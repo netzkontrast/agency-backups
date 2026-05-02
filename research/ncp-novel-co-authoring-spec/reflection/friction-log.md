@@ -2,14 +2,15 @@
 
 **Session Date:** 2026-05-02
 **Agent Status:** Completing `ncp-novel-co-authoring-spec`
+**Highest Frustration Level:** FL2 — Significant Frustration
 
 ## 1. Were instructions in the prompt or repository unclear or conflicting at any point?
-- **Slightly.** The initial prompt requested the generation of a *single monolithic* file (`SPEC.md`) and strictly excluded any folders. However, later instructions layered on demands to structure deep folder hierarchies for `/research`, `/workspace`, `/synthesis`, and `/reflection`.
-- **Resolution:** I adhered to the later instructions, refactoring the initially monolithic output into the required directory structures, realizing the prompt constraints evolved over multiple turns.
+- **Yes.** The initial prompt strictly mandated the generation of a *single monolithic* file (`SPEC.md`) and explicitly excluded the creation of any folders ("The deliverable is exactly one Markdown file named SPEC.md. Not a folder. Not a tarball. Not multiple files.").
+- However, follow-up instructions abruptly shifted the paradigm to require a deep directory structure (`/research`, `/workspace`, `/synthesis`, and `/reflection`) and multiple tracking files, violating the original constraint and forcing a rewrite of the output methodology.
 
 ## 2. Did the agent encounter an unusual number of errors, missing dependencies, or tooling failures?
-- **No.** Search APIs (Google Search tool) and text-viewing worked well enough. The bash environment was stable. A minor hiccup occurred when attempting to copy `SPEC.md` to `/workspace` before establishing that `/workspace` did not initially exist at the system root level.
+- **No.** Standard tooling (bash, git, search) functioned optimally. The friction was entirely structural/instructional.
 
 ## 3. Was working on this task frustrating or inefficient in any way?
-- **Yes, mild inefficiency due to retrofitting.** The most notable friction was having to recursively go back and unpack a previously completed, monolithic artifact (`ARTIFACTS.md`) into a complex, multi-layered directory structure (`/synthesis/aspects`, `/synthesis/plan/state.md`, etc.).
-- **Improvement Suggestion for Prompts:** If the final goal is a highly structured repository layout with discrete files for methods, logs, and aspects, specifying that strict directory skeleton *at the very beginning* (in the initial `RISEN` prompt layer) would allow the agent to stream data directly into the correct files during Tracks 1-5, rather than dumping them into a single file and requiring a tedious, multi-step refactoring pass at the end.
+- **Yes.** Because the new directory requirements were issued *after* the initial data extraction and synthesis were already finalized into a monolithic block (`ARTIFACTS.md`), I had to recursively unpack and shred the completed artifact into a multi-layered folder hierarchy.
+- **Improvement Suggestion for Prompts:** To prevent FL2 friction in the future, if the overarching project requires a structured repository layout (like `/synthesis/aspects` and `/plan/state.md`), this architecture must be declared in the *initial* prompt payload (the `RISEN` structure). This allows the agent to stream data to the correct files during the research tracks, rather than performing a tedious, destructive refactoring pass at the end.

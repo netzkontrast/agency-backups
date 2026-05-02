@@ -21,6 +21,7 @@ For every new research task, create a dedicated subfolder within the root `/rese
     │       └── state.md     # A checklist state file keeping track of every step of the synthesis. Must not be empty.
     ├── /reflection          # Rigorous self-reflection based on the 5 critical thinking methods.
     │   ├── readme.md        # The overarching reflection plan.
+    │   ├── friction-log.md  # Standardized tracking of agent frustration levels (FL0-FL3).
     │   └── /step-[1-5]      # Individual workbooks and artifact evidence for each method.
     └── /output              # The final deliverables (e.g., SPEC.md)
 ```
@@ -55,9 +56,6 @@ Before committing the final deliverables of any Research Task, the agent MUST ru
    - `/synthesis/plan/state.md` shows all steps checked off as complete `[x]`.
    - All applied methods and aspect tracks are thoroughly documented in their respective subfolders.
 6. **Output Verification:** `/output` contains the final target specification or report (e.g., `SPEC.md`), and it adheres strictly to the formatting constraints defined in the original prompt.
+7. **Task Friction Reflection:** After all other checks are complete, the agent MUST write a meta-reflection document located at `/reflection/friction-log.md`. This document MUST conform to the specifications in `FRUSTRATED.md`. It must declare an explicit **Frustration Level (FL0 - FL3)** at the top of the file, explain any confusing/conflicting instructions, and document workflow inefficiencies or backtracking caused by the prompt structure.
 
 All steps in the synthesis process MUST be verifiably checked off in `/synthesis/plan/state.md` before this pre-commit check can pass.
-7. **Task Friction Reflection:** After all other checks are complete, and right before executing the commit, the agent MUST write a meta-reflection document located at `/reflection/friction-log.md`. This document must explicitly answer:
-   - Were the instructions in the prompt or repository unclear or conflicting at any point?
-   - Did the agent encounter an unusual number of errors, missing dependencies, or tooling failures?
-   - **Crucially:** Was working on this task frustrating or inefficient in any way? If the agent had to perform tedious reorganizations or backtrack significantly, this friction must be logged so future protocols or prompts can be improved.
