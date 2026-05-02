@@ -36,3 +36,10 @@ If your initial request or prompt is a **Research Task**, you must consult the [
 - What changed: Added the Abstraction Axis query expansion to methodology.md and to the Query Expansion Log in SPEC.md.
 - Verification: PASS
 - Next candidate: none identified
+
+### Iteration 3 — 2026-05-02
+- Dimension targeted: Completeness
+- What was wrong: The Python pseudocode block was accidentally removed from SPEC.md when the ASCII diagram was added in Iteration 1.
+- What changed: Restored the Python pseudocode block to sit alongside the ASCII diagram in SPEC.md.
+- Verification: PASS
+- Next candidate: none identified

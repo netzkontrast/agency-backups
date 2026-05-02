@@ -62,6 +62,19 @@ status: "active" # Oder draft, archived
 summary: "Kurze Zusammenfassung für den Agenten, um Token-Laden zu vermeiden."
 ---
 ```
+**Pseudocode für Script-Logik:**
+```python
+def process_file(filepath):
+    frontmatter = extract_yaml(filepath)
+    if frontmatter['type'] == 'index':
+        children = get_folder_contents(filepath.parent)
+        return {"action": "scan_children", "targets": children}
+    if frontmatter['status'] == 'archived':
+        return {"action": "ignore"}
+    if estimate_tokens(frontmatter['summary']) < budget:
+        return {"action": "read_body"}
+```
+
 **Entscheidungsbaum für Expansion-Pattern (ASCII):**
 
 ```text
