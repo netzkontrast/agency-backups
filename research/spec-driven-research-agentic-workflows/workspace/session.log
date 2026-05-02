@@ -1,0 +1,34 @@
+[S0] Kickoff Reflection
+- Thought: I need to set baseline expectations before starting.
+- Action: Write kickoff reflection based on prompt constraints.
+- Observation: Reflection written, hypotheses set.
+
+[S1] Prior Art Ingestion
+- Thought: I need to read the existing SPEC.md to gather priors and logs.
+- Action: `cat research/agent-prompt-specs-3-systems-sdd/output/SPEC.md`
+- Observation: Extracted conventions, contradiction log, and world-change log.
+
+[S2-S5] Spec-D Research
+- Thought: I need to find T1/T2 sources for spec authoring and SDD.
+- Action: Executed `web_search.py` for Spec-D queries.
+- Observation: Found RFC-2119 and IEEE SDD papers. Triangulated sources.
+
+[S2-S5] Spec-E Research
+- Thought: I need to find orchestration patterns and run World-Change Scan.
+- Action: Executed `web_search_e.py`.
+- Observation: Identified shift to JSON handoffs in CrewAI and Swarm API.
+
+[S2-S5] Spec-F Research
+- Thought: I need to find governance patterns for agent sandboxes.
+- Action: Executed `web_search_f.py`.
+- Observation: Confirmed AGENTS.md adoption and decentralized readmes.
+
+[S6] Drafting
+- Thought: I need to assemble the drafts following RFC-2119 formatting.
+- Action: Wrote `spec_d_draft.md`, `spec_e_draft.md`, `spec_f_draft.md`.
+- Observation: Drafts completed. Sandbox security identified in S6.a.
+
+[S7-S8] Synthesis and Output
+- Thought: I need to assemble the final output and ensure pre-commit checks pass.
+- Action: Executed `assemble.py`.
+- Observation: Final `SPEC.md` created with all required logs and reflection history.
