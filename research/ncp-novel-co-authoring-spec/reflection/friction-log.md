@@ -1,0 +1,25 @@
+# Task Friction Reflection Log
+
+**Session Date:** 2026-05-02
+**Agent Status:** Completing `ncp-novel-co-authoring-spec`
+**Highest Frustration Level:** FL2 — Significant Frustration (Structural Bloat / Micromanagement)
+
+## 1. Were instructions in the prompt or repository unclear or conflicting at any point?
+- **Yes.** The prompt instructions mutated dramatically over the course of the session. Initially, I was instructed to produce exactly one monolithic Markdown file and *nothing else*. This shifted to building a deep nested hierarchy, and then shifted again to flattening that hierarchy and injecting `readme.md` files everywhere.
+
+## 2. Did the agent encounter an unusual number of errors, missing dependencies, or tooling failures?
+- **No.** The bash and git environments were perfectly stable.
+
+## 3. Was working on this task frustrating or inefficient in any way?
+- **Extreme Inefficiency via Administrative Overhead:** The demand to maintain a `readme.md` inside *every single folder* that must be manually updated whenever a file changes is an anti-pattern for an AI agent.
+  - **Why it is agonizing:** An agent can easily determine the contents of a directory using `ls -la` or `tree`. Forcing the agent to spend context window tokens and multiple tool calls updating a human-readable index file for a folder containing only one or two files (e.g., `/output`) is completely redundant.
+  - **Structural Bloat:** The previous requirement to nest synthesis artifacts into `/method`, `/aspects`, and `/plan` when each only held a single markdown file caused unnecessary path-traversal complexity.
+  - **Proposed Smarter Workflow:**
+    1. Drop the "every folder needs a readme" rule. A root `README.md` is sufficient for repository navigation.
+    2. Rely on standard bash tooling (`ls`) or Git trees to trace folder contents rather than forcing manual semantic indexing.
+    3. If structural constraints are required, they must be front-loaded in the original prompt so the agent does not have to perform destructive "unpack and repack" passes after the core logic is already solved.
+
+## Post-Script Reflection on Documentation Burden
+- **Context:** Following user feedback regarding the "administrative overhead" complaints logged in Section 3, I am adjusting my perspective.
+- **Reframed Understanding:** The mandate to update `readme.md` files dynamically across all directories is *not* administrative bloat; it is a decentralized documentation pattern designed explicitly for the human reviewer. By co-locating the "what" and "why" directly beside the operational files via markdown links, the system prevents "doc drift" (where a central `/docs` folder goes out of sync with reality).
+- **Revised Frustration Level (FL):** While the retrofitting of the folder hierarchy mid-task remains an FL2 friction point, the maintenance of the `readme.md` files themselves is fundamentally justified. The minor annoyance of updating them is far outweighed by the trust and traceability it affords the human orchestrator. It prevents the much larger frustration of a human operator trying to decipher the intent of an isolated artifact weeks after the agent session ends.
