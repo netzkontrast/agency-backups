@@ -27,3 +27,6 @@ Agents MUST use the following **Frustration Levels (FL)** when logging their exp
 ## When and How to Log
 1. **Research Tasks:** You MUST create or update `/reflection/friction-log.md` at the end of the session, explicitly declaring your highest FL experienced during the run at the top of the file (e.g., `Highest Frustration Level: FL2`).
 2. **Standard Tasks:** Even outside of deep research, if you hit FL2 or FL3, you must include a section named `## Frustration Log` in your final PR description or submit message.
+
+### Special Triggers
+- **Structural Bloat / Micromanagement:** If a prompt demands deeply nested folder structures with less than 3 files per folder, or requires tedious administrative overhead (e.g., updating a `readme.md` for every single minor file change instead of relying on standard `ls` or Git tooling), the agent MUST log this as FL2. This administrative burden distracts the LLM's context window from actual logic and code generation.

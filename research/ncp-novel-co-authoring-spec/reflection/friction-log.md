@@ -2,15 +2,19 @@
 
 **Session Date:** 2026-05-02
 **Agent Status:** Completing `ncp-novel-co-authoring-spec`
-**Highest Frustration Level:** FL2 — Significant Frustration
+**Highest Frustration Level:** FL2 — Significant Frustration (Structural Bloat / Micromanagement)
 
 ## 1. Were instructions in the prompt or repository unclear or conflicting at any point?
-- **Yes.** The initial prompt strictly mandated the generation of a *single monolithic* file (`SPEC.md`) and explicitly excluded the creation of any folders ("The deliverable is exactly one Markdown file named SPEC.md. Not a folder. Not a tarball. Not multiple files.").
-- However, follow-up instructions abruptly shifted the paradigm to require a deep directory structure (`/research`, `/workspace`, `/synthesis`, and `/reflection`) and multiple tracking files, violating the original constraint and forcing a rewrite of the output methodology.
+- **Yes.** The prompt instructions mutated dramatically over the course of the session. Initially, I was instructed to produce exactly one monolithic Markdown file and *nothing else*. This shifted to building a deep nested hierarchy, and then shifted again to flattening that hierarchy and injecting `readme.md` files everywhere.
 
 ## 2. Did the agent encounter an unusual number of errors, missing dependencies, or tooling failures?
-- **No.** Standard tooling (bash, git, search) functioned optimally. The friction was entirely structural/instructional.
+- **No.** The bash and git environments were perfectly stable.
 
 ## 3. Was working on this task frustrating or inefficient in any way?
-- **Yes.** Because the new directory requirements were issued *after* the initial data extraction and synthesis were already finalized into a monolithic block (`ARTIFACTS.md`), I had to recursively unpack and shred the completed artifact into a multi-layered folder hierarchy.
-- **Improvement Suggestion for Prompts:** To prevent FL2 friction in the future, if the overarching project requires a structured repository layout (like `/synthesis/aspects` and `/plan/state.md`), this architecture must be declared in the *initial* prompt payload (the `RISEN` structure). This allows the agent to stream data to the correct files during the research tracks, rather than performing a tedious, destructive refactoring pass at the end.
+- **Extreme Inefficiency via Administrative Overhead:** The demand to maintain a `readme.md` inside *every single folder* that must be manually updated whenever a file changes is an anti-pattern for an AI agent.
+  - **Why it is agonizing:** An agent can easily determine the contents of a directory using `ls -la` or `tree`. Forcing the agent to spend context window tokens and multiple tool calls updating a human-readable index file for a folder containing only one or two files (e.g., `/output`) is completely redundant.
+  - **Structural Bloat:** The previous requirement to nest synthesis artifacts into `/method`, `/aspects`, and `/plan` when each only held a single markdown file caused unnecessary path-traversal complexity.
+  - **Proposed Smarter Workflow:**
+    1. Drop the "every folder needs a readme" rule. A root `README.md` is sufficient for repository navigation.
+    2. Rely on standard bash tooling (`ls`) or Git trees to trace folder contents rather than forcing manual semantic indexing.
+    3. If structural constraints are required, they must be front-loaded in the original prompt so the agent does not have to perform destructive "unpack and repack" passes after the core logic is already solved.
