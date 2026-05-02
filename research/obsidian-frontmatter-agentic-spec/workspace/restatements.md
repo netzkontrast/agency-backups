@@ -17,3 +17,41 @@ Ich agiere als PKM-Architekt und LLM-Systems-Ingenieur mit tiefgreifender Expert
 3. **Steelmanning:** Die stärkste Version eines Arguments aufbauen, bevor es verworfen wird.
 4. **Contrast Classes:** Explizite Kontraste (verglichen womit? unter welcher Bedingung?) für evaluative Aussagen.
 5. **Adversarial Query Expansion:** Suchbegriffe bei Checkpoints in vier Achsen (Adjacent, Opposing, Abstraction, Orthogonal) erweitern, um Local-Minimum-Lock-In zu vermeiden.
+
+# Restatement Checkpoints for Steps 2-8
+*(Note: As the constraints and methods remain globally active, they are identical to Step 1. They are explicitly acknowledged and reaffirmed for each step per the prompt instructions.)*
+
+## Restatement Checkpoint vor Step 2
+**Role:** Ich agiere als PKM-Architekt und LLM-Systems-Ingenieur für agentic Workflows.
+**Active Constraints:** 0 (Reflection), 1 (Source Priority), 2 (Temporal Scope), 3 (Output Exclusions), 4 (Obsidian-Kompatibilität), 5 (Agentic-Konsumenten-Dualität).
+**Active Methods:** Falsification, First-Principles Decomposition, Steelmanning, Contrast Classes, Adversarial Query Expansion. Alle weiterhin aktiv.
+
+## Restatement Checkpoint vor Step 3
+**Role:** Ich agiere als PKM-Architekt und LLM-Systems-Ingenieur für agentic Workflows.
+**Active Constraints:** 0 (Reflection), 1 (Source Priority), 2 (Temporal Scope), 3 (Output Exclusions), 4 (Obsidian-Kompatibilität), 5 (Agentic-Konsumenten-Dualität).
+**Active Methods:** Falsification, First-Principles Decomposition, Steelmanning, Contrast Classes, Adversarial Query Expansion. Alle weiterhin aktiv.
+
+## Restatement Checkpoint vor Step 4
+**Role:** Ich agiere als PKM-Architekt und LLM-Systems-Ingenieur für agentic Workflows.
+**Active Constraints:** 0 (Reflection), 1 (Source Priority), 2 (Temporal Scope), 3 (Output Exclusions), 4 (Obsidian-Kompatibilität), 5 (Agentic-Konsumenten-Dualität).
+**Active Methods:** Falsification, First-Principles Decomposition, Steelmanning, Contrast Classes, Adversarial Query Expansion. Alle weiterhin aktiv.
+
+## Restatement Checkpoint vor Step 5
+**Role:** Ich agiere als PKM-Architekt und LLM-Systems-Ingenieur für agentic Workflows.
+**Active Constraints:** 0 (Reflection), 1 (Source Priority), 2 (Temporal Scope), 3 (Output Exclusions), 4 (Obsidian-Kompatibilität), 5 (Agentic-Konsumenten-Dualität).
+**Active Methods:** Falsification, First-Principles Decomposition, Steelmanning, Contrast Classes, Adversarial Query Expansion. Alle weiterhin aktiv.
+
+## Restatement Checkpoint vor Step 6
+**Role:** Ich agiere als PKM-Architekt und LLM-Systems-Ingenieur für agentic Workflows.
+**Active Constraints:** 0 (Reflection), 1 (Source Priority), 2 (Temporal Scope), 3 (Output Exclusions), 4 (Obsidian-Kompatibilität), 5 (Agentic-Konsumenten-Dualität).
+**Active Methods:** Falsification, First-Principles Decomposition, Steelmanning, Contrast Classes, Adversarial Query Expansion. Alle weiterhin aktiv.
+
+## Restatement Checkpoint vor Step 7
+**Role:** Ich agiere als PKM-Architekt und LLM-Systems-Ingenieur für agentic Workflows.
+**Active Constraints:** 0 (Reflection), 1 (Source Priority), 2 (Temporal Scope), 3 (Output Exclusions), 4 (Obsidian-Kompatibilität), 5 (Agentic-Konsumenten-Dualität).
+**Active Methods:** Falsification, First-Principles Decomposition, Steelmanning, Contrast Classes, Adversarial Query Expansion. Alle weiterhin aktiv.
+
+## Restatement Checkpoint vor Step 8
+**Role:** Ich agiere als PKM-Architekt und LLM-Systems-Ingenieur für agentic Workflows.
+**Active Constraints:** 0 (Reflection), 1 (Source Priority), 2 (Temporal Scope), 3 (Output Exclusions), 4 (Obsidian-Kompatibilität), 5 (Agentic-Konsumenten-Dualität).
+**Active Methods:** Falsification, First-Principles Decomposition, Steelmanning, Contrast Classes, Adversarial Query Expansion. Alle weiterhin aktiv.

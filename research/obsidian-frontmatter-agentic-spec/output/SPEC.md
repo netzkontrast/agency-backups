@@ -89,10 +89,90 @@ def process_file(filepath):
 3. **Orthogonal:** "game engine asset metadata taxonomy" -> Novel: Asset-Sidecars sind Industrie-Standard für Metadaten. Modified L3 Handling.
 
 ## Reflection History
-[M00-Kickoff] Fokus auf Reibung zwischen Obsidian (flach) und Agent (Hierarchie). Nächster Schritt: First-Principles.
-[M00-Midrun] Confidence in Namespacing. Sidecar (H3) als stärkstes Gegenbeispiel.
-[M00-Post-Query] Expansion-Pattern wird durch Semantik, nicht nur Tokens getriggert.
-[M00-Pre-Synthesis] Agenten-Technologie (Context Windows) entwickelt sich schnell, Auslöser-Grenzen könnten veralten.
+# Kickoff-Reflektion
+
+**Q1. Was glaube ich gerade tatsächlich, und wie confident bin ich?**
+Ich glaube mit hoher Confidence, dass es eine inhärente Reibung zwischen den flachen Strukturen gibt, die Obsidian nativ bevorzugt (und unterstützt), und den hierarchischen, relationalen Metadatenstrukturen, die LLM-Agenten für token-effiziente Graphennavigation benötigen.
+
+**Q2. Was ist das stärkste Gegenbeispiel gegen meine aktuelle Überzeugung?**
+Ein starkes Gegenbeispiel wäre, wenn sich herausstellt, dass LLMs gar keine stark vorstrukturierten Metadaten brauchen und stattdessen mit reinem rohen Text oder wenigen, sehr flachen Feldern weitaus besser performen, da semantische Retrieval-Engines dies besser handhaben könnten.
+
+**Q3. Wo liege ich am wahrscheinlichsten falsch, und warum?**
+Ich liege am wahrscheinlichsten bei der Annahme falsch, dass eine einheitliche Schema-Spezifikation (eine einzige YAML-Block-Struktur) allen drei Konsumenten optimal gerecht werden kann, ohne dass es zu störendem "Metadaten-Noise" für menschliche Leser führt.
+
+**Q4. Was würde ich anders machen wenn ich die Research von vorne beginnen würde mit dem Wissen das ich jetzt habe?**
+N/A - Ich stehe ganz am Anfang der Recherche.
+
+**Q5. Was ist die einzige höchstwertige nächste Aktion?**
+Die höchstwertige nächste Aktion ist die First-Principles-Dekonstruktion (Step 1) der Begriffe "Obsidian Frontmatter", "tokeneffizientes Navigieren", "Expansion Pattern", und "Spec" sowie deren Überprüfung durch initiale Suchen in der Obsidian-Dokumentation und LLM-Context-Management-Literatur.
+
+# Mid-Run-Reflektion
+
+**Q1. Was glaube ich gerade tatsächlich, und wie confident bin ich?**
+Ich glaube mit hoher Confidence, dass das H2-Modell (Layered Schema) durch Namespacing (`prefix_key`) zu einem künstlichen H1-Modell (Flat Schema) kollabiert werden muss, um sowohl die Obsidian-Maximalgrenzen als auch die LLM-Token-Stabilität zu respektieren.
+
+**Q2. Was ist das stärkste Gegenbeispiel gegen meine aktuelle Überzeugung?**
+Das stärkste Gegenbeispiel ist das H3-Modell (Sidecar), in dem es dem Agenten vollkommen egal ist, was im Obsidian-YAML steht, weil er ein rohes JSON/YAML in `.meta.yml` liest, das beliebig verschachtelt sein kann.
+
+**Q3. Wo liege ich am wahrscheinlichsten falsch, und warum?**
+Ich unterschätze vermutlich den Overhead, den ein H3-Sidecar-Modell für einen PKM-Nutzer erzeugt (Synchronisationsprobleme, Plugin-Inkompatibilität).
+
+**Q4. Was würde ich anders machen wenn ich die Research von vorne beginnen würde mit dem Wissen das ich jetzt habe?**
+Ich würde sofort nach "Obsidian YAML namespace prefixing vs JSON sidecar" suchen, um die Trade-offs direkter zu adressieren.
+
+**Q5. Was ist die einzige höchstwertige nächste Aktion?**
+Die Synthese der H1, H2 und H3 Hypothesen basierend auf dem Wissen über LLM-YAML-Parsing und Obsidian-Limits in `step2.md` abzuschließen und die "surviving architecture" zu identifizieren.
+
+# Post-Query-Expansion-Reflektion
+
+**Q1. Was glaube ich gerade tatsächlich, und wie confident bin ich?**
+Ich bin sehr confident (hoch), dass das Expansion-Pattern nicht primär durch Dateigröße (Token-Limit), sondern durch "Semantic Divergence" getriggert werden muss.
+
+**Q2. Was ist das stärkste Gegenbeispiel gegen meine aktuelle Überzeugung?**
+Das stärkste Gegenbeispiel sind Agenten-Frameworks, die starre Chunker verwenden (z.B. "teile nach 500 Wörtern"), weil semantisches Splittern für LLMs fehleranfällig zu programmieren ist.
+
+**Q3. Wo liege ich am wahrscheinlichsten falsch, und warum?**
+Ich könnte falsch liegen in der Annahme, dass eine `README.md` Manifest-Datei im Expansion-Unterordner für Agenten leicht zu finden ist. Wenn sie die Ordner-Struktur nicht kennen, verfehlen sie das Manifest.
+
+**Q4. Was würde ich anders machen wenn ich die Research von vorne beginnen würde mit dem Wissen das ich jetzt habe?**
+Ich würde Zettelkasten-Literatur überspringen und direkt auf "File System manifest index parsing für LLM RAG" suchen.
+
+**Q5. Was ist die einzige höchstwertige nächste Aktion?**
+Die Heuristiken in harte Constraints (MUSS/KANN/DARF NICHT) zu gießen, um sie in Schritt 4 in der Spezifikation zu dokumentieren.
+
+# Pre-Synthesis-Reflektion
+
+**Q1. Was glaube ich gerade tatsächlich, und wie confident bin ich?**
+Ich glaube mit hoher Confidence, dass die finalen Spec-Ergebnisse nicht nur für Obsidian, sondern generell für agent-gestütztes PKM richtungsweisend sind, da sie die Trennlinie zwischen Mensch-lesbarem Zustand und Maschinen-Zustand ziehen.
+
+**Q2. Was ist das stärkste Gegenbeispiel gegen meine aktuelle Überzeugung?**
+Ein starkes Gegenbeispiel ist die Tatsache, dass sich LLM-Context-Windows auf 1M-2M Token erweitern (z.B. Gemini 1.5 Pro). Wenn Context Windows gigantisch und billig werden, wird tokeneffiziente Metadaten-Navigation möglicherweise obsolet.
+
+**Q3. Wo liege ich am wahrscheinlichsten falsch, und warum?**
+Ich liege am wahrscheinlichsten bei der Definition der "Auslöser-Bedingung" (2000 Tokens) falsch, da dieses Limit durch den schnellen Fortschritt der Modelle bereits veraltet sein könnte.
+
+**Q4. Was würde ich anders machen wenn ich die Research von vorne beginnen würde mit dem Wissen das ich jetzt habe?**
+Ich würde den Temporal Scope für Agenten auf 2024-2026 einschränken, da alles vor 2024 in Bezug auf Context-Window-Ökonomie veraltet ist.
+
+**Q5. Was ist die einzige höchstwertige nächste Aktion?**
+Den Pre-Synthesis Integrity Check auszuführen und die gesammelten Artefakte in das endgültige `SPEC.md` Dokument zu gießen.
+
+# Post-Synthesis-Reflektion
+
+**Q1. Was glaube ich gerade tatsächlich, und wie confident bin ich?**
+Ich bin sehr confident (hoch), dass die vorliegende Spezifikation extrem nützlich für die Agenten-Integration ist und alle Vorgaben bezüglich Obsidian-Kompatibilität erfüllt.
+
+**Q2. Was ist das stärkste Gegenbeispiel gegen meine aktuelle Überzeugung?**
+Ein Agent, der nicht auf Context-Window-Ökonomie achten muss (weil Token-Kosten gegen Null gehen), würde diese gesamte Spezifikation (insbesondere das `summary` Feld) als überflüssigen Overhead betrachten.
+
+**Q3. Wo liege ich am wahrscheinlichsten falsch, und warum?**
+Ich liege am wahrscheinlichsten bei der strengen Trennung in `index`-Nodes und `note`-Nodes falsch, weil sich eine Datei organisch in der Obsidian-Nutzung ständig dazwischen hin- und herbewegt, was die manuelle Pflege des `type`-Felds anstrengend macht.
+
+**Q4. Was würde ich anders machen wenn ich die Research von vorne beginnen würde mit dem Wissen das ich jetzt habe?**
+Ich hätte von vornherein ein Automatisierungs-Script als Constraint eingeführt, um dem Menschen die manuelle Typ-Änderung beim Expansion-Pattern abzunehmen.
+
+**Q5. Was ist die einzige höchstwertige nächste Aktion?**
+Pre-Commit Housekeeping (Löschen von Temp-Scripts, Erstellen der Readmes, Friction-Log) durchführen, um den sauberen State für den Commit vorzubereiten.
 
 ## Open Questions / Unresolved
 Wie geht die Obsidian Graph View nativ mit dem L2-Namespacing um, ohne dass externe Plugins die Verbindungen visualisieren müssen?
