@@ -1,10 +1,13 @@
 # Reflection
-Purpose: Application of 5 critical thinking methods and frustration tracking.
-Contents:
-- `readme.md`: The overarching reflection plan.
-- `friction-log.md`: Log of task pain-points and frustration levels.
-- `M06-audit.md`: Source triangulation verification.
-- `M07-review.md`: Contradiction handling verification.
-- `M08-fidelity.md`: Pre-commitment falsifiability check.
-- `M10-audit.md`: Concept disambiguation.
-- `M13-efficacy.md`: Query expansion check.
+
+**What is this folder?** The meta-analysis and critical thinking directory.
+**Why is it here?** To force the agent to rigorously critique its own assumptions using the 5 defined methods, and to track systemic workflow friction to improve future prompts.
+
+## Contents
+- [readme.md](./readme.md): This file. Explains the overarching reflection plan.
+- [friction-log.md](./friction-log.md): A log of task pain-points, categorized by Frustration Levels (FL0-FL3). Essential for continuous protocol improvement.
+- [M06-audit.md](./M06-audit.md): Audit proving source triangulation.
+- [M07-review.md](./M07-review.md): Audit proving contradictions were not silently dropped.
+- [M08-fidelity.md](./M08-fidelity.md): Audit proving pre-commitments were falsifiable.
+- [M10-audit.md](./M10-audit.md): Disambiguation of complex terminology (e.g. 'Scene').
+- [M13-efficacy.md](./M13-efficacy.md): Proof that adversarial searches broadened the research scope.

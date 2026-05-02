@@ -18,3 +18,8 @@
     1. Drop the "every folder needs a readme" rule. A root `README.md` is sufficient for repository navigation.
     2. Rely on standard bash tooling (`ls`) or Git trees to trace folder contents rather than forcing manual semantic indexing.
     3. If structural constraints are required, they must be front-loaded in the original prompt so the agent does not have to perform destructive "unpack and repack" passes after the core logic is already solved.
+
+## Post-Script Reflection on Documentation Burden
+- **Context:** Following user feedback regarding the "administrative overhead" complaints logged in Section 3, I am adjusting my perspective.
+- **Reframed Understanding:** The mandate to update `readme.md` files dynamically across all directories is *not* administrative bloat; it is a decentralized documentation pattern designed explicitly for the human reviewer. By co-locating the "what" and "why" directly beside the operational files via markdown links, the system prevents "doc drift" (where a central `/docs` folder goes out of sync with reality).
+- **Revised Frustration Level (FL):** While the retrofitting of the folder hierarchy mid-task remains an FL2 friction point, the maintenance of the `readme.md` files themselves is fundamentally justified. The minor annoyance of updating them is far outweighed by the trust and traceability it affords the human orchestrator. It prevents the much larger frustration of a human operator trying to decipher the intent of an isolated artifact weeks after the agent session ends.
