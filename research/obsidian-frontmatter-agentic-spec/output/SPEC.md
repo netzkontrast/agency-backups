@@ -62,6 +62,19 @@ status: "active" # Oder draft, archived
 summary: "Kurze Zusammenfassung für den Agenten, um Token-Laden zu vermeiden."
 ---
 ```
+**Pseudocode für Script-Logik:**
+```python
+def process_file(filepath):
+    frontmatter = extract_yaml(filepath)
+    if frontmatter['type'] == 'index':
+        children = get_folder_contents(filepath.parent)
+        return {"action": "scan_children", "targets": children}
+    if frontmatter['status'] == 'archived':
+        return {"action": "ignore"}
+    if estimate_tokens(frontmatter['summary']) < budget:
+        return {"action": "read_body"}
+```
+
 **Entscheidungsbaum für Expansion-Pattern (ASCII):**
 
 ```text
@@ -99,7 +112,8 @@ summary: "Kurze Zusammenfassung für den Agenten, um Token-Laden zu vermeiden."
 ## Query Expansion Log
 1. **Adjacent:** "PKM metadata taxonomy" -> Novel: Trennung von Taxonomic vs Procedural. Modified H2.
 2. **Opposing:** "YAML frontmatter limitations LLM" -> Novel: LLMs halluzinieren bei tiefen YAMLs. Modified H2.
-3. **Orthogonal:** "game engine asset metadata taxonomy" -> Novel: Asset-Sidecars sind Industrie-Standard für Metadaten. Modified L3 Handling.
+3. **Abstraction:** "graph-structured document retrieval for LLM agents" -> Novel: Frontmatter als "Node Attribute" für Graphen-Vorfilterung. Modified L1 (Pflichtfelder).
+4. **Orthogonal:** "game engine asset metadata taxonomy" -> Novel: Asset-Sidecars sind Industrie-Standard für Metadaten. Modified L3 Handling.
 
 ## Reflection History
 # Kickoff-Reflektion

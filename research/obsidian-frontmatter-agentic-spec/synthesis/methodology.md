@@ -20,3 +20,8 @@
 **Query:** game engine asset metadata taxonomy
 **Novel Finding:** Ja. Game Engines lagern Asset-Payload (Textur/Code) fast immer aus und behalten ein .meta Manifest mit GUID und Type. Das Sidecar-Pattern ist Standard für Performance.
 **Conclusion Modified:** Ja, festigt die Entscheidung, L3 (Agent-Score/Vector) komplett aus dem Obsidian YAML rauszuhalten.
+
+## Expansion 4 (Abstraction Axis)
+**Query:** graph-structured document retrieval for LLM agents
+**Novel Finding:** Ja. Auf einer höheren Abstraktionsebene wird "Frontmatter" als reines "Node Attribute" in einem Graphen modelliert. Agenten nutzen diese Attribute als Vorfilterung, bevor sie Kanten abwandern.
+**Conclusion Modified:** Ja, bekräftigt, dass L1-Metadaten (wie type und summary) zwingend notwendig sind, damit der Agent Graph-Traversal-Entscheidungen ohne Full-Text-Reads treffen kann.
