@@ -57,3 +57,7 @@ Before committing the final deliverables of any Research Task, the agent MUST ru
 6. **Output Verification:** `/output` contains the final target specification or report (e.g., `SPEC.md`), and it adheres strictly to the formatting constraints defined in the original prompt.
 
 All steps in the synthesis process MUST be verifiably checked off in `/synthesis/plan/state.md` before this pre-commit check can pass.
+7. **Task Friction Reflection:** After all other checks are complete, and right before executing the commit, the agent MUST write a meta-reflection document located at `/reflection/friction-log.md`. This document must explicitly answer:
+   - Were the instructions in the prompt or repository unclear or conflicting at any point?
+   - Did the agent encounter an unusual number of errors, missing dependencies, or tooling failures?
+   - **Crucially:** Was working on this task frustrating or inefficient in any way? If the agent had to perform tedious reorganizations or backtrack significantly, this friction must be logged so future protocols or prompts can be improved.
