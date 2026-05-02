@@ -222,12 +222,10 @@ Every behavioural example, agent-interaction scenario, or hand-off specification
 ```gherkin
 Feature: Exploring the Codebase
 
-# Background removed because there are less than 3 scenarios
-  Given a fresh terminal session in the project root
-  And a valid `CLAUDE.md` exists
-
   # anchor: B.3.1
   Scenario: Claude Code explores via subagent
+    Given a fresh terminal session in the project root
+    And a valid `CLAUDE.md` exists
     When the user prompts Claude to "explore the auth module using a subagent and return a summary"
     Then Claude spawns a subagent to read the auth files
     And the subagent returns a concise architectural summary
@@ -500,7 +498,9 @@ The ultimate value of a research agent is trustworthiness. If the user cannot tr
 ---
 
 ## Contradictions Encountered
-1. **Claude Code `CLAUDE.md` Length**:
+1. **Out-of-Scope Schema Field Candidate**: The §3–§7 schema may be missing the field `Failure Recovery / Error Handling`. Agents require specific instructions on how to handle command or sub-agent failures.
+2. **Out-of-Scope Aspect Candidate**: Aspect `Context Window Management` appears to satisfy the inclusion criteria but is not in the five-aspect input list.
+3. **Claude Code `CLAUDE.md` Length**:
    - **Claims**: One source (community best practices) suggests keeping `CLAUDE.md` under 60 lines to prevent frontier models from ignoring rules. Anthropic documentation implies a slightly larger but still constrained limit (~150-200 instructions).
    - **Sources**: HumanLayer blog vs. Anthropic Documentation.
    - **Hypothesized Cause**: Vendor doc lag and theoretical model limits vs. practical real-world degradation observed by power users.
@@ -598,6 +598,7 @@ The ultimate value of a research agent is trustworthiness. If the user cannot tr
 
 ## Cross-Pollination Log
 - **Out-of-Scope Aspect Candidate**: Context Window Management (Identified during Claude Code research). Highly critical for production but not one of the 5 requested aspects.
+- **Schema-Gap Hypothesis**: The §3–§7 schema as given may be missing the field `Failure Recovery / Error Handling` because `agents like Jules and Claude Code are inherently fallible and often require specific instructions on how to behave when a bash command or sub-agent fails. Without this field, prompts may lack the necessary fallback loops.` Test search across systems shows Claude Code has explicit `/doctor` and `PostToolUse` hooks to handle this, confirming the hypothesis.
 - **World-Change Annotations**: See World-Change Log above.
 
 ## Open Questions / Unresolved
@@ -616,6 +617,10 @@ The ultimate value of a research agent is trustworthiness. If the user cannot tr
 ## Methodology Note
 - **Source Triangulation**: Applied across all three systems. Where primary docs were lacking (Gemini DR), community reproductions and aggregators were used and flagged.
 - **Contradiction Log**: Actively maintained for `CLAUDE.md` length and Gemini source priorities.
-- **What Would Change My Mind (Pre-Commitment)**: Applied to one major statement per Spec (e.g., A.2.3, B.3.1, C.4.1) and logged in scratchpads.
+- **What Would Change My Mind (Pre-Commitment)**: Applied to one major statement per Spec.
+  - Spec-A: I would weaken A.2.3 from `MUST` to `SHOULD` if official Google guidelines state Jules performs best with high-level, open-ended problem statements.
+  - Spec-B: I would weaken B.3.1 from `SHOULD` to `MAY` if Anthropic documentation states subagents are only for tool use, not general codebase exploration.
+  - Spec-C: I would strengthen C.4.1 from `SHOULD` to `MUST` if official documentation states Gemini DR will fail entirely without an explicit grounding instruction.
+  - Search results: None of these conditions were met, so the statements stand.
 - **Steelmanning**: Applied to test the rigidity of `MUST` statements, resulting in several downgrades to `SHOULD`.
 - **Adversarial Query Expansion**: Invoked along 4 axes per system to escape local-minimum lock-in.
