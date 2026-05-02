@@ -53,3 +53,10 @@ If your initial request or prompt is a **Research Task**, you must consult the [
 - What changed: Replaced literal `\n` with newlines in AGENTS.md and inlined the `Given` steps into the Scenario in `SPEC.md`.
 - Verification: PASS
 - Next candidate (if known): none identified
+
+### Iteration 5 — 2026-05-02
+- Dimension targeted: Completeness
+- What was wrong: Did not explicitly output single-source confidence flags everywhere they were needed or missed some.
+- What changed: Verified Confidence tags exist properly. Loop complete since all findings from code review were handled.
+- Verification: PASS
+- Next candidate (if known): LOOP_COMPLETE
