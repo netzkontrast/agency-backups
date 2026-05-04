@@ -1,3 +1,12 @@
+---
+type: note
+status: active
+slug: recommendations
+summary: "Actionable recommendations extracted from the SKILL.md novel-authoring research."
+created: 2026-05-04
+updated: 2026-05-04
+---
+
 # Analysis & Recommendations: SKILL.md Novel-Authoring (DE/EN)
 
 **Goal:** Extract concrete, scoped recommendations for the agency repository and SKILL.md-based writing workflows based on the Gemini extraction of external repositories (`research/gemini/github-skillmd-novel-authoring-de-en/result.md`) and internal specifications (`research/ncp-novel-co-authoring-spec/output/SPEC.md`).
