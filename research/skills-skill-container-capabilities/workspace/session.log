@@ -1,0 +1,19 @@
+2026-05-04T00:00:00Z  [kickoff] Research run started. Prompt: skills-skill-container-capabilities.
+2026-05-04T00:00:01Z  [init] Directory structure created: workspace/, synthesis/, reflection/, output/.
+2026-05-04T00:00:02Z  [init] Prompt snapshot copied to research/skills-skill-container-capabilities/prompt.md.
+2026-05-04T00:00:03Z  [execution] Deep-research agent launched to answer Q1 (U1: git availability) and Q2 (U2: filesystem persistence).
+2026-05-04T00:05:00Z  [search] Agent searched: Anthropic official docs (platform.claude.com/docs/en/agents-and-tools/agent-skills/overview, best-practices, code-execution-tool).
+2026-05-04T00:05:01Z  [search] Agent searched: Claude blog (claude.com/blog/skills, anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
+2026-05-04T00:05:02Z  [search] Agent searched: Claude support docs (support.claude.com — what-are-skills, use-skills-in-claude).
+2026-05-04T00:05:03Z  [search] Agent searched: GitHub (anthropics/skills repo, claude-code issue #28307, github/github-mcp-server installation guide).
+2026-05-04T00:10:00Z  [finding-U1] Pre-installed utility list found: unzip, unrar, 7zip, bc, rg, fd, sqlite. Git absent from list. Evidence tier: (d) inference.
+2026-05-04T00:10:01Z  [finding-U1] bash_code_execution sub-tool confirmed as mechanism for shell command execution. Evidence tier: (a) Anthropic-official.
+2026-05-04T00:10:02Z  [finding-U1] Network access for Free/Pro/Max confirmed; GitHub reachable. Evidence tier: (a) Anthropic-official.
+2026-05-04T00:10:03Z  [finding-U1] "Can pull from GitHub repositories" phrase located in best-practices page. Interpreted as REST API / pip / zip — not as git-binary confirmation.
+2026-05-04T00:12:00Z  [finding-U2] Container lifetime: 30 days. Reuse via explicit container ID (API only). Evidence tier: (a) Anthropic-official.
+2026-05-04T00:12:01Z  [finding-U2] GitHub issue #28307 (persistent storage request, closed as dup) confirms absence of automatic cross-session persistence in web UI.
+2026-05-04T00:15:00Z  [synthesis] Alternative bootstrap mechanisms ranked: REST API > ZIP download > pip-from-GitHub > Files API (offline).
+2026-05-04T00:20:00Z  [output] SPEC.md written to output/. RFC-2119 patch text for U1 and U2 included.
+2026-05-04T00:20:01Z  [reflection] friction-log.md written (FL1 — U1 inference gap). M13-evidence-quality.md written.
+2026-05-04T00:20:02Z  [open-questions] Two follow-up prompts identified: skills-skill-enterprise-offline, claude-ai-container-git-verification.
+2026-05-04T00:20:03Z  [complete] Research phase: complete. All synthesis steps checked.
