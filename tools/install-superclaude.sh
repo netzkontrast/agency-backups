@@ -8,7 +8,7 @@
 # Options:
 #   --yes              Non-interactive; accept all prompts automatically.
 #   --clone-dir <path> Where to clone SuperClaude_Framework if not found locally.
-#                      Default: sibling directory ../SuperClaude_Framework
+#                      Default: ~/SuperClaude_Framework
 
 set -euo pipefail
 
@@ -17,6 +17,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AGENCY_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 AUTO_YES=false
 CLONE_DIR=""
+# Default clone location: $HOME/SuperClaude_Framework (avoids relative-path issues)
+DEFAULT_CLONE_TARGET="$HOME/SuperClaude_Framework"
 
 # ── arg parsing ───────────────────────────────────────────────────────────────
 while [[ $# -gt 0 ]]; do
@@ -59,7 +61,7 @@ elif [[ -d "$HOME/SuperClaude_Framework/.git" ]]; then
   SC_DIR="$HOME/SuperClaude_Framework"
   info "Found existing clone at $SC_DIR"
 else
-  SC_DIR="$(cd "$AGENCY_ROOT/.." && pwd)/SuperClaude_Framework"
+  SC_DIR="$DEFAULT_CLONE_TARGET"
   info "SuperClaude_Framework not found locally."
   confirm "Clone from $REPO_URL into $SC_DIR?" || die "Aborted."
   git clone "$REPO_URL" "$SC_DIR"
@@ -83,7 +85,8 @@ ok "UV $(uv --version)"
 # ── 3. install SuperClaude Python package ─────────────────────────────────────
 info "Installing SuperClaude package in editable mode from $SC_DIR …"
 cd "$SC_DIR"
-uv pip install -e ".[dev]"
+# --system: install into the system Python when no virtualenv is active
+uv pip install --system -e ".[dev]"
 ok "Package installed"
 
 # ── 4. deploy Claude Code artifacts ──────────────────────────────────────────
