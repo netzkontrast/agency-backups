@@ -1,15 +1,3 @@
----
-type: research
-status: completed
-slug: agentic-eval-trust-improvement-spec
-summary: "Spec-J/K/L: agentic output quality evaluation (CLEAR rubric), human-agent trust calibration with N-Zero promotion gates, and governance improvement loops decoupled from task optimization."
-created: 2026-05-02
-updated: 2026-05-04
-research_phase: complete
-research_executes_prompt: agentic-eval-trust-improvement-spec
-research_friction_level: FL1
----
-
 # Agentic Output Evaluation, Trust Calibration, and Governance Improvement Loops
 
 ## 1. Executive Summary

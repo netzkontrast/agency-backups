@@ -79,7 +79,7 @@ Body-level Markdown links between folders are encouraged for human navigation, b
 
 ## 7. Anti-Patterns
 
-- **MUST NOT** create operational folders outside `/tasks/`, `/prompts/`, `/research/`. Top-level governance specs (`TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `FRUSTRATED.md`, `PRE_COMMIT.md`, `AGENTS.md`) live at the repo root.
+- **MUST NOT** create operational folders outside `/tasks/`, `/prompts/`, `/research/`. Top-level governance specs (`TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `FRUSTRATED.md`, `PRE_COMMIT.md`, `AGENTS.md`) live at the repo root. *Exemption:* the non-operational storage folders enumerated in §8 (`/skills/`, `/templates/`, `/tools/`, `/maintenance/`) are explicitly out of scope of this rule.
 - **MUST NOT** mix kinds inside one folder (e.g., a prompt draft inside a research workspace).
 - **MUST NOT** rely on body-level Markdown links instead of frontmatter for cross-directory linkage that tooling will consume.
 
