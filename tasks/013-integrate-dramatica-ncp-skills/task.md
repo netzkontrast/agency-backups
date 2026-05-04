@@ -6,6 +6,7 @@ summary: "Spec-driven, scenario-keyed restructure of dramatica-theory + dramatic
 created: 2026-05-04
 updated: 2026-05-04
 task_id: "013"
+task_notes_kickoff: "Research kickoff completed 2026-05-04 — see /research/integrate-dramatica-ncp-skills/output/SPEC.md for findings and Plan-step recommendations."
 task_owner: "claude-code"
 task_status: in_progress
 task_priority: P1
@@ -325,7 +326,8 @@ Walks `skills/dramatica-vocabulary/references/*.md`, parses every per-term front
 - [ ] 12. Wire `validate.py` into `tools/check-governance.sh`; update `PRE_COMMIT.md`.
 - [ ] 13. Run token-cost benchmark; record to `notes.md`.
 - [ ] 14. Write `/prompts/integrate-dramatica-ncp-skills/{readme.md,brief.md,prompt.md}`.
-- [ ] 15. Spawn `/research/integrate-dramatica-ncp-skills/` with frontmatter and methodology.
+- [x] 15a. Spawn `/research/integrate-dramatica-ncp-skills/` (kickoff phase) with frontmatter, three evidence streams, M01 + M07 reflections, and `output/SPEC.md` consolidating findings + recommendations addressed at Plan steps 2–11.
+- [ ] 15b. Run the synthesis-phase research pass after Plan steps 2–11 land (re-execute against the schemas + ontology + navigator to verify acceptance criteria empirically).
 - [ ] 16. Friction log; flip `task_status: done`; `/sc:createPR`.
 
 ## Acceptance Criteria (Gherkin)

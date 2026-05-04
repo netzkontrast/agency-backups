@@ -1,0 +1,40 @@
+2026-05-04 — kickoff session (Claude Code, Opus 4.7).
+
+## Step 1 — Resolve the prompt
+- Confirmed /prompts/integrate-dramatica-ncp-skills/prompt.md exists (status: draft).
+- Snapshotted to /research/integrate-dramatica-ncp-skills/prompt.md.
+
+## Step 2 — Initialize directory
+- mkdir -p workspace synthesis reflection output
+
+## Step 3 — Corpus inventory (synthesis/inventory.md)
+- Dispatched Explore subagent against skills/dramatica-vocabulary/references/ and skills/dramatica-theory/references/.
+- Subagent returned: 22 vocab files, 310 distinct terms, 75 reciprocal pairs, 512 synonym aliases, 15 theory chapters totalling 1010 KB.
+- Verified counts independently:  grep -c '^- ' _synonym-lookup.md => 512;  wc -l dynamic-pairs-index.md => 82.
+- Discrepancy logged: vocab elements.md carries 71 entries (canonical 64 + 7 meta-entries: Crucial Element, MC Problem, OS Problem/Response/Solution/Symptom, Symptom Element, Focus, etc.). Likewise types.md carries 41 entries (canonical 16 + 25 concept entries). Schema MUST distinguish kind=element-canonical vs kind=concept.
+
+## Step 4 — Cross-skill ID audit (synthesis/id-audit.md)
+- grep across the four SKILL.md files for "throughline | impact | influence | subjective | relationship | mental sex".
+- Confirmed three concrete naming contradictions:
+  C1 (4th throughline name): SS / RS / Relationship Story / RS — three labels, one entity.
+  C2 (3rd throughline name): Impact Character (theory + vocab) vs Influence Character (ncp-author).
+  C3 (MC dynamic for problem-solving): Mental Sex (theory + vocab) vs Problem-solving Style (ncp-author canonical-vocabulary §1.2).
+- Verified ncp-author/references/canonical-vocabulary.md §1.1 declares 'Main Character | Influence Character | Objective Story | Relationship Story' as canonical — i.e. the NCP enum is the binding contract for JSON output, not the theory prose.
+
+## Step 5 — Scenario-tag survey (synthesis/scenario-survey.md)
+- Mapped the 11 personas-scenarios from /tasks/013/task.md against vocabulary file inventory.
+- First-pass heuristic only — confidence=medium; final tag list is authored downstream in Task 013 plan step 6.
+
+## Step 6 — Reflection
+- M01 Falsification on Plan step 8 navigator design (recorded in reflection/M01-falsification.md).
+- M07 Contradiction Log on the four-skill cross-references (recorded in reflection/M07-contradiction-log.md).
+
+## Step 7 — Output
+- Wrote output/SPEC.md consolidating findings + recommendations for Task 013 plan steps 2–11.
+- Wrote output/readme.md.
+
+## Friction
+- FL0. No tool failures, no scope drift. The Explore subagent over-counted elements (71 vs canonical 64) but flagged it correctly as meta-entries; that is content-level signal, not session friction.
+
+## Pre-commit hygiene
+- Ran tools/check-governance.sh --no-trust before commit. Passes for the new files; pre-existing 6 lint-structure errors in unrelated /prompts/ remain.
