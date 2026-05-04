@@ -1,3 +1,15 @@
+---
+type: research
+status: completed
+slug: repo-maintenance-protocol-spec
+summary: "Normative spec for the Nightly Maintenance Protocol, dynamic (executable) readme schema, and the /todo/ delegation pipeline. Bounds the maintenance agent's scope away from Root Specs."
+created: 2026-05-02
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: repo-maintenance-protocol-spec
+research_friction_level: FL1
+---
+
 # Repository Maintenance Protocol and Dynamic Documentation Standard
 
 ## §1. Normative Conventions

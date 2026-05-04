@@ -82,3 +82,16 @@ Body-level Markdown links between folders are encouraged for human navigation, b
 - **MUST NOT** create operational folders outside `/tasks/`, `/prompts/`, `/research/`. Top-level governance specs (`TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `FRUSTRATED.md`, `PRE_COMMIT.md`, `AGENTS.md`) live at the repo root.
 - **MUST NOT** mix kinds inside one folder (e.g., a prompt draft inside a research workspace).
 - **MUST NOT** rely on body-level Markdown links instead of frontmatter for cross-directory linkage that tooling will consume.
+
+## 8. Non-Operational Storage Folders (Explicit Exemptions)
+
+Some top-level folders hold content that is mirrored from, or destined for, an external runtime — they are not operational orchestration folders and are therefore exempt from §1 and §7:
+
+| Folder | Purpose | Exemption scope |
+|---|---|---|
+| `/skills/` | Version-controlled mirror of Claude skills (`SKILL.md` + assets). Runtime location is `~/.claude/skills/` and `/mnt/skills/user/`. | Exempt from the `/tasks/`-`/prompts/`-`/research/` partition. Per-skill `readme.md` files are auto-generated from each `SKILL.md` frontmatter and SHOULD NOT be hand-edited. They are NOT required to carry L1 Vault Core frontmatter. |
+| `/templates/` | Frontmatter and folder skeletons consumed by agents when creating new operational artifacts. | Files MAY contain `REPLACE` tokens; the validator skips template files for that check. The folder's own `readme.md` MUST carry L1 frontmatter. |
+| `/tools/` | Repository tooling (validator, lints, helpers). | The folder's own `readme.md` MUST carry L1 frontmatter; individual scripts do not. |
+| `/maintenance/` | Canonical language spec and maintenance run logs. | Treated as a governance annex; not in the audit graph. |
+
+`tools/validate-frontmatter.py` enforces this partition mechanically: it walks `/tasks/`, `/prompts/`, `/research/`, `/templates/`, `/tools/` only. Adding a new top-level folder that is *not* on this list is itself an anti-pattern unless it is explicitly listed in the table above.

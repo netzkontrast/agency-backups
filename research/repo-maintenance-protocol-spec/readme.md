@@ -1,3 +1,15 @@
+---
+type: index
+status: active
+slug: repo-maintenance-protocol-spec
+summary: "Research workspace for the Nightly Maintenance Protocol, dynamic readme schema, and the /todo/ delegation pipeline. Final spec lives in output/SPEC.md."
+created: 2026-05-02
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: repo-maintenance-protocol-spec
+research_friction_level: FL1
+---
+
 # Research Task: Repository Maintenance Protocol and Dynamic Documentation Standard
 
 This folder contains the research execution for defining the Nightly Maintenance Protocol, Dynamic Readmes, and the `/todo/` pipeline delegation.

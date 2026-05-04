@@ -58,6 +58,7 @@ fi
 IN_SYNC=0
 MISSING=0
 DIVERGED=0
+FETCH_ERR=0
 
 for skill_name in "${REPO_SKILLS[@]}"; do
   local_file="$TARGET_DIR/$skill_name/SKILL.md"
@@ -69,7 +70,12 @@ for skill_name in "${REPO_SKILLS[@]}"; do
   fi
 
   remote_tmp="$(mktemp)"
-  git -C "$REPO_ROOT" show "origin/main:skills/$skill_name/SKILL.md" > "$remote_tmp" 2>/dev/null || true
+  if ! git -C "$REPO_ROOT" show "origin/main:skills/$skill_name/SKILL.md" > "$remote_tmp" 2>/dev/null; then
+    echo "ERROR:    $skill_name  (git show failed for origin/main:skills/$skill_name/SKILL.md)"
+    rm -f "$remote_tmp"
+    (( FETCH_ERR++ )) || true
+    continue
+  fi
 
   if cmp -s "$remote_tmp" "$local_file"; then
     echo "OK:       $skill_name"
@@ -95,8 +101,13 @@ fi
 
 echo ""
 log "Source: origin/main @ ${MAIN_SHA:0:7}"
-log "Result: $IN_SYNC in-sync, $MISSING missing, $DIVERGED diverged"
+log "Result: $IN_SYNC in-sync, $MISSING missing, $DIVERGED diverged, $FETCH_ERR fetch-error"
 log "Target: $TARGET_DIR"
+
+if [[ $FETCH_ERR -gt 0 ]]; then
+  log "git show failed for one or more skills; check origin/main and network."
+  exit 2
+fi
 
 if [[ $MISSING -gt 0 || $DIVERGED -gt 0 ]]; then
   log "Run skills/skills-skill-bootstrap/sync.sh to fix."

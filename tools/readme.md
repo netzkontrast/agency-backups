@@ -15,7 +15,7 @@ updated: 2026-05-04
 
 ## Contents
 
-- [`validate-frontmatter.py`](./validate-frontmatter.py) — Walks `/tasks/`, `/prompts/`, `/research/` and verifies L1 + L2 keys are present, YAML nesting ≤ 1, no surviving `REPLACE` tokens. Exit 1 on any diagnostic. Required by [`PRE_COMMIT.md`](../PRE_COMMIT.md) §7.
+- [`validate-frontmatter.py`](./validate-frontmatter.py) — Walks `/tasks/`, `/prompts/`, `/research/`, `/templates/`, `/tools/` and verifies L1 + L2 keys are present, YAML nesting ≤ 1, no surviving `REPLACE` tokens. Path classification anchors on the first known governance root in the path, so the validator works whether invoked with repo-relative or absolute paths and from any cwd. Waivers live in [`./.frontmatter-waivers`](./.frontmatter-waivers) and are resolved relative to the script (not cwd). Exit 1 on any diagnostic. Required by [`PRE_COMMIT.md`](../PRE_COMMIT.md) §7.
 
 ## Workflow Assumptions
 
