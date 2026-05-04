@@ -325,7 +325,7 @@ Walks `skills/dramatica-vocabulary/references/*.md`, parses every per-term front
 - [ ] 11. Update `dramatica-vocabulary/SKILL.md`, `dramatica-theory/SKILL.md`, `ncp-author/SKILL.md`, `novel-architect/SKILL.md` with navigator wiring.
 - [ ] 12. Wire `validate.py` into `tools/check-governance.sh`; update `PRE_COMMIT.md`.
 - [ ] 13. Run token-cost benchmark; record to `notes.md`.
-- [ ] 14. Write `/prompts/integrate-dramatica-ncp-skills/{readme.md,brief.md,prompt.md}`.
+- [x] 14. Write `/prompts/integrate-dramatica-ncp-skills/{readme.md,brief.md,prompt.md}` — promoted from `status: draft` to `status: active`; encodes the resolved OQ-A/B/C as binding requirements.
 - [x] 15a. Spawn `/research/integrate-dramatica-ncp-skills/` (kickoff phase) with frontmatter, three evidence streams, M01 + M07 reflections, and `output/SPEC.md` consolidating findings + recommendations addressed at Plan steps 2–11.
 - [ ] 15b. Run the synthesis-phase research pass after Plan steps 2–11 land (re-execute against the schemas + ontology + navigator to verify acceptance criteria empirically).
 - [ ] 16. Friction log; flip `task_status: done`; `/sc:createPR`.
@@ -429,9 +429,19 @@ Feature: The Narrative Ontology powers token-efficient lookup across narrative s
 
 ## Open Questions
 
+### Task-side
+
 - **OQ-1.** Do we represent KTAD as a property of every term, or only of Quad members? Current plan: only of Quad members and the four foundational Elements (Knowledge / Thought / Ability / Desire). All other terms carry KTAD via their Quad. Decide before step 5.
 - **OQ-2.** Are scenarios a flat namespace or do they carry sub-personas? Current plan: flat, with the persona prefix (`novel.*`, `lyric.*`) carrying the discrimination. Revisit if a third persona appears (game-narrative? screenplay?).
 - **OQ-3.** Should the navigator emit Markdown tables in addition to JSON? Useful for human-in-the-loop review; expensive in tokens. Decision: JSON-only by default; `--md` flag opt-in.
+
+### Kickoff-research-side (resolved)
+
+The kickoff research run surfaced three additional open questions; all three are resolved as binding requirements in [`/prompts/integrate-dramatica-ncp-skills/prompt.md § Binding Resolutions of Open Questions`](../../prompts/integrate-dramatica-ncp-skills/prompt.md). The downstream agent MUST NOT re-open them.
+
+- **OQ-A — Locale alias YAML shape.** Resolved: **flattened keys** (`aliases_en`, `aliases_de`, `deprecated_aliases_<locale>`). Preserves the repo-wide depth-1 YAML constraint; no rule exception needed.
+- **OQ-B — `# Element (70)` heading.** Resolved: **keep the heading**; per-term `kind: element` vs `kind: concept` does the semantic work. No prose churn.
+- **OQ-C — Dynamic-pair representation.** Resolved: **hybrid** — Elements/Variations carry `dynamic_pair_id` for constant-time partner lookup; standalone `kind: dynamic-pair` entries exist per pair (with `pair_member_a` / `pair_member_b`) so pair-level scenario tagging is addressable. `validate.py` enforces the reciprocity invariant.
 
 ## Anti-Patterns to Avoid
 

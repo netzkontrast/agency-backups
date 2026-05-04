@@ -133,15 +133,15 @@ The synonym lookup is EN-only (512 rows) but the vocabulary skill triggers expli
 
 ## §4. Open Questions Surfaced
 
-The kickoff surfaces three questions that block clean schema authoring. Per `RESEARCH.md §4.9` they are filed as follow-up prompts in `/prompts/` for downstream resolution; here we record them so the SPEC is closed.
+The kickoff surfaces three questions that block clean schema authoring. **All three are resolved** in [`/prompts/integrate-dramatica-ncp-skills/prompt.md § Binding Resolutions of Open Questions`](../../../prompts/integrate-dramatica-ncp-skills/prompt.md); the resolutions are binding for downstream Task 013 work.
 
-| ID | Question | Threshold for closure |
+| ID | Question | Resolution (binding) |
 |---|---|---|
-| **OQ-A** | Should `aliases.<locale>` be expressed in YAML as a depth-2 nested map (`aliases: { en: [...], de: [...] }`) — which violates the repo's depth-1 rule — or as flattened keys `aliases_en: [...]`, `aliases_de: [...]`? | Decide before Plan step 2. The flattened form is the safer default; the nested form would require a repo-wide rule exception. |
-| **OQ-B** | The vocabulary's `elements.md` heading says "Element (70)". Do we keep that heading and rely on the `kind` distinction, or rewrite the heading to "Element (64) + Concept (6)"? | Decide before Plan step 6 (scenario tagging touches the file). Recommendation: keep the heading; the per-term `kind` field handles the semantics. |
-| **OQ-C** | Do we mint ontology IDs for the 75 entries in `dynamic-pairs-index.md` (one ID per pair) or treat dynamic-pairs as a *property* of an Element entry (`dynamic_pair_id: el.partner`) and not as standalone entries? Hybrid is also possible. | Decide before Plan step 4. Recommendation: hybrid — Elements carry the `dynamic_pair_id` property, and pairs *also* get standalone `kind: dynamic-pair` entries that point at both halves. This makes `nav.py by-quad` and `nav.py by-pair` callable without reverse-walking. |
+| **OQ-A** | Should `aliases.<locale>` be expressed in YAML as a depth-2 nested map (`aliases: { en: [...], de: [...] }`) — which violates the repo's depth-1 rule — or as flattened keys `aliases_en: [...]`, `aliases_de: [...]`? | **Flattened keys.** `aliases_en`, `aliases_de`, `deprecated_aliases_en`, etc. The depth-1 YAML rule from `AGENTS.md` is preserved without exception. New locales become legal automatically. |
+| **OQ-B** | Keep "Element (70)" heading or rewrite to "Element (64) + Concept (6)"? | **Keep heading.** The per-term `kind` field handles the semantics: 64 entries with `kind: element`, 7 with `kind: concept`. Rewriting human-facing prose for a schema-internal reason fails the cost/benefit test. |
+| **OQ-C** | Mint ontology IDs for the 75 dynamic pairs as standalone entries, OR treat as a property of an Element entry, OR hybrid? | **Hybrid.** Elements/Variations carry `dynamic_pair_id` (constant-time partner lookup); a standalone `kind: dynamic-pair` entry exists per pair carrying `pair_member_a` + `pair_member_b` (so pair-level scenario tagging is addressable without forcing the tag onto both halves). Reciprocity invariant is enforced by `validate.py`. |
 
-These three questions are filed under the Task's Open Questions list for the agent who picks up Plan step 2.
+The resolutions modify Plan steps 2 (schema fields), 4 (ontology bootstrap), 8 (validator integrity check), and 9 (navigator subcommands include `by-pair`).
 
 ## §5. Acceptance Criteria for the Kickoff
 
