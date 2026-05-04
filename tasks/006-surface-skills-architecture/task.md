@@ -5,7 +5,7 @@ slug: surface-skills-architecture
 summary: "Found by coherence check 2026-05-04: Surface skills-skill-architecture research findings to governance."
 created: 2026-05-04
 updated: 2026-05-04
-task_id: "003"
+task_id: "006"
 task_status: open
 task_owner: "unassigned"
 task_priority: P2
@@ -18,7 +18,7 @@ task_affects_paths:
   - TASK.md
 ---
 
-# Task 003 — Surface Skills Architecture to Governance
+# Task 006 — Surface Skills Architecture to Governance
 
 ## Goal
 The `skills-skill-architecture` research run was marked complete, but its findings have not been integrated into the root governance documents (`AGENTS.md`, `TASK.md`, `MAINTENANCE.md`). Ensure the architecture and triggers discovered in that research run are canonically logged.

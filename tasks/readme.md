@@ -25,8 +25,13 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 
 - [`000-decouple-architecture/`](./000-decouple-architecture/) — Bootstrap meta-task that introduced this folder, the Frontmatter Ontology, `TASK.md`, templates, and the validator. Status: `done`.
 - [`001-refactor-governance-from-specs/`](./001-refactor-governance-from-specs/) — Encode rules from Spec-A/B/C, Spec-G/H/I, and Spec-J/K/L into linters, hooks, and templates. Status: `open`.
-- [`002-token-efficiency-tool-suite/`](./002-token-efficiency-tool-suite/) — Build token-efficiency tooling for agentic workflows. Status: `open`.
-- [`003-analyze-skillmd-novel-authoring/`](./003-analyze-skillmd-novel-authoring/) — Analyze Gemini SKILL.md novel-authoring research (DE/EN) and extract actionable recommendations. Status: `open`.
+- [`002-token-efficiency-tool-suite/`](./002-token-efficiency-tool-suite/) — Build token-efficiency tooling for agentic workflows. Status: `done`.
+- [`003-analyze-skillmd-novel-authoring/`](./003-analyze-skillmd-novel-authoring/) — Analyze Gemini SKILL.md novel-authoring research (DE/EN) and extract actionable recommendations. Status: `done`.
+- [`004-create-missing-prompts/`](./004-create-missing-prompts/) — Author missing prompts for Tasks 001 and 002. Status: `open`.
+- [`005-address-deferred-coherence-issues/`](./005-address-deferred-coherence-issues/) — Apply 148 deferred T1/T2 frontmatter stubs from coherence run 2026-05-04. Status: `open`.
+- [`006-surface-skills-architecture/`](./006-surface-skills-architecture/) — Surface `skills-skill-architecture` research findings to root governance. Renumbered from `003` per TASK.md §8.1. Status: `open`.
+- [`007-reconcile-closed-task-linkage/`](./007-reconcile-closed-task-linkage/) — Reconcile linkage drift in closed Tasks 002 and 003 (missing friction-logs, prompt/research field confusion, namespaced research path). Status: `open`.
+- [`008-harden-coherence-baseline-protocol/`](./008-harden-coherence-baseline-protocol/) — Harden the coherence-check baseline + run-log protocol against squash-merges, malformed records, duplicate task_ids, and silent fallbacks. Status: `open`.
 
 ## Workflow Assumptions
 
