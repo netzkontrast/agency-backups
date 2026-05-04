@@ -140,7 +140,7 @@ If sync produces an error or the local skill directory is corrupt:
 skills/skills-skill-bootstrap/verify.sh && echo "All skills in sync"
 ```
 
-`verify.sh` prints `OK`, `MISSING`, `DIVERGED`, or `LOCAL` for each skill. `LOCAL` entries (skills present locally but absent from the repo) are informational and do not cause a non-zero exit.
+`verify.sh` prints `OK`, `MISSING`, `DIVERGED`, `ERROR`, or `LOCAL` for each skill. `LOCAL` entries (skills present locally but absent from the repo) are informational and do not cause a non-zero exit. `ERROR` entries (raised when `git show origin/main:skills/<name>/SKILL.md` fails — typically a network or fetch problem) cause an exit code of `2` to distinguish infrastructure failure from a sync drift (`1`).
 
 ## Assumptions Log
 
