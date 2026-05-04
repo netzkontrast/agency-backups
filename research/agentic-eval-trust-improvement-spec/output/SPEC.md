@@ -1,3 +1,14 @@
+---
+type: research
+status: active
+slug: agentic-eval-trust-improvement-spec
+summary: "Final specification output for the agentic eval trust improvement research."
+created: 2026-05-04
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: agentic-eval-trust-improvement-spec
+research_friction_level: FL0
+---
 # Agentic Output Evaluation, Trust Calibration, and Governance Improvement Loops
 
 ## 1. Executive Summary

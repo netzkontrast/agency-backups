@@ -1,3 +1,14 @@
+---
+type: research
+status: active
+slug: repo-maintenance-protocol-spec
+summary: "Final specification output for the repo maintenance protocol research."
+created: 2026-05-04
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: repo-maintenance-protocol-spec
+research_friction_level: FL0
+---
 # Repository Maintenance Protocol and Dynamic Documentation Standard
 
 ## §1. Normative Conventions

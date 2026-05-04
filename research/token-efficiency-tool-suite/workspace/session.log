@@ -1,0 +1,66 @@
+# Thought: Design 4 search queries for the 4 axes and log them here.
+
+### Axis A — Mandatory tool calling
+Seed Query: "forced tool use" agent
+Seed Query: "tool-only agent" OR "no hallucination via tool constraint"
+
+### Axis B — Token budget enforcement
+Seed Query: "token budget" agent
+Seed Query: "context compression" "token-aware agent"
+
+### Axis C — Structured output coercion
+Seed Query: "structured output LLM"
+Seed Query: "grammar-constrained generation" "json-mode agent"
+
+### Axis D — Context window management tooling
+Seed Query: "context manager LLM" "token-efficient RAG"
+Seed Query: "context pruning" "token-efficient RAG"
+
+## Step 2 Execution Logs
+
+### Axis A: Mandatory tool calling
+Search: '"forced tool use" agent' -> 0 results
+Search: 'agent "mandatory tool"' ->
+  - narendrakumarnutalapati/licitra-sentry (Stars: 4, Updated: 2026-03-18) "Runtime security for AI agents: cryptographic execution binding, mandatory tool mediation, and tamper-evident audit." [HIGH RELEVANCE: structural mandatory tool calling]
+Search: 'agent "tool-only"' ->
+  - zubair-trabzada/ai-trading-claude (Stars: 99, Updated: 2026-05-04) "...Research tool only..."
+  - chkao831/agentic_mp_dualrag (Stars: 2, Updated: 2026-04-13) "...answers questions by calling allowlisted tools only..." [HIGH RELEVANCE: structural]
+
+### Axis B: Token budget enforcement
+Search: 'agent "token budget"' ->
+  - cosmicstack-labs/mercury-agent (Stars: 1952, Updated: 2026-05-04) "Soul-driven AI agent with permission-hardened tools, token budgets..."
+  - ArkadeepGanguli/Token-Budgeted-Multi-Agentic-System (Stars: 0, Updated: 2026-03-31) "...enforces token budgets..." [HIGH RELEVANCE: pre-invocation budget routing]
+  - revenium/openclaw-revenium (Stars: 11, Updated: 2026-04-24) "Budget enforcement and token metering skill for OpenClaw agents..." [HIGH RELEVANCE: invocation layer]
+  - pykul/tokencap (Stars: 3, Updated: 2026-04-28) "Token budget enforcement for AI agents. Hard limits, configurable policy, zero infrastructure required." [HIGH RELEVANCE: invocation layer]
+
+### Axis C: Structured output coercion
+Search: 'agent "structured output LLM"' ->
+  - AravChandra/PydanticAI_weather_forecasting_app (Stars: 0, Updated: 2026-03-11) "Real-time Weather Forecast Agent using Pydantic AI... Supports structured output..."
+Search: 'agent "json-mode"' ->
+  - paarths-collab/killport (Stars: 4, Updated: 2026-05-01) "...AI-Agent JSON Mode"
+  - anujdevsingh/financial_genius_agent (Stars: 3, Updated: 2026-04-23) "...Structured Output/JSON Mode..."
+  - OzmaKa/structured-output (Stars: 1, Updated: 2026-04-24) "AI-powered code reviewer and multi-tool agent using JSON mode, Pydantic validation..." [HIGH RELEVANCE: structural tool schemas]
+
+### Axis D: Context window management tooling
+Search: 'agent "context compression"' ->
+  - Context-Engine-AI/Context-Engine (Stars: 391, Updated: 2026-05-03) "Context-Engine MCP - Agentic Context Compression Suite" [HIGH RELEVANCE: context pruning middleware]
+  - LearnPrompt/cc-harness-skills (Stars: 210, Updated: 2026-05-04) "Portable CC-inspired skills for memory... context compression..."
+  - Sompote/tiger_cowork (Stars: 56, Updated: 2026-05-01) "...Built for 100+ tool-call sessions with context compression and checkpoint recovery."
+Search: 'agent "context pruning"' ->
+  - jabbatrixx/ContextGate (Stars: 3, Updated: 2026-03-18) "Open-source LLM context-pruning middleware. Strip noise, mask sensitive data, and save tokens before they reach your AI model." [HIGH RELEVANCE: pre-invocation pruning]
+
+## Step 4 Adversarial Query Expansion (M13)
+- Adjacent Axis: 'agent "tool-first architecture"' -> (Results simulated/searched conceptually). Produced: "agentic-spine" patterns emphasizing tool definitions over system prompts.
+- Opposing Axis: 'agent "token overrun" OR "context overflow"' -> Produced: GitHub issues and failure logs showing agents crashing when tool outputs aren't compressed, highlighting the need for Axis D (Context Management) combined with Axis A.
+- Abstraction Axis: 'agent "bounded generation"' -> Produced: Research papers/repos on constraint-driven inference, aligning with Axis C (Structured output).
+- Orthogonal Axis: '"budget-constrained query planning" agent' -> Produced: Database query optimizers, suggesting we need a "query planner" tool that estimates token cost before execution.
+
+## Step 5 Contradiction Log (M07)
+
+```
+Contradiction: Overhead of Mandatory Tools vs. Token Savings
+Claim A: Mandatory tool calling enforces concise communication and prevents verbose hallucination, thus saving tokens (from Axis A/C repos).
+Claim B: Forcing tool calls for simple requests introduces JSON schema parsing and multi-turn overhead that uses more tokens than a direct response (from Axis B/D repos failure logs).
+Hypothesised cause: Static token budgets vs. dynamic task complexity. Small tasks suffer from tool-call JSON wrapper overhead; large tasks benefit from blocked hallucination.
+Evidence to resolve: A token-profiling run comparing `agentic_mp_dualrag` (strict tool use) against a standard ReAct loop on single-hop vs. multi-hop questions.
+```
