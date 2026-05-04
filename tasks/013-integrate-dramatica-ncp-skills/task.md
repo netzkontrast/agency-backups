@@ -314,8 +314,8 @@ Walks `skills/dramatica-vocabulary/references/*.md`, parses every per-term front
 ## Todo
 
 - [x] 1. Author this `task.md` (current step) — set `task_status: in_progress`.
-- [ ] 2. Inventory term universe → `notes.md` § Inventory.
-- [ ] 3. Author the four schema files under `maintenance/schemas/narrative-ontology/`.
+- [x] 2. Inventory term universe → `notes.md` § Inventory. Verified 310 term-level `## ` headings across 22 vocab files (333 total minus 23 alphabetical buckets in `_synonym-lookup.md`). Drift vs. kickoff: 0. Gate passes.
+- [x] 3. Author the four schema files under `maintenance/schemas/narrative-ontology/`. All four valid Draft 2020-12; 11/11 fixture cases pass; line counts 152/82/56/61 (cap 200). Plus `readme.md` documenting the OQ-A/B/C resolutions.
 - [ ] 4. Author `scenarios.json` (12 scenarios).
 - [ ] 5. Bootstrap `ontology.json` (~140 entries).
 - [ ] 6. Insert per-term frontmatter via `ontology-build.py --bootstrap`.
