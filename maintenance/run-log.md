@@ -48,7 +48,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run 2026-05-04 — bootstrap
 - agent: claude-code (session claude/improve-agents-documentation-DyXZf)
 - start_commit: f620b6d
-- end_commit: 4c5e7e4 f620b6d
+- end_commit: 4c5e7e4
 - baseline_commit: none (first run — log seeded from current HEAD)
 - files_in_delta: 0
 - files_scanned: 0
@@ -97,7 +97,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 - notes: >
     Baseline 4c5e7e4 (recorded by Jules's previous run) was not present in git history — likely
     lost when the merge of PR #25 collapsed the branch's hash. Fell back to the 7-day window.
-    The previous run's record set `end_commit: 4c5e7e4 f620b6d` (two hashes) which is malformed
+    The previous run's record set `end_commit: 4c5e7e4` (two hashes) which is malformed
     and broke the awk-based extraction in `prompts/repo-coherence-check/prompt.md` Step 1.
     Drove the run from `tools/check-governance.sh` output rather than re-scanning all 624 files,
     because the linters surface every active conformance error mechanically — far more focused

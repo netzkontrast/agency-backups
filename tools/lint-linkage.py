@@ -83,6 +83,14 @@ def lint_tasks(
                         f"(TASK.md §7.3)"
                     )
 
+            for slug in str_list(fm, "task_spawns_prompts"):
+                prompt_path = prompts_root / slug / "prompt.md"
+                if not prompt_path.exists():
+                    errors.append(
+                        f"{task_md}: task_spawns_prompts slug '{slug}' does not resolve "
+                        f"to {prompt_path}"
+                    )
+
         # When done: all todos checked + friction-log.md exists
         if task_status == "done":
             text = task_md.read_text(encoding="utf-8")
@@ -128,11 +136,12 @@ def lint_prompts(
                 )
             else:
                 task_fm = read_fm(task_md)
-                if prompt_dir.name not in str_list(task_fm, "task_uses_prompts"):
+                if (prompt_dir.name not in str_list(task_fm, "task_uses_prompts") and
+                    prompt_dir.name not in str_list(task_fm, "task_spawns_prompts")):
                     errors.append(
                         f"{prompt_md}: prompt_relates_to_task '{task_slug}' exists "
                         f"but task does not list '{prompt_dir.name}' in "
-                        f"task_uses_prompts (FOLDERS.md §6 reciprocity)"
+                        f"task_uses_prompts or task_spawns_prompts (FOLDERS.md §6 reciprocity)"
                     )
 
         # prompt_spawned_from_research must resolve (top-level or provider subfolder)

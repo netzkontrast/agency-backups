@@ -37,7 +37,7 @@ from _frontmatter import FRONTMATTER_RE, Diag, parse_frontmatter
 
 L1_REQUIRED = {"type", "status", "slug", "summary", "created", "updated"}
 L2_TASK = {"task_id", "task_status", "task_owner", "task_priority",
-           "task_uses_prompts", "task_spawns_research", "task_affects_paths"}
+           "task_uses_prompts", "task_spawns_research", "task_spawns_prompts", "task_affects_paths"}
 # PROMPT.md §3 example shows prompt_relates_to_task / prompt_spawned_from_research
 # as "<slug or empty>" — they are conditional linkage fields, not always present.
 # Only the kind/framework/target trio is required on every prompt.

@@ -13,6 +13,7 @@ task_uses_prompts:
   - token-efficiency-tool-suite
 task_spawns_research:
   - token-efficiency-tool-suite
+task_spawns_prompts: []
 task_affects_paths:
   - research/token-efficiency-tool-suite/
   - prompts/token-efficiency-tool-suite/

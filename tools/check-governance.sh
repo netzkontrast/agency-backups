@@ -42,9 +42,15 @@ if ! "$PYTHON" tools/lint-linkage.py; then
   FAIL=1
 fi
 
+echo ""
+echo "--- [4/4] Run-log record validator ---"
+if ! "$PYTHON" tools/lint-runlog.py; then
+  FAIL=1
+fi
+
 if [ "$SKIP_TRUST" -eq 0 ]; then
   echo ""
-  echo "--- [4/4] Spec-J/K/L trust audit ---"
+  echo "--- [5/5] Spec-J/K/L trust audit ---"
   if ! "$PYTHON" tools/check-trust.py; then
     FAIL=1
   fi

@@ -11,6 +11,7 @@ task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts: []
 task_spawns_research: []
+task_spawns_prompts: []
 task_affects_paths:
   - tasks/002-token-efficiency-tool-suite/
   - tasks/003-analyze-skillmd-novel-authoring/

@@ -12,6 +12,7 @@ task_priority: P2
 task_uses_prompts:
   - skills-frontmatter-schema-files
 task_spawns_research: []
+task_spawns_prompts: []
 task_affects_paths:
   - maintenance/schemas/l1-vault-core.schema.json
   - maintenance/schemas/l2-task.schema.json
