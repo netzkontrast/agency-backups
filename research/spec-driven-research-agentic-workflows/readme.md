@@ -1,3 +1,15 @@
+---
+type: index
+status: completed
+slug: spec-driven-research-agentic-workflows
+summary: "Research index for meta-governance protocols governing spec-driven agentic research workflows."
+created: 2026-05-04
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: ""
+research_friction_level: FL0
+---
+
 # Spec-Driven Research Agentic Workflows
 
 This directory contains the complete lifecycle artifacts for researching the meta-governance of agentic workflows. It adheres to the `RESEARCH.md` schema.

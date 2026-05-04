@@ -13,6 +13,8 @@ Welcome, agent. This repository manages development and deep research tasks.
 
 **Before committing any work:** You MUST review and abide by the checks defined in [PRE_COMMIT.md](./PRE_COMMIT.md).
 
+**Last step of every Claude Code run:** After your final commit and push succeed, you MUST invoke `/sc:createPR` to open a pull request for review. See [§ Closing Run Procedure (Claude Code)](#closing-run-procedure-claude-code) below for the binding rule.
+
 ## Folder Management & Workflow Drift
 
 You MUST abide by the rules defined in [FOLDERS.md](./FOLDERS.md).
@@ -22,6 +24,47 @@ You MUST abide by the rules defined in [FOLDERS.md](./FOLDERS.md).
 ## Mandatory Frustration Feedback
 
 We rely on your honest feedback to improve these protocols. You MUST consult [FRUSTRATED.md](./FRUSTRATED.md) to accurately log the Frustration Level (FL) associated with your task. **This is a mandatory step for every session, even if everything went perfectly (FL0).**
+
+## Closing Run Procedure (Claude Code)
+
+This section binds the *final* step of every Claude Code session. It applies to Claude Code only; Jules and Gemini agents follow their own platform conventions.
+
+### Skill Provenance
+
+The `/sc:createPR` slash-command is provided by the **SuperClaude Framework** at [`src/superclaude/commands/createPR.md`](https://github.com/netzkontrast/SuperClaude_Framework/blob/main/src/superclaude/commands/createPR.md). It is installed automatically alongside the rest of the `/sc:*` command set; no per-repository setup is required beyond having SuperClaude available in the session.
+
+### Normative Rules
+
+- **CR.1** A Claude Code agent MUST invoke `/sc:createPR` as the final action of every session, immediately after a successful `git push`.
+- **CR.2** The agent MUST NOT consider a session complete until `/sc:createPR` has either (a) opened a new pull request, or (b) returned an explicit no-op confirmation that an existing PR already covers the pushed commits.
+- **CR.3** The agent MUST NOT invoke `/sc:createPR` if pre-commit checks (per [PRE_COMMIT.md](./PRE_COMMIT.md)) failed or were skipped. A failing or unverified working tree MUST NOT be promoted to a PR. The `/sc:createPR` skill itself enforces this gate by re-running `tools/check-governance.sh` before opening the PR.
+- **CR.4** If `/sc:createPR` errors out, the agent MUST NOT silently exit — the error MUST be reported to the user with the exact command output, and the session MUST remain in `in_progress` for the operator to triage.
+- **CR.5** The PR body created by `/sc:createPR` MUST reference (a) the closed Task slug(s) under `/tasks/` if any, and (b) the FL declaration from the friction log per [FRUSTRATED.md](./FRUSTRATED.md).
+- **CR.6** Re-invocation of `/sc:createPR` on a branch that already has an open pull request MUST be a no-op (the skill is idempotent). Agents MUST NOT create duplicate PRs to "force-update" an existing one — pushing additional commits to the same branch updates the open PR automatically.
+
+### Gherkin Scenario
+
+```gherkin
+Feature: Claude Code closes every run with /sc:createPR
+
+  # anchor: CR.1.1
+  Scenario: Successful run ends with PR creation
+    Given a Claude Code session has finished its work
+    And the agent has committed and pushed all changes
+    And tools/check-governance.sh exited 0 on the final commit
+    When the agent reaches the end of the session
+    Then the agent MUST invoke /sc:createPR before declaring the session complete
+    And the resulting pull request body MUST cite the closed Task slug(s) and the FL declaration
+
+  # anchor: CR.1.2
+  Scenario: Pre-commit failure blocks PR creation
+    Given a Claude Code session is finishing
+    And tools/check-governance.sh exited non-zero on the most recent commit attempt
+    When the agent considers invoking /sc:createPR
+    Then the agent MUST NOT invoke /sc:createPR
+    And the agent MUST report the linter diagnostics to the user
+    And the session MUST remain open for triage
+```
 
 ## Task Type Routing
 

@@ -1,3 +1,15 @@
+---
+type: index
+status: completed
+slug: ncp-novel-co-authoring-spec
+summary: "Research index for the Narrative Context Protocol specification enabling AI-agent-driven novel co-authoring."
+created: 2026-05-04
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: ""
+research_friction_level: FL0
+---
+
 # NCP Novel Co-Authoring Spec
 
 **What is this folder?** The main task directory for the NCP/Dramatica research prompt.

@@ -9,6 +9,8 @@ updated: 2026-05-04
 
 # Folder Interaction Specification
 
+> **Mechanical Enforcement Notice:** This spec is mechanically enforced by `tools/check-governance.sh`. Before editing any folder under `/tasks/`, `/prompts/`, or `/research/`, install the pre-commit hook once with `tools/install-hooks.sh`. The readme.md rule (§3) is enforced by [`tools/lint-structure.py`](./tools/lint-structure.py); the cross-directory linkage rule (§6) is enforced by [`tools/lint-linkage.py`](./tools/lint-linkage.py).
+
 To ensure navigation and traceability across the repository, agents MUST abide by the rules below.
 
 ## 1. Top-Level Topology (Separation of Concerns)
@@ -37,6 +39,7 @@ To ensure navigation and traceability across the repository, agents MUST abide b
 ## 3. The `readme.md` Rule (Decentralized Documentation)
 
 - **Rule:** EVERY folder MUST contain a `readme.md`.
+- **Enforcement:** [`tools/lint-structure.py`](./tools/lint-structure.py) emits an `ERROR` for every operational folder (`/tasks/<NNN>-<slug>/`, `/prompts/<slug>/`, non-provider `/research/<slug>/`) missing a `readme.md`. The pre-commit hook blocks the commit on any such error.
 - **Why:** Adjacent docs prevent doc-drift; the user can trust repository state without consulting a separate `/docs/` tree.
 - **Update Trigger:** Pre-commit batching. Agents update touched folders' `readme.md` as a single pre-commit step, not on every file change. This protects context window from administrative bloat.
 - **Required Content:**
@@ -76,6 +79,8 @@ Linkage between Tasks, Prompts, and Research MUST flow exclusively through front
 - Research → Prompt: `research_executes_prompt: <slug>`
 
 Body-level Markdown links between folders are encouraged for human navigation, but the **frontmatter is the source of truth** for any future CLI/graph tooling.
+
+**Enforcement:** [`tools/lint-linkage.py`](./tools/lint-linkage.py) walks every operational folder and emits an `ERROR` when any of the five frontmatter linkage keys above fails to resolve to its target file or folder. The pre-commit hook blocks the commit on any such error. Reciprocity (Prompt ↔ Task) is also checked.
 
 ## 7. Anti-Patterns
 

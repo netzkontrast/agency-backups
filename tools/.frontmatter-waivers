@@ -4,31 +4,9 @@
 # tools/validate-frontmatter.py will SKIP. Waivers exist to grandfather
 # pre-existing artifacts that pre-date the 2026-05-04 architecture refactor.
 #
-# Closing /tasks/001-refactor-governance-from-specs/ MUST burn this list to
-# zero by retrofitting frontmatter on every waived file.
+# This list was burned to zero by Task 001 (refactor-governance-from-specs)
+# on 2026-05-04 — all pre-existing research files were retrofitted with
+# L1+L2_RESEARCH frontmatter.
 #
 # Format: one path per line. Paths are matched as exact strings against the
 # `str(Path)` representation produced by the validator.
-
-# Pre-refactor research workspaces (output/SPEC.md and root readme.md).
-# Task 001 will retrofit these. The migration is non-trivial because the
-# legacy convention stored prompt.md INSIDE the research workspace, so a
-# proper retrofit also has to extract those prompts to /prompts/<slug>/
-# (per RESEARCH.md §3, research_executes_prompt MUST resolve there). Until
-# that bulk migration runs, adding frontmatter on these files would either
-# fabricate unresolved linkage or be inconsistent with the other siblings,
-# so they stay waived as a group.
-research/agent-prompt-specs-3-systems-sdd/readme.md
-research/agent-prompt-specs-3-systems-sdd/output/SPEC.md
-research/obsidian-frontmatter-agentic-spec/readme.md
-research/obsidian-frontmatter-agentic-spec/output/SPEC.md
-research/ncp-novel-co-authoring-spec/readme.md
-research/ncp-novel-co-authoring-spec/output/SPEC.md
-research/agentic-session-continuity-spec/readme.md
-research/agentic-session-continuity-spec/output/SPEC.md
-research/agentic-eval-trust-improvement-spec/readme.md
-research/agentic-eval-trust-improvement-spec/output/SPEC.md
-research/repo-maintenance-protocol-spec/readme.md
-research/repo-maintenance-protocol-spec/output/SPEC.md
-research/spec-driven-research-agentic-workflows/readme.md
-research/spec-driven-research-agentic-workflows/output/SPEC.md
