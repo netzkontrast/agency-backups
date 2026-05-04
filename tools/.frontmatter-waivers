@@ -10,6 +10,3 @@
 #
 # Format: one path per line. Paths are matched as exact strings against the
 # `str(Path)` representation produced by the validator.
-tasks/006-skills-navigation-bootstrap/readme.md
-prompts/skills-navigation-bootstrap/readme.md
-prompts/skills-navigation-bootstrap/brief.md

@@ -14,6 +14,7 @@ task_uses_prompts:
 task_spawns_research: []
 task_affects_paths:
   - prompts/skills-navigation-bootstrap/
+  - research/skills-navigation-bootstrap/
   - tasks/006-skills-navigation-bootstrap/
 ---
 
