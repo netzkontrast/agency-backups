@@ -6,8 +6,8 @@ summary: "Harden the coherence-check baseline + run-log protocol so it survives 
 created: 2026-05-04
 updated: 2026-05-04
 task_id: "008"
-task_status: open
-task_owner: "unassigned"
+task_status: in_progress
+task_owner: "claude-code/claude/stoic-mendel-Sk9lZ"
 task_priority: P1
 task_uses_prompts: []
 task_spawns_research: []
