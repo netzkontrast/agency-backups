@@ -1,3 +1,19 @@
+---
+type: theory-chunk
+chunk_id: dt-00-storyform-validation
+summary: Checklist for validating a completed storyform against Dramatica's hard structural rules and soft completeness checks before locking it in.
+covers_ontology_ids:
+  - concept.storyform
+  - concept.crucial-element
+serves_scenarios:
+  - novel.storyform-slot-fill
+  - novel.dual-storyform
+size_kb: 8
+depends_on_chunks:
+  - dt-00-storyform-worksheet
+  - dt-01-foundations
+---
+
 # Storyform Validation
 
 > Run this against a filled `00-storyform-worksheet.md` before declaring the storyform locked. Hard rules are structural — if violated, the storyform is invalid as Dramatica defines it. Soft checks are completeness/quality flags — they don't break the storyform but tend to predict trouble in encoding.

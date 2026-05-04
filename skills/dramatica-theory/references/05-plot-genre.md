@@ -1,3 +1,21 @@
+---
+type: theory-chunk
+chunk_id: dt-05-plot-genre
+summary: Describes how acts, sequences, and scenes are generated from signposts and journeys, and how genre modifies the audience's emotional expectations.
+covers_ontology_ids:
+  - plot-dynamic.*
+  - concept.signpost
+  - concept.journey
+  - concept.genre
+serves_scenarios:
+  - novel.act-pivot
+  - lyric.album-arc-mapping
+size_kb: 60
+depends_on_chunks:
+  - dt-01-foundations
+  - dt-04-theme
+---
+
 # Plot and Genre: Story Points, Acts, Sequences, Scenes, Genre Modes
 
 > Source: Phillips & Huntley, *Dramatica: A New Theory of Story* (4th ed., 2001), © Screenplay Systems Inc. This chunk: source lines 2422–2941 of 7516. Verbatim extract for personal narrative-craft use; not for redistribution.

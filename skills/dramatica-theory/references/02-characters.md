@@ -1,3 +1,19 @@
+---
+type: theory-chunk
+chunk_id: dt-02-characters
+summary: Covers archetypal characters, complex character construction, driver vs. passenger roles, and the 64 motivation elements that define character function.
+covers_ontology_ids:
+  - archetype.*
+  - element.*
+  - character-dynamic.*
+serves_scenarios:
+  - novel.character-arc
+  - lyric.archetype-as-system-part
+size_kb: 99
+depends_on_chunks:
+  - dt-01-foundations
+---
+
 # Characters: Archetypes, Complex Characters, Drivers/Passengers, Motivation Elements
 
 > Source: Phillips & Huntley, *Dramatica: A New Theory of Story* (4th ed., 2001), © Screenplay Systems Inc. This chunk: source lines 445–1571 of 7516. Verbatim extract for personal narrative-craft use; not for redistribution.

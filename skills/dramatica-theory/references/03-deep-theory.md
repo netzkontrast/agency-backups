@@ -1,3 +1,20 @@
+---
+type: theory-chunk
+chunk_id: dt-03-deep-theory
+summary: Explores how characters build justification chains and why those chains must be solvable for a story to make a complete argument.
+covers_ontology_ids:
+  - concept.justification
+  - concept.problem-solving
+  - concept.crucial-element
+serves_scenarios:
+  - novel.diagnose-flat-draft
+  - novel.crucial-element-audit
+size_kb: 30
+depends_on_chunks:
+  - dt-01-foundations
+  - dt-02-characters
+---
+
 # Deep Theory: Justification and Problem Solving
 
 > Source: Phillips & Huntley, *Dramatica: A New Theory of Story* (4th ed., 2001), © Screenplay Systems Inc. This chunk: source lines 1572–1793 of 7516. Verbatim extract for personal narrative-craft use; not for redistribution.

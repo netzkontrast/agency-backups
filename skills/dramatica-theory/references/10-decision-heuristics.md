@@ -1,3 +1,22 @@
+---
+type: theory-chunk
+chunk_id: dt-10-decision-heuristics
+summary: Practical heuristics for the Dramatica decisions authors struggle with most, including indicators, anti-indicators, and short tests for each choice point.
+covers_ontology_ids:
+  - concept.storyform
+  - concept.crucial-element
+  - character-dynamic.*
+  - plot-dynamic.*
+serves_scenarios:
+  - novel.storyform-slot-fill
+  - novel.character-arc
+  - novel.diagnose-flat-draft
+size_kb: 11
+depends_on_chunks:
+  - dt-01-foundations
+  - dt-06-storyforming
+---
+
 # Decision Heuristics
 
 > The Dramatica decisions that authors actually struggle with. Each section gives indicators (signs pointing toward one option), anti-indicators (signs pointing away), and a short test. None of these are infallible — they're calibrated bets. When a heuristic and the story disagree, the story wins; the disagreement just means the heuristic doesn't apply to your case.

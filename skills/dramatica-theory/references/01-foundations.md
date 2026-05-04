@@ -1,3 +1,17 @@
+---
+type: theory-chunk
+chunk_id: dt-01-foundations
+summary: Introduces the Story Mind model, the four throughlines (OS, MC, IC, RS), and what makes a Grand Argument Story structurally complete.
+covers_ontology_ids:
+  - throughline.*
+  - concept.storyform
+  - concept.story-mind
+serves_scenarios:
+  - novel.storyform-slot-fill
+  - novel.character-arc
+size_kb: 15
+---
+
 # Foundations: Story Mind, Four Throughlines, Grand Argument Story
 
 > Source: Phillips & Huntley, *Dramatica: A New Theory of Story* (4th ed., 2001), © Screenplay Systems Inc. This chunk: source lines 305–444 of 7516. Verbatim extract for personal narrative-craft use; not for redistribution.

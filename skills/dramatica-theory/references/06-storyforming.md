@@ -1,3 +1,24 @@
+---
+type: theory-chunk
+chunk_id: dt-06-storyforming
+summary: "Guides the author through Stage 1 storyforming: choosing story dynamics and populating all story points to lock the storyform before encoding begins."
+covers_ontology_ids:
+  - plot-dynamic.*
+  - character-dynamic.*
+  - concept.storyform
+  - concept.story-point
+serves_scenarios:
+  - novel.storyform-slot-fill
+  - novel.crucial-element-audit
+  - novel.character-arc
+size_kb: 107
+depends_on_chunks:
+  - dt-01-foundations
+  - dt-02-characters
+  - dt-04-theme
+  - dt-05-plot-genre
+---
+
 # Storyforming (Stage 1): Dynamics and Story Point Selection
 
 > Source: Phillips & Huntley, *Dramatica: A New Theory of Story* (4th ed., 2001), © Screenplay Systems Inc. This chunk: source lines 2942–3909 of 7516. Verbatim extract for personal narrative-craft use; not for redistribution.

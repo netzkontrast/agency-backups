@@ -1,3 +1,22 @@
+---
+type: theory-chunk
+chunk_id: dt-04-theme
+summary: Explains thematic structure through concerns, issues, counterpoints, and story points across all four throughlines, including the crucial element.
+covers_ontology_ids:
+  - variation.*
+  - concept.crucial-element
+  - throughline.*
+  - concept.story-point
+serves_scenarios:
+  - novel.crucial-element-audit
+  - novel.character-arc
+  - lyric.refrain-as-restatement
+size_kb: 74
+depends_on_chunks:
+  - dt-01-foundations
+  - dt-02-characters
+---
+
 # Theme: Throughlines, Concerns, Issues, Problems, Story Points
 
 > Source: Phillips & Huntley, *Dramatica: A New Theory of Story* (4th ed., 2001), © Screenplay Systems Inc. This chunk: source lines 1794–2421 of 7516. Verbatim extract for personal narrative-craft use; not for redistribution.

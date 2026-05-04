@@ -1,3 +1,20 @@
+---
+type: theory-chunk
+chunk_id: dt-12-scene-level-bridge
+summary: Bridge between abstract storyform decisions and concrete scene writing, showing how to derive scene content from signposts and audit scenes against the storyform.
+covers_ontology_ids:
+  - concept.signpost
+  - concept.journey
+  - throughline.*
+serves_scenarios:
+  - novel.act-pivot
+  - lyric.verse-chorus-pair
+size_kb: 8
+depends_on_chunks:
+  - dt-07-storyencoding
+  - dt-05-plot-genre
+---
+
 # Scene-Level Bridge
 
 > The storyform is abstract. The scene is concrete. This file is the bridge: how to take a storyform decision and let it inform what happens in the next scene you write — and conversely, how to audit a written scene against the storyform.
