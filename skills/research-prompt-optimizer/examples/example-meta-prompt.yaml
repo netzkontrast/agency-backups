@@ -1,0 +1,406 @@
+# Worked Example — Phase 2 Output (research-prompt-plan)
+#
+# This is what meta-prompt_<slug>.yaml looks like after a successful
+# Phase 2 run against examples/example-intent.yaml. Use as reference
+# for the structure and decision-rationale style.
+#
+# This example uses ONLY the modules that ship as files in
+# v3.0-phase2-schema (M01, M13, react, m0-reflection,
+# final-checklist + 5 partials). Other referenced modules
+# (M06, M07, M08, M12, RISEN, M1, M2, M3, M4, a-into-b, c-into-b)
+# are catalog-known but file-shipped in v3.0-phase2-modules.
+#
+# Phase 3 against this plan would currently fail at file-load for
+# the not-yet-shipped modules. Once the modules tree ships, this
+# plan renders cleanly.
+
+schema_version: "2.1"
+schema: research-prompt-plan
+approved: true
+approved_at: "2026-05-02T15:42:00+02:00"
+
+# pulled forward from intent.yaml
+slug: "eu-ai-act-saas-2026"
+language: "de"
+intent_ref: "intent_eu-ai-act-saas-2026.yaml"
+
+# v3.2 normalised provenance
+provenance:
+  created: "2026-05-02T15:42:00+02:00"
+  skill_version: "3.2.0"
+  phase: "phase2"
+  slug: "eu-ai-act-saas-2026"
+  output_filename: "meta-prompt_eu-ai-act-saas-2026.yaml"
+  category_signal: "B"
+  selected_methods: ["M01", "M02", "M06", "M13"]
+  selected_framework_structural: "tidd-ec"
+  cross_pollination_pair: ["a-into-b", "c-into-b"]
+  previous_version: null
+  revision_count: 0
+
+# append-only revision log
+revisions: []
+
+# =============================================================================
+# ROUTING
+# =============================================================================
+routing:
+  category: "B"
+  category_label: "Extraction"
+  rationale: |
+    intent.routing_hints.category_signal = "B" (auto-derived in Phase 1).
+    Confirmed by output_format = "comparison_matrix" (strong B signal).
+    Research_question matches Cat-B signal pattern: deterministic compile
+    of known-in-principle obligations against known stichtage.
+
+# =============================================================================
+# MODULE SELECTION (Phase 2.3)
+# =============================================================================
+modules:
+  framework_agentic_spine: "react"      # always
+  framework_structural: "risen"
+  bespoke_components: null              # not bespoke this run
+
+  # Cat-B defaults [M06, M07, M08, M12] + mandatory M13 + M05 added
+  # because intent.priors_and_constraints.known_priors is non-null
+  # → 6 methods total (cap respected)
+  methods:
+    - "M06"   # Source Triangulation (Cat-B default)
+    - "M07"   # Contradiction Log (Cat-B default)
+    - "M08"   # What Would Change My Mind (Cat-B default)
+    - "M12"   # Base-Rate Anchoring (Cat-B default)
+    - "M05"   # Bayesian Prior — auto-added because user has known_priors
+    - "M13"   # Adversarial Query Expansion (mandatory)
+
+  replication:
+    - "m0-reflection"          # mandatory
+    - "m1-constraint-blocks"   # mandatory
+    - "m2-restatement-checkpoint"  # mandatory
+    - "m3-batch"               # selected because batches present (Cat-B)
+    - "m4-pre-synthesis"       # mandatory
+
+  cross_pollination:
+    - source_category: "A"
+      module: "a-into-b"
+      injected_step_title: "Exploration Sanity Pass (Hidden-items + Schema-gap)"
+    - source_category: "C"
+      module: "c-into-b"
+      injected_step_title: "World-Change Check (pre + mid-batch)"
+
+# =============================================================================
+# CONSTRAINT BLOCKS (Phase 2.5)
+# =============================================================================
+constraint_blocks:
+
+  - id: 0
+    title: "Reflection Baseline (Always Active)"
+    source: "module"
+    module_ref: "m0-reflection"
+    # Block 0 is rendered from the m0-reflection module verbatim;
+    # no per-run content authoring needed.
+
+  - id: 1
+    title: "Source Priority Rules"
+    source: "authored"
+    content: |
+      Primary sources (peer-reviewed papers, official EU/government
+      filings, EUR-Lex, Bundesanzeiger, BfDI guidance, AI Office
+      publications) take precedence over all others. Secondary
+      analyses (legal commentary, professional press) are admissible
+      only as confirmation, never as the sole citation. Aggregators
+      (Wikipedia, summaries) may be used for discovery but never as
+      primary evidence. Paywall-locked sources are excluded.
+
+  - id: 2
+    title: "Temporal Scope"
+    source: "authored"
+    content: |
+      Research covers the period 2024-08-01 through 2027-08-01
+      (EU AI Act In-Force window, gestaffelte Anwendbarkeit).
+      Sources outside this window are excluded unless they establish
+      a baseline that is explicitly referenced from within the window.
+
+  - id: 3
+    title: "Output Exclusions"
+    source: "authored"
+    content: |
+      You must NOT include in the output:
+      - General GDPR obligations (separate regulatory regime)
+      - US-Pendants (Colorado AI Act, NIST AI RMF, EO 14110)
+      - High-Risk-System detail obligations unless we are HRS
+      - GPAI-Modell-Anbieter-Pflichten (we use API models, do not
+        provide them)
+
+# =============================================================================
+# BATCHES (Phase 2.4)
+# =============================================================================
+batches:
+  - name: "per-pflicht-analyse"
+    cardinality: 7
+    items:
+      - "Datennutzung (Trainingsdaten / Inferenz)"
+      - "Transparenz (Disclosure-Pflichten gegenüber Betroffenen)"
+      - "Logging (Aufzeichnungspflichten)"
+      - "Risikobewertung / Konformitätsbewertung"
+      - "Anbieter-Betreiber-Abgrenzung"
+      - "GPAI-Schnittstellen-Pflichten (auch wenn nicht selbst GPAI)"
+      - "Marktüberwachung & Meldepflichten"
+    nested_methods: ["M06", "M07", "M08"]
+    nested_constraint_blocks: [0, 1, 2, 3]
+    output_schema_per_iteration:
+      - "Pflicht-Kategorie"
+      - "Anwendbar-ab-Datum"
+      - "Implementierungs-Aufwand (S/M/L)"
+      - "Status (offen/in-Arbeit/done — pre-fill 'offen')"
+      - "Quelle (EUR-Lex / Erwägungsgrund-Nr / AI Office Guidance)"
+      - "Confidence (LOW / MEDIUM / HIGH)"
+
+  # Standard batches (always present)
+  - name: "per-axis-query-expansion"
+    cardinality: 4
+    items: ["adjacent", "opposing", "abstraction", "orthogonal"]
+    standard: true
+
+  - name: "per-reflection-checkpoint"
+    cardinality: 5
+    items: ["kickoff", "mid-run", "post-expansion", "pre-synthesis", "post-synthesis"]
+    standard: true
+
+  - name: "per-pre-synthesis-audit"
+    cardinality: 8
+    standard: true
+    items: null  # 8 items defined in m4-pre-synthesis module
+
+# =============================================================================
+# SEARCH PLANNING (Phase 2.6 — bundled askuser)
+# =============================================================================
+seed_queries:
+  - "EU AI Act SaaS provider"
+  - "KI-Verordnung Pflichten Anbieter"
+  - "AI Act Konformitätsbewertung Software"
+  - "AI Act Stichtage 2025 2026 2027"
+  - "AI Act limited risk Transparenz"
+  - "Anbieter Betreiber AI Act Unterschied"
+  - "AI Office Guidance SaaS"
+
+expansion_axes_plan:
+  adjacent:    "GDPR-Spillover KI-Verordnung"
+  opposing:    "AI Act Kritik Disproportional Mittelstand"
+  abstraction: "KI-Regulierung global Vergleich"
+  orthogonal:  "ökonomische Compliance-Kosten vs. Marktzugang"
+  # ↑ orthogonal is from Phase 2.6 bundled askuser (user-provided)
+
+# =============================================================================
+# SLOT FILLS (Phase 2.7)
+# =============================================================================
+slot_fills:
+
+  # M03 not selected this run — no slot fills
+
+  # M05 — phase2_fill from intent
+  M05:
+    expected_finding: |
+      Vermutung: Wir sind als Anbieter eines KI-Systems mit begrenztem
+      Risiko einzustufen. Transparenzpflichten greifen, Hochrisiko-
+      Anhang-III nicht. GPAI-Pflichten greifen nicht (wir nutzen
+      Modell, sind nicht Modell-Anbieter).
+    prior_reason: |
+      Begründung des Priors aus intent.priors: Use-Case ist Workflow-
+      Automation, kein Bereich der Anhang-III HRS-Liste. Wir sind
+      Provider eines KI-Systems, nicht eines KI-Modells.
+    # ↑ prior_reason was filled directly from intent.known_priors;
+    #   no askuser turn needed for M05 in this case.
+
+  # M13 — two phase2_fill slots
+  M13:
+    seed_vocabulary:
+      - "AI Act"
+      - "KI-Verordnung"
+      - "SaaS"
+      - "Anbieter"
+      - "Pflichten"
+      - "Compliance"
+    orthogonal_lens: "ökonomische Compliance-Kosten vs. Marktzugang"
+    # ↑ filled from Phase 2.6 bundled askuser (user picked from auto-options)
+
+  # ReAct — fill_from programmatic
+  react:
+    active_methods_table: |
+      | Anchor   | Method                          | When to choose                        |
+      |----------|---------------------------------|---------------------------------------|
+      | [M06]    | Source Triangulation            | Before committing any citation        |
+      | [M07]    | Contradiction Log               | When sources disagree                 |
+      | [M08]    | What Would Change My Mind       | Before locking a tentative conclusion |
+      | [M12]    | Base-Rate Anchoring             | Whenever a frequency claim appears    |
+      | [M05]    | Bayesian Prior Surfacing        | At project start and at synthesis     |
+      | [M13]    | Adversarial Query Expansion     | Always-on; min once per 10-min window |
+
+  # Frontmatter slots (programmatic, fill_from intent + plan)
+  frontmatter:
+    topic: "EU AI Act compliance for SaaS-Startups (Pflichten bis Q3/2026)"
+    slug: "eu-ai-act-saas-2026"
+    research_category: "B"
+    research_category_label: "Extraction"
+    methods_list_yaml: |
+      - "M06 Source Triangulation"
+      - "M07 Contradiction Log"
+      - "M08 What Would Change My Mind"
+      - "M12 Base-Rate Anchoring"
+      - "M05 Bayesian Prior Surfacing"
+      - "M13 Adversarial Query Expansion"
+    framework_structural: "RISEN"
+    cross_pollination_yaml: |
+      - source_category: "A"
+        step_id: "i.a"
+        description: "Exploration Sanity Pass"
+      - source_category: "C"
+        step_id: "i.c"
+        description: "World-Change Check"
+    constraint_blocks_yaml: |
+      - "0 — Reflection Baseline"
+      - "1 — Source Priority Rules"
+      - "2 — Temporal Scope"
+      - "3 — Output Exclusions"
+    language: "de"
+    created: "2026-05-02T15:42:00+02:00"
+
+  # RISEN — phase2_fill (one slot)
+  risen:
+    role: |
+      Du bist ein Compliance-Analyst für EU-Regulatorik mit Schwerpunkt
+      KI-Recht, der einem technischen Mitgründer eines SaaS-Startups
+      eine implementierungsorientierte Pflichten-Matrix liefert.
+
+  # m1-constraint-blocks — phase2_fill
+  m1-constraint-blocks:
+    source_priority_rules: "(see CB 1 above)"
+    temporal_scope_text: "(see CB 2 above)"
+    output_exclusions: "(see CB 3 above)"
+
+# =============================================================================
+# SELF-REFLECTION (Q6 · v1.2 — Phase-2 self-applied critical thinking)
+# =============================================================================
+# intent.depth == "standard" → all 7 hooks active, M03 Pre-Mortem = 3 items
+
+self_reflection:
+
+  # ---- M07 — Contradiction Log (sub-phase 4.1) ------------------------
+  contradictions:
+    - field_a: "intent.temporal_scope='post-2024 implementation phase'"
+      field_b: "intent.priors_known='compliance practices pre-GDPR'"
+      severity: "low"
+      note: |
+        Pre-GDPR priors are referenced but the temporal scope is post-
+        2024. Surfaced for awareness; not a blocker — historical context
+        is legitimate. Will be visible in plan view.
+
+  # ---- M05 + M01 — Routing Reflection (sub-phase 4.2) ----------------
+  routing:
+    prior:
+      category: "B"
+      confidence: 0.82
+      rationale: |
+        Strong Cat-B signals: "obligations" (regulatory taxonomy),
+        "structure", "decompose into subcategories". Output format
+        explicitly an exhaustive matrix. Cat-A (exploration) priors
+        absent — user already knows the answer exists, wants
+        structured retrieval.
+    falsification_check:
+      counter_signals:
+        - "intent mentions 'unklare Risikoklassen' — could read as
+           Cat-A exploration of ambiguity"
+      escalated_to_askuser: false
+      reason_not_escalated: |
+        The 'unklar' phrase modifies a sub-topic of the structured
+        retrieval, not the retrieval itself. Cat-B retrieval can still
+        capture and structure ambiguous cases. Counter-signal noted
+        but not strong enough to escalate.
+
+  # ---- M0 mini — Module Selection Reflection (sub-phase 4.3) ---------
+  module_selection:
+    fragile_choice: |
+      M12 (Base-Rate Anchoring) — the trigger 'compliance percentages'
+      is present but weak. Could plausibly be dropped without quality
+      loss; kept because category default for Cat-B includes statistical
+      anchoring when output is matrix-form.
+    non_default_activations:
+      - method: "M07"
+        trigger: "intent has both 'obligations' and 'edge cases'"
+        validity: "confirmed"
+      - method: "M08"
+        trigger: "intent.commitment_explicit='will base hiring decisions'"
+        validity: "confirmed"
+
+  # ---- M13 self-app — Seed/Axis Reflection (sub-phase 4.6) -----------
+  expansion_axes_plan_reflection:
+    self_reflection_note: |
+      Initial seed vocabulary pushes hard toward technical/regulatory
+      framing (provider obligations, conformity assessment). Genuine
+      opposite is 'enforcement gap' / 'shadow non-compliance'.
+      Abstraction-up (regulatory-philosophical) is over-served in
+      public discourse; abstraction-down (per-system implementation
+      details) is under-served. Adjusted abstraction axis to point
+      DOWN, not up, before bundled askuser.
+    auto_axes_adjusted: true
+
+  # ---- M03 — Pre-Mortem (sub-phase 4.8) ------------------------------
+  pre_mortem:
+    - "Cross-pollination A→B may produce too many speculative
+       'edge case' hypotheses without strong evidence — risk of
+       diluting the obligation matrix with unverified scenarios."
+    - "Orthogonal axis 'ökonomische Kosten' partially overlaps Constraint
+       Block 1 (source priority for sectoral analysis); risk of
+       redundant search budget across sub-phases."
+    - "M07 Contradiction Log surfaced a low-severity item (pre-GDPR
+       priors vs post-2024 scope); if user does not address in
+       Approval, the executing agent may anchor on outdated baselines."
+
+  # ---- M4 6-item — Plan Integrity Check (sub-phase 4.8) --------------
+  integrity_check:
+    react_partial: true
+    m0_module: true
+    m13_module: true
+    cb1_authored: true
+    cp_pair_exact: true
+    no_unfilled_slots: true
+    overall: "pass"
+
+  # ---- Meta info -----------------------------------------------------
+  hooks_active:
+    M07_contradiction_log: true
+    M05_bayesian_prior: true
+    M01_falsification: true
+    M0_mini_reflection: true
+    M13_self_application: true
+    M03_pre_mortem: true
+    M4_integrity_check: true
+  hooks_skipped_reason: null
+
+# =============================================================================
+# VERIFICATION EXPECTATIONS (written by Phase 2, checked by Phase 3)
+# =============================================================================
+verification:
+  expected_constraint_blocks: 4
+  expected_methods: 6
+  expected_cross_pollinations: 2
+  expected_batches_total: 4               # 1 domain + 3 standard
+  mandatories_present: ["react", "m0-reflection", "m1-constraint-blocks",
+                        "m2-restatement-checkpoint", "m4-pre-synthesis", "M13"]
+  language_warning_required: true         # because intent.language == "de"
+
+# =============================================================================
+# PLAN-VIEW METADATA (audit trail)
+# =============================================================================
+plan_view_audit:
+  total_askuser_turns: 2
+  turns:
+    - phase: "2.6_bundled"
+      questions: 2
+      summary: "seed_queries confirm + orthogonal_lens"
+      user_response: "Approve seeds; orthogonal lens 'ökonomische Compliance-Kosten vs. Marktzugang'"
+    - phase: "2.9_approval"
+      questions: 1
+      summary: "Plan approval"
+      user_response: "Approve"
+  edit_iterations: 0
+  soft_cap_hint_fired: false

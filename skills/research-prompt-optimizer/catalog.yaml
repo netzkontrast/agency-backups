@@ -1,0 +1,836 @@
+# Catalog — Master Index of All Modules
+#
+# Phase 2 reads this for module selection. Phase 3 reads this for
+# render-time module loading + slot validation.
+#
+# v3.0-phase2 ships with this complete catalog metadata, but only a
+# subset of module files is actually present in the package. Modules
+# without a file yet have their `file:` field present but the file
+# itself ships in v3.0-phase2-modules (the second package).
+#
+# Catalog entries are FROZEN against the v1.1 design plan (see
+# phase2-design-plan.md §5).
+
+schema_version: "1.0"
+catalog_version: "1.1"
+created_for: "research-prompt-optimizer v3.2.0"
+
+# =============================================================================
+# CATEGORIES (3) — routing layer
+# =============================================================================
+categories:
+  A:
+    full_name: "Exploration (Recursive Search / Tree of Thoughts)"
+    inline_block_module: "categories/a-exploration"
+    default_methods: [M01, M02, M04, M05, M10]
+    default_framework_structural: "risen"
+    cross_pollination_pair: ["b-into-a", "c-into-a"]
+    typical_batches: []
+    signal_words:
+      - "why does"
+      - "warum scheitert"
+      - "find gaps"
+      - "explore"
+      - "hypothesize"
+      - "i suspect"
+      - "what's really going on"
+      - "unbekannte ursache"
+      - "hypothesen testen"
+
+  B:
+    full_name: "Extraction (Plan-and-Execute / Deterministic Collection)"
+    inline_block_module: "categories/b-extraction"
+    default_methods: [M06, M07, M08, M12]
+    default_framework_structural: "risen"
+    cross_pollination_pair: ["a-into-b", "c-into-b"]
+    typical_batches: ["per-item"]
+    signal_words:
+      - "compare"
+      - "vergleichen"
+      - "list all"
+      - "aggregate"
+      - "matrix"
+      - "comparison table"
+      - "due diligence"
+      - "summarize the field"
+      - "benchmark"
+      - "inventory"
+      - "catalog"
+    output_format_strong_signals:
+      - "comparison_matrix"
+      - "json_schema"
+      - "table"
+
+  C:
+    full_name: "Lifecycle (Long-Running Context Engineering)"
+    inline_block_module: "categories/c-lifecycle"
+    default_methods: [M03, M07, M09, M11]
+    default_framework_structural: "risen"
+    cross_pollination_pair: ["a-into-c", "b-into-c"]
+    typical_batches: ["per-session"]
+    signal_words:
+      - "ongoing"
+      - "monitor"
+      - "track over months"
+      - "incremental"
+      - "weekly refresh"
+      - "monthly refresh"
+      - "quarterly refresh"
+      - "watch list"
+      - "running brief"
+      - "intelligence feed"
+
+# =============================================================================
+# MODULES — flat dict, lookup by ID
+# =============================================================================
+modules:
+
+  # ---------------------------------------------------------------------------
+  # METHODS (M01–M13)
+  # ---------------------------------------------------------------------------
+
+  M01:
+    type: method
+    file: "modules/methods/m01-falsification.md"
+    full_name: "Falsification (Karl Popper's Disconfirmation Principle)"
+    short_anchor: "M01-Falsification"
+    mandatory: false
+    self_applicable: true
+    self_applied_phase2:
+      sub_phase: "4.2"
+      hook_role: "After category cascade decides, run one counter-pass: 'what signals would falsify this routing?' Escalate to askuser if non-trivial counter-signals exist."
+      depth_active: ["standard", "exhaustive"]
+    applies_to_categories: [A, B, C]
+    default_for: [A]
+    triggered_by_signals: ["prove", "show that", "validate"]
+    pairs_well_with: [M02, M08]
+    escape_criterion: "≥3 orthogonal disconfirmations OR contra-evidence >20% of pool"
+    slots:
+      hypothesis:
+        type: agent_runtime_fill
+        description: "The current hypothesis being tested as a falsifiable statement"
+        required: true
+      disprove_phrase:
+        type: agent_runtime_fill
+        description: "Search phrase designed to surface counter-evidence"
+        required: true
+      failure_mode_phrase:
+        type: agent_runtime_fill
+        description: "Phrase capturing the failure case"
+        required: true
+
+  M02:
+    type: method
+    file: "modules/methods/m02-steelmanning.md"
+    full_name: "Steelmanning (Strongest-Version Reconstruction)"
+    short_anchor: "M02-Steelmanning"
+    mandatory: false
+    applies_to_categories: [A, B, C]
+    default_for: [A]
+    triggered_by_signals: ["challenge the view", "is it really", "i suspect", "skeptical"]
+    pairs_well_with: [M01, M09]
+    escape_criterion: "Cannot articulate position to advocate-acceptable bar after two iterations → flag as 'unable to steelman — sources too thin'"
+    slots:
+      mainstream_position:
+        type: agent_runtime_fill
+        description: "The dominant view to be steelmanned against"
+        required: true
+
+  M03:
+    type: method
+    file: "modules/methods/m03-pre-mortem.md"
+    full_name: "Pre-Mortem Analysis"
+    short_anchor: "M03-PreMortem"
+    mandatory: false
+    self_applicable: true
+    self_applied_phase2:
+      sub_phase: "4.8"
+      hook_role: "Generate top-3 failure modes for the plan before plan-view rendering. Top-5 if depth=exhaustive. Output rendered into plan view."
+      depth_active: ["standard", "exhaustive"]
+      output_size: "3 items (standard) | 5 items (exhaustive)"
+    applies_to_categories: [A, B, C]
+    default_for: [C]
+    triggered_by_signals: ["risk", "what could go wrong", "plan for failure", "fail"]
+    pairs_well_with: [M07, M09]
+    escape_criterion: "Run once at start + once at halfway. More than two runs → anxious over-planning"
+    slots:
+      topic:
+        type: phase2_fill
+        description: "The research topic — used in the pre-mortem framing 'If my final report on TOPIC turns out wrong...'"
+        required: true
+        fill_from_intent: "intent.research_question"
+        fill_from_intent_max_chars: 100
+      source_type:
+        type: agent_runtime_fill
+        description: "A source-type the agent identifies as a likely failure cause"
+        required: false
+      temporal_window:
+        type: agent_runtime_fill
+        description: "A temporal-window risk the agent identifies"
+        required: false
+
+  M04:
+    type: method
+    file: "modules/methods/m04-contrast-classes.md"
+    full_name: "Contrast Classes (Making Implicit Baselines Explicit)"
+    short_anchor: "M04-ContrastClasses"
+    mandatory: false
+    applies_to_categories: [A, B, C]
+    default_for: [A]
+    triggered_by_signals: ["compared to what", "alternatives", "versus baseline", "vs"]
+    pairs_well_with: [M12]
+    escape_criterion: "Apply to every evaluative claim; skip pure descriptive statements"
+    slots: {}
+
+  M05:
+    type: method
+    file: "modules/methods/m05-bayesian-prior.md"
+    full_name: "Bayesian Prior Surfacing"
+    short_anchor: "M05-BayesianPrior"
+    mandatory: false
+    self_applicable: true
+    self_applied_phase2:
+      sub_phase: "4.2"
+      hook_role: "Before category cascade runs, write one-line prior with confidence and rationale. Logged to meta-prompt.routing.prior. Pairs with M01 falsification afterward."
+      depth_active: ["standard", "exhaustive"]
+    applies_to_categories: [A, B, C]
+    default_for: [A]
+    triggered_by_signals: ["prior belief", "my hunch is", "gut says", "vermute"]
+    pairs_well_with: [M08]
+    escape_criterion: "One prior at start, one updated belief at end. Do not inflate to per-step"
+    auto_select_when: "intent.priors_and_constraints.known_priors is not null"
+    slots:
+      expected_finding:
+        type: phase2_fill
+        description: "User's prior — what they expect the answer to be"
+        required: true
+        fill_from_intent: "priors_and_constraints.known_priors"
+        fill_from_intent_required: false   # may be null if user has no prior
+      prior_reason:
+        type: phase2_fill
+        description: "Why the user holds this prior"
+        required: true
+        fill_from_intent: null
+        ask_user_if_missing:
+          question: "Warum dieser Prior? Eine Zeile reicht."
+          type: free_text
+
+  M06:
+    type: method
+    file: "modules/methods/m06-source-triangulation.md"
+    full_name: "Source Triangulation"
+    short_anchor: "M06-SourceTriangulation"
+    mandatory: false
+    applies_to_categories: [A, B, C]
+    default_for: [B]
+    triggered_by_signals: ["cite sources", "verify with multiple", "cross-check"]
+    pairs_well_with: [M07, M12]
+    escape_criterion: "≥3 independent confirmations OR claim minor enough for single-source (flag)"
+    slots:
+      claim:
+        type: agent_runtime_fill
+        description: "The claim being triangulated"
+        required: true
+
+  M07:
+    type: method
+    file: "modules/methods/m07-contradiction-log.md"
+    full_name: "Contradiction Log"
+    short_anchor: "M07-ContradictionLog"
+    mandatory: false
+    self_applicable: true
+    self_applied_phase2:
+      sub_phase: "4.1"
+      hook_role: "Scan parsed intent for internal inconsistencies (depth ↔ output_format, scope ↔ priors, etc.). Findings logged to meta-prompt.contradictions[] and surfaced in plan view."
+      depth_active: ["standard", "exhaustive"]
+    applies_to_categories: [A, B, C]
+    default_for: [B, C]
+    triggered_by_signals: ["conflicting reports", "contradictions", "disagreement"]
+    pairs_well_with: [M06, M09]
+    escape_criterion: "No ceiling. If log >10 entries, consider the research question may be ill-posed"
+    slots:
+      claim_x:
+        type: agent_runtime_fill
+        description: "First conflicting claim"
+        required: true
+      claim_not_x:
+        type: agent_runtime_fill
+        description: "Counter-claim"
+        required: true
+
+  M08:
+    type: method
+    file: "modules/methods/m08-what-would-change-my-mind.md"
+    full_name: "What Would Change My Mind (Pre-Commitment)"
+    short_anchor: "M08-WhatWouldChangeMyMind"
+    mandatory: false
+    applies_to_categories: [A, B, C]
+    default_for: [B]
+    triggered_by_signals: ["falsifiable", "disconfirming evidence"]
+    pairs_well_with: [M01, M05]
+    escape_criterion: "One pre-commitment per major conclusion. Do not inflate to per-claim"
+    slots:
+      conclusion:
+        type: agent_runtime_fill
+        description: "The tentative conclusion being pre-committed against"
+        required: true
+      disconfirming_observation:
+        type: agent_runtime_fill
+        description: "Concrete observable that would reverse the conclusion"
+        required: true
+
+  M09:
+    type: method
+    file: "modules/methods/m09-red-team.md"
+    full_name: "Red Team / Devil's Advocate Review"
+    short_anchor: "M09-RedTeam"
+    mandatory: false
+    applies_to_categories: [A, B, C]
+    default_for: [C]
+    triggered_by_signals: ["steelman the opposition", "attack this", "break it"]
+    pairs_well_with: [M02, M07]
+    escape_criterion: "Three attack angles per major conclusion. Stop when no non-trivial new attack surfaces"
+    slots:
+      conclusion:
+        type: agent_runtime_fill
+        description: "Conclusion under red-team attack"
+        required: true
+      biased_domain:
+        type: agent_runtime_fill
+        required: false
+      hidden_premise:
+        type: agent_runtime_fill
+        required: false
+      competing_hypothesis:
+        type: agent_runtime_fill
+        required: false
+
+  M10:
+    type: method
+    file: "modules/methods/m10-first-principles.md"
+    full_name: "First-Principles Decomposition"
+    short_anchor: "M10-FirstPrinciples"
+    mandatory: false
+    applies_to_categories: [A, B, C]
+    default_for: [A]
+    triggered_by_signals: ["from first principles", "ground up", "why does this exist"]
+    pairs_well_with: [M04]
+    escape_criterion: "Stop at 2-3 decomposition layers; further produces no new structure"
+    slots: {}
+
+  M11:
+    type: method
+    file: "modules/methods/m11-assumption-decay.md"
+    full_name: "Assumption-Decay Audit"
+    short_anchor: "M11-AssumptionDecay"
+    mandatory: false
+    applies_to_categories: [A, B, C]
+    default_for: [C]
+    triggered_by_signals: ["ongoing", "monitor", "still valid"]
+    pairs_well_with: [M03, M07]
+    escape_criterion: "Per checkpoint, not per search. Stop entirely only when research is closed"
+    slots:
+      foundational_assumptions:
+        type: phase2_fill_or_runtime
+        description: "List of foundational assumptions; seeded from intent.priors if present, agent extends during run"
+        seed_from_intent: "priors_and_constraints.known_priors"
+        required: false
+      concrete_check:
+        type: agent_runtime_fill
+        description: "Decay test per assumption — agent designs during run"
+        required: true
+
+  M12:
+    type: method
+    file: "modules/methods/m12-base-rate.md"
+    full_name: "Base-Rate Anchoring"
+    short_anchor: "M12-BaseRate"
+    mandatory: false
+    applies_to_categories: [A, B, C]
+    default_for: [B]
+    triggered_by_signals: ["how common is", "typical rate", "how often"]
+    pairs_well_with: [M04, M06]
+    escape_criterion: "Apply to every numerical frequency/probability claim. Skip pure qualitative"
+    slots: {}
+
+  M13:
+    type: method
+    file: "modules/methods/m13-adversarial-query-expansion.md"
+    full_name: "Adversarial Query Expansion"
+    short_anchor: "M13-AdversarialQueryExpansion"
+    mandatory: true                      # MANDATORY in every prompt
+    self_applicable: true
+    self_applied_phase2:
+      sub_phase: "4.6"
+      hook_role: "Before auto-generating adjacent/opposing/abstraction axes, reflect on the conceptual direction the initial seed-vocabulary pushes toward. Adjust auto-axes before bundled askuser. Without this hook, all 4 axes drift to local minimum."
+      depth_active: ["standard", "exhaustive"]
+    applies_to_categories: [A, B, C]
+    default_for: [A, B, C]
+    triggered_by_signals: []             # always-on, no trigger needed
+    pairs_well_with: []                  # universal partner
+    escape_criterion: "Stop expanding an axis when 2 consecutive expansions produce no novel findings; full method terminates only at Pre-Synthesis Integrity Check"
+    slots:
+      seed_vocabulary:
+        type: phase2_fill
+        description: "Initial query vocabulary the agent expands from"
+        required: true
+        fill_from_intent: "intent.research_question"
+        fill_from_intent_strategy: "extract_keywords"   # not literal copy
+      orthogonal_lens:
+        type: phase2_fill
+        description: "A lens not present in the framing — the highest-leverage axis"
+        required: true
+        fill_from_intent: null
+        ask_user_if_missing:
+          question: "Welche orthogonale Linse hat in deiner Frage bisher niemand angesetzt?"
+          type: single_select_with_other
+          phase: "2.6_bundled"           # asked together with seed-confirm
+      adjacent_term:
+        type: agent_runtime_fill
+        description: "Synonyms / neighbouring sub-fields the agent expands during run"
+      opposing_term:
+        type: agent_runtime_fill
+        description: "Failure cases / opposite school the agent expands"
+      higher_level_term:
+        type: agent_runtime_fill
+        description: "Up-abstraction term the agent expands"
+      lower_level_term:
+        type: agent_runtime_fill
+        description: "Down-abstraction term the agent expands"
+
+  # ---------------------------------------------------------------------------
+  # FRAMEWORKS — 1 mandatory agentic spine + 5 structural + 1 synthesis protocol
+  # ---------------------------------------------------------------------------
+
+  react:
+    type: framework
+    role: agentic_spine
+    file: "modules/frameworks/react.md"
+    full_name: "ReAct (Reason + Act + Observe)"
+    short_anchor: "ReAct"
+    mandatory: true
+    selected_when: "always"
+    slots:
+      active_methods_table:
+        type: fill_from
+        description: "Programmatic table of active methods with anchors and escape criteria"
+        fill_from: "selected_methods"
+        renders_as: "markdown_table"
+        # rendering rule documented in the partial: react-loop-anchored.md
+
+  risen:
+    type: framework
+    role: structural_layer
+    file: "modules/frameworks/risen.md"
+    full_name: "RISEN (Role · Input · Steps · Expectations · Narrowing)"
+    short_anchor: "RISEN"
+    mandatory: false
+    default_for_categories: [A, B, C]
+    selected_when: "no override_trigger fires (default)"
+    override_priority: 0
+    slots:
+      role:
+        type: phase2_fill
+        description: "Role description for the executing agent — derived from intent.audience"
+        fill_from_intent: "intent.audience"
+        fill_strategy: "mirror"          # 'You are an expert advising <audience>'
+
+  tidd-ec:
+    type: framework
+    role: structural_layer
+    file: "modules/frameworks/tidd-ec.md"
+    full_name: "TIDD-EC (Task · Instructions · Do · Don't · Examples · Context)"
+    short_anchor: "TIDD-EC"
+    mandatory: false
+    default_for_categories: []
+    override_trigger:
+      condition: "intent.known_constraints contains 'forbidden actions' OR research is compliance-focused"
+      priority: 2
+    slots: {}
+
+  co-star:
+    type: framework
+    role: structural_layer
+    file: "modules/frameworks/co-star.md"
+    full_name: "CO-STAR (Context · Objective · Style · Tone · Audience · Response)"
+    short_anchor: "CO-STAR"
+    mandatory: false
+    default_for_categories: []
+    override_trigger:
+      condition: "audience tone is decisive AND output is for external/non-expert reader"
+      priority: 1
+    slots: {}
+
+  care:
+    type: framework
+    role: structural_layer
+    file: "modules/frameworks/care.md"
+    full_name: "CARE (Context · Action · Result · Examples)"
+    short_anchor: "CARE"
+    mandatory: false
+    default_for_categories: []
+    override_trigger:
+      condition: "research_question contains 'follow this rule:' OR known_constraints lists worked examples"
+      priority: 4
+    slots: {}
+
+  crispe:
+    type: framework
+    role: structural_layer
+    file: "modules/frameworks/crispe.md"
+    full_name: "CRISPE (Capacity · Request · Insight · Style · Personality · Experiment)"
+    short_anchor: "CRISPE"
+    mandatory: false
+    default_for_categories: []
+    override_trigger:
+      condition: "output_format == 'multiple_variants' OR research_question contains 'alternatives'"
+      priority: 3
+    slots:
+      experiment_axis_count:
+        type: phase2_fill
+        description: "How many output variants (default 3)"
+        required: false
+
+  bespoke:
+    type: framework
+    role: structural_layer
+    file: "modules/frameworks/synthesis.md"      # protocol, not a fixed framework
+    full_name: "Bespoke Synthesis (composed from catalog components)"
+    short_anchor: "BESPOKE"
+    mandatory: false
+    selected_when: "Q3-lenient: ≥2 override_triggers fire simultaneously"
+    requires_provenance: true
+    slots:
+      bespoke_acronym:
+        type: phase2_fill
+        description: "New acronym name for the bespoke framework"
+        required: true
+        fill_strategy: "claude_generates_from_components"
+      components:
+        type: phase2_fill
+        description: "List of {letter, name, definition, source_framework}"
+        required: true
+        fill_strategy: "claude_generates"
+
+  # ---------------------------------------------------------------------------
+  # REPLICATION MECHANISMS (5 — M0 mandatory)
+  # ---------------------------------------------------------------------------
+
+  m0-reflection:
+    type: replication
+    file: "modules/replication/m0-reflection.md"
+    full_name: "Reflection Baseline (CONSTRAINT BLOCK 0)"
+    short_anchor: "M0-ReflectionBaseline"
+    mandatory: true
+    self_applicable: true
+    self_applied_phase2:
+      sub_phase: "4.3"
+      hook_role: "After module selection commits, run 2-Q mini-reflection variant (NOT the full 5-Q baseline): 'Which method choice in this set is most fragile?' + 'Which non-default activation has the trigger really present?'"
+      depth_active: ["standard", "exhaustive"]
+      variant: "2-Q mini (not full 5-Q)"
+    constraint_block_id: 0
+    selected_when: "always"
+    slots: {}                            # template is fully self-contained
+
+  m1-constraint-blocks:
+    type: replication
+    file: "modules/replication/m1-constraint-blocks.md"
+    full_name: "Constraint Block Anchors"
+    short_anchor: "M1-ConstraintBlocks"
+    mandatory: true
+    selected_when: "always"
+    slots:
+      source_priority_rules:
+        type: phase2_fill
+        description: "Block 1 content"
+        fill_from_intent: "priors_and_constraints.known_constraints"
+        fill_strategy: "merge_with_default"   # default canonical text + intent additions
+      temporal_scope_text:
+        type: phase2_fill
+        description: "Block 2 content"
+        fill_from_intent: "intent.temporal_scope"
+        fill_strategy: "render_as_sentence"
+      output_exclusions:
+        type: phase2_fill
+        description: "Block 3 content"
+        fill_from_intent: "intent.research_question_unpacked"
+        fill_strategy: "extract_exclusions"
+
+  m2-restatement-checkpoint:
+    type: replication
+    file: "modules/replication/m2-restatement-checkpoint.md"
+    full_name: "Per-Step Restatement Checkpoint"
+    short_anchor: "M2-RestatementCheckpoint"
+    mandatory: true
+    selected_when: "always (every multi-step prompt)"
+    slots:
+      active_constraint_blocks:
+        type: fill_from
+        description: "List of CB IDs to restate verbatim"
+        fill_from: "constraint_blocks"
+      active_methods:
+        type: fill_from
+        description: "List of methods to restate verbatim"
+        fill_from: "selected_methods"
+
+  m3-batch:
+    type: replication
+    file: "modules/replication/m3-batch.md"
+    full_name: "Batch-Explicit Framing"
+    short_anchor: "M3-Batch"
+    mandatory: false
+    selected_when: "len(plan.batches.domain) >= 1 OR category in [B, C]"
+    slots:
+      batch_name:
+        type: phase2_fill
+        description: "Human-readable name for this batch"
+        required: true
+      cardinality:
+        type: phase2_fill
+        description: "int OR 'indefinite' (Cat-C)"
+        required: true
+      items:
+        type: phase2_fill
+        description: "Concrete items list, OR null if cardinality='indefinite'"
+        required: false
+      iteration_steps:
+        type: phase2_fill
+        description: "Steps to execute per iteration"
+        required: true
+      output_schema_per_iteration:
+        type: phase2_fill
+        description: "Schema each iteration must populate"
+        required: true
+
+  m4-pre-synthesis:
+    type: replication
+    file: "modules/replication/m4-pre-synthesis.md"
+    full_name: "Pre-Synthesis Integrity Check (8-item)"
+    short_anchor: "M4-PreSynthesisCheck"
+    mandatory: true
+    self_applicable: true
+    self_applied_phase2:
+      sub_phase: "4.8"
+      hook_role: "Before plan-view rendering, run 6-item Phase-2 variant of the integrity check (NOT the 8-item agent-runtime version). Failed items block rendering and force self-correct loop. Active for ALL depths including surface."
+      depth_active: ["surface", "standard", "exhaustive"]
+      variant: "6-item Phase-2 (not 8-item agent-runtime)"
+    selected_when: "always"
+    slots: {}                            # 8-item check is generic
+
+  # ---------------------------------------------------------------------------
+  # CROSS-POLLINATION (6) — paired-by-category, never user-selected
+  # ---------------------------------------------------------------------------
+
+  a-into-b:
+    type: cross_pollination
+    file: "modules/cross-pollination/a-into-b.md"
+    inject_into_category: B
+    source_category: A
+    full_name: "Exploration Sanity Pass (Hidden-items + Schema-gap)"
+    selected_when: "category == B"
+    slots: {}
+
+  a-into-c:
+    type: cross_pollination
+    file: "modules/cross-pollination/a-into-c.md"
+    inject_into_category: C
+    source_category: A
+    full_name: "Framing Re-Opening (every 4th session)"
+    selected_when: "category == C"
+    slots: {}
+
+  b-into-a:
+    type: cross_pollination
+    file: "modules/cross-pollination/b-into-a.md"
+    inject_into_category: A
+    source_category: B
+    full_name: "Surviving-Branch Triangulation"
+    selected_when: "category == A"
+    slots: {}
+
+  b-into-c:
+    type: cross_pollination
+    file: "modules/cross-pollination/b-into-c.md"
+    inject_into_category: C
+    source_category: B
+    full_name: "Per-Session Locked Schema + Cross-Session Diff"
+    selected_when: "category == C"
+    slots: {}
+
+  c-into-a:
+    type: cross_pollination
+    file: "modules/cross-pollination/c-into-a.md"
+    inject_into_category: A
+    source_category: C
+    full_name: "Hypothesis Half-Life Audit"
+    selected_when: "category == A"
+    slots: {}
+
+  c-into-b:
+    type: cross_pollination
+    file: "modules/cross-pollination/c-into-b.md"
+    inject_into_category: B
+    source_category: C
+    full_name: "World-Change Check (pre + mid-batch)"
+    selected_when: "category == B"
+    slots: {}
+
+# =============================================================================
+# PARTIALS — shared building blocks, referenced by other modules
+# =============================================================================
+partials:
+
+  frontmatter-template:
+    file: "modules/partials/frontmatter-template.md"
+    purpose: "YAML frontmatter for the rendered research-prompt.md"
+    slots:
+      topic: { fill_from: "intent.research_question_short" }
+      slug: { fill_from: "intent.slug" }
+      research_category: { fill_from: "category" }
+      methods_list: { fill_from: "selected_methods" }
+      framework_agentic: { value: "ReAct" }
+      framework_structural: { fill_from: "framework_structural" }
+      bespoke_provenance: { fill_from: "bespoke_components", required_when: "framework_structural == 'bespoke'" }
+      constraint_blocks_list: { fill_from: "constraint_blocks" }
+      cross_pollination_list: { fill_from: "cross_pollination" }
+      language: { fill_from: "intent.language" }
+      created: { fill_from: "now()" }
+
+  meta-header:
+    file: "modules/partials/meta-header.md"
+    purpose: "The 'three layers' meta-header at the top of the rendered prompt"
+    slots:
+      category_block: { fill_from: "category_inline_block" }
+      react_block: { fill_from: "modules/frameworks/react" }
+      structural_block: { fill_from: "selected_structural_framework" }
+
+  react-loop-anchored:
+    file: "modules/partials/react-loop-anchored.md"
+    purpose: "The KEY INNOVATION — ReAct Reason phase with explicit method anchoring"
+    used_by: ["react"]
+    slots:
+      active_methods_table:
+        type: fill_from
+        renders_as: "markdown_table"
+        columns: [anchor, method, when_to_choose]
+        fill_from: "selected_methods.anchored_view"
+
+  synthesis-schema:
+    file: "modules/partials/synthesis-schema.md"
+    purpose: "The Synthesis section template the executing agent fills at the end"
+    slots:
+      category_specific_main_body:
+        type: phase2_fill
+        fill_strategy: "by_category"
+        # A → Hypothesis Tree, B → Output Matrix, C → Periodic Brief
+
+  language-warning:
+    file: "modules/partials/language-warning.md"
+    purpose: "Plan-View prepended block when intent.language != 'en' (Q1 v1.1)"
+    slots:
+      user_language: { fill_from: "intent.language" }
+
+# =============================================================================
+# VERIFICATION — final checklist embedded in rendered prompt
+# =============================================================================
+verification:
+
+  final-checklist:
+    file: "modules/verification/final-checklist.md"
+    full_name: "Self-Verification Checklist for the Executing AI (11-item)"
+    short_anchor: "FinalChecklist"
+    items_count: 11
+    slots: {}
+
+# =============================================================================
+# CATALOG VALIDATION RULES
+# =============================================================================
+# Phase 2 / Phase 3 validators check these invariants:
+#
+# 1. Every selected method/framework/replication module has its slots
+#    accounted for: phase2_fill slots are filled in slot_fills,
+#    fill_from slots resolve to a non-empty value, agent_runtime_fill
+#    slots become {{placeholder}} text in the rendered prompt.
+#
+# 2. Mandatory modules are present in every plan: react, M0-reflection,
+#    M13, M1-constraint-blocks, M2-restatement-checkpoint, M4-pre-synthesis.
+#
+# 3. Cross-pollination set has exactly 2 entries matching the
+#    category's `cross_pollination_pair`.
+#
+# 4. Method count is in [4, 6] (mandatory M13 always counted; defaults
+#    + signal swaps fit within the cap).
+#
+# 5. If framework_structural == 'bespoke', `bespoke_components` is
+#    populated with provenance (one entry per component naming source
+#    catalog framework).
+#
+# 6. constraint_blocks always begins with id=0 (M0 reflection); no
+#    re-used IDs.
+#
+# 7. batches always include the three default batches:
+#    per-axis-query-expansion (4), per-reflection-checkpoint (5),
+#    per-pre-synthesis-audit (8). Domain batches are additional.
+
+# =============================================================================
+# v3.0-phase2 PACKAGE STATUS
+# =============================================================================
+# SELF-APPLIED PHASE-2 INDEX
+# =============================================================================
+# Q6 (v1.2) — modules that Phase 2 applies to its OWN planning work,
+# in addition to writing them into the rendered prompt for the agent.
+# This index is for navigation and for Phase-3 tooling that needs to
+# know which catalog methods double as Phase-2 internal methods.
+#
+# Each module's full hook spec lives on the module entry itself
+# (under self_applied_phase2). This list just enumerates them.
+
+self_applied_phase2_index:
+  - module_id: "M07"
+    sub_phase: "4.1"
+    role: "Contradiction Log on intent fields"
+  - module_id: "M05"
+    sub_phase: "4.2"
+    role: "Bayesian Prior on category routing"
+  - module_id: "M01"
+    sub_phase: "4.2"
+    role: "Falsification on routing decision"
+  - module_id: "m0-reflection"
+    sub_phase: "4.3"
+    role: "Mini-Reflection (2-Q) after module selection"
+  - module_id: "M13"
+    sub_phase: "4.6"
+    role: "Self-Application before auto-axis generation"
+  - module_id: "M03"
+    sub_phase: "4.8"
+    role: "Pre-Mortem before plan-view rendering"
+  - module_id: "m4-pre-synthesis"
+    sub_phase: "4.8"
+    role: "Integrity Check (6-item) before plan-view rendering"
+
+# Depth scaling rules:
+#   surface   → only m4-pre-synthesis runs (the cheap integrity check)
+#   standard  → all 7 hooks active
+#   exhaustive → all 7 hooks active; M03 Pre-Mortem expands 3→5 items
+
+# =============================================================================
+# This catalog is COMPLETE — all 34 module entries plus partials and
+# verification.
+#
+# v3.0-phase2 ships ALL module files (40 total):
+#   - modules/categories/        (3 files: a-exploration, b-extraction, c-lifecycle)
+#   - modules/methods/           (13 files: m01..m13)
+#   - modules/frameworks/        (7 files: react, risen, tidd-ec, co-star, care, crispe, synthesis)
+#   - modules/replication/       (5 files: m0-reflection, m1-constraint-blocks, m2-restatement-checkpoint, m3-batch, m4-pre-synthesis)
+#   - modules/cross-pollination/ (6 files: a-into-b, a-into-c, b-into-a, b-into-c, c-into-a, c-into-b)
+#   - modules/partials/          (5 files: react-loop-anchored, language-warning, frontmatter-template, meta-header, synthesis-schema)
+#   - modules/verification/      (1 file: final-checklist)
+#
+# Frontmatter for each module is the canonical source of truth for slot
+# definitions, depth-active flags, self_applicable flag, and self_applied_phase2
+# hook spec (where present). Module bodies are the v2.1 inline-template content
+# inherited from the previous skill version.
+#
+# Final polish step before Phase 3 (render): convert v2.1 [BRACKET] markers in
+# bodies to v3.0 {{slot}} placeholders per the slot-type definitions in each
+# module's frontmatter. Phase 3 Python render script will read these slots.

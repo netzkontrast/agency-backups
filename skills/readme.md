@@ -1,0 +1,42 @@
+# skills/
+
+## What
+Version-controlled snapshots of user-installed Claude skills from
+`/mnt/skills/user/`. Each subfolder is one skill, structured per Anthropic's
+skill-creator convention (a `SKILL.md` plus optional `references/`, `scripts/`,
+`assets/`, `agents/`).
+
+## Why here
+Skills evolve continuously across Claude.ai sessions. Hosting them here gives
+us version history, a multi-agent collaboration surface (Claude Code, Jules,
+gemini-cli can all read and propose changes via PR), and a recoverable
+upstream when a session container is reset.
+
+The runtime "live" location is still `/mnt/skills/user/` inside each
+Claude.ai session. This folder is the durable mirror.
+
+## Skill index (14 skills)
+- [dramatica-theory/](./dramatica-theory/) — Apply Dramatica narrative theory (Phillips & Huntley, *Dramatica*, 4th ed., 2001) to story analysis, storyforming, drafting, and draft diagnosis.
+- [dramatica-vocabulary/](./dramatica-vocabulary/) — Aktive Dramatica-Theorie für Storyform-Aufbau, Encoding und Storyweaving — kein passives Dictionary, sondern Werkzeug.
+- [drive-markdown-converter/](./drive-markdown-converter/) — >- Use when the user wants to convert Google Docs or PDFs in a Google Drive folder to Markdown and upload the results to another Drive folder — without letting file contents land in the main contex...
+- [gdrive-notion-curator/](./gdrive-notion-curator/) — >- MCP-driven Drive-zu-Notion Curator.
+- [ncp-author/](./ncp-author/) — >- Schema cheatsheet, canonical vocabulary (463 appreciations + 144 narrative_functions), validation rules, 10-stage authoring workflow, and runnable schema validator for NCP (ncp-schema.json v1.3.0).
+- [notebooklm-prompt-architect/](./notebooklm-prompt-architect/) — >- Use when designing custom-instruction prompts, source-pack governance, or full production specs for NotebookLM Audio Overviews / Deep Dive podcasts — especially "pitch podcast" use cases that de...
+- [novel-architect/](./novel-architect/) — >- Orchestrator für den deutschsprachigen Roman „Kohärenz Protokoll" (Hard-SF / Philosophical Horror, Dual-Storyform, 39 Kapitel, 13 Alters).
+- [pdf-to-markdown/](./pdf-to-markdown/) — Convert a PDF to Markdown using PyMuPDF4LLM.
+- [prompt-optimizer/](./prompt-optimizer/) — >- Use at the START of EVERY conversation, before processing any user request.
+- [ralph-skill/](./ralph-skill/) — "Use when generating Ralph agentic-loop files (loop.sh, PROMPT_build.md, PROMPT_plan.md, AGENTS.md, IMPLEMENTATION_PLAN.md), customizing or extending an existing Ralph workflow, auditing a Ralph se...
+- [research-prompt-optimizer/](./research-prompt-optimizer/) — >- Use whenever a user wants to generate, optimize, audit, version, or architect a Deep Research prompt for any autonomous research system (Gemini Deep Research, Perplexity, Claude Research, GPT De...
+- [spec-skill/](./spec-skill/) — "Authoring, applying, and auditing normative specifications for autonomous AI agents and long-horizon agentic workflows — using RFC-2119 keywords, Gherkin acceptance criteria, and a fixed five-aspe...
+- [suno-lyric-writer/](./suno-lyric-writer/) — >- Use when writing, reviewing, or revising song lyrics for Suno AI generation.
+- [the-agency-system-architect/](./the-agency-system-architect/) — >- Orchestrates the full concept-album production pipeline for "The Agency System" (Michael Schimmer's darkwave/industrial triptych — Album 1 "Together We Confide", Album 2 "Moment der Klarheit", A...
+
+## Assumptions Log
+- Initial import: snapshot taken 2026-05-04 from a single Claude.ai
+  session. No sync-back protocol (`/mnt/skills/user/` ← `skills/`) is defined
+  yet — that is a follow-up task (will likely live as a "agency bootstrap"
+  skill that clones this repo into the session workspace).
+- Per-skill `readme.md` files are auto-generated from each `SKILL.md`'s YAML
+  frontmatter. If the frontmatter format changes, regeneration is needed.
+- Skill-internal subfolders are intentionally NOT given individual readmes
+  (see per-skill Assumptions Log for rationale).
