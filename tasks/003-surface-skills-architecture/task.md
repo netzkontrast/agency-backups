@@ -9,7 +9,8 @@ task_id: "003"
 task_status: open
 task_owner: "unassigned"
 task_priority: P2
-task_uses_prompts: []
+task_uses_prompts:
+  - skills-skill-architecture
 task_spawns_research: []
 task_affects_paths:
   - AGENTS.md

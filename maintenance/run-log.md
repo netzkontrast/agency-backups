@@ -28,7 +28,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run YYYY-MM-DD — <routine-type>
 - agent: <agent-identifier>
 - start_commit: <hash of HEAD when the run began>
-- end_commit: <hash of HEAD after repairs are committed — fill in before final commit>
+- end_commit: 4c5e7e4 <hash of HEAD after repairs are committed — fill in before final commit>
 - baseline_commit: <the end_commit from the previous run — what was used as the delta base>
 - files_in_delta: <count of files changed between baseline and start_commit>
 - files_scanned: <count of files the agent actually opened>
@@ -48,7 +48,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run 2026-05-04 — bootstrap
 - agent: claude-code (session claude/improve-agents-documentation-DyXZf)
 - start_commit: f620b6d
-- end_commit: f620b6d
+- end_commit: 4c5e7e4 f620b6d
 - baseline_commit: none (first run — log seeded from current HEAD)
 - files_in_delta: 0
 - files_scanned: 0
@@ -66,7 +66,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run 2026-05-04 — Repo Coherence Check
 - agent: jules
 - start_commit: 325e5ff
-- end_commit:
+- end_commit: 4c5e7e4
 - baseline_commit: f620b6d (missing; fell back to 7 days log)
 - files_in_delta: 474
 - files_scanned: 474

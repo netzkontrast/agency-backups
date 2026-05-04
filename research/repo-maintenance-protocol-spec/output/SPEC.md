@@ -1,3 +1,15 @@
+---
+type: spec
+status: active
+slug: repo-maintenance-protocol-spec
+summary: "Auto-generated stub"
+created: 2026-05-04
+updated: 2026-05-04
+research_executes_prompt: repo-maintenance-protocol-spec
+research_friction_level: FL0
+research_phase: complete
+---
+
 # Repository Maintenance Protocol and Dynamic Documentation Standard
 
 ## §1. Normative Conventions

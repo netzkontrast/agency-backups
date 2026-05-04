@@ -9,7 +9,7 @@ Before committing any code or documentation changes to this repository, the agen
 
 ## 2. File Integrity & Decentralized Documentation (Batch Update)
 - No required documentation file (like `readme.md`, `state.md`, `session.log`) may be left empty (0 bytes).
-- **Global Readme Audit:** Folders with significant structural changes SHOULD have their `readme.md` updated. Exhaustive readme updates are otherwise delegated to the Nightly Maintenance Run governed by [MAINTENANCE.md](./MAINTENANCE.md).
+- **Global Readme Audit:** EVERY folder that has been touched during this session MUST have its `readme.md` updated *now*, right before the commit.
 - **Readme Format:** The `readme.md` MUST explicitly explain the "what" and "why", MUST document any workflow assumptions made by the agent to prevent drift, and MUST use clickable relative Markdown links for every file and subfolder referenced.
 
 ## 3. Mandatory Agent Feedback & Frustration Logging

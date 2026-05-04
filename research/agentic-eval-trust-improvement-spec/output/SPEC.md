@@ -1,3 +1,15 @@
+---
+type: spec
+status: active
+slug: agentic-eval-trust-improvement-spec
+summary: "Auto-generated stub"
+created: 2026-05-04
+updated: 2026-05-04
+research_executes_prompt: agentic-eval-trust-improvement-spec
+research_friction_level: FL0
+research_phase: complete
+---
+
 # Agentic Output Evaluation, Trust Calibration, and Governance Improvement Loops
 
 ## 1. Executive Summary
