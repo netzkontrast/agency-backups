@@ -1,0 +1,68 @@
+# Session Log — skills-skill-architecture
+
+## Session: 2026-05-04 (claude/research-skills-skill-arch)
+
+### 09:00 — Session start
+Agent: Claude Code (claude-sonnet-4-6), branch claude/research-skills-skill-arch.
+Mission: Stage C of bootstrap-skills-sync. Execute research prompt at /prompts/skills-skill-architecture/prompt.md.
+
+### 09:01 — Governance review
+Read all root governance specs: AGENTS.md, FOLDERS.md, PRE_COMMIT.md, MAINTENANCE.md, RESEARCH.md, PROMPT.md, FRUSTRATED.md.
+Key constraints noted:
+- Research task requires prompt to exist first (RESEARCH.md §4.1) — prompt created at /prompts/skills-skill-architecture/.
+- All output frontmatter must include research_* keys.
+- Open questions must be filed as /prompts/<slug>/ with prompt_kind: follow-up.
+- validate-frontmatter.py must pass before commit.
+
+### 09:05 — Environment inspection
+Inspected Claude Code installation:
+- Skills dir: /root/.claude/skills/  (contains: session-start-hook/SKILL.md)
+- Commands dir: /root/.claude/commands/sc/ (slash commands, distinct from skills)
+- Agents dir: /root/.claude/agents/ (subagent definitions)
+- settings.json: no explicit skills path; ~/.claude/skills/ is conventional
+
+Finding: Claude Code uses /root/.claude/skills/<name>/SKILL.md — same format as claude.ai's /mnt/skills/user/<name>/SKILL.md. No format adapter needed for skill bodies.
+
+### 09:10 — Research track assignments
+Track A: Bootstrap mechanics & trust (R1, R5)
+Track B: Sync & conflict model (R2, R7)
+Track C: Runtime routing & progressive disclosure (R3, R4)
+Track D: Cross-agent portability (R6)
+
+### 09:15 — Track A synthesis
+R1: Stub must: (1) activate on claude.ai's native trigger, (2) clone/fetch repo, (3) resolve requested skill, (4) inject skill body as context.
+UNCERTAIN: Exact SKILL.md trigger syntax in claude.ai. We know the format but not how the host detects "which skill to invoke" vs the skill's own routing.
+R5: Bootstrap stub lives in read-only /mnt/skills/user/ — cannot be tampered with per session. Repo content is the attack surface. Mitigation: tag-based pinning. UNCERTAIN: git availability in claude.ai container.
+
+### 09:20 — Track B synthesis
+R2: Read/write topology:
+  - /mnt/skills/user/ → READ ONLY, ephemeral, no upstream
+  - repo /skills/ → canonical, PR-gated writes
+  - ~/.claude/skills/ → synced FROM repo via skills-skill-bootstrap (Stage B)
+  - Jules, gemini-cli → UNKNOWN (filed as follow-up prompts)
+R7: pull-if-exists strategy preferred (balance freshness vs latency). SHA pinning supported via config.
+
+### 09:25 — Track C synthesis
+R3: Routing via description-field matching in SKILL.md headers. Host trigger handles "which skill pool", stub handles "which skill within pool". UNCERTAIN: whether host provides intent signal to stub.
+R4: Three-tier disclosure: (1) SKILL.md summary only, (2) full SKILL.md body, (3) references/ content. Tier advances on explicit request. State tracked in-context per session.
+
+### 09:30 — Track D synthesis
+R6: claude.ai and Claude Code share SKILL.md format — confirmed. Jules: UNKNOWN. gemini-cli: UNKNOWN. Filed two follow-up prompts.
+
+### 09:35 — Output drafting
+Drafting SPEC.md (RFC-2119), gemini-prompt.md (self-contained), integration-plan.md (mechanical steps).
+
+### 09:50 — Open questions filed
+- /prompts/skills-skill-jules-portability/ (R6 for Jules)
+- /prompts/skills-skill-gemini-cli-portability/ (R6 for gemini-cli)
+- /prompts/skills-skill-trigger-lifecycle/ (R1 trigger details)
+
+### 09:55 — Pre-commit checks
+- validate-frontmatter.py run against prompts/ and research/ — passed.
+- All required files present and non-empty.
+- No .py or .sh execution scripts in workspace.
+- Friction log completed.
+
+### 10:00 — Commit and push
+Branch: claude/research-skills-skill-arch
+PR created against main.
