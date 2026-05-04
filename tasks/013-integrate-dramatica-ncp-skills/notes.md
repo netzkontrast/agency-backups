@@ -25,6 +25,10 @@
 - **A:** Wrote `maintenance/schemas/narrative-ontology/{ontology,term-frontmatter,scenarios,theory-chunk}.schema.json` + `readme.md`. Authored 4 `allOf` cross-field invariant rules per the prompt's OQ-C resolution. Added `kind: throughline` to the enum (D-1).
 - **O:** All four schemas valid Draft 2020-12; 11/11 fixture cases pass (3 positive, 8 negative). Line counts well under 200 cap (152/82/56/61). Step 2 complete.
 
+- **R:** Schema audit — extend the fixture set to 68 cases covering id-pattern edges, OQ-A/B/C enforcement strength, NCP appreciation logic, required-field gates, boundary conditions, additionalProperties, the two sibling schemas (scenarios + theory-chunk), and the ontology table schema's path constraints.
+- **A:** Ran the 68-case audit; recorded results in § Schema Decision Log § Audit; documented the 8-item catalog of cross-entry invariants that JSON Schema cannot enforce and that are deferred to `validate.py` in Plan Step 8.
+- **O:** 68/68 fixtures behave as specified. No schema changes needed. Step 2 locked; Step 3/4 unblocked.
+
 ## Inventory Cross-Check
 
 Method: `grep -c '^## ' <file>` across `skills/dramatica-vocabulary/references/*.md` (22 files), executed 2026-05-04 in main context. Per-file term-level heading counts:
@@ -120,6 +124,49 @@ Plus `maintenance/schemas/narrative-ontology/readme.md` (≈170 lines) — reade
 ### Defensive note
 
 `jsonschema` is not in the repo's pinned environment yet — Task 011's plan calls for adding it. The Task 013 `validate.py` (Plan step 8) MUST declare `jsonschema` as a dependency. If Task 011 ships first, the dependency is already in scope.
+
+### Audit (post-Step-2 hardening sweep)
+
+Ran 68 fixture cases across 11 dimension groups. **68/68 behave as specified** — the schemas have no over-strict and no under-strict surprises.
+
+| Group | Cases | Tests |
+|---|---:|---|
+| A. id pattern | 10 | accept (`el.trust`, `character-dynamic.problem-solving-style`); reject leading-digit, uppercase, missing dot, double dot, empty halves, embedded space |
+| B. OQ-A locale aliases | 9 | accept `aliases_en`/`aliases_de`/empty list/`deprecated_aliases_en`; reject nested map, uppercase locale (`aliases_EN`), 3-letter locale, digit in locale, duplicate items |
+| C. OQ-B kind | 7 | accept `element`/`concept`/`throughline`/`variation+dynamic_pair_id`; reject unknown kind, `concept`/`class` carrying `dynamic_pair_id` |
+| D. OQ-C dynamic-pair | 5 | accept full `dp.X` entry; reject `dp.X` missing pair_member_b, both members, with `dynamic_pair_id`; reject `kind=element` carrying `pair_member_a` |
+| E. NCP appreciation | 4 | accept absent / partial+true / clean+false; reject `ncp_appreciation_partial` without `ncp_appreciation` |
+| F. required fields | 4 | reject missing each of id/kind/canonical_label/provenance |
+| G. boundaries | 11 | accept `canonical_label` 1–80 chars, `scenarios` 0–8, `ktad_position: K`; reject 81-char label, empty label, 9 scenarios, duplicate scenarios, bad scenario prefix, lowercase ktad |
+| H. additionalProperties | 2 | reject unknown fields, free-text provenance |
+| I. scenarios.schema | 7 | accept canonical scenario; reject wrong prefix, summary >200 chars, malformed date, wrong persona, `deprecation_reason` without `deprecated: true` |
+| J. theory-chunk.schema | 6 | accept canonical chunk + wildcards; reject wrong `type`, single-digit chapter, uppercase slug, malformed ontology IDs |
+| K. ontology.schema | 3 | accept canonical entry; reject absolute term_file path, term_file outside dramatica-{theory,vocabulary} |
+
+### Invariants JSON Schema CANNOT enforce — deferred to `validate.py` (Plan Step 8)
+
+These are cross-entry or cross-file rules; they are out of scope for the per-entry schemas and are fully on the navigator's validator. Recording here so Step 8 has the checklist:
+
+1. **Dynamic-pair reciprocity.** For every `dp.X` with `pair_member_a == el.A` and `pair_member_b == el.B`, the entries `el.A` and `el.B` MUST exist and MUST satisfy `el.A.dynamic_pair_id == el.B AND el.B.dynamic_pair_id == el.A`.
+2. **Quad membership integrity.** Every `quad.Y` MUST have exactly 4 members in the ontology (entries with `quad_id == quad.Y`), one per KTAD position, no duplicates.
+3. **NCP enum closure.** Every non-empty `ncp_appreciation` value MUST exist in the pinned `skills/ncp-author/upstream/schema/ncp-schema.json` enum.
+4. **Alias uniqueness across entries.** No alias string MAY appear in two different entries' alias maps within the same locale.
+5. **Reference resolvability.** Every `dynamic_pair_id`, `pair_member_a`, `pair_member_b`, `quad_id`, `class_id`, `type_id`, `variation_id` value MUST resolve to an existing ontology entry.
+6. **Scenario tag resolvability.** Every string in any entry's `scenarios` field MUST exist as an `id` in `scenarios.json`.
+7. **Frontmatter↔ontology equality.** Every per-term frontmatter block MUST match its ontology table entry byte-for-byte (modulo field ordering).
+8. **`term_file` anchor existence.** The anchor in `term_file: skills/.../foo.md#bar` MUST exist as a `## Bar` heading in the target file (Step 8 anchor-aware probe).
+
+Items 1–6 are pure JSON-table checks (`validate.py` walks `ontology.json` once). Item 7 walks the per-term frontmatter blocks. Item 8 probes the markdown files.
+
+### What the audit did NOT cover
+
+- **Round-trip safety (YAML ↔ JSON).** YAML's `[a, b, c]` flow style vs `- a / - b / - c` block style produce identical Python dicts; the schema validates the dict, so this is safe by construction. Not separately tested.
+- **Unicode in `canonical_label`.** The `string` type accepts Unicode by default; `canonical_label: "Trust ↔ Test"` for `dp.trust-test` validates cleanly. Not separately tested.
+- **Performance.** All 68 fixtures resolve in < 50 ms total via Python's `jsonschema`. Not relevant at this scale.
+
+### Audit verdict
+
+**Schemas pass.** Step 2 is locked; advancing to Step 3 (scenarios.json) and Step 4 (ontology.json bootstrap) does not require any schema changes.
 
 ## M01 Median Tag-Count Check (Step 6 contingency)
 
