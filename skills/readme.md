@@ -31,6 +31,9 @@ Claude.ai session. This folder is the durable mirror.
 - [suno-lyric-writer/](./suno-lyric-writer/) — >- Use when writing, reviewing, or revising song lyrics for Suno AI generation.
 - [the-agency-system-architect/](./the-agency-system-architect/) — >- Orchestrates the full concept-album production pipeline for "The Agency System" (Michael Schimmer's darkwave/industrial triptych — Album 1 "Together We Confide", Album 2 "Moment der Klarheit", A...
 
+## Management layer
+- [skills-skill-bootstrap/](./skills-skill-bootstrap/) — Sync tool: pulls skill bodies from `origin/main:skills/` into Claude Code's `~/.claude/skills/`.
+
 ## Assumptions Log
 - Initial import: snapshot taken 2026-05-04 from a single Claude.ai
   session. No sync-back protocol (`/mnt/skills/user/` ← `skills/`) is defined
@@ -40,3 +43,7 @@ Claude.ai session. This folder is the durable mirror.
   frontmatter. If the frontmatter format changes, regeneration is needed.
 - Skill-internal subfolders are intentionally NOT given individual readmes
   (see per-skill Assumptions Log for rationale).
+- **FOLDERS.md §7 tension**: `skills/` is content storage, not a workflow
+  orchestration folder, and is therefore exempt from the task/prompt/research
+  restriction. This interpretation is logged here to prevent future agents from
+  deleting `skills/` to satisfy a strict reading of §7.
