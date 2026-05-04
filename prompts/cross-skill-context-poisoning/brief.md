@@ -1,0 +1,1 @@
+Investigate how neural architectures arbitrate severe stylistic conflicts if contradictory SKILL.md skills (e.g. Hard Sci-Fi Worldbuilder vs Comedic Romance Dialogue) are invoked simultaneously into the same context window.

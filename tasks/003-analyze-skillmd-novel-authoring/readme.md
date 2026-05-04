@@ -16,6 +16,7 @@ updated: 2026-05-04
 ## Contents
 
 - [`task.md`](./task.md) — The Task spec (goal, plan, todo, links).
+- [`output/`](./output) — Contains generated recommendations output files.
 
 ## Workflow Assumptions
 

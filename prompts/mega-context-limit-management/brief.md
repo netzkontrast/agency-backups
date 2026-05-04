@@ -1,0 +1,1 @@
+Analyze whether utilizing a truncation marker (e.g., passing only the last 1,000 words to the agent) fundamentally damages long-term narrative foreshadowing and character arc resolutions compared to using theoretically infinite context windows.

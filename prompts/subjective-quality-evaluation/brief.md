@@ -1,0 +1,1 @@
+Design a standardized human-in-the-loop (HITL) benchmarking protocol to evaluate the subjective literary quality of AI-generated prose without relying solely on LLM-as-a-judge models.
