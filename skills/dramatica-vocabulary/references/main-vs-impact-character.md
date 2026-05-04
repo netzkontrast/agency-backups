@@ -9,6 +9,19 @@ Specific to the MC↔IC throughline relationship.
 ---
 
 ## Impact Character
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: throughline.influence
+kind: throughline
+canonical_label: Influence Character
+provenance: source-original
+ncp_appreciation: Influence Character
+ncp_appreciation_partial: false
+aliases_en:
+- Impact Character
+- IC
+```
+
 
 *Type: Main vs. Impact Throughline Character*
 

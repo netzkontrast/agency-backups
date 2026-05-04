@@ -238,3 +238,48 @@ For v0.1 the limitation is **acceptable and documented**. validate.py will repor
 ### Generation script
 
 The merge was performed by an inline `python3 << 'PY'` script in main context (not persisted). Per RESEARCH.md §5.3, no execution scripts remain in the workspace. Re-running the merge requires re-authoring the script logic — but step 5's `ontology-build.py` will subsume this functionality long-term (rebuilding `ontology.json` from per-term frontmatter, which is the one-pass projection direction).
+
+## Plan Step 5 — Per-term frontmatter insertion
+
+**Coverage:** 187 blocks inserted across 11 files (out of 22 vocab files; 11 files have 0 ontology-mappable headings — synonym index, dynamic-pairs index, plus several extension files). 0 schema errors. Pure insertion-only diff (1802+ lines, 0 deletions; no prose modified).
+
+| File | Blocks |
+|---|---:|
+| `archetypes.md` | 8 |
+| `character-dynamics.md` | 2 |
+| `classes.md` | 2 |
+| `domains.md` | 1 |
+| `dramatica-fundamentals.md` | 2 |
+| `elements.md` | 70 |
+| `main-vs-impact-character.md` | 1 |
+| `plot-dynamics.md` | 4 |
+| `structural-terms.md` | 5 |
+| `types.md` | 29 |
+| `variations.md` | 63 |
+| **Total** | **187** |
+
+**Coverage gap analysis:** 187/293 = 64% of `## ` headings carry frontmatter. The 36% gap breaks down as:
+- ~50 sub-headings that are intros / explainers, not terms (e.g., "Why Quads matter for Encoding", "Phase 1 — Throughline Class assignments")
+- ~30 meta-meta entries like per-throughline aliases ("Female Mental Sex", "Impact Character Approach", "Dividend (Overall Story Throughline)") — these are slot specializations, not first-class ontology terms
+- ~25 entries with mismatched term_file anchors in the ontology (hand-authored by Sonnet C with semantic anchors instead of canonical-label-derived slugs; e.g., `concept.archetype` → `term_file=archetypes.md#contents`)
+
+**Block format:** HTML comment marker + fenced YAML, idempotent (re-running detects existing blocks):
+```
+## Trust
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.trust
+kind: element
+canonical_label: Trust
+provenance: source-original
+quad_id: quad.effect-cause-el
+ktad_position: A
+dynamic_pair_id: el.test
+```
+
+<existing prose>
+```
+
+**Implementation note:** the prompt called for `/sc:implement --morph --validate`. The `morphllm` MCP server isn't loaded in this environment, so the bulk pattern application ran via inline Python with the same outcome (one transform pattern applied to every `## <Term>` match across the 11 in-scope files). Validation against `term-frontmatter.schema.json` ran inline post-insertion: 187/187 blocks pass with 0 errors.
+
+**Deferred to v0.2 cleanup:** the ~25 mismatched term_file anchors should be normalized so 100% of canonical entries land per-term blocks. Will be flagged by `validate.py` (Step 8) as a `term_file-anchor-mismatch` diagnostic.

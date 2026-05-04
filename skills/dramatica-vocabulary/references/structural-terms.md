@@ -23,6 +23,14 @@ Dramatica's structural vocabulary: Acts, Signposts, Journeys, the components of 
 ---
 
 ## Act
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.act
+kind: concept
+canonical_label: Act
+provenance: source-original
+```
+
 
 *Type: Structural Term*
 
@@ -331,6 +339,14 @@ the INVERSE of
 ---
 
 ## Item
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.event
+kind: concept
+canonical_label: Event
+provenance: source-original
+```
+
 
 *Type: Structural Term*
 
@@ -354,6 +370,14 @@ levels (Eleme
 ---
 
 ## Quad
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.quad-structure
+kind: concept
+canonical_label: Quad Structure
+provenance: source-original
+```
+
 
 *Type: Structural Term*
 
@@ -367,6 +391,14 @@ diagonal, horizontal, and vertical pairs.
 ---
 
 ## Set
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.sequence
+kind: concept
+canonical_label: Sequence
+provenance: source-original
+```
+
 
 *Type: Structural Term*
 
@@ -401,6 +433,14 @@ determine the nature of the plot.
 ---
 
 ## Unit
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.scene
+kind: concept
+canonical_label: Scene
+provenance: source-original
+```
+
 
 *Type: Structural Term*
 

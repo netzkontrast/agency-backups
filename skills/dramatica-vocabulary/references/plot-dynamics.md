@@ -20,6 +20,16 @@ Story-level dynamics: Driver, Limit, Outcome, Judgment. These set the shape of t
 ---
 
 ## Action
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: plot-dynamic.driver
+kind: plot-dynamic
+canonical_label: Driver
+provenance: source-original
+ncp_appreciation: Driver
+ncp_appreciation_partial: false
+```
+
 
 *Type: Plot Dynamic*
 
@@ -202,6 +212,16 @@ personal problems the outcome is deemed Good.
 ---
 
 ## Judgment
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: plot-dynamic.judgment
+kind: plot-dynamic
+canonical_label: Judgment
+provenance: source-original
+ncp_appreciation: Judgment
+ncp_appreciation_partial: false
+```
+
 
 *Type: Plot Dynamic*
 
@@ -310,6 +330,16 @@ minded-ness because the Character believes no reconsideration is needed since th
 ---
 
 ## Limit
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: plot-dynamic.limit
+kind: plot-dynamic
+canonical_label: Limit
+provenance: source-original
+ncp_appreciation: Limit
+ncp_appreciation_partial: false
+```
+
 
 *Type: Plot Dynamic*
 
@@ -380,6 +410,16 @@ and Judgment (Good or Bad).
 ---
 
 ## Outcome
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: plot-dynamic.outcome
+kind: plot-dynamic
+canonical_label: Outcome
+provenance: source-original
+ncp_appreciation: Outcome
+ncp_appreciation_partial: false
+```
+
 
 *Type: Plot Dynamic*
 

@@ -48,6 +48,15 @@ The 16 Types are the second-resolution layer beneath Class. Each Class contains 
 ---
 
 ## Becoming
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.becoming
+kind: type
+canonical_label: Becoming
+provenance: source-original
+class_id: class.psychology
+```
+
 
 *Type: Type*
 
@@ -58,6 +67,15 @@ embodying, manifesting, personifying, incarnating, transforming
 ---
 
 ## Being
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.being
+kind: type
+canonical_label: Being
+provenance: source-original
+class_id: class.psychology
+```
+
 
 *Type: Type*
 
@@ -84,6 +102,15 @@ look to see how everything is coming along.
 ---
 
 ## Conceiving
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.conceiving
+kind: type
+canonical_label: Conceiving
+provenance: source-original
+class_id: class.psychology
+```
+
 
 *Type: Type*
 
@@ -95,6 +122,15 @@ engendering, hatching ideas
 ---
 
 ## Conceptualizing
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.conceptualizing
+kind: type
+canonical_label: Conceptualizing
+provenance: source-original
+class_id: class.psychology
+```
+
 
 *Type: Type*
 
@@ -105,6 +141,14 @@ visualizing, imagining, envisioning, visualizing implementation
 ---
 
 ## Concern
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.unique-ability
+kind: concept
+canonical_label: Unique Ability
+provenance: source-original
+```
+
 
 *Type: Type*
 
@@ -117,6 +161,15 @@ eager, or which they hope to protect or affect.
 ---
 
 ## Conscious
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.conscious
+kind: type
+canonical_label: Conscious
+provenance: source-original
+class_id: class.mind
+```
+
 
 *Type: Type*
 
@@ -127,6 +180,14 @@ considerations, sensibilities, cognizant, ability to consider, sensible, informe
 ---
 
 ## Consequence
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.consequences
+kind: concept
+canonical_label: Consequences
+provenance: source-original
+```
+
 
 *Type: Type*
 
@@ -150,6 +211,14 @@ protagonist hopes to achieve.
 ---
 
 ## Cost
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.costs
+kind: concept
+canonical_label: Costs
+provenance: source-original
+```
+
 
 *Type: Type*
 
@@ -179,6 +248,14 @@ McLean, "The more you pay, the more it's worth."
 ---
 
 ## Dividend (Overall Story Throughline)
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.dividends
+kind: concept
+canonical_label: Dividends
+provenance: source-original
+```
+
 
 *Type: Type*
 
@@ -206,6 +283,15 @@ Character prefers to adapt his environment to himself -Every Main Character
 ---
 
 ## Doing
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.doing
+kind: type
+canonical_label: Doing
+provenance: source-original
+class_id: class.physics
+```
+
 
 *Type: Type / Type*
 
@@ -259,6 +345,15 @@ acting
 ---
 
 ## Future
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.future
+kind: type
+canonical_label: Future
+provenance: source-original
+class_id: class.universe
+```
+
 
 *Type: Type*
 
@@ -293,6 +388,14 @@ number of examples might be created.
 ---
 
 ## Journey
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.journey
+kind: concept
+canonical_label: Journey
+provenance: source-original
+```
+
 
 *Type: Type*
 
@@ -305,6 +408,15 @@ another as each
 ---
 
 ## Learning
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.learning
+kind: type
+canonical_label: Learning
+provenance: source-original
+class_id: class.physics
+```
+
 
 *Type: Type*
 
@@ -316,6 +428,15 @@ information, collecting data, gathering knowledge
 ---
 
 ## Memory
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.memory
+kind: type
+canonical_label: Memory
+provenance: source-original
+class_id: class.mind
+```
+
 
 *Type: Type*
 
@@ -332,6 +453,15 @@ fixed point of view, disposition
 ---
 
 ## Obtaining
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.obtaining
+kind: type
+canonical_label: Obtaining
+provenance: source-original
+class_id: class.physics
+```
+
 
 *Type: Type / Type*
 
@@ -422,6 +552,14 @@ see Dividends.
 ---
 
 ## Overall (Objective) Story Forewarnings
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.forewarnings
+kind: concept
+canonical_label: Forewarnings
+provenance: source-original
+```
+
 
 *Type: Type*
 
@@ -432,6 +570,14 @@ see Forewarnings.
 ---
 
 ## Overall (Objective) Story Goal
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.story-goal
+kind: concept
+canonical_label: Story Goal
+provenance: source-original
+```
+
 
 *Type: Type*
 
@@ -472,6 +618,15 @@ see Requirements.
 ---
 
 ## Past
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.past
+kind: type
+canonical_label: Past
+provenance: source-original
+class_id: class.universe
+```
+
 
 *Type: Type*
 
@@ -483,6 +638,15 @@ retrospective
 ---
 
 ## Past (The Past)
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.past
+kind: type
+canonical_label: Past
+provenance: source-original
+class_id: class.universe
+```
+
 
 *Type: Type*
 
@@ -502,6 +666,14 @@ eventually happen in the future.
 ---
 
 ## Preconditions
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.preconditions
+kind: concept
+canonical_label: Preconditions
+provenance: source-original
+```
+
 
 *Type: Type / Variation / Variation*
 
@@ -561,6 +733,15 @@ imposed limitations
 ---
 
 ## Preconscious
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.preconscious
+kind: type
+canonical_label: Preconscious
+provenance: source-original
+class_id: class.mind
+```
+
 
 *Type: Type*
 
@@ -573,6 +754,14 @@ response, innate
 ---
 
 ## Prerequisites
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.prerequisites
+kind: concept
+canonical_label: Prerequisites
+provenance: source-original
+```
+
 
 *Type: Type / Variation / Variation*
 
@@ -612,6 +801,15 @@ requisites, compulsory stipulation
 ---
 
 ## Present
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.present
+kind: type
+canonical_label: Present
+provenance: source-original
+class_id: class.universe
+```
+
 
 *Type: Type*
 
@@ -623,6 +821,15 @@ current situation, as of this moment
 ---
 
 ## Present (The Present)
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.present
+kind: type
+canonical_label: Present
+provenance: source-original
+class_id: class.universe
+```
+
 
 *Type: Type*
 
@@ -644,6 +851,15 @@ defines the scenario that exists at the moment .
 ---
 
 ## Progress
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.progress
+kind: type
+canonical_label: Progress
+provenance: source-original
+class_id: class.universe
+```
+
 
 *Type: Type*
 
@@ -656,6 +872,14 @@ staging, success
 ---
 
 ## Requirements
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.requirements
+kind: concept
+canonical_label: Requirements
+provenance: source-original
+```
+
 
 *Type: Type*
 
@@ -677,6 +901,14 @@ prerequisites and preconditions.
 ---
 
 ## Signpost
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.signpost
+kind: concept
+canonical_label: Signpost
+provenance: source-original
+```
+
 
 *Type: Type*
 
@@ -813,6 +1045,14 @@ story.
 ---
 
 ## Throughline
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.issue
+kind: concept
+canonical_label: Issue
+provenance: source-original
+```
+
 
 *Type: Type / Dramatica Term*
 
@@ -957,6 +1197,15 @@ can be the real limit that forces the climax.
 ---
 
 ## Understanding
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.understanding
+kind: type
+canonical_label: Understanding
+provenance: source-original
+class_id: class.physics
+```
+
 
 *Type: Type / Type*
 

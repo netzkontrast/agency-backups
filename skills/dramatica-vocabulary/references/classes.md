@@ -32,6 +32,16 @@ audience needs to get a sense of the bigger picture the story-wide view that sho
 ---
 
 ## Physics
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: class.physics
+kind: class
+canonical_label: Physics
+provenance: source-original
+aliases_en:
+- Activity
+```
+
 
 *Type: Class*
 
@@ -43,6 +53,16 @@ an endeavor, an operation
 ---
 
 ## Psychology
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: class.psychology
+kind: class
+canonical_label: Psychology
+provenance: source-original
+aliases_en:
+- Manipulation
+```
+
 
 *Type: Class*
 
