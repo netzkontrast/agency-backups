@@ -15,9 +15,11 @@ updated: 2026-05-04
 
 ## Governing Specification
 
-All work here MUST conform to [`RESEARCH.md`](../RESEARCH.md). Frontmatter and cross-directory linkage rules live in [`TASK.md`](../TASK.md) §3.
+All work here MUST conform to [`RESEARCH.md`](../RESEARCH.md). Frontmatter and cross-directory linkage rules live in [`TASK.md`](../TASK.md) §3. External research ingestion rules live in [`RESEARCH.md`](../RESEARCH.md) §6.
 
 ## Contents
+
+### In-House Research Workspaces
 
 - [`agent-prompt-specs-3-systems-sdd/`](./agent-prompt-specs-3-systems-sdd/) — Spec-A/B/C: agentic prompt specifications (3-systems SDD).
 - [`agentic-eval-trust-improvement-spec/`](./agentic-eval-trust-improvement-spec/) — Spec-J/K/L: evaluation, trust, improvement loops.
@@ -26,7 +28,14 @@ All work here MUST conform to [`RESEARCH.md`](../RESEARCH.md). Frontmatter and c
 - [`obsidian-frontmatter-agentic-spec/`](./obsidian-frontmatter-agentic-spec/) — The Layered Schema with Namespacing model that backs this repo's frontmatter ontology.
 - [`spec-driven-research-agentic-workflows/`](./spec-driven-research-agentic-workflows/) — Spec-driven research workflow patterns.
 
+### External Research Results (Third-Party Sources)
+
+See [`RESEARCH.md`](../RESEARCH.md) §6 for ingestion rules.
+
+- [`gemini/github-skillmd-novel-authoring-de-en/result.md`](./gemini/github-skillmd-novel-authoring-de-en/result.md) — Gemini analysis of GitHub repos with SKILL.md-conformant novel-authoring capabilities (DE/EN). Downstream analysis: [`tasks/003-analyze-skillmd-novel-authoring/`](../tasks/003-analyze-skillmd-novel-authoring/).
+
 ## Workflow Assumptions
 
-- Each subfolder slug equals the slug of the prompt that triggered the run (see `research_executes_prompt` in each output's frontmatter).
+- Each in-house subfolder slug equals the slug of the prompt that triggered the run (see `research_executes_prompt` in each output's frontmatter).
 - Workspaces are read-mostly once `research_phase: complete`. Follow-up questions are filed as new prompts in `/prompts/`, not appended here.
+- External results under `/research/<provider>/` follow the ingestion workflow in `RESEARCH.md` §6 and always have a corresponding downstream Task in `/tasks/`.
