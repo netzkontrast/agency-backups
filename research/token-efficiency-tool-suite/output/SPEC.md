@@ -1,6 +1,6 @@
 ---
 type: research
-status: active
+status: completed
 slug: token-efficiency-tool-suite
 summary: "Synthesized specification for a Token Efficiency Tool Suite, derived from public GitHub repos enforcing token budgets and context pruning."
 created: 2026-05-04
@@ -104,6 +104,7 @@ Feature: Token Efficiency Enforcement
     Given the agent is running in the repository environment
     And the Token Efficiency Tool Suite is active
 
+```gherkin
   # anchor: TE.1.1
   Scenario: Agent attempts to execute an action exceeding the budget
     Given the task has a remaining budget of 500 tokens
@@ -131,6 +132,7 @@ Feature: Token Efficiency Enforcement
     When a shell command is executed
     Then the RTK proxy MUST filter the output first
     And the Context-Pruner MUST further compress the RTK output if it exceeds the token limit
+```
 
 ## 7. Contradiction Log
 
@@ -144,6 +146,7 @@ Evidence to resolve: Implemented the "Token-Estimator" (Query Planner) to dynami
 
 ## 8. Open Questions / Unresolved
 
+- If zero results are returned for tool-first architecture searches, what are the best practices for structuring tools without system prompts?
 - How exactly does the Context-Pruner differentiate between "noise" and "critical context" without using another LLM (which would cost more tokens)?
 - What is the exact fallback mechanism when the Budget-Enforcer aborts a task? Does the agent wait for human approval, or does it permanently fail?
 
@@ -151,8 +154,18 @@ Evidence to resolve: Implemented the "Token-Estimator" (Query Planner) to dynami
 
 1. `narendrakumarnutalapati/licitra-sentry` (Primary)
 2. `chkao831/agentic_mp_dualrag` (Primary)
-3. `revenium/openclaw-revenium` (Primary)
-4. `Context-Engine-AI/Context-Engine` (Primary)
+3. `ArkadeepGanguli/Token-Budgeted-Multi-Agentic-System` (Primary)
+4. `revenium/openclaw-revenium` (Primary)
+5. `pykul/tokencap` (Primary)
+6. `OzmaKa/structured-output` (Primary)
+7. `Context-Engine-AI/Context-Engine` (Primary)
+8. `jabbatrixx/ContextGate` (Primary)
+9. `zubair-trabzada/ai-trading-claude` (Reproduction)
+10. `cosmicstack-labs/mercury-agent` (Reproduction)
+11. `AravChandra/PydanticAI_weather_forecasting_app` (Reproduction)
+12. `paarths-collab/killport` (Reproduction)
+13. `LearnPrompt/cc-harness-skills` (Reproduction)
+14. `Sompote/tiger_cowork` (Reproduction)
 
 ## 10. Methodology Note
 

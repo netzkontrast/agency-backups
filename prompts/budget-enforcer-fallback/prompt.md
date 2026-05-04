@@ -8,7 +8,7 @@ updated: 2026-05-04
 prompt_kind: follow-up
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
-prompt_relates_to_task: ""
+prompt_relates_to_task: "002-token-efficiency-tool-suite"
 prompt_spawned_from_research: "token-efficiency-tool-suite"
 ---
 

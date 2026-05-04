@@ -50,7 +50,7 @@ Search: 'agent "context pruning"' ->
   - jabbatrixx/ContextGate (Stars: 3, Updated: 2026-03-18) "Open-source LLM context-pruning middleware. Strip noise, mask sensitive data, and save tokens before they reach your AI model." [HIGH RELEVANCE: pre-invocation pruning]
 
 ## Step 4 Adversarial Query Expansion (M13)
-- Adjacent Axis: 'agent "tool-first architecture"' -> (Results simulated/searched conceptually). Produced: "agentic-spine" patterns emphasizing tool definitions over system prompts.
+- Adjacent Axis: 'agent "tool-first architecture"' -> 0 results
 - Opposing Axis: 'agent "token overrun" OR "context overflow"' -> Produced: GitHub issues and failure logs showing agents crashing when tool outputs aren't compressed, highlighting the need for Axis D (Context Management) combined with Axis A.
 - Abstraction Axis: 'agent "bounded generation"' -> Produced: Research papers/repos on constraint-driven inference, aligning with Axis C (Structured output).
 - Orthogonal Axis: '"budget-constrained query planning" agent' -> Produced: Database query optimizers, suggesting we need a "query planner" tool that estimates token cost before execution.

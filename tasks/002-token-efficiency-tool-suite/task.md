@@ -45,16 +45,16 @@ Survey public GitHub repositories that address **token efficiency via mandatory 
 
 ## Todo
 
-- [ ] 1. Verify `/prompts/token-efficiency-tool-suite/prompt.md` exists and is valid.
-- [ ] 2. Initialize `/research/token-efficiency-tool-suite/` workspace.
-- [ ] 3. Snapshot prompt into `/research/token-efficiency-tool-suite/prompt.md`.
-- [ ] 4. Execute research — search GitHub, collect repos, log findings in `workspace/session.log`.
-- [ ] 5. Complete synthesis pass (methodology, tracks, state, post-synthesis-log).
-- [ ] 6. Complete reflection pass (all milestone reflections + friction-log).
-- [ ] 7. Draft `output/SPEC.md` with all required sections.
-- [ ] 8. Run RESEARCH.md §5 pre-commit checks; fix all failures.
-- [ ] 9. File any open questions as follow-up prompts under `/prompts/`.
-- [ ] 10. Set `task_status: done`, update `updated`, write `friction-log.md`.
+- [x] 1. Verify `/prompts/token-efficiency-tool-suite/prompt.md` exists and is valid.
+- [x] 2. Initialize `/research/token-efficiency-tool-suite/` workspace.
+- [x] 3. Snapshot prompt into `/research/token-efficiency-tool-suite/prompt.md`.
+- [x] 4. Execute research — search GitHub, collect repos, log findings in `workspace/session.log`.
+- [x] 5. Complete synthesis pass (methodology, tracks, state, post-synthesis-log).
+- [x] 6. Complete reflection pass (all milestone reflections + friction-log).
+- [x] 7. Draft `output/SPEC.md` with all required sections.
+- [x] 8. Run RESEARCH.md §5 pre-commit checks; fix all failures.
+- [x] 9. File any open questions as follow-up prompts under `/prompts/`.
+- [x] 10. Set `task_status: done`, update `updated`, write `friction-log.md`.
 
 ## Links
 
