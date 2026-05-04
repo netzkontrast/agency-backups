@@ -11,6 +11,7 @@ task_owner: "claude-code"
 task_priority: P0
 task_uses_prompts: []
 task_spawns_research: []
+task_spawns_prompts: []
 task_affects_paths:
   - TASK.md
   - PROMPT.md

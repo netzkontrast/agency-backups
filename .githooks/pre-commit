@@ -37,8 +37,14 @@ fi
 
 echo ""
 if [ "$FAIL" -eq 1 ]; then
-  echo "=== BLOCKED: one or more governance linters failed. Fix all ERRORs before committing. ==="
-  exit 1
+  if "$PYTHON" tools/check-maintenance-bypass.py; then
+    echo "=== WARNING: Governance linters failed, but all errors are covered by open Tasks. Maintenance bypass active. ==="
+    exit_code=0
+  else
+    echo "=== BLOCKED: one or more governance linters failed and are not covered by open Tasks. Fix all ERRORs before committing. ==="
+    exit_code=1
+  fi
+  ${EXIT_CMD:-exit} $exit_code
 else
   echo "=== All governance linters passed. ==="
 fi

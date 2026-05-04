@@ -13,6 +13,7 @@ task_uses_prompts:
   - skills-frontmatter-index-suite
 task_spawns_research:
   - skills-frontmatter-index-suite
+task_spawns_prompts: []
 task_affects_paths:
   - tools/build-frontmatter-index.py
   - tools/query-frontmatter-index.py

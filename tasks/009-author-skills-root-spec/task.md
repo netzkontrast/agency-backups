@@ -12,6 +12,7 @@ task_priority: P1
 task_uses_prompts:
   - author-skills-root-spec
 task_spawns_research: []
+task_spawns_prompts: []
 task_affects_paths:
   - SKILLS.md
   - AGENTS.md

@@ -12,6 +12,7 @@ task_priority: P1
 task_uses_prompts:
   - github-skillmd-novel-authoring-de-en
 task_spawns_research: []
+task_spawns_prompts: []
 task_affects_paths:
   - research/gemini/github-skillmd-novel-authoring-de-en/result.md
   - research/ncp-novel-co-authoring-spec/

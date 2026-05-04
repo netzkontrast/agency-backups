@@ -143,6 +143,8 @@ External results live under a provider subfolder inside `/research/`:
 - `<provider>` is lowercase and normalized (e.g. `gemini`, `gpt`, `human`).
 - `<slug>` is kebab-case derived from the research topic (max 6 tokens), NOT an internal prompt slug.
 
+**Path-namespaced resolution:** Any linkage pointing to a research slug (e.g., `prompt_spawned_from_research` or `task_spawns_research`) MUST resolve if either `/research/<slug>/` exists OR `/research/<provider>/<slug>/` exists.
+
 ### 6.2 result.md Frontmatter
 
 `result.md` MUST carry L1 Vault Core keys plus the `research_*` namespace. Set `research_executes_prompt` to the slug of the stub prompt created in §6.3.

@@ -64,7 +64,9 @@ Do not read any other file until Step 2 directs you to.
 
 ```bash
 # 1a. Read baseline from run-log
-BASELINE=$(grep "end_commit:" maintenance/run-log.md | tail -1 | awk '{print $2}')
+# The lookup mechanism falls forward by reading the most recent reachable end_commit
+BASELINE=$(grep "end_commit:" maintenance/run-log.md | tac | awk '{for(i=2;i<=NF;i++) if (system("git cat-file -e " $i " 2>/dev/null") == 0) {print $i; break}}' | head -n 1)
+# If no recent end_commit is reachable, the agent MUST fail loudly and require a human-confirmed reseed (a tagged "coherence-reseed" annotation).
 
 # 1b. Get all files changed since baseline
 git log ${BASELINE}..HEAD --oneline
@@ -146,6 +148,8 @@ Beyond issues found during Step 3, actively check for these T3 patterns in the d
 - [ ] **Governance spec out of sync with language-spec.md** — does `AGENTS.md §Spec Language Reference` or `TASK.md §3` contain a rule that contradicts `maintenance/language-spec.md`? T3 finding: "Reconcile [spec] with language-spec.md."
 
 #### Writing a Task for a T3 Finding
+
+Before creating a new Task, you MUST run `ls tasks/ | sort` and ensure the next free `<NNN>` is used (this is the duplicate-task_id guard).
 
 Each T3 Task MUST follow `TASK.md §5`. At minimum:
 
