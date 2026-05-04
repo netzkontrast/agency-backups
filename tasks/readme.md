@@ -32,6 +32,9 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`006-surface-skills-architecture/`](./006-surface-skills-architecture/) — Surface `skills-skill-architecture` research findings to root governance. Renumbered from `003` per TASK.md §8.1. Status: `open`.
 - [`007-reconcile-closed-task-linkage/`](./007-reconcile-closed-task-linkage/) — Reconcile linkage drift in closed Tasks 002 and 003 (missing friction-logs, prompt/research field confusion, namespaced research path). Status: `open`.
 - [`008-harden-coherence-baseline-protocol/`](./008-harden-coherence-baseline-protocol/) — Harden the coherence-check baseline + run-log protocol against squash-merges, malformed records, duplicate task_ids, and silent fallbacks. Status: `open`.
+- [`009-author-skills-root-spec/`](./009-author-skills-root-spec/) — Author `SKILLS.md`, the missing root governance spec for `/skills/`, and wire skill-to-skill cross-references. Status: `open`.
+- [`010-skills-frontmatter-index-suite/`](./010-skills-frontmatter-index-suite/) — Build the token-efficient frontmatter index + skills tool suite that operationalizes `SKILLS.md §B.5` for cross-agent navigation. Status: `open`.
+- [`011-skills-frontmatter-schema-files/`](./011-skills-frontmatter-schema-files/) — Author JSON Schemas for L1/L2 frontmatter and the canonical header ontology so tools and external agents share one machine-readable contract. Status: `open`.
 
 ## Workflow Assumptions
 

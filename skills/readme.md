@@ -52,6 +52,14 @@ Claude.ai session. This folder is the durable mirror.
 - Gemini Deep Research PDF pending (required to resolve 6 UNCERTAIN markers in the architecture spec before `skills-skill` implementation can begin).
 - Jules and gemini-cli skill-loading conventions unknown — their portability to the `SKILL.md` format is unverified.
 
+## Governance In Flight
+
+`/skills/` does not yet have a root governance file. Three open tasks will close that gap:
+
+- [`/tasks/009-author-skills-root-spec/`](../tasks/009-author-skills-root-spec/) — author `SKILLS.md` (the missing sibling of `TASK.md` / `PROMPT.md` / `RESEARCH.md`); ratify the `skill_*` L2 namespace and the bootstrap protocol.
+- [`/tasks/010-skills-frontmatter-index-suite/`](../tasks/010-skills-frontmatter-index-suite/) — build the token-efficient frontmatter index + query CLI + manifest emitter so Claude Code, Jules, and Gemini share one cheap navigation surface.
+- [`/tasks/011-skills-frontmatter-schema-files/`](../tasks/011-skills-frontmatter-schema-files/) — author JSON Schemas for L1/L2 frontmatter and the canonical header ontology.
+
 ## Assumptions Log
 - Initial import: snapshot taken 2026-05-04 from a single Claude.ai
   session. No sync-back protocol (`/mnt/skills/user/` ← `skills/`) is defined

@@ -5,6 +5,7 @@ slug: prompts-root
 summary: "Root of /prompts/. Holds every executable instruction set: research proposals, follow-ups, tool instructions, task-specs."
 created: 2026-05-02
 updated: 2026-05-04
+# (also lists: author-skills-root-spec, skills-frontmatter-index-suite, skills-frontmatter-schema-files)
 ---
 
 # Prompts Root
@@ -27,6 +28,9 @@ All work in this folder MUST conform to [`PROMPT.md`](../PROMPT.md). Frontmatter
 ## Contents
 
 - [`research-prompt-from-annotations/`](./research-prompt-from-annotations/) — A prompt that scans an existing research folder for open questions and generates new research prompts from those findings.
+- [`author-skills-root-spec/`](./author-skills-root-spec/) — Task-spec prompt that authors `SKILLS.md` at the repository root, plus the supporting edits to AGENTS.md / FOLDERS.md / templates. Drives Task 009.
+- [`skills-frontmatter-index-suite/`](./skills-frontmatter-index-suite/) — Research-proposal + build prompt for the token-efficient frontmatter index, query CLI, and skills manifest emitter. Drives Task 010.
+- [`skills-frontmatter-schema-files/`](./skills-frontmatter-schema-files/) — Task-spec prompt that authors JSON Schemas for L1/L2 frontmatter and the header ontology. Drives Task 011.
 
 ## Workflow Assumptions
 
