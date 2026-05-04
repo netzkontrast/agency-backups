@@ -1,3 +1,12 @@
+---
+type: spec
+status: active
+slug: agents-spec
+summary: "Entry-point governance spec for all agents operating in this repository. Defines task routing, folder rules, spec language (RFC 2119 + Gherkin), and the Frontmatter Ontology every agent must apply."
+created: 2026-05-02
+updated: 2026-05-04
+---
+
 # Agent Instructions
 
 Welcome, agent. This repository manages development and deep research tasks.
@@ -5,10 +14,13 @@ Welcome, agent. This repository manages development and deep research tasks.
 **Before committing any work:** You MUST review and abide by the checks defined in [PRE_COMMIT.md](./PRE_COMMIT.md).
 
 ## Folder Management & Workflow Drift
+
 You MUST abide by the rules defined in [FOLDERS.md](./FOLDERS.md).
+
 **Preventing Workflow Drift:** To prevent this repository's protocols from slowly drifting out of sync with reality, you are required to document your assumptions. If you assumed a certain file should be JSON instead of Markdown, or if you assumed a specific subfolder was unnecessary, you MUST log that assumption in the relevant folder's `readme.md`. This ensures human operators and future agents understand *why* the repository looks the way it does.
 
 ## Mandatory Frustration Feedback
+
 We rely on your honest feedback to improve these protocols. You MUST consult [FRUSTRATED.md](./FRUSTRATED.md) to accurately log the Frustration Level (FL) associated with your task. **This is a mandatory step for every session, even if everything went perfectly (FL0).**
 
 ## Task Type Routing
@@ -23,7 +35,152 @@ Three top-level governance specs partition the work this repository performs. Pi
 
 **Separation of concerns is hard:** a Task MUST link to its prompt (never inline it); research MUST NOT contain prompt drafts; follow-up questions discovered during research MUST be filed as new prompts in `/prompts/`. The full audit-graph rules and Frontmatter Ontology (Layered Schema with Namespacing) live in [TASK.md §3](./TASK.md).
 
+---
+
+## Spec Language Reference
+
+Every agent in this repository MUST speak a shared formal language when writing normative specifications, acceptance criteria, or governance rules. This section defines that language. The **canonical, complete definitions** live in [`/maintenance/language-spec.md`](./maintenance/language-spec.md). The rules below are the authoritative binding summary every agent must internalize before writing any spec.
+
+### RFC 2119 Normative Keywords
+
+The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and **OPTIONAL** in this repository are to be interpreted as described in BCP 14 \[RFC 2119\] \[RFC 8174\] **when, and only when, they appear in all capitals**.
+
+#### Quick Reference
+
+| Keyword | Strength | Meaning |
+|---|---|---|
+| MUST / REQUIRED / SHALL | Absolute | No deviation permitted under any circumstances. |
+| MUST NOT / SHALL NOT | Absolute prohibition | The behaviour is never allowed. |
+| SHOULD / RECOMMENDED | Strong default | Deviation allowed only with documented justification. |
+| SHOULD NOT / NOT RECOMMENDED | Strong discouragement | Deviation allowed only with documented justification. |
+| MAY / OPTIONAL | Permissive | Fully at the implementer's discretion. |
+
+#### Usage Rules
+
+- **R1.** Every normative statement MUST use exactly one RFC 2119 keyword per sentence.
+- **R2.** Rationale paragraphs, motivation text, and prose explanations MUST NOT contain RFC 2119 keywords in uppercase. Lowercase "should" or "may" in prose is permitted.
+- **R3.** Each normative statement SHOULD be addressable by a stable identifier of the form `<Spec-Letter>.<Section>.<Index>` (e.g., `A.3.2`), so that cross-references and audit logs can pin-point the exact clause.
+- **R4.** A spec file MUST include a verbatim `§ RFC 2119` declaration section before its first normative clause (see `/maintenance/language-spec.md` for the canonical boilerplate).
+
+### Gherkin Syntax Binding
+
+Every behavioural example, agent-interaction scenario, or hand-off specification in every produced spec MUST use standard Gherkin syntax and MUST be self-contained and executable.
+
+#### Keywords
+
+| Keyword | Role |
+|---|---|
+| `Feature:` | Names the capability under test. Every Gherkin block must be nested inside a Feature. |
+| `Background:` | Shared setup steps applied to every Scenario in the Feature. OPTIONAL; RECOMMENDED when ≥ 3 scenarios share the same Given setup. |
+| `Scenario:` | A single, named behavioural example. |
+| `Scenario Outline:` | A parametric scenario template. MUST be paired with an `Examples:` table. RECOMMENDED when the same behavioural shape repeats with varying inputs. |
+| `Given` | Establishes pre-conditions. At least one Given MUST appear in every Scenario. |
+| `When` | Describes the triggering action or event. At least one When MUST appear in every Scenario. |
+| `Then` | States the expected observable outcome. At least one Then MUST appear in every Scenario. |
+| `And` / `But` | Continuation of the immediately preceding `Given`, `When`, or `Then`. MUST NOT be used as the first step in a Scenario. |
+
+#### Validity Rules
+
+- **G1.** Every `Scenario` block MUST contain at least one `Given`, at least one `When`, and at least one `Then`.
+- **G2.** `And` and `But` MUST follow a `Given`, `When`, or `Then` — never open a scenario.
+- **G3.** A scenario MUST be **self-contained**: it MUST NOT reference external context that is not also defined within the same spec file.
+- **G4.** A scenario MUST be **executable**: a human or agent reading it MUST be able to enact every step without additional clarification.
+- **G5.** Each `Scenario` SHOULD carry an anchor comment on the line immediately above it: `# anchor: <stable-id>`. This enables cross-referencing from prose.
+- **G6.** Acceptance criteria in this repository MUST be written as Gherkin scenarios, not as bullet-list assertions.
+
+#### Minimal Valid Example
+
+```gherkin
+Feature: Agent picks up an open Task
+
+  # anchor: T.6.1
+  Scenario: Agent claims a task before writing
+    Given a file "/tasks/003-example/task.md" exists
+    And its frontmatter field "task_status" is "open"
+    When an agent decides to work on the task
+    Then the agent MUST set "task_status" to "in_progress" before any other write
+    And the agent MUST set "task_owner" to its own identifier
+    And the agent MUST update "updated" to today's ISO-8601 date
+```
+
+---
+
+## Frontmatter Ontology (Summary)
+
+Every Markdown file in this repository SHOULD carry frontmatter. Files inside operational directories (`/tasks/`, `/prompts/`, `/research/`) MUST carry frontmatter. The schema is a **Layered Schema with Namespacing** derived from `research/obsidian-frontmatter-agentic-spec/output/SPEC.md` and canonically defined in [TASK.md §3](./TASK.md).
+
+### Layer Overview
+
+| Layer | Scope | Mandate |
+|---|---|---|
+| **L0** — Obsidian Reserved | `tags`, `aliases`, `cssclasses` | Optional; preserved if present. |
+| **L1** — Vault Core | `type`, `status`, `slug`, `summary`, `created`, `updated` | MUST be present on all operational files. |
+| **L2** — Domain Namespace | `task_*`, `prompt_*`, `research_*` keys | MUST be present inside the directory that owns the namespace. |
+| **L3** — Agent-Only | Vector embeddings, graph scores, token matrices | MUST NOT appear in YAML. Lives in `/.agent_cache/<file>.meta.json`. |
+
+### L1 Field Semantics
+
+| Key | Type | Agent Guidance |
+|---|---|---|
+| `type` | string | One of: `task`, `prompt`, `research`, `spec`, `readme`, `note`, `index`. Drives parser routing — read this first. |
+| `status` | string | One of: `draft`, `active`, `blocked`, `completed`, `archived`. Archived files MAY be skipped by the agent to save tokens. |
+| `slug` | string | Kebab-case; MUST match the enclosing folder name where applicable. |
+| `summary` | string | Token-cheap tl;dr. The agent SHOULD read `summary` before opening the body. This is the primary token-saving lever in the repo. |
+| `created` | date | ISO-8601 (`YYYY-MM-DD`). Set once at creation; never update. |
+| `updated` | date | ISO-8601 (`YYYY-MM-DD`). MUST be updated on every substantive change. |
+
+### YAML Depth Rule
+
+YAML frontmatter MUST NOT nest beyond one level. Lists MUST contain scalars or short strings only. This is a hard constraint to prevent LLM YAML-parsing hallucinations.
+
+The complete ontology with all L2 namespaces and worked examples lives in [TASK.md §3](./TASK.md). The Obsidian-native reasoning behind this design is in [`research/obsidian-frontmatter-agentic-spec/output/SPEC.md`](./research/obsidian-frontmatter-agentic-spec/output/SPEC.md).
+
+---
+
+## Gherkin Scenarios (Normative) — Agent Behaviour
+
+```gherkin
+Feature: Agent reads a file before acting
+
+  Background:
+    Given the agent is operating inside this repository
+    And the repository root contains AGENTS.md, TASK.md, PROMPT.md, RESEARCH.md
+
+  # anchor: AG.1.1
+  Scenario: Agent reads summary before body
+    Given a Markdown file exists with a non-empty "summary" frontmatter field
+    When the agent needs to understand that file's purpose
+    Then the agent MUST read the "summary" field first
+    And the agent SHOULD open the file body only if the summary is insufficient
+
+  # anchor: AG.1.2
+  Scenario: Agent skips archived files
+    Given a Markdown file has frontmatter "status: archived"
+    When the agent is scanning the repository for actionable work
+    Then the agent MAY skip reading the body of that file
+    And the agent MUST NOT modify an archived file without first updating its status
+
+  # anchor: AG.2.1
+  Scenario: Agent selects task type before writing
+    Given the agent has received a work request
+    When the agent determines the request type
+    Then if it is coordination work the agent MUST consult TASK.md before creating any file
+    And if it is instruction-set authoring the agent MUST consult PROMPT.md before creating any file
+    And if it is evidence-gathering the agent MUST consult RESEARCH.md before creating any file
+
+  # anchor: AG.3.1
+  Scenario: Agent adds frontmatter to every new operational file
+    Given the agent is creating a new file inside /tasks/, /prompts/, or /research/
+    When the agent writes the file
+    Then the agent MUST include L1 Vault Core frontmatter
+    And the agent MUST include the L2 namespace appropriate to the directory
+    And the YAML MUST NOT nest deeper than one level
+```
+
+---
+
 ## Current State
+
 - Output exists in `research/agent-prompt-specs-3-systems-sdd/output/SPEC.md`
 - Needs audit against RISE-DX constraints.
 
