@@ -1,3 +1,17 @@
+---
+type: prompt
+status: active
+slug: research-prompt-from-annotations
+summary: "Annotation-expansion prompt: scan a /research/<slug>/ folder for unresolved signals (open questions, [NOT-FOUND], friction logs) and emit new follow-up prompts under /prompts/."
+created: 2026-05-02
+updated: 2026-05-04
+prompt_kind: tool-instruction
+prompt_framework: RISEN+ReAct
+prompt_target_agent: "any"
+prompt_relates_to_task: ""
+prompt_spawned_from_research: ""
+---
+
 # Research Prompt Generator from Annotation Scan
 
 **Framework:** RISEN + ReAct  

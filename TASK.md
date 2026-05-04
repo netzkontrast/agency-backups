@@ -189,7 +189,51 @@ Before committing a Task that is being closed, the agent MUST verify:
 6. **Readme Audit** — `/tasks/<NNN>-<slug>/readme.md` exists and links to every other file in the folder (per `FOLDERS.md`).
 7. **Friction Log** — `friction-log.md` exists if `FL > FL0`; an FL0 declaration MAY be inlined in the closing commit message instead.
 
-## 8. Anti-Patterns
+## 8. Edge Cases & Open Questions
+
+### 8.1 Concurrent Task Numbering
+
+Two agents may simultaneously claim the next sequence number. The agent MUST resolve this on commit by:
+
+1. Running `ls tasks/ | sort` immediately before staging.
+2. If the chosen `<NNN>` already exists on disk or on the target branch, the agent MUST renumber to the next free `<NNN>` and update `task_id` accordingly.
+3. The Task slug MUST remain stable across renumbering; only `<NNN>` changes.
+
+### 8.2 Multi-Prompt Tasks
+
+A Task MAY list multiple prompts in `task_uses_prompts`. Semantics:
+
+- The prompts are executed in declaration order unless the Plan section explicitly states otherwise.
+- Each executed prompt produces its own research workspace; all such slugs MUST appear in `task_spawns_research` on closure.
+- A Task MUST NOT list the same prompt slug twice; if a prompt is executed multiple times with different inputs, those are separate prompts (separate slugs).
+
+### 8.3 Abandonment
+
+A Task MAY end without closure. The agent MUST:
+
+1. Set `task_status: abandoned`.
+2. Append a dated entry to `notes.md` stating the reason and the last reproducible state.
+3. List any partial artifacts under a `## Partial Artifacts` section in `task.md` so a future agent can resume or salvage.
+
+The pre-commit checks in §7 are relaxed for `abandoned` tasks (todo completion is not required) but `notes.md` MUST exist and contain the abandonment reason.
+
+### 8.4 Resumption
+
+When a Task in `task_status: blocked` is unblocked, the agent MUST:
+
+1. Set `task_status: in_progress`.
+2. Update `updated` to today.
+3. Append a "## Resumption Checklist" section to `notes.md` listing what was assumed about the prior state (per Spec-G/H/I session-continuity rules).
+
+### 8.5 Tasks That Spawn Tasks
+
+A Task MAY discover that it requires sub-coordination. It MUST NOT nest sub-tasks inside `/tasks/<NNN>-<slug>/`; instead, it creates a sibling `/tasks/<MMM>-<sub-slug>/` and adds the parent slug to that child's `notes.md` under "## Parent Task". The graph is intentionally flat.
+
+### 8.6 Research-Only Sessions Without a Task
+
+A research run MAY proceed without a `/tasks/` entry when it is a one-shot extraction triggered directly by a prompt. The Task layer is for *coordinated* work; ad-hoc research does not require it. The judgement test: would a future agent need to know this work happened? If yes, file a Task; if no, the research workspace alone is sufficient.
+
+## 9. Anti-Patterns
 
 - **MUST NOT** inline an executable prompt body inside `task.md`. Link to `/prompts/<slug>/prompt.md` instead.
 - **MUST NOT** store research synthesis or outputs inside `/tasks/`. Those belong in `/research/<slug>/`.
