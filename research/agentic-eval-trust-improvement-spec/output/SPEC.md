@@ -1,13 +1,13 @@
 ---
-type: research
-status: completed
+type: spec
+status: active
 slug: agentic-eval-trust-improvement-spec
-summary: "Normative best practices for agentic output quality evaluation, human-agent trust calibration tiers, and governance improvement feedback loops."
+summary: "Auto-generated stub"
 created: 2026-05-04
 updated: 2026-05-04
-research_phase: complete
-research_executes_prompt: ""
+research_executes_prompt: agentic-eval-trust-improvement-spec
 research_friction_level: FL0
+research_phase: complete
 ---
 
 # Agentic Output Evaluation, Trust Calibration, and Governance Improvement Loops

@@ -1,17 +1,14 @@
 ---
-type: research
-status: completed
+type: spec
+status: active
 slug: repo-maintenance-protocol-spec
-summary: "Normative spec for scheduled repository maintenance runs, dynamic readme state-machine partitioning, and /todo/ pipeline delegation to prevent documentation drift."
+summary: "Auto-generated stub"
 created: 2026-05-04
 updated: 2026-05-04
-research_phase: complete
-research_executes_prompt: ""
+research_executes_prompt: repo-maintenance-protocol-spec
 research_friction_level: FL0
+research_phase: complete
 ---
-
-
-
 
 # Repository Maintenance Protocol and Dynamic Documentation Standard
 
