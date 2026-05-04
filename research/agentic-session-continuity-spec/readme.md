@@ -1,3 +1,15 @@
+---
+type: index
+status: completed
+slug: agentic-session-continuity-spec
+summary: "Research index for best practices preserving agent epistemic continuity across context window boundaries, multi-session gaps, and cross-agent handoffs."
+created: 2026-05-04
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: ""
+research_friction_level: FL0
+---
+
 # Agentic Session Continuity Spec
 
 This folder contains the research task for `agentic-session-continuity-spec`.

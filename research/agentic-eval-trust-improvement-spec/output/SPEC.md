@@ -1,5 +1,6 @@
 ---
 type: research
+<<<<<<< HEAD
 status: active
 slug: agentic-eval-trust-improvement-spec
 summary: "Final specification output for the agentic eval trust improvement research."
@@ -9,6 +10,18 @@ research_phase: complete
 research_executes_prompt: agentic-eval-trust-improvement-spec
 research_friction_level: FL0
 ---
+=======
+status: completed
+slug: agentic-eval-trust-improvement-spec
+summary: "Normative best practices for agentic output quality evaluation, human-agent trust calibration tiers, and governance improvement feedback loops."
+created: 2026-05-04
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: ""
+research_friction_level: FL0
+---
+
+>>>>>>> origin/main
 # Agentic Output Evaluation, Trust Calibration, and Governance Improvement Loops
 
 ## 1. Executive Summary

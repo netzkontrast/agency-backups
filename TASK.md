@@ -9,6 +9,8 @@ updated: 2026-05-04
 
 # Task Orchestration Specification
 
+> **Mechanical Enforcement Notice:** This spec is mechanically enforced by `tools/check-governance.sh`. Before editing any file under `/tasks/`, install the pre-commit hook once with `tools/install-hooks.sh`. See [§7 Mandatory Pre-Commit Checks](#7-mandatory-pre-commit-checks-for-task-tasks) for the per-clause linter mapping.
+
 When the agent is asked to perform a unit of work that is neither a pure prompt-craft nor a pure research execution, the agent MUST treat it as a **Task** and apply the rules in this document. A Task is the orchestration layer that links *what should be done* (Task) to *the instruction set* (Prompt) and *the produced evidence* (Research, code, or specs).
 
 ## 1. Definitions (RFC 2119)
@@ -178,6 +180,20 @@ Feature: Task pickup and linkage
 ```
 
 ## 7. Mandatory Pre-Commit Checks for Task Tasks
+
+The agent MUST run `tools/check-governance.sh` before committing any change to `/tasks/`. The agent MUST NOT commit if that script exits non-zero. The seven checks below are mechanically enforced by the linters mapped in §7.0.
+
+### 7.0 Mechanical Enforcement Mapping
+
+| Check | Tool | Failure mode |
+|---|---|---|
+| §7.1 Frontmatter Integrity | [`tools/validate-frontmatter.py`](./tools/validate-frontmatter.py) | Missing L1/L2 keys, YAML depth > 1, non-kebab slug |
+| §7.2 Prompt Linkage | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `task_uses_prompts` slug doesn't resolve |
+| §7.3 Research Linkage | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `task_spawns_research` slug doesn't resolve (closed tasks only) |
+| §7.4 Path Containment | human review | No mechanical check — human responsibility |
+| §7.5 Todo Completion | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `task_status: done` with unchecked `- [ ]` items |
+| §7.6 Readme Audit | [`tools/lint-structure.py`](./tools/lint-structure.py) | Missing `readme.md` in task folder |
+| §7.7 Friction Log | [`tools/lint-linkage.py`](./tools/lint-linkage.py) + [`tools/check-trust.py`](./tools/check-trust.py) | `task_status: done` without `friction-log.md` containing an FL[0-3] declaration |
 
 Before committing a Task that is being closed, the agent MUST verify:
 
