@@ -6,8 +6,8 @@ summary: "Encode the rules from Spec-A/B/C (3-Systems SDD), Spec-G/H/I (Session 
 created: 2026-05-04
 updated: 2026-05-04
 task_id: "001"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts:
   - refactor-governance-from-specs
@@ -47,21 +47,21 @@ Convert the *theoretical* recommendations of the recently-completed research spe
 
 ## Todo
 
-- [ ] 1. Author `/prompts/refactor-governance-from-specs/prompt.md` per `PROMPT.md`.
-- [ ] 2. Inventory mechanically-checkable clauses from Spec-A/B/C.
-- [ ] 3. Inventory mechanically-checkable clauses from Spec-G/H/I.
-- [ ] 4. Inventory mechanically-checkable clauses from Spec-J/K/L.
-- [ ] 5. Categorize each clause (frontmatter / structure / pre-commit / human-only).
-- [ ] 6. Implement `tools/lint-frontmatter.{sh,py}`.
-- [ ] 7. Implement `tools/lint-structure.{sh,py}`.
-- [ ] 8. Implement `tools/lint-linkage.{sh,py}`.
-- [ ] 9. Wire `.githooks/pre-commit` and update `PRE_COMMIT.md`.
-- [ ] 10. Add `templates/task.md`, `templates/prompt.md`, `templates/research-readme.md`.
-- [ ] 11. Add continuity-hook artifacts per Spec-G/H/I.
-- [ ] 12. Add eval/trust audit script per Spec-J/K/L.
-- [ ] 13. Run linters against the current repo and resolve all diagnostics.
-- [ ] 14. Write `friction-log.md`.
-- [ ] 15. Set `task_status: done` and update `updated:` field.
+- [x] 1. Author `/prompts/refactor-governance-from-specs/prompt.md` per `PROMPT.md`.
+- [x] 2. Inventory mechanically-checkable clauses from Spec-A/B/C.
+- [x] 3. Inventory mechanically-checkable clauses from Spec-G/H/I.
+- [x] 4. Inventory mechanically-checkable clauses from Spec-J/K/L.
+- [x] 5. Categorize each clause (frontmatter / structure / pre-commit / human-only).
+- [x] 6. Implement `tools/lint-frontmatter.{sh,py}` — delivered as `tools/validate-frontmatter.py` (pre-existed, verified complete).
+- [x] 7. Implement `tools/lint-structure.{sh,py}` — `tools/lint-structure.py` created.
+- [x] 8. Implement `tools/lint-linkage.{sh,py}` — `tools/lint-linkage.py` created.
+- [x] 9. Wire `.githooks/pre-commit` and update `PRE_COMMIT.md`.
+- [x] 10. Add `templates/task.md`, `templates/prompt.md`, `templates/research-readme.md` — pre-existed; added `templates/notes.md`.
+- [x] 11. Add continuity-hook artifacts per Spec-G/H/I — `templates/notes.md` with Resumption Checklist section.
+- [x] 12. Add eval/trust audit script per Spec-J/K/L — `tools/check-trust.py` created.
+- [x] 13. Run linters against the current repo and resolve all diagnostics — all 4 scripts exit 0.
+- [x] 14. Write `friction-log.md`.
+- [x] 15. Set `task_status: done` and update `updated:` field.
 
 ## Links
 

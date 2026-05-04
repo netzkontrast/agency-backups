@@ -84,37 +84,55 @@ def parse_frontmatter(text: str) -> dict[str, object]:
     return mapping
 
 
+KNOWN_ROOTS = ("tasks", "prompts", "research", "templates", "tools")
+
+
+def _root_index(parts: tuple[str, ...]) -> int | None:
+    """Return the index of the first known governance root in parts.
+
+    This lets classify() handle both repo-relative paths
+    ("research/foo/output/SPEC.md") and absolute paths
+    ("/home/.../agency/research/foo/output/SPEC.md") correctly,
+    while still ignoring deeper accidental matches like
+    "research/foo/tasks/bar.md" (the first known root wins).
+    """
+    for i, p in enumerate(parts):
+        if p in KNOWN_ROOTS:
+            return i
+    return None
+
+
 def classify(path: Path) -> tuple[bool, set[str]]:
     """Return (frontmatter_required, l2_required_keys)."""
     parts = path.parts
+    idx = _root_index(parts)
+    if idx is None:
+        return (False, set())
+    top = parts[idx]
+    rel_parts = parts[idx:]
     name = path.name
-    in_tasks = "tasks" in parts
-    in_prompts = "prompts" in parts
-    in_research = "research" in parts
-    in_templates = "templates" in parts
-    in_tools = "tools" in parts
 
-    if in_templates or in_tools:
+    if top in ("templates", "tools"):
         return (name == "readme.md", set())
 
-    if in_tasks:
+    if top == "tasks":
         if name == "task.md":
             return (True, L2_TASK)
         if name == "readme.md":
             return (True, set())
         return (False, set())
 
-    if in_prompts:
+    if top == "prompts":
         if name == "prompt.md":
             return (True, L2_PROMPT)
         if name == "readme.md":
             return (True, set())
         return (False, set())
 
-    if in_research:
-        if name == "readme.md" and len(parts) <= 3:
-            return (True, L2_RESEARCH if len(parts) == 3 else set())
-        if name == "SPEC.md" and "output" in parts:
+    if top == "research":
+        if name == "readme.md" and len(rel_parts) <= 3:
+            return (True, L2_RESEARCH if len(rel_parts) == 3 else set())
+        if name == "SPEC.md" and "output" in rel_parts:
             return (True, L2_RESEARCH)
         return (False, set())
 
@@ -165,7 +183,8 @@ def iter_targets(roots: Iterable[Path]) -> Iterable[Path]:
 
 
 def load_waivers() -> set[str]:
-    waiver_path = Path("tools/.frontmatter-waivers")
+    # Resolve next to this script so the validator works regardless of cwd.
+    waiver_path = Path(__file__).resolve().parent / ".frontmatter-waivers"
     if not waiver_path.exists():
         return set()
     out: set[str] = set()

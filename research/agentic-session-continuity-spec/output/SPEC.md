@@ -1,3 +1,15 @@
+---
+type: research
+status: completed
+slug: agentic-session-continuity-spec
+summary: "Normative specs (G/H/I) for context engineering, agent memory architecture, and cross-session continuity protocols in long-horizon agentic pipelines."
+created: 2026-05-04
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: ""
+research_friction_level: FL0
+---
+
 # Agentic Long-Horizon Context Continuity
 
 ## Executive Summary

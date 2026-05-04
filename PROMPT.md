@@ -9,6 +9,8 @@ updated: 2026-05-04
 
 # Prompt Task Specification
 
+> **Mechanical Enforcement Notice:** This spec is mechanically enforced by `tools/check-governance.sh`. Before editing any file under `/prompts/`, install the pre-commit hook once with `tools/install-hooks.sh`. See [§6 Mandatory Pre-Commit Checks](#6-mandatory-pre-commit-checks-for-prompt-tasks) for the per-clause linter mapping.
+
 A **Prompt Task** produces an *instruction set* — a self-contained, executable artifact intended to be run by an agent. Prompts are the single source of truth for "what the agent is told to do". Tasks (`/tasks/`) coordinate work; Research (`/research/`) records what running a prompt produced. This file governs the `/prompts/` directory only.
 
 ## 1. Scope (What Belongs in `/prompts/`)
@@ -83,6 +85,21 @@ Every prompt produced MUST satisfy:
 7. **Failure Handling** — Specify what the agent MUST do when a step fails or a source is unavailable.
 
 ## 6. Mandatory Pre-Commit Checks for Prompt Tasks
+
+The agent MUST run `tools/check-governance.sh` before committing any change to `/prompts/`. The agent MUST NOT commit if that script exits non-zero. The eight checks below are mechanically enforced by the linters mapped in §6.0.
+
+### 6.0 Mechanical Enforcement Mapping
+
+| Check | Tool | Failure mode |
+|---|---|---|
+| §6.1 Brief Integrity | [`tools/lint-structure.py`](./tools/lint-structure.py) | Missing `brief.md` in prompt folder |
+| §6.2 Frontmatter Integrity | [`tools/validate-frontmatter.py`](./tools/validate-frontmatter.py) | Missing L1/L2 keys, YAML depth > 1, non-kebab slug |
+| §6.3 Prompt Non-Empty | [`tools/lint-structure.py`](./tools/lint-structure.py) | Missing `prompt.md` in prompt folder |
+| §6.4 Self-Containedness Test | human review | No mechanical check — human responsibility |
+| §6.5 Backward Link Resolves | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `prompt_spawned_from_research` doesn't resolve |
+| §6.6 Forward Link Reciprocity | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `prompt_relates_to_task` set but task does not list this prompt |
+| §6.7 Readme Audit | [`tools/lint-structure.py`](./tools/lint-structure.py) | Missing `readme.md` in prompt folder |
+| §6.8 Friction Log | human review (commit message) | No mechanical check at commit time |
 
 Before committing the deliverables of a Prompt Task, the agent MUST verify:
 

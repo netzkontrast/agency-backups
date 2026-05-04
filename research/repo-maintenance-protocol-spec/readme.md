@@ -1,14 +1,17 @@
 ---
 type: index
-status: active
+status: completed
 slug: repo-maintenance-protocol-spec
-summary: "Auto-generated stub"
+summary: "Research index for defining the nightly maintenance protocol, dynamic readme state machines, and the /todo/ pipeline delegation standard."
 created: 2026-05-04
 updated: 2026-05-04
-research_executes_prompt: repo-maintenance-protocol-spec
-research_friction_level: FL0
 research_phase: complete
+research_executes_prompt: ""
+research_friction_level: FL0
 ---
+
+
+
 
 # Research Task: Repository Maintenance Protocol and Dynamic Documentation Standard
 

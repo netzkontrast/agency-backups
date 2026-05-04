@@ -9,6 +9,8 @@ updated: 2026-05-04
 
 # Folder Interaction Specification
 
+> **Mechanical Enforcement Notice:** This spec is mechanically enforced by `tools/check-governance.sh`. Before editing any folder under `/tasks/`, `/prompts/`, or `/research/`, install the pre-commit hook once with `tools/install-hooks.sh`. The readme.md rule (§3) is enforced by [`tools/lint-structure.py`](./tools/lint-structure.py); the cross-directory linkage rule (§6) is enforced by [`tools/lint-linkage.py`](./tools/lint-linkage.py).
+
 To ensure navigation and traceability across the repository, agents MUST abide by the rules below.
 
 ## 1. Top-Level Topology (Separation of Concerns)
@@ -37,6 +39,7 @@ To ensure navigation and traceability across the repository, agents MUST abide b
 ## 3. The `readme.md` Rule (Decentralized Documentation)
 
 - **Rule:** EVERY folder MUST contain a `readme.md`.
+- **Enforcement:** [`tools/lint-structure.py`](./tools/lint-structure.py) emits an `ERROR` for every operational folder (`/tasks/<NNN>-<slug>/`, `/prompts/<slug>/`, non-provider `/research/<slug>/`) missing a `readme.md`. The pre-commit hook blocks the commit on any such error.
 - **Why:** Adjacent docs prevent doc-drift; the user can trust repository state without consulting a separate `/docs/` tree.
 - **Update Trigger:** Pre-commit batching. Agents update touched folders' `readme.md` as a single pre-commit step, not on every file change. This protects context window from administrative bloat.
 - **Required Content:**
@@ -77,8 +80,23 @@ Linkage between Tasks, Prompts, and Research MUST flow exclusively through front
 
 Body-level Markdown links between folders are encouraged for human navigation, but the **frontmatter is the source of truth** for any future CLI/graph tooling.
 
+**Enforcement:** [`tools/lint-linkage.py`](./tools/lint-linkage.py) walks every operational folder and emits an `ERROR` when any of the five frontmatter linkage keys above fails to resolve to its target file or folder. The pre-commit hook blocks the commit on any such error. Reciprocity (Prompt ↔ Task) is also checked.
+
 ## 7. Anti-Patterns
 
-- **MUST NOT** create operational folders outside `/tasks/`, `/prompts/`, `/research/`. Top-level governance specs (`TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `FRUSTRATED.md`, `PRE_COMMIT.md`, `AGENTS.md`) live at the repo root.
+- **MUST NOT** create operational folders outside `/tasks/`, `/prompts/`, `/research/`. Top-level governance specs (`TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `FRUSTRATED.md`, `PRE_COMMIT.md`, `AGENTS.md`) live at the repo root. *Exemption:* the non-operational storage folders enumerated in §8 (`/skills/`, `/templates/`, `/tools/`, `/maintenance/`) are explicitly out of scope of this rule.
 - **MUST NOT** mix kinds inside one folder (e.g., a prompt draft inside a research workspace).
 - **MUST NOT** rely on body-level Markdown links instead of frontmatter for cross-directory linkage that tooling will consume.
+
+## 8. Non-Operational Storage Folders (Explicit Exemptions)
+
+Some top-level folders hold content that is mirrored from, or destined for, an external runtime — they are not operational orchestration folders and are therefore exempt from §1 and §7:
+
+| Folder | Purpose | Exemption scope |
+|---|---|---|
+| `/skills/` | Version-controlled mirror of Claude skills (`SKILL.md` + assets). Runtime location is `~/.claude/skills/` and `/mnt/skills/user/`. | Exempt from the `/tasks/`-`/prompts/`-`/research/` partition. Per-skill `readme.md` files are auto-generated from each `SKILL.md` frontmatter and SHOULD NOT be hand-edited. They are NOT required to carry L1 Vault Core frontmatter. |
+| `/templates/` | Frontmatter and folder skeletons consumed by agents when creating new operational artifacts. | Files MAY contain `REPLACE` tokens; the validator skips template files for that check. The folder's own `readme.md` MUST carry L1 frontmatter. |
+| `/tools/` | Repository tooling (validator, lints, helpers). | The folder's own `readme.md` MUST carry L1 frontmatter; individual scripts do not. |
+| `/maintenance/` | Canonical language spec and maintenance run logs. | Treated as a governance annex; not in the audit graph. |
+
+`tools/validate-frontmatter.py` enforces this partition mechanically: it walks `/tasks/`, `/prompts/`, `/research/`, `/templates/`, `/tools/` only. Adding a new top-level folder that is *not* on this list is itself an anti-pattern unless it is explicitly listed in the table above.

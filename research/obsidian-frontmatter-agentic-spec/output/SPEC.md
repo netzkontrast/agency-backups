@@ -1,3 +1,15 @@
+---
+type: research
+status: completed
+slug: obsidian-frontmatter-agentic-spec
+summary: "Layered namespaced YAML frontmatter schema for Obsidian vaults that balances agent-parsability, human readability, and token efficiency via sidecar databases for deep metadata."
+created: 2026-05-04
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: ""
+research_friction_level: FL0
+---
+
 # Obsidian Frontmatter & Agentic Navigation — Research Synthesis
 
 ## Executive Summary

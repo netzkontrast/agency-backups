@@ -32,8 +32,40 @@ Pick the matching governance spec — the agent MUST additionally satisfy the `M
 - **Prompt** (instruction set in `/prompts/<slug>/`): [PROMPT.md](./PROMPT.md) §6.
 - **Research** (execution workspace in `/research/<slug>/`): [RESEARCH.md](./RESEARCH.md) §5.
 
-## 7. Frontmatter Validation (Mechanical Check)
+## 7. Mechanical Governance Checks
 
-If the change touches any file under `/tasks/`, `/prompts/`, or `/research/`, the agent MUST run [`tools/validate-frontmatter.py`](./tools/validate-frontmatter.py) against the staged files. The commit MUST NOT proceed if the validator exits non-zero. Diagnostics MUST be addressed by fixing the file (preferred) or by documenting a waiver in the touched folder's `readme.md`.
+If the change touches any file under `/tasks/`, `/prompts/`, or `/research/`, the agent MUST run **all three** linters below and fix every `ERROR`-level diagnostic before committing. Run via the unified shim or individually:
+
+```bash
+# Unified (recommended):
+tools/check-governance.sh
+
+# Individual linters:
+python3 tools/validate-frontmatter.py   # L1+L2 frontmatter keys, YAML depth, slug format
+python3 tools/lint-structure.py         # task.md / prompt.md / brief.md / readme.md presence
+python3 tools/lint-linkage.py           # task_uses_prompts, task_spawns_research, reciprocity
+```
+
+The pre-commit hook under `.githooks/pre-commit` runs all three automatically. Install once per clone with **either** of the equivalent commands below:
+
+```bash
+# Recommended: idempotent installer with sanity checks
+tools/install-hooks.sh
+
+# Or directly:
+git config core.hooksPath .githooks
+```
+
+Diagnostics at `ERROR` level MUST be addressed by fixing the file (preferred) or by documenting a waiver in `tools/.frontmatter-waivers` with a rationale comment. `WARN`-level diagnostics are advisory only.
+
+## 8. Trust Audit (Spec-J/K/L)
+
+Before closing a Task (`task_status: done`), the agent MUST run the trust audit:
+
+```bash
+python3 tools/check-trust.py
+```
+
+This script verifies that every `done` Task has a `friction-log.md` and that the friction log's FL declaration is traceable (Spec-L.3.1 / Spec-L.7.1).
 
 Only when all applicable boxes above are conceptually "checked" may the agent invoke the `submit` or `git commit` commands.
