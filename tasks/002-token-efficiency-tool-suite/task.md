@@ -6,8 +6,8 @@ summary: "Research public GitHub repos that address token efficiency via mandato
 created: 2026-05-04
 updated: 2026-05-04
 task_id: "002"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "jules"
 task_priority: P1
 task_uses_prompts:
   - token-efficiency-tool-suite
@@ -45,16 +45,16 @@ Survey public GitHub repositories that address **token efficiency via mandatory 
 
 ## Todo
 
-- [ ] 1. Verify `/prompts/token-efficiency-tool-suite/prompt.md` exists and is valid.
-- [ ] 2. Initialize `/research/token-efficiency-tool-suite/` workspace.
-- [ ] 3. Snapshot prompt into `/research/token-efficiency-tool-suite/prompt.md`.
-- [ ] 4. Execute research — search GitHub, collect repos, log findings in `workspace/session.log`.
-- [ ] 5. Complete synthesis pass (methodology, tracks, state, post-synthesis-log).
-- [ ] 6. Complete reflection pass (all milestone reflections + friction-log).
-- [ ] 7. Draft `output/SPEC.md` with all required sections.
-- [ ] 8. Run RESEARCH.md §5 pre-commit checks; fix all failures.
-- [ ] 9. File any open questions as follow-up prompts under `/prompts/`.
-- [ ] 10. Set `task_status: done`, update `updated`, write `friction-log.md`.
+- [x] 1. Verify `/prompts/token-efficiency-tool-suite/prompt.md` exists and is valid.
+- [x] 2. Initialize `/research/token-efficiency-tool-suite/` workspace.
+- [x] 3. Snapshot prompt into `/research/token-efficiency-tool-suite/prompt.md`.
+- [x] 4. Execute research — search GitHub, collect repos, log findings in `workspace/session.log`.
+- [x] 5. Complete synthesis pass (methodology, tracks, state, post-synthesis-log).
+- [x] 6. Complete reflection pass (all milestone reflections + friction-log).
+- [x] 7. Draft `output/SPEC.md` with all required sections.
+- [x] 8. Run RESEARCH.md §5 pre-commit checks; fix all failures.
+- [x] 9. File any open questions as follow-up prompts under `/prompts/`.
+- [x] 10. Set `task_status: done`, update `updated`, write `friction-log.md`.
 
 ## Links
 
@@ -62,3 +62,7 @@ Survey public GitHub repositories that address **token efficiency via mandatory 
 - Spawned research workspace: [`/research/token-efficiency-tool-suite/`](../../research/token-efficiency-tool-suite/) *(to be created during execution)*
 - Language spec: [`/maintenance/language-spec.md`](../../maintenance/language-spec.md)
 - Governing specs: [`TASK.md`](../../TASK.md), [`PROMPT.md`](../../PROMPT.md), [`RESEARCH.md`](../../RESEARCH.md), [`FOLDERS.md`](../../FOLDERS.md)
+
+## Frustration Log
+- Highest Friction Level: FL1
+- Summary: The initial strict exact-match searches on GitHub returned 0 results. Had to loosen the query operators to find relevant examples. Ensure tasks are flexible about the specific terminology used by the community.
