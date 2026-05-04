@@ -283,3 +283,44 @@ dynamic_pair_id: el.test
 **Implementation note:** the prompt called for `/sc:implement --morph --validate`. The `morphllm` MCP server isn't loaded in this environment, so the bulk pattern application ran via inline Python with the same outcome (one transform pattern applied to every `## <Term>` match across the 11 in-scope files). Validation against `term-frontmatter.schema.json` ran inline post-insertion: 187/187 blocks pass with 0 errors.
 
 **Deferred to v0.2 cleanup:** the ~25 mismatched term_file anchors should be normalized so 100% of canonical entries land per-term blocks. Will be flagged by `validate.py` (Step 8) as a `term_file-anchor-mismatch` diagnostic.
+
+## Plan Step 6 — Scenario tagging (3-iteration `/sc:improve --loop`)
+
+**Final state after 3 iterations:**
+
+| Metric | Value | Notes |
+|---|---:|---|
+| Tagged terms | 85 | target was ≥40 — 2× exceeded |
+| Median tags/term | 1 | M01 contingency: **PASS** (≤ 5) |
+| Mean tags/term | 1.59 | |
+| Max tags/term | 4 | well under 8-cap |
+| Total tag emissions | 135 | |
+| Orphan scenarios (<3 tags) | 0 | |
+| Over-tagged scenarios (>25 tags) | 0 | |
+| Schema validation | 0 errors | |
+| Per-term blocks updated | 68 | across 10 files |
+
+**Per-scenario distribution:**
+
+| Scenario | Tags |
+|---|---:|
+| `novel.crucial-element-audit` | 24 |
+| `novel.storyform-slot-fill` | 19 |
+| `novel.act-pivot` | 17 |
+| `lyric.verse-chorus-pair` | 16 |
+| `lyric.archetype-as-system-part` | 12 |
+| `novel.character-arc` | 12 |
+| `lyric.album-arc-mapping` | 8 |
+| `lyric.bridge-pivot` | 8 |
+| `novel.dual-storyform` | 8 |
+| `novel.diagnose-flat-draft` | 6 |
+| `lyric.refrain-as-restatement` | 5 |
+
+**Iteration trace:**
+- **Iteration 1** — bulk tag from scenario-survey.md heuristic; 85 tagged; flagged 1 orphan (`refrain-as-restatement`, only `concept.quad-structure` matched) and 1 over-tag (`crucial-element-audit` at 26).
+- **Iteration 2** — added refrain tag to `el.support`, `el.oppose`, `el.faith`, `el.disbelief`, `concept.quad` (and synonyms); trimmed `crucial-element-audit` from 26 to 24 by removing the 2 less-relevant character-arc Elements.
+- **Iteration 3** — coherence pass: confirmed 0 unknown scenario references, 0 `dynamic-pair`-kind entries with `refrain-as-restatement` tag (semantic correctness — refrains tag the underlying members, not the pair entity); confirmed schema validation clean.
+
+**M01 contingency status: PASS** (median 1 ≤ 5; per-term frontmatter remains structurally sufficient; no `scenario-index.py` build pass required for v0.1).
+
+**Sync verified:** all 68 modified per-term frontmatter blocks under `skills/dramatica-vocabulary/references/*.md` carry the same `scenarios:` field as the matching ontology entry. Cross-skill `frontmatter ↔ ontology` equality invariant satisfied.

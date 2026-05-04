@@ -376,6 +376,8 @@ id: concept.quad-structure
 kind: concept
 canonical_label: Quad Structure
 provenance: source-original
+scenarios:
+- lyric.refrain-as-restatement
 ```
 
 

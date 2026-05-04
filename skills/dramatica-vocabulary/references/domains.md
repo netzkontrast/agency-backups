@@ -100,6 +100,8 @@ canonical_label: Relationship Story
 provenance: source-original
 ncp_appreciation: Relationship Story
 ncp_appreciation_partial: false
+scenarios:
+- novel.dual-storyform
 aliases_en:
 - Subjective Story
 - RS

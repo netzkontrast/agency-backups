@@ -214,6 +214,10 @@ provenance: source-original
 quad_id: quad.pursuit-avoid-el
 ktad_position: T
 dynamic_pair_id: el.pursuit
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -268,6 +272,10 @@ provenance: source-original
 quad_id: quad.effect-cause-el
 ktad_position: T
 dynamic_pair_id: el.effect
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -350,6 +358,8 @@ provenance: source-original
 quad_id: quad.order-chaos-el
 ktad_position: T
 dynamic_pair_id: el.order
+scenarios:
+- lyric.verse-chorus-pair
 ```
 
 
@@ -470,6 +480,9 @@ provenance: source-original
 quad_id: quad.conscience-temptation-el
 ktad_position: K
 dynamic_pair_id: el.temptation
+scenarios:
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -568,6 +581,10 @@ provenance: source-original
 quad_id: quad.logic-feeling-el
 ktad_position: A
 dynamic_pair_id: el.uncontrolled
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -603,6 +620,10 @@ id: concept.crucial-element
 kind: concept
 canonical_label: Crucial Element
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
+- novel.storyform-slot-fill
 ```
 
 
@@ -670,6 +691,8 @@ provenance: source-original
 quad_id: quad.knowledge-el
 ktad_position: D
 dynamic_pair_id: el.ability
+scenarios:
+- novel.storyform-slot-fill
 ```
 
 
@@ -757,6 +780,9 @@ id: concept.direction
 kind: concept
 canonical_label: Direction
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
 ```
 
 
@@ -778,6 +804,10 @@ provenance: source-original
 quad_id: quad.faith-disbelief-el
 ktad_position: T
 dynamic_pair_id: el.faith
+scenarios:
+- lyric.refrain-as-restatement
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
 ```
 
 
@@ -819,6 +849,10 @@ provenance: source-original
 quad_id: quad.effect-cause-el
 ktad_position: K
 dynamic_pair_id: el.cause
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -1013,6 +1047,10 @@ provenance: source-original
 quad_id: quad.faith-disbelief-el
 ktad_position: K
 dynamic_pair_id: el.disbelief
+scenarios:
+- lyric.refrain-as-restatement
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
 ```
 
 
@@ -1057,6 +1095,11 @@ provenance: source-original
 quad_id: quad.logic-feeling-el
 ktad_position: T
 dynamic_pair_id: el.logic
+scenarios:
+- lyric.archetype-as-system-part
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -1096,6 +1139,9 @@ id: concept.focus
 kind: concept
 canonical_label: Focus
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
 ```
 
 
@@ -1165,6 +1211,11 @@ provenance: source-original
 quad_id: quad.help-hinder-el
 ktad_position: A
 dynamic_pair_id: el.hinder
+scenarios:
+- lyric.archetype-as-system-part
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -1205,6 +1256,11 @@ provenance: source-original
 quad_id: quad.help-hinder-el
 ktad_position: D
 dynamic_pair_id: el.help
+scenarios:
+- lyric.archetype-as-system-part
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -1461,6 +1517,8 @@ canonical_label: Knowledge
 provenance: source-original
 quad_id: quad.knowledge-el
 ktad_position: K
+scenarios:
+- novel.storyform-slot-fill
 ```
 
 
@@ -1490,6 +1548,11 @@ provenance: source-original
 quad_id: quad.logic-feeling-el
 ktad_position: K
 dynamic_pair_id: el.feeling
+scenarios:
+- lyric.archetype-as-system-part
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -1628,6 +1691,8 @@ id: concept.mc-problem
 kind: concept
 canonical_label: Main Character Problem
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
 ```
 
 
@@ -1759,6 +1824,8 @@ provenance: source-original
 quad_id: quad.help-hinder-el
 ktad_position: T
 dynamic_pair_id: el.support
+scenarios:
+- lyric.refrain-as-restatement
 ```
 
 
@@ -1800,6 +1867,8 @@ provenance: source-original
 quad_id: quad.order-chaos-el
 ktad_position: K
 dynamic_pair_id: el.chaos
+scenarios:
+- lyric.verse-chorus-pair
 ```
 
 
@@ -1840,6 +1909,8 @@ id: concept.os-problem
 kind: concept
 canonical_label: Overall Story Problem
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
 ```
 
 
@@ -2406,6 +2477,10 @@ provenance: source-original
 quad_id: quad.pursuit-avoid-el
 ktad_position: K
 dynamic_pair_id: el.avoid
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -2784,6 +2859,8 @@ provenance: source-original
 quad_id: quad.help-hinder-el
 ktad_position: K
 dynamic_pair_id: el.oppose
+scenarios:
+- lyric.refrain-as-restatement
 ```
 
 
@@ -2823,6 +2900,9 @@ id: concept.symptom-element
 kind: concept
 canonical_label: Symptom Element
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
 ```
 
 
@@ -2846,6 +2926,9 @@ provenance: source-original
 quad_id: quad.conscience-temptation-el
 ktad_position: T
 dynamic_pair_id: el.conscience
+scenarios:
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -2881,6 +2964,10 @@ provenance: source-original
 quad_id: quad.effect-cause-el
 ktad_position: D
 dynamic_pair_id: el.trust
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -2970,6 +3057,8 @@ canonical_label: Thought
 provenance: source-original
 quad_id: quad.knowledge-el
 ktad_position: T
+scenarios:
+- novel.storyform-slot-fill
 ```
 
 
@@ -3040,6 +3129,10 @@ provenance: source-original
 quad_id: quad.effect-cause-el
 ktad_position: A
 dynamic_pair_id: el.test
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 
@@ -3081,6 +3174,10 @@ provenance: source-original
 quad_id: quad.logic-feeling-el
 ktad_position: D
 dynamic_pair_id: el.control
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
 ```
 
 

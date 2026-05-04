@@ -55,6 +55,8 @@ kind: type
 canonical_label: Becoming
 provenance: source-original
 class_id: class.psychology
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -74,6 +76,8 @@ kind: type
 canonical_label: Being
 provenance: source-original
 class_id: class.psychology
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -109,6 +113,8 @@ kind: type
 canonical_label: Conceiving
 provenance: source-original
 class_id: class.psychology
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -129,6 +135,8 @@ kind: type
 canonical_label: Conceptualizing
 provenance: source-original
 class_id: class.psychology
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -168,6 +176,8 @@ kind: type
 canonical_label: Conscious
 provenance: source-original
 class_id: class.mind
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -290,6 +300,8 @@ kind: type
 canonical_label: Doing
 provenance: source-original
 class_id: class.physics
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -352,6 +364,8 @@ kind: type
 canonical_label: Future
 provenance: source-original
 class_id: class.universe
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -415,6 +429,8 @@ kind: type
 canonical_label: Learning
 provenance: source-original
 class_id: class.physics
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -435,6 +451,8 @@ kind: type
 canonical_label: Memory
 provenance: source-original
 class_id: class.mind
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -460,6 +478,8 @@ kind: type
 canonical_label: Obtaining
 provenance: source-original
 class_id: class.physics
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -576,6 +596,8 @@ id: concept.story-goal
 kind: concept
 canonical_label: Story Goal
 provenance: source-original
+scenarios:
+- lyric.album-arc-mapping
 ```
 
 
@@ -625,6 +647,8 @@ kind: type
 canonical_label: Past
 provenance: source-original
 class_id: class.universe
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -645,6 +669,8 @@ kind: type
 canonical_label: Past
 provenance: source-original
 class_id: class.universe
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -740,6 +766,8 @@ kind: type
 canonical_label: Preconscious
 provenance: source-original
 class_id: class.mind
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -808,6 +836,8 @@ kind: type
 canonical_label: Present
 provenance: source-original
 class_id: class.universe
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -828,6 +858,8 @@ kind: type
 canonical_label: Present
 provenance: source-original
 class_id: class.universe
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -858,6 +890,8 @@ kind: type
 canonical_label: Progress
 provenance: source-original
 class_id: class.universe
+scenarios:
+- novel.act-pivot
 ```
 
 
@@ -1204,6 +1238,8 @@ kind: type
 canonical_label: Understanding
 provenance: source-original
 class_id: class.physics
+scenarios:
+- novel.act-pivot
 ```
 
 

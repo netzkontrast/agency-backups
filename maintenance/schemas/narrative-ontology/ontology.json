@@ -8,56 +8,88 @@
       "kind": "archetype",
       "canonical_label": "Antagonist",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#antagonist"
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#antagonist",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "novel.character-arc"
+      ]
     },
     {
       "id": "arc.contagonist",
       "kind": "archetype",
       "canonical_label": "Contagonist",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#contagonist"
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#contagonist",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "novel.character-arc"
+      ]
     },
     {
       "id": "arc.emotion",
       "kind": "archetype",
       "canonical_label": "Emotion",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#emotion"
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#emotion",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "novel.character-arc"
+      ]
     },
     {
       "id": "arc.guardian",
       "kind": "archetype",
       "canonical_label": "Guardian",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#guardian"
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#guardian",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "novel.character-arc"
+      ]
     },
     {
       "id": "arc.protagonist",
       "kind": "archetype",
       "canonical_label": "Protagonist",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#protagonist"
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#protagonist",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "novel.character-arc"
+      ]
     },
     {
       "id": "arc.reason",
       "kind": "archetype",
       "canonical_label": "Reason",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#reason"
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#reason",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "novel.character-arc"
+      ]
     },
     {
       "id": "arc.sidekick",
       "kind": "archetype",
       "canonical_label": "Sidekick",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#sidekick"
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#sidekick",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "novel.character-arc"
+      ]
     },
     {
       "id": "arc.skeptic",
       "kind": "archetype",
       "canonical_label": "Skeptic",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#skeptic"
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#skeptic",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "novel.character-arc"
+      ]
     },
     {
       "id": "character-dynamic.approach",
@@ -66,7 +98,10 @@
       "provenance": "source-original",
       "ncp_appreciation": "Approach",
       "ncp_appreciation_partial": true,
-      "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#approach"
+      "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#approach",
+      "scenarios": [
+        "novel.character-arc"
+      ]
     },
     {
       "id": "character-dynamic.growth",
@@ -75,7 +110,10 @@
       "provenance": "source-original",
       "ncp_appreciation": "Growth",
       "ncp_appreciation_partial": true,
-      "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#approach"
+      "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#approach",
+      "scenarios": [
+        "novel.character-arc"
+      ]
     },
     {
       "id": "character-dynamic.problem-solving-style",
@@ -90,7 +128,10 @@
       ],
       "ncp_appreciation": "Problem-solving Style",
       "ncp_appreciation_partial": true,
-      "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#mental-sex"
+      "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#mental-sex",
+      "scenarios": [
+        "novel.character-arc"
+      ]
     },
     {
       "id": "character-dynamic.resolve",
@@ -99,7 +140,10 @@
       "provenance": "extension-derived",
       "ncp_appreciation": "Resolve",
       "ncp_appreciation_partial": true,
-      "term_file": "skills/dramatica-vocabulary/references/dramatica-fundamentals.md#resolve-substantive-definition"
+      "term_file": "skills/dramatica-vocabulary/references/dramatica-fundamentals.md#resolve-substantive-definition",
+      "scenarios": [
+        "novel.character-arc"
+      ]
     },
     {
       "id": "class.mind",
@@ -109,7 +153,10 @@
       "aliases_en": [
         "Fixed Attitude"
       ],
-      "term_file": "skills/dramatica-vocabulary/references/dramatica-fundamentals.md#the-four-classes-complete-set"
+      "term_file": "skills/dramatica-vocabulary/references/dramatica-fundamentals.md#the-four-classes-complete-set",
+      "scenarios": [
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "class.physics",
@@ -119,7 +166,10 @@
       "aliases_en": [
         "Activity"
       ],
-      "term_file": "skills/dramatica-vocabulary/references/classes.md#physics"
+      "term_file": "skills/dramatica-vocabulary/references/classes.md#physics",
+      "scenarios": [
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "class.psychology",
@@ -129,7 +179,10 @@
       "aliases_en": [
         "Manipulation"
       ],
-      "term_file": "skills/dramatica-vocabulary/references/classes.md#psychology"
+      "term_file": "skills/dramatica-vocabulary/references/classes.md#psychology",
+      "scenarios": [
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "class.universe",
@@ -139,7 +192,10 @@
       "aliases_en": [
         "Situation"
       ],
-      "term_file": "skills/dramatica-vocabulary/references/dramatica-fundamentals.md#the-four-classes-complete-set"
+      "term_file": "skills/dramatica-vocabulary/references/dramatica-fundamentals.md#the-four-classes-complete-set",
+      "scenarios": [
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "concept.act",
@@ -181,14 +237,23 @@
       "kind": "concept",
       "canonical_label": "Crucial Element",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#crucial-element"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#crucial-element",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "concept.direction",
       "kind": "concept",
       "canonical_label": "Direction",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#direction-overall-story-throughline"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#direction-overall-story-throughline",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "concept.dividends",
@@ -209,7 +274,11 @@
       "kind": "concept",
       "canonical_label": "Focus",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#focus"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#focus",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "concept.forewarnings",
@@ -237,7 +306,10 @@
       "kind": "concept",
       "canonical_label": "Main Character Problem",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#main-character-problem"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#main-character-problem",
+      "scenarios": [
+        "novel.crucial-element-audit"
+      ]
     },
     {
       "id": "concept.os-catalyst",
@@ -265,7 +337,10 @@
       "kind": "concept",
       "canonical_label": "Overall Story Problem",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#overall-objective-story-problem"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#overall-objective-story-problem",
+      "scenarios": [
+        "novel.crucial-element-audit"
+      ]
     },
     {
       "id": "concept.os-response",
@@ -307,7 +382,11 @@
       "kind": "concept",
       "canonical_label": "Problem",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#problem"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#problem",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "concept.problem-slot",
@@ -321,7 +400,10 @@
       "kind": "concept",
       "canonical_label": "Quad Structure",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#quad"
+      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#quad",
+      "scenarios": [
+        "lyric.refrain-as-restatement"
+      ]
     },
     {
       "id": "concept.requirements",
@@ -356,7 +438,11 @@
       "kind": "concept",
       "canonical_label": "Solution",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#solution"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#solution",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "concept.solution-slot",
@@ -370,21 +456,30 @@
       "kind": "concept",
       "canonical_label": "Story Driver",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#action"
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#action",
+      "scenarios": [
+        "lyric.album-arc-mapping"
+      ]
     },
     {
       "id": "concept.story-goal",
       "kind": "concept",
       "canonical_label": "Story Goal",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#overall-objective-story-goal"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#overall-objective-story-goal",
+      "scenarios": [
+        "lyric.album-arc-mapping"
+      ]
     },
     {
       "id": "concept.story-judgment",
       "kind": "concept",
       "canonical_label": "Story Judgment",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#judgment"
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#judgment",
+      "scenarios": [
+        "lyric.album-arc-mapping"
+      ]
     },
     {
       "id": "concept.story-limit",
@@ -398,14 +493,21 @@
       "kind": "concept",
       "canonical_label": "Story Outcome",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#outcome"
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#outcome",
+      "scenarios": [
+        "lyric.album-arc-mapping"
+      ]
     },
     {
       "id": "concept.symptom-element",
       "kind": "concept",
       "canonical_label": "Symptom Element",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#symptom-element"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#symptom-element",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "concept.unique-ability",
@@ -1007,7 +1109,10 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#ability",
       "quad_id": "quad.knowledge-el",
       "ktad_position": "A",
-      "dynamic_pair_id": "el.desire"
+      "dynamic_pair_id": "el.desire",
+      "scenarios": [
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.acceptance",
@@ -1047,7 +1152,12 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#avoid",
       "quad_id": "quad.pursuit-avoid-el",
       "ktad_position": "T",
-      "dynamic_pair_id": "el.pursuit"
+      "dynamic_pair_id": "el.pursuit",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.aware",
@@ -1066,7 +1176,12 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#cause",
       "quad_id": "quad.effect-cause-el",
       "ktad_position": "T",
-      "dynamic_pair_id": "el.effect"
+      "dynamic_pair_id": "el.effect",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.certainty",
@@ -1096,7 +1211,10 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#chaos",
       "quad_id": "quad.order-chaos-el",
       "ktad_position": "T",
-      "dynamic_pair_id": "el.order"
+      "dynamic_pair_id": "el.order",
+      "scenarios": [
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "el.conscience",
@@ -1106,7 +1224,11 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#conscience",
       "quad_id": "quad.conscience-temptation-el",
       "ktad_position": "K",
-      "dynamic_pair_id": "el.temptation"
+      "dynamic_pair_id": "el.temptation",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.consider",
@@ -1124,7 +1246,12 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#control",
       "quad_id": "quad.logic-feeling-el",
       "ktad_position": "A",
-      "dynamic_pair_id": "el.uncontrolled"
+      "dynamic_pair_id": "el.uncontrolled",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.deduction",
@@ -1144,7 +1271,10 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#desire",
       "quad_id": "quad.knowledge-el",
       "ktad_position": "D",
-      "dynamic_pair_id": "el.ability"
+      "dynamic_pair_id": "el.ability",
+      "scenarios": [
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.determination",
@@ -1164,7 +1294,12 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#disbelief",
       "quad_id": "quad.faith-disbelief-el",
       "ktad_position": "T",
-      "dynamic_pair_id": "el.faith"
+      "dynamic_pair_id": "el.faith",
+      "scenarios": [
+        "lyric.refrain-as-restatement",
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit"
+      ]
     },
     {
       "id": "el.effect",
@@ -1174,7 +1309,12 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#effect",
       "quad_id": "quad.effect-cause-el",
       "ktad_position": "K",
-      "dynamic_pair_id": "el.cause"
+      "dynamic_pair_id": "el.cause",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.ending",
@@ -1224,7 +1364,12 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#faith",
       "quad_id": "quad.faith-disbelief-el",
       "ktad_position": "K",
-      "dynamic_pair_id": "el.disbelief"
+      "dynamic_pair_id": "el.disbelief",
+      "scenarios": [
+        "lyric.refrain-as-restatement",
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit"
+      ]
     },
     {
       "id": "el.feeling",
@@ -1234,7 +1379,13 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#feeling",
       "quad_id": "quad.logic-feeling-el",
       "ktad_position": "T",
-      "dynamic_pair_id": "el.logic"
+      "dynamic_pair_id": "el.logic",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.help",
@@ -1244,7 +1395,13 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#help",
       "quad_id": "quad.help-hinder-el",
       "ktad_position": "A",
-      "dynamic_pair_id": "el.hinder"
+      "dynamic_pair_id": "el.hinder",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.hinder",
@@ -1254,7 +1411,13 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#hinder",
       "quad_id": "quad.help-hinder-el",
       "ktad_position": "D",
-      "dynamic_pair_id": "el.help"
+      "dynamic_pair_id": "el.help",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.hunch",
@@ -1312,7 +1475,10 @@
       "provenance": "source-original",
       "term_file": "skills/dramatica-vocabulary/references/elements.md#knowledge",
       "quad_id": "quad.knowledge-el",
-      "ktad_position": "K"
+      "ktad_position": "K",
+      "scenarios": [
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.logic",
@@ -1322,7 +1488,13 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#logic",
       "quad_id": "quad.logic-feeling-el",
       "ktad_position": "K",
-      "dynamic_pair_id": "el.feeling"
+      "dynamic_pair_id": "el.feeling",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.non-acceptance",
@@ -1352,7 +1524,10 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#oppose",
       "quad_id": "quad.help-hinder-el",
       "ktad_position": "T",
-      "dynamic_pair_id": "el.support"
+      "dynamic_pair_id": "el.support",
+      "scenarios": [
+        "lyric.refrain-as-restatement"
+      ]
     },
     {
       "id": "el.order",
@@ -1362,7 +1537,10 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#order",
       "quad_id": "quad.order-chaos-el",
       "ktad_position": "K",
-      "dynamic_pair_id": "el.chaos"
+      "dynamic_pair_id": "el.chaos",
+      "scenarios": [
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "el.perception",
@@ -1470,7 +1648,12 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#pursuit",
       "quad_id": "quad.pursuit-avoid-el",
       "ktad_position": "K",
-      "dynamic_pair_id": "el.avoid"
+      "dynamic_pair_id": "el.avoid",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.reaction",
@@ -1537,7 +1720,10 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#support",
       "quad_id": "quad.help-hinder-el",
       "ktad_position": "K",
-      "dynamic_pair_id": "el.oppose"
+      "dynamic_pair_id": "el.oppose",
+      "scenarios": [
+        "lyric.refrain-as-restatement"
+      ]
     },
     {
       "id": "el.temptation",
@@ -1547,7 +1733,11 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#temptation",
       "quad_id": "quad.conscience-temptation-el",
       "ktad_position": "T",
-      "dynamic_pair_id": "el.conscience"
+      "dynamic_pair_id": "el.conscience",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.test",
@@ -1557,7 +1747,12 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#test",
       "quad_id": "quad.effect-cause-el",
       "ktad_position": "D",
-      "dynamic_pair_id": "el.trust"
+      "dynamic_pair_id": "el.trust",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.theory",
@@ -1576,7 +1771,10 @@
       "provenance": "source-original",
       "term_file": "skills/dramatica-vocabulary/references/elements.md#thought",
       "quad_id": "quad.knowledge-el",
-      "ktad_position": "T"
+      "ktad_position": "T",
+      "scenarios": [
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.trust",
@@ -1586,7 +1784,12 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#trust",
       "quad_id": "quad.effect-cause-el",
       "ktad_position": "A",
-      "dynamic_pair_id": "el.test"
+      "dynamic_pair_id": "el.test",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.uncontrolled",
@@ -1596,7 +1799,12 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#uncontrolled",
       "quad_id": "quad.logic-feeling-el",
       "ktad_position": "D",
-      "dynamic_pair_id": "el.control"
+      "dynamic_pair_id": "el.control",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill"
+      ]
     },
     {
       "id": "el.unending",
@@ -1625,7 +1833,11 @@
       "provenance": "source-original",
       "ncp_appreciation": "Driver",
       "ncp_appreciation_partial": false,
-      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#action"
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#action",
+      "scenarios": [
+        "lyric.album-arc-mapping",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "plot-dynamic.judgment",
@@ -1634,7 +1846,10 @@
       "provenance": "source-original",
       "ncp_appreciation": "Judgment",
       "ncp_appreciation_partial": false,
-      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#judgment"
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#judgment",
+      "scenarios": [
+        "lyric.album-arc-mapping"
+      ]
     },
     {
       "id": "plot-dynamic.limit",
@@ -1643,7 +1858,10 @@
       "provenance": "source-original",
       "ncp_appreciation": "Limit",
       "ncp_appreciation_partial": false,
-      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#limit"
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#limit",
+      "scenarios": [
+        "lyric.album-arc-mapping"
+      ]
     },
     {
       "id": "plot-dynamic.outcome",
@@ -1652,7 +1870,10 @@
       "provenance": "source-original",
       "ncp_appreciation": "Outcome",
       "ncp_appreciation_partial": false,
-      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#outcome"
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#outcome",
+      "scenarios": [
+        "lyric.album-arc-mapping"
+      ]
     },
     {
       "id": "quad.acceptance-reaction-el",
@@ -1673,7 +1894,10 @@
       "kind": "quad",
       "canonical_label": "Actuality",
       "provenance": "extension-derived",
-      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md",
+      "scenarios": [
+        "lyric.bridge-pivot"
+      ]
     },
     {
       "id": "quad.approach-var-physics",
@@ -1710,7 +1934,10 @@
       "kind": "quad",
       "canonical_label": "Conscience / Temptation",
       "provenance": "extension-derived",
-      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md",
+      "scenarios": [
+        "lyric.bridge-pivot"
+      ]
     },
     {
       "id": "quad.conscience-var",
@@ -1733,7 +1960,10 @@
       "kind": "quad",
       "canonical_label": "Effect / Cause",
       "provenance": "extension-derived",
-      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md",
+      "scenarios": [
+        "lyric.bridge-pivot"
+      ]
     },
     {
       "id": "quad.evaluation-re-evaluation-el",
@@ -1762,7 +1992,10 @@
       "kind": "quad",
       "canonical_label": "Help / Hinder",
       "provenance": "extension-derived",
-      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md",
+      "scenarios": [
+        "lyric.bridge-pivot"
+      ]
     },
     {
       "id": "quad.hope-var",
@@ -1791,7 +2024,10 @@
       "kind": "quad",
       "canonical_label": "Knowledge",
       "provenance": "extension-derived",
-      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md",
+      "scenarios": [
+        "lyric.bridge-pivot"
+      ]
     },
     {
       "id": "quad.knowledge-var",
@@ -1806,7 +2042,10 @@
       "kind": "quad",
       "canonical_label": "Logic / Feeling",
       "provenance": "extension-derived",
-      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md",
+      "scenarios": [
+        "lyric.bridge-pivot"
+      ]
     },
     {
       "id": "quad.logic-var",
@@ -1829,7 +2068,10 @@
       "kind": "quad",
       "canonical_label": "Order / Chaos",
       "provenance": "extension-derived",
-      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md",
+      "scenarios": [
+        "lyric.bridge-pivot"
+      ]
     },
     {
       "id": "quad.production-reduction-el",
@@ -1850,7 +2092,10 @@
       "kind": "quad",
       "canonical_label": "Pursuit / Avoid",
       "provenance": "extension-derived",
-      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md",
+      "scenarios": [
+        "lyric.bridge-pivot"
+      ]
     },
     {
       "id": "quad.rationalization-var",
@@ -1926,7 +2171,10 @@
       ],
       "ncp_appreciation": "Influence Character",
       "ncp_appreciation_partial": false,
-      "term_file": "skills/dramatica-vocabulary/references/main-vs-impact-character.md#impact-character"
+      "term_file": "skills/dramatica-vocabulary/references/main-vs-impact-character.md#impact-character",
+      "scenarios": [
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "throughline.main",
@@ -1938,7 +2186,10 @@
       ],
       "ncp_appreciation": "Main Character",
       "ncp_appreciation_partial": false,
-      "term_file": "skills/dramatica-vocabulary/references/domains.md#perspective"
+      "term_file": "skills/dramatica-vocabulary/references/domains.md#perspective",
+      "scenarios": [
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "throughline.objective",
@@ -1951,7 +2202,10 @@
       ],
       "ncp_appreciation": "Objective Story",
       "ncp_appreciation_partial": false,
-      "term_file": "skills/dramatica-vocabulary/references/domains.md#perspective"
+      "term_file": "skills/dramatica-vocabulary/references/domains.md#perspective",
+      "scenarios": [
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "throughline.relationship",
@@ -1965,7 +2219,10 @@
       ],
       "ncp_appreciation": "Relationship Story",
       "ncp_appreciation_partial": false,
-      "term_file": "skills/dramatica-vocabulary/references/domains.md#perspective"
+      "term_file": "skills/dramatica-vocabulary/references/domains.md#perspective",
+      "scenarios": [
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "type.becoming",
@@ -1973,7 +2230,10 @@
       "canonical_label": "Becoming",
       "provenance": "source-original",
       "class_id": "class.psychology",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#becoming"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#becoming",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.being",
@@ -1981,7 +2241,10 @@
       "canonical_label": "Being",
       "provenance": "source-original",
       "class_id": "class.psychology",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#being"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#being",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.conceiving",
@@ -1989,7 +2252,10 @@
       "canonical_label": "Conceiving",
       "provenance": "source-original",
       "class_id": "class.psychology",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#conceiving"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#conceiving",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.conceptualizing",
@@ -1997,7 +2263,10 @@
       "canonical_label": "Conceptualizing",
       "provenance": "source-original",
       "class_id": "class.psychology",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#conceptualizing"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#conceptualizing",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.conscious",
@@ -2005,7 +2274,10 @@
       "canonical_label": "Conscious",
       "provenance": "source-original",
       "class_id": "class.mind",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#conscious"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#conscious",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.doing",
@@ -2013,7 +2285,10 @@
       "canonical_label": "Doing",
       "provenance": "source-original",
       "class_id": "class.physics",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#doing"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#doing",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.future",
@@ -2021,7 +2296,10 @@
       "canonical_label": "Future",
       "provenance": "source-original",
       "class_id": "class.universe",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#future"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#future",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.learning",
@@ -2029,7 +2307,10 @@
       "canonical_label": "Learning",
       "provenance": "source-original",
       "class_id": "class.physics",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#learning"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#learning",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.memory",
@@ -2037,7 +2318,10 @@
       "canonical_label": "Memory",
       "provenance": "source-original",
       "class_id": "class.mind",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#memory"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#memory",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.obtaining",
@@ -2045,7 +2329,10 @@
       "canonical_label": "Obtaining",
       "provenance": "source-original",
       "class_id": "class.physics",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#obtaining"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#obtaining",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.past",
@@ -2053,7 +2340,10 @@
       "canonical_label": "Past",
       "provenance": "source-original",
       "class_id": "class.universe",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#past"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#past",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.preconscious",
@@ -2061,7 +2351,10 @@
       "canonical_label": "Preconscious",
       "provenance": "source-original",
       "class_id": "class.mind",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#preconscious"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#preconscious",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.present",
@@ -2069,7 +2362,10 @@
       "canonical_label": "Present",
       "provenance": "source-original",
       "class_id": "class.universe",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#present"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#present",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.progress",
@@ -2077,7 +2373,10 @@
       "canonical_label": "Progress",
       "provenance": "source-original",
       "class_id": "class.universe",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#progress"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#progress",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.subconscious",
@@ -2085,7 +2384,10 @@
       "canonical_label": "Subconscious",
       "provenance": "source-original",
       "class_id": "class.mind",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#subconscious"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#subconscious",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "type.understanding",
@@ -2093,7 +2395,10 @@
       "canonical_label": "Understanding",
       "provenance": "source-original",
       "class_id": "class.physics",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#understanding"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#understanding",
+      "scenarios": [
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "var.ability",

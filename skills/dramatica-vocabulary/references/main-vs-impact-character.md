@@ -17,6 +17,8 @@ canonical_label: Influence Character
 provenance: source-original
 ncp_appreciation: Influence Character
 ncp_appreciation_partial: false
+scenarios:
+- novel.dual-storyform
 aliases_en:
 - Impact Character
 - IC

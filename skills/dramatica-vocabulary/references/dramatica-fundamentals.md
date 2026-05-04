@@ -19,6 +19,8 @@ id: class.universe
 kind: class
 canonical_label: Universe
 provenance: extension-derived
+scenarios:
+- novel.dual-storyform
 aliases_en:
 - Situation
 ```
@@ -93,6 +95,8 @@ canonical_label: Resolve
 provenance: extension-derived
 ncp_appreciation: Resolve
 ncp_appreciation_partial: true
+scenarios:
+- novel.character-arc
 ```
 
 

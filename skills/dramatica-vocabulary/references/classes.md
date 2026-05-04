@@ -38,6 +38,8 @@ id: class.physics
 kind: class
 canonical_label: Physics
 provenance: source-original
+scenarios:
+- novel.dual-storyform
 aliases_en:
 - Activity
 ```
@@ -59,6 +61,8 @@ id: class.psychology
 kind: class
 canonical_label: Psychology
 provenance: source-original
+scenarios:
+- novel.dual-storyform
 aliases_en:
 - Manipulation
 ```

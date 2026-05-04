@@ -22,6 +22,9 @@ id: arc.antagonist
 kind: archetype
 canonical_label: Antagonist
 provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
 ```
 
 
@@ -45,6 +48,9 @@ id: arc.contagonist
 kind: archetype
 canonical_label: Contagonist
 provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
 ```
 
 
@@ -93,6 +99,9 @@ id: arc.emotion
 kind: archetype
 canonical_label: Emotion
 provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
 ```
 
 
@@ -124,6 +133,9 @@ id: arc.guardian
 kind: archetype
 canonical_label: Guardian
 provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
 ```
 
 
@@ -154,6 +166,9 @@ id: arc.protagonist
 kind: archetype
 canonical_label: Protagonist
 provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
 ```
 
 
@@ -199,6 +214,9 @@ id: arc.reason
 kind: archetype
 canonical_label: Reason
 provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
 ```
 
 
@@ -259,6 +277,9 @@ id: arc.sidekick
 kind: archetype
 canonical_label: Sidekick
 provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
 ```
 
 
@@ -292,6 +313,9 @@ id: arc.skeptic
 kind: archetype
 canonical_label: Skeptic
 provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
 ```
 
 

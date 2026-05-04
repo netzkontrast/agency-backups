@@ -28,6 +28,9 @@ canonical_label: Driver
 provenance: source-original
 ncp_appreciation: Driver
 ncp_appreciation_partial: false
+scenarios:
+- lyric.album-arc-mapping
+- novel.act-pivot
 ```
 
 
@@ -220,6 +223,8 @@ canonical_label: Judgment
 provenance: source-original
 ncp_appreciation: Judgment
 ncp_appreciation_partial: false
+scenarios:
+- lyric.album-arc-mapping
 ```
 
 
@@ -338,6 +343,8 @@ canonical_label: Limit
 provenance: source-original
 ncp_appreciation: Limit
 ncp_appreciation_partial: false
+scenarios:
+- lyric.album-arc-mapping
 ```
 
 
@@ -418,6 +425,8 @@ canonical_label: Outcome
 provenance: source-original
 ncp_appreciation: Outcome
 ncp_appreciation_partial: false
+scenarios:
+- lyric.album-arc-mapping
 ```
 
 
