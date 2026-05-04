@@ -14,11 +14,11 @@ updated: 2026-05-04
 - [x] Prompt snapshot confirmed
 - [x] Directory structure initialized
 - [x] Session log started
-- [ ] Q1 (U1: git availability) — search executed
-- [ ] Q2 (U2: filesystem persistence) — search executed
-- [ ] Q3 (alternative bootstrap) — search executed
-- [ ] Evidence quality ratings (M13) applied
-- [ ] Synthesis artifacts written to /synthesis/
-- [ ] Output SPEC.md written
-- [ ] Friction log completed
-- [ ] Open questions outward-routed to /prompts/
+- [x] Q1 (U1: git availability) — search executed; git not confirmed pre-installed; (d) inference from official list
+- [x] Q2 (U2: filesystem persistence) — search executed; no auto-persistence in web UI confirmed
+- [x] Q3 (alternative bootstrap) — REST API recommended; ZIP and Files API documented as alternatives
+- [x] Evidence quality ratings (M13) applied — see reflection/M13-evidence-quality.md
+- [x] Synthesis artifacts written to /synthesis/
+- [x] Output SPEC.md written — includes RFC-2119 patch text for U1 and U2
+- [x] Friction log completed — FL1 (U1 inference gap)
+- [x] Open questions outward-routed to /prompts/ (skills-skill-enterprise-offline, claude-ai-container-git-verification)
