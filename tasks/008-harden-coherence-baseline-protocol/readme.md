@@ -10,3 +10,4 @@ updated: 2026-05-04
 # Task 008 — Harden the Coherence-Check Baseline Protocol
 
 - [task.md](./task.md) — Goal, plan, todo, links.
+- [notes.md](./notes.md) — Post-merge review of PR #26 by `claude-code` session `claude/stoic-mendel-4pxCa`.
