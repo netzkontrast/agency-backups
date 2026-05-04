@@ -12,3 +12,4 @@ updated: 2026-05-04
 - [task.md](./task.md) — Goal, plan, todo, links.
 - [notes.md](./notes.md) — Post-merge review of PR #26 by `claude-code` session `claude/stoic-mendel-4pxCa`.
 - [critique-pr31.md](./critique-pr31.md) — Governance critique of PR #31 by `claude-code` session `claude/stoic-mendel-iCz32`.
+- [critique-pr32.md](./critique-pr32.md) — Governance meta-critique of PR #32 by `claude-code` session `claude/stoic-mendel-Sk9lZ`.
