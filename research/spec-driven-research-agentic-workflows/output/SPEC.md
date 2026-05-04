@@ -1,3 +1,15 @@
+---
+type: research
+status: completed
+slug: spec-driven-research-agentic-workflows
+summary: "Normative governance specs (D/E/F) for designing, orchestrating, and repository-grounding agentic research workflows to prevent drift and context degradation."
+created: 2026-05-04
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: ""
+research_friction_level: FL0
+---
+
 # Spec-Driven Best Practices for Designing and Governing Agentic Research Workflows
 
 ## Executive Summary

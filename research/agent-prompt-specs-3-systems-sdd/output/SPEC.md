@@ -1,3 +1,15 @@
+---
+type: research
+status: completed
+slug: agent-prompt-specs-3-systems-sdd
+summary: "Actionable spec-driven prompting best practices for Google Jules, Claude Code, and Gemini Deep Research across the Explore-Plan-Implement-Review-Validate cycle."
+created: 2026-05-04
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: ""
+research_friction_level: FL0
+---
+
 # Spec-Driven Best Practices for Agent/Research Prompts on Google Jules, Claude Code, and Gemini Deep Research
 
 ## Executive Summary

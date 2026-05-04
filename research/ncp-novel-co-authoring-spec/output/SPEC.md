@@ -1,3 +1,15 @@
+---
+type: research
+status: completed
+slug: ncp-novel-co-authoring-spec
+summary: "Normative specification (RFC 2119 / Gherkin) for the Narrative Context Protocol enabling structured AI-agent-driven novel co-authoring workflows."
+created: 2026-05-04
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: ""
+research_friction_level: FL0
+---
+
 # Narrative Context Protocol — Specification for AI-Agent-Driven Novel Co-Authoring
 
 ## Document Metadata

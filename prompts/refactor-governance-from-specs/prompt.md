@@ -1,6 +1,6 @@
 ---
 type: prompt
-status: draft
+status: active
 slug: refactor-governance-from-specs
 summary: "Skeleton task-spec prompt that drives Task 001: convert Spec-A/B/C + G/H/I + J/K/L into linters, hooks, templates."
 created: 2026-05-04
