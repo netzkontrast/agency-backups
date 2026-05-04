@@ -6,12 +6,15 @@ summary: "Analyze Gemini extraction of SKILL.md-conformant novel-authoring repos
 created: 2026-05-04
 updated: 2026-05-04
 task_id: "003"
-task_status: open
+task_status: done
 task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts:
   - github-skillmd-novel-authoring-de-en
-task_spawns_research: []
+task_spawns_research:
+  - mega-context-limit-management
+  - cross-skill-context-poisoning
+  - subjective-quality-evaluation
 task_affects_paths:
   - research/gemini/github-skillmd-novel-authoring-de-en/result.md
   - research/ncp-novel-co-authoring-spec/
@@ -39,12 +42,12 @@ Analyze the external Gemini research result in `research/gemini/github-skillmd-n
 
 ## Todo
 
-- [ ] 1. Read and annotate `result.md` key findings.
-- [ ] 2. Cross-reference with in-house research workspaces.
-- [ ] 3. Categorize findings (actionable / needs-research / out-of-scope).
-- [ ] 4. Draft `output/RECOMMENDATIONS.md`.
-- [ ] 5. File follow-up prompts for unresolved open questions.
-- [ ] 6. Update frontmatter and close task.
+- [x] 1. Read and annotate `result.md` key findings.
+- [x] 2. Cross-reference with in-house research workspaces.
+- [x] 3. Categorize findings (actionable / needs-research / out-of-scope).
+- [x] 4. Draft `output/RECOMMENDATIONS.md`.
+- [x] 5. File follow-up prompts for unresolved open questions.
+- [x] 6. Update frontmatter and close task.
 
 ## Links
 
