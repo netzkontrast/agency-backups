@@ -1,3 +1,15 @@
+---
+type: research
+status: completed
+slug: repo-maintenance-protocol-spec
+summary: "Normative spec for scheduled repository maintenance runs, dynamic readme state-machine partitioning, and /todo/ pipeline delegation to prevent documentation drift."
+created: 2026-05-04
+updated: 2026-05-04
+research_phase: complete
+research_executes_prompt: ""
+research_friction_level: FL0
+---
+
 # Repository Maintenance Protocol and Dynamic Documentation Standard
 
 ## §1. Normative Conventions

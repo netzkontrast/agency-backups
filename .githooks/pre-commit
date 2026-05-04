@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Pre-commit hook for the agency repository.
+# Runs all three governance linters and blocks the commit on any ERROR-level diagnostic.
+# Wired per TASK.md §7 and PRE_COMMIT.md §7.
+#
+# Install once per clone:
+#   git config core.hooksPath .githooks
+# Or run the shim: tools/check-governance.sh
+
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+PYTHON="${PYTHON:-python3}"
+FAIL=0
+
+echo "=== agency pre-commit: governance linters ==="
+
+echo ""
+echo "--- [1/3] Frontmatter linter ---"
+if ! "$PYTHON" tools/validate-frontmatter.py; then
+  FAIL=1
+fi
+
+echo ""
+echo "--- [2/3] Directory-structure linter ---"
+if ! "$PYTHON" tools/lint-structure.py; then
+  FAIL=1
+fi
+
+echo ""
+echo "--- [3/3] Cross-reference linkage linter ---"
+if ! "$PYTHON" tools/lint-linkage.py; then
+  FAIL=1
+fi
+
+echo ""
+if [ "$FAIL" -eq 1 ]; then
+  echo "=== BLOCKED: one or more governance linters failed. Fix all ERRORs before committing. ==="
+  exit 1
+else
+  echo "=== All governance linters passed. ==="
+fi
