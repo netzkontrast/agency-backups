@@ -175,3 +175,66 @@ Items 1–6 are pure JSON-table checks (`validate.py` walks `ontology.json` once
      activates and Step 8 expands to add scenario-index.py. -->
 
 _populated in Step 6_
+
+## Plan Steps 3+4+7 — Parallel Sonnet batch + main-context merge
+
+### What landed
+
+| Step | Owner | Output | Validation |
+|---|---|---|---|
+| 3 | Sonnet A (foreground) | `maintenance/schemas/narrative-ontology/scenarios.json` (11 entries) | 0 schema errors |
+| 7 | Sonnet B (background) | YAML frontmatter inserted into 15 `dramatica-theory/references/*.md` chapters | 0 schema errors; 275 insertions / 0 deletions; no prose modified |
+| 4a-no-crossref | Sonnet C (background) | `.fragments/4ac-no-crossref.json` (74 entries: 4 classes, 16 types, 4 throughlines, 8 archetypes, 4 char-dynamics, 4 plot-dynamics, 34 concepts) | 0 schema errors |
+| 4b-quads+pairs | Sonnet D (background) | `.fragments/4d-quads-pairs.json` (35 quads + 66 dynamic-pairs = 101 entries) | 0 schema errors |
+| 4b-cross-ref-heavy | Main context | 64 Variations + 64 Elements + bridging concepts; merged with C+D into `ontology.json` | see below |
+
+### Final ontology.json — 304 entries
+
+| Kind | Count |
+|---|---:|
+| class | 4 |
+| type | 16 |
+| throughline | 4 |
+| archetype | 8 |
+| character-dynamic | 4 |
+| plot-dynamic | 4 |
+| concept | 39 |
+| quad | 35 |
+| dynamic-pair | 65 |
+| variation | 62 |
+| element | 63 |
+| **Total** | **304** |
+
+### Cross-entry invariants — final state
+
+| Check | Status |
+|---|---|
+| Schema (per-entry) | 0 errors |
+| Dynamic-pair reciprocity | 0 violations |
+| Pair_member resolvability | 0 unresolved |
+| Quad_id resolvability | 0 unresolved |
+| Class_id / type_id resolvability | 0 unresolved |
+| Quad membership integrity (4 members, KTAD-complete) | **11 partial of 35** — known fractal-distortion limitation |
+
+### Merge fixes applied
+
+1. **D's slug mismatches** — 3 IDs reclassified: `type.preconditions` / `type.prerequisites` → `concept.*` (passenger plot points, not Types); `plot-dynamic.work` → `var.work` (Work canonically pairs with Attempt at the Variation level per the Attraction/Repulsion Element-Quad).
+2. **`dp.destiny-fantasy` dropped** — false pair conflicting with canonical `dp.destiny-fate` (per element-quads.md Universe-Fate Quad). One of D's 75-pair source-list entries that didn't reflect canonical Dramatica.
+3. **5 missing canonical entities added** — Non-Acceptance, Non-Accurate, Ability, Change (Elements), Self-Interest (Variation). These are referenced in source `dyn.pr.` lines but absent as `## ` headings in `elements.md` / `variations.md`.
+4. **Quad-slug convention** — adopted D's `<name>-var` / `<name>-el` suffix scheme; my Variation+Element generators were updated to use the composite slash-preserving names (e.g. `quad.acceptance-reaction-el`, not `quad.acceptance-el`).
+5. **`var.work` special case** — Work appears in `plot-dynamics.md` (per kickoff inventory) but is canonically a Variation per `element-quads.md`'s Attraction/Repulsion Quad listing. Authored as `var.work` with quad_id pointing at the Element-level Attraction/Repulsion Quad.
+
+### Quad-membership partial count — known limitation
+
+Of 35 Quads, 24 have exactly 4 KTAD members (clean). 11 have 2/3/5 members because the source corpus reuses Variation+Element names across multiple Quads (the explicitly-documented "fractal distortion" in `element-quads.md` lines 30, 126). Each ontology entry carries ONE `quad_id`; the multi-Quad participation cannot be encoded with a single `quad_id` field.
+
+Resolution direction (deferred to v0.2 if it ever matters in practice):
+- **Option A** (preferred): leave the schema as-is; document the limitation. The fractal duplication is rare enough that Quad-completeness lookups still mostly work; the navigator returns "partial Quad" responses for the affected entries.
+- **Option B**: change `quad_id` to `quad_ids: array`. Schema bump + ontology-build refactor + navigator changes.
+- **Option C**: mint per-Class entries for recurring names (`var.knowledge-physics`, `var.knowledge-mind`). Multiplies entries; breaks "one canonical name = one ID".
+
+For v0.1 the limitation is **acceptable and documented**. validate.py will report `quad-membership-partial` warnings (not errors) for the 11 affected Quads.
+
+### Generation script
+
+The merge was performed by an inline `python3 << 'PY'` script in main context (not persisted). Per RESEARCH.md §5.3, no execution scripts remain in the workspace. Re-running the merge requires re-authoring the script logic — but step 5's `ontology-build.py` will subsume this functionality long-term (rebuilding `ontology.json` from per-term frontmatter, which is the one-pass projection direction).

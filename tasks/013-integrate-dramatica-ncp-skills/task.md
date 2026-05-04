@@ -316,8 +316,8 @@ Walks `skills/dramatica-vocabulary/references/*.md`, parses every per-term front
 - [x] 1. Author this `task.md` (current step) — set `task_status: in_progress`.
 - [x] 2. Inventory term universe → `notes.md` § Inventory. Verified 310 term-level `## ` headings across 22 vocab files (333 total minus 23 alphabetical buckets in `_synonym-lookup.md`). Drift vs. kickoff: 0. Gate passes.
 - [x] 3. Author the four schema files under `maintenance/schemas/narrative-ontology/`. All four valid Draft 2020-12; 11/11 fixture cases pass; line counts 152/82/56/61 (cap 200). Plus `readme.md` documenting the OQ-A/B/C resolutions.
-- [ ] 4. Author `scenarios.json` (12 scenarios).
-- [ ] 5. Bootstrap `ontology.json` (~140 entries).
+- [x] 4. Author `scenarios.json` (12 scenarios) — actually 11 v0.1 scenarios per the persona table; outer wrapper carries schema_version + ontology_version + created. Authored by Sonnet A.
+- [x] 5. Bootstrap `ontology.json` (~140 entries) — actually 304 entries (4 classes + 16 types + 4 throughlines + 8 archetypes + 4 char-dynamics + 4 plot-dynamics + 39 concepts + 35 quads + 65 dynamic-pairs + 62 variations + 63 elements). Authored across Sonnet C (74), Sonnet D (101), main-context (125 + 4 bridging concepts). Cross-entry invariants: 0 schema errors, 0 reciprocity violations, 0 unresolved pair_members, 0 unresolved quad_ids; 11/35 quads partial-membership (documented fractal-distortion limitation).
 - [ ] 6. Insert per-term frontmatter via `ontology-build.py --bootstrap`.
 - [ ] 7. Tag the top-≥40 terms with scenarios.
 - [ ] 8. Add theory-chunk frontmatter to the nine `dramatica-theory/references/*.md` chapters.
