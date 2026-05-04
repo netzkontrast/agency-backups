@@ -9,6 +9,8 @@ updated: 2026-05-04
 
 # Research Task Specification
 
+> **Mechanical Enforcement Notice:** This spec is mechanically enforced by `tools/check-governance.sh`. Before editing any file under `/research/`, install the pre-commit hook once with `tools/install-hooks.sh`. See [§5 Mandatory Pre-Commit Checks](#5-mandatory-pre-commit-checks-for-research-tasks) for the per-clause linter mapping.
+
 A **Research Task** *executes* a prompt. It does not author one. The prompt that triggered this run lives in `/prompts/<slug>/prompt.md`; the workspace produced by running it lives in `/research/<slug>/`. Open questions or follow-up prompts surfaced during a run are NOT appended to the research workspace — they are filed as new prompts in `/prompts/` per `PROMPT.md` §1.
 
 ## 1. Scope (What `/research/` Is and Is Not)
@@ -86,6 +88,23 @@ YAML MUST NOT nest beyond one level.
 9. **Surface Open Questions Outward** — For every unresolved question discovered during the run, the agent MUST file a new prompt under `/prompts/` with `prompt_kind: follow-up` and `prompt_spawned_from_research: <this-slug>`. List those new prompt slugs in this research's `readme.md` under an "Open Questions Surfaced" heading. The agent MUST NOT amend the research output post-closure to track follow-ups.
 
 ## 5. Mandatory Pre-Commit Checks for Research Tasks
+
+The agent MUST run `tools/check-governance.sh` before committing any change to `/research/`. The agent MUST NOT commit if that script exits non-zero. The ten checks below are mechanically enforced by the linters mapped in §5.0.
+
+### 5.0 Mechanical Enforcement Mapping
+
+| Check | Tool | Failure mode |
+|---|---|---|
+| §5.1 Prompt Snapshot Integrity | human review | No mechanical check — content equality |
+| §5.2 Prompt Linkage | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `research_executes_prompt` doesn't resolve |
+| §5.3 Workspace Cleanliness | human review | No mechanical check — file content |
+| §5.4 No Empty Files | human review | No mechanical check |
+| §5.5 Batch Readme Audit | [`tools/lint-structure.py`](./tools/lint-structure.py) | Missing `readme.md` in research folder |
+| §5.6 Session Logging | human review | No mechanical check |
+| §5.7 Synthesis Verification | human review | No mechanical check |
+| §5.8 Output Verification | [`tools/validate-frontmatter.py`](./tools/validate-frontmatter.py) | Missing L1/L2 keys in `output/SPEC.md` |
+| §5.9 Friction Reflection | human review (currently); [`tools/check-trust.py`](./tools/check-trust.py) when wrapped by a Task | Missing `friction-log.md` |
+| §5.10 Open-Questions Outward Routing | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | External `result.md` without downstream task |
 
 Before committing, the agent MUST satisfy:
 

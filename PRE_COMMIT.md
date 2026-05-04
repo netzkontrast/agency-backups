@@ -46,9 +46,13 @@ python3 tools/lint-structure.py         # task.md / prompt.md / brief.md / readm
 python3 tools/lint-linkage.py           # task_uses_prompts, task_spawns_research, reciprocity
 ```
 
-The pre-commit hook under `.githooks/pre-commit` runs all three automatically. Install once per clone with:
+The pre-commit hook under `.githooks/pre-commit` runs all three automatically. Install once per clone with **either** of the equivalent commands below:
 
 ```bash
+# Recommended: idempotent installer with sanity checks
+tools/install-hooks.sh
+
+# Or directly:
 git config core.hooksPath .githooks
 ```
 
