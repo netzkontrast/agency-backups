@@ -96,8 +96,6 @@
       "kind": "character-dynamic",
       "canonical_label": "Approach",
       "provenance": "source-original",
-      "ncp_appreciation": "Approach",
-      "ncp_appreciation_partial": true,
       "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#approach",
       "scenarios": [
         "novel.character-arc"
@@ -108,8 +106,6 @@
       "kind": "character-dynamic",
       "canonical_label": "Growth",
       "provenance": "source-original",
-      "ncp_appreciation": "Growth",
-      "ncp_appreciation_partial": true,
       "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#approach",
       "scenarios": [
         "novel.character-arc"
@@ -126,8 +122,6 @@
       "deprecated_aliases_en": [
         "Male/Female problem-solving"
       ],
-      "ncp_appreciation": "Problem-solving Style",
-      "ncp_appreciation_partial": true,
       "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#mental-sex",
       "scenarios": [
         "novel.character-arc"
@@ -138,8 +132,6 @@
       "kind": "character-dynamic",
       "canonical_label": "Resolve",
       "provenance": "extension-derived",
-      "ncp_appreciation": "Resolve",
-      "ncp_appreciation_partial": true,
       "term_file": "skills/dramatica-vocabulary/references/dramatica-fundamentals.md#resolve-substantive-definition",
       "scenarios": [
         "novel.character-arc"
@@ -1831,8 +1823,6 @@
       "kind": "plot-dynamic",
       "canonical_label": "Driver",
       "provenance": "source-original",
-      "ncp_appreciation": "Driver",
-      "ncp_appreciation_partial": false,
       "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#action",
       "scenarios": [
         "lyric.album-arc-mapping",
@@ -1844,8 +1834,6 @@
       "kind": "plot-dynamic",
       "canonical_label": "Judgment",
       "provenance": "source-original",
-      "ncp_appreciation": "Judgment",
-      "ncp_appreciation_partial": false,
       "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#judgment",
       "scenarios": [
         "lyric.album-arc-mapping"
@@ -1856,8 +1844,6 @@
       "kind": "plot-dynamic",
       "canonical_label": "Limit",
       "provenance": "source-original",
-      "ncp_appreciation": "Limit",
-      "ncp_appreciation_partial": false,
       "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#limit",
       "scenarios": [
         "lyric.album-arc-mapping"
@@ -1868,8 +1854,6 @@
       "kind": "plot-dynamic",
       "canonical_label": "Outcome",
       "provenance": "source-original",
-      "ncp_appreciation": "Outcome",
-      "ncp_appreciation_partial": false,
       "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#outcome",
       "scenarios": [
         "lyric.album-arc-mapping"

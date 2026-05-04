@@ -23,22 +23,6 @@ from lib.ontology import OntologyIndex
 PROG = Path(__file__).name
 
 
-# ---------------------------------------------------------------------------
-# Shared argument parent parsers
-# ---------------------------------------------------------------------------
-
-def _output_parent() -> argparse.ArgumentParser:
-    """Common output flags shared across all subcommands."""
-    p = argparse.ArgumentParser(add_help=False)
-    p.add_argument("--full", action="store_true", help="Inline prose via extract.py.")
-    p.add_argument("--md", action="store_true", help="Emit Markdown table instead of JSON.")
-    return p
-
-
-# ---------------------------------------------------------------------------
-# Output helpers
-# ---------------------------------------------------------------------------
-
 def _emit_json(payload: Any) -> None:
     print(json.dumps(payload, indent=2, ensure_ascii=False))
 
@@ -73,10 +57,6 @@ def _emit(payload: Any, *, md: bool) -> None:
         print(_md_single(payload))
 
 
-# ---------------------------------------------------------------------------
-# --full prose inlining
-# ---------------------------------------------------------------------------
-
 def _inline_prose(entry: dict) -> dict:
     """Call extract.py for entry['id'] and attach its stdout as 'prose'."""
     entry_id = entry["id"]
@@ -92,10 +72,6 @@ def _inline_prose(entry: dict) -> dict:
         sys.exit(5)
     return {**entry, "prose": result.stdout}
 
-
-# ---------------------------------------------------------------------------
-# Subcommand handlers
-# ---------------------------------------------------------------------------
 
 def cmd_by_id(
     idx: OntologyIndex,
@@ -170,12 +146,16 @@ def cmd_by_pair(idx: OntologyIndex, args: argparse.Namespace) -> int:
     return 1 if not results else 0
 
 
-# ---------------------------------------------------------------------------
-# Argument parser
-# ---------------------------------------------------------------------------
+def _sub(sub: Any, name: str, help_text: str) -> argparse.ArgumentParser:
+    """Add a subparser pre-loaded with --full and --md output flags."""
+    sp = sub.add_parser(name, help=help_text)
+    sp.add_argument("value", help="Query value.")
+    sp.add_argument("--full", action="store_true", help="Inline prose via extract.py.")
+    sp.add_argument("--md", action="store_true", help="Emit Markdown table instead of JSON.")
+    return sp
+
 
 def build_parser() -> argparse.ArgumentParser:
-    out = _output_parent()
     p = argparse.ArgumentParser(
         prog=PROG,
         description="Dramatica ontology navigator — query 7 lookup axes.",
@@ -183,50 +163,25 @@ def build_parser() -> argparse.ArgumentParser:
     )
     sub = p.add_subparsers(dest="subcmd", required=True)
 
-    # by-id: single-record; supports --full, --md, --include-pairs
-    sp = sub.add_parser("by-id", parents=[out], help="Fetch single entry by ontology id.")
-    sp.add_argument("value", help="Ontology id (e.g. el.trust).")
+    sp = _sub(sub, "by-id", "Fetch single entry by ontology id (e.g. el.trust).")
     sp.add_argument("--include-pairs", action="store_true", default=False,
                     help="Attach dynamic_pairs array to result.")
 
-    # by-alias: single-record; supports --full, --md, --lang
-    sp = sub.add_parser("by-alias", parents=[out], help="Fetch entry by alias in a locale.")
-    sp.add_argument("value", help="Alias string to search.")
+    sp = _sub(sub, "by-alias", "Fetch entry whose aliases_<lang> contains value.")
     sp.add_argument("--lang", default="en", metavar="LANG",
                     help="Locale for alias lookup (default: en).")
 
-    # by-scenario: multi-record; supports --md, --kind
-    sp = sub.add_parser("by-scenario", parents=[out],
-                        help="All entries tagged with a scenario id.")
-    sp.add_argument("value", help="Scenario id (e.g. novel.crucial-element-audit).")
+    sp = _sub(sub, "by-scenario", "All entries tagged with a scenario id.")
     sp.add_argument("--kind", default=None, metavar="KIND",
                     help="Filter results to this entry kind.")
 
-    # by-quad: multi-record; supports --md
-    sp = sub.add_parser("by-quad", parents=[out], help="The 4 quad members for a quad_id.")
-    sp.add_argument("value", help="Quad id (e.g. quad.logic-feeling-el).")
-
-    # by-ktad: multi-record; supports --md
-    sp = sub.add_parser("by-ktad", parents=[out],
-                        help="All entries at a KTAD position (K/T/A/D).")
-    sp.add_argument("value", help="KTAD position letter.")
-
-    # by-ncp: multi-record; supports --md
-    sp = sub.add_parser("by-ncp", parents=[out],
-                        help="All entries with a given NCP appreciation mapping.")
-    sp.add_argument("value", help="NCP appreciation string.")
-
-    # by-pair: multi-record; supports --md
-    sp = sub.add_parser("by-pair", parents=[out],
-                        help="dp.* dynamic-pair entries containing member_id.")
-    sp.add_argument("value", help="Member id (e.g. el.trust).")
+    _sub(sub, "by-quad", "The 4 quad members for a quad_id.")
+    _sub(sub, "by-ktad", "All entries at a KTAD position (K/T/A/D).")
+    _sub(sub, "by-ncp", "All entries with a given NCP appreciation mapping.")
+    _sub(sub, "by-pair", "dp.* dynamic-pair entries containing member_id.")
 
     return p
 
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
 
 _HANDLERS = {
     "by-id": cmd_by_id,

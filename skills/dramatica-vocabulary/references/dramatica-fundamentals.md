@@ -93,8 +93,6 @@ id: character-dynamic.resolve
 kind: character-dynamic
 canonical_label: Resolve
 provenance: extension-derived
-ncp_appreciation: Resolve
-ncp_appreciation_partial: true
 scenarios:
 - novel.character-arc
 ```

@@ -25,8 +25,6 @@ id: character-dynamic.growth
 kind: character-dynamic
 canonical_label: Growth
 provenance: source-original
-ncp_appreciation: Growth
-ncp_appreciation_partial: true
 scenarios:
 - novel.character-arc
 ```
@@ -308,8 +306,6 @@ id: character-dynamic.problem-solving-style
 kind: character-dynamic
 canonical_label: Problem-solving Style
 provenance: source-original
-ncp_appreciation: Problem-solving Style
-ncp_appreciation_partial: true
 scenarios:
 - novel.character-arc
 aliases_en:

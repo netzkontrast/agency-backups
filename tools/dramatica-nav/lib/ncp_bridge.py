@@ -20,11 +20,19 @@ from . import OntologyError
 
 
 def load_ncp_appreciations(repo_root: Optional[Path] = None) -> set[str]:
-    """Return the set of valid NCP `appreciation` enum strings.
+    """Return the union of all valid NCP enum-string surfaces an ontology
+    `ncp_appreciation` field may legitimately reference.
 
-    Falls back to a synthesized set derived from the canonical-vocabulary doc
-    if the pinned schema's enum isn't found at the expected path (this keeps
-    validate.py useful even before Task 011 lands the full schema bundle).
+    Per kickoff SPEC §2.5, the ontology's `ncp_appreciation` maps to multiple
+    NCP enum surfaces depending on the entity kind:
+      - throughlines → NCP `throughline` enum (4 values: "Main Character", ...)
+      - storypoint appreciations → `canonical_appreciation` enum (463 values)
+      - narrative functions → `canonical_narrative_function` enum (144 values)
+
+    Returns the union of all three. character-dynamics and plot-dynamics
+    don't have a clean NCP mapping (they map to slot-name patterns that
+    compose with the throughline) and SHOULD have `ncp_appreciation` absent
+    rather than partial — those entries are corrected at the data layer.
     """
     if repo_root is None:
         here = Path(__file__).resolve()
@@ -40,21 +48,34 @@ def load_ncp_appreciations(repo_root: Optional[Path] = None) -> set[str]:
     except json.JSONDecodeError as e:
         raise OntologyError(f"ncp-schema.json malformed: {e}") from e
 
-    # The NCP enum lives under definitions.canonical_appreciation.enum
-    # (per the upstream schema convention)
-    defs = schema.get("definitions") or schema.get("$defs") or {}
-    appreciation_def = defs.get("canonical_appreciation", {})
-    enum = appreciation_def.get("enum", [])
+    valid: set[str] = set()
 
-    # If not under definitions, try top-level properties (some schema generators)
-    if not enum:
-        for key in ("appreciation", "canonical_appreciation"):
-            top = schema.get("properties", {}).get(key, {})
-            if "enum" in top:
-                enum = top["enum"]
-                break
+    # 1. Top-level $defs / definitions enums
+    defs = schema.get("$defs") or schema.get("definitions") or {}
+    for key in ("canonical_appreciation", "canonical_narrative_function"):
+        enum = defs.get(key, {}).get("enum", [])
+        if enum:
+            valid.update(enum)
 
-    return set(enum) if enum else set()
+    # 2. Inline throughline enum (buried in the storypoints subschema)
+    # Walk the schema looking for any enum that includes throughline names
+    def walk(node):
+        if isinstance(node, dict):
+            if "enum" in node and isinstance(node["enum"], list):
+                yield node["enum"]
+            for v in node.values():
+                yield from walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                yield from walk(v)
+
+    throughline_marker = "Main Character"
+    for enum in walk(schema):
+        if throughline_marker in enum:
+            valid.update(enum)
+            break  # throughline enum found
+
+    return valid
 
 
 def is_valid_appreciation(appreciation: str, valid_set: Optional[set[str]] = None) -> bool:

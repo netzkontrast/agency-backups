@@ -26,8 +26,6 @@ id: plot-dynamic.driver
 kind: plot-dynamic
 canonical_label: Driver
 provenance: source-original
-ncp_appreciation: Driver
-ncp_appreciation_partial: false
 scenarios:
 - lyric.album-arc-mapping
 - novel.act-pivot
@@ -221,8 +219,6 @@ id: plot-dynamic.judgment
 kind: plot-dynamic
 canonical_label: Judgment
 provenance: source-original
-ncp_appreciation: Judgment
-ncp_appreciation_partial: false
 scenarios:
 - lyric.album-arc-mapping
 ```
@@ -341,8 +337,6 @@ id: plot-dynamic.limit
 kind: plot-dynamic
 canonical_label: Limit
 provenance: source-original
-ncp_appreciation: Limit
-ncp_appreciation_partial: false
 scenarios:
 - lyric.album-arc-mapping
 ```
@@ -423,8 +417,6 @@ id: plot-dynamic.outcome
 kind: plot-dynamic
 canonical_label: Outcome
 provenance: source-original
-ncp_appreciation: Outcome
-ncp_appreciation_partial: false
 scenarios:
 - lyric.album-arc-mapping
 ```
