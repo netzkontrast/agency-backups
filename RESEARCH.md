@@ -1,59 +1,113 @@
+---
+type: spec
+status: active
+slug: research-spec
+summary: "Root specification for /research/. Research is execution-only: it consumes a prompt and produces a workspace of evidence, synthesis, reflection, and a final output. Prompt-craft and follow-up question generation are out of scope and live in /prompts/."
+created: 2026-05-02
+updated: 2026-05-04
+---
+
 # Research Task Specification
 
-When handling a Research Task, the agent MUST enforce the following directory structure and workflow. This ensures consistency, traceability, and separation of concerns across multiple research engagements. No required file may remain completely empty; placeholder text or raw data must be inserted to prove execution.
+A **Research Task** *executes* a prompt. It does not author one. The prompt that triggered this run lives in `/prompts/<slug>/prompt.md`; the workspace produced by running it lives in `/research/<slug>/`. Open questions or follow-up prompts surfaced during a run are NOT appended to the research workspace — they are filed as new prompts in `/prompts/` per `PROMPT.md` §1.
 
-## Directory Structure
-For every new research task, create a dedicated subfolder within the root `/research` directory. The folder name should be the `slugname` of the research prompt. All folders must adhere to the rules in `FOLDERS.md` (e.g. keeping structures flat and maintaining a human-readable `readme.md`).
+## 1. Scope (What `/research/` Is and Is Not)
+
+`/research/` IS:
+
+- The workspace where a prompt is executed.
+- The home of synthesis, reflection, friction logs, and final deliverables.
+- A read-mostly archive once a run is `complete` or `archived`.
+
+`/research/` IS NOT:
+
+- A place to draft prompts (those live in `/prompts/`).
+- A place to coordinate work across runs (that lives in `/tasks/`).
+- A place to amend with follow-up questions after closure (file a new prompt instead).
+
+## 2. Directory Structure
+
+For every new research run, create a dedicated subfolder under `/research/`. The folder name is the `slug` of the *prompt* that triggered the run (matching the `/prompts/<slug>/` it executes). Folders MUST adhere to `FOLDERS.md`.
 
 ```text
 /research
-└── /<slugname>
-    ├── readme.md            # Directory index with relative links and assumption logs.
-    ├── prompt.md            # The exact, complete initial research prompt/request. Must not be empty.
-    ├── /workspace           # All temporary work artifacts, bash scripts, tracking notes, etc.
-    │   ├── readme.md        # Directory index.
-    │   ├── session.log      # A chronological list of terminal commands, searches, and file creations.
-    │   └── ...              # Other scratchpad notes (unneeded execution scripts must be deleted before commit).
-    ├── /synthesis           # Structured, flattened synthesis artifacts.
-    │   ├── readme.md        # Directory index.
-    │   ├── post-synthesis-log.md # A chronological log detailing how facts were merged.
-    │   ├── methodology.md   # Documentation of methods applied (e.g., M06, M13 logs).
-    │   ├── tracks.md        # Files detailing specific aspect/track worked on.
-    │   └── state.md         # A checklist state file keeping track of every step of the synthesis.
-    ├── /reflection          # Rigorous self-reflection based on the 5 critical thinking methods.
-    │   ├── readme.md        # Directory index.
-    │   ├── friction-log.md  # Standardized, mandatory tracking of agent frustration levels (FL0-FL3).
-    │   └── M<XX>-*.md       # Individual flattened artifact files for each method (e.g. M06-audit.md).
-    └── /output              # The final deliverables (e.g., SPEC.md)
-        ├── readme.md        # Directory index.
-        └── SPEC.md
+└── /<slug>
+    ├── readme.md             # Directory index with relative links and assumption logs.
+    ├── prompt.md             # Snapshot of the executing prompt at run-start (immutable).
+    ├── /workspace            # Temporary work artifacts, scratch notes, session logs.
+    │   ├── readme.md
+    │   ├── session.log       # Chronological terminal/tool trace.
+    │   └── ...               # Scratchpad notes; execution scripts MUST be deleted before commit.
+    ├── /synthesis            # Structured, flattened synthesis artifacts.
+    │   ├── readme.md
+    │   ├── post-synthesis-log.md  # Chronological merge log.
+    │   ├── methodology.md    # Methods applied (e.g., M06, M13).
+    │   ├── tracks.md         # Per-track work breakdown.
+    │   └── state.md          # Checklist of synthesis steps.
+    ├── /reflection           # Critical-thinking reflection artifacts.
+    │   ├── readme.md
+    │   ├── friction-log.md   # Mandatory FL0–FL3 log per FRUSTRATED.md.
+    │   └── M<XX>-*.md        # One file per critical-thinking method.
+    └── /output               # Final deliverables.
+        ├── readme.md
+        └── SPEC.md           # Or REPORT.md, depending on the prompt.
 ```
 
-## Workflow Requirements
-1. **Initialize Directory:** Immediately create the `<slugname>` folder and its main subfolders (`workspace`, `synthesis`, `reflection`, `output`).
-2. **Store Prompt:** Save the raw text of the user's initial prompt into `prompt.md`.
-3. **Work in Workspace:** Save all planning scripts, search logs, downloaded pages, and temporary tracking files into the `/workspace` folder. Do not pollute the root directory. *Ensure execution scripts (e.g., `.py` or `.sh` test runners) are deleted prior to finalizing the branch.*
-4. **Log the Session:** Reconstruct or continuously save the terminal/bash commands and tool calls into `/workspace/session.log`. This file must map a chronological timeline of the agent's actions.
-5. **Synthesize Structurally:** The `/synthesis` folder must be populated structurally. Keep the structure flat per `FOLDERS.md` unless subcategorizing 4+ files of the exact same type.
-6. **Reflect:** Conduct self-reflection according to the methods outlined in the prompt and save the evidence in `/reflection` as flat files. Document task friction in `friction-log.md`.
-7. **Deliver:** Move the final completed deliverable (e.g., `SPEC.md`, `REPORT.md`) into the `/output` folder.
+## 3. Mandatory Frontmatter
 
-Follow these rules for every research-oriented task without deviation.
+`/research/<slug>/output/SPEC.md` and `/research/<slug>/readme.md` MUST carry L1 Vault Core keys plus the L2 `research_*` namespace defined in `TASK.md` §3:
 
-## Mandatory Pre-Commit Checks for Research Tasks
-Before committing the final deliverables of any Research Task, the agent MUST run through the following specific checks. If any check fails, the pre-commit phase fails, and the agent must resolve the issue before proceeding.
+```yaml
+---
+type: research
+status: active | completed | archived
+slug: <research-slug>            # MUST equal the executing prompt slug.
+summary: "Token-cheap tl;dr."
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+research_phase: kickoff | synthesis | reflection | complete
+research_executes_prompt: <prompt-slug>   # MUST resolve to /prompts/<slug>/.
+research_friction_level: FL0 | FL1 | FL2 | FL3
+---
+```
 
-1. **Prompt Integrity:** `prompt.md` exists and contains the exact, unedited user request.
-2. **Workspace Cleanliness:** Temporary scripts, `.py` runners, and `.sh` generators MUST be deleted from `/workspace`. Only raw notes, dumps, and `session.log` may remain.
-3. **No Empty Files:** No required file (`session.log`, `post-synthesis-log.md`, `state.md`, `readme.md`) may be completely empty (0 bytes). They must contain actual trace data or explanatory text.
-4. **Batch Readme Audit:** EVERY folder that has been touched must have a `readme.md` generated or updated *now*. It must explain the "what" and "why", use relative markdown links, and document any workflow assumptions.
-5. **Session Logging:** `/workspace/session.log` exists, is populated, and accurately traces the CLI operations executed during the task.
-6. **Synthesis Verification:**
-   - The `/synthesis` folder exists and is structured properly (flattened).
-   - `/synthesis/readme.md` is complete and contains hard results.
-   - `/synthesis/post-synthesis-log.md` traces the exact sequence used to arrive at the final specification.
-   - `/synthesis/state.md` shows all steps checked off as complete `[x]`.
-7. **Output Verification:** `/output` contains the final target specification or report.
-8. **Mandatory Task Friction Reflection:** After all other checks are complete, the agent MUST write a meta-reflection document located at `/reflection/friction-log.md`. This document MUST conform to the specifications in `FRUSTRATED.md`. It must declare an explicit **Frustration Level (FL0 - FL3)** at the top of the file, explain any confusing/conflicting instructions, and document workflow inefficiencies or backtracking caused by the prompt structure. **This is mandatory even for FL0.**
+YAML MUST NOT nest beyond one level.
 
-All steps in the synthesis process MUST be verifiably checked off in `/synthesis/state.md` before this pre-commit check can pass.
+## 4. Workflow Requirements
+
+1. **Resolve the Prompt** — Confirm `/prompts/<slug>/prompt.md` exists. If it does not, the agent MUST stop and create one per `PROMPT.md`. Research MUST NOT fabricate its own instruction set.
+2. **Initialize Directory** — Create the `<slug>` folder and the four subfolders (`workspace/`, `synthesis/`, `reflection/`, `output/`).
+3. **Snapshot the Prompt** — Copy the prompt body into `/research/<slug>/prompt.md` (this is the immutable run-start snapshot, not a re-author).
+4. **Work in Workspace** — Save planning scripts, search logs, downloaded pages, and tracking files into `/workspace`. Do not pollute the root directory. Execution scripts (`.py`, `.sh`) MUST be deleted before final commit.
+5. **Log the Session** — Append to `/workspace/session.log` chronologically. This is the terminal-level audit trail.
+6. **Synthesize Structurally** — Populate `/synthesis/` flat (per `FOLDERS.md`) unless 4+ files of the same type accumulate.
+7. **Reflect** — Apply the critical-thinking methods named in the executing prompt; one flat file per method in `/reflection/`. Log friction in `friction-log.md`.
+8. **Deliver** — Move the final completed artifact (`SPEC.md`, `REPORT.md`, etc.) into `/output/`.
+9. **Surface Open Questions Outward** — For every unresolved question discovered during the run, the agent MUST file a new prompt under `/prompts/` with `prompt_kind: follow-up` and `prompt_spawned_from_research: <this-slug>`. List those new prompt slugs in this research's `readme.md` under an "Open Questions Surfaced" heading. The agent MUST NOT amend the research output post-closure to track follow-ups.
+
+## 5. Mandatory Pre-Commit Checks for Research Tasks
+
+Before committing, the agent MUST satisfy:
+
+1. **Prompt Snapshot Integrity** — `prompt.md` exists and matches the prompt body at run-start.
+2. **Prompt Linkage** — `research_executes_prompt` resolves to `/prompts/<slug>/`.
+3. **Workspace Cleanliness** — No execution scripts (`.py`, `.sh`) remain in `/workspace`. Only raw notes, dumps, and `session.log` may stay.
+4. **No Empty Files** — No required file (`session.log`, `post-synthesis-log.md`, `state.md`, `readme.md`) is 0 bytes.
+5. **Batch Readme Audit** — Every touched folder has an updated `readme.md` per `FOLDERS.md`.
+6. **Session Logging** — `/workspace/session.log` is populated and chronological.
+7. **Synthesis Verification**
+   - `/synthesis/` is structured and flattened.
+   - `/synthesis/readme.md` contains hard results.
+   - `/synthesis/post-synthesis-log.md` traces the merge sequence.
+   - `/synthesis/state.md` shows every step `[x]`.
+8. **Output Verification** — `/output/` contains the final deliverable with required frontmatter.
+9. **Friction Reflection** — `/reflection/friction-log.md` exists and declares the highest FL experienced (FL0–FL3) at the top, per `FRUSTRATED.md`. Mandatory even at FL0.
+10. **Open-Questions Outward Routing** — For every unresolved question, a corresponding `/prompts/<slug>/` exists with `prompt_kind: follow-up`.
+
+All steps in `/synthesis/state.md` MUST be checked off before this pre-commit can pass.
+
+## 6. Anti-Patterns
+
+- **MUST NOT** craft prompts inside `/research/`. Prompts live in `/prompts/`.
+- **MUST NOT** edit a `/research/<slug>/` workspace after `research_phase: complete` to insert follow-up questions. File a new prompt instead.
+- **MUST NOT** treat a Research run as a standalone Task. If coordination across runs is needed, create a Task in `/tasks/` per `TASK.md`.

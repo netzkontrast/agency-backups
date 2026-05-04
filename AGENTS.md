@@ -11,8 +11,18 @@ You MUST abide by the rules defined in [FOLDERS.md](./FOLDERS.md).
 ## Mandatory Frustration Feedback
 We rely on your honest feedback to improve these protocols. You MUST consult [FRUSTRATED.md](./FRUSTRATED.md) to accurately log the Frustration Level (FL) associated with your task. **This is a mandatory step for every session, even if everything went perfectly (FL0).**
 
-## Research Tasks
-If your initial request or prompt is a **Research Task**, you must consult the [RESEARCH.md](./RESEARCH.md) file located in the root of this repository before proceeding. `RESEARCH.md` details the strict directory structure, required artifact logging, and output expectations for all research-oriented tasks.
+## Task Type Routing
+
+Three top-level governance specs partition the work this repository performs. Pick the one that matches your request *before* writing any file:
+
+| If the request is… | Consult | Operational directory |
+|---|---|---|
+| Coordination/orchestration with a goal, plan, and todo | [TASK.md](./TASK.md) | [/tasks/](./tasks/) |
+| Authoring an executable instruction set (research proposal, follow-up, tool instruction, task-spec) | [PROMPT.md](./PROMPT.md) | [/prompts/](./prompts/) |
+| Executing a prompt to produce evidence, synthesis, reflection, output | [RESEARCH.md](./RESEARCH.md) | [/research/](./research/) |
+
+**Separation of concerns is hard:** a Task MUST link to its prompt (never inline it); research MUST NOT contain prompt drafts; follow-up questions discovered during research MUST be filed as new prompts in `/prompts/`. The full audit-graph rules and Frontmatter Ontology (Layered Schema with Namespacing) live in [TASK.md §3](./TASK.md).
+
 ## Current State
 - Output exists in `research/agent-prompt-specs-3-systems-sdd/output/SPEC.md`
 - Needs audit against RISE-DX constraints.
