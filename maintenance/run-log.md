@@ -62,3 +62,22 @@ The agent MUST append its own record **before** committing the run's repairs, so
     as its baseline and scan everything committed after this point. The repo was
     verified coherent as of this commit: AGENTS.md carries frontmatter, language-spec.md
     exists in /maintenance/, Task 002 and its prompt are properly linked.
+
+### Run 2026-05-04 — Repo Coherence Check
+- agent: jules
+- start_commit: 325e5ff
+- end_commit:
+- baseline_commit: f620b6d (missing; fell back to 7 days log)
+- files_in_delta: 474
+- files_scanned: 474
+- t1_fixes: 3
+- t2_fixes: 0
+- t3_tasks_created: 2
+- t4_skipped: 151
+- issues_skipped: 148
+- notes: >
+    Baseline f620b6d was missing from git history so fell back to scanning last 7 days of changes.
+    Skipped applying T1/T2 frontmatter stubs to deeply nested operational files (148 files in skills/tools and old research runs) to prevent an excessively large git diff.
+    Explicitly updated `updated:` tags on root tasks and prompts.
+    Created Tasks 003 and 004 to track missing prompts and un-surfaced research findings.
+    Updated PRE_COMMIT.md to reference MAINTENANCE.md.
