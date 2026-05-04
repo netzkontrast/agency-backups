@@ -31,6 +31,7 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`005-address-deferred-coherence-issues/`](./005-address-deferred-coherence-issues/) — Apply 148 deferred T1/T2 frontmatter stubs from coherence run 2026-05-04. Status: `open`.
 - [`006-surface-skills-architecture/`](./006-surface-skills-architecture/) — Surface `skills-skill-architecture` research findings to root governance. Renumbered from `003` per TASK.md §8.1. Status: `open`.
 - [`007-reconcile-closed-task-linkage/`](./007-reconcile-closed-task-linkage/) — Reconcile linkage drift in closed Tasks 002 and 003 (missing friction-logs, prompt/research field confusion, namespaced research path). Status: `open`.
+- [`008-harden-coherence-baseline-protocol/`](./008-harden-coherence-baseline-protocol/) — Harden the coherence-check baseline + run-log protocol against squash-merges, malformed records, duplicate task_ids, and silent fallbacks. Status: `open`.
 
 ## Workflow Assumptions
 

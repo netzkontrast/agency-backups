@@ -85,7 +85,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run 2026-05-04 — Repo Coherence Check
 - agent: claude-code (session claude/funny-curie-zVZBH)
 - start_commit: c76d62c
-- end_commit: <fill-after-commit>
+- end_commit: 2ac93bd
 - baseline_commit: 4c5e7e4 (missing — squashed by PR #25 merge; fell back to 7 days log per gate R1)
 - files_in_delta: 624
 - files_scanned: 14
