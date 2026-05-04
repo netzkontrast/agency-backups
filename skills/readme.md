@@ -34,6 +34,24 @@ Claude.ai session. This folder is the durable mirror.
 ## Management layer
 - [skills-skill-bootstrap/](./skills-skill-bootstrap/) — Sync tool: pulls skill bodies from `origin/main:skills/` into Claude Code's `~/.claude/skills/`.
 
+## Current State
+
+- **14 skills** in repo, all synced to `~/.claude/skills/` as of 2026-05-04.
+- `skills-skill-bootstrap/` sync mechanism is live and tested end-to-end.
+- Architecture spec for the future `skills-skill` loader is in progress at `research/skills-skill-architecture/` — awaiting Gemini Deep Research PDF to finalize.
+- `/skills/skills-skill/` path reserved; do not create until spec is accepted.
+
+## Latest Synthesized Learnings
+
+- Claude Code `~/.claude/skills/` and claude.ai `/mnt/skills/user/` use the **same `SKILL.md` format** — no adapter needed between the two platforms.
+- `git ls-tree -d --name-only` is the correct enumeration method for skill directories; `--name-only` without `-d` incorrectly includes flat files (like this readme).
+- The sync mechanism should use `cmp -s` (binary comparison via temp file) rather than command-substitution string comparison for correctness on large or whitespace-sensitive files.
+
+## Open Blockers
+
+- Gemini Deep Research PDF pending (required to resolve 6 UNCERTAIN markers in the architecture spec before `skills-skill` implementation can begin).
+- Jules and gemini-cli skill-loading conventions unknown — their portability to the `SKILL.md` format is unverified.
+
 ## Assumptions Log
 - Initial import: snapshot taken 2026-05-04 from a single Claude.ai
   session. No sync-back protocol (`/mnt/skills/user/` ← `skills/`) is defined

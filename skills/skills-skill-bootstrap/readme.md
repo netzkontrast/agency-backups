@@ -41,25 +41,29 @@ The repo is the canonical source of truth. `~/.claude/skills/` is an ephemeral c
 
 This is Claude Code's user-scoped skill directory, confirmed by inspecting the running installation at `/root/.claude/skills/`. It is the closest equivalent to claude.ai's `/mnt/skills/user/`. No dedicated "skill path" config key exists in `settings.json`; the location is a convention, not a setting.
 
-**IMPORTANT FINDING**: Claude Code's skill mechanism (`~/.claude/skills/<name>/SKILL.md`) is structurally identical to what the mission describes for `claude.ai`. A skill is a folder containing `SKILL.md`. The same file format works in both systems. This means the same `SKILL.md` bodies in `/skills/<name>/` can be synced to either platform without transformation.
+**Key finding**: Claude Code's skill mechanism (`~/.claude/skills/<name>/SKILL.md`) is structurally identical to claude.ai's `/mnt/skills/user/<name>/SKILL.md`. The same `SKILL.md` bodies in `/skills/<name>/` sync to either platform without transformation.
 
 ### Non-destructive by default
 
-Running `sync.sh` without `--clean` will not delete local skills that are absent from the repo (e.g., the pre-existing `session-start-hook` skill). Use `--clean` to enforce exact parity. This prevents accidental deletion of skills installed by other means.
+Running `sync.sh` without `--clean` will not delete local skills that are absent from the repo (e.g., the `session-start-hook` skill). Use `--clean` to enforce exact parity.
 
 ### Idempotent
 
-`sync.sh` is safe to run multiple times. It overwrites existing `SKILL.md` files only when their content differs from the canonical remote. The `verify.sh` script confirms the no-op state after a clean sync.
+`sync.sh` is safe to run multiple times. It uses `cmp -s` (binary comparison) to skip skills already in sync. Re-running against an up-to-date state completes with `0 synced, 14 already-in-sync, 0 errors`.
+
+### Skill discovery uses `-d --name-only`
+
+`git ls-tree -d --name-only origin/main:skills/` returns only tree objects (directories), which naturally excludes flat files like `readme.md`. This is safer than filtering by name — it scales to any future non-skill file added at the skills/ root.
 
 ### Manual trigger, no cron
 
-The sync is invoked on demand by a human or another script. No systemd timer or cron job is created here — those would be fragile in a sandboxed container environment. The expected trigger points are:
+Invoked on demand. Expected trigger points:
 1. After any PR to `main` that modifies `/skills/`.
-2. At the start of a new Claude Code session (can be added to a `SessionStart` hook in `.claude/settings.json`).
+2. At the start of a new Claude Code session (via SessionStart hook, optional — see below).
 
 ### Scheduling via SessionStart hook (optional)
 
-To automate syncing at session start, add this to `.claude/settings.json`:
+To automate syncing at session start, add to `.claude/settings.json` (adjust the repo path):
 
 ```json
 {
@@ -69,7 +73,7 @@ To automate syncing at session start, add this to `.claude/settings.json`:
         "hooks": [
           {
             "type": "command",
-            "command": "/home/user/agency/skills/skills-skill-bootstrap/sync.sh"
+            "command": "$(git -C \"$CLAUDE_PROJECT_DIR\" rev-parse --show-toplevel)/skills/skills-skill-bootstrap/sync.sh"
           }
         ]
       }
@@ -78,9 +82,21 @@ To automate syncing at session start, add this to `.claude/settings.json`:
 }
 ```
 
-This is **not** enabled by default. The path is absolute and assumes the repository is checked out at `/home/user/agency`. Adjust for your environment.
+Or with a fixed path if you know the checkout location:
+
+```json
+"command": "/your/path/to/agency/skills/skills-skill-bootstrap/sync.sh"
+```
+
+This is **not** enabled by default.
 
 ## How to Use
+
+### List available skills
+
+```bash
+skills/skills-skill-bootstrap/sync.sh --list
+```
 
 ### Sync skills from origin/main
 
@@ -89,11 +105,11 @@ cd /path/to/agency
 skills/skills-skill-bootstrap/sync.sh
 ```
 
-### Verify sync state (check if up-to-date)
+### Verify sync state
 
 ```bash
 skills/skills-skill-bootstrap/verify.sh
-# exit 0 = all skills in sync
+# exit 0 = all canonical skills in sync (LOCAL-only skills are reported but don't fail)
 # exit 1 = missing or diverged skills; run sync.sh to fix
 ```
 
@@ -116,9 +132,7 @@ If sync produces an error or the local skill directory is corrupt:
 1. Run `verify.sh` to identify which skills are affected.
 2. Delete the offending skill folder: `rm -rf ~/.claude/skills/<name>/`
 3. Re-run `sync.sh` to re-create it from the canonical source.
-4. Re-run `verify.sh` to confirm recovery.
-
-If `origin/main:skills/` is missing entirely (before Stage A merges), `sync.sh` exits 0 with a warning. This is expected pre-Stage A.
+4. Re-run `verify.sh` to confirm recovery (exit 0).
 
 ## How a Human Verifies Sync State
 
@@ -126,11 +140,12 @@ If `origin/main:skills/` is missing entirely (before Stage A merges), `sync.sh` 
 skills/skills-skill-bootstrap/verify.sh && echo "All skills in sync"
 ```
 
-Non-zero exit means at least one skill is missing or diverged. The script prints which ones.
+`verify.sh` prints `OK`, `MISSING`, `DIVERGED`, or `LOCAL` for each skill. `LOCAL` entries (skills present locally but absent from the repo) are informational and do not cause a non-zero exit.
 
 ## Assumptions Log
 
-- `~/.claude/skills/` is the correct target for Claude Code user skills. This was confirmed by inspecting `/root/.claude/skills/` on the running installation. If Anthropic changes this path, update the default in `sync.sh`.
-- `git show origin/main:skills/<name>/SKILL.md` is sufficient to extract skill content. If skills gain binary assets, this approach needs revision.
-- The `session-start-hook` skill currently in `~/.claude/skills/` is NOT in the repo's `/skills/` and will NOT be touched by a non-`--clean` sync. It was installed by other means and is treated as an external resource.
-- This folder intentionally does NOT have `/skills/skills-skill/` as a neighbor yet — that path is reserved for the future `skills-skill` loader implementation and must not be created until the architecture spec is finalized.
+- `~/.claude/skills/` is the correct target for Claude Code user skills. Confirmed by inspecting `/root/.claude/skills/` on the running installation. If Anthropic changes this path, update the default in `sync.sh` and this readme.
+- `git ls-tree -d --name-only` is used to enumerate skill directories. Tested against the live repo with 14 skills plus a `readme.md` at the skills root — the `-d` flag correctly excludes the readme.
+- Only `SKILL.md` is synced per skill. Skills with `references/`, `scripts/`, or `agents/` subdirectories have those managed separately (they remain in the repo but are not synced to `~/.claude/skills/`). Claude Code loads `SKILL.md` only; the deeper content is fetched by the skill itself at runtime. If this assumption changes, `sync.sh` will need a `--deep` mode.
+- The `session-start-hook` skill in `~/.claude/skills/` is NOT in the repo and is correctly reported as `LOCAL` by `verify.sh`. It is intentionally not touched.
+- This folder intentionally does NOT have `/skills/skills-skill/` as a neighbor — that path is reserved for the future loader implementation.
