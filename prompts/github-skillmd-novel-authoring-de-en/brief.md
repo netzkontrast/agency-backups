@@ -9,8 +9,8 @@ updated: 2026-05-04
 
 # Brief — GitHub SKILL.md Novel-Authoring Repositories (DE/EN)
 
-**Requester:** Repository maintainer
-**Target agent:** Google Gemini (external execution)
+**Requester:** Repository maintainer  
+**Target agent:** Google Gemini (external execution)  
 **Use case:** Populate the agency's knowledge base with real-world examples of SKILL.md-conformant novel-authoring repositories to inform the design of the `skills-skill` architecture.
 
 ## Raw Request
