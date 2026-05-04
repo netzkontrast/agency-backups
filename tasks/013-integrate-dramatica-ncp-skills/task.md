@@ -21,6 +21,7 @@ task_affects_paths:
   - skills/novel-architect/
   - maintenance/schemas/
   - tools/
+  - AGENTS.md
 ---
 
 # Task 013 — Integrate Dramatica Skills With NCP and Novel-Architect
@@ -303,8 +304,8 @@ Walks `skills/dramatica-vocabulary/references/*.md`, parses every per-term front
 7. **Annotate theory-chunk frontmatter.** Add `type: theory-chunk` frontmatter to each of `skills/dramatica-theory/references/*.md`, listing covered ontology IDs (wildcards permitted) and served scenarios.
 8. **Implement the navigator scripts.** Build `tools/dramatica-nav/nav.py`, `extract.py`, `validate.py`, `ontology-build.py`, plus the `lib/` shared helpers. Use stdlib + `pyyaml` + `jsonschema` only — same dependency footprint Task 011 already proposes.
 9. **Write smoke tests.** `tests/test_nav.py` covers each subcommand on at least three fixtures; `test_validate.py` covers each of the four integrity checks both passing and deliberately broken. Tests run under `pytest tools/dramatica-nav/tests/`.
-10. **Wire skills.** Add the `## Navigator` sections to the four skill SKILL.md files. Reference IDs by ontology ID where possible; prose stays prose.
-11. **Wire CI.** Add `tools/dramatica-nav/validate.py` invocation to `tools/check-governance.sh` (gated on `narrative-ontology` files existing, so the rest of the repo doesn't break if narrative-ontology is removed). Update `tools/check-governance.sh` documentation in `PRE_COMMIT.md`.
+10. **Wire skills.** Add the `## Navigator` sections to the four skill SKILL.md files. Reference IDs by ontology ID where possible; prose stays prose. The cross-cutting `AGENTS.md § Narrative Ontology` section already names the schemas and the load triggers (NO.1–NO.6) in advance — the SKILL.md sections are the *skill-specific* operational detail under that umbrella.
+11. **Wire CI.** Add `tools/dramatica-nav/validate.py` invocation to `tools/check-governance.sh` (gated on `narrative-ontology` files existing, so the rest of the repo doesn't break if narrative-ontology is removed). Update `tools/check-governance.sh` documentation in `PRE_COMMIT.md`. Confirm the load triggers in `AGENTS.md § Narrative Ontology` resolve (paths from placeholder to real); flip the status note if the schemas now exist.
 12. **Run an end-to-end token-cost benchmark.** For ten representative queries (3 from Anna's scenario list, 3 from Otto's, plus 4 storyform-validation cases), measure the bytes the agent loads with the old prose-only path vs. the new navigator path. Record results in `notes.md` § Token-Cost Benchmark. Acceptance threshold: ≥60% reduction on lookup-shaped queries; conceptual queries are exempt.
 13. **Author the prompt.** Per `PROMPT.md`, store the executable instruction set for downstream research and authoring at `/prompts/integrate-dramatica-ncp-skills/prompt.md`. The Plan above is the Task; the executable instruction is a Prompt and MUST live in `/prompts/`.
 14. **Spawn research workspace.** Per `RESEARCH.md`, the workspace at `/research/integrate-dramatica-ncp-skills/` records the actual evidence (corpus inventory, schema authoring scratch, benchmark logs). Its frontmatter sets `research_executes_prompt: integrate-dramatica-ncp-skills`.

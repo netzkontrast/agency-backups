@@ -182,14 +182,22 @@ Dependency footprint: stdlib + `pyyaml` + `jsonschema` (already in scope via Tas
 
 `pytest tools/dramatica-nav/tests/` MUST exit 0.
 
-### Step 10 — Wire skills
+### Step 10 — Wire skills + verify AGENTS.md
+
+[`AGENTS.md § Narrative Ontology`](../../AGENTS.md) already names the schemas, the navigator, and the load triggers (NO.1–NO.6) in advance — that section was authored at the start of Task 013 so every agent entering the repo sees the load contract regardless of whether they trigger a narrative skill. **Step 10 does not re-author it.** Step 10 verifies the path links resolve now that the schemas exist, and adds the *skill-specific* operational detail under each affected SKILL.md.
 
 Edit four `SKILL.md` files in this order:
 
-1. `skills/dramatica-vocabulary/SKILL.md` — add `## Navigator` section pointing at `tools/dramatica-nav/nav.py`. Update `## Lookup-Disziplin` to mention the navigator as the *fast path*; prose lookup remains the path for conceptual questions.
-2. `skills/dramatica-theory/SKILL.md` — add `## Navigator` section; note `extract.py` as a way to pull a single term from a 90 KB chapter.
-3. `skills/ncp-author/SKILL.md` — update `## Dramatica Integration Map` to reference ontology IDs (e.g. `nav.py by-id <id> --include-pairs`). Retain the prose delegation rules — they answer *meaning* questions; the navigator answers *lookup* questions.
-4. `skills/novel-architect/SKILL.md` — add `## Navigator-Backed Lookups` paragraph; gain a "preferred nav.py call" column in the routing matrix for pure-lookup workflow steps.
+1. `skills/dramatica-vocabulary/SKILL.md` — add `## Navigator` section pointing at `tools/dramatica-nav/nav.py`. Update `## Lookup-Disziplin` to mention the navigator as the *fast path*; prose lookup remains the path for conceptual questions. Cross-link to `AGENTS.md § Narrative Ontology` for the cross-cutting load triggers.
+2. `skills/dramatica-theory/SKILL.md` — add `## Navigator` section; note `extract.py` as a way to pull a single term from a 90 KB chapter. Cross-link to `AGENTS.md § Narrative Ontology`.
+3. `skills/ncp-author/SKILL.md` — update `## Dramatica Integration Map` to reference ontology IDs (e.g. `nav.py by-id <id> --include-pairs`). Retain the prose delegation rules — they answer *meaning* questions; the navigator answers *lookup* questions. Cross-link to `AGENTS.md § Narrative Ontology` (NO.2 binds NCP authoring directly).
+4. `skills/novel-architect/SKILL.md` — add `## Navigator-Backed Lookups` paragraph; gain a "preferred nav.py call" column in the routing matrix for pure-lookup workflow steps. Cross-link to `AGENTS.md § Narrative Ontology` (NO.3 binds Kohärenz Protokoll structural canon edits).
+
+Then verify in `AGENTS.md § Narrative Ontology`:
+
+- Every schema link resolves (no 404). If still 404 anywhere, that schema file is missing — go back and create it in Step 2.
+- The status-note paragraph ("paths above MAY resolve to placeholders or 404") is updated to reflect that the schemas now exist (flip from forward-declaration to live state).
+- The Gherkin `# anchor: NO.1.1`, `NO.2.1`, `NO.5.1` scenarios pass empirically when the navigator and the schemas are exercised on the test fixtures from Step 9.
 
 ### Step 11 — Wire CI
 

@@ -180,6 +180,74 @@ The complete ontology with all L2 namespaces and worked examples lives in [TASK.
 
 ---
 
+## Narrative Ontology — Dramatica × NCP × Novel-Architect Bridge
+
+This is a separate ontology from the Frontmatter Ontology. The Frontmatter Ontology governs **every operational file**; the Narrative Ontology governs **only narrative-craft work** (Dramatica theory, NCP storyforms, Kohärenz-Protokoll novel-architect, Suno-lyric / Agency-System triptychon work). Most repository tasks do not touch it. Loading the schemas inside a non-narrative session is a token-budget mistake.
+
+### Authoritative Location
+
+| File | Purpose |
+|---|---|
+| [`maintenance/schemas/narrative-ontology/ontology.schema.json`](./maintenance/schemas/narrative-ontology/ontology.schema.json) | One ontology entry contract (kind, aliases, dynamic-pair links, NCP mapping, provenance, scenarios). |
+| [`maintenance/schemas/narrative-ontology/scenarios.schema.json`](./maintenance/schemas/narrative-ontology/scenarios.schema.json) | Persona-scenario entry contract (`novel.*` / `lyric.*` IDs). |
+| [`maintenance/schemas/narrative-ontology/term-frontmatter.schema.json`](./maintenance/schemas/narrative-ontology/term-frontmatter.schema.json) | Per-term YAML block contract for `skills/dramatica-vocabulary/references/*.md`. |
+| [`maintenance/schemas/narrative-ontology/theory-chunk.schema.json`](./maintenance/schemas/narrative-ontology/theory-chunk.schema.json) | Theory-chapter frontmatter contract for `skills/dramatica-theory/references/*.md`. |
+| [`maintenance/schemas/narrative-ontology/ontology.json`](./maintenance/schemas/narrative-ontology/ontology.json) | Canonical entry table (~215 entries). The single source of truth for all narrative IDs. |
+| [`maintenance/schemas/narrative-ontology/scenarios.json`](./maintenance/schemas/narrative-ontology/scenarios.json) | The eleven persona scenarios (six Novel Author, five Organist / Lyric Architect). |
+| [`maintenance/schemas/narrative-ontology/readme.md`](./maintenance/schemas/narrative-ontology/readme.md) | Reader's guide; statement of OQ-A/B/C resolutions; provenance rule. |
+
+The query surface over the ontology is [`tools/dramatica-nav/nav.py`](./tools/dramatica-nav/nav.py). Agents SHOULD prefer `nav.py` over loading the JSON files directly; it returns one record + a pointer rather than the whole table.
+
+> **Status note.** The schemas, ontology, and navigator are produced by [Task 013](./tasks/013-integrate-dramatica-ncp-skills/task.md) executing [the integrate-dramatica-ncp-skills prompt](./prompts/integrate-dramatica-ncp-skills/prompt.md). Until that task closes, paths above MAY resolve to placeholders or 404. The load triggers below remain binding the moment the files exist — agents MUST NOT pre-load before existence-check, and MUST start using them once they do exist.
+
+### When to Load (RFC 2119)
+
+- **NO.1.** An agent working on **Dramatica theory or vocabulary** (`skills/dramatica-theory/`, `skills/dramatica-vocabulary/`) MUST consult `nav.py` before reading the prose chapters when the question is structural ("what's the dynamic pair of Trust?", "which Quad does Logic sit in?", "which scenarios does Crucial Element appear in?"). Prose loading is RECOMMENDED only when the question is conceptual ("explain the Story Mind premise", "why does MC Resolve matter?") and the navigator's pointer directs to a chapter.
+- **NO.2.** An agent authoring or auditing an **NCP** document (`*.ncp.json`, `skills/ncp-author/`) MUST resolve every Dramatica-flavored slot through the ontology. The mapping rule is one-way: ontology IDs map to NCP enum strings; NCP enum strings are owned upstream and MUST NOT be coined from the Dramatica side. Use `nav.py by-ncp <enum-string>` to find the ontology ID, or `nav.py by-id <ontology-id>` to find the NCP string.
+- **NO.3.** An agent working on the **`novel-architect` Kohärenz Protokoll** (any file under `skills/novel-architect/references/canon/`) MUST consult the ontology before changing a structural canon entry, so the change references a canonical ID rather than a free-text label. Direct prose canon (DKT-Physik, Prosa-Regeln, Mandate in `canon-meta.md`) does not trigger this rule.
+- **NO.4.** An agent doing **Agency-System triptychon / Suno-lyric** work (`skills/the-agency-system-architect/`, `skills/suno-lyric-writer/`) SHOULD consult the ontology when a track, verse, or arc encodes a Dramatica concept. Tag the concept with its `lyric.*` scenario ID where applicable so the cross-skill audit graph stays intact.
+- **NO.5.** An agent doing **non-narrative work** (governance refactors, frontmatter linters, build tooling, anything not under the four narrative skills) MUST NOT load the Narrative Ontology files. Loading wastes tokens on data the work does not need. The Frontmatter Ontology governs that work; this ontology does not.
+- **NO.6.** When the navigator and the prose disagree, the **navigator is authoritative for IDs and relationships**; the **prose is authoritative for meaning**. The skills' own SKILL.md files document this precedence rule under their `## Navigator` sections.
+
+### What the Schemas Bind
+
+- **Canonical IDs.** The fourth throughline is `throughline.relationship` (`canonical_label: "Relationship Story"`). Aliases `Subjective Story`, `SS`, `Relationship`, `RS` are recorded but MUST NOT be used as IDs in machine-readable contexts. Same pattern: `throughline.influence` (canonical `Influence Character`; alias `Impact Character` / `IC`) and `character-dynamic.problem-solving-style` (canonical `Problem-solving Style`; alias `Mental Sex`; deprecated `Male/Female problem-solving`).
+- **Kind discrimination.** `kind: element` is one of the canonical 64; `kind: concept` is a meta-entry *about* a structural slot (Crucial Element, Symptom, Focus, Direction). Likewise `kind: type` (16 canonical) vs `kind: concept`. Agents MUST NOT silently merge these.
+- **Locale aliases.** Aliases are stored as flattened depth-1 keys: `aliases_en: [...]`, `aliases_de: [...]`, `deprecated_aliases_<locale>: [...]`. Per the YAML Depth Rule, no nested-map form is permitted.
+- **Dynamic-pair representation.** Every `kind: element | variation` MAY carry a `dynamic_pair_id` pointing at its partner. Each of the 75 reciprocal pairs ALSO has a standalone `kind: dynamic-pair` entry with `pair_member_a` + `pair_member_b`. The reciprocity invariant is enforced by `tools/dramatica-nav/validate.py`.
+- **NCP closure.** `ncp_appreciation` is OPTIONAL. Approximately 60% of entries carry it as partial (`ncp_appreciation_partial: true`), 30% omit it (archetypes, quads, dynamic-pairs, concepts — NCP has no native enum target), 10% carry it cleanly (throughlines, story-level appreciations). Validators MUST treat absence-with-reason as legal.
+
+### Gherkin Scenarios (Normative)
+
+```gherkin
+Feature: Agent uses the Narrative Ontology when narrative work is in scope
+
+  # anchor: NO.1.1
+  Scenario: Structural lookup uses the navigator before prose
+    Given an agent is asked the dynamic pair of a Dramatica term
+    And tools/dramatica-nav/nav.py exists
+    When the agent answers the question
+    Then the agent MUST invoke nav.py by-id (or by-alias) before opening any chapter file
+    And the agent SHOULD open a chapter only if nav.py's term_file pointer indicates the answer requires prose
+
+  # anchor: NO.2.1
+  Scenario: NCP document fills slots through the ontology
+    Given an agent is authoring or auditing a *.ncp.json document
+    When the agent fills a Dramatica-flavored slot (appreciation, narrative_function, throughline)
+    Then the agent MUST resolve the canonical ontology ID first
+    And the agent MUST NOT coin a new NCP enum value
+    And if the slot has no clean NCP target the agent MUST use the parallel custom_* field with its *_namespace companion
+
+  # anchor: NO.5.1
+  Scenario: Non-narrative work does not load the ontology
+    Given an agent is working on governance, lint tooling, or non-narrative skills
+    When the agent considers loading maintenance/schemas/narrative-ontology/ontology.json
+    Then the agent MUST NOT load it
+    And the agent SHOULD log "narrative ontology skipped — non-narrative scope" if narrative content is mentioned only in passing
+```
+
+---
+
 ## Gherkin Scenarios (Normative) — Agent Behaviour
 
 ```gherkin
