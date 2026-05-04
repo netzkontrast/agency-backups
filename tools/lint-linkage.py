@@ -31,62 +31,23 @@ import re
 import sys
 from pathlib import Path
 
-FRONTMATTER_RE = re.compile(r"\A---\n(.*?)\n---\s*(?:\n|$)", re.DOTALL)
+from _frontmatter import read_fm, str_list, str_val
+
 PROVIDER_NAMES = {"gemini", "gpt", "human", "other"}
 TODO_UNCHECKED_RE = re.compile(r"^- \[ \]", re.MULTILINE)
 
 
-def parse_frontmatter(text: str) -> dict[str, object]:
-    m = FRONTMATTER_RE.match(text)
-    if not m:
-        return {}
-    mapping: dict[str, object] = {}
-    current_list_key: str | None = None
-    for raw in m.group(1).splitlines():
-        if not raw.strip() or raw.lstrip().startswith("#"):
-            continue
-        stripped = raw.strip()
-        if stripped.startswith("- "):
-            if current_list_key is not None:
-                mapping.setdefault(current_list_key, []).append(
-                    stripped[2:].strip().strip('"')
-                )
-            continue
-        if ":" not in stripped:
-            continue
-        key, _, val = stripped.partition(":")
-        key = key.strip()
-        val = val.strip()
-        current_list_key = None
-        if val == "":
-            mapping[key] = []
-            current_list_key = key
-        elif val == "[]":
-            mapping[key] = []
-        else:
-            mapping[key] = val.strip('"')
-    return mapping
-
-
-def read_fm(path: Path) -> dict[str, object]:
-    try:
-        return parse_frontmatter(path.read_text(encoding="utf-8"))
-    except OSError:
-        return {}
-
-
-def str_list(fm: dict, key: str) -> list[str]:
-    v = fm.get(key, [])
-    if isinstance(v, list):
-        return [s for s in v if s]
-    if isinstance(v, str) and v:
-        return [v]
-    return []
-
-
-def str_val(fm: dict, key: str) -> str:
-    v = fm.get(key, "")
-    return v if isinstance(v, str) else ""
+def research_slug_resolves(research_root: Path, slug: str) -> bool:
+    """A research slug resolves if /research/<slug>/ exists OR a provider
+    subfolder /research/<provider>/<slug>/ exists. The provider case covers
+    external research executions (RESEARCH.md §6) which are valid spawn sources
+    for follow-up prompts."""
+    if (research_root / slug).is_dir():
+        return True
+    for provider in PROVIDER_NAMES:
+        if (research_root / provider / slug).is_dir():
+            return True
+    return False
 
 
 def lint_tasks(
@@ -115,11 +76,11 @@ def lint_tasks(
         # (open/in_progress tasks may declare future research before it is created)
         if task_status in ("done", "abandoned"):
             for slug in str_list(fm, "task_spawns_research"):
-                research_path = research_root / slug
-                if not research_path.is_dir():
+                if not research_slug_resolves(research_root, slug):
                     errors.append(
                         f"{task_md}: task_spawns_research slug '{slug}' does not resolve "
-                        f"to {research_path}/ (TASK.md §7.3)"
+                        f"to research/{slug}/ or any research/<provider>/{slug}/ "
+                        f"(TASK.md §7.3)"
                     )
 
         # When done: all todos checked + friction-log.md exists
@@ -174,13 +135,14 @@ def lint_prompts(
                         f"task_uses_prompts (FOLDERS.md §6 reciprocity)"
                     )
 
-        # prompt_spawned_from_research must resolve
+        # prompt_spawned_from_research must resolve (top-level or provider subfolder)
         research_slug = str_val(fm, "prompt_spawned_from_research")
         if research_slug:
-            if not (research_root / research_slug).is_dir():
+            if not research_slug_resolves(research_root, research_slug):
                 errors.append(
                     f"{prompt_md}: prompt_spawned_from_research '{research_slug}' "
-                    f"does not resolve to /research/{research_slug}/ (PROMPT.md §6.5)"
+                    f"does not resolve to /research/{research_slug}/ or any "
+                    f"/research/<provider>/{research_slug}/ (PROMPT.md §6.5)"
                 )
 
     return errors

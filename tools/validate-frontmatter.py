@@ -29,59 +29,20 @@ If no paths are given, walks /tasks/, /prompts/, /research/, /templates/,
 """
 from __future__ import annotations
 
-import re
 import sys
 from pathlib import Path
 from typing import Iterable
 
+from _frontmatter import FRONTMATTER_RE, Diag, parse_frontmatter
+
 L1_REQUIRED = {"type", "status", "slug", "summary", "created", "updated"}
 L2_TASK = {"task_id", "task_status", "task_owner", "task_priority",
            "task_uses_prompts", "task_spawns_research", "task_affects_paths"}
-L2_PROMPT = {"prompt_kind", "prompt_framework", "prompt_target_agent",
-             "prompt_relates_to_task", "prompt_spawned_from_research"}
+# PROMPT.md §3 example shows prompt_relates_to_task / prompt_spawned_from_research
+# as "<slug or empty>" — they are conditional linkage fields, not always present.
+# Only the kind/framework/target trio is required on every prompt.
+L2_PROMPT = {"prompt_kind", "prompt_framework", "prompt_target_agent"}
 L2_RESEARCH = {"research_phase", "research_executes_prompt", "research_friction_level"}
-
-FRONTMATTER_RE = re.compile(r"\A---\n(.*?)\n---\s*(?:\n|$)", re.DOTALL)
-
-
-class Diag(Exception):
-    pass
-
-
-def parse_frontmatter(text: str) -> dict[str, object]:
-    m = FRONTMATTER_RE.match(text)
-    if not m:
-        raise Diag("missing frontmatter block (no leading '---' fenced YAML)")
-    body = m.group(1)
-    mapping: dict[str, object] = {}
-    current_list_key: str | None = None
-    for raw in body.splitlines():
-        if not raw.strip() or raw.lstrip().startswith("#"):
-            continue
-        indent = len(raw) - len(raw.lstrip(" "))
-        depth = indent // 2
-        stripped = raw.strip()
-        if stripped.startswith("- "):
-            if current_list_key is None:
-                raise Diag(f"orphan list item: {stripped!r}")
-            mapping.setdefault(current_list_key, []).append(stripped[2:].strip().strip('"'))
-            continue
-        if depth >= 2:
-            raise Diag(f"YAML nested deeper than 1 level (depth={depth}) at line: {raw!r}")
-        if ":" not in stripped:
-            raise Diag(f"unparseable frontmatter line: {raw!r}")
-        key, _, val = stripped.partition(":")
-        key = key.strip()
-        val = val.strip()
-        current_list_key = None
-        if val == "":
-            mapping[key] = []
-            current_list_key = key
-        elif val == "[]":
-            mapping[key] = []
-        else:
-            mapping[key] = val.strip('"')
-    return mapping
 
 
 KNOWN_ROOTS = ("tasks", "prompts", "research", "templates", "tools")
@@ -154,7 +115,7 @@ def check_file(path: Path) -> list[str]:
         diags.append(f"{path}: unresolved 'REPLACE' token in frontmatter")
 
     try:
-        fm = parse_frontmatter(text)
+        fm = parse_frontmatter(text, strict=True)
     except Diag as e:
         return diags + [f"{path}: {e}"]
 
@@ -182,20 +143,6 @@ def iter_targets(roots: Iterable[Path]) -> Iterable[Path]:
             yield from root.rglob("*.md")
 
 
-def load_waivers() -> set[str]:
-    # Resolve next to this script so the validator works regardless of cwd.
-    waiver_path = Path(__file__).resolve().parent / ".frontmatter-waivers"
-    if not waiver_path.exists():
-        return set()
-    out: set[str] = set()
-    for line in waiver_path.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
-        out.add(line)
-    return out
-
-
 def main(argv: list[str]) -> int:
     if len(argv) > 1:
         roots = [Path(a) for a in argv[1:]]
@@ -204,23 +151,18 @@ def main(argv: list[str]) -> int:
                       Path("templates"), Path("tools")]
         roots = [r for r in candidates if r.exists()]
 
-    waivers = load_waivers()
     all_diags: list[str] = []
     checked = 0
-    waived = 0
     for path in iter_targets(roots):
         required, _ = classify(path)
         if not required:
-            continue
-        if str(path) in waivers:
-            waived += 1
             continue
         checked += 1
         all_diags.extend(check_file(path))
 
     for d in all_diags:
         print(d, file=sys.stderr)
-    print(f"Checked {checked} files ({waived} waived); {len(all_diags)} diagnostic(s).")
+    print(f"Checked {checked} files; {len(all_diags)} diagnostic(s).")
     return 1 if all_diags else 0
 
 

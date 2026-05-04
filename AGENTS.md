@@ -168,7 +168,7 @@ Every Markdown file in this repository SHOULD carry frontmatter. Files inside op
 | `type` | string | One of: `task`, `prompt`, `research`, `spec`, `readme`, `note`, `index`. Drives parser routing — read this first. |
 | `status` | string | One of: `draft`, `active`, `blocked`, `completed`, `archived`. Archived files MAY be skipped by the agent to save tokens. |
 | `slug` | string | Kebab-case; MUST match the enclosing folder name where applicable. |
-| `summary` | string | Token-cheap tl;dr. The agent SHOULD read `summary` before opening the body. This is the primary token-saving lever in the repo. |
+| `summary` | string | Token-cheap tl;dr. The agent should read `summary` before opening the body. This is the primary token-saving lever in the repo. |
 | `created` | date | ISO-8601 (`YYYY-MM-DD`). Set once at creation; never update. |
 | `updated` | date | ISO-8601 (`YYYY-MM-DD`). MUST be updated on every substantive change. |
 

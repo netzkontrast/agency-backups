@@ -11,10 +11,7 @@ task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts:
   - github-skillmd-novel-authoring-de-en
-task_spawns_research:
-  - mega-context-limit-management
-  - cross-skill-context-poisoning
-  - subjective-quality-evaluation
+task_spawns_research: []
 task_affects_paths:
   - research/gemini/github-skillmd-novel-authoring-de-en/result.md
   - research/ncp-novel-co-authoring-spec/
