@@ -25,6 +25,15 @@ Before committing any code or documentation changes to this repository, the agen
 - All Markdown files must have consistent header formatting, valid relative links, and readable tables.
 
 ## 6. Context-Specific Mandates
-- If the task is a **Research Task**, the agent MUST additionally satisfy the `Mandatory Pre-Commit Checks` defined in [RESEARCH.md](./RESEARCH.md).
+
+Pick the matching governance spec — the agent MUST additionally satisfy the `Mandatory Pre-Commit Checks` defined there:
+
+- **Task** (orchestration in `/tasks/<NNN>-<slug>/`): [TASK.md](./TASK.md) §7.
+- **Prompt** (instruction set in `/prompts/<slug>/`): [PROMPT.md](./PROMPT.md) §6.
+- **Research** (execution workspace in `/research/<slug>/`): [RESEARCH.md](./RESEARCH.md) §5.
+
+## 7. Frontmatter Validation (Mechanical Check)
+
+If the change touches any file under `/tasks/`, `/prompts/`, or `/research/`, the agent MUST run [`tools/validate-frontmatter.py`](./tools/validate-frontmatter.py) against the staged files. The commit MUST NOT proceed if the validator exits non-zero. Diagnostics MUST be addressed by fixing the file (preferred) or by documenting a waiver in the touched folder's `readme.md`.
 
 Only when all applicable boxes above are conceptually "checked" may the agent invoke the `submit` or `git commit` commands.
