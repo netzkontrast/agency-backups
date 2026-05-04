@@ -1,0 +1,161 @@
+# Initial Topics-Konfiguration für gdrive-notion-curator v0.3.0
+#
+# Wird bei Phase 0 (Setup) verwendet um:
+#   1. Topics-DB zu befüllen (eine Page pro Topic)
+#   2. Files-DB Topic-SELECT-Optionen zu setzen
+#
+# Erweiterung: bei neuen approved Topics aus Phase C (Inbox-Review):
+#   1. Topics-DB neue Page anlegen
+#   2. Files-DB ALTER COLUMN Topic SET SELECT(...alle inkl neue)
+#   3. Diese yaml manuell um neuen Eintrag ergänzen (für Reproducibility)
+schema_version: 1
+last_updated: "2026-05-03"
+
+topics:
+
+  - slug: kohaerenz-protokoll
+    display: "Kohärenz Protokoll"
+    sensitive: false
+    keywords:
+      - kohaerenz
+      - kohärenz protokoll
+      - kohärenz-protokoll
+      - aegis
+      - kael
+      - juna
+      - dramatica
+      - hard-sf
+    description: "Hard-SF/Philosophical Horror Novel-Projekt"
+
+  - slug: dramatica-theory
+    display: "Dramatica Theory"
+    sensitive: false
+    keywords:
+      - dramatica
+      - storyform
+      - storyforming
+      - quad-modell
+      - thematic argument
+      - throughline
+    description: "Story-Strukturanalyse via Dramatica-Methodologie"
+
+  - slug: agency-system-design
+    display: "Agency System Design"
+    sensitive: false
+    keywords:
+      - agency system
+      - the agency system
+      - asdls
+      - manifest protocol
+      - together we confide
+      - moment der klarheit
+      - gegenüber
+      - darkwave
+      - industrial
+    description: "Darkwave/industrial Konzeptalbum-Triptych + Visual Spec"
+
+  - slug: agentic-architecture
+    display: "Agentic Architecture"
+    sensitive: false
+    keywords:
+      - janus
+      - agentic
+      - planner-executor
+      - dual-cognition
+      - multi-agent
+      - skill hierarchy
+      - skill engineering
+      - subagent
+    description: "Multi-Agent-Orchestration und JANUS-System"
+
+  - slug: llm-wiki-agent
+    display: "LLM Wiki Agent"
+    sensitive: false
+    keywords:
+      - llm-wiki
+      - wiki-agent
+      - novel pipeline
+      - canon-diff
+      - reader_state
+      - knowledge layer
+    description: "LLM-assistierte Novel-Writing Pipeline"
+
+  - slug: research-prompt-optimizer
+    display: "Research Prompt Optimizer"
+    sensitive: false
+    keywords:
+      - research-prompt
+      - deep research
+      - gemini deep research
+      - perplexity
+      - prompt optimizer
+      - research-prompt-optimizer
+    description: "Deep-Research-Prompt-Generator-Skill"
+
+  - slug: music-production
+    display: "Music Production"
+    sensitive: false
+    keywords:
+      - suno
+      - lyric
+      - lyrics
+      - songtext
+      - track
+      - album
+      - mixing
+      - mastering
+      - sound engineering
+      - vocal tag
+    description: "Suno-basierte Tracks und Songtext-Skills"
+
+  - slug: trauma-dis-material
+    display: "Trauma / DIS Material"
+    sensitive: true
+    keywords:
+      - trauma
+      - dis
+      - dissociative
+      - dissoziativ
+      - alter
+      - alters
+      - flashback
+      - trigger
+      - tsdp
+      - polyvagal
+      - window of tolerance
+      - therapy
+      - therapie
+      - clinic
+      - klinik
+    description: "Sensitive — wird Title-only klassifiziert, kein Content-Read"
+
+  - slug: dkt-physik
+    display: "DKT Physik"
+    sensitive: false
+    keywords:
+      - dkt
+      - dynamische kohärenz
+      - thermodynamische epistemologie
+      - state variable
+      - entropie
+      - kohärenz physik
+    description: "DKT — Dynamische Kohärenz-Theorie"
+
+  - slug: visual-design
+    display: "Visual Design"
+    sensitive: false
+    keywords:
+      - asdls
+      - atelier
+      - visual spec
+      - cover artwork
+      - illustration
+      - design language
+      - cluster
+    description: "ASDLS und visuelle Asset-Generierung"
+
+  - slug: misc
+    display: "Misc"
+    sensitive: false
+    keywords: []
+    description: "Catch-all für manuell zugeordnete oder Inbox-rejected Files"

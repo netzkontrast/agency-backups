@@ -1,0 +1,110 @@
+# Worked Example — Phase 1 Output
+# This is what intent_<slug>.yaml looks like after a successful
+# Phase 1 run. Use as reference for the structure and field-fill
+# style. Do NOT use as a default — every research request gets its
+# own intent.yaml from a fresh askuser-loop.
+
+schema_version: "1.1"
+schema: research-prompt-intent
+approved: true
+approved_at: "2026-05-02T14:23:00+02:00"
+
+slug: "eu-ai-act-saas-2026"
+language: "de"
+
+# v3.2 normalised provenance
+provenance:
+  created: "2026-05-02T14:23:00+02:00"
+  skill_version: "3.2.0"
+  phase: "phase1"
+  slug: "eu-ai-act-saas-2026"
+  output_filename: "intent_eu-ai-act-saas-2026.yaml"
+  category_signal: "B"
+  previous_version: null
+  revision_count: 0
+
+# append-only revision log
+revisions: []
+
+intent:
+  research_question: |
+    Welche AI-Act-Pflichten treffen ein SaaS-Startup mit Sitz in
+    Deutschland, das eine LLM-gestützte Workflow-Automation an
+    Mittelstandskunden vertreibt, und welche dieser Pflichten müssen
+    bis Q3/2026 operativ implementiert sein?
+
+  research_question_unpacked: |
+    EXPLIZIT NICHT Teil der Antwort:
+    - Allgemeine DSGVO-Pflichten (anders gelagertes Regime)
+    - US-Pendants (Colorado AI Act, NIST AI RMF, EO 14110)
+    - High-Risk-System-Detailpflichten, sofern wir nicht selbst HRS sind
+    - Pflichten für Anbieter von General-Purpose-AI-Modellen (wir bauen
+      kein Modell, wir nutzen API-Modelle)
+
+  audience: |
+    Technischer Mitgründer (CTO-Rolle) mit Strategie- und
+    Implementierungs-Mandat. Versteht Tech-Stack-Begriffe (API,
+    Embedding, RAG, Logging, Observability) ohne Erklärung; kein
+    Jurist, aber souverän im Umgang mit Verordnungstext.
+
+  output_format: "comparison_matrix"
+
+  output_format_detail: |
+    Hauptergebnis: Markdown-Tabelle mit folgenden Spalten —
+    Pflicht-Kategorie · Anwendbar-ab-Datum · Implementierungs-Aufwand
+    (S/M/L) · Status (offen / in Arbeit / done) · Quelle (mit
+    EUR-Lex-Anker oder Erwägungsgrund-Nummer). Sekundäres Ergebnis:
+    Quellenliste mit Primärquellen-Markierung. Tertiär: kurzer
+    Reasoning-Anhang mit den abgewiesenen Nachbarfragen (was wir
+    bewusst NICHT in die Matrix aufgenommen haben und warum).
+
+  temporal_scope:
+    from: "2024-08-01"
+    to: "2027-08-01"
+    rationale: |
+      AI Act trat am 01.08.2024 in Kraft, mit gestaffelter
+      Anwendbarkeit. Letzte relevante Tranche
+      (Hochrisiko-Anhang-III-Systeme) gilt ab 02.08.2027.
+
+  depth: "standard"
+
+  success_criterion: |
+    Wir können nach der Recherche einen Implementierungs-Backlog mit
+    konkreten Tickets erstellen, der bis Q3/2026 abgearbeitet ist und
+    alle bis dahin scharfen AI-Act-Pflichten abdeckt. Operativer Test:
+    "Wenn wir am 03.08.2026 ein BfDI-Audit hätten, sind wir compliant."
+
+priors_and_constraints:
+  known_priors: |
+    Vermutung: Wir sind als "Anbieter eines KI-Systems mit begrenztem
+    Risiko" einzustufen — d.h. Transparenzpflichten greifen,
+    Hochrisiko-Anhang-III nicht. GPAI-Pflichten greifen nicht, da wir
+    nicht das Modell anbieten, sondern es nur einbinden.
+
+  known_constraints: |
+    Quellen-Einschränkungen:
+    - Nur EU-Quellen (EUR-Lex, BfDI, Datenschutzkonferenz, BMDV);
+      keine US-Sekundärliteratur als Primärquelle
+    - Keine Paywall-Quellen (keine Beck-Online, keine Juris-Premium)
+    - Veröffentlichte Leitfäden der EU-Kommission und des
+      AI-Office sind explizit erwünscht
+    Vertraulichkeit: interner Use; kein Output an Externe.
+
+  domain_context: |
+    Unser Produkt ist eine Workflow-Automatisierungs-Plattform, die
+    LLMs (über API) nutzt, um Geschäftsdokumente zu klassifizieren,
+    zu extrahieren und in nachgelagerte Systeme zu schreiben. Wir
+    sind Anbieter (Provider) des KI-Systems im Sinne der Verordnung,
+    nicht Anbieter eines KI-Modells. Unsere Kunden sind Mittelständler
+    in DACH; sie sind Betreiber (Deployer) im Sinne der Verordnung.
+
+routing_hints:
+  category_signal: "B"
+  category_rationale: |
+    Antwort ist im Kern bekannt-und-zusammenzutragen (Verordnungstext
+    + Kommissions-Leitfäden + AI-Office-Konkretisierungen). Format
+    ist explizit comparison_matrix. Keine Hypothesen-Suche. Klares
+    Extraction-Pattern.
+
+scope_drift_log: []
+unspecified_slots: []

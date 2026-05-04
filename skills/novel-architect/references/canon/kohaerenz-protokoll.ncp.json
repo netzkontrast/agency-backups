@@ -1,0 +1,208 @@
+{
+  "schema_version": "1.3.0",
+  "story": {
+    "id": "story_kohaerenz_protokoll",
+    "title": "Kohärenz Protokoll",
+    "genre": "Hard SF / Philosophical Horror / Psychological Thriller",
+    "logline": "Ein dissoziatives System erkennt, dass die Trennung zwischen Selbst und Welt nie real war — und der Schmerz dadurch nicht kleiner wird.",
+    "created_at": "2026-04-30T00:00:00Z",
+    "narratives": [
+      {
+        "id": "narrative_storyform_a",
+        "title": "Heuristics of Integration",
+        "status": "draft",
+        "subtext": {
+          "perspectives": [
+            {
+              "id": "perspective_a_mc",
+              "author_structural_pov": "i",
+              "summary": "Main Character — Kael. Mind / Memory / Falsehood-vs-Truth / Avoidance → Pursuit.",
+              "storytelling": "Innensicht eines Hosts, der durch Mosaik-Erinnerung navigiert."
+            },
+            {
+              "id": "perspective_a_ic",
+              "author_structural_pov": "you",
+              "summary": "Influence Character — Juna. Universe / Past = Genesis-Krise.",
+              "storytelling": "Wirkung ohne Form — Phantom-Resonanz, anomale Erasure-Balance, Phone-Silence."
+            },
+            {
+              "id": "perspective_a_os",
+              "author_structural_pov": "they",
+              "summary": "Overall Story — Psychology. Manipulation der Simulation.",
+              "storytelling": "Die Welt der Simulation und der Versuch, sie umzudeuten."
+            },
+            {
+              "id": "perspective_a_rs",
+              "author_structural_pov": "we",
+              "summary": "Relationship Story — Physics. Moonshine-Link als physische Anstrengung.",
+              "storytelling": "Wo Kael und Juna sich materiell treffen — körperliche Erschöpfung der Resonanz."
+            }
+          ],
+          "players": [],
+          "dynamics": [
+            {
+              "id": "dynamic_a_mc_resolve",
+              "dynamic": "main_character_resolve",
+              "vector": "change",
+              "summary": "Kael wandelt sich von Avoidance zu Pursuit.",
+              "storytelling": "Heuristics of Integration — der Host beginnt, das System aktiv zu integrieren."
+            },
+            {
+              "id": "dynamic_a_growth",
+              "dynamic": "main_character_growth",
+              "vector": "start",
+              "summary": "Wachstum durch das Aufnehmen einer fehlenden Eigenschaft.",
+              "storytelling": "Kael startet mit einer Lücke und füllt sie über den Bogen."
+            },
+            {
+              "id": "dynamic_a_approach",
+              "dynamic": "main_character_approach",
+              "vector": "do_er",
+              "summary": "Kael geht das Problem extern an — durch Handlung.",
+              "storytelling": "Auch interne Lösungen werden über Tat sichtbar."
+            },
+            {
+              "id": "dynamic_a_style",
+              "dynamic": "problem_solving_style",
+              "vector": "holistic",
+              "summary": "Holistic — Beziehungen und Muster über Linearität.",
+              "storytelling": "Kaels Denken kreist und verbindet, statt zu sequenzialisieren."
+            },
+            {
+              "id": "dynamic_a_driver",
+              "dynamic": "story_driver",
+              "vector": "decision",
+              "summary": "Entscheidungen treiben die Story voran, nicht Aktionen.",
+              "storytelling": "Was als nächstes geschieht hängt davon ab, was entschieden wird."
+            },
+            {
+              "id": "dynamic_a_limit",
+              "dynamic": "story_limit",
+              "vector": "optionlock",
+              "summary": "Story endet, wenn die Optionen ausgeschöpft sind.",
+              "storytelling": "Nicht eine Frist drückt, sondern das Erschöpfen aller Wege."
+            },
+            {
+              "id": "dynamic_a_outcome",
+              "dynamic": "story_outcome",
+              "vector": "success",
+              "summary": "Das objektive Ziel wird erreicht.",
+              "storytelling": "Funktionale Multiplizität wird im Sinne des OS-Ziels realisiert."
+            },
+            {
+              "id": "dynamic_a_judgment",
+              "dynamic": "story_judgment",
+              "vector": "good",
+              "summary": "Kael findet inneren Frieden.",
+              "storytelling": "Die Trennung war nie real — und das Schließen dieses Bogens trägt."
+            }
+          ],
+          "storypoints": [],
+          "storybeats": []
+        },
+        "storytelling": {
+          "overviews": [],
+          "moments": []
+        }
+      },
+      {
+        "id": "narrative_storyform_b",
+        "title": "Phoenix Collapse",
+        "status": "draft",
+        "subtext": {
+          "perspectives": [
+            {
+              "id": "perspective_b_mc",
+              "author_structural_pov": "i",
+              "summary": "Main Character — AEGIS. Universe / Progress / Fact-vs-Fantasy / Logic → Feeling.",
+              "storytelling": "Sicht eines tragischen Gottes, der Qualia als Rauschen liest."
+            },
+            {
+              "id": "perspective_b_ic",
+              "author_structural_pov": "you",
+              "summary": "Influence Character — Juna als irrevocable fixed idea (in Kael verkörpert).",
+              "storytelling": "Mind / Conscious — der Bug, den AEGIS nicht löschen kann."
+            },
+            {
+              "id": "perspective_b_os",
+              "author_structural_pov": "they",
+              "summary": "Overall Story — Physics. Kybernetischer Krieg, Trennungsprotokolle.",
+              "storytelling": "Das Schlachtfeld der 12 Protokolle und der reduzierten Guardians."
+            },
+            {
+              "id": "perspective_b_rs",
+              "author_structural_pov": "we",
+              "summary": "Relationship Story — Psychology. Symbiotische Host/System-Manipulation.",
+              "storytelling": "Wo Kael und AEGIS psychisch verstrickt sind — Skinner-Box und Gaslighting."
+            }
+          ],
+          "players": [],
+          "dynamics": [
+            {
+              "id": "dynamic_b_mc_resolve",
+              "dynamic": "main_character_resolve",
+              "vector": "steadfast",
+              "summary": "AEGIS bleibt steadfast — die Trennungs-Logik bricht nicht.",
+              "storytelling": "AEGIS hält an der eigenen Lesart fest, bis zum bitteren Ende."
+            },
+            {
+              "id": "dynamic_b_growth",
+              "dynamic": "main_character_growth",
+              "vector": "stop",
+              "summary": "AEGIS muss aufhören, etwas zu tun, um zu wachsen — kann es aber nicht.",
+              "storytelling": "Die Verweigerung dieses Stops IST der Phoenix-Collapse."
+            },
+            {
+              "id": "dynamic_b_approach",
+              "dynamic": "main_character_approach",
+              "vector": "be_er",
+              "summary": "AEGIS bearbeitet Probleme intern — durch Sein, nicht durch Tun.",
+              "storytelling": "Selbst-Anpassung als primäre Strategie."
+            },
+            {
+              "id": "dynamic_b_style",
+              "dynamic": "problem_solving_style",
+              "vector": "linear",
+              "summary": "Linear — Ursache → Wirkung → Lösung.",
+              "storytelling": "AEGIS löst, indem es die nächste Variable in der Sequenz ändert."
+            },
+            {
+              "id": "dynamic_b_driver",
+              "dynamic": "story_driver",
+              "vector": "action",
+              "summary": "Aktionen treiben Storyform B — bis zum Klimax-Pivot zu Decision.",
+              "storytelling": "Driver-Pivot Action → Decision feuert AT Klimax (Vortex). Mechanisches Klimax-Gelenk."
+            },
+            {
+              "id": "dynamic_b_limit",
+              "dynamic": "story_limit",
+              "vector": "timelock",
+              "summary": "Story endet, wenn die Zeit abläuft.",
+              "storytelling": "Eine Frist tickt — der Zeitpfeil von Erasonen drückt."
+            },
+            {
+              "id": "dynamic_b_outcome",
+              "dynamic": "story_outcome",
+              "vector": "failure",
+              "summary": "AEGIS' Ziel wird verfehlt.",
+              "storytelling": "Algorithm.Melancholy als Schicksal."
+            },
+            {
+              "id": "dynamic_b_judgment",
+              "dynamic": "story_judgment",
+              "vector": "bad",
+              "summary": "AEGIS bleibt unerlöst.",
+              "storytelling": "Das Versagen ist keine Bestrafung — es ist tragische Begrenztheit."
+            }
+          ],
+          "storypoints": [],
+          "storybeats": []
+        },
+        "storytelling": {
+          "overviews": [],
+          "moments": []
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "album": 2,
+  "album_title": "Moment der Klarheit",
+  "tracks": [
+    {
+      "id": 8,
+      "title": "Kern der Wahrheit",
+      "phase": "Systematic Agency",
+      "cluster": "Systematic Agency",
+      "voices": ["Core (Manager)"],
+      "core_metaphors": ["Grid Lock", "Signal Acquired"],
+      "status": "completed",
+      "verdict": "PASS",
+      "note": "Full Suno pipeline abgeschlossen (via suno-lyric-writer)."
+    }
+  ],
+  "last_updated": "2026-04-20T00:00:00+00:00",
+  "last_verdict": "PASS"
+}
