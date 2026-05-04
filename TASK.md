@@ -34,7 +34,7 @@ Every Task MUST live in a dedicated subfolder under `/tasks/`. The folder name M
     ├── readme.md        # Directory index (per FOLDERS.md).
     ├── task.md          # The Task spec: frontmatter + Goal + Plan + Todo. MUST exist.
     ├── notes.md         # OPTIONAL running notes captured during execution.
-    └── friction-log.md  # OPTIONAL friction log per FRUSTRATED.md.
+    └── friction-log.md  # MANDATORY when task_status reaches "done" or "abandoned", per FRUSTRATED.md.
 ```
 
 Subfolders inside a Task directory MUST NOT be created unless 4+ files of the same category accumulate (per `FOLDERS.md`).
@@ -85,8 +85,8 @@ Convention: `<domain>_<key>`. Keys MUST be flat (no nested objects). Lists are p
 | `prompt_kind` | string | One of: `research-proposal`, `follow-up`, `tool-instruction`, `task-spec`, `general`. |
 | `prompt_framework` | string | One of: `RISEN`, `RISE-DX`, `ReAct`, `RISEN+ReAct`, `CoT`. |
 | `prompt_target_agent` | string | E.g. `Claude Code`, `Gemini`, `any`. |
-| `prompt_relates_to_task` | string | Task slug, or empty if standalone. |
-| `prompt_spawned_from_research` | string | Research slug that motivated this prompt, or empty. |
+| `prompt_relates_to_task` | string | OPTIONAL. Slug of the Task whose `task_uses_prompts` already lists this prompt (reciprocity required). Omit for follow-up prompts not yet adopted by a Task. |
+| `prompt_spawned_from_research` | string | OPTIONAL. Slug of the research run that produced this prompt as a follow-up. Resolves under `/research/<slug>/` or `/research/<provider>/<slug>/`. |
 
 **Research namespace** (mandatory in `/research/<slug>/output/SPEC.md` and `readme.md`):
 
@@ -131,7 +131,7 @@ task_affects_paths:
 3. **Link Prompts** — If the Task requires an instruction set, ensure a prompt exists under `/prompts/<slug>/` and reference its slug in `task_uses_prompts`. If no suitable prompt exists, the agent MUST first create one as a Prompt Task per `PROMPT.md`.
 4. **Execute** — Set `task_status: in_progress`. The agent works on the listed paths; new artifacts are created in their proper home (`/research/`, source code, `/prompts/`, etc.). Notes accumulate in `notes.md` if useful.
 5. **Block** — If blocked, set `task_status: blocked` and append a dated entry to `notes.md` describing the blocker.
-6. **Close** — When all Todo items are checked, set `task_status: done`, update `updated`, and (if friction was non-trivial) commit a `friction-log.md`.
+6. **Close** — When all Todo items are checked, set `task_status: done`, update `updated`, and commit a `friction-log.md` containing an FL[0-3] declaration. The log is mandatory even when the run was frictionless (FRUSTRATED.md FL0).
 
 ## 5. `task.md` Required Sections
 
@@ -203,7 +203,7 @@ Before committing a Task that is being closed, the agent MUST verify:
 4. **Path Containment** — Files modified by the Task fall within `task_affects_paths` (or the agent has updated that list to reflect reality).
 5. **Todo Completion** — Either every `- [ ]` is checked, or `task_status` is `blocked`/`abandoned` with a reason in `notes.md`.
 6. **Readme Audit** — `/tasks/<NNN>-<slug>/readme.md` exists and links to every other file in the folder (per `FOLDERS.md`).
-7. **Friction Log** — `friction-log.md` exists if `FL > FL0`; an FL0 declaration MAY be inlined in the closing commit message instead.
+7. **Friction Log** — `friction-log.md` MUST exist for every closed task and MUST contain an `FL[0-3]` declaration, including for FL0 runs (FRUSTRATED.md). An inline declaration in the commit message is NOT a substitute.
 
 ## 8. Edge Cases & Open Questions
 

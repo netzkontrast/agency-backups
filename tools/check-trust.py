@@ -28,46 +28,10 @@ import re
 import sys
 from pathlib import Path
 
-FRONTMATTER_RE = re.compile(r"\A---\n(.*?)\n---\s*(?:\n|$)", re.DOTALL)
+from _frontmatter import parse_frontmatter, str_val
+
 FL_DECL_RE = re.compile(r"\bFL[0-3]\b")
 TASK_DIR_RE = re.compile(r"^\d{3}-.+$")
-
-
-def parse_frontmatter(text: str) -> dict[str, object]:
-    m = FRONTMATTER_RE.match(text)
-    if not m:
-        return {}
-    mapping: dict[str, object] = {}
-    current_list_key: str | None = None
-    for raw in m.group(1).splitlines():
-        if not raw.strip() or raw.lstrip().startswith("#"):
-            continue
-        stripped = raw.strip()
-        if stripped.startswith("- "):
-            if current_list_key is not None:
-                mapping.setdefault(current_list_key, []).append(
-                    stripped[2:].strip().strip('"')
-                )
-            continue
-        if ":" not in stripped:
-            continue
-        key, _, val = stripped.partition(":")
-        key = key.strip()
-        val = val.strip()
-        current_list_key = None
-        if val == "":
-            mapping[key] = []
-            current_list_key = key
-        elif val == "[]":
-            mapping[key] = []
-        else:
-            mapping[key] = val.strip('"')
-    return mapping
-
-
-def str_val(fm: dict, key: str) -> str:
-    v = fm.get(key, "")
-    return v if isinstance(v, str) else ""
 
 
 def audit_tasks(tasks_root: Path) -> list[str]:
@@ -78,7 +42,7 @@ def audit_tasks(tasks_root: Path) -> list[str]:
         task_md = task_dir / "task.md"
         if not task_md.exists():
             continue
-        fm = parse_frontmatter(task_md.read_text(encoding="utf-8"))
+        fm = parse_frontmatter(task_md.read_text(encoding="utf-8"), strict=False)
         task_status = str_val(fm, "task_status")
         if task_status != "done":
             continue

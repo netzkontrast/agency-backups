@@ -51,8 +51,8 @@ updated: YYYY-MM-DD
 prompt_kind: research-proposal | follow-up | tool-instruction | task-spec | general
 prompt_framework: RISEN | RISE-DX | ReAct | RISEN+ReAct | CoT
 prompt_target_agent: "Claude Code"
-prompt_relates_to_task: <task-slug or empty>
-prompt_spawned_from_research: <research-slug or empty>
+prompt_relates_to_task: <task-slug>      # OPTIONAL: only when a Task already lists this prompt in task_uses_prompts.
+prompt_spawned_from_research: <slug>     # OPTIONAL: research that produced this prompt as a follow-up.
 ---
 ```
 
@@ -107,8 +107,8 @@ Before committing the deliverables of a Prompt Task, the agent MUST verify:
 2. **Frontmatter Integrity** — `prompt.md` carries every required L1 and `prompt_*` key. YAML nesting ≤ 1.
 3. **Prompt Non-Empty** — `prompt.md` is non-empty and constitutes a complete, executable prompt.
 4. **Self-Containedness Test** — Read `prompt.md` in isolation; no section requires external context.
-5. **Backward Link Resolves** — If `prompt_spawned_from_research` is set, that research slug exists under `/research/`.
-6. **Forward Link Reciprocity** — If `prompt_relates_to_task` is set, the named Task lists this prompt's slug in `task_uses_prompts`.
+5. **Backward Link Resolves** — If `prompt_spawned_from_research` is set, that research slug resolves to either `/research/<slug>/` or any `/research/<provider>/<slug>/` (provider subfolders per RESEARCH.md §6 are valid spawn sources).
+6. **Forward Link Reciprocity** — `prompt_relates_to_task` encodes a *uses* relationship, not a "spawned by" relationship. If set, the named Task MUST list this prompt's slug in `task_uses_prompts`. Follow-up prompts not yet adopted by any Task MUST omit this field; their lineage is preserved via `prompt_spawned_from_research`.
 7. **Readme Audit** — `/prompts/<slug>/readme.md` exists and links to `brief.md` and `prompt.md` per `FOLDERS.md`.
 8. **Friction Log** — A `## Frustration Log` section in the PR/commit message (or a `friction-log.md` adjacent for standalone runs), per `FRUSTRATED.md`. FL0 declarations are still mandatory.
 

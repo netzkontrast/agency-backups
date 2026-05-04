@@ -31,6 +31,8 @@ import re
 import sys
 from pathlib import Path
 
+from _frontmatter import read_fm, str_val
+
 TASK_DIR_RE = re.compile(r"^\d{3}-.+$")
 PROVIDER_NAMES = {"gemini", "gpt", "human", "other"}
 RESEARCH_SUBDIRS = {"workspace", "synthesis", "reflection", "output"}
@@ -38,18 +40,7 @@ RESEARCH_SUBDIRS = {"workspace", "synthesis", "reflection", "output"}
 
 def _read_frontmatter_key(path: Path, key: str) -> str:
     """Return the value for a YAML frontmatter key, or '' if missing/unparseable."""
-    try:
-        text = path.read_text(encoding="utf-8")
-    except OSError:
-        return ""
-    m = re.match(r"\A---\n(.*?)\n---", text, re.DOTALL)
-    if not m:
-        return ""
-    for line in m.group(1).splitlines():
-        k, _, v = line.partition(":")
-        if k.strip() == key:
-            return v.strip().strip('"')
-    return ""
+    return str_val(read_fm(path), key)
 
 
 def lint_tasks(tasks_root: Path) -> list[str]:

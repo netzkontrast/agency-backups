@@ -6,8 +6,8 @@ summary: "Found by coherence check 2026-05-04: Tasks 002 and 003-analyze closed 
 created: 2026-05-04
 updated: 2026-05-04
 task_id: "007"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts: []
 task_spawns_research: []
@@ -58,14 +58,14 @@ The pre-commit governance check (`tools/check-governance.sh`) reports 13 linkage
 
 ## Todo
 
-- [ ] Choose reconciliation strategy (A/B/C/D or mix) and record the decision in `notes.md`.
-- [ ] If strategy B: extend `TASK.md §3.3` with `task_spawns_prompts` and update `tools/lint-linkage.py`.
-- [ ] If strategy C: extend `tools/lint-linkage.py` to resolve `research/<provider>/<slug>/`.
-- [ ] Author `tasks/002-token-efficiency-tool-suite/friction-log.md`.
-- [ ] Author `tasks/003-analyze-skillmd-novel-authoring/friction-log.md`.
-- [ ] Reconcile `task_spawns_research` in `tasks/003-analyze-skillmd-novel-authoring/task.md` so every listed slug resolves OR is moved to a different field.
-- [ ] Reconcile `task_uses_prompts` in `tasks/002-token-efficiency-tool-suite/task.md` and `tasks/003-analyze-skillmd-novel-authoring/task.md`.
-- [ ] Run `tools/check-governance.sh` and confirm zero errors.
+- [x] Choose reconciliation strategy (A/B/C/D or mix) and record the decision in `notes.md`. (Strategy A + C; details in `notes.md`.)
+- [x] ~~If strategy B: extend `TASK.md §3.3` with `task_spawns_prompts` and update `tools/lint-linkage.py`.~~ Strategy B not chosen.
+- [x] If strategy C: extend `tools/lint-linkage.py` to resolve `research/<provider>/<slug>/`. (`research_slug_resolves()` added.)
+- [x] Author `tasks/002-token-efficiency-tool-suite/friction-log.md`. (Extracted from inline `## Frustration Log` in `task.md`; FL1.)
+- [x] Author `tasks/003-analyze-skillmd-novel-authoring/friction-log.md`. (Reconstructed FL1 in retrospect.)
+- [x] Reconcile `task_spawns_research` in `tasks/003-analyze-skillmd-novel-authoring/task.md` so every listed slug resolves OR is moved to a different field. (Emptied — the slugs were follow-up *prompts*, not research.)
+- [x] Reconcile `task_uses_prompts` in `tasks/002-token-efficiency-tool-suite/task.md` and `tasks/003-analyze-skillmd-novel-authoring/task.md`. (No additions needed — `prompt_relates_to_task` removed from the 5 follow-up prompts that had no using-task; the spec was clarified in PROMPT.md §6.6 to state that follow-ups not yet adopted MUST omit the field.)
+- [x] Run `tools/check-governance.sh` and confirm zero errors.
 
 ## Links
 

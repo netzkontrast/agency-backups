@@ -8,7 +8,6 @@ updated: 2026-05-04
 prompt_kind: follow-up
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "external"
-prompt_relates_to_task: analyze-skillmd-novel-authoring
 prompt_spawned_from_research: github-skillmd-novel-authoring-de-en
 ---
 
