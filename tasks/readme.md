@@ -24,7 +24,7 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 ## Contents
 
 - [`000-decouple-architecture/`](./000-decouple-architecture/) — Bootstrap meta-task that introduced this folder, the Frontmatter Ontology, `TASK.md`, templates, and the validator. Status: `done`.
-- [`001-refactor-governance-from-specs/`](./001-refactor-governance-from-specs/) — Encode rules from Spec-A/B/C, Spec-G/H/I, and Spec-J/K/L into linters, hooks, and templates. Status: `open`.
+- [`001-refactor-governance-from-specs/`](./001-refactor-governance-from-specs/) — Encode rules from Spec-A/B/C, Spec-G/H/I, and Spec-J/K/L into linters, hooks, and templates. Status: `updated` → superseded by [026](./026-update-governance-specs-from-research/).
 - [`002-token-efficiency-tool-suite/`](./002-token-efficiency-tool-suite/) — Build token-efficiency tooling for agentic workflows. Status: `done`.
 - [`003-analyze-skillmd-novel-authoring/`](./003-analyze-skillmd-novel-authoring/) — Analyze Gemini SKILL.md novel-authoring research (DE/EN) and extract actionable recommendations. Status: `done`.
 - [`004-create-missing-prompts/`](./004-create-missing-prompts/) — Author missing prompts for Tasks 001 and 002. Status: `updated` → superseded by [020](./020-audit-prompt-fm-validate-conformance/).
@@ -51,6 +51,7 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`023-header-ontology-and-schema-mirror/`](./023-header-ontology-and-schema-mirror/) — Successor to [Task 011](./011-skills-frontmatter-schema-files/). Add the per-type JSON Schema *mirror* (generated from `header-ontology.json`) plus a divergence gate. Status: `open`.
 - [`024-renumber-duplicate-task-ids-v2/`](./024-renumber-duplicate-task-ids-v2/) — Successor to [Task 013](./013-renumber-duplicate-task-ids/). Renumber the persistent 006/006 and 009/009 duplicates into the next free slots. Status: `open`.
 - [`025-maintenance-spec-remaining-findings/`](./025-maintenance-spec-remaining-findings/) — Successor to [Task 014](./014-improve-maintenance-spec-from-session/). Carry forward only F2 / F3 / F4 / F7 (F1 / F5 / F6 absorbed by Tasks 008 + 016). Status: `open` (blocked by [019](./019-fm-toolchain-suite-integration/)).
+- [`026-update-governance-specs-from-research/`](./026-update-governance-specs-from-research/) — Successor to [Task 001](./001-refactor-governance-from-specs/). Implement the governance specs update plan derived from research on the current tooling ecosystem. Status: `open`.
 
 ## Workflow Assumptions
 
