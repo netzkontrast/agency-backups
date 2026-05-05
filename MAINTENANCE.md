@@ -36,7 +36,20 @@ Not all fixes are equal. Before touching any file, the agent MUST classify the c
 
 **Mutation surface stability.** `tools/fm/edit.py` is the canonical T1/T2 mutator for frontmatter; coherence-check agents SHOULD prefer it over `sed`/`awk` because it preserves body bytes and quoting, takes a file lock, and rejects T3/T4 operations by construction (per [SPEC.md §7.2](./research/flexible-frontmatter-toolchain/output/SPEC.md)). Body-section mutations are deferred to `tools/fm/section.py` (Task 018).
 
-**Validation surface stability.** `tools/fm/validate.py` is the canonical linter (Task 017 cutover); `tools/check-governance.sh` defaults `FM_TOOLCHAIN=1`. The legacy frontmatter, structural, and linkage validators live under `tools/legacy/` for one release window and run advisory until their fm- successors land. Set `FM_TOOLCHAIN=0` only for a contested migration step; do not check that escape hatch into routine workflows.
+### 1.1 Toolchain Migration Context (Legacy ↔ Flexible)
+
+Two governance toolchains coexist while [Task 017](./tasks/017-migrate-repo-to-flexible-toolchain/) and [Task 019](./tasks/019-fm-toolchain-suite-integration/) execute the migration:
+
+| Toolchain | Entry point | Enforcement state | Owner |
+|---|---|---|---|
+| **Legacy** (default) | `tools/validate-frontmatter.py`, `tools/lint-structure.py`, `tools/lint-linkage.py` invoked by `tools/check-governance.sh` | Gating — non-zero exit blocks the pre-commit hook. | Task 001 lineage. |
+| **Flexible** (opt-in) | `tools/fm/validate.py` invoked by `FM_TOOLCHAIN=1 tools/check-governance.sh` | Advisory — runs alongside legacy; failures do not gate until Task 019 flips the default per [SPEC §12.6](./research/flexible-frontmatter-toolchain/output/SPEC.md). | Task 016. |
+
+Maintenance agents MUST be aware that:
+
+1. T1/T2 mutations through `tools/fm/edit.py` are valid under both toolchains; the file lock and per-section preservation behave identically regardless of which validator gates the commit.
+2. The maintenance-bypass mode in `.githooks/pre-commit` (§4.1) reads its waiver list from `tools/.frontmatter-waivers`; that list is consumed by the **legacy** validator only. When `FM_TOOLCHAIN=1` becomes the default, waivers will need to be re-expressed against `tools/fm/validate.py` (tracked in Task 019).
+3. A coherence-check run that mixes the two toolchains (legacy gating + flexible advisory) is the supported transition state. An agent MUST NOT silently disable either; if a flexible-toolchain WARN points at a real defect, file a Task rather than papering over the warning.
 
 ---
 
@@ -124,6 +137,33 @@ The Coherence Check and the Nightly Maintenance Run MUST audit the freshness of 
 6. Else → **still accurate**.
 
 **Successor naming.** A successor Task uses the next free `<NNN>` and a slug that signals continuity with the predecessor (e.g. `<predecessor-slug>-v2` or a more specific re-framing such as `<predecessor-slug>-via-fm-edit`). The successor's `## Goal` MUST open with a one-line "Successor to Task NNN" pointer; the body re-frames the work against current repo state.
+
+**Drift-check inputs differentiate spec-bearing from review-bearing research.** When the staleness audit walks `task_spawns_research` to verify that the produced research workspace still matches the Task's premise, it MUST classify the workspace before flagging drift:
+
+- **Spec-bearing research** (`research/<slug>/output/SPEC.md` exists with `research_phase: complete`): the audit treats the SPEC as the canonical successor artefact and SHOULD trigger the **drifted (re-frame)** bucket only when the SPEC explicitly supersedes the Task's plan.
+- **Review-bearing research** (workspaces produced for PR review or critique runs whose deliverable is `notes.md` / `output/REVIEW.md` rather than a SPEC): the audit MUST NOT treat the absence of a SPEC as drift. Review research closes by being filed and referenced; it is not expected to mutate root specs.
+
+This distinction prevents the false-positive observed during the Task 001 friction log, where review-bearing research was flagged as "incomplete" against an audit rule that assumed every research run produces a SPEC.
+
+### 3.5 Duplicate `task_id` Governance (T3 Renumbering)
+
+Duplicate `task_id` collisions (e.g. two `task_id: "006"` folders) are a known failure mode of the §8.1 "renumber on commit" protocol when two agents pick the next free slot on independent branches. Resolving such a collision is a **T3 (Structural) action** per §1, even though the per-file mutation is mechanical, because the resolution touches:
+
+- The colliding Task's folder name (`tasks/<NNN>-<slug>/` rename).
+- That Task's `task_id` frontmatter value.
+- Every reciprocal reference: `task_blocked_by`, `task_supersedes`, `task_superseded_by` in sibling Tasks.
+- The bullet for the Task in `tasks/readme.md` (per `TASK.md §4.8`).
+
+Because the change spans multiple files and rewrites cross-references, the maintenance agent MUST NOT perform the renumber inline during a coherence run. Instead it MUST file a Task (e.g. the Task 013 / Task 024 lineage) whose Plan covers:
+
+1. Identify all colliding `task_id` values via `ls tasks/ | sort` and `grep '^task_id:' tasks/*/task.md`.
+2. Pick the next free `<NNN>` slot for the *later-created* colliding folder (the earlier folder retains its number).
+3. Rename the folder and update the `task_id` frontmatter atomically in one commit.
+4. Rewrite every `task_blocked_by` / `task_supersedes` / `task_superseded_by` entry that referenced the renumbered Task by its old `<NNN>`.
+5. Update `tasks/readme.md` so the bullet path and number match the new folder.
+6. Verify `tools/check-governance.sh` exits 0 against the post-renumber state before committing.
+
+The slug MUST remain stable across renumbering; only `<NNN>` and `task_id` change. Renumbering by reusing an unrelated free slot (e.g. picking 030 to clear a 006 collision) is permitted when the Task naturally fits later in the sequence.
 
 ---
 
