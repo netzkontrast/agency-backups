@@ -55,10 +55,6 @@ def _split(text: str) -> tuple[str, str, str]:
     return open_fence, fm_body, rest
 
 
-def _serialize(fm_lines: list[str]) -> str:
-    return "\n".join(fm_lines) + "\n" if fm_lines else "\n"
-
-
 def _parse_lines(fm_body: str) -> list[dict]:
     """Parse fm_body into a list of dicts:
     {kind: "scalar"|"list", key: str, value: str|list[str], raw: list[str]}
@@ -246,10 +242,14 @@ def apply_edit(text: str, action: str, *args: str) -> tuple[str, int]:
         return text, rc
     new_fm = _render(entries)
     new_text = open_fence + new_fm + rest
-    # Verify body bytes are byte-identical.
-    _, _, old_rest = _split(text)
+    # Body bytes (`rest` — everything from the closing fence onward) are by
+    # construction identical pre/post: we reuse the same `rest` string. This
+    # check catches the case where a future change introduces a mutation
+    # path that bypasses the construction. RuntimeError (not assert) so the
+    # guard survives `python -O`.
     _, _, new_rest = _split(new_text)
-    assert old_rest == new_rest, "fm-edit invariant: body bytes changed"
+    if rest != new_rest:
+        raise RuntimeError("fm-edit invariant: body bytes changed")
     return new_text, EXIT_OK
 
 
