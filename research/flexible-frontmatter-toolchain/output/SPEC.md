@@ -402,19 +402,271 @@ The implementations and successor specs MUST NOT:
   width — the output MUST be plain UTF-8 markdown.
 ```
 
-## §10. Open Questions (Deferred)
+## §10. Open Questions
 
 ```text
 # anchor: F.10.1
-Q1. How does fm-query interact with submodules or sparse checkouts? (Task 016 todo.)
+Q1. How does fm-query interact with submodules or sparse checkouts?
+    Resolved by Task 016 (see tasks/016-flexible-frontmatter-toolchain/notes.md).
+    Summary: walks the materialised filesystem only, never consults git.
+
 Q2. Should fm-edit grow a --batch mode reading mutations from stdin/JSON?
-    (Task 016 todo; default answer: not in v1.)
+    Resolved by Task 016: not in v1. Concurrency safety is anchored on the
+    per-invocation OS file lock; batch semantics would either hold the lock
+    too long or abandon cross-mutation atomicity. Revisitable when a concrete
+    caller demonstrates a workload where shell-loop overhead dominates.
+
 Q3. How does the toolchain expose a programmatic API for non-Python callers
     (e.g., gemini-cli scripts)? (Task 017 todo; candidate: a thin JSON-RPC
     over stdio wrapper, deferred to a follow-up.)
+
+Q4. Should `Levenshtein-distance 1` in §3.4 be amended to read
+    `Optimal String Alignment distance 1` (transposition-aware)? The §6.1
+    example (`tpye` → `type`) is OSA 1, not standard Levenshtein 1.
+    Task 016 implementation uses OSA; this clause should be amended for
+    consistency. (Task 018 follow-up.)
+
+Q5. Should the §6.1 row for `type=skill` require `name` (per the example) or
+    `skill_kind, skill_target_agents` (per §3.2)? The Anthropic SKILL.md
+    format only carries `name` + `description`. Task 016 encoded
+    `name`/`description` as REQUIRED for `type=skill` and the skill_* keys
+    as RECOMMENDED. (Task 018 follow-up.)
 ```
 
-## §11. Sources
+## §12. Body Data Schema (Per Section)
+
+This section is **additive on top of §4**: §4 enumerates the *required*
+`## ` headings per type; §12 specifies what the body of each required
+section MUST look like. Every clause here is opt-in for v1
+(`fm-validate --check-body`), gated for default-on by Task 019 once the
+existing corpus is migrated.
+
+### §12.1 Closed Shape Vocabulary
+
+```text
+# anchor: F.12.1
+Each typed body section MUST declare exactly one shape from the closed set:
+
+  - paragraph      : prose, no top-level list markers
+  - ordered_list   : top-level lines start with `1.` / `2.` / …
+  - unordered_list : top-level lines start with `- ` or `* `
+                     (NOT `- [ ]` / `- [x]` — that is task_list)
+  - task_list      : top-level lines start with `- [ ]` or `- [x]`
+  - link_list      : an unordered_list whose items each contain at
+                     least one Markdown link `[text](url)`
+  - gherkin_block  : at least one fenced ```gherkin code block
+  - code_block     : at least one fenced code block (any language)
+  - definition_list: lines of the form `**Term**: definition`
+                     (reserved for future glossary use)
+  - mixed          : any combination — the catch-all default
+
+Shape detection MUST ignore content inside fenced code blocks (mirrors
+the rule already established for `## ` heading detection in §4).
+```
+
+### §12.2 Per-Type Body Schema
+
+```text
+# anchor: F.12.2
+type: task — body_schema (§4.1: Goal, Plan, Todo, Links)
+
+  Goal :  shape=paragraph,    min_chars=20, max_paragraphs=3
+  Plan :  shape=ordered_list, min_items=1
+  Todo :  shape=task_list,    min_items=1, completion_field=task_status
+  Links:  shape=link_list,    min_items=1, link_pattern="^(\\.\\.?\\/|/)"
+
+type: prompt — body_schema (§4.1: Framework, R — Role, I — Input,
+                            S — Steps, E — Expectations, Constraints)
+
+  Framework      : shape=paragraph, max_paragraphs=2
+  R — Role       : shape=paragraph, min_chars=20
+  I — Input      : shape=unordered_list, min_items=1
+  S — Steps      : shape=ordered_list,   min_items=3
+  E — Expectations: shape=unordered_list, min_items=1
+  Constraints    : shape=unordered_list, min_items=1,
+                   item_pattern="\\b(MUST|MUST NOT|SHOULD|SHOULD NOT|MAY|REQUIRED|SHALL)\\b",
+                   item_pattern_severity=WARN
+
+type: research — body_schema (output/SPEC.md)
+
+  §1: shape=paragraph,     must_contain="RFC 2119"
+  §6: shape=gherkin_block, min_blocks=1
+
+type: skill   — body owned by Anthropic SKILL.md format; no body_schema.
+type: spec    — body_schema empty (§ structure is author-owned).
+type: index   — body_schema empty.
+type: readme  — body_schema empty.
+type: note    — body_schema empty.
+```
+
+### §12.3 Field Reference
+
+```text
+# anchor: F.12.3
+Per-section schema fields (all OPTIONAL except `shape`):
+
+  shape                  : required; one value from §12.1
+  min_items, max_items   : list-shape count constraints
+  min_chars              : minimum body length after stripping whitespace
+  max_paragraphs         : guard against accidental shape drift in `paragraph`
+  item_pattern           : regex each list item MUST match
+  item_pattern_severity  : "ERROR" (default) | "WARN" — overrides emit level
+  link_pattern           : regex against URL portion of each link in link_list
+  must_contain           : case-insensitive substring assertion against the
+                           whole section body
+  min_blocks             : minimum count of fenced code blocks
+  completion_field       : task_list-only; names the FM field whose value MUST
+                           equal "done" when every checkbox is `[x]`. Auto-
+                           derivation is INFORMATIONAL only — the validator
+                           emits a WARN if the file's task_status disagrees
+                           with checkbox completion, never an ERROR.
+  doc                    : free-form note surfaced by `fm-validate --explain`
+```
+
+### §12.4 Diagnostic Codes
+
+```text
+# anchor: F.12.4
+fm-validate --check-body emits diagnostics with codes in the F.B.* family:
+
+  F.B.1 : shape mismatch (expected X, found Y)
+  F.B.2 : item-count below min_items / above max_items
+  F.B.3 : item_pattern miss (one diagnostic per failing item)
+  F.B.4 : min_chars / max_paragraphs miss
+  F.B.5 : must_contain assertion failed
+  F.B.6 : link_pattern miss in link_list
+  F.B.7 : task_list completion disagrees with completion_field (WARN only)
+
+Diagnostic shape mirrors §5.1:
+  <path>:<line?>:<severity>:<code>:<message>
+Examples:
+  tasks/099-x/task.md::ERROR:F.B.1:section '## Plan' shape mismatch: expected ordered_list, found paragraph
+  prompts/y/prompt.md::WARN:F.B.3:section '## Constraints' item 3 missing RFC 2119 keyword
+  tasks/099-x/task.md::WARN:F.B.7:Todo all checked but task_status='active' (expected 'done')
+```
+
+### §12.5 Pass / Fail Semantics
+
+```text
+# anchor: F.12.5
+fm-validate --check-body MUST FAIL when, for any required section in §12.2:
+  - the section's body shape does not match the declared shape;
+  - any item-count, link_pattern, item_pattern (severity=ERROR), min_chars,
+    max_paragraphs, must_contain, or min_blocks constraint is violated.
+
+fm-validate --check-body MUST PASS when:
+  - the section is absent (already a §4 ERROR — F.4.2 wins over F.B.*;
+    do not double-count);
+  - extra non-required sections appear with any shape;
+  - WARN-level diagnostics fire and `--strict` is unset.
+
+Default state: --check-body is OFF. Phasing per §12.6.
+```
+
+### §12.6 Phasing
+
+```text
+# anchor: F.12.6
+Phase 1 (Task 018): ship --check-body as opt-in. WARN-only by default,
+  ERROR-promotion via --strict. Existing files surface their drift but
+  do not block CI.
+
+Phase 2 (Task 019): migrate the corpus — every existing operational file
+  passes --check-body. Add a separate Task per type if the diff is large.
+
+Phase 3 (Task 020): flip --check-body ON by default in
+  tools/check-governance.sh, behind FM_TOOLCHAIN=1. Legacy validator
+  retired in the same Task.
+```
+
+## §13. Section Operations (fm-section, deferred)
+
+`fm-edit` only mutates frontmatter (§5.3 invariant). The body equivalent
+is a separate tool, `fm-section`, scoped to Task 018. The interface is
+specified here so callers and reviewers have a stable contract to reason
+about while implementation is queued.
+
+### §13.1 Tool Surface
+
+```text
+# anchor: F.13.1
+fm-section <path> --replace <name> --from-stdin
+fm-section <path> --append-to <name> --text <str>
+fm-section <path> --append-list-item <name> <item>
+fm-section <path> --check-task <name> <item-substring>
+fm-section <path> --insert-after <name> --new-heading <h> --from-stdin
+fm-section <path> --insert-before <name> --new-heading <h> --from-stdin
+fm-section <path> --delete <name>
+fm-section <path> --rename <old> <new>
+
+Section addressing accepts:
+  --section <name>            : first match (back-compat with fm-extract)
+  --section <name> --nth N    : 1-indexed match
+  --anchor <id>               : match by `# anchor: <id>` comment
+                                (binding for spec files per §1)
+```
+
+### §13.2 Invariants
+
+```text
+# anchor: F.13.2
+fm-section MUST preserve, byte-for-byte:
+  - the YAML frontmatter block (open fence through closing fence);
+  - every byte outside the address[ed] section's heading-line-through-
+    next-`## `-or-EOF span.
+
+fm-section MUST take an OS file lock for the whole read-modify-write,
+identical to fm-edit (§5.3).
+
+fm-section MUST NOT execute T3/T4 changes (mirrors §7.2). --rename is
+T2 only when no other file references the old heading; otherwise it
+MUST refuse and instruct the caller to file a Task.
+
+fm-section's mutations MUST satisfy the §12 body_schema for the file's
+type. A mutation that would leave the section in violation MUST be
+rejected with exit 4 (type error), regardless of --check-body state.
+```
+
+### §13.3 Section Addressing Under Duplicates
+
+```text
+# anchor: F.13.3
+fm-extract and fm-section MUST support the following disambiguation
+when more than one `## ` heading shares a normalised name:
+
+  default                  : first match (back-compat)
+  --nth N                  : 1-indexed
+  --all                    : every match (fm-extract only); separator is a
+                             single `\\f` form-feed byte between bodies
+  --anchor <id>            : match by `# anchor: <id>` comment on the line
+                             above the heading
+
+Unaddressable duplicates (no anchor, no --nth) on a write operation
+MUST exit 5 (ambiguous address).
+```
+
+## §14. Reading Extensions
+
+```text
+# anchor: F.14.1
+fm-extract grows three additional modes (additive, no behavioural
+change to existing flags):
+
+  --body                   : print everything after the closing `---\\n`
+                             (no truncation, no FM, no headings stripped)
+  --toc                    : print one normalised `## ` heading per line,
+                             optional anchor in trailing parens
+  --sections <a,b,c>       : batch read; output is the concatenation of
+                             each named section's body, separated by a
+                             single `\\f` form-feed
+
+Token caps (per §5.2) extend:
+  --toc                    : ≤ 1 KB
+  --sections               : the section cap (4 KB) is per-section; total
+                             output is uncapped (caller controls the count)
+```
+
+## §15. Sources
 
 In-house, cited by repo path:
 

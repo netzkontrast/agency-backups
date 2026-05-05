@@ -4,7 +4,7 @@ status: active
 slug: run-log
 summary: "Chronological log of every Repo Coherence Check and Nightly Maintenance run. The agent MUST read the last entry's end_commit before beginning any run."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 ---
 
 # Maintenance Run Log
@@ -157,3 +157,29 @@ The agent MUST append its own record **before** committing the run's repairs, so
       - Three delta research workspaces are research_phase: complete; only two carry
         SPEC.md outputs. The drift checklist in the coherence prompt does not yet differentiate
         spec-bearing vs review-bearing research, leading to false positives.
+
+### Run 2026-05-05 — Task 016 implementation
+- agent: claude-code (session claude/execute-task-16-ZrBJe)
+- start_commit: 9850947
+- end_commit: PENDING
+- baseline_commit: 9850947 (no preceding coherence run since merge of PR #46)
+- files_in_delta: 0
+- files_scanned: 0
+- t1_fixes: 0
+- t2_fixes: 0
+- t3_tasks_created: 0
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+    Not a coherence run — this is a *task implementation* record per
+    MAINTENANCE.md §2.3, logged so the new tools' availability is visible to
+    every subsequent agent. Shipped Task 016: the four-tool flexible
+    frontmatter toolchain at `tools/fm/{validate,extract,edit,query}.py` plus
+    `tools/fm/_core.py` and `maintenance/schemas/header-ontology.json`. The
+    legacy validators stay in CI; `FM_TOOLCHAIN=1` flips
+    `tools/check-governance.sh` to gate on `fm-validate` instead. 39 unittest
+    tests in `tests/fm/` cover SPEC §6 scenarios F.6.1–F.6.7 and the M01
+    falsification attacks P1–P5; all pass. The legacy `tools/_frontmatter.py`
+    is now a re-export shim around `tools/fm/_core` for one release window
+    (Task 017 retires it). Friction logged as FL1 in
+    `tasks/016-flexible-frontmatter-toolchain/friction-log.md`.
