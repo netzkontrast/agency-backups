@@ -53,6 +53,20 @@ To ensure navigation and traceability across the repository, agents MUST abide b
 2. **Consolidation First** — Consolidate inside the parent before reaching for sub-directories.
 3. **No Empty Scaffolding** — Do not pre-create subfolders "in case". Create them when populated.
 
+### 4.1 Mandatory Scaffold for `/prompts/<slug>/`
+
+Every `/prompts/<slug>/` folder MUST contain three files at creation time, regardless of which template the agent copies from:
+
+| File | Purpose | Enforcement |
+|---|---|---|
+| `prompt.md` | The executable instruction set, with L1 + Prompt-namespace frontmatter (per `PROMPT.md §3`). | `tools/lint-structure.py` emits an ERROR if absent. |
+| `brief.md` | One-screen orientation: what this prompt asks an agent to do and why, written for a human reader skimming the directory. | `tools/lint-structure.py` emits an ERROR if absent. |
+| `readme.md` | Directory index per §3, linking the two files above. | `tools/lint-structure.py` emits an ERROR if absent. |
+
+This rule is **mandatory at folder creation**, not deferred to a later cleanup step. The Task 001 friction log recorded multiple cases where `brief.md` or `readme.md` were omitted because the agent assumed the template was authoritative; relying on template fidelity alone is not sufficient. Treat the three-file scaffold as the contract, with the templates as a convenience.
+
+When a follow-up prompt is generated mid-run (e.g. a research run produces an open question that becomes a new prompt), the spawning agent MUST create all three files in the same commit that introduces the prompt folder. A prompt folder containing only `prompt.md` is a structural lint failure even if the body content is otherwise complete.
+
 ## 5. Frontmatter on Folder Indexes
 
 `readme.md` files in operational folders SHOULD carry L1 Vault Core frontmatter (per `TASK.md` §3) so the file system itself is queryable. Minimal example:

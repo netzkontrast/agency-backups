@@ -6,8 +6,8 @@ summary: "Implement the update plan derived from the governance-specs-update-res
 created: 2026-05-05
 updated: 2026-05-05
 task_id: "026"
-task_status: open
-task_owner: "jules"
+task_status: done
+task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts:
   - governance-specs-update-research
@@ -37,10 +37,11 @@ Implement the recommendations detailed in `research/governance-specs-update-rese
 5. Verify changes with linting and commit.
 
 ## Todo
-- [ ] Update `MAINTENANCE.md`.
-- [ ] Update `PRE_COMMIT.md`.
-- [ ] Update `FOLDERS.md`.
-- [ ] Update `TASK.md`.
+- [x] Update `MAINTENANCE.md`.
+- [x] Update `PRE_COMMIT.md`.
+- [x] Update `FOLDERS.md`.
+- [x] Update `TASK.md`.
 
 ## Links
 - Output SPEC: [`../../research/governance-specs-update-research/output/SPEC.md`](../../research/governance-specs-update-research/output/SPEC.md)
+- Friction log: [`./friction-log.md`](./friction-log.md)

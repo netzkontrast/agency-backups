@@ -305,7 +305,7 @@ Before committing a Task that is being closed, the agent MUST verify:
 
 1. **Frontmatter Integrity** — `task.md` carries every required L1 and Task-namespace key. YAML nesting depth is ≤ 1.
 2. **Prompt Linkage** — Every slug in `task_uses_prompts` resolves to an existing `/prompts/<slug>/prompt.md`.
-3. **Research Linkage** — Every slug in `task_spawns_research` resolves to an existing `/research/<slug>/` folder.
+3. **Research Linkage** — Every slug in `task_spawns_research` resolves to an existing `/research/<slug>/` folder. **Enforcement scope:** [`tools/lint-linkage.py`](./tools/lint-linkage.py) only runs this check when `task_status` ∈ {`done`, `updated`, `abandoned`}. While the Task is `open`, `in_progress`, or `blocked`, `task_spawns_research` MAY pre-declare a slug whose `/research/<slug>/` folder does not yet exist — this is the intended pattern for a Task that will produce the research workspace as part of its execution. The closure-only enforcement was clarified after Task 001 surfaced false-positive ERROR diagnostics on open Tasks that legitimately listed a future research slug.
 4. **Path Containment** — Files modified by the Task fall within `task_affects_paths` (or the agent has updated that list to reflect reality).
 5. **Todo Completion** — Either every `- [ ]` is checked, or `task_status` is `blocked`/`abandoned` with a reason in `notes.md`.
 6. **Readme Audit** — `/tasks/<NNN>-<slug>/readme.md` exists and links to every other file in the folder (per `FOLDERS.md`).
@@ -327,6 +327,13 @@ Two agents may simultaneously claim the next sequence number. The agent MUST res
 1. Running `ls tasks/ | sort` immediately before staging.
 2. If the chosen `<NNN>` already exists on disk or on the target branch, the agent MUST renumber to the next free `<NNN>` and update `task_id` accordingly.
 3. The Task slug MUST remain stable across renumbering; only `<NNN>` changes.
+
+**Enforcement status — agent responsibility, not linter-gated.** Duplicate `task_id` prevention is a spec-bearing rule (this section) but is **not** mechanically enforced by any current linter: `tools/check-governance.sh` will *not* block a commit that introduces a second Task with an already-used `task_id`. The collisions tracked by Tasks 013 and 024 prove this — they entered the repo and required dedicated cleanup Tasks rather than being caught at commit time. Until a linter check is added (a Task 019-class follow-up against `tools/fm/validate.py --type-check`), the **agent** carries the obligation:
+
+1. Before creating a new `tasks/<NNN>-<slug>/` folder, run `ls tasks/ | sort` and visually confirm the chosen `<NNN>` is unused on disk.
+2. Run `git fetch origin main && git ls-tree -r --name-only origin/main tasks/ | grep '^tasks/<NNN>-' || true` to confirm the slot is unused on the target branch as well — a folder may have been merged on `main` after the agent started its branch.
+3. If the slot is used, pick the next free `<NNN>` immediately; do not stage a colliding folder and rely on a future maintenance Task to fix it.
+4. When the agent encounters an *existing* duplicate at session start, the agent MUST file a renumber Task per `MAINTENANCE.md §3.5` rather than attempting to resolve it inline as a T1/T2 mutation.
 
 ### 8.2 Multi-Prompt Tasks
 
