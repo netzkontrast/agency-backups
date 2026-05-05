@@ -52,10 +52,9 @@ def _truncate(payload: str, cap: int) -> str:
 
 def extract_section(path: Path, heading: str) -> tuple[str, int]:
     text = path.read_text(encoding="utf-8")
-    found = _core.find_section_body(text, heading)
-    if found is None:
+    body = _core.find_section_body(text, heading)
+    if body is None:
         return "", 3
-    body, _, _ = found
     return _truncate(body, SECTION_CAP), 0
 
 

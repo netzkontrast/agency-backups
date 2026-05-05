@@ -269,46 +269,13 @@ def normalise_heading(name: str) -> str:
     return s.casefold()
 
 
-def iter_h2(body: str) -> Iterator[tuple[int, str]]:
-    """Yield (line_number, heading_text) for every `## ` heading in `body`.
-
-    Skips headings inside fenced code blocks.
-    """
+def _iter_lines_outside_fence(lines: Iterable[str]) -> Iterator[tuple[int, str]]:
+    """Yield (zero-based-index, line) for every line NOT inside a triple-
+    backtick or triple-tilde fenced code block. Fence lines themselves are
+    not yielded. The closing fence must use the same marker character as
+    the opening fence (``` ↔ ```, ~~~ ↔ ~~~)."""
     in_fence = False
     fence_marker: str | None = None
-    for i, line in enumerate(body.splitlines(), start=1):
-        s = line.lstrip()
-        if s.startswith("```") or s.startswith("~~~"):
-            marker = s[:3]
-            if not in_fence:
-                in_fence = True
-                fence_marker = marker
-            elif fence_marker == marker:
-                in_fence = False
-                fence_marker = None
-            continue
-        if in_fence:
-            continue
-        m = HEADING_RE.match(line)
-        if m and len(m.group(1)) == 2:
-            yield i, m.group(2)
-
-
-def find_section_body(text: str, heading: str) -> tuple[str, int, int] | None:
-    """Return (body_text, start_offset, end_offset) for the named `## heading`.
-
-    Matching is case-insensitive after `normalise_heading`. The body extends
-    from the line after the heading to (but not including) the next `## `
-    heading or end-of-file.
-    """
-    target = normalise_heading(heading)
-    fm_block, body = split_frontmatter_and_body(text)
-    fm_offset = len(fm_block)
-    lines = body.splitlines(keepends=True)
-    in_fence = False
-    fence_marker: str | None = None
-    start_line: int | None = None
-    end_line = len(lines)
     for idx, line in enumerate(lines):
         s = line.lstrip()
         if s.startswith("```") or s.startswith("~~~"):
@@ -322,11 +289,32 @@ def find_section_body(text: str, heading: str) -> tuple[str, int, int] | None:
             continue
         if in_fence:
             continue
+        yield idx, line
+
+
+def iter_h2(body: str) -> Iterator[tuple[int, str]]:
+    """Yield (line_number, heading_text) for every `## ` heading in `body`,
+    skipping headings inside fenced code blocks. Line numbers are 1-based."""
+    for idx, line in _iter_lines_outside_fence(body.splitlines()):
+        m = HEADING_RE.match(line)
+        if m and len(m.group(1)) == 2:
+            yield idx + 1, m.group(2)
+
+
+def find_section_body(text: str, heading: str) -> str | None:
+    """Return the body text of the named `## heading`, or None if absent.
+
+    Matching is case-insensitive after `normalise_heading`. The body extends
+    from the line after the heading up to (but not including) the next `## `
+    heading or end-of-file. Headings inside fenced code blocks are ignored."""
+    target = normalise_heading(heading)
+    _, body = split_frontmatter_and_body(text)
+    lines = body.splitlines(keepends=True)
+    start_line: int | None = None
+    end_line = len(lines)
+    for idx, line in _iter_lines_outside_fence(lines):
         m = HEADING_RE.match(line.rstrip("\n"))
-        if not m:
-            continue
-        level = len(m.group(1))
-        if level != 2:
+        if not m or len(m.group(1)) != 2:
             continue
         norm = normalise_heading(m.group(2))
         if start_line is None:
@@ -337,10 +325,7 @@ def find_section_body(text: str, heading: str) -> tuple[str, int, int] | None:
             break
     if start_line is None:
         return None
-    body_text = "".join(lines[start_line:end_line])
-    start_offset = fm_offset + sum(len(l) for l in lines[:start_line])
-    end_offset = fm_offset + sum(len(l) for l in lines[:end_line])
-    return body_text, start_offset, end_offset
+    return "".join(lines[start_line:end_line])
 
 
 # ---- Diagnostics -------------------------------------------------------------
