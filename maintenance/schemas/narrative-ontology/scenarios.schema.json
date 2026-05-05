@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agency.local/schemas/narrative-ontology/scenarios.schema.json",
   "title": "Narrative Ontology — Scenario Definition",
-  "description": "One persona-scenario record. Eleven scenarios ship in v0.1 (six 'novel.*' for the Novel Author Anna; five 'lyric.*' for the Organist / Lyric Architect Otto). New scenarios go through the proposal procedure declared in tasks/013-integrate-dramatica-ncp-skills/task.md § Scenario Taxonomy Rules.",
+  "description": "One persona-scenario record. Eleven scenarios ship in v0.1 (six 'novel.*' for the Novel Author Anna; five 'lyric.*' for the Organist / Lyric Architect Otto). New scenarios go through the proposal procedure declared in tasks/015-integrate-dramatica-ncp-skills/task.md § Scenario Taxonomy Rules.",
 
   "type": "object",
   "required": ["id", "persona", "summary", "created"],

@@ -1,6 +1,6 @@
 # Post-Implementation Acceptance — Synthesis Phase
 
-The kickoff (research_phase: kickoff, committed 2026-05-04) defined the seven Gherkin acceptance scenarios in [`/tasks/013-integrate-dramatica-ncp-skills/task.md` § Acceptance Criteria (Gherkin)](../../../tasks/013-integrate-dramatica-ncp-skills/task.md). Plan Steps 1–12 of the prompt are now executed. This file records empirical pass/fail status of each Gherkin scenario against the as-built system.
+The kickoff (research_phase: kickoff, committed 2026-05-04) defined the seven Gherkin acceptance scenarios in [`/tasks/015-integrate-dramatica-ncp-skills/task.md` § Acceptance Criteria (Gherkin)](../../../tasks/015-integrate-dramatica-ncp-skills/task.md). Plan Steps 1–12 of the prompt are now executed. This file records empirical pass/fail status of each Gherkin scenario against the as-built system.
 
 ## 7-of-7 Gherkin scenarios — empirical status
 
@@ -12,7 +12,7 @@ The kickoff (research_phase: kickoff, committed 2026-05-04) defined the seven Gh
 | **NO.1.4** | validate.py exits non-zero on bad ncp_appreciation | `tests/fixtures/ontology_ncp_bad.json` → subprocess invocation → exit 1 | **PASS** — verified by `tests/test_validate.py::test_ncp_enum_failure_exits_nonzero` |
 | **NO.1.5** | Pre-commit gate catches dynamic-pair reciprocity drift | `tests/fixtures/ontology_reciprocity_fail.json` → subprocess → exit 1 | **PASS** — verified by `tests/test_validate.py::test_reciprocity_violation_exits_nonzero` |
 | **NO.1.6** | Skill prose stays human-readable (frontmatter↔ontology equality) | `ontology-build.py --check-only` exits 0 on canonical tree (no drift between per-term blocks and ontology.json) | **PASS** — verified by `tests/test_ontology_build.py::test_check_only_canonical_no_drift` |
-| **NO.1.7** | Token-cost benchmark — average ≥ 60% reduction on lookup queries | 10-query benchmark in [`/tasks/013/notes.md § Token-Cost Benchmark`](../../../tasks/013-integrate-dramatica-ncp-skills/notes.md) | **PASS at 83.4% avg** — far exceeds the 60% gate; verified by `tests/test_nav.py::test_by_id_output_under_2kb` and the inline benchmark |
+| **NO.1.7** | Token-cost benchmark — average ≥ 60% reduction on lookup queries | 10-query benchmark in [`/tasks/013/notes.md § Token-Cost Benchmark`](../../../tasks/015-integrate-dramatica-ncp-skills/notes.md) | **PASS at 83.4% avg** — far exceeds the 60% gate; verified by `tests/test_nav.py::test_by_id_output_under_2kb` and the inline benchmark |
 
 ## What the as-built system delivers (in numbers)
 
@@ -62,4 +62,4 @@ These are filed as v0.2 follow-up tasks, not blockers for closing v0.1.
 
 ## Verdict
 
-**The Task 013 falsifiable acceptance gate is satisfied.** Plan Steps 1–12 + 14 are complete; Step 15 (close + PR) is the remaining mechanical operation.
+**The Task 015 falsifiable acceptance gate is satisfied.** Plan Steps 1–12 + 14 are complete; Step 15 (close + PR) is the remaining mechanical operation.

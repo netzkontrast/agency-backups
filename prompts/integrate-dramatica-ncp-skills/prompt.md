@@ -2,7 +2,7 @@
 type: prompt
 status: active
 slug: integrate-dramatica-ncp-skills
-summary: "Authoritative instruction set for Task 013 — author Narrative Ontology schemas, bootstrap the ontology, generate per-term frontmatter, build the dramatica-nav navigator suite, and wire all four narrative skills to it. Encodes the binding resolutions of OQ-A, OQ-B, OQ-C from the kickoff research SPEC."
+summary: "Authoritative instruction set for Task 015 — author Narrative Ontology schemas, bootstrap the ontology, generate per-term frontmatter, build the dramatica-nav navigator suite, and wire all four narrative skills to it. Encodes the binding resolutions of OQ-A, OQ-B, OQ-C from the kickoff research SPEC."
 created: 2026-05-04
 updated: 2026-05-04
 prompt_kind: task-spec
@@ -34,7 +34,7 @@ You are the **Narrative Ontology architect** for the four narrative skills (`dra
 
 The executor MUST read, in order:
 
-1. [`/tasks/013-integrate-dramatica-ncp-skills/task.md`](../../tasks/013-integrate-dramatica-ncp-skills/task.md) — the binding plan, the eleven persona scenarios, the schema skeletons, the Gherkin acceptance criteria.
+1. [`/tasks/015-integrate-dramatica-ncp-skills/task.md`](../../tasks/015-integrate-dramatica-ncp-skills/task.md) — the binding plan, the eleven persona scenarios, the schema skeletons, the Gherkin acceptance criteria.
 2. [`/research/integrate-dramatica-ncp-skills/output/SPEC.md`](../../research/integrate-dramatica-ncp-skills/output/SPEC.md) — the kickoff specification with the twelve normative recommendations addressed at this prompt's steps.
 3. [`/research/integrate-dramatica-ncp-skills/synthesis/inventory.md`](../../research/integrate-dramatica-ncp-skills/synthesis/inventory.md), [`id-audit.md`](../../research/integrate-dramatica-ncp-skills/synthesis/id-audit.md), [`scenario-survey.md`](../../research/integrate-dramatica-ncp-skills/synthesis/scenario-survey.md) — corpus inventory, the three resolved naming contradictions, and the first-pass scenario survey.
 4. [`/research/integrate-dramatica-ncp-skills/reflection/M01-falsification.md`](../../research/integrate-dramatica-ncp-skills/reflection/M01-falsification.md), [`M07-contradiction-log.md`](../../research/integrate-dramatica-ncp-skills/reflection/M07-contradiction-log.md) — falsification triggers and the nine catalogued contradictions.
@@ -72,7 +72,7 @@ Reciprocity invariant: for every standalone `kind: dynamic-pair` entry `dp.X`, t
 
 ### Step 0 — ReAct loop preamble (mandatory bookkeeping)
 
-Before any file edit, write `tasks/013-integrate-dramatica-ncp-skills/notes.md` with three sections (initially empty, populated as the loop runs):
+Before any file edit, write `tasks/015-integrate-dramatica-ncp-skills/notes.md` with three sections (initially empty, populated as the loop runs):
 
 ```markdown
 ## ReAct Trace
@@ -85,7 +85,7 @@ Before any file edit, write `tasks/013-integrate-dramatica-ncp-skills/notes.md` 
 <!-- populated at Step 12 -->
 ```
 
-Also flip `tasks/013-integrate-dramatica-ncp-skills/task.md`'s `task_status` to `in_progress` (already set) and `updated` to today's ISO date on every checkpoint.
+Also flip `tasks/015-integrate-dramatica-ncp-skills/task.md`'s `task_status` to `in_progress` (already set) and `updated` to today's ISO date on every checkpoint.
 
 ### Step 1 — Inventory term universe
 
@@ -184,7 +184,7 @@ Dependency footprint: stdlib + `pyyaml` + `jsonschema` (already in scope via Tas
 
 ### Step 10 — Wire skills + verify AGENTS.md
 
-[`AGENTS.md § Narrative Ontology`](../../AGENTS.md) already names the schemas, the navigator, and the load triggers (NO.1–NO.6) in advance — that section was authored at the start of Task 013 so every agent entering the repo sees the load contract regardless of whether they trigger a narrative skill. **Step 10 does not re-author it.** Step 10 verifies the path links resolve now that the schemas exist, and adds the *skill-specific* operational detail under each affected SKILL.md.
+[`AGENTS.md § Narrative Ontology`](../../AGENTS.md) already names the schemas, the navigator, and the load triggers (NO.1–NO.6) in advance — that section was authored at the start of Task 015 so every agent entering the repo sees the load contract regardless of whether they trigger a narrative skill. **Step 10 does not re-author it.** Step 10 verifies the path links resolve now that the schemas exist, and adds the *skill-specific* operational detail under each affected SKILL.md.
 
 Edit four `SKILL.md` files in this order:
 
@@ -234,7 +234,7 @@ Re-execute against the new artefacts. Append a synthesis pass to `/research/inte
 
 ### Step 15 — Friction log + closing
 
-When all acceptance scenarios pass: write `tasks/013-integrate-dramatica-ncp-skills/friction-log.md` per `FRUSTRATED.md`, flip `task_status` to `done`, run `tools/check-governance.sh` to confirm exit 0, and invoke `/sc:createPR` per `AGENTS.md § Closing Run Procedure`.
+When all acceptance scenarios pass: write `tasks/015-integrate-dramatica-ncp-skills/friction-log.md` per `FRUSTRATED.md`, flip `task_status` to `done`, run `tools/check-governance.sh` to confirm exit 0, and invoke `/sc:createPR` per `AGENTS.md § Closing Run Procedure`.
 
 ## E — Expectations
 
@@ -256,8 +256,8 @@ The following files MUST exist and be staged on completion:
 | `/tools/dramatica-nav/tests/` | Pytest-clean. |
 | `/tools/check-governance.sh`, `/PRE_COMMIT.md` | Wired to invoke `validate.py`. |
 | `/skills/{dramatica-theory,dramatica-vocabulary,ncp-author,novel-architect}/SKILL.md` | Navigator wiring sections. |
-| `/tasks/013-integrate-dramatica-ncp-skills/notes.md` | ReAct trace + benchmark + cross-check. |
-| `/tasks/013-integrate-dramatica-ncp-skills/friction-log.md` | FL declaration. |
+| `/tasks/015-integrate-dramatica-ncp-skills/notes.md` | ReAct trace + benchmark + cross-check. |
+| `/tasks/015-integrate-dramatica-ncp-skills/friction-log.md` | FL declaration. |
 | `/research/integrate-dramatica-ncp-skills/` | Synthesis-phase artefacts appended. |
 
 The seven Gherkin acceptance scenarios in `task.md § Acceptance Criteria (Gherkin)` MUST all pass. The token-cost benchmark in Step 12 MUST hit ≥ 60% reduction on lookup queries.

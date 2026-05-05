@@ -1,6 +1,6 @@
 # Cross-Skill ID Audit
 
-Reproducible greps across the four primary skills (`dramatica-theory`, `dramatica-vocabulary`, `ncp-author`, `novel-architect`). Three concrete naming contradictions surface; all are resolvable by the canonical-ID + aliases pattern proposed in [`/tasks/013-integrate-dramatica-ncp-skills/task.md § Target Architecture`](../../../tasks/013-integrate-dramatica-ncp-skills/task.md).
+Reproducible greps across the four primary skills (`dramatica-theory`, `dramatica-vocabulary`, `ncp-author`, `novel-architect`). Three concrete naming contradictions surface; all are resolvable by the canonical-ID + aliases pattern proposed in [`/tasks/015-integrate-dramatica-ncp-skills/task.md § Target Architecture`](../../../tasks/015-integrate-dramatica-ncp-skills/task.md).
 
 ## Contradiction 1 — Fourth throughline (the MC↔IC relationship)
 
@@ -106,4 +106,4 @@ This finding refines `task.md` § Target Architecture: the proposed `ncp_appreci
 
 ## What this audit does not resolve
 
-The audit identifies *where* the skills disagree on names; it does not author the resolution. Authoring the canonical `aliases` map for every entity is **Task 013 plan step 4** (bootstrap `ontology.json`). This audit's job is to ensure that step has the data it needs.
+The audit identifies *where* the skills disagree on names; it does not author the resolution. Authoring the canonical `aliases` map for every entity is **Task 015 plan step 4** (bootstrap `ontology.json`). This audit's job is to ensure that step has the data it needs.

@@ -2,12 +2,12 @@
 type: readme
 status: active
 slug: integrate-dramatica-ncp-skills
-summary: "Folder index for Task 013 — spec-driven, scenario-keyed restructure of the dramatica skills with deep ncp-author and novel-architect integration via a shared Narrative Ontology."
+summary: "Folder index for Task 015 — spec-driven, scenario-keyed restructure of the dramatica skills with deep ncp-author and novel-architect integration via a shared Narrative Ontology."
 created: 2026-05-04
 updated: 2026-05-04
 ---
 
-# Task 013 — Integrate Dramatica Skills With NCP and Novel-Architect
+# Task 015 — Integrate Dramatica Skills With NCP and Novel-Architect
 
 ## Files in this folder
 

@@ -5,7 +5,7 @@ slug: integrate-dramatica-ncp-skills
 summary: "Spec-driven, scenario-keyed restructure of dramatica-theory + dramatica-vocabulary, deeply integrated with ncp-author and novel-architect via a shared Narrative Ontology, per-term frontmatter, and a token-efficient Python navigator suite."
 created: 2026-05-04
 updated: 2026-05-04
-task_id: "013"
+task_id: "015"
 task_notes_kickoff: "Research kickoff completed 2026-05-04 — see /research/integrate-dramatica-ncp-skills/output/SPEC.md for findings and Plan-step recommendations."
 task_owner: "claude-code"
 task_status: in_progress
@@ -25,7 +25,7 @@ task_affects_paths:
   - AGENTS.md
 ---
 
-# Task 013 — Integrate Dramatica Skills With NCP and Novel-Architect
+# Task 015 — Integrate Dramatica Skills With NCP and Novel-Architect
 
 ## Goal
 

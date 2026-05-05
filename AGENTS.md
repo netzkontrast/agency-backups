@@ -198,7 +198,7 @@ This is a separate ontology from the Frontmatter Ontology. The Frontmatter Ontol
 
 The query surface over the ontology is [`tools/dramatica-nav/nav.py`](./tools/dramatica-nav/nav.py). Agents SHOULD prefer `nav.py` over loading the JSON files directly; it returns one record + a pointer rather than the whole table.
 
-> **Status note.** The schemas, ontology, and navigator are produced by [Task 013](./tasks/013-integrate-dramatica-ncp-skills/task.md) executing [the integrate-dramatica-ncp-skills prompt](./prompts/integrate-dramatica-ncp-skills/prompt.md). Until that task closes, paths above MAY resolve to placeholders or 404. The load triggers below remain binding the moment the files exist — agents MUST NOT pre-load before existence-check, and MUST start using them once they do exist.
+> **Status note.** The schemas, ontology, and navigator are produced by [Task 015](./tasks/015-integrate-dramatica-ncp-skills/task.md) executing [the integrate-dramatica-ncp-skills prompt](./prompts/integrate-dramatica-ncp-skills/prompt.md). Until that task closes, paths above MAY resolve to placeholders or 404. The load triggers below remain binding the moment the files exist — agents MUST NOT pre-load before existence-check, and MUST start using them once they do exist.
 
 ### When to Load (RFC 2119)
 

@@ -2,7 +2,7 @@
 
 ## Scope
 
-This is the **kickoff** research phase. It collects evidence required by Task 013 plan steps 2–11 (schemas, ontology bootstrap, frontmatter annotation, scenario tagging) but does not author any of those artefacts itself. Authoring is downstream and out of scope for this run.
+This is the **kickoff** research phase. It collects evidence required by Task 015 plan steps 2–11 (schemas, ontology bootstrap, frontmatter annotation, scenario tagging) but does not author any of those artefacts itself. Authoring is downstream and out of scope for this run.
 
 ## Methods applied
 
@@ -29,9 +29,9 @@ The vocabulary corpus (22 files) and theory corpus (15 chapters) were enumerated
 ## Methods deliberately deferred to downstream phases
 
 - **M03 Pre-Mortem** — already authored as part of `task.md § Pre-Work`; re-running here would be redundant.
-- **M13 Adversarial Query Expansion** — relevant when the Task 013 prompt body is authored (step 14). Not relevant to a corpus-walk kickoff.
-- **M0 Reflection** — runs at session-end of the *full* Task 013 run, not at the kickoff sub-run.
+- **M13 Adversarial Query Expansion** — relevant when the Task 015 prompt body is authored (step 14). Not relevant to a corpus-walk kickoff.
+- **M0 Reflection** — runs at session-end of the *full* Task 015 run, not at the kickoff sub-run.
 
 ## Honest framing
 
-This kickoff is intentionally narrow. It answers three concrete questions (*what's in the corpus?*, *do the skills agree on names?*, *which scenarios attach where?*) and stops. The schema-authoring, ontology-bootstrap, and navigator-implementation work in Task 013's plan downstream of this kickoff is a different shape of work and benefits from a different methodology — that's why the prompt at `/prompts/integrate-dramatica-ncp-skills/prompt.md` will use `RISEN+ReAct` while this kickoff used corpus-walk + targeted greps.
+This kickoff is intentionally narrow. It answers three concrete questions (*what's in the corpus?*, *do the skills agree on names?*, *which scenarios attach where?*) and stops. The schema-authoring, ontology-bootstrap, and navigator-implementation work in Task 015's plan downstream of this kickoff is a different shape of work and benefits from a different methodology — that's why the prompt at `/prompts/integrate-dramatica-ncp-skills/prompt.md` will use `RISEN+ReAct` while this kickoff used corpus-walk + targeted greps.

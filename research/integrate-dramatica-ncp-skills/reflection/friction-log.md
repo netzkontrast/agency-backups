@@ -33,4 +33,4 @@ The kickoff scope from the prompt: corpus inventory + cross-skill ID audit + sce
 
 ## Action items
 
-- None at the friction level. All forward-pointing actions land in `output/SPEC.md § Recommendations for Task 013`.
+- None at the friction level. All forward-pointing actions land in `output/SPEC.md § Recommendations for Task 015`.

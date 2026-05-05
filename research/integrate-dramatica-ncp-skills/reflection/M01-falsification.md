@@ -4,7 +4,7 @@
 
 > *"Per-term frontmatter is sufficient to power scenario-keyed lookup without a separate scenario index file."*
 
-This is the design hypothesis at the heart of [`task.md § Target Architecture`](../../../tasks/013-integrate-dramatica-ncp-skills/task.md). If it survives, Task 013 plan steps 5–9 are correctly scoped. If it fails, the navigator suite needs an additional offline `scenario-index.json` build pass, which would expand plan step 8 by ~30%.
+This is the design hypothesis at the heart of [`task.md § Target Architecture`](../../../tasks/015-integrate-dramatica-ncp-skills/task.md). If it survives, Task 015 plan steps 5–9 are correctly scoped. If it fails, the navigator suite needs an additional offline `scenario-index.json` build pass, which would expand plan step 8 by ~30%.
 
 ## Disconfirmation conditions identified in `task.md` Pre-Work
 
@@ -27,7 +27,7 @@ The Task itself names two falsification triggers; we re-state them and test agai
 
 ## Pre-commitment
 
-If the **real** per-term tagging in Task 013 plan step 6 produces a median >5, the M01 contingency triggers automatically: Plan step 8 expands to add `tools/dramatica-nav/scenario-index.py` (compiles `scenario-index.json` from per-term frontmatter; `nav.py by-scenario` reads the index instead of walking files). The contingency is recorded here so Step 6 can flip the design without Step 8 needing rework.
+If the **real** per-term tagging in Task 015 plan step 6 produces a median >5, the M01 contingency triggers automatically: Plan step 8 expands to add `tools/dramatica-nav/scenario-index.py` (compiles `scenario-index.json` from per-term frontmatter; `nav.py by-scenario` reads the index instead of walking files). The contingency is recorded here so Step 6 can flip the design without Step 8 needing rework.
 
 ## Honest framing
 
@@ -35,6 +35,6 @@ The kickoff survey is first-pass. It is plausible that downstream tagging expose
 
 ## What this falsification does *not* test
 
-- The performance/token-cost claim (M01 hypothesis is **structural**: can the data fit; it is not the **performance** hypothesis: does navigator-path beat prose-path by ≥60%? Performance is tested at Task 013 plan step 12 benchmark, not here).
+- The performance/token-cost claim (M01 hypothesis is **structural**: can the data fit; it is not the **performance** hypothesis: does navigator-path beat prose-path by ≥60%? Performance is tested at Task 015 plan step 12 benchmark, not here).
 - The cross-skill-ID hypothesis (resolved by M07; see [`M07-contradiction-log.md`](./M07-contradiction-log.md)).
 - The persona-set sufficiency (whether two personas Anna + Otto cover the user's real use cases is an authorial judgement, not a falsifiable claim — testable only by use).

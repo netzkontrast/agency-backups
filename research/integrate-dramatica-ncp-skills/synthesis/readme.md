@@ -9,7 +9,7 @@ updated: 2026-05-04
 
 # Synthesis
 
-The kickoff produced three evidence files; together they unblock Task 013 plan steps 2–11.
+The kickoff produced three evidence files; together they unblock Task 015 plan steps 2–11.
 
 ## Hard results
 

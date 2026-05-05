@@ -1,4 +1,4 @@
-# Task 013 — Notes
+# Task 015 — Notes
 
 > Running scratchpad for the dramatica × NCP × novel-architect ontology integration. Per the executing prompt's Step 0, this file is authored before any other file edit and grows in three sections as the run proceeds.
 
@@ -10,7 +10,7 @@
 - **O:** what came back / what I learned. -->
 
 - **R:** Compress context and start the prompt; need notes.md skeleton before any schema work per Step 0.
-- **A:** Wrote `tasks/013-integrate-dramatica-ncp-skills/notes.md` with three skeleton sections.
+- **A:** Wrote `tasks/015-integrate-dramatica-ncp-skills/notes.md` with three skeleton sections.
 - **O:** File present; downstream steps will populate.
 
 - **R:** Step 1 needs a per-term inventory of all 22 vocab files; doing this in main context would burn ~30K tokens and is read-only — perfect for an Explore subagent.
@@ -123,7 +123,7 @@ Plus `maintenance/schemas/narrative-ontology/readme.md` (≈170 lines) — reade
 
 ### Defensive note
 
-`jsonschema` is not in the repo's pinned environment yet — Task 011's plan calls for adding it. The Task 013 `validate.py` (Plan step 8) MUST declare `jsonschema` as a dependency. If Task 011 ships first, the dependency is already in scope.
+`jsonschema` is not in the repo's pinned environment yet — Task 011's plan calls for adding it. The Task 015 `validate.py` (Plan step 8) MUST declare `jsonschema` as a dependency. If Task 011 ships first, the dependency is already in scope.
 
 ### Audit (post-Step-2 hardening sweep)
 
@@ -363,4 +363,4 @@ It does NOT invalidate the gate (the average is what matters), but it surfaces a
 2. **The schema/ontology/per-term-frontmatter design holds at production load.** Cross-entry resolution, alias lookup, scenario-tag filtering, KTAD walks all return tractable results.
 3. **The token-economy claim from prompt § Closing is no longer a hypothesis.** It's a measurement.
 
-The full Task 013 falsifiable acceptance gate is satisfied. Plan Step 12 closes.
+The full Task 015 falsifiable acceptance gate is satisfied. Plan Step 12 closes.

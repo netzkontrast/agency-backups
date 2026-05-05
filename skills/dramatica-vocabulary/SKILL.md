@@ -209,7 +209,7 @@ python3 tools/dramatica-nav/nav.py by-quad quad.logic-feeling-el
 
 Output ist JSON + ein `term_file`-Pointer. Mit `--full` wird die Prose-Section via `extract.py` inline gehängt; ohne `--full` öffnet der Agent die Prose nur, wenn die strukturelle Antwort nicht ausreicht.
 
-**Token-Ökonomie:** Im Step-12-Benchmark (notes.md im Task 013) liegt die durchschnittliche Reduktion bei **83.4 %** gegenüber dem prose-only Pfad — die Lookup-Disziplin oben bleibt korrekt für konzeptuelle Fragen; für strukturelle Fragen ist `nav.py` der vorgesehene Erstgriff.
+**Token-Ökonomie:** Im Step-12-Benchmark (notes.md im Task 015) liegt die durchschnittliche Reduktion bei **83.4 %** gegenüber dem prose-only Pfad — die Lookup-Disziplin oben bleibt korrekt für konzeptuelle Fragen; für strukturelle Fragen ist `nav.py` der vorgesehene Erstgriff.
 
 Cross-Cutting: die Lade-Trigger (NO.1–NO.6) für die Narrative-Ontology stehen in [`AGENTS.md § Narrative Ontology`](../../AGENTS.md). Non-narrative Sessions laden die Ontology gar nicht (NO.5 — Token-Ökonomie).
 

@@ -2,7 +2,7 @@
 type: research
 status: active
 slug: integrate-dramatica-ncp-skills
-summary: "Kickoff specification — consolidated findings from the corpus inventory, cross-skill ID audit, and scenario-tag survey, with concrete recommendations addressed at Task 013 plan steps 2 through 11."
+summary: "Kickoff specification — consolidated findings from the corpus inventory, cross-skill ID audit, and scenario-tag survey, with concrete recommendations addressed at Task 015 plan steps 2 through 11."
 created: 2026-05-04
 updated: 2026-05-04
 research_phase: synthesis
@@ -18,15 +18,15 @@ research_friction_level: FL0
 |---|---|
 | **Maturity** | Draft — kickoff phase |
 | **Last review date** | 2026-05-04 |
-| **Primary sources** | `skills/dramatica-theory/`, `skills/dramatica-vocabulary/`, `skills/ncp-author/`, `skills/novel-architect/`, `skills/research-prompt-optimizer/`, `skills/spec-skill/`; the eleven persona scenarios in [`/tasks/013-integrate-dramatica-ncp-skills/task.md`](../../../tasks/013-integrate-dramatica-ncp-skills/task.md). |
+| **Primary sources** | `skills/dramatica-theory/`, `skills/dramatica-vocabulary/`, `skills/ncp-author/`, `skills/novel-architect/`, `skills/research-prompt-optimizer/`, `skills/spec-skill/`; the eleven persona scenarios in [`/tasks/015-integrate-dramatica-ncp-skills/task.md`](../../../tasks/015-integrate-dramatica-ncp-skills/task.md). |
 | **Methods applied** | Corpus walk via Explore subagent; M01 Falsification; M07 Contradiction Log. |
-| **Out of scope** | Schema authoring, ontology bootstrap, navigator implementation — those are downstream Task 013 plan steps and produce their own artefacts. |
+| **Out of scope** | Schema authoring, ontology bootstrap, navigator implementation — those are downstream Task 015 plan steps and produce their own artefacts. |
 
 ## §1. Normative Conventions
 
 The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in BCP 14 [RFC 2119] [RFC 8174] when, and only when, they appear in all capitals as shown here.
 
-The findings in §3 are normative for downstream Task 013 work. The discussion in §2 is rationale; recommendations in §4 are the operative output.
+The findings in §3 are normative for downstream Task 015 work. The discussion in §2 is rationale; recommendations in §4 are the operative output.
 
 ## §2. Findings
 
@@ -85,13 +85,13 @@ The eleven persona scenarios from `task.md` map to bounded subsets of the term u
 
 The kickoff Falsification check (M01) confirms: per-term frontmatter is structurally sufficient for the lookup workload defined by the eleven scenarios. No separate `scenario-index.json` is required for the v0.1 design.
 
-A pre-commitment is recorded: if Task 013 plan step 6 produces a real per-term tag median > 5, plan step 8 expands to add `scenario-index.py`. The contingency is small (≈80 lines) and does not require schema changes.
+A pre-commitment is recorded: if Task 015 plan step 6 produces a real per-term tag median > 5, plan step 8 expands to add `scenario-index.py`. The contingency is small (≈80 lines) and does not require schema changes.
 
 ### §2.7 Multilingual lookup gap
 
 The synonym lookup is EN-only (512 rows) but the vocabulary skill triggers explicitly on German queries. The schema MUST allow `aliases.<locale>` (at minimum `aliases.en` and `aliases.de`) so DE→canonical lookup is symmetric to EN.
 
-## §3. Normative Recommendations for Task 013
+## §3. Normative Recommendations for Task 015
 
 ### §3.1 Plan step 2 — Schema authoring
 
@@ -133,7 +133,7 @@ The synonym lookup is EN-only (512 rows) but the vocabulary skill triggers expli
 
 ## §4. Open Questions Surfaced
 
-The kickoff surfaces three questions that block clean schema authoring. **All three are resolved** in [`/prompts/integrate-dramatica-ncp-skills/prompt.md § Binding Resolutions of Open Questions`](../../../prompts/integrate-dramatica-ncp-skills/prompt.md); the resolutions are binding for downstream Task 013 work.
+The kickoff surfaces three questions that block clean schema authoring. **All three are resolved** in [`/prompts/integrate-dramatica-ncp-skills/prompt.md § Binding Resolutions of Open Questions`](../../../prompts/integrate-dramatica-ncp-skills/prompt.md); the resolutions are binding for downstream Task 015 work.
 
 | ID | Question | Resolution (binding) |
 |---|---|---|
@@ -146,7 +146,7 @@ The resolutions modify Plan steps 2 (schema fields), 4 (ontology bootstrap), 8 (
 ## §5. Acceptance Criteria for the Kickoff
 
 ```gherkin
-Feature: Kickoff research delivers the evidence Task 013 plan steps 2–11 require
+Feature: Kickoff research delivers the evidence Task 015 plan steps 2–11 require
 
   # anchor: KO.1.1
   Scenario: Corpus inventory exists and is complete
@@ -192,15 +192,15 @@ Feature: Kickoff research delivers the evidence Task 013 plan steps 2–11 requi
 
 This kickoff:
 
-- Did **not** author any JSON Schema. That is Task 013 plan step 2.
-- Did **not** modify any skill file. That is Task 013 plan step 11.
-- Did **not** implement any Python script. That is Task 013 plan step 9.
-- Did **not** measure token-cost reduction. That is Task 013 plan step 13.
+- Did **not** author any JSON Schema. That is Task 015 plan step 2.
+- Did **not** modify any skill file. That is Task 015 plan step 11.
+- Did **not** implement any Python script. That is Task 015 plan step 9.
+- Did **not** measure token-cost reduction. That is Task 015 plan step 13.
 - Treated provenance as per-entry (coarse). A per-field provenance map may be needed later; recorded as a meta-question in `reflection/M07-contradiction-log.md`.
 
 ## §7. Source Index
 
-- [`/tasks/013-integrate-dramatica-ncp-skills/task.md`](../../../tasks/013-integrate-dramatica-ncp-skills/task.md) — the binding plan this kickoff feeds.
+- [`/tasks/015-integrate-dramatica-ncp-skills/task.md`](../../../tasks/015-integrate-dramatica-ncp-skills/task.md) — the binding plan this kickoff feeds.
 - [`/prompts/integrate-dramatica-ncp-skills/prompt.md`](../../../prompts/integrate-dramatica-ncp-skills/prompt.md) — the executing prompt (currently `status: draft`).
 - [`/research/integrate-dramatica-ncp-skills/synthesis/inventory.md`](../synthesis/inventory.md) — corpus inventory.
 - [`/research/integrate-dramatica-ncp-skills/synthesis/id-audit.md`](../synthesis/id-audit.md) — cross-skill ID audit.

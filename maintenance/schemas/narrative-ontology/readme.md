@@ -9,7 +9,7 @@ updated: 2026-05-04
 
 # Narrative Ontology — Schemas
 
-Four JSON Schemas (Draft 2020-12) plus two data files form the canonical contract between [`dramatica-theory`](../../../skills/dramatica-theory/), [`dramatica-vocabulary`](../../../skills/dramatica-vocabulary/), [`ncp-author`](../../../skills/ncp-author/), and [`novel-architect`](../../../skills/novel-architect/). The contract is governed by [Task 013](../../../tasks/013-integrate-dramatica-ncp-skills/) and named in [`AGENTS.md § Narrative Ontology`](../../../AGENTS.md). Most repository tasks do not load these files — see `AGENTS.md` rule **NO.5** (token economy: non-narrative work MUST NOT load the ontology).
+Four JSON Schemas (Draft 2020-12) plus two data files form the canonical contract between [`dramatica-theory`](../../../skills/dramatica-theory/), [`dramatica-vocabulary`](../../../skills/dramatica-vocabulary/), [`ncp-author`](../../../skills/ncp-author/), and [`novel-architect`](../../../skills/novel-architect/). The contract is governed by [Task 015](../../../tasks/015-integrate-dramatica-ncp-skills/) and named in [`AGENTS.md § Narrative Ontology`](../../../AGENTS.md). Most repository tasks do not load these files — see `AGENTS.md` rule **NO.5** (token economy: non-narrative work MUST NOT load the ontology).
 
 ## Files
 
@@ -19,8 +19,8 @@ Four JSON Schemas (Draft 2020-12) plus two data files form the canonical contrac
 | [`scenarios.schema.json`](./scenarios.schema.json) | One persona-scenario entry — `novel.*` or `lyric.*` ID, persona, summary. |
 | [`term-frontmatter.schema.json`](./term-frontmatter.schema.json) | Per-term YAML block embedded at every `## <Term>` anchor in `dramatica-vocabulary/references/*.md`. Mirrors `ontology.schema.json` minus `term_file`. |
 | [`theory-chunk.schema.json`](./theory-chunk.schema.json) | Chapter-head YAML for `dramatica-theory/references/*.md`. Lists `covers_ontology_ids` + `serves_scenarios`. |
-| `ontology.json` | Canonical entry table (~215 entries). Authored in Task 013 plan step 4; rebuilt from the per-term frontmatter by `tools/dramatica-nav/ontology-build.py`. |
-| `scenarios.json` | The eleven v0.1 persona scenarios. Authored in Task 013 plan step 3. |
+| `ontology.json` | Canonical entry table (~215 entries). Authored in Task 015 plan step 4; rebuilt from the per-term frontmatter by `tools/dramatica-nav/ontology-build.py`. |
+| `scenarios.json` | The eleven v0.1 persona scenarios. Authored in Task 015 plan step 3. |
 
 The two data files (`ontology.json`, `scenarios.json`) land in plan steps 3–4 and are not present until then. The schemas are present from plan step 2 onward.
 
@@ -36,7 +36,7 @@ ontology.json (canonical entry table)
 agents reading the navigator output
 ```
 
-The reverse direction (ontology → per-term frontmatter) is **intentionally not supported**. Frontmatter is the source of truth; the table is a projection. This avoids the "two sources of truth" failure mode flagged in [`task.md § Pre-Work § Pre-Mortem`](../../../tasks/013-integrate-dramatica-ncp-skills/task.md).
+The reverse direction (ontology → per-term frontmatter) is **intentionally not supported**. Frontmatter is the source of truth; the table is a projection. This avoids the "two sources of truth" failure mode flagged in [`task.md § Pre-Work § Pre-Mortem`](../../../tasks/015-integrate-dramatica-ncp-skills/task.md).
 
 ## Binding resolutions of OQ-A / OQ-B / OQ-C
 
@@ -65,7 +65,7 @@ Two complementary representations:
 1. **Property of an Element / Variation entry.** `dynamic_pair_id` field points at the partner's ontology ID. Constant-time partner lookup. Forbidden for `kind: archetype | quad | dynamic-pair | concept | class | throughline` (schema enforces).
 2. **Standalone `kind: dynamic-pair` entry.** Each of the 75 reciprocal pairs from `dramatica-vocabulary/references/dynamic-pairs-index.md` becomes its own ontology entry with `pair_member_a` + `pair_member_b`. Required-iff-`kind=dynamic-pair`; forbidden otherwise (schema enforces).
 
-**Reciprocity invariant.** For every standalone `dp.X` with `pair_member_a == el.A` and `pair_member_b == el.B`: `el.A.dynamic_pair_id == el.B` and `el.B.dynamic_pair_id == el.A`. Enforced at runtime by `tools/dramatica-nav/validate.py` (Task 013 plan step 9).
+**Reciprocity invariant.** For every standalone `dp.X` with `pair_member_a == el.A` and `pair_member_b == el.B`: `el.A.dynamic_pair_id == el.B` and `el.B.dynamic_pair_id == el.A`. Enforced at runtime by `tools/dramatica-nav/validate.py` (Task 015 plan step 9).
 
 ## NCP enum closure (≈ 60% partial / 30% absent / 10% clean)
 
@@ -99,7 +99,7 @@ Every entry carries `provenance: source-original | extension-derived`. The split
 
 ## License note
 
-Per [`task.md § Pre-Work § M13`](../../../tasks/013-integrate-dramatica-ncp-skills/task.md), Dramatica source prose is © Screenplay Systems and is not redistributable. The schemas carry only IDs, relationships, and short structural descriptions written from scratch; no source prose is reproduced here or in `ontology.json`.
+Per [`task.md § Pre-Work § M13`](../../../tasks/015-integrate-dramatica-ncp-skills/task.md), Dramatica source prose is © Screenplay Systems and is not redistributable. The schemas carry only IDs, relationships, and short structural descriptions written from scratch; no source prose is reproduced here or in `ontology.json`.
 
 ## Bumping the schema
 

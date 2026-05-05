@@ -25,7 +25,7 @@
 
 ## Target audience
 
-The agent (Claude Code primary; Jules viable) that picks up Task 013 from `/tasks/013-integrate-dramatica-ncp-skills/`. The downstream beneficiaries are the Novel Author persona (working through `novel-architect`) and the Organist / Lyric Architect persona (working through `the-agency-system-architect` + `suno-lyric-writer`).
+The agent (Claude Code primary; Jules viable) that picks up Task 015 from `/tasks/015-integrate-dramatica-ncp-skills/`. The downstream beneficiaries are the Novel Author persona (working through `novel-architect`) and the Organist / Lyric Architect persona (working through `the-agency-system-architect` + `suno-lyric-writer`).
 
 ## Intended model / agent
 

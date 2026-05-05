@@ -14,7 +14,7 @@ Conflicting claims surfaced during the kickoff walk, with hypothesised cause and
 | 8 | The vocabulary `_synonym-lookup.md` is EN-only (512 rows, no DE). | `dramatica-vocabulary/SKILL.md` description triggers explicitly on German phrases ("Storyform anlegen", "Throughline bestimmen", etc.). | Bootstrap content was extracted from the EN source; DE aliases were never added. | None — this is a content gap, not a contradiction. | **Schema-level resolution.** Add `aliases.de` field to the term-frontmatter schema so DE→canonical lookup is symmetric to EN. |
 | 9 | `task.md § Target Architecture` proposes `ncp_appreciation_partial: false` as default per-term. | NCP only encodes Elements / Variations / Types via `<Throughline> <Slot>` storypoint strings, never as standalone enum values. | Task author wrote the schema before the kickoff audit measured NCP enum closure. | `synthesis/id-audit.md § NCP enum closure check`. | **Resolvable in the schema.** The `ncp_appreciation` field MUST be allowed *absent* (not just `_partial: true`). Realistic split per the audit: ≈60% partial / 30% omitted / 10% clean. |
 
-## How the contradictions ripple into Task 013 plan
+## How the contradictions ripple into Task 015 plan
 
 - Items 1–3 land directly in **Plan step 4** (`ontology.json` bootstrap) — author with the canonical labels above and populate the alias maps.
 - Items 4–5 modify **Plan step 2** (schema authoring) — the `kind` enum MUST include `concept` alongside `element` / `type` / `archetype`.

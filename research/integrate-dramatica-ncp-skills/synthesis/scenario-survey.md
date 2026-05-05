@@ -1,6 +1,6 @@
 # Scenario-Tag Survey
 
-First-pass mapping of the eleven personas-scenarios from [`/tasks/013-integrate-dramatica-ncp-skills/task.md § Personas and Working Scenarios`](../../../tasks/013-integrate-dramatica-ncp-skills/task.md) to candidate term files. **Confidence: medium.** This is a starting heuristic for Task 013 plan step 6 ("tag the top-≥40 terms"); the final per-term tagging happens during that step by reading individual term sections, not whole files.
+First-pass mapping of the eleven personas-scenarios from [`/tasks/015-integrate-dramatica-ncp-skills/task.md § Personas and Working Scenarios`](../../../tasks/015-integrate-dramatica-ncp-skills/task.md) to candidate term files. **Confidence: medium.** This is a starting heuristic for Task 015 plan step 6 ("tag the top-≥40 terms"); the final per-term tagging happens during that step by reading individual term sections, not whole files.
 
 The schema's `scenarios: ≤8` per-term cap is enforced in the schema; the per-scenario candidate counts below are *first-pass*, expected to be filtered down to 8 or fewer per term by the downstream tagger.
 
@@ -140,9 +140,9 @@ The schema's `scenarios: ≤8` per-term cap is enforced in the schema; the per-s
 
 ## Falsification check (M01 self-applied)
 
-The `task.md` design hypothesis was *"per-term frontmatter is sufficient to power scenario-keyed lookup without a separate scenario index."* This survey's median of ~2.4 scenarios per tagged term, and the 8-cap holding for every hot term, **leaves the hypothesis intact** for the kickoff phase. Re-test after Task 013 plan step 6 produces real per-term tags; if the median drifts above 5, the navigator MUST also build `scenario-index.json` per the M01 contingency in `methodology.md`.
+The `task.md` design hypothesis was *"per-term frontmatter is sufficient to power scenario-keyed lookup without a separate scenario index."* This survey's median of ~2.4 scenarios per tagged term, and the 8-cap holding for every hot term, **leaves the hypothesis intact** for the kickoff phase. Re-test after Task 015 plan step 6 produces real per-term tags; if the median drifts above 5, the navigator MUST also build `scenario-index.json` per the M01 contingency in `methodology.md`.
 
 ## What this survey does not do
 
-- Does not authoritatively tag any term. The actual `scenarios: [...]` list per term is produced in Task 013 plan step 6.
+- Does not authoritatively tag any term. The actual `scenarios: [...]` list per term is produced in Task 015 plan step 6.
 - Does not stretch beyond the 11 scenarios defined in `task.md`. New scenarios go through the proposal procedure declared in `task.md § Scenario Taxonomy Rules`.

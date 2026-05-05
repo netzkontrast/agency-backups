@@ -2,7 +2,7 @@
 type: prompt
 status: draft
 slug: integrate-dramatica-ncp-skills
-summary: "Stub prompt for Task 013 — the binding instruction set is authored in Task 013 step 14; this stub exists so /tasks/013/ link integrity passes the linkage linter."
+summary: "Stub prompt for Task 015 — the binding instruction set is authored in Task 015 step 14; this stub exists so /tasks/013/ link integrity passes the linkage linter."
 created: 2026-05-04
 updated: 2026-05-04
 prompt_kind: task-spec
@@ -16,7 +16,7 @@ prompt_spawned_from_research: ""
 
 ## Status
 
-`draft`. The full executable instruction set is authored as **step 14** of [`/tasks/013-integrate-dramatica-ncp-skills/task.md`](../../tasks/013-integrate-dramatica-ncp-skills/task.md). This file is intentionally a stub right now so that:
+`draft`. The full executable instruction set is authored as **step 14** of [`/tasks/015-integrate-dramatica-ncp-skills/task.md`](../../tasks/015-integrate-dramatica-ncp-skills/task.md). This file is intentionally a stub right now so that:
 
 1. The linkage linter (`tools/lint-linkage.py`, [`TASK.md §7.2`](../../TASK.md)) accepts the `task_uses_prompts: integrate-dramatica-ncp-skills` declaration on the Task.
 2. Future agents reading the Task can navigate to this folder and find the in-progress prompt rather than a 404.
@@ -49,7 +49,7 @@ The author MUST verify, before flipping `status` from `draft` to `active`:
 
 ## Links
 
-- Owning Task: [`/tasks/013-integrate-dramatica-ncp-skills/task.md`](../../tasks/013-integrate-dramatica-ncp-skills/task.md)
+- Owning Task: [`/tasks/015-integrate-dramatica-ncp-skills/task.md`](../../tasks/015-integrate-dramatica-ncp-skills/task.md)
 - Governing specs: [`PROMPT.md`](../../PROMPT.md), [`TASK.md`](../../TASK.md), [`AGENTS.md`](../../AGENTS.md)
 - Critical-thinking source: [`/skills/research-prompt-optimizer/`](../../skills/research-prompt-optimizer/)
 - Spec-discipline source: [`/skills/spec-skill/`](../../skills/spec-skill/)
