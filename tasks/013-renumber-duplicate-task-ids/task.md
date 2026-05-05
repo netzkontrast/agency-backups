@@ -6,12 +6,14 @@ summary: "Found by coherence check 2026-05-05: two pairs of tasks share task_id 
 created: 2026-05-05
 updated: 2026-05-05
 task_id: "013"
-task_status: open
-task_owner: "unassigned"
+task_status: updated
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
+task_superseded_by:
+  - "024"
 task_affects_paths:
   - tasks/006-skills-navigation-bootstrap/
   - tasks/006-surface-skills-architecture/

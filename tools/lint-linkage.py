@@ -37,6 +37,28 @@ PROVIDER_NAMES = {"gemini", "gpt", "human", "other"}
 TODO_UNCHECKED_RE = re.compile(r"^- \[ \]", re.MULTILINE)
 
 
+def _find_task_by_id_or_slug(tasks_root: Path, ref: str) -> Path | None:
+    """Resolve a task_id (e.g. '010') or slug to its /tasks/<NNN>-<slug>/ folder.
+
+    Used by the 'updated' lifecycle reciprocity check (TASK.md §4.7, §7.10):
+    a successor reference may be either a zero-padded id or the kebab-case slug
+    of the target Task. Returns None if no folder matches.
+    """
+    if not ref:
+        return None
+    ref = ref.strip()
+    for task_dir in tasks_root.iterdir():
+        if not task_dir.is_dir():
+            continue
+        name = task_dir.name
+        if "-" not in name:
+            continue
+        nnn, _, slug = name.partition("-")
+        if ref == nnn or ref == slug or ref == name:
+            return task_dir
+    return None
+
+
 def research_slug_resolves(research_root: Path, slug: str) -> bool:
     """A research slug resolves if /research/<slug>/ exists OR a provider
     subfolder /research/<provider>/<slug>/ exists. The provider case covers
@@ -104,6 +126,50 @@ def lint_tasks(
                     f"{task_dir}: task_status is 'done' but friction-log.md is missing "
                     f"(TASK.md §7.6 / Spec-L.3.1)"
                 )
+
+        # When updated: friction-log.md MUST exist with a Supersession Rationale,
+        # and task_superseded_by MUST resolve reciprocally to a successor that
+        # carries this task's id in task_supersedes (TASK.md §4.7, §7.10).
+        if task_status == "updated":
+            log_path = task_dir / "friction-log.md"
+            if not log_path.exists():
+                errors.append(
+                    f"{task_dir}: task_status is 'updated' but friction-log.md is missing "
+                    f"(TASK.md §4.7 / §7.7)"
+                )
+            else:
+                log_text = log_path.read_text(encoding="utf-8")
+                if "Supersession Rationale" not in log_text:
+                    errors.append(
+                        f"{log_path}: 'updated' closure requires a "
+                        f"'## Supersession Rationale' section (TASK.md §4.7)"
+                    )
+
+            successors = str_list(fm, "task_superseded_by")
+            if not successors:
+                errors.append(
+                    f"{task_md}: task_status is 'updated' but task_superseded_by is empty "
+                    f"(TASK.md §7.10)"
+                )
+            else:
+                this_id = str_val(fm, "task_id")
+                for succ in successors:
+                    succ_dir = _find_task_by_id_or_slug(tasks_root, succ)
+                    if succ_dir is None:
+                        errors.append(
+                            f"{task_md}: task_superseded_by '{succ}' does not resolve "
+                            f"to any /tasks/<NNN>-<slug>/ folder (TASK.md §7.10)"
+                        )
+                        continue
+                    succ_fm = read_fm(succ_dir / "task.md")
+                    succ_supersedes = str_list(succ_fm, "task_supersedes")
+                    if this_id and this_id not in succ_supersedes and \
+                            str_val(fm, "slug") not in succ_supersedes:
+                        errors.append(
+                            f"{succ_dir / 'task.md'}: task_supersedes is missing "
+                            f"reciprocal entry for predecessor '{this_id}' "
+                            f"(TASK.md §7.10)"
+                        )
 
     return errors
 

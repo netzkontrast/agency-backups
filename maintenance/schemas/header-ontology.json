@@ -10,6 +10,8 @@
   "l1_required": ["type", "status", "slug", "summary", "created", "updated"],
   "type_values": ["task", "prompt", "research", "spec", "readme", "note", "index", "skill"],
   "status_values": ["draft", "active", "blocked", "completed", "archived"],
+  "task_status_values": ["open", "in_progress", "blocked", "done", "updated", "abandoned"],
+  "task_status_doc": "Lifecycle states for the L2 task_status field. 'updated' is closure-with-continuity (TASK.md §4.7): the Task is closed but a successor referenced via task_supersedes/task_superseded_by carries the intent forward.",
   "shape_vocabulary": [
     "paragraph", "ordered_list", "unordered_list", "task_list",
     "link_list", "gherkin_block", "code_block", "definition_list", "mixed"
@@ -22,6 +24,12 @@
         "task_uses_prompts", "task_spawns_research", "task_spawns_prompts",
         "task_affects_paths"
       ],
+      "recommended_keys": ["task_blocked_by", "task_supersedes", "task_superseded_by"],
+      "key_docs": {
+        "task_blocked_by": "List of task_id (or slug) values whose task_status MUST be 'done' before this Task may transition open → in_progress (TASK.md §8.7).",
+        "task_supersedes": "List of predecessor task_id (or slug) values that this Task replaces. Reciprocal with task_superseded_by. Set on a successor created via the 'updated' lifecycle (TASK.md §4.7).",
+        "task_superseded_by": "List of successor task_id (or slug) values. Set on the predecessor at the moment task_status flips to 'updated'. Reciprocal with task_supersedes."
+      },
       "required_headings": ["Goal", "Plan", "Todo", "Links"],
       "body_schema": {
         "Goal": {
