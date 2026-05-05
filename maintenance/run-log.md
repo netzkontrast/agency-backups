@@ -354,7 +354,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run 2026-05-05 — Task 020 prompt RISEN+ReAct conformance migration
 - agent: claude-code (session claude/complete-frontmatter-toolchain-l5Q8E)
 - start_commit: b73e615
-- end_commit: PENDING
+- end_commit: 3266fed
 - baseline_commit: b73e615 (Task 019 final commit)
 - files_in_delta: 27 (1 ontology, 1 _core normalizer extension, 1
   fm/new template, 5 nearly-RISEN prompt fixes, 19 fully-custom
