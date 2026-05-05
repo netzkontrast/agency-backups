@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGENCY // Decoupled Orchestration Frontend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="agency-data.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:            #0B0D17;
+    --bg-panel:      #111318;
+    --bg-card:       #161820;
+    --border:        #252830;
+    --border-bright: #353840;
+    --fg:            #ffffff;
+    --fg-dim:        rgba(255,255,255,0.45);
+    --fg-mid:        rgba(255,255,255,0.72);
+    --green:         #00FF9F;
+    --green-dim:     rgba(0,255,159,0.12);
+    --green-glow:    0 0 12px rgba(0,255,159,0.35);
+    --yellow:        #FFD700;
+    --yellow-dim:    rgba(255,215,0,0.12);
+    --orange:        #FF4500;
+    --orange-dim:    rgba(255,69,0,0.12);
+    --violet:        #3B3355;
+    --gold:          #FFDF00;
+    --gold-dim:      rgba(255,223,0,0.12);
+    --blue:          #003366;
+    --primary:       hsl(56,50%,42%);
+    --primary-light: hsl(56,50%,55%);
+    --font-sans:     'Space Grotesk', system-ui, sans-serif;
+    --font-mono:     'JetBrains Mono', monospace;
+    --radius:        3px;
+  }
+
+  html, body, #root { height: 100%; overflow: hidden; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 13px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Scanline overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--fg-dim); }
+
+  /* Glitch animation */
+  @keyframes glitch-h {
+    0%,100% { clip-path: inset(0 0 100% 0); transform: translateX(0); }
+    20% { clip-path: inset(30% 0 50% 0); transform: translateX(-3px); }
+    40% { clip-path: inset(60% 0 20% 0); transform: translateX(2px); }
+    60% { clip-path: inset(10% 0 80% 0); transform: translateX(-1px); }
+    80% { clip-path: inset(80% 0 5% 0); transform: translateX(3px); }
+  }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+  @keyframes pulse-green { 0%,100% { box-shadow: 0 0 4px rgba(0,255,159,0.4); } 50% { box-shadow: 0 0 12px rgba(0,255,159,0.8); } }
+  @keyframes slide-in-right { from { opacity:0; transform:translateX(12px); } to { opacity:1; transform:translateX(0); } }
+  @keyframes slide-in-left { from { opacity:0; transform:translateX(-8px); } to { opacity:1; transform:translateX(0); } }
+  @keyframes fade-up { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes scan { 0% { top:-20%; } 100% { top:120%; } }
+
+  .animate-in { animation: fade-up 0.18s ease both; }
+  .slide-right { animation: slide-in-right 0.15s ease both; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
+const D = window.AGENCY_DATA;
+
+// ── STATUS CONFIG ──────────────────────────────────────────────────────────
+const STATUS_CFG = {
+  done:        { label: 'DONE',        color: '#00FF9F', bg: 'rgba(0,255,159,0.1)' },
+  open:        { label: 'OPEN',        color: '#FFD700', bg: 'rgba(255,215,0,0.1)' },
+  in_progress: { label: 'IN_PROG',     color: '#FFDF00', bg: 'rgba(255,223,0,0.1)' },
+  blocked:     { label: 'BLOCKED',     color: '#FF4500', bg: 'rgba(255,69,0,0.1)' },
+  updated:     { label: 'SUPERSEDED',  color: '#8B8B00', bg: 'rgba(139,139,0,0.1)' },
+  complete:    { label: 'COMPLETE',    color: '#00FF9F', bg: 'rgba(0,255,159,0.1)' },
+  in_progress_r: { label: 'RUNNING',  color: '#FFDF00', bg: 'rgba(255,223,0,0.1)' },
+};
+
+const PRIORITY_COLOR = { P0: '#FF4500', P1: '#FFD700', P2: 'rgba(255,255,255,0.4)' };
+const KIND_COLOR = {
+  'task-spec':         '#00FF9F',
+  'research-proposal': '#FFD700',
+  'tool-instruction':  '#FFDF00',
+  'follow-up':         '#8B8B00',
+};
+
+function StatusBadge({ status, small }) {
+  const cfg = STATUS_CFG[status] || { label: status?.toUpperCase(), color: '#fff', bg: 'rgba(255,255,255,0.08)' };
+  return (
+    <span style={{
+      display:'inline-flex', alignItems:'center', gap:4,
+      fontFamily:'var(--font-mono)', fontSize: small ? 9 : 10,
+      fontWeight:700, letterSpacing:'0.08em',
+      color: cfg.color, background: cfg.bg,
+      border: `1px solid ${cfg.color}33`,
+      padding: small ? '1px 5px' : '2px 7px',
+      borderRadius: 2,
+    }}>
+      <span style={{width:5,height:5,borderRadius:'50%',background:cfg.color,flexShrink:0,
+        boxShadow:`0 0 4px ${cfg.color}`}}></span>
+      {cfg.label}
+    </span>
+  );
+}
+
+// ── COMMAND PALETTE ────────────────────────────────────────────────────────
+function CommandPalette({ onClose, onNavigate }) {
+  const [q, setQ] = useState('');
+  const inputRef = useRef();
+  useEffect(() => { inputRef.current?.focus(); }, []);
+
+  const allItems = useMemo(() => [
+    ...D.tasks.map(t => ({ type:'task', label:`[T${t.id}] ${t.slug}`, sub: t.summary, payload:{view:'tasks',item:t} })),
+    ...D.prompts.map(p => ({ type:'prompt', label:`[P] ${p.slug}`, sub: p.summary, payload:{view:'prompts',item:p} })),
+    ...D.research.map(r => ({ type:'research', label:`[R] ${r.slug}`, sub: r.summary, payload:{view:'research',item:r} })),
+    { type:'nav', label:'>> dashboard', sub:'Overview + metrics', payload:{view:'dashboard',item:null} },
+    { type:'nav', label:'>> graph', sub:'Audit graph visualization', payload:{view:'graph',item:null} },
+  ], []);
+
+  const results = useMemo(() => {
+    if (!q.trim()) return allItems.slice(0,12);
+    const lq = q.toLowerCase();
+    return allItems.filter(i => i.label.toLowerCase().includes(lq) || i.sub?.toLowerCase().includes(lq)).slice(0,12);
+  }, [q, allItems]);
+
+  const TYPE_COLOR = { task:'#00FF9F', prompt:'#FFD700', research:'#FFDF00', nav:'#fff' };
+
+  const [sel, setSel] = useState(0);
+  useEffect(() => setSel(0), [q]);
+
+  function handleKey(e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setSel(s => Math.min(s+1,results.length-1)); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); setSel(s => Math.max(s-1,0)); }
+    if (e.key === 'Enter' && results[sel]) { onNavigate(results[sel].payload); onClose(); }
+    if (e.key === 'Escape') onClose();
+  }
+
+  return (
+    <div style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.75)', zIndex:1000,
+      display:'flex', alignItems:'flex-start', justifyContent:'center', paddingTop:120 }}
+      onClick={onClose}>
+      <div style={{ width:620, background:'#0F1119', border:'1px solid #353840',
+        boxShadow:'0 24px 80px rgba(0,0,0,0.8)', borderRadius:4 }}
+        onClick={e => e.stopPropagation()}>
+        <div style={{ padding:'10px 14px', borderBottom:'1px solid #252830',
+          display:'flex', alignItems:'center', gap:10 }}>
+          <span style={{ fontFamily:'var(--font-mono)', color:'#00FF9F', fontSize:12 }}>▸</span>
+          <input ref={inputRef} value={q} onChange={e=>setQ(e.target.value)} onKeyDown={handleKey}
+            placeholder="search tasks / prompts / research…"
+            style={{ flex:1, background:'transparent', border:'none', outline:'none',
+              fontFamily:'var(--font-mono)', fontSize:13, color:'#fff',
+              letterSpacing:'0.02em' }}/>
+          <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.3)' }}>ESC</span>
+        </div>
+        <div style={{ maxHeight:360, overflowY:'auto' }}>
+          {results.map((item, i) => (
+            <div key={i}
+              onClick={() => { onNavigate(item.payload); onClose(); }}
+              style={{ padding:'9px 14px', cursor:'pointer', display:'flex', alignItems:'flex-start', gap:10,
+                background: i===sel ? 'rgba(0,255,159,0.06)' : 'transparent',
+                borderLeft: i===sel ? '2px solid #00FF9F' : '2px solid transparent' }}>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:TYPE_COLOR[item.type],
+                marginTop:3, flexShrink:0 }}>{item.type.toUpperCase()}</span>
+              <div>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:12, color: i===sel ? '#fff' : 'rgba(255,255,255,0.8)' }}>
+                  {item.label}
+                </div>
+                <div style={{ fontSize:11, color:'rgba(255,255,255,0.35)', marginTop:2, lineHeight:1.4 }}>
+                  {item.sub?.slice(0,90)}{item.sub?.length>90?'…':''}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style={{ padding:'6px 14px', borderTop:'1px solid #252830', display:'flex', gap:16 }}>
+          {[['↑↓','navigate'],['↵','select'],['Esc','close']].map(([k,l]) => (
+            <span key={k} style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.3)' }}>
+              <span style={{ color:'rgba(255,255,255,0.5)' }}>{k}</span> {l}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── SIDEBAR ────────────────────────────────────────────────────────────────
+function Sidebar({ view, onView, onPalette }) {
+  const navItems = [
+    { id:'dashboard', icon:'⬡', label:'DASHBOARD' },
+    { id:'tasks',     icon:'▸', label:'TASKS' },
+    { id:'prompts',   icon:'◈', label:'PROMPTS' },
+    { id:'research',  icon:'◎', label:'RESEARCH' },
+    { id:'graph',     icon:'⬡', label:'AUDIT GRAPH' },
+  ];
+
+  const counts = {
+    tasks: D.tasks.length,
+    prompts: D.prompts.length,
+    research: D.research.length,
+    open: D.tasks.filter(t => t.status==='open').length,
+    in_progress: D.tasks.filter(t => t.status==='in_progress').length,
+  };
+
+  return (
+    <div style={{ width:200, background:' #0D0F18', borderRight:'1px solid #1E2028',
+      display:'flex', flexDirection:'column', flexShrink:0, height:'100%' }}>
+      {/* Logo */}
+      <div style={{ padding:'16px 14px 12px', borderBottom:'1px solid #1E2028' }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'rgba(255,255,255,0.3)', marginBottom:4 }}>
+          AGENCY // v0.19
+        </div>
+        <div style={{ fontFamily:'var(--font-sans)', fontWeight:700, fontSize:15, letterSpacing:'-0.02em' }}>
+          <span style={{ color:'#00FF9F' }}>netz</span><span style={{ color:'rgba(255,255,255,0.5)' }}>kontrast</span>
+        </div>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.2)', marginTop:2 }}>
+          machine · actor · space
+        </div>
+      </div>
+
+      {/* Search trigger */}
+      <div onClick={onPalette}
+        style={{ margin:'10px 10px 4px', padding:'7px 10px', background:'#161820',
+          border:'1px solid #252830', borderRadius:3, cursor:'pointer',
+          display:'flex', alignItems:'center', gap:8,
+          transition:'border-color 0.15s' }}
+        onMouseEnter={e=>e.currentTarget.style.borderColor='#353840'}
+        onMouseLeave={e=>e.currentTarget.style.borderColor='#252830'}>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.3)' }}>▸_</span>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'rgba(255,255,255,0.25)' }}>search…</span>
+        <span style={{ marginLeft:'auto', fontFamily:'var(--font-mono)', fontSize:9,
+          color:'rgba(255,255,255,0.2)', background:'#1E2028', padding:'2px 5px', borderRadius:2 }}>⌘K</span>
+      </div>
+
+      {/* Nav */}
+      <nav style={{ flex:1, padding:'6px 0', overflowY:'auto' }}>
+        {navItems.map(item => {
+          const active = view === item.id;
+          return (
+            <div key={item.id} onClick={() => onView(item.id)}
+              style={{ padding:'8px 14px', cursor:'pointer', display:'flex', alignItems:'center', gap:10,
+                background: active ? 'rgba(0,255,159,0.06)' : 'transparent',
+                borderLeft: active ? '2px solid #00FF9F' : '2px solid transparent',
+                transition:'all 0.12s' }}
+              onMouseEnter={e=>{ if(!active) e.currentTarget.style.background='rgba(255,255,255,0.03)'; }}
+              onMouseLeave={e=>{ if(!active) e.currentTarget.style.background='transparent'; }}>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:11,
+                color: active ? '#00FF9F' : 'rgba(255,255,255,0.35)' }}>{item.icon}</span>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:10, fontWeight:600,
+                letterSpacing:'0.06em', color: active ? '#fff' : 'rgba(255,255,255,0.45)' }}>
+                {item.label}
+              </span>
+              {item.id === 'tasks' && (
+                <span style={{ marginLeft:'auto', fontFamily:'var(--font-mono)', fontSize:9,
+                  color:'rgba(255,215,0,0.7)', background:'rgba(255,215,0,0.08)',
+                  padding:'1px 5px', borderRadius:2 }}>{counts.open}↑</span>
+              )}
+              {item.id === 'prompts' && (
+                <span style={{ marginLeft:'auto', fontFamily:'var(--font-mono)', fontSize:9,
+                  color:'rgba(255,255,255,0.3)' }}>{counts.prompts}</span>
+              )}
+              {item.id === 'research' && (
+                <span style={{ marginLeft:'auto', fontFamily:'var(--font-mono)', fontSize:9,
+                  color:'rgba(255,255,255,0.3)' }}>{counts.research}</span>
+              )}
+            </div>
+          );
+        })}
+      </nav>
+
+      {/* Status footer */}
+      <div style={{ padding:'10px 14px', borderTop:'1px solid #1E2028' }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.2)', lineHeight:1.8 }}>
+          <div>TASKS <span style={{ color:'rgba(255,255,255,0.45)' }}>{counts.tasks}</span></div>
+          <div>IN_PROG <span style={{ color:'#FFDF00' }}>{counts.in_progress}</span></div>
+          <div>COHERENCE <span style={{ color:'#00FF9F' }}>✓ 2026-05-05</span></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── DASHBOARD ──────────────────────────────────────────────────────────────
+function Dashboard({ onNavigate }) {
+  const stats = useMemo(() => {
+    const t = D.tasks;
+    return {
+      total: t.length,
+      done: t.filter(x=>x.status==='done').length,
+      open: t.filter(x=>x.status==='open').length,
+      in_progress: t.filter(x=>x.status==='in_progress').length,
+      blocked: t.filter(x=>x.status==='blocked').length,
+      updated: t.filter(x=>x.status==='updated').length,
+    };
+  }, []);
+
+  const recentTasks = D.tasks.filter(t=>['in_progress','open'].includes(t.status)).slice(0,6);
+  const flCounts = { FL0:0, FL1:0, FL2:0, FL3:0 };
+  D.frictionLogs.forEach(f => { flCounts[f.level]++; });
+
+  return (
+    <div style={{ padding:'20px 24px', overflowY:'auto', height:'100%' }} className="animate-in">
+      {/* Header */}
+      <div style={{ marginBottom:24, borderBottom:'1px solid #1E2028', paddingBottom:16 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.3)', marginBottom:6 }}>
+          AGENCY // DASHBOARD // {new Date().toISOString().split('T')[0]}
+        </div>
+        <h1 style={{ fontFamily:'var(--font-sans)', fontSize:22, fontWeight:700, letterSpacing:'-0.02em',
+          color:'#fff', lineHeight:1.2 }}>
+          Decoupling Machine, Actor,<br/>
+          <span style={{ color:'#00FF9F' }}>and Space</span>
+        </h1>
+        <p style={{ marginTop:6, fontSize:12, color:'rgba(255,255,255,0.4)', fontFamily:'var(--font-mono)' }}>
+          Long-horizon AI agency governance substrate
+        </p>
+      </div>
+
+      {/* Stat tiles */}
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:10, marginBottom:20 }}>
+        {[
+          { label:'TASKS TOTAL', val:stats.total, color:'#fff', sub:'across 26 slugs' },
+          { label:'OPEN', val:stats.open, color:'#FFD700', sub:'awaiting execution' },
+          { label:'IN PROGRESS', val:stats.in_progress, color:'#FFDF00', sub:'active sessions' },
+          { label:'COMPLETED', val:stats.done, color:'#00FF9F', sub:'closed tasks' },
+          { label:'BLOCKED', val:stats.blocked, color:'#FF4500', sub:'needs unblocking' },
+          { label:'PROMPTS', val:D.prompts.length, color:'#FFDF00', sub:'executable instruction sets' },
+        ].map(s => (
+          <div key={s.label} style={{ background:'#111318', border:'1px solid #1E2028',
+            borderRadius:3, padding:'14px 16px', cursor:'default' }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.3)',
+              letterSpacing:'0.1em', marginBottom:6 }}>{s.label}</div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:28, fontWeight:700, color:s.color,
+              lineHeight:1, letterSpacing:'-0.02em' }}>{s.val}</div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.2)',
+              marginTop:4 }}>{s.sub}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Active tasks */}
+      <div style={{ marginBottom:20 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+          letterSpacing:'0.1em', marginBottom:10 }}>ACTIVE TASKS</div>
+        <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
+          {recentTasks.map(t => (
+            <div key={t.id} onClick={() => onNavigate({view:'tasks',item:t})}
+              style={{ background:'#111318', border:'1px solid #1E2028', borderRadius:3,
+                padding:'10px 14px', cursor:'pointer', display:'flex', alignItems:'center', gap:12,
+                transition:'all 0.12s' }}
+              onMouseEnter={e=>{ e.currentTarget.style.borderColor='#353840'; e.currentTarget.style.background='#161820'; }}
+              onMouseLeave={e=>{ e.currentTarget.style.borderColor='#1E2028'; e.currentTarget.style.background='#111318'; }}>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.25)',
+                flexShrink:0, minWidth:28 }}>{t.id}</span>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'rgba(255,255,255,0.8)',
+                flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
+                {t.slug}
+              </span>
+              {t.priority && <span style={{ fontFamily:'var(--font-mono)', fontSize:9,
+                color:PRIORITY_COLOR[t.priority] }}>{t.priority}</span>}
+              <StatusBadge status={t.status} small />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Coherence runs + Friction */}
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+        <div>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+            letterSpacing:'0.1em', marginBottom:8 }}>COHERENCE RUNS</div>
+          {D.coherenceRuns.map((r,i) => (
+            <div key={i} style={{ background:'#111318', border:'1px solid #1E2028', borderRadius:3,
+              padding:'10px 12px', marginBottom:6 }}>
+              <div style={{ display:'flex', justifyContent:'space-between', marginBottom:4 }}>
+                <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.6)' }}>{r.date}</span>
+                <StatusBadge status={r.status === 'pass' ? 'done' : 'in_progress'} small />
+              </div>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)', lineHeight:1.5 }}>
+                {r.issues} issues · {r.deferred} deferred
+              </div>
+            </div>
+          ))}
+        </div>
+        <div>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+            letterSpacing:'0.1em', marginBottom:8 }}>FRICTION LOG SUMMARY</div>
+          {Object.entries(flCounts).map(([lvl, count]) => (
+            <div key={lvl} style={{ display:'flex', alignItems:'center', gap:10, marginBottom:6 }}>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:10,
+                color: lvl==='FL0' ? '#00FF9F' : lvl==='FL1' ? '#FFD700' : lvl==='FL2' ? '#FF4500' : '#FF4500',
+                minWidth:30 }}>{lvl}</span>
+              <div style={{ flex:1, height:4, background:'#1E2028', borderRadius:2, overflow:'hidden' }}>
+                <div style={{ height:'100%', width:`${(count/D.frictionLogs.length)*100}%`,
+                  background: lvl==='FL0' ? '#00FF9F' : lvl==='FL1' ? '#FFD700' : '#FF4500',
+                  transition:'width 0.4s ease' }}></div>
+              </div>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.4)',
+                minWidth:14, textAlign:'right' }}>{count}</span>
+            </div>
+          ))}
+          {D.frictionLogs.map((f,i) => (
+            <div key={i} style={{ background:'#111318', border:'1px solid #1E2028', borderRadius:3,
+              padding:'8px 12px', marginTop:8, borderLeft:`2px solid ${f.level==='FL0'?'#00FF9F':f.level==='FL1'?'#FFD700':'#FF4500'}` }}>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.5)', lineHeight:1.5 }}>
+                <span style={{ color: f.level==='FL0' ? '#00FF9F' : '#FFD700' }}>{f.level}</span>
+                {' '}<span style={{ color:'rgba(255,255,255,0.3)' }}>task:{f.task}</span>{' '}
+                {f.note.slice(0,60)}…
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── TASK LIST ──────────────────────────────────────────────────────────────
+function TaskList({ selected, onSelect, filter, onFilter }) {
+  const filtered = useMemo(() => {
+    if (!filter || filter === 'all') return D.tasks;
+    return D.tasks.filter(t => t.status === filter);
+  }, [filter]);
+
+  const filterOpts = [
+    { val:'all', label:'ALL' },
+    { val:'open', label:'OPEN' },
+    { val:'in_progress', label:'IN_PROG' },
+    { val:'blocked', label:'BLOCKED' },
+    { val:'done', label:'DONE' },
+    { val:'updated', label:'SUPERS.' },
+  ];
+
+  return (
+    <div style={{ display:'flex', flexDirection:'column', height:'100%' }}>
+      <div style={{ padding:'12px 14px 8px', borderBottom:'1px solid #1E2028', flexShrink:0 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+          letterSpacing:'0.1em', marginBottom:8 }}>TASKS // {filtered.length} records</div>
+        <div style={{ display:'flex', gap:4, flexWrap:'wrap' }}>
+          {filterOpts.map(f => (
+            <button key={f.val} onClick={() => onFilter(f.val)}
+              style={{ fontFamily:'var(--font-mono)', fontSize:9, letterSpacing:'0.06em',
+                padding:'3px 7px', borderRadius:2, cursor:'pointer', border:'1px solid',
+                borderColor: filter===f.val ? '#00FF9F' : '#252830',
+                background: filter===f.val ? 'rgba(0,255,159,0.08)' : 'transparent',
+                color: filter===f.val ? '#00FF9F' : 'rgba(255,255,255,0.3)',
+                transition:'all 0.1s' }}>
+              {f.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div style={{ flex:1, overflowY:'auto', padding:'8px 0' }}>
+        {filtered.map(task => {
+          const active = selected?.id === task.id;
+          return (
+            <div key={task.id} onClick={() => onSelect(task)}
+              style={{ padding:'10px 14px', cursor:'pointer',
+                background: active ? 'rgba(0,255,159,0.06)' : 'transparent',
+                borderLeft: active ? '2px solid #00FF9F' : '2px solid transparent',
+                borderBottom:'1px solid #12141A',
+                transition:'all 0.1s' }}
+              onMouseEnter={e=>{ if(!active){ e.currentTarget.style.background='rgba(255,255,255,0.025)'; }}}
+              onMouseLeave={e=>{ if(!active){ e.currentTarget.style.background='transparent'; }}}>
+              <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:4 }}>
+                <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.25)',
+                  minWidth:24, flexShrink:0 }}>{task.id}</span>
+                {task.priority && (
+                  <span style={{ fontFamily:'var(--font-mono)', fontSize:8, color:PRIORITY_COLOR[task.priority],
+                    border:`1px solid ${PRIORITY_COLOR[task.priority]}44`, padding:'1px 4px', borderRadius:2,
+                    flexShrink:0 }}>{task.priority}</span>
+                )}
+                <StatusBadge status={task.status} small />
+              </div>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color: active ? '#fff' : 'rgba(255,255,255,0.75)',
+                lineHeight:1.3, wordBreak:'break-all' }}>{task.slug}</div>
+              <div style={{ fontFamily:'var(--font-sans)', fontSize:11, color:'rgba(255,255,255,0.35)',
+                marginTop:3, lineHeight:1.4 }}>{task.summary?.slice(0,80)}{task.summary?.length>80?'…':''}</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── TASK DETAIL ────────────────────────────────────────────────────────────
+function TaskDetail({ task }) {
+  if (!task) return (
+    <div style={{ height:'100%', display:'flex', alignItems:'center', justifyContent:'center',
+      flexDirection:'column', gap:8 }}>
+      <span style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'rgba(255,255,255,0.15)' }}>
+        ▸ select a task to inspect
+      </span>
+    </div>
+  );
+
+  const linkedPrompts = D.prompts.filter(p => task.uses_prompts?.includes(p.slug));
+  const linkedResearch = D.research.filter(r => task.spawns_research?.includes(r.slug));
+
+  return (
+    <div style={{ padding:'20px', overflowY:'auto', height:'100%' }} className="slide-right" key={task.id}>
+      {/* Header */}
+      <div style={{ marginBottom:16, paddingBottom:14, borderBottom:'1px solid #1E2028' }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.08em', marginBottom:6 }}>
+          TASK // {task.id} // {task.created}
+        </div>
+        <h2 style={{ fontFamily:'var(--font-mono)', fontSize:15, fontWeight:700, color:'#00FF9F',
+          letterSpacing:'-0.01em', marginBottom:8, lineHeight:1.3 }}>
+          {task.slug}
+        </h2>
+        <div style={{ display:'flex', gap:8, flexWrap:'wrap', alignItems:'center' }}>
+          <StatusBadge status={task.status} />
+          {task.priority && (
+            <span style={{ fontFamily:'var(--font-mono)', fontSize:10,
+              color:PRIORITY_COLOR[task.priority] }}>{task.priority}</span>
+          )}
+          {task.owner && (
+            <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+              background:'#1E2028', padding:'2px 8px', borderRadius:2 }}>
+              owner:{task.owner}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Summary */}
+      <div style={{ marginBottom:14 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.1em', marginBottom:6 }}>SUMMARY</div>
+        <p style={{ fontFamily:'var(--font-sans)', fontSize:12, color:'rgba(255,255,255,0.7)',
+          lineHeight:1.6 }}>{task.summary}</p>
+      </div>
+
+      {/* Frontmatter */}
+      <div style={{ background:'#0D0F18', border:'1px solid #1E2028', borderRadius:3,
+        padding:'12px 14px', marginBottom:14, fontFamily:'var(--font-mono)', fontSize:10 }}>
+        <div style={{ color:'rgba(255,255,255,0.2)', marginBottom:6 }}>--- frontmatter</div>
+        {[
+          ['type', 'task'],
+          ['status', task.status],
+          ['slug', task.slug],
+          ['task_id', `"${task.id}"`],
+          ['task_status', task.status],
+          ['task_priority', task.priority],
+          ['created', task.created],
+          ['updated', task.updated],
+        ].map(([k,v]) => (
+          <div key={k} style={{ display:'flex', gap:8, lineHeight:1.8 }}>
+            <span style={{ color:'rgba(255,255,255,0.35)' }}>{k}:</span>
+            <span style={{ color:'#FFDF00' }}>{v}</span>
+          </div>
+        ))}
+        {task.uses_prompts?.length > 0 && (
+          <div style={{ display:'flex', gap:8, lineHeight:1.8, flexWrap:'wrap' }}>
+            <span style={{ color:'rgba(255,255,255,0.35)' }}>task_uses_prompts:</span>
+            <span style={{ color:'#00FF9F' }}>[{task.uses_prompts.join(', ')}]</span>
+          </div>
+        )}
+        <div style={{ color:'rgba(255,255,255,0.2)', marginTop:6 }}>---</div>
+      </div>
+
+      {/* Linked Prompts */}
+      {linkedPrompts.length > 0 && (
+        <div style={{ marginBottom:14 }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+            letterSpacing:'0.1em', marginBottom:6 }}>LINKED PROMPTS ({linkedPrompts.length})</div>
+          {linkedPrompts.map(p => (
+            <div key={p.slug} style={{ background:'#111318', border:'1px solid #1E2028',
+              borderRadius:3, padding:'8px 12px', marginBottom:5,
+              borderLeft:'2px solid rgba(255,215,0,0.4)' }}>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'#FFD700' }}>{p.slug}</div>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+                marginTop:2 }}>{p.kind}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Linked Research */}
+      {linkedResearch.length > 0 && (
+        <div style={{ marginBottom:14 }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+            letterSpacing:'0.1em', marginBottom:6 }}>SPAWNED RESEARCH ({linkedResearch.length})</div>
+          {linkedResearch.map(r => (
+            <div key={r.slug} style={{ background:'#111318', border:'1px solid #1E2028',
+              borderRadius:3, padding:'8px 12px', marginBottom:5,
+              borderLeft:'2px solid rgba(255,223,0,0.4)' }}>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'#FFDF00' }}>{r.slug}</div>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+                marginTop:2 }}>phase:{r.phase}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Dates */}
+      <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.2)', lineHeight:1.8,
+        borderTop:'1px solid #1E2028', paddingTop:12, marginTop:4 }}>
+        <div>created: <span style={{ color:'rgba(255,255,255,0.4)' }}>{task.created}</span></div>
+        <div>updated: <span style={{ color:'rgba(255,255,255,0.4)' }}>{task.updated}</span></div>
+      </div>
+    </div>
+  );
+}
+
+// ── PROMPT LIST + DETAIL ───────────────────────────────────────────────────
+function PromptView({ selected, onSelect }) {
+  const [filter, setFilter] = useState('all');
+  const filtered = filter === 'all' ? D.prompts : D.prompts.filter(p => p.kind === filter);
+  const kinds = ['all', 'task-spec', 'research-proposal', 'tool-instruction'];
+
+  return (
+    <>
+      <div style={{ display:'flex', flexDirection:'column', height:'100%' }}>
+        <div style={{ padding:'12px 14px 8px', borderBottom:'1px solid #1E2028', flexShrink:0 }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+            letterSpacing:'0.1em', marginBottom:8 }}>PROMPTS // {filtered.length} records</div>
+          <div style={{ display:'flex', gap:4, flexWrap:'wrap' }}>
+            {kinds.map(k => (
+              <button key={k} onClick={() => setFilter(k)}
+                style={{ fontFamily:'var(--font-mono)', fontSize:9, letterSpacing:'0.04em',
+                  padding:'3px 7px', borderRadius:2, cursor:'pointer', border:'1px solid',
+                  borderColor: filter===k ? KIND_COLOR[k]||'#00FF9F' : '#252830',
+                  background: filter===k ? `${KIND_COLOR[k]||'#00FF9F'}14` : 'transparent',
+                  color: filter===k ? KIND_COLOR[k]||'#00FF9F' : 'rgba(255,255,255,0.3)',
+                  transition:'all 0.1s' }}>
+                {k.toUpperCase().replace(/-/g,'_')}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div style={{ flex:1, overflowY:'auto', padding:'8px 0' }}>
+          {filtered.map(p => {
+            const active = selected?.slug === p.slug;
+            return (
+              <div key={p.slug} onClick={() => onSelect(p)}
+                style={{ padding:'10px 14px', cursor:'pointer',
+                  background: active ? 'rgba(255,215,0,0.05)' : 'transparent',
+                  borderLeft: active ? `2px solid ${KIND_COLOR[p.kind]||'#FFD700'}` : '2px solid transparent',
+                  borderBottom:'1px solid #12141A', transition:'all 0.1s' }}
+                onMouseEnter={e=>{ if(!active) e.currentTarget.style.background='rgba(255,255,255,0.025)'; }}
+                onMouseLeave={e=>{ if(!active) e.currentTarget.style.background='transparent'; }}>
+                <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:4 }}>
+                  <span style={{ fontFamily:'var(--font-mono)', fontSize:9,
+                    color:KIND_COLOR[p.kind]||'#fff', background:`${KIND_COLOR[p.kind]||'#fff'}14`,
+                    border:`1px solid ${KIND_COLOR[p.kind]||'#fff'}33`,
+                    padding:'1px 5px', borderRadius:2, flexShrink:0 }}>
+                    {p.kind?.replace(/-/g,'_').toUpperCase()}
+                  </span>
+                </div>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:11,
+                  color: active ? '#fff' : 'rgba(255,255,255,0.75)' }}>{p.slug}</div>
+                <div style={{ fontFamily:'var(--font-sans)', fontSize:11, color:'rgba(255,255,255,0.35)',
+                  marginTop:3, lineHeight:1.4 }}>{p.summary?.slice(0,80)}{p.summary?.length>80?'…':''}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function PromptDetail({ prompt }) {
+  if (!prompt) return (
+    <div style={{ height:'100%', display:'flex', alignItems:'center', justifyContent:'center' }}>
+      <span style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'rgba(255,255,255,0.15)' }}>
+        ◈ select a prompt to inspect
+      </span>
+    </div>
+  );
+  const linkedTask = D.tasks.find(t => t.id === prompt.relates_to_task || t.slug === prompt.relates_to_task);
+  const linkedResearch = D.research.find(r => r.executes_prompt === prompt.slug);
+
+  return (
+    <div style={{ padding:'20px', overflowY:'auto', height:'100%' }} className="slide-right" key={prompt.slug}>
+      <div style={{ marginBottom:14, paddingBottom:12, borderBottom:'1px solid #1E2028' }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.08em', marginBottom:6 }}>PROMPT // {prompt.created}</div>
+        <h2 style={{ fontFamily:'var(--font-mono)', fontSize:14, fontWeight:700,
+          color:KIND_COLOR[prompt.kind]||'#FFD700', letterSpacing:'-0.01em', marginBottom:8 }}>
+          {prompt.slug}
+        </h2>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:10,
+          color:KIND_COLOR[prompt.kind]||'#fff', background:`${KIND_COLOR[prompt.kind]||'#fff'}14`,
+          border:`1px solid ${KIND_COLOR[prompt.kind]||'#fff'}33`,
+          padding:'2px 8px', borderRadius:2 }}>
+          {prompt.kind}
+        </span>
+      </div>
+
+      <div style={{ background:'#0D0F18', border:'1px solid #1E2028', borderRadius:3,
+        padding:'12px 14px', marginBottom:14, fontFamily:'var(--font-mono)', fontSize:10 }}>
+        <div style={{ color:'rgba(255,255,255,0.2)', marginBottom:6 }}>--- frontmatter</div>
+        {[
+          ['type', 'prompt'],
+          ['slug', prompt.slug],
+          ['prompt_kind', prompt.kind],
+          ['created', prompt.created],
+          ['updated', prompt.updated],
+          ['prompt_relates_to_task', prompt.relates_to_task || 'null'],
+        ].map(([k,v]) => (
+          <div key={k} style={{ display:'flex', gap:8, lineHeight:1.8 }}>
+            <span style={{ color:'rgba(255,255,255,0.35)' }}>{k}:</span>
+            <span style={{ color:'#FFDF00' }}>{v}</span>
+          </div>
+        ))}
+        <div style={{ color:'rgba(255,255,255,0.2)', marginTop:6 }}>---</div>
+      </div>
+
+      <div style={{ marginBottom:14 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.1em', marginBottom:6 }}>SUMMARY</div>
+        <p style={{ fontFamily:'var(--font-sans)', fontSize:12, color:'rgba(255,255,255,0.7)', lineHeight:1.6 }}>
+          {prompt.summary}
+        </p>
+      </div>
+
+      {linkedTask && (
+        <div style={{ marginBottom:12 }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+            letterSpacing:'0.1em', marginBottom:6 }}>LINKED TASK</div>
+          <div style={{ background:'#111318', border:'1px solid #1E2028', borderRadius:3,
+            padding:'8px 12px', borderLeft:'2px solid rgba(0,255,159,0.4)' }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'#00FF9F' }}>
+              [{linkedTask.id}] {linkedTask.slug}
+            </div>
+            <StatusBadge status={linkedTask.status} small />
+          </div>
+        </div>
+      )}
+
+      {linkedResearch && (
+        <div>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+            letterSpacing:'0.1em', marginBottom:6 }}>SPAWNED RESEARCH</div>
+          <div style={{ background:'#111318', border:'1px solid #1E2028', borderRadius:3,
+            padding:'8px 12px', borderLeft:'2px solid rgba(255,223,0,0.4)' }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'#FFDF00' }}>{linkedResearch.slug}</div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+              marginTop:2 }}>phase:{linkedResearch.phase}</div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── RESEARCH VIEW ──────────────────────────────────────────────────────────
+function ResearchView({ selected, onSelect }) {
+  return (
+    <div style={{ display:'flex', flexDirection:'column', height:'100%' }}>
+      <div style={{ padding:'12px 14px 8px', borderBottom:'1px solid #1E2028', flexShrink:0 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+          letterSpacing:'0.1em' }}>RESEARCH // {D.research.length} workspaces</div>
+      </div>
+      <div style={{ flex:1, overflowY:'auto', padding:'8px 0' }}>
+        {D.research.map(r => {
+          const active = selected?.slug === r.slug;
+          const phase = r.phase === 'complete' ? 'complete' : 'in_progress_r';
+          return (
+            <div key={r.slug} onClick={() => onSelect(r)}
+              style={{ padding:'10px 14px', cursor:'pointer',
+                background: active ? 'rgba(255,223,0,0.04)' : 'transparent',
+                borderLeft: active ? '2px solid #FFDF00' : '2px solid transparent',
+                borderBottom:'1px solid #12141A', transition:'all 0.1s' }}
+              onMouseEnter={e=>{ if(!active) e.currentTarget.style.background='rgba(255,255,255,0.025)'; }}
+              onMouseLeave={e=>{ if(!active) e.currentTarget.style.background='transparent'; }}>
+              <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:4 }}>
+                <StatusBadge status={phase} small />
+              </div>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:11,
+                color: active ? '#fff' : 'rgba(255,255,255,0.75)' }}>{r.slug}</div>
+              <div style={{ fontFamily:'var(--font-sans)', fontSize:11, color:'rgba(255,255,255,0.35)',
+                marginTop:3, lineHeight:1.4 }}>{r.summary?.slice(0,80)}{r.summary?.length>80?'…':''}</div>
+              {r.executes_prompt && (
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,215,0,0.5)',
+                  marginTop:4 }}>executes: {r.executes_prompt}</div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function ResearchDetail({ research }) {
+  if (!research) return (
+    <div style={{ height:'100%', display:'flex', alignItems:'center', justifyContent:'center' }}>
+      <span style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'rgba(255,255,255,0.15)' }}>
+        ◎ select a workspace to inspect
+      </span>
+    </div>
+  );
+  const linkedPrompt = D.prompts.find(p => p.slug === research.executes_prompt);
+
+  return (
+    <div style={{ padding:'20px', overflowY:'auto', height:'100%' }} className="slide-right" key={research.slug}>
+      <div style={{ marginBottom:14, paddingBottom:12, borderBottom:'1px solid #1E2028' }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.08em', marginBottom:6 }}>RESEARCH WORKSPACE // {research.created}</div>
+        <h2 style={{ fontFamily:'var(--font-mono)', fontSize:13, fontWeight:700,
+          color:'#FFDF00', marginBottom:8, lineHeight:1.3 }}>{research.slug}</h2>
+        <StatusBadge status={research.phase === 'complete' ? 'complete' : 'in_progress_r'} />
+      </div>
+
+      <div style={{ background:'#0D0F18', border:'1px solid #1E2028', borderRadius:3,
+        padding:'12px 14px', marginBottom:14, fontFamily:'var(--font-mono)', fontSize:10 }}>
+        <div style={{ color:'rgba(255,255,255,0.2)', marginBottom:6 }}>--- frontmatter</div>
+        {[
+          ['type', 'research'],
+          ['slug', research.slug.replace(/\//g,'-')],
+          ['research_phase', research.phase],
+          ['research_executes_prompt', research.executes_prompt || 'null'],
+          ['created', research.created],
+          ['updated', research.updated],
+        ].map(([k,v]) => (
+          <div key={k} style={{ display:'flex', gap:8, lineHeight:1.8 }}>
+            <span style={{ color:'rgba(255,255,255,0.35)' }}>{k}:</span>
+            <span style={{ color:'#FFDF00' }}>{v}</span>
+          </div>
+        ))}
+        <div style={{ color:'rgba(255,255,255,0.2)', marginTop:6 }}>---</div>
+      </div>
+
+      <div style={{ marginBottom:14 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.1em', marginBottom:6 }}>SUMMARY</div>
+        <p style={{ fontFamily:'var(--font-sans)', fontSize:12, color:'rgba(255,255,255,0.7)', lineHeight:1.6 }}>
+          {research.summary}
+        </p>
+      </div>
+
+      {linkedPrompt && (
+        <div style={{ marginBottom:12 }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+            letterSpacing:'0.1em', marginBottom:6 }}>EXECUTES PROMPT</div>
+          <div style={{ background:'#111318', border:'1px solid #1E2028', borderRadius:3,
+            padding:'8px 12px', borderLeft:`2px solid ${KIND_COLOR[linkedPrompt.kind]||'#FFD700'}66` }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:10,
+              color:KIND_COLOR[linkedPrompt.kind]||'#FFD700' }}>{linkedPrompt.slug}</div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+              marginTop:2 }}>{linkedPrompt.kind}</div>
+          </div>
+        </div>
+      )}
+
+      <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.15)',
+        borderTop:'1px solid #1E2028', paddingTop:10, marginTop:4 }}>
+        Structure: workspace/ · synthesis/ · reflection/ · output/
+      </div>
+    </div>
+  );
+}
+
+// ── AUDIT GRAPH ────────────────────────────────────────────────────────────
+function AuditGraph() {
+  const svgRef = useRef();
+  const [tooltip, setTooltip] = useState(null);
+  const [highlighted, setHighlighted] = useState(null);
+
+  const W = 900, H = 600;
+
+  // Build nodes + edges
+  const nodes = useMemo(() => {
+    const all = [];
+    const xT = 80, xP = 380, xR = 680;
+    const tasks = D.tasks.filter(t => !['updated'].includes(t.status)).slice(0,14);
+    const prompts = D.prompts.slice(0,14);
+    const research = D.research.slice(0,12);
+
+    tasks.forEach((t,i) => all.push({
+      id: `t:${t.slug}`, type:'task', label:t.slug.slice(0,18), slug:t.slug,
+      status:t.status, x:xT, y:60 + i*(H-80)/(tasks.length-1||1),
+      color: t.status==='done'?'#00FF9F':t.status==='in_progress'?'#FFDF00':t.status==='blocked'?'#FF4500':'#FFD700',
+      raw:t
+    }));
+    prompts.forEach((p,i) => all.push({
+      id:`p:${p.slug}`, type:'prompt', label:p.slug.slice(0,18), slug:p.slug,
+      x:xP, y:60 + i*(H-80)/(prompts.length-1||1),
+      color:KIND_COLOR[p.kind]||'#fff', raw:p
+    }));
+    research.forEach((r,i) => all.push({
+      id:`r:${r.slug}`, type:'research', label:r.slug.slice(0,22), slug:r.slug,
+      x:xR, y:60 + i*(H-80)/(research.length-1||1),
+      color: r.phase==='complete'?'#00FF9F':'#FFDF00', raw:r
+    }));
+    return all;
+  }, []);
+
+  const edges = useMemo(() => {
+    const edgeList = [];
+    D.tasks.forEach(t => {
+      t.uses_prompts?.forEach(ps => {
+        const src = nodes.find(n => n.id===`t:${t.slug}`);
+        const dst = nodes.find(n => n.id===`p:${ps}`);
+        if (src && dst) edgeList.push({ src, dst, color:'rgba(0,255,159,0.25)', type:'task-prompt' });
+      });
+      t.spawns_research?.forEach(rs => {
+        const src = nodes.find(n => n.id===`t:${t.slug}`);
+        const dst = nodes.find(n => n.id===`r:${rs}`);
+        if (src && dst) edgeList.push({ src, dst, color:'rgba(255,215,0,0.2)', type:'task-research' });
+      });
+    });
+    D.research.forEach(r => {
+      if (r.executes_prompt) {
+        const src = nodes.find(n => n.id===`p:${r.executes_prompt}`);
+        const dst = nodes.find(n => n.id===`r:${r.slug}`);
+        if (src && dst) edgeList.push({ src, dst, color:'rgba(255,223,0,0.3)', type:'prompt-research' });
+      }
+    });
+    return edgeList;
+  }, [nodes]);
+
+  const activeEdges = highlighted
+    ? edges.filter(e => e.src.id===highlighted || e.dst.id===highlighted)
+    : edges;
+
+  return (
+    <div style={{ height:'100%', display:'flex', flexDirection:'column' }}>
+      <div style={{ padding:'12px 20px 10px', borderBottom:'1px solid #1E2028', flexShrink:0 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+          letterSpacing:'0.1em', marginBottom:4 }}>AUDIT GRAPH // Task → Prompt → Research</div>
+        <div style={{ display:'flex', gap:16 }}>
+          {[['Task','#00FF9F'],['Prompt','#FFD700'],['Research','#FFDF00']].map(([l,c]) => (
+            <div key={l} style={{ display:'flex', alignItems:'center', gap:5 }}>
+              <div style={{ width:8, height:8, borderRadius:1, background:c }}></div>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.4)' }}>{l}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{ flex:1, overflow:'auto', position:'relative' }}>
+        <svg width={W} height={H} style={{ display:'block', minWidth:W, minHeight:H }}>
+          <defs>
+            <filter id="glow-green">
+              <feGaussianBlur stdDeviation="2" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          {/* Column labels */}
+          {[['TASKS',80],['PROMPTS',380],['RESEARCH',680]].map(([l,x]) => (
+            <text key={l} x={x} y={24} textAnchor="middle"
+              style={{ fontFamily:'var(--font-mono)', fontSize:9, fill:'rgba(255,255,255,0.2)',
+                letterSpacing:'0.1em' }}>{l}</text>
+          ))}
+
+          {/* Edges */}
+          {edges.map((e,i) => {
+            const isActive = !highlighted || e.src.id===highlighted || e.dst.id===highlighted;
+            const x1 = e.src.x + 72, y1 = e.src.y;
+            const x2 = e.dst.x - 72, y2 = e.dst.y;
+            const mx = (x1+x2)/2;
+            return (
+              <path key={i}
+                d={`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`}
+                fill="none"
+                stroke={isActive ? e.color : 'rgba(255,255,255,0.04)'}
+                strokeWidth={isActive && highlighted && (e.src.id===highlighted||e.dst.id===highlighted) ? 2 : 1}
+                style={{ transition:'all 0.2s' }}
+              />
+            );
+          })}
+
+          {/* Nodes */}
+          {nodes.map(n => (
+            <g key={n.id} transform={`translate(${n.x},${n.y})`}
+              style={{ cursor:'pointer' }}
+              onMouseEnter={() => { setHighlighted(n.id); setTooltip(n); }}
+              onMouseLeave={() => { setHighlighted(null); setTooltip(null); }}>
+              <rect x={-72} y={-12} width={144} height={24} rx={2}
+                fill={highlighted===n.id ? `${n.color}20` : '#111318'}
+                stroke={highlighted===n.id ? n.color : '#252830'}
+                strokeWidth={highlighted===n.id ? 1.5 : 1}
+                style={{ transition:'all 0.15s' }}
+              />
+              <circle cx={-60} cy={0} r={4} fill={n.color}
+                style={{ filter: highlighted===n.id ? `drop-shadow(0 0 4px ${n.color})` : 'none' }}/>
+              <text x={-50} y={4} style={{ fontFamily:'var(--font-mono)', fontSize:9,
+                fill: highlighted===n.id ? '#fff' : 'rgba(255,255,255,0.65)',
+                pointerEvents:'none' }}>
+                {n.label}
+              </text>
+            </g>
+          ))}
+        </svg>
+
+        {/* Tooltip */}
+        {tooltip && (
+          <div style={{ position:'absolute', top:20, right:20, width:260,
+            background:'#0D0F18', border:`1px solid ${tooltip.color}44`,
+            borderRadius:3, padding:'12px 14px', pointerEvents:'none',
+            boxShadow:`0 8px 32px rgba(0,0,0,0.6)` }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:tooltip.color,
+              letterSpacing:'0.1em', marginBottom:4 }}>{tooltip.type.toUpperCase()}</div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'#fff',
+              marginBottom:6 }}>{tooltip.slug}</div>
+            <div style={{ fontFamily:'var(--font-sans)', fontSize:11, color:'rgba(255,255,255,0.5)',
+              lineHeight:1.5 }}>{tooltip.raw.summary?.slice(0,100)}…</div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── TOPBAR ─────────────────────────────────────────────────────────────────
+function TopBar({ view, onPalette }) {
+  const [time, setTime] = useState(new Date());
+  useEffect(() => { const t = setInterval(() => setTime(new Date()), 1000); return () => clearInterval(t); }, []);
+
+  return (
+    <div style={{ height:40, background:'#0D0F18', borderBottom:'1px solid #1E2028',
+      display:'flex', alignItems:'center', padding:'0 16px', flexShrink:0, gap:16 }}>
+      <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.25)',
+        letterSpacing:'0.04em' }}>
+        <span style={{ color:'#00FF9F' }}>◼</span>{' '}
+        agency<span style={{ color:'rgba(255,255,255,0.15)' }}>/</span>
+        <span style={{ color:'rgba(255,255,255,0.5)' }}>{view}</span>
+      </div>
+      <div style={{ flex:1 }}></div>
+      <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.2)' }}>
+        {time.toISOString().replace('T',' ').slice(0,19)} UTC
+      </div>
+      <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(0,255,159,0.6)',
+        background:'rgba(0,255,159,0.06)', border:'1px solid rgba(0,255,159,0.15)',
+        padding:'2px 8px', borderRadius:2 }}>
+        COHERENCE OK
+      </div>
+      <button onClick={onPalette}
+        style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+          background:'#1A1D24', border:'1px solid #252830', borderRadius:2,
+          padding:'3px 10px', cursor:'pointer', letterSpacing:'0.04em' }}>
+        ⌘K SEARCH
+      </button>
+    </div>
+  );
+}
+
+// ── ROOT APP ───────────────────────────────────────────────────────────────
+function App() {
+  const [view, setView] = useState('dashboard');
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [selectedPrompt, setSelectedPrompt] = useState(null);
+  const [selectedResearch, setSelectedResearch] = useState(null);
+  const [taskFilter, setTaskFilter] = useState('all');
+  const [showPalette, setShowPalette] = useState(false);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); setShowPalette(p => !p); }
+      if (e.key === 'Escape') setShowPalette(false);
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, []);
+
+  function handleNavigate({ view: v, item }) {
+    setView(v);
+    if (v === 'tasks' && item) setSelectedTask(item);
+    if (v === 'prompts' && item) setSelectedPrompt(item);
+    if (v === 'research' && item) setSelectedResearch(item);
+  }
+
+  // Determine panel layout
+  const showDetail = view !== 'dashboard' && view !== 'graph';
+  const LIST_W = showDetail ? 280 : 0;
+  const DETAIL_W = showDetail ? undefined : 0;
+
+  return (
+    <div style={{ height:'100vh', display:'flex', flexDirection:'column' }}>
+      <TopBar view={view} onPalette={() => setShowPalette(true)} />
+
+      <div style={{ flex:1, display:'flex', overflow:'hidden', minHeight:0 }}>
+        <Sidebar view={view} onView={setView} onPalette={() => setShowPalette(true)} />
+
+        {/* Main area */}
+        <div style={{ flex:1, display:'flex', overflow:'hidden', minWidth:0 }}>
+          {/* Dashboard */}
+          {view === 'dashboard' && (
+            <div style={{ flex:1, overflowY:'auto' }}>
+              <Dashboard onNavigate={handleNavigate} />
+            </div>
+          )}
+
+          {/* Graph */}
+          {view === 'graph' && (
+            <div style={{ flex:1, overflow:'auto' }}>
+              <AuditGraph />
+            </div>
+          )}
+
+          {/* Tasks */}
+          {view === 'tasks' && (
+            <>
+              <div style={{ width:LIST_W, borderRight:'1px solid #1E2028', flexShrink:0, overflowY:'auto' }}>
+                <TaskList selected={selectedTask} onSelect={setSelectedTask}
+                  filter={taskFilter} onFilter={setTaskFilter} />
+              </div>
+              <div style={{ flex:1, overflowY:'auto', minWidth:0 }}>
+                <TaskDetail task={selectedTask} />
+              </div>
+            </>
+          )}
+
+          {/* Prompts */}
+          {view === 'prompts' && (
+            <>
+              <div style={{ width:LIST_W, borderRight:'1px solid #1E2028', flexShrink:0, overflowY:'auto' }}>
+                <PromptView selected={selectedPrompt} onSelect={setSelectedPrompt} />
+              </div>
+              <div style={{ flex:1, overflowY:'auto', minWidth:0 }}>
+                <PromptDetail prompt={selectedPrompt} />
+              </div>
+            </>
+          )}
+
+          {/* Research */}
+          {view === 'research' && (
+            <>
+              <div style={{ width:LIST_W, borderRight:'1px solid #1E2028', flexShrink:0, overflowY:'auto' }}>
+                <ResearchView selected={selectedResearch} onSelect={setSelectedResearch} />
+              </div>
+              <div style={{ flex:1, overflowY:'auto', minWidth:0 }}>
+                <ResearchDetail research={selectedResearch} />
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      {showPalette && (
+        <CommandPalette
+          onClose={() => setShowPalette(false)}
+          onNavigate={handleNavigate}
+        />
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

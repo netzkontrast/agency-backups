@@ -1,0 +1,311 @@
+/*
+ * Coherence Protocol / Agency System — Design Tokens
+ * Agency System Design Language Spec (ASDLS)
+ * Based on: netzkontrast/agency-system
+ */
+
+/* ─────────────────────────────────────────────
+   GOOGLE FONTS
+   ───────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* ─────────────────────────────────────────────
+   ASDLS COLOR PRIMITIVES
+   Raw hex values as defined in the ASDLS spec
+   ───────────────────────────────────────────── */
+:root {
+  /* Background Paradigm — The Functional Vacuum */
+  --asdls-terminal-black:    #0B0D17;   /* 98% bg coverage in Tier 0 */
+  --asdls-deep-charcoal:     #1A1D24;   /* Panels, windows, latency state */
+
+  /* State / Accent Colors — max 5% coverage per asset */
+  --asdls-system-blue:       #003366;   /* Absolute control, firewall */
+  --asdls-corrupted-yellow:  #8B8B00;   /* System trauma, freeze, decay */
+  --asdls-signal-yellow:     #FFD700;   /* Alert, intrusion, acute danger */
+  --asdls-terminal-green:    #00FF9F;   /* Raw data, noise, operational unrest */
+  --asdls-flame-orange:      #FF4500;   /* Destructive collapse, overload */
+  --asdls-clean-ping:        #FCEE0C;   /* Fragile hope — rare, tiny pixel only */
+  --asdls-latency-violet:    #3B3355;   /* Dissociation, loss, bandwidth drop */
+  --asdls-kintsugi-gold:     #FFDF00;   /* Repair, reintegration, breakthrough */
+
+  /* Interaction Rule — these two NEVER co-exist in one frame: */
+  /* --asdls-flame-orange + --asdls-clean-ping = system exclusion */
+}
+
+/* ─────────────────────────────────────────────
+   APP COLOR TOKENS (shadcn/ui dark-mode)
+   Exact values from apps/web/src/app/globals.css
+   ───────────────────────────────────────────── */
+:root {
+  /* shadcn HSL tokens — light mode (rarely used) */
+  --background:          hsl(0 0% 100%);
+  --foreground:          hsl(240 4% 5%);
+  --card:                hsl(0 0% 100%);
+  --card-foreground:     hsl(240 4% 5%);
+  --popover:             hsl(0 0% 100%);
+  --popover-foreground:  hsl(240 4% 5%);
+  --primary:             hsl(56 50% 42%);   /* Olive-gold, near Kintsugi Gold */
+  --primary-foreground:  hsl(0 0% 100%);
+  --secondary:           hsl(220 13% 91%);
+  --secondary-foreground:hsl(240 4% 5%);
+  --muted:               hsl(220 13% 94%);
+  --muted-foreground:    hsl(240 4% 45%);
+  --accent:              hsl(220 13% 91%);
+  --accent-foreground:   hsl(240 4% 5%);
+  --destructive:         hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border:              hsl(220 17% 90%);
+  --input:               hsl(220 17% 90%);
+  --ring:                hsl(56 50% 42%);
+  --radius:              0.5rem;
+}
+
+/* DARK MODE — primary operating mode for this system */
+:root.dark, [data-theme="dark"], .dark {
+  --background:          hsl(240 4% 5%);    /* ≈ #0C0C0E — close to Terminal Black */
+  --foreground:          hsl(0 0% 100%);
+  --card:                hsl(240 4% 5%);
+  --card-foreground:     hsl(0 0% 100%);
+  --popover:             hsl(240 4% 5%);
+  --popover-foreground:  hsl(0 0% 100%);
+  --primary:             hsl(56 50% 42%);   /* Olive-gold primary action */
+  --primary-foreground:  hsl(0 0% 100%);
+  --secondary:           hsl(220 13% 18%);
+  --secondary-foreground:hsl(0 0% 100%);
+  --muted:               hsl(220 13% 18%);
+  --muted-foreground:    hsl(0 0% 63%);
+  --accent:              hsl(220 13% 18%);
+  --accent-foreground:   hsl(0 0% 100%);
+  --destructive:         hsl(0 63% 31%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border:              hsl(220 13% 27%);
+  --input:               hsl(220 13% 27%);
+  --ring:                hsl(56 50% 42%);
+}
+
+/* ─────────────────────────────────────────────
+   SEMANTIC TYPOGRAPHY TOKENS
+   ───────────────────────────────────────────── */
+:root {
+  /* Font families */
+  --font-sans:   'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Base sizes (px-equivalent) */
+  --text-xs:     0.75rem;   /* 12px — labels, badges */
+  --text-sm:     0.875rem;  /* 14px — body default */
+  --text-base:   1rem;      /* 16px */
+  --text-lg:     1.125rem;  /* 18px */
+  --text-xl:     1.25rem;   /* 20px */
+  --text-2xl:    1.5rem;    /* 24px */
+  --text-3xl:    1.875rem;  /* 30px */
+  --text-4xl:    2.25rem;   /* 36px */
+
+  /* Line heights */
+  --leading-tight:  1.25;
+  --leading-normal: 1.5;
+  --leading-none:   1;
+
+  /* Font weights */
+  --weight-normal:   400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+}
+
+/* ─────────────────────────────────────────────
+   SEMANTIC ELEMENT STYLES
+   ───────────────────────────────────────────── */
+
+/* Reset base */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-normal);
+  color: var(--foreground);
+  background-color: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+}
+
+h4 {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+}
+
+h5 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-tight);
+}
+
+h6 {
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-tight);
+}
+
+p {
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--foreground);
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+/* Terminal/system output style */
+.terminal {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--asdls-terminal-green);
+  background: var(--asdls-terminal-black);
+  padding: 1rem;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+}
+
+/* ASDLS label style — used for system status indicators */
+.system-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+/* ─────────────────────────────────────────────
+   SPACING TOKENS
+   ───────────────────────────────────────────── */
+:root {
+  --space-px:   1px;
+  --space-0:    0;
+  --space-0-5:  0.125rem;  /* 2px */
+  --space-1:    0.25rem;   /* 4px */
+  --space-1-5:  0.375rem;  /* 6px */
+  --space-2:    0.5rem;    /* 8px */
+  --space-2-5:  0.625rem;  /* 10px */
+  --space-3:    0.75rem;   /* 12px */
+  --space-4:    1rem;      /* 16px */
+  --space-5:    1.25rem;   /* 20px */
+  --space-6:    1.5rem;    /* 24px */
+  --space-8:    2rem;      /* 32px */
+  --space-10:   2.5rem;    /* 40px */
+  --space-12:   3rem;      /* 48px */
+  --space-16:   4rem;      /* 64px */
+  --space-20:   5rem;      /* 80px */
+  --space-24:   6rem;      /* 96px */
+}
+
+/* ─────────────────────────────────────────────
+   BORDER RADIUS TOKENS
+   ───────────────────────────────────────────── */
+:root {
+  --radius-sm:   calc(var(--radius) - 4px);  /* 0.25rem */
+  --radius-md:   calc(var(--radius) - 2px);  /* 0.375rem */
+  --radius-lg:   var(--radius);              /* 0.5rem */
+  --radius-xl:   0.75rem;
+  --radius-2xl:  1rem;
+  --radius-full: 9999px;
+}
+
+/* ─────────────────────────────────────────────
+   SHADOW TOKENS
+   ───────────────────────────────────────────── */
+:root {
+  --shadow-xs:  0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm:  0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md:  0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg:  0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* ASDLS: glow shadows for state colors */
+  --glow-system-blue:    0 0 16px rgba(0, 51, 102, 0.6);
+  --glow-terminal-green: 0 0 16px rgba(0, 255, 159, 0.4);
+  --glow-signal-yellow:  0 0 16px rgba(255, 215, 0, 0.5);
+  --glow-flame-orange:   0 0 20px rgba(255, 69, 0, 0.6);
+  --glow-kintsugi-gold:  0 0 12px rgba(255, 223, 0, 0.5);
+}
+
+/* ─────────────────────────────────────────────
+   ANIMATION TOKENS
+   ───────────────────────────────────────────── */
+:root {
+  --ease-out:          cubic-bezier(0, 0, 0.2, 1);
+  --ease-in:           cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out:       cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:     100ms;
+  --duration-normal:   200ms;
+  --duration-slow:     300ms;
+
+  /* ASDLS glitch animation timing */
+  --glitch-jitter:     50ms;
+  --glitch-shift:      80ms;
+}
+
+/* ─────────────────────────────────────────────
+   ASDLS TIER UTILITY CLASSES
+   Apply these to set the escalation state of a section
+   ───────────────────────────────────────────── */
+.tier-0 {
+  /* Homeostasis — perfect control, no disturbance */
+  background-color: var(--asdls-terminal-black);
+  color: hsl(0 0% 100%);
+  --accent-color: var(--asdls-system-blue);
+}
+
+.tier-1 {
+  /* Latency — dissociation, fading connection */
+  background-color: #111318;
+  color: hsl(0 0% 75%);
+  --accent-color: var(--asdls-latency-violet);
+  filter: saturate(0.6) brightness(0.85);
+}
+
+.tier-2 {
+  /* Alert — system conflict, hostile intrusion */
+  background-color: var(--asdls-terminal-black);
+  color: hsl(0 0% 100%);
+  --accent-color: var(--asdls-signal-yellow);
+}
+
+.tier-3 {
+  /* Kernel Panic — total collapse, overload */
+  background-color: #0a0800;
+  color: hsl(0 0% 100%);
+  --accent-color: var(--asdls-flame-orange);
+}
+
+.tier-4 {
+  /* Safe Mode — post-crash, desaturated, scarred */
+  background-color: #141414;
+  color: hsl(0 0% 60%);
+  --accent-color: var(--asdls-kintsugi-gold);
+  filter: saturate(0.2) brightness(0.9);
+}

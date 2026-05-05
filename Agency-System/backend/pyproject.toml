@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agency-backend"
+version = "0.1.0"
+description = "Watches an Agency repo and serves its state over FastAPI + MCP."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "pydantic>=2.7",
+  "python-frontmatter>=1.1",
+  "watchdog>=4.0",
+  "fastmcp>=2.0",
+  "sse-starlette>=2.1",
+  "anyio>=4.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.23", "httpx>=0.27"]
+
+[project.scripts]
+agency-backend = "agency_backend.app:main"
+agency-mcp     = "agency_backend.mcp_server:main"
+
+[tool.setuptools.packages.find]
+include = ["agency_backend*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
