@@ -59,3 +59,9 @@ Deliverables, on full execution:
 ---
 
 **Next action for the executing agent:** Replace each "to flesh out" block above with concrete RISE-DX content, then mark this prompt's `status: active`.
+
+## Constraints
+
+- The agent MUST NOT delete content from any source spec without an explicit deletion entry on the `specs/` checklist.
+- The agent SHOULD treat each governance spec amendment as a T3 change per `MAINTENANCE.md §1` and prefer filing a Task over editing a root spec in-place.
+- Failure handling: if any source spec is unreachable or unparseable, the agent MUST file a follow-up prompt rather than guess content.

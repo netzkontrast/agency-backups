@@ -145,7 +145,19 @@ def _make_prompt(args: argparse.Namespace, repo_root: Path) -> int:
         "---\n\n"
         f"# {args.summary}\n\n"
         "## Framework\n\n"
-        f"Declared framework: {args.framework}.\n"
+        f"Declared framework: {args.framework}. Refine this paragraph when the prompt is authored.\n\n"
+        "## R — Role\n\n"
+        f"Single sentence defining the executor persona. Replace this placeholder before {args.target_agent} runs the prompt.\n\n"
+        "## I — Input\n\n"
+        "- Replace this bullet with the first input file or URL.\n\n"
+        "## S — Steps\n\n"
+        "1. Replace this with the first execution step (RFC 2119 keyword required).\n"
+        "2. Replace this with the second step.\n"
+        "3. Replace this with the third step.\n\n"
+        "## E — Expectations\n\n"
+        "- Replace this bullet with the first deliverable artefact path.\n\n"
+        "## Constraints\n\n"
+        "- The agent MUST replace every placeholder above before executing the prompt.\n"
     )
     (folder / "prompt.md").write_text(prompt_md, encoding="utf-8")
 

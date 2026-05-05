@@ -267,8 +267,21 @@ def normalise_heading(name: str) -> str:
     """Case-insensitive comparable form: strip surrounding whitespace and
     trailing punctuation (colons, em-dashes, en-dashes, hyphens) so that
     `## Goal:`, `## Goal —`, and `## Goal — :` all match `## Goal`.
+    A trailing parenthetical (`## I — Input (to flesh out)`) also strips.
     Embedded em-dashes (e.g., `I — Input`) are preserved verbatim."""
     s = name.strip()
+    # Drop a single trailing parenthetical, e.g. `Foo (note)` → `Foo`.
+    if s.endswith(")"):
+        depth = 0
+        for i in range(len(s) - 1, -1, -1):
+            ch = s[i]
+            if ch == ")":
+                depth += 1
+            elif ch == "(":
+                depth -= 1
+                if depth == 0:
+                    s = s[:i].rstrip()
+                    break
     while s and s[-1] in ":—–- \t":
         s = s[:-1]
     return s.casefold()

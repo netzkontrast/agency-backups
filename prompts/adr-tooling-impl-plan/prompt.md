@@ -115,3 +115,13 @@ The plan MUST be executable by a fresh agent with no prior context beyond this p
 - Tool boundary: `agency-adr` MUST reuse existing `tools/fm/` parsing primitives; it MUST NOT duplicate them.
 - No working code: interface contracts (type signatures, CLI shape, JSON-Schema) yes; implementations no.
 - RFC 2119 normativity in the plan: one keyword per sentence; stable IDs from the spec MUST be cited.
+
+## Framework
+
+RISEN+ReAct, applied to ADR governance. Framework declared at the top of the file; this section restates it for fm-validate header conformance.
+
+## Constraints
+
+- The agent MUST cite every assumption back to its source ADR/spec rather than inferring intent silently.
+- The agent SHOULD treat conflicts between ADRs as a T3 change requiring a sub-Task per MAINTENANCE.md §1.
+- The agent MUST NOT auto-resolve ambiguity without surfacing the divergence in friction-log.md.

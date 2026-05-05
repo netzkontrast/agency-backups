@@ -123,3 +123,13 @@ Mandatory content per section:
 - Temporal scope: 2011-01-01 through today. Pre-2022 sources on LLM/agent patterns are background only.
 - BCP-14 keyword density: exactly one per normative sentence.
 - `additionalProperties: true` in the JSON-Schema to allow future L2 namespace extension without breaking validation.
+
+## Framework
+
+RISEN+ReAct, applied to ADR governance. Framework declared at the top of the file; this section restates it for fm-validate header conformance.
+
+## Constraints
+
+- The agent MUST cite every assumption back to its source ADR/spec rather than inferring intent silently.
+- The agent SHOULD treat conflicts between ADRs as a T3 change requiring a sub-Task per MAINTENANCE.md §1.
+- The agent MUST NOT auto-resolve ambiguity without surfacing the divergence in friction-log.md.
