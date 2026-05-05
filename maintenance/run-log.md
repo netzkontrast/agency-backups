@@ -183,3 +183,73 @@ The agent MUST append its own record **before** committing the run's repairs, so
     is now a re-export shim around `tools/fm/_core` for one release window
     (Task 017 retires it). Friction logged as FL1 in
     `tasks/016-flexible-frontmatter-toolchain/friction-log.md`.
+
+### Run 2026-05-05 — Task 017 migration
+- agent: claude-code (session claude/complete-frontmatter-toolchain-l5Q8E)
+- start_commit: 94eb4b4
+- end_commit: PENDING
+- baseline_commit: 6b0480a (Task 016 final commit)
+- files_in_delta: ~50
+- files_scanned: 252
+- t1_fixes: 28 (research subfolder readmes authored), 4 (re-typed readmes / SKILL.md status fixups)
+- t2_fixes: 6 (legacy linter shims; check-governance default flip; bypass repointed; pre-commit defers to shim; ontology spec alt_type; coherence-check Step 2.5)
+- t3_tasks_created: 0 (one schema decision recorded as a SPEC §4.1 deviation in friction-log)
+- t4_skipped: 2 (--delta mode for pre-commit; tools/legacy/ removal — both filed as follow-ups)
+- issues_skipped: 0
+- notes: >
+    Task implementation record per MAINTENANCE.md §2.3, NOT a coherence run.
+    Migrated the repo onto the Task 016 toolchain in three batches per
+    SPEC §8.
+
+    Batch 1b: moved tools/{validate-frontmatter,lint-structure,lint-linkage}.py
+    into tools/legacy/ with deprecation banners; original paths are thin
+    runpy shims emitting a one-line stderr warning (silenceable via
+    FM_LEGACY_QUIET=1). Commit 84492c6.
+
+    Pre-Batch 2 disagreement triage: cleared 164 fm-validate ERRORs by
+    authoring frontmatter for 28 research subfolder readmes, re-typing
+    two legacy readmes from task/prompt to index, normalising two
+    SKILL.md metadata.status enums, adding spec as alt_type for
+    research/*/output/SPEC.md, and emptying prompt.required_headings
+    in the header-ontology pending Task 019's --check-body migration.
+    Commit 3c7bb82.
+
+    Batch 2a: flipped FM_TOOLCHAIN=1 as the default in
+    tools/check-governance.sh; FM_LEGACY_QUIET=1 default silences shim
+    warnings. Commit 4cf18db.
+
+    Batch 2b/2c: tools/check-maintenance-bypass.py now harvests
+    fm-validate's `<path>::<level>:<code>:<msg>` diagnostic format and
+    folds tools/legacy/lint-{structure,linkage}.py in for the gaps
+    fm-* doesn't yet cover. .githooks/pre-commit defers to
+    tools/check-governance.sh. The --delta mode is filed as a
+    follow-up; the full-suite run is sub-second on this corpus.
+    Commit a58d2d3.
+
+    Batch 3a: amended PRE_COMMIT.md §7 to make the unified shim the
+    canonical recipe; added a "Validation surface stability" paragraph
+    to MAINTENANCE.md §1 alongside the existing "Mutation surface
+    stability" note. The originally-named MAINTENANCE.md §3.2
+    contains no linter references — the relevant amendment landed in
+    §1 and is documented in the friction-log. Commit 1216ca8.
+
+    Batch 3b: added "Step 2.5 — Linter-First Triage" to
+    prompts/repo-coherence-check/prompt.md per Task 014 finding F3,
+    with fm-query missing-key recipes for slicing the open-task
+    surface. Commit 3b579ac.
+
+    Batch 3c: Task 010 was already scope-narrowed via the 'updated'
+    lifecycle prior to this session — task_status: updated, superseded
+    by Task 022, friction-log cites SPEC §C1 verbatim. No further
+    edit needed.
+
+    Final cleanup (remove tools/legacy/) is intentionally deferred:
+    lint-structure.py and lint-linkage.py still own structural and
+    cross-ref checks that fm-* doesn't yet replace. A future task
+    will fold those rules into fm-validate / a new fm-graph and only
+    then can tools/legacy/ be deleted.
+
+    Friction logged as FL2 in
+    `tasks/017-migrate-repo-to-flexible-toolchain/friction-log.md`;
+    SPEC §10 Q3 (programmatic API for non-Python callers) resolved
+    in `tasks/017-migrate-repo-to-flexible-toolchain/notes.md`.
