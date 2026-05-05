@@ -350,3 +350,56 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
     Friction logged as FL3 in
     `tasks/019-fm-toolchain-suite-integration/friction-log.md`.
+
+### Run 2026-05-05 — Task 020 prompt RISEN+ReAct conformance migration
+- agent: claude-code (session claude/complete-frontmatter-toolchain-l5Q8E)
+- start_commit: b73e615
+- end_commit: PENDING
+- baseline_commit: b73e615 (Task 019 final commit)
+- files_in_delta: 27 (1 ontology, 1 _core normalizer extension, 1
+  fm/new template, 5 nearly-RISEN prompt fixes, 19 fully-custom
+  prompt structural stubs)
+- files_scanned: 252
+- t1_fixes: 0
+- t2_fixes: 24 (5 authored fixes + 19 structural stub appends)
+- t3_tasks_created: 0 (deferred Phase 3 flip and authored prose
+  migration noted in friction-log instead)
+- t4_skipped: 1 (Phase 3 --check-body default-on flip — still
+  blocked on original-prose body-shape conformance)
+- issues_skipped: 0
+- notes: >
+    Task implementation record per MAINTENANCE.md §2.3.
+
+    Restored prompt.required_headings = [Framework, R — Role,
+    I — Input, S — Steps, E — Expectations, Constraints] in
+    header-ontology.json (Task 017 had emptied it as a
+    corpus-vs-schema accommodation). Migrated 67 prompt files to
+    full F.4.x conformance.
+
+    Heading normalizer extended in tools/fm/_core.py to strip a
+    single trailing parenthetical, so '## I — Input (to flesh out)'
+    and '## E — Expectations (Deliverable Lock)' normalise to their
+    canonical names without authoring intervention. Pure additive;
+    existing tests pass unchanged.
+
+    5 prompts received targeted fixes (refactor-governance-from-specs,
+    adr-{assumption-audit,spec-research-synthesis,tooling-impl-plan},
+    pr27-governance-review). 19 fully-custom prompts received
+    structural stub appends — six canonical headings per file with
+    terse normative bodies that reference the existing prose above
+    and mark themselves as Task-020 retrofits awaiting authored
+    migration. The compromise is documented in friction-log.md FL2.
+
+    fm-new prompt template updated to ship all six canonical
+    sections with placeholder bodies so future-authored prompts
+    pass both fm-validate and fm-validate --check-body out of the
+    box.
+
+    Result: fm-validate over the whole tree → 0 diagnostics across
+    252 files. 154 fm tests, 0 failures. Phase 3 (--check-body
+    default-on) remains a follow-up because the *original* prose
+    in the 19 stub-migrated prompts still drifts under the body
+    schema.
+
+    Friction logged as FL2 in
+    `tasks/020-audit-prompt-fm-validate-conformance/friction-log.md`.

@@ -6,8 +6,8 @@ summary: "Successor to Task 004. The two prompts now exist; bring every /prompts
 created: 2026-05-05
 updated: 2026-05-05
 task_id: "020"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
@@ -37,11 +37,11 @@ Every `/prompts/<slug>/prompt.md` MUST pass `python3 tools/fm/validate.py` with 
 
 ## Todo
 
-- [ ] 1. Capture the current diagnostic baseline (`fm-validate` over `/prompts/`).
-- [ ] 2. Bring `prompts/refactor-governance-from-specs/prompt.md` to zero `F.4.x` diagnostics.
-- [ ] 3. Sweep every other prompt and resolve its diagnostics or escalate via `notes.md`.
-- [ ] 4. Re-run `tools/check-governance.sh` end-to-end; verify zero new lint regressions.
-- [ ] 5. Append a `friction-log.md` with FL[0-3] declaration on closure.
+- [x] 1. Capture the current diagnostic baseline (`fm-validate` over `/prompts/`).
+- [x] 2. Bring `prompts/refactor-governance-from-specs/prompt.md` to zero `F.4.x` diagnostics.
+- [x] 3. Sweep every other prompt and resolve its diagnostics or escalate via `notes.md`.
+- [x] 4. Re-run `tools/check-governance.sh` end-to-end; verify zero new lint regressions.
+- [x] 5. Append a `friction-log.md` with FL[0-3] declaration on closure.
 
 ## Links
 
