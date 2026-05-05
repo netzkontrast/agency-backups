@@ -2,7 +2,7 @@
 type: research
 status: active
 slug: adr-assumption-audit
-summary: "ADR Assumption Audit Report. 9 hidden assumptions (3 high-blast), 11 implicit-ADR candidates (5 P1), 7 pending decisions (3 open). Recommends Task 030 (first-batch ADR authoring with hybrid cardinality) and surfaces a previously-missing review/maintenance loop."
+summary: "ADR Assumption Audit Report. 9 hidden assumptions (5 high-blast: 4 technical + 1 cultural, 4 medium), 11 implicit-ADR candidates (5 P1), 7 pending decisions (3 open). Recommends Task 030 (first-batch ADR authoring with hybrid cardinality) and surfaces a previously-missing review/maintenance loop."
 created: 2026-05-05
 updated: 2026-05-05
 research_phase: complete
@@ -49,7 +49,7 @@ Sorted by blast radius (HIGH → LOW). Full evidence per ASM lives in [`workspac
 |---|---|---|---|---|
 | **007** | abstraction | The spec assumes humans will proactively author ADRs. Zero of the repo's 14 catalogued implicit decisions were authored that way. | SPEC §3 (Aspect 1 — Explore); SPEC §4 (Aspect 2 — Plan). | HIGH (cultural) — the corpus risks staying empty (the *log4brains adoption-failure pattern*). |
 
-### Medium-Blast Assumptions (3)
+### Medium-Blast Assumptions (4)
 
 | ASM | Axis | One-line Statement | Embedded At | Blast Radius |
 |---|---|---|---|---|
