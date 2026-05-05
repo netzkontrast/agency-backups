@@ -257,7 +257,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run 2026-05-05 — Task 018 implementation
 - agent: claude-code (session claude/complete-frontmatter-toolchain-l5Q8E)
 - start_commit: 3feee02
-- end_commit: PENDING
+- end_commit: 2342889
 - baseline_commit: 3feee02 (Task 017 final commit)
 - files_in_delta: 4 (tools/fm/section.py new; tools/fm/_core.py
   extended; tests/fm/test_section.py new; SPEC.md amended) plus
