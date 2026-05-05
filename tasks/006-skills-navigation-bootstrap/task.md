@@ -9,6 +9,7 @@ task_id: "006"
 task_status: done
 task_owner: "claude-code"
 task_priority: P1
+task_spawns_prompts: []
 task_uses_prompts:
   - skills-navigation-bootstrap
 task_spawns_research:

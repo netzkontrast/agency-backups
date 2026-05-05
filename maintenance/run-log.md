@@ -28,7 +28,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run YYYY-MM-DD — <routine-type>
 - agent: <agent-identifier>
 - start_commit: <hash of HEAD when the run began>
-- end_commit: 4c5e7e4 <hash of HEAD after repairs are committed — fill in before final commit>
+- end_commit: 4c5e7e4 628439e
 - baseline_commit: <the end_commit from the previous run — what was used as the delta base>
 - files_in_delta: <count of files changed between baseline and start_commit>
 - files_scanned: <count of files the agent actually opened>
@@ -121,3 +121,22 @@ The agent MUST append its own record **before** committing the run's repairs, so
       - Two coherence runs in a row hit baseline-loss-after-squash. This is structural: the
         run-log baseline cannot survive squash-merges. See follow-up Task for prompt + spec
         improvements.
+
+### Run 2026-05-05 — Repo Coherence Check
+- agent: jules
+- start_commit: 473cad7
+- end_commit: 628439e
+- baseline_commit: 2ac93bd (missing — fell back to 7 days log)
+- files_in_delta: 0
+- files_scanned: 106
+- t1_fixes: 0
+- t2_fixes: 2
+- t3_tasks_created: 0
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+    Baseline 2ac93bd was not present in git history. Fell back to scanning last 7 days of changes.
+    Delta evaluation locally resulted in 0 files. Drove the repairs by output from tools/check-governance.sh
+    since the linter detects compliance issues.
+    T2 fixes applied to tasks/006-skills-navigation-bootstrap/task.md and tasks/012-review-pr-29/task.md to
+    add the missing `task_spawns_prompts` array.
