@@ -21,6 +21,7 @@ All work here MUST conform to [`RESEARCH.md`](../RESEARCH.md). Frontmatter and c
 
 ### In-House Research Workspaces
 
+- [`adr-assumption-audit/`](./adr-assumption-audit/) — Critical-thinking audit (M13, M07, M06+M08) of the Task 027 SPEC and Task 028 plan. Output: [`output/REPORT.md`](./adr-assumption-audit/output/REPORT.md) — 9 hidden assumptions, 11 implicit ADRs, 7 pending decisions (2 novel), 5 Recommended Actions. Closes [Task 029](../tasks/029-adr-assumption-audit/task.md).
 - [`adr-spec-research-synthesis/`](./adr-spec-research-synthesis/) — Repo-native ADR Governance Specification (§0–§9): canonical `decisions/` storage path, `adr_*` L2 namespace, guarded-section AGENTS.md synthesis, and the `agency-adr` CLI shape under `tools/adr/`. Output: [`output/SPEC.md`](./adr-spec-research-synthesis/output/SPEC.md). Closes [Task 027](../tasks/027-adr-spec-research-synthesis/task.md).
 - [`agent-prompt-specs-3-systems-sdd/`](./agent-prompt-specs-3-systems-sdd/) — Spec-A/B/C: agentic prompt specifications (3-systems SDD).
 - [`agentic-eval-trust-improvement-spec/`](./agentic-eval-trust-improvement-spec/) — Spec-J/K/L: evaluation, trust, improvement loops.

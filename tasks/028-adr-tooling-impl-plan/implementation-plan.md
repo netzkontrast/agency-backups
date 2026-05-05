@@ -350,5 +350,21 @@ S items: 16 (≈ 8 days at one-per-half-day). M items: 14 (≈ 28 days at two-pe
 
 - ADR governance spec: [`../../research/adr-spec-research-synthesis/output/SPEC.md`](../../research/adr-spec-research-synthesis/output/SPEC.md).
 - Predecessor task: [`../027-adr-spec-research-synthesis/task.md`](../027-adr-spec-research-synthesis/task.md) (`task_status: done`).
-- Sibling task: [`../029-adr-assumption-audit/task.md`](../029-adr-assumption-audit/task.md) (`task_status: open`; feeds OD.1, OD.2, OD.4, OD.10).
+- Sibling task: [`../029-adr-assumption-audit/task.md`](../029-adr-assumption-audit/task.md) (`task_status: done`; produced [`../../research/adr-assumption-audit/output/REPORT.md`](../../research/adr-assumption-audit/output/REPORT.md)).
 - Reusable tooling: [`../../tools/fm/_core.py`](../../tools/fm/_core.py), [`../../tools/check-governance.sh`](../../tools/check-governance.sh).
+
+## §B Task 029 Audit Cross-Reference (PD ↔ OD)
+
+Added 2026-05-05 by Task 029 closure (per its prompt Step 7.3). This appendix is read-only metadata: it neither modifies any §1–§7 row nor changes the build sequencing. It cross-links the PDs from [`../../research/adr-assumption-audit/output/REPORT.md`](../../research/adr-assumption-audit/output/REPORT.md) §3 to the ODs in §6 above.
+
+| PD (REPORT §3) | Maps to OD (§6) | Audit recommendation | Effect on build |
+|---|---|---|---|
+| PD-001 — storage path | implicit (resolved at SPEC drafting) | `decisions/` (Option A) confirmed | none — already in plan §1 |
+| PD-002 — fidelity algorithm | OD.2 | Ship A+B together as v0; defer C (`llm-pass`) | upgrades plan §2.1 `tools/adr/fidelity.py` from "ships A only" to "ships A+B"; +1 day on §7.1 estimate |
+| PD-003 — AGENTS.md ownership | OD.6 (placement) | Option B (guarded section) confirmed; placement still deferred | none on contract; sub-mitigations from REPORT.md §4 Action 3 extend OD.6 |
+| PD-004 — DAG storage | OD-implicit (plan §2.1 resolved) | Option A (frontmatter source-of-truth) confirmed | none — already in plan §2.1 |
+| PD-005 — bootstrap cardinality | OD.1 | **Hybrid Option C** — 5 P1 individual + 1–2 P2 clusters + P3 deferred | unblocks Task 030 candidate (first-batch ADR authoring); does NOT block any §2.1 module |
+| PD-006 — ADR review loop (NOVEL) | none — extends PRE_COMMIT.md §7.D | Append 5-item review checklist | extends plan §5.1 with a §7.D sub-section; +S effort |
+| PD-007 — stale-Proposed lifecycle (NOVEL) | none — defer to Task 031 | Defer; default forever-open | post-v0; not on critical path |
+
+REPORT.md §4 enumerates 5 Recommended Actions tied to the table above. The implementing-agent Task that succeeds Task 028 SHOULD treat REPORT.md §4 as a binding refinement of plan §6.

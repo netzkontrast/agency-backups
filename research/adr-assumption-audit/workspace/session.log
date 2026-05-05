@@ -1,0 +1,22 @@
+2026-05-05T00:00:00Z  session-start    agent=claude-code  task=029-adr-assumption-audit  branch=claude/adr-spec-research-NPwuc
+2026-05-05T00:00:01Z  governance       tools/check-governance.sh exit=0 (baseline)
+2026-05-05T00:00:05Z  read-spec        research/adr-spec-research-synthesis/output/SPEC.md (in-force; T4-immutable)
+2026-05-05T00:00:06Z  read-plan        tasks/028-adr-tooling-impl-plan/implementation-plan.md (§6 Open Decisions: 10 ODs)
+2026-05-05T00:00:07Z  read-gemini      research/gemini/agency-adr-governance-spec/{adr-governance-spec,research-prompt_*}.md
+2026-05-05T00:00:08Z  read-roots       AGENTS,TASK,PROMPT,RESEARCH,FOLDERS,PRE_COMMIT,MAINTENANCE,FRUSTRATED,README .md
+2026-05-05T00:00:09Z  read-tools       tools/check-governance.sh tools/fm/{validate,extract,edit,query,_core}.py
+2026-05-05T00:00:20Z  init-workspace   mkdir -p research/adr-assumption-audit/{workspace,synthesis,reflection,output}  exit=0
+2026-05-05T00:00:21Z  snapshot         wrote prompt.md (immutable run-start snapshot)
+2026-05-05T00:00:30Z  cb0-kickoff      wrote reflection/kickoff.md (5-question template)
+2026-05-05T00:00:40Z  subagent-A       launched [M13] adversarial query expansion across 4 axes  → workspace/m13-hidden-assumptions.md  9 ASMs (3 high, 4 med, 2 low blast)
+2026-05-05T00:00:50Z  subagent-B       launched [M07] contradiction log against root specs + tooling  → workspace/m07-implicit-adrs.md  11 IADRs (4 P1, 5 P2, 2 P3)
+2026-05-05T00:01:00Z  subagent-C       launched [M06]+[M08] triangulated pending decisions  → workspace/m06-m08-pending-decisions.md  7 PDs (PD-001..PD-007)
+2026-05-05T00:01:01Z  cb0-mid-run      wrote reflection/mid-run.md
+2026-05-05T00:01:10Z  synthesis        merged 3 subagent outputs  → output/REPORT.md  §1-§4
+2026-05-05T00:01:11Z  cb0-post-synth   wrote reflection/post-synthesis.md
+2026-05-05T00:01:20Z  cross-ref        amended tasks/028-adr-tooling-impl-plan/implementation-plan.md §6 with PD↔OD cross-reference appendix (read-only audit boundary preserved)
+2026-05-05T00:01:30Z  reflection       wrote reflection/friction-log.md  highest=FL1
+2026-05-05T00:01:40Z  synthesis        wrote synthesis/{methodology,tracks,post-synthesis-log,state,readme}.md
+2026-05-05T00:01:50Z  governance       tools/check-governance.sh exit=0 against new files
+2026-05-05T00:02:00Z  close            set tasks/029-adr-assumption-audit/task.md task_status=done; updated tasks/readme.md and research/readme.md
+2026-05-05T00:02:10Z  session-end      pre-commit ready
