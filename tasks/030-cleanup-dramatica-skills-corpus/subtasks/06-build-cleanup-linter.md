@@ -48,6 +48,8 @@ Each rule has:
 
 Wire into `tools/check-governance.sh` per Task 015's pattern (gated on `narrative-ontology/ontology.json` existing, so non-narrative branches don't break).
 
+**`agency-adr` integration (per parent task `task_blocked_by: ["028"]`).** Each `cleanup.py --check` violation that requires a normative-rule decision (e.g., adding a fifth rule, changing the auto-fix path of an existing rule) MUST be filed as an ADR via `agency-adr` rather than as an ad-hoc lint update. The `--explain` payload SHOULD include the ADR ID once the rule is ratified. If the `agency-adr` CLI is not yet available at ST-6 dispatch time, the integration point is a `# TODO(after-028)` marker that emits the rule-violation log to stderr in an ADR-ingestible format (one JSON-line per violation, schema TBD by Task 028).
+
 ## Falsification
 
 Wrong cut **iff** `cleanup.py` becomes a bottomless pit of ad-hoc regex bandaids. Mitigation: the v0.1 lint catalogue is FOUR rules, period. Adding a fifth requires:

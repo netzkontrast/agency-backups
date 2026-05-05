@@ -14,7 +14,8 @@ task_spawns_research: []
 task_spawns_prompts: []
 task_supersedes: []
 task_superseded_by: []
-task_blocked_by: []
+task_blocked_by:
+  - "028"
 task_affects_paths:
   - skills/dramatica-theory/
   - skills/dramatica-vocabulary/
@@ -41,6 +42,8 @@ The dramatica corpus is operational but degraded. **Phase 0 (now)** of this task
 [Task 015](../015-integrate-dramatica-ncp-skills/task.md) integrated the dramatica skills with NCP and novel-architect via a Narrative Ontology, per-term frontmatter, and a Python navigator suite. Its [friction-log §Action items](../015-integrate-dramatica-ncp-skills/friction-log.md) surfaced three v0.2 follow-ups (OQ-X multi-quad / OQ-Y term_file anchor cleanup / OQ-Z DE-locale alias coverage) that were marked "can be standalone follow-up tasks; none are blockers for closing v0.1". This task absorbs all three.
 
 The "Phase 1" schema-decision questions (deprecation lifecycle, multi-quad encoding, structured `encoding_hints` field) are deferred to main's ADR-governance pipeline — [Task 027](../027-adr-spec-research-synthesis/) (canonical ADR spec from the executed Gemini draft), [Task 028](../028-adr-tooling-impl-plan/) (ADR tooling impl plan), and [Task 029](../029-adr-assumption-audit/) (assumption audit). The FE-1…FE-10 items in this task's `notes.md §3` are intended inputs to Task 029.
+
+**Blocking dependency on Task 028.** This task SHOULD consume the `agency-adr` CLI tool suite that [Task 028](../028-adr-tooling-impl-plan/) ships (validate / synthesize / DAG / JSON-Schema linter / GHA integration). Concretely: ST-6's `cleanup.py` lint catalogue and ST-5's `term.py` deprecation lifecycle are natural callers of `agency-adr validate` and the JSON-Schema linter, and the schema-bump procedure ST-5 surfaces (term-level `status: deprecated`) is precisely the kind of decision the `agency-adr` synthesise pipeline records as an ADR. `task_blocked_by: ["028"]` is set so Task 030 does not begin Phase A until the `agency-adr` tooling is authored and ready for use; if the maintainer chooses to unblock early, the affected subtasks (ST-5, ST-6) reflect the unblock by stubbing the `agency-adr` integration with explicit `# TODO(after-028)` markers in code.
 
 This task adds:
 
