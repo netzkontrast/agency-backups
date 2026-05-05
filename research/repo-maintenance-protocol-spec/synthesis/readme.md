@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: repo-maintenance-protocol-spec-synthesis
+summary: "Structured outputs, contradiction logs, and methodology tracing."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Synthesis
 
 Structured outputs, contradiction logs, and methodology tracing.

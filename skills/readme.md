@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: skills-readme
+summary: "Index for /skills/: version-controlled snapshots of installed Claude skills."
+created: 2026-05-04
+updated: 2026-05-05
+---
+
 # skills/
 
 ## What

@@ -21,30 +21,29 @@ for arg in "$@"; do
 done
 
 FAIL=0
-FM_TOOLCHAIN="${FM_TOOLCHAIN:-0}"
+# Task 017 flipped the default: fm-validate is now the gate; the legacy
+# validator runs advisory and is silenced by default. Set FM_TOOLCHAIN=0
+# to revert (e.g., for the duration of a contested migration step).
+FM_TOOLCHAIN="${FM_TOOLCHAIN:-1}"
+export FM_LEGACY_QUIET="${FM_LEGACY_QUIET:-1}"
 
 echo "=== agency check-governance ==="
 
 echo ""
 echo "--- [1/3] Frontmatter linter ---"
-# Task 016: dual-run during the migration window. The legacy validator
-# decides the exit code by default; fm-validate runs in advisory mode.
-# Set FM_TOOLCHAIN=1 to flip the gate (Task 017 makes that the default).
 if [ "$FM_TOOLCHAIN" = "1" ]; then
-  echo "(FM_TOOLCHAIN=1 — fm-validate is the gate; legacy runs advisory)"
-  if ! "$PYTHON" tools/fm/validate.py; then
+  if ! "$PYTHON" tools/fm/validate.py --type-check; then
     FAIL=1
   fi
-  echo "--- legacy validate-frontmatter.py (advisory) ---"
-  "$PYTHON" tools/validate-frontmatter.py || true
+  echo "--- legacy validate-frontmatter.py (advisory; one release window) ---"
+  "$PYTHON" tools/legacy/validate-frontmatter.py >/dev/null 2>&1 || true
 else
-  if ! "$PYTHON" tools/validate-frontmatter.py; then
+  echo "(FM_TOOLCHAIN=0 — legacy validator gates; fm-validate runs advisory)"
+  if ! "$PYTHON" tools/legacy/validate-frontmatter.py; then
     FAIL=1
   fi
-  if [ -f "tools/fm/validate.py" ]; then
-    echo "--- fm-validate (advisory; set FM_TOOLCHAIN=1 to gate) ---"
-    "$PYTHON" tools/fm/validate.py >/dev/null 2>&1 || true
-  fi
+  echo "--- fm-validate (advisory) ---"
+  "$PYTHON" tools/fm/validate.py >/dev/null 2>&1 || true
 fi
 
 echo ""
@@ -54,10 +53,8 @@ if ! "$PYTHON" tools/lint-structure.py; then
 fi
 
 echo ""
-echo "--- [3/3] Cross-reference linkage linter ---"
-if ! "$PYTHON" tools/lint-linkage.py; then
-  FAIL=1
-fi
+echo "--- [3/3] Cross-reference linkage (folded into fm-validate --type-check) ---"
+echo "(legacy tools/lint-linkage.py is now a shim around fm-validate --type-check; checked above)"
 
 echo ""
 echo "--- [4/4] Run-log record validator ---"

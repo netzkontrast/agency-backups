@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: agentic-session-continuity-spec-synthesis
+summary: "Contains synthesized data and state logs prior to final output assembly."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Synthesis
 
 Contains synthesized data and state logs prior to final output assembly.

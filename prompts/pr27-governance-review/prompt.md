@@ -29,23 +29,22 @@ BCP 14 [RFC 2119] [RFC 8174] when, and only when, they appear in all capitals as
 
 ---
 
-## Input
+## I — Input
 
 - PR diff: 19 files changed, +251 / −207 lines on branch `claude/analyze-code-PfoLl`
 - Driving prompt snapshot: [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md)
 - Governance specs: AGENTS.md, TASK.md, PROMPT.md, RESEARCH.md, FOLDERS.md, MAINTENANCE.md, PRE_COMMIT.md
 
-## Steps
+## S — Steps
 
 1. Read the PR diff in full.
 2. Cross-reference each change cluster against the governance spec it touches.
 3. Identify correctness issues, scope concerns, audit-graph gaps, and self-referential inconsistencies.
 4. Produce `output/REVIEW.md` with sections: Summary, Strengths, Issues, Verdict.
 
-## Deliverable
+## E — Expectations
 
-`research/pr27-governance-review/output/REVIEW.md` — structured critique with RFC 2119
-normative language where applicable.
+- `research/pr27-governance-review/output/REVIEW.md` — structured critique with RFC 2119 normative language where applicable.
 
 ## Constraints
 
@@ -53,3 +52,7 @@ normative language where applicable.
 2. MUST distinguish between genuine defects and stylistic preferences.
 3. MUST cite the specific spec clause (e.g. AGENTS.md CR.5, TASK.md §7.7) for each finding.
 4. MUST NOT rewrite or "fix" any file outside the research workspace.
+
+## R — Role
+
+Reviewer auditing PR #27 (governance specs) for adherence to MAINTENANCE.md §1 tier discipline and SPEC.md cross-references. The reviewer surfaces drift but does NOT silently fix it.

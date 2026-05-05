@@ -171,6 +171,11 @@ ONTOLOGY_PATH_REL = Path("maintenance/schemas/header-ontology.json")
 def load_ontology(repo_root: Path | None = None) -> dict[str, Any]:
     root = repo_root or repo_root_from_cwd()
     path = root / ONTOLOGY_PATH_REL
+    if not path.exists():
+        # Fall back to the ontology shipped alongside this module.
+        sibling = Path(__file__).resolve().parents[1].parent / ONTOLOGY_PATH_REL
+        if sibling.exists():
+            path = sibling
     return json.loads(path.read_text(encoding="utf-8"))
 
 
@@ -262,8 +267,21 @@ def normalise_heading(name: str) -> str:
     """Case-insensitive comparable form: strip surrounding whitespace and
     trailing punctuation (colons, em-dashes, en-dashes, hyphens) so that
     `## Goal:`, `## Goal —`, and `## Goal — :` all match `## Goal`.
+    A trailing parenthetical (`## I — Input (to flesh out)`) also strips.
     Embedded em-dashes (e.g., `I — Input`) are preserved verbatim."""
     s = name.strip()
+    # Drop a single trailing parenthetical, e.g. `Foo (note)` → `Foo`.
+    if s.endswith(")"):
+        depth = 0
+        for i in range(len(s) - 1, -1, -1):
+            ch = s[i]
+            if ch == ")":
+                depth += 1
+            elif ch == "(":
+                depth -= 1
+                if depth == 0:
+                    s = s[:i].rstrip()
+                    break
     while s and s[-1] in ":—–- \t":
         s = s[:-1]
     return s.casefold()
@@ -334,6 +352,93 @@ def find_all_section_bodies(text: str, heading: str) -> list[str]:
     if open_start is not None:
         matches.append((open_start, len(lines)))
     return ["".join(lines[s:e]) for s, e in matches]
+
+
+@dataclass(frozen=True)
+class SectionSpan:
+    """Position of one `## ` section relative to the body (post-frontmatter).
+
+    All indices are 0-based body-line offsets (matching `body.splitlines(keepends=True)`).
+    `heading_line` is the index of the `## …` line itself; the body runs
+    from `heading_line + 1` up to (but not including) `body_end`.
+    `anchor_line` is the index of a preceding `# anchor: <id>` comment if
+    any (one line above the heading), else None.
+    """
+    heading_line: int
+    body_start: int
+    body_end: int
+    heading_text: str
+    anchor_id: str | None
+    anchor_line: int | None
+
+
+def find_section_spans(text: str, heading: str) -> list[SectionSpan]:
+    """Return one SectionSpan per `## heading` match in document order.
+
+    Heading match is case-insensitive after `normalise_heading`. Headings
+    inside fenced code blocks are ignored. The body span ends at the next
+    `## ` heading (outside fences) or end-of-body. SPEC §13.3 addressing.
+    """
+    target = normalise_heading(heading)
+    _, body = split_frontmatter_and_body(text)
+    lines = body.splitlines(keepends=True)
+    spans: list[SectionSpan] = []
+    open_meta: tuple[int, str, str | None, int | None] | None = None
+    for idx, line in _iter_lines_outside_fence(lines):
+        m = HEADING_RE.match(line.rstrip("\n"))
+        if not m or len(m.group(1)) != 2:
+            continue
+        head_text = m.group(2)
+        norm = normalise_heading(head_text)
+        if open_meta is not None:
+            heading_line, ht, anch_id, anch_line = open_meta
+            spans.append(SectionSpan(
+                heading_line=heading_line,
+                body_start=heading_line + 1,
+                body_end=idx,
+                heading_text=ht,
+                anchor_id=anch_id,
+                anchor_line=anch_line,
+            ))
+            open_meta = None
+        if norm == target:
+            anch_id, anch_line = _peek_anchor(lines, idx)
+            open_meta = (idx, head_text, anch_id, anch_line)
+    if open_meta is not None:
+        heading_line, ht, anch_id, anch_line = open_meta
+        spans.append(SectionSpan(
+            heading_line=heading_line,
+            body_start=heading_line + 1,
+            body_end=len(lines),
+            heading_text=ht,
+            anchor_id=anch_id,
+            anchor_line=anch_line,
+        ))
+    return spans
+
+
+_ANCHOR_COMMENT_RE = re.compile(r"^<!--\s*anchor:\s*([^\s>]+)\s*-->\s*$")
+_ANCHOR_HASH_RE = re.compile(r"^#\s*anchor:\s*([^\s]+)\s*$")
+
+
+def _peek_anchor(lines: list[str], heading_idx: int) -> tuple[str | None, int | None]:
+    """Look at the line immediately above `heading_idx` for an anchor marker.
+
+    Recognises:
+      - `<!-- anchor: <id> -->` (preferred markdown form)
+      - `# anchor: <id>` inside a fenced block on the line above (SPEC §1)
+    Returns (anchor_id, anchor_line_idx) or (None, None).
+    """
+    j = heading_idx - 1
+    while j >= 0 and lines[j].strip() == "":
+        j -= 1
+    if j < 0:
+        return None, None
+    s = lines[j].strip()
+    m = _ANCHOR_COMMENT_RE.match(s) or _ANCHOR_HASH_RE.match(s)
+    if m:
+        return m.group(1), j
+    return None, None
 
 
 def list_h2_headings(text: str) -> list[str]:

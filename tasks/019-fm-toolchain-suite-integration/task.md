@@ -6,8 +6,8 @@ summary: "Decompose the gap between the four-tool fm-* atomic surface and a comp
 created: 2026-05-05
 updated: 2026-05-05
 task_id: "019"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts: []
 task_spawns_research: []
@@ -76,18 +76,18 @@ Each subtask carries its own falsification clause: *what observation would prove
 
 ## Todo
 
-- [ ] 1. Spawn ST-1 fm-rename via `/sc:agent` using [`subtasks/01-fm-rename-cross-file-slug.md`](./subtasks/01-fm-rename-cross-file-slug.md).
-- [ ] 2. Spawn ST-2 fm-graph via `/sc:agent` using [`subtasks/02-fm-graph-dependency.md`](./subtasks/02-fm-graph-dependency.md).
-- [ ] 3. Spawn ST-3 fm-new via `/sc:agent` using [`subtasks/03-fm-new-scaffolder.md`](./subtasks/03-fm-new-scaffolder.md).
-- [ ] 4. Spawn ST-4 fm-fix via `/sc:agent` using [`subtasks/04-fm-fix-auto-repair.md`](./subtasks/04-fm-fix-auto-repair.md).
-- [ ] 5. Spawn ST-5 validate extensions via `/sc:agent` using [`subtasks/05-validate-extensions.md`](./subtasks/05-validate-extensions.md).
-- [ ] 6. Spawn ST-7 docs + cookbook via `/sc:agent` using [`subtasks/07-fm-readme-cookbook.md`](./subtasks/07-fm-readme-cookbook.md).
-- [ ] 7. Spawn ST-9 SPEC amendments via `/sc:agent` using [`subtasks/09-spec-amendments-q4-q5.md`](./subtasks/09-spec-amendments-q4-q5.md).
-- [ ] 8. Merge Phase A outputs (verify no API conflicts; rebase if needed).
-- [ ] 9. Spawn ST-6 legacy retirement via `/sc:agent` using [`subtasks/06-legacy-linter-rewrite.md`](./subtasks/06-legacy-linter-rewrite.md).
-- [ ] 10. Spawn ST-8 single-fm wrapper via `/sc:agent` using [`subtasks/08-fm-cli-wrapper.md`](./subtasks/08-fm-cli-wrapper.md).
-- [ ] 11. Flip `FM_TOOLCHAIN=1` to default in `tools/check-governance.sh`; retire legacy linters from CI in same commit.
-- [ ] 12. Set `task_status: done`; write `friction-log.md`; append `maintenance/run-log.md`.
+- [x] 1. Spawn ST-1 fm-rename via `/sc:agent` using [`subtasks/01-fm-rename-cross-file-slug.md`](./subtasks/01-fm-rename-cross-file-slug.md).
+- [x] 2. Spawn ST-2 fm-graph via `/sc:agent` using [`subtasks/02-fm-graph-dependency.md`](./subtasks/02-fm-graph-dependency.md).
+- [x] 3. Spawn ST-3 fm-new via `/sc:agent` using [`subtasks/03-fm-new-scaffolder.md`](./subtasks/03-fm-new-scaffolder.md).
+- [x] 4. Spawn ST-4 fm-fix via `/sc:agent` using [`subtasks/04-fm-fix-auto-repair.md`](./subtasks/04-fm-fix-auto-repair.md).
+- [x] 5. Spawn ST-5 validate extensions via `/sc:agent` using [`subtasks/05-validate-extensions.md`](./subtasks/05-validate-extensions.md).
+- [x] 6. Spawn ST-7 docs + cookbook via `/sc:agent` using [`subtasks/07-fm-readme-cookbook.md`](./subtasks/07-fm-readme-cookbook.md).
+- [x] 7. Spawn ST-9 SPEC amendments via `/sc:agent` using [`subtasks/09-spec-amendments-q4-q5.md`](./subtasks/09-spec-amendments-q4-q5.md).
+- [x] 8. Merge Phase A outputs (verify no API conflicts; rebase if needed).
+- [x] 9. Spawn ST-6 legacy retirement via `/sc:agent` using [`subtasks/06-legacy-linter-rewrite.md`](./subtasks/06-legacy-linter-rewrite.md).
+- [x] 10. Spawn ST-8 single-fm wrapper via `/sc:agent` using [`subtasks/08-fm-cli-wrapper.md`](./subtasks/08-fm-cli-wrapper.md).
+- [x] 11. Flip `FM_TOOLCHAIN=1` to default + retire legacy linkage from CI. *(FM_TOOLCHAIN=1 was already default after Task 017; this task added `--type-check` to the gate and reduced lint-linkage step to a documentation note. Flipping `--check-body` default-on is explicit Task 020 territory per SPEC §12.6 — the corpus has 71 pre-existing F.B.* drifts that need a migration pass first.)*
+- [x] 12. Set `task_status: done`; write `friction-log.md`; append `maintenance/run-log.md`.
 
 ## Links
 

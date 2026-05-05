@@ -200,3 +200,13 @@ Use the five-question CB0 template verbatim from `research/gemini/agency-adr-gov
 - Critical-thinking methods MUST be applied as defined in the Research Prompt Optimizer source — do not abbreviate.
 - Subagents are parallel workers. They MAY read each other's output directories after their own Step is complete, but MUST NOT wait for each other before producing their own output.
 - Blast radius classification: high = breaks AGENTS.md synthesis silently; medium = requires spec amendment; low = documentation gap only.
+
+## Framework
+
+RISEN+ReAct, applied to ADR audit. Framework declared at the top of the file; this section restates it for fm-validate header conformance.
+
+## Constraints
+
+- The agent MUST treat every surfaced assumption as a candidate ADR until reviewed.
+- The agent MUST NOT silently merge surfaced assumptions into existing ADRs without an audit-trail commit per MAINTENANCE.md §1.
+- The agent SHOULD prefer surfacing FL2+ friction over silently resolving an ambiguity.

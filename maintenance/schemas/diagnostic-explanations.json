@@ -1,0 +1,67 @@
+{
+  "$schema-note": "Per-code rationale strings used by fm-validate --explain. Each entry MUST carry severity_hint + what + why + fix. Codes mirror SPEC §5.1 and the F.T.* type-check family added by Task 019 ST-5.",
+  "version": "1.0.0",
+  "spec": "research/flexible-frontmatter-toolchain/output/SPEC.md",
+  "codes": {
+    "F.3.1": {
+      "severity_hint": "ERROR",
+      "what": "One or more L1 frontmatter keys are missing (type / status / slug / summary / created / updated).",
+      "why": "L1 keys are the universal contract every operational file declares. Missing them blocks every cross-file query and lifecycle audit.",
+      "fix": "Add the missing keys with valid values. Use `fm-fix --apply` for mechanically-derivable values; otherwise hand-author."
+    },
+    "F.3.2": {
+      "severity_hint": "ERROR",
+      "what": "One or more L2 keys required by the file's `type:` are missing.",
+      "why": "Per-type L2 keys are the typed routing surface (e.g. tasks declare task_uses_prompts so prompts can be reverse-resolved). Missing them breaks the reciprocity graph.",
+      "fix": "Add the listed keys. List-typed L2 keys may use `key: []` if the value is genuinely empty; scalar L2 keys must be authored."
+    },
+    "F.3.3": {
+      "severity_hint": "ERROR",
+      "what": "Frontmatter is missing entirely, malformed, or its `type:` disagrees with the path-classification table.",
+      "why": "Frontmatter is the structural contract. A missing or wrong `type:` means every type-specific check below is invalid.",
+      "fix": "Open the file; re-emit a valid `---`-fenced YAML block with at minimum the L1 keys. If `type:` disagrees, set it to the path-expected value listed in `maintenance/schemas/header-ontology.json`."
+    },
+    "F.3.4": {
+      "severity_hint": "ERROR",
+      "what": "An unknown frontmatter key's name is within Optimal String Alignment distance 1 of a required key (a likely typo, e.g. `tpye` for `type`).",
+      "why": "Typos silently shadow the intended key — the validator would otherwise pass a file whose intent is broken.",
+      "fix": "Inspect manually: rename if a typo, otherwise add to the recognised key set in the ontology. fm-fix refuses to auto-rename — renaming might lose the original value."
+    },
+    "F.4.2": {
+      "severity_hint": "ERROR",
+      "what": "A `## ` heading required by the file's type is absent or normalises to a different name.",
+      "why": "Required headings are the bodies' navigation surface. Tools and reviewers expect to find them at predictable names.",
+      "fix": "Author the missing heading (`## Goal`, `## Plan`, `## Todo`, `## Links` for tasks) and a body that satisfies the §12 body_schema for that section."
+    },
+    "F.B.1": {
+      "severity_hint": "ERROR",
+      "what": "A section's body shape (paragraph / ordered_list / unordered_list / task_list / link_list / gherkin_block / code_block / definition_list) does not match the §12 body_schema for the file's type.",
+      "why": "Body-shape mismatches mean downstream tools (fm-section --check-task, the coherence-check linter) cannot operate on the section.",
+      "fix": "Re-author the body to match the expected shape. If the existing shape is intentional, file a Task to amend the body_schema."
+    },
+    "F.B.2": {
+      "severity_hint": "ERROR",
+      "what": "A list-shaped section has fewer items than `min_items` or more than `max_items`.",
+      "why": "Bounds keep the section navigable and stops drift (e.g. an empty Plan is meaningless).",
+      "fix": "Add or remove items to fall within the bounds."
+    },
+    "F.B.3": {
+      "severity_hint": "WARN",
+      "what": "A list item does not match the `item_pattern` regex for the section's body_schema (e.g. a Constraints bullet missing an RFC 2119 keyword).",
+      "why": "Item patterns enforce normative-keyword discipline (lang-spec U1).",
+      "fix": "Rewrite the item to include the required pattern (typically MUST / MUST NOT / SHOULD / MAY / etc.)."
+    },
+    "F.T.1": {
+      "severity_hint": "ERROR",
+      "what": "A list-valued L2 field references a slug or task_id that has no matching operational file.",
+      "why": "Dangling references silently break the reciprocity graph and produce orphaned navigation when agents follow links.",
+      "fix": "Either author the missing target file, fix the typo'd slug, or remove the dangling reference."
+    },
+    "F.T.2": {
+      "severity_hint": "ERROR",
+      "what": "A reciprocal pairing (e.g. task_uses_prompts vs prompt_relates_to_task) is asymmetric — one side names the other but the other does not name back.",
+      "why": "Reciprocity is the integrity invariant for the slug graph. Asymmetry means a reverse query returns wrong results.",
+      "fix": "Decide which side is correct and fix the other to match. fm-edit --append-list or --remove-from-list applies the change atomically."
+    }
+  }
+}

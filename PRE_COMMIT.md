@@ -34,22 +34,22 @@ Pick the matching governance spec — the agent MUST additionally satisfy the `M
 
 ## 7. Mechanical Governance Checks
 
-If the change touches any file under `/tasks/`, `/prompts/`, or `/research/`, the agent MUST run **all three** linters below and fix every `ERROR`-level diagnostic before committing. Run via the unified shim or individually:
+If the change touches any file under `/tasks/`, `/prompts/`, `/research/`, `/skills/`, or `/maintenance/`, the agent MUST run the unified shim below and fix every `ERROR`-level diagnostic before committing.
 
 ```bash
-# Unified (recommended):
-tools/check-governance.sh
+# Unified (canonical, Task 017 cutover):
+tools/check-governance.sh                  # FM_TOOLCHAIN=1 by default (fm-validate gates)
 
-# Individual linters (legacy — gating until Task 019 retires them):
-python3 tools/validate-frontmatter.py   # L1+L2 frontmatter keys, YAML depth, slug format
-python3 tools/lint-structure.py         # task.md / prompt.md / brief.md / readme.md presence
-python3 tools/lint-linkage.py           # task_uses_prompts, task_spawns_research, reciprocity
-python3 tools/dramatica-nav/validate.py # narrative-ontology integrity (gated on ontology.json)
-
-# Flexible toolchain (Task 016 — opt-in until Task 019 flips the default):
-FM_TOOLCHAIN=1 tools/check-governance.sh   # gates on tools/fm/validate.py instead of legacy
+# Targeted invocations:
+python3 tools/fm/validate.py               # L1+L2 keys, type/path agreement, required headings
 python3 tools/fm/validate.py --check-body  # adds SPEC §12 per-section body-schema checks
 python3 tools/fm/validate.py --strict      # promotes WARN-severity diagnostics to non-zero exit
+python3 tools/dramatica-nav/validate.py    # narrative-ontology integrity (gated on ontology.json)
+
+# Legacy escape hatches (one-release deprecation window):
+FM_TOOLCHAIN=0 tools/check-governance.sh   # restore the legacy validate-frontmatter gate
+python3 tools/legacy/lint-structure.py     # structural rules pending fm- migration
+python3 tools/legacy/lint-linkage.py       # cross-ref graph pending fm-query migration
 ```
 
 ### 7.A Toolchain Selection (Legacy → Flexible Transition)

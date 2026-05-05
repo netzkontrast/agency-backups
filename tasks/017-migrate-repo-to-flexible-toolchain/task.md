@@ -6,8 +6,8 @@ summary: "Migrate the agency repo onto the flexible-frontmatter toolchain shippe
 created: 2026-05-05
 updated: 2026-05-05
 task_id: "017"
-task_status: blocked
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts:
   - migrate-repo-to-flexible-toolchain
@@ -60,18 +60,18 @@ Three batches per SPEC §8.
 
 ## Todo
 
-- [ ] 1. Confirm Task 016 is `done` (gate; this task is `blocked` until then).
-- [ ] 2. Batch 1: `fm-edit --bump-updated` sweep + commit.
-- [ ] 3. Batch 1: move legacy validators to `tools/legacy/` with deprecation banner.
-- [ ] 4. Batch 2: flip `FM_TOOLCHAIN=1`; verify side-by-side run is silent.
-- [ ] 5. Batch 2: re-point `check-maintenance-bypass.py`.
-- [ ] 6. Batch 2: switch `.githooks/pre-commit` to `--delta`.
-- [ ] 7. Batch 3: amend `MAINTENANCE.md §3.2` + `PRE_COMMIT.md §7` (T3 — file as a sub-task if review is contentious).
-- [ ] 8. Batch 3: amend `prompts/repo-coherence-check/prompt.md` Step 2.5.
-- [ ] 9. Batch 3: scope-narrow Task 010 per SPEC §C1; cross-reference back to this task.
-- [ ] 10. Resolve SPEC §10 Q3 (programmatic API for non-Python callers) in `notes.md`.
-- [ ] 11. Final commit: remove `tools/legacy/`; rerun `tools/check-governance.sh`.
-- [ ] 12. Set `task_status: done`, `updated:`; write `friction-log.md`; append `maintenance/run-log.md`.
+- [x] 1. Confirm Task 016 is `done` (gate; this task is `blocked` until then).
+- [x] 2. Batch 1: `fm-edit --bump-updated` sweep + commit.
+- [x] 3. Batch 1: move legacy validators to `tools/legacy/` with deprecation banner.
+- [x] 4. Batch 2: flip `FM_TOOLCHAIN=1`; verify side-by-side run is silent.
+- [x] 5. Batch 2: re-point `check-maintenance-bypass.py`.
+- [x] 6. Batch 2: switch `.githooks/pre-commit` to `--delta`.
+- [x] 7. Batch 3: amend `MAINTENANCE.md §3.2` + `PRE_COMMIT.md §7` (T3 — file as a sub-task if review is contentious).
+- [x] 8. Batch 3: amend `prompts/repo-coherence-check/prompt.md` Step 2.5.
+- [x] 9. Batch 3: scope-narrow Task 010 per SPEC §C1; cross-reference back to this task.
+- [x] 10. Resolve SPEC §10 Q3 (programmatic API for non-Python callers) in `notes.md`.
+- [x] 11. Final commit: remove `tools/legacy/`; rerun `tools/check-governance.sh`.
+- [x] 12. Set `task_status: done`, `updated:`; write `friction-log.md`; append `maintenance/run-log.md`.
 
 ## Links
 

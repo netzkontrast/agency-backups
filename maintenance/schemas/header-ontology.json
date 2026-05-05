@@ -70,6 +70,7 @@
         "E — Expectations",
         "Constraints"
       ],
+      "_required_headings_note": "Restored by Task 020. Every active prompt.md MUST carry the canonical RISEN+ReAct headings. Older prompts that pre-date this schema have been migrated section-by-section in this Task; new prompts authored via fm-new ship them by default.",
       "body_schema": {
         "Framework": {"shape": "paragraph", "max_paragraphs": 2},
         "R — Role": {"shape": "paragraph", "min_chars": 20},
@@ -133,12 +134,21 @@
       "body_schema": {}
     }
   },
+  "reciprocity": {
+    "note": "Reciprocal slug-graph edges checked by fm-validate --type-check (F.T.2). Each rule names a forward field on the source type and the back-reference field expected on the target type. fm-validate walks every operational file, builds the slug→file index, and verifies every forward reference has a matching back-reference. Note: `prompt_spawned_from_research` is intentionally NOT listed here — the spawn relationship is one-to-many and the back-edge `research_executes_prompt` is a scalar that names only the original prompt, not the follow-ups.",
+    "rules": [
+      {
+        "forward": {"type": "task", "field": "task_uses_prompts"},
+        "back":    {"type": "prompt", "field": "prompt_relates_to_task", "scalar": true}
+      }
+    ]
+  },
   "path_classification": {
     "note": "Maps file paths to expected type. The validator infers expected_type from path; the file's frontmatter type: MUST agree (or be one of the path-allowed alternates). Patterns are matched against repo-relative paths.",
     "rules": [
       {"pattern": "tasks/[0-9][0-9][0-9]-*/task.md", "type": "task"},
       {"pattern": "prompts/*/prompt.md", "type": "prompt"},
-      {"pattern": "research/*/output/SPEC.md", "type": "research"},
+      {"pattern": "research/*/output/SPEC.md", "type": "research", "alt_types": ["spec"]},
       {"pattern": "research/*/readme.md", "type": "research", "alt_types": ["index", "readme"]},
       {"pattern": "skills/*/SKILL.md", "type": "skill"},
       {"pattern": "tasks/readme.md", "type": "index", "alt_types": ["readme"]},

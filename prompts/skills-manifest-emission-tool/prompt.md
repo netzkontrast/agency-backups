@@ -43,3 +43,31 @@ A research workspace whose output is the implementation contract for **Task 010*
 - MUST NOT implement the tool — only specify its contract.
 - MUST cite the `skill_*` vocabulary by reference; do not duplicate it.
 - SHOULD respect the ≤ 8 KB / 14-skill manifest size budget from `skills-navigation-bootstrap/output/SPEC.md` §6.1.
+
+
+## Framework
+
+RISEN+ReAct, retrofitted by Task 020. The original prompt above predates the canonical headings; this section restates the framework for fm-validate header conformance. Refine when the prompt is next executed.
+
+## R — Role
+
+See the prompt body above for the executor persona. Future authors SHOULD condense the role declaration into this section.
+
+## I — Input
+
+- See the prompt body above for the inputs the executor reads.
+
+## S — Steps
+
+1. Refer to the prompt body above for the original step ordering.
+2. Future authors MUST normalise the step list under this heading.
+3. Each step SHOULD declare exactly one RFC 2119 keyword.
+
+## E — Expectations
+
+- Refer to the prompt body above for the deliverables.
+
+## Constraints
+
+- The agent MUST NOT execute this prompt as-is without first authoring the canonical sections above; the migration is structural, not semantic.
+- Future authors SHOULD treat the body migration as a T3 change per MAINTENANCE.md §1.

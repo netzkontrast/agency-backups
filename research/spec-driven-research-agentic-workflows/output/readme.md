@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: spec-driven-research-agentic-workflows-output
+summary: "Holds the final deliverables."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Output Directory
 
 Holds the final deliverables.

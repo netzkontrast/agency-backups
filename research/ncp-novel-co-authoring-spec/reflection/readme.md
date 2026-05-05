@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: ncp-novel-co-authoring-spec-reflection
+summary: "**What is this folder?** The meta-analysis and critical thinking directory."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Reflection
 
 **What is this folder?** The meta-analysis and critical thinking directory.

@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: repo-maintenance-protocol-spec-output
+summary: "Final deliverables."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Output
 
 Final deliverables.
