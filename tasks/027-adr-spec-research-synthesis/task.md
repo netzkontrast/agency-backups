@@ -30,7 +30,7 @@ task_affects_paths:
 
 ## Goal
 
-Produce the **repo-native ADR governance specification** for `netzkontrast/agency` — the canonical, enforceable document that defines how Architecture Decision Records are authored, stored, superseded, synthesized into `AGENTS.md`, and validated. The Gemini-generated draft (`research/gemini/slug/adr-governance-spec.md`) is the theoretical foundation; this task grounds it against the actual repo structure and governance conventions, resolving every mismatch.
+Produce the **repo-native ADR governance specification** for `netzkontrast/agency` — the canonical, enforceable document that defines how Architecture Decision Records are authored, stored, superseded, synthesized into `AGENTS.md`, and validated. The Gemini-generated draft (`research/gemini/agency-adr-governance-spec/adr-governance-spec.md`) is the theoretical foundation; this task grounds it against the actual repo structure and governance conventions, resolving every mismatch.
 
 The task is **done** when `research/adr-spec-research-synthesis/output/SPEC.md` exists, passes `tools/check-governance.sh`, and is acknowledged by the maintainer as the authoritative ADR governance document for this repository.
 
@@ -38,7 +38,7 @@ Spawns Task 028 (tooling implementation plan) and Task 029 (assumption audit) up
 
 ## Context
 
-The Gemini research (`research/gemini/slug/adr-governance-spec.md`) established a rigorous §0–§9 ADR governance specification using MDL compression, DAG supersession, Gherkin acceptance criteria, and JSON-Schema frontmatter contracts. However, it was produced without full read access to the repo's internal files. Key gaps exist:
+The Gemini research (`research/gemini/agency-adr-governance-spec/adr-governance-spec.md`) established a rigorous §0–§9 ADR governance specification using MDL compression, DAG supersession, Gherkin acceptance criteria, and JSON-Schema frontmatter contracts. However, it was produced without full read access to the repo's internal files. Key gaps exist:
 
 - The existing tooling (`tools/fm/`, `tools/check-governance.sh`) already implements some overlapping concerns.
 - The Frontmatter Ontology (`maintenance/schemas/header-ontology.json`) partially defines the structural metadata that the ADR spec independently proposes.
@@ -54,7 +54,7 @@ Run `/sc:analyze` across the following to extract the current governance surface
 1. Root specs: `AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `PRE_COMMIT.md`, `MAINTENANCE.md`, `FRUSTRATED.md`, `README.md`
 2. Tooling: `tools/check-governance.sh`, `tools/fm/validate.py`, `tools/fm/edit.py`, `tools/fm/query.py`, `tools/fm/extract.py`
 3. Existing schemas: `maintenance/schemas/header-ontology.json` (if present)
-4. Gemini ADR draft: `research/gemini/slug/adr-governance-spec.md`
+4. Gemini ADR draft: `research/gemini/agency-adr-governance-spec/adr-governance-spec.md`
 
 Produce an analysis report identifying: (a) existing architectural decisions that are already implicitly in effect, (b) structural conventions the ADR spec must honour, (c) tooling hooks the synthesis pipeline can attach to.
 
@@ -101,8 +101,8 @@ The SPEC.md MUST:
 
 ## Links
 
-- ADR Governance draft: [`research/gemini/slug/adr-governance-spec.md`](../../research/gemini/slug/adr-governance-spec.md)
-- Originating research prompt: [`research/gemini/slug/research-prompt_agency-adr-governance-spec.md`](../../research/gemini/slug/research-prompt_agency-adr-governance-spec.md)
+- ADR Governance draft: [`research/gemini/agency-adr-governance-spec/adr-governance-spec.md`](../../research/gemini/agency-adr-governance-spec/adr-governance-spec.md)
+- Originating research prompt: [`research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md`](../../research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md)
 - Executing prompt: [`prompts/adr-spec-research-synthesis/prompt.md`](../../prompts/adr-spec-research-synthesis/prompt.md)
 - Spawns: [`028-adr-tooling-impl-plan/task.md`](../028-adr-tooling-impl-plan/task.md), [`029-adr-assumption-audit/task.md`](../029-adr-assumption-audit/task.md)
 - Governing specs: [`TASK.md`](../../TASK.md), [`RESEARCH.md`](../../RESEARCH.md), [`PROMPT.md`](../../PROMPT.md), [`AGENTS.md`](../../AGENTS.md)

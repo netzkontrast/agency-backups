@@ -23,4 +23,4 @@ Claude Code (primary); model-agnostic for the research execution phase.
 
 ## Use-Case Context
 
-The Gemini-generated ADR governance spec (`research/gemini/slug/adr-governance-spec.md`) is a theoretically sound but repo-ungrounded document. This prompt drives the work that grounds it: analyze actual root specs and tooling, brainstorm the integration gaps, and synthesize a deployable §0–§9 spec that enforces correctly within the existing `netzkontrast/agency` governance conventions.
+The Gemini-generated ADR governance spec (`research/gemini/agency-adr-governance-spec/adr-governance-spec.md`) is a theoretically sound but repo-ungrounded document. This prompt drives the work that grounds it: analyze actual root specs and tooling, brainstorm the integration gaps, and synthesize a deployable §0–§9 spec that enforces correctly within the existing `netzkontrast/agency` governance conventions.

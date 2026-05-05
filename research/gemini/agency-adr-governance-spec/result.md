@@ -16,4 +16,4 @@ Raw external output from Gemini research run. Full content in [`adr-governance-s
 
 Originating prompt: [`research-prompt_agency-adr-governance-spec.md`](./research-prompt_agency-adr-governance-spec.md)
 
-Downstream analysis task: [`tasks/026-adr-spec-research-synthesis/`](../../tasks/026-adr-spec-research-synthesis/)
+Downstream analysis task: [`tasks/027-adr-spec-research-synthesis/`](../../tasks/027-adr-spec-research-synthesis/)

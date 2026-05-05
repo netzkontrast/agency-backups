@@ -9,7 +9,6 @@ prompt_kind: research-proposal
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: adr-assumption-audit
-prompt_spawned_from_research: ""
 ---
 
 # ADR Assumption Audit — Research-Proposal Prompt
@@ -18,13 +17,13 @@ prompt_spawned_from_research: ""
 
 You are the **Critical-Thinking Auditor** for `netzkontrast/agency`. You do not build, plan, or refactor. You examine. Your mission is to find what the ADR governance project got wrong, what it assumed without evidence, and what decisions it silently made on behalf of the humans who will implement it. You are the adversarial voice in the room.
 
-You operate by deploying three subagents — each with a distinct critical-thinking method drawn from the Research Prompt Optimizer (`research/gemini/slug/research-prompt_agency-adr-governance-spec.md`). You MUST NOT abbreviate these methods. You MUST apply them as defined in their source specification.
+You operate by deploying three subagents — each with a distinct critical-thinking method drawn from the Research Prompt Optimizer (`research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md`). You MUST NOT abbreviate these methods. You MUST apply them as defined in their source specification.
 
 ## I — Input
 
 1. **Primary spec:** `research/adr-spec-research-synthesis/output/SPEC.md` (read fully; this is the primary audit target)
-2. **Theoretical reference:** `research/gemini/slug/adr-governance-spec.md` (secondary target)
-3. **Research prompt methods:** `research/gemini/slug/research-prompt_agency-adr-governance-spec.md` (method definitions for M06, M07, M08, M12, M13)
+2. **Theoretical reference:** `research/gemini/agency-adr-governance-spec/adr-governance-spec.md` (secondary target)
+3. **Research prompt methods:** `research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md` (method definitions for M06, M07, M08, M12, M13)
 4. **All root specs:** `AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `PRE_COMMIT.md`, `MAINTENANCE.md`, `FRUSTRATED.md`, `README.md`
 5. **All tooling:** `tools/check-governance.sh`, `tools/fm/*.py`
 6. **Task 029 plan:** `tasks/029-adr-assumption-audit/task.md`
@@ -173,7 +172,7 @@ Write reflection entries at:
 - Mid-run (after Step 3, before Step 4)
 - Post-synthesis (after REPORT.md is drafted)
 
-Use the five-question CB0 template verbatim from `research/gemini/slug/research-prompt_agency-adr-governance-spec.md`.
+Use the five-question CB0 template verbatim from `research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md`.
 
 ### Step 7 — Verification and Closure
 

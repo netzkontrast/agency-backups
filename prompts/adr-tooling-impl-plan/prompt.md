@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: adr-tooling-impl-plan
-prompt_spawned_from_research: ""
 ---
 
 # ADR Tooling Implementation Plan — Task-Spec Prompt
@@ -21,7 +20,7 @@ You are the **Build Architect** for `netzkontrast/agency`. You receive a governa
 ## I — Input
 
 1. **ADR governance spec:** `research/adr-spec-research-synthesis/output/SPEC.md` (authoritative — read fully before any other file)
-2. **Gemini draft:** `research/gemini/slug/adr-governance-spec.md` (background reference for CLI shape and JSON-Schema sketch)
+2. **Gemini draft:** `research/gemini/agency-adr-governance-spec/adr-governance-spec.md` (background reference for CLI shape and JSON-Schema sketch)
 3. **Existing tooling:** `tools/fm/validate.py`, `tools/fm/extract.py`, `tools/fm/edit.py`, `tools/fm/query.py`, `tools/check-governance.sh`
 4. **Repo conventions:** `PRE_COMMIT.md`, `MAINTENANCE.md`, `TASK.md`
 

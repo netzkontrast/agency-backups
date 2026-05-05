@@ -36,7 +36,7 @@ The task is **done** when `research/adr-assumption-audit/output/REPORT.md` exist
 
 ## Context
 
-The Gemini research prompt (`research/gemini/slug/research-prompt_agency-adr-governance-spec.md`) embedded five critical-thinking methods: M06 Source Triangulation, M07 Contradiction Log, M08 What Would Change My Mind, M12 Base-Rate Anchoring, and M13 Adversarial Query Expansion. These methods were applied during the *generation* of the spec but not against the *repo itself*. This task inverts that lens.
+The Gemini research prompt (`research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md`) embedded five critical-thinking methods: M06 Source Triangulation, M07 Contradiction Log, M08 What Would Change My Mind, M12 Base-Rate Anchoring, and M13 Adversarial Query Expansion. These methods were applied during the *generation* of the spec but not against the *repo itself*. This task inverts that lens.
 
 Key categories of hidden assumptions to surface:
 
@@ -123,5 +123,5 @@ Merge the three subagent outputs into `research/adr-assumption-audit/output/REPO
 - Blocked by: [`027-adr-spec-research-synthesis/task.md`](../027-adr-spec-research-synthesis/task.md)
 - Feeds into: [`028-adr-tooling-impl-plan/task.md`](../028-adr-tooling-impl-plan/task.md) (pending decisions inform open-decisions list)
 - Executing prompt: [`prompts/adr-assumption-audit/prompt.md`](../../prompts/adr-assumption-audit/prompt.md)
-- Critical-thinking source: [`research/gemini/slug/research-prompt_agency-adr-governance-spec.md`](../../research/gemini/slug/research-prompt_agency-adr-governance-spec.md)
+- Critical-thinking source: [`research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md`](../../research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md)
 - Governing specs: [`TASK.md`](../../TASK.md), [`RESEARCH.md`](../../RESEARCH.md), [`FRUSTRATED.md`](../../FRUSTRATED.md)

@@ -23,4 +23,4 @@ External (Gemini). This brief stub preserves the `Prompt → Research` audit gra
 
 ## Use-Case Context
 
-The full originating prompt is at `research/gemini/slug/research-prompt_agency-adr-governance-spec.md`. The result is at `research/gemini/slug/result.md`. Downstream analysis is driven by Task 027 via `prompts/adr-spec-research-synthesis/`.
+The full originating prompt is at `research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md`. The result is at `research/gemini/agency-adr-governance-spec/result.md`. Downstream analysis is driven by Task 027 via `prompts/adr-spec-research-synthesis/`.

@@ -13,4 +13,4 @@ updated: 2026-05-05
 
 ## Note
 
-Execution happened outside the repository (Gemini). The full originating prompt is at `research/gemini/slug/research-prompt_agency-adr-governance-spec.md`. The result is at `research/gemini/slug/result.md`.
+Execution happened outside the repository (Gemini). The full originating prompt is at `research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md`. The result is at `research/gemini/agency-adr-governance-spec/result.md`.

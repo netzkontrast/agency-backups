@@ -25,4 +25,4 @@ updated: 2026-05-05
 
 ## Relationship to Gemini Draft
 
-The Gemini draft at `research/gemini/slug/adr-governance-spec.md` is the theoretical foundation. This task's research run grounds it against the repo's actual governance conventions and resolves all structural mismatches. The Gemini draft is input; the SPEC.md produced here is the authoritative output.
+The Gemini draft at `research/gemini/agency-adr-governance-spec/adr-governance-spec.md` is the theoretical foundation. This task's research run grounds it against the repo's actual governance conventions and resolves all structural mismatches. The Gemini draft is input; the SPEC.md produced here is the authoritative output.

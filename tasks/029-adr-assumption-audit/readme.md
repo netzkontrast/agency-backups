@@ -25,4 +25,4 @@ updated: 2026-05-05
 
 ## Design Note
 
-The critical-thinking methods used here are drawn verbatim from the Research Prompt Optimizer specification (`research/gemini/slug/research-prompt_agency-adr-governance-spec.md`). Subagents are not permitted to modify or abbreviate the method templates — they MUST apply them as defined.
+The critical-thinking methods used here are drawn verbatim from the Research Prompt Optimizer specification (`research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md`). Subagents are not permitted to modify or abbreviate the method templates — they MUST apply them as defined.

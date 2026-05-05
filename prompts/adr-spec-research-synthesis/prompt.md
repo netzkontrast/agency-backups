@@ -9,7 +9,6 @@ prompt_kind: research-proposal
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: adr-spec-research-synthesis
-prompt_spawned_from_research: ""
 ---
 
 # ADR Spec Research Synthesis — Research-Proposal Prompt
@@ -30,8 +29,8 @@ Primary sources (read in this order, per CONSTRAINT BLOCK 1 of the originating r
 1. **Repo root specs:** `AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `PRE_COMMIT.md`, `MAINTENANCE.md`, `FRUSTRATED.md`, `README.md`
 2. **Tooling:** `tools/check-governance.sh`, `tools/fm/validate.py`, `tools/fm/extract.py`, `tools/fm/edit.py`, `tools/fm/query.py`
 3. **Existing schemas:** `maintenance/schemas/header-ontology.json` (read if exists; log absence if not)
-4. **Gemini ADR draft:** `research/gemini/slug/adr-governance-spec.md` (theoretical reference only)
-5. **Gemini research prompt:** `research/gemini/slug/research-prompt_agency-adr-governance-spec.md` (for critical-thinking method definitions)
+4. **Gemini ADR draft:** `research/gemini/agency-adr-governance-spec/adr-governance-spec.md` (theoretical reference only)
+5. **Gemini research prompt:** `research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md` (for critical-thinking method definitions)
 
 ## S — Steps
 
