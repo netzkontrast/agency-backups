@@ -61,7 +61,9 @@ The prompt MUST be configured as a Claude Code SessionStart hook or invoked via 
 
 ### 2.3 Run-Log Protocol
 
-Every run MUST append one record to `maintenance/run-log.md` before the run's commit. The record format is defined in that file's header. The agent MUST read the last record's `end_commit` field before beginning; if the field is absent (first run), the agent MUST use the repository's initial commit as the baseline.
+Every run MUST append one record to `maintenance/run-log.md` before the run's commit. The record format is defined in that file's header.
+The baseline is recorded as a *content-hash of the run-log entry* in addition to the commit hash.
+The agent MUST determine the baseline by reading the most recent reachable `end_commit` field (falling forward). If no recent `end_commit` is reachable, the agent MUST fail loudly and require a human-confirmed reseed (a tagged "coherence-reseed" annotation in `maintenance/run-log.md`). If the field is absent entirely (first run ever), the agent MUST use the repository's initial commit as the baseline.
 
 ---
 
@@ -108,6 +110,10 @@ Before committing the results of any maintenance run, verify:
 3. No T3 or T4 changes were made directly.
 4. `maintenance/run-log.md` has been updated with the run record.
 5. The commit message references the run-log entry date and the commit range scanned.
+
+### 4.1 Maintenance Bypass Mode
+
+The repository employs a **maintenance-bypass** mode in `.githooks/pre-commit`. By default, the pre-commit hook blocks any commit if a governance linter fails. However, if the repository has pre-existing errors, the hook will allow the commit **if and only if** every file causing an error has a corresponding `open` Task in `/tasks/` whose `task_affects_paths` array covers the offending file. If any error is not covered by an open Task, the commit MUST block.
 
 ---
 

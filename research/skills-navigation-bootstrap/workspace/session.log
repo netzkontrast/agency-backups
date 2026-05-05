@@ -1,0 +1,23 @@
+# session.log — skills-navigation-bootstrap research run
+# Chronological trace. Append-only.
+
+2026-05-04T00:00Z  start  branch=claude/run-task-006-vGA6Y owner=claude-code
+2026-05-04T00:00Z  read   tasks/006-skills-navigation-bootstrap/task.md
+2026-05-04T00:01Z  read   prompts/skills-navigation-bootstrap/prompt.md
+2026-05-04T00:02Z  read   AGENTS.md  (skills mentions = 0; routing rules confirmed)
+2026-05-04T00:02Z  read   FOLDERS.md §8 — /skills/ exempt from operational partition
+2026-05-04T00:03Z  read   TASK.md §3 — frontmatter ontology layered with namespacing
+2026-05-04T00:04Z  read   skills/readme.md — 14 skills, governance gap acknowledged in body
+2026-05-04T00:05Z  read   skills/skills-skill-bootstrap/{readme.md,sync.sh} — repo→local one-way pull
+2026-05-04T00:06Z  read   research/skills-skill-architecture/output/SPEC.md — R1-R7 architecture, U1-U6 deferred
+2026-05-04T00:07Z  read   tasks/{009,010,011}/task.md — confirmed downstream scope split
+2026-05-04T00:08Z  decide separate concerns: SKILLS.md (governance) | skill_* L2 (graph) | manifest tool (index) | bootstrap protocol (per-agent)
+2026-05-04T00:09Z  decide name root spec SKILLS.md (plural, sibling of TASK/PROMPT/RESEARCH)
+2026-05-04T00:10Z  decide do NOT inline a manifest format draft into SPEC.md beyond contract level — implementation belongs to Task 010
+2026-05-04T00:11Z  decide file two follow-up prompts: skills-namespace-ontology, skills-manifest-emission-tool
+2026-05-04T00:12Z  write  research workspace skeleton (4 subfolders + readmes)
+2026-05-04T00:15Z  write  output/SPEC.md (architecture + draft SKILLS.md as Annex A)
+2026-05-04T00:30Z  write  follow-up prompts brief.md + prompt.md + readme.md (×2)
+2026-05-04T00:35Z  run    tools/check-governance.sh --no-trust  (3 pre-existing structural errors, none in scope)
+2026-05-04T00:36Z  log    pre-existing errors to reflection/friction-log.md (FL1)
+2026-05-04T00:37Z  close  task_status=done; updated=2026-05-04

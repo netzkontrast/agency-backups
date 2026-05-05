@@ -42,6 +42,12 @@ if ! "$PYTHON" tools/lint-linkage.py; then
   FAIL=1
 fi
 
+echo ""
+echo "--- [4/4] Run-log record validator ---"
+if ! "$PYTHON" tools/lint-runlog.py; then
+  FAIL=1
+fi
+
 # Optional: narrative-ontology validator (gated on the ontology file existing,
 # so the rest of the repo doesn't break if narrative-ontology is removed).
 NARRATIVE_ONTOLOGY="$REPO_ROOT/maintenance/schemas/narrative-ontology/ontology.json"
@@ -55,7 +61,7 @@ fi
 
 if [ "$SKIP_TRUST" -eq 0 ]; then
   echo ""
-  echo "--- [4/4] Spec-J/K/L trust audit ---"
+  echo "--- [5/5] Spec-J/K/L trust audit ---"
   if ! "$PYTHON" tools/check-trust.py; then
     FAIL=1
   fi

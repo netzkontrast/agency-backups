@@ -12,6 +12,7 @@ task_priority: P1
 task_uses_prompts:
   - refactor-governance-from-specs
 task_spawns_research: []
+task_spawns_prompts: []
 task_affects_paths:
   - PRE_COMMIT.md
   - .githooks/

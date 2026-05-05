@@ -11,6 +11,7 @@ task_owner: "unassigned"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
+task_spawns_prompts: []
 task_affects_paths:
   - prompts/refactor-governance-from-specs/prompt.md
   - prompts/token-efficiency-tool-suite/prompt.md

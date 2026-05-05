@@ -11,6 +11,7 @@ task_owner: "claude-code/claude/stoic-mendel-Sk9lZ"
 task_priority: P1
 task_uses_prompts: []
 task_spawns_research: []
+task_spawns_prompts: []
 task_affects_paths:
   - MAINTENANCE.md
   - prompts/repo-coherence-check/prompt.md
@@ -53,13 +54,13 @@ The second run of the day surfaced concrete failure modes in the existing spec:
 
 ## Todo
 
-- [ ] Specify the squash-merge-resilient baseline contract in `MAINTENANCE.md` and the prompt.
-- [ ] Implement `tools/lint-runlog.py` and wire it into `tools/check-governance.sh`.
-- [ ] Define and implement the maintenance-bypass commit policy in `.githooks/pre-commit`.
-- [ ] Add the duplicate-`task_id` pre-creation check to `prompts/repo-coherence-check/prompt.md` Step 4.
-- [ ] Extend the L2 schema with `task_spawns_prompts` (TASK.md, language-spec, validators).
-- [ ] Extend `tools/lint-linkage.py` to resolve `research/<provider>/<slug>/`.
-- [ ] Run the next coherence check and confirm zero pre-commit errors and a clean run-log entry.
+- [x] Specify the squash-merge-resilient baseline contract in `MAINTENANCE.md` and the prompt.
+- [x] Implement `tools/lint-runlog.py` and wire it into `tools/check-governance.sh`.
+- [x] Define and implement the maintenance-bypass commit policy in `.githooks/pre-commit`.
+- [x] Add the duplicate-`task_id` pre-creation check to `prompts/repo-coherence-check/prompt.md` Step 4.
+- [x] Extend the L2 schema with `task_spawns_prompts` (TASK.md, language-spec, validators).
+- [x] Extend `tools/lint-linkage.py` to resolve `research/<provider>/<slug>/`.
+- [x] Run the next coherence check and confirm zero pre-commit errors and a clean run-log entry.
 
 ## Links
 

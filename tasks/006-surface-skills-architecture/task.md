@@ -12,6 +12,7 @@ task_priority: P2
 task_uses_prompts:
   - skills-skill-architecture
 task_spawns_research: []
+task_spawns_prompts: []
 task_affects_paths:
   - AGENTS.md
   - MAINTENANCE.md
