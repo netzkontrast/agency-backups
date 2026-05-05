@@ -10,10 +10,11 @@ updated: 2026-05-05
 # Task 029 — ADR Assumption Audit (Critical-Thinking)
 
 - [`task.md`](./task.md) — Goal, Plan, Todo, Links.
+- [`friction-log.md`](./friction-log.md) — Closure friction log (FL1).
 
 ## State
 
-`task_status: open`, blocked by Task 027. The three subagents cannot run until the Task 027 SPEC.md exists as their primary input.
+`task_status: done`. Output [`research/adr-assumption-audit/output/REPORT.md`](../../research/adr-assumption-audit/output/REPORT.md): 9 ASMs, 11 IADRs, 7 PDs, 5 Recommended Actions. Two novel PDs (PD-006 review loop, PD-007 stale-Proposed lifecycle) surfaced beyond the prompt's pre-specified five. PD↔OD cross-reference appended as [`../028-adr-tooling-impl-plan/implementation-plan.md §B`](../028-adr-tooling-impl-plan/implementation-plan.md).
 
 ## Subagent Map
 

@@ -10,18 +10,21 @@ updated: 2026-05-05
 # Task 027 — ADR Spec Research Synthesis
 
 - [`task.md`](./task.md) — Goal, Plan, Todo, Links.
+- [`friction-log.md`](./friction-log.md) — Closure friction log (FL1 declared).
 
 ## State
 
-`task_status: open`. No blockers. Spawns Task 028 and Task 029 upon completion.
+`task_status: done`. Tasks 028 and 029 unblock with this closure (both list `task_blocked_by: ["027"]`).
 
 ## Artefacts
 
 | Artefact | Status | Path |
 |----------|--------|------|
-| Analysis report | pending | `research/adr-spec-research-synthesis/workspace/analysis.md` |
-| Brainstorm output | pending | `research/adr-spec-research-synthesis/workspace/brainstorm.md` |
-| Output spec | pending | `research/adr-spec-research-synthesis/output/SPEC.md` |
+| Analysis report | done | [`research/adr-spec-research-synthesis/workspace/analysis.md`](../../research/adr-spec-research-synthesis/workspace/analysis.md) |
+| Brainstorm output | done | [`research/adr-spec-research-synthesis/workspace/brainstorm.md`](../../research/adr-spec-research-synthesis/workspace/brainstorm.md) |
+| Output spec | done | [`research/adr-spec-research-synthesis/output/SPEC.md`](../../research/adr-spec-research-synthesis/output/SPEC.md) |
+| Friction log (research) | done | [`research/adr-spec-research-synthesis/reflection/friction-log.md`](../../research/adr-spec-research-synthesis/reflection/friction-log.md) |
+| Friction log (task closure) | done | [`./friction-log.md`](./friction-log.md) |
 
 ## Relationship to Gemini Draft
 

@@ -1,13 +1,13 @@
 ---
 type: task
-status: active
+status: completed
 slug: adr-assumption-audit
 summary: "Multi-subagent critical-thinking audit: surface hidden assumptions baked into the ADR governance spec, catalogue which architectural decisions are already implicitly in force in this repo, and enumerate the decisions that must still be made before implementation can begin."
 created: 2026-05-05
 updated: 2026-05-05
 task_id: "029"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts:
   - adr-assumption-audit
@@ -109,19 +109,22 @@ Merge the three subagent outputs into `research/adr-assumption-audit/output/REPO
 
 ## Todo
 
-- [ ] 1. Confirm Task 027 is `done` and `research/adr-spec-research-synthesis/output/SPEC.md` exists.
-- [ ] 2. Launch Subagent A (M13) — produce `m13-hidden-assumptions.md`.
-- [ ] 3. Launch Subagent B (M07) — produce `m07-implicit-adrs.md`.
-- [ ] 4. Launch Subagent C (M06+M08) — produce `m06-m08-pending-decisions.md`.
-- [ ] 5. Merge into `research/adr-assumption-audit/output/REPORT.md`.
-- [ ] 6. Map pending decisions to Task 028 modules; update Task 028 open-decisions list.
-- [ ] 7. Run `tools/check-governance.sh`; fix failures.
-- [ ] 8. Set `task_status: done`.
+- [x] 1. Confirm Task 027 is `done` and `research/adr-spec-research-synthesis/output/SPEC.md` exists.
+- [x] 2. Launch Subagent A (M13) — produce `m13-hidden-assumptions.md` (9 ASMs across 4 axes).
+- [x] 3. Launch Subagent B (M07) — produce `m07-implicit-adrs.md` (11 IADRs; 5 P1, 4 P2, 2 P3).
+- [x] 4. Launch Subagent C (M06+M08) — produce `m06-m08-pending-decisions.md` (7 PDs incl. 2 novel).
+- [x] 5. Merge into `research/adr-assumption-audit/output/REPORT.md` §1–§4.
+- [x] 6. Map pending decisions to Task 028 modules — appended PD↔OD cross-reference as `tasks/028-adr-tooling-impl-plan/implementation-plan.md §B`.
+- [x] 7. Run `tools/check-governance.sh`; fix failures.
+- [x] 8. Set `task_status: done`.
 
 ## Links
 
-- Blocked by: [`027-adr-spec-research-synthesis/task.md`](../027-adr-spec-research-synthesis/task.md)
-- Feeds into: [`028-adr-tooling-impl-plan/task.md`](../028-adr-tooling-impl-plan/task.md) (pending decisions inform open-decisions list)
+- Output report: [`research/adr-assumption-audit/output/REPORT.md`](../../research/adr-assumption-audit/output/REPORT.md) — §1–§4 (9 ASMs, 11 IADRs, 7 PDs, 5 Recommended Actions).
+- PD↔OD cross-reference appendix: [`../028-adr-tooling-impl-plan/implementation-plan.md §B`](../028-adr-tooling-impl-plan/implementation-plan.md).
+- Closure friction log: [`./friction-log.md`](./friction-log.md) — FL1.
+- Blocked by (resolved): [`027-adr-spec-research-synthesis/task.md`](../027-adr-spec-research-synthesis/task.md) (`task_status: done`).
+- Sibling: [`028-adr-tooling-impl-plan/task.md`](../028-adr-tooling-impl-plan/task.md) (`task_status: done`).
 - Executing prompt: [`prompts/adr-assumption-audit/prompt.md`](../../prompts/adr-assumption-audit/prompt.md)
 - Critical-thinking source: [`research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md`](../../research/gemini/agency-adr-governance-spec/research-prompt_agency-adr-governance-spec.md)
 - Governing specs: [`TASK.md`](../../TASK.md), [`RESEARCH.md`](../../RESEARCH.md), [`FRUSTRATED.md`](../../FRUSTRATED.md)
