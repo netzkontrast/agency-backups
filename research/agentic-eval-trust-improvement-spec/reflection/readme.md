@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: agentic-eval-trust-improvement-spec-reflection
+summary: "This folder contains the self-reflection steps ensuring cognitive rigour during the research execution."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Reflection
 
 This folder contains the self-reflection steps ensuring cognitive rigour during the research execution.

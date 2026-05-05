@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: obsidian-frontmatter-agentic-spec-workspace
+summary: "**What:** This directory contains all temporary work artifacts, bash session logs, and raw findings from the research steps."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Workspace
 **What:** This directory contains all temporary work artifacts, bash session logs, and raw findings from the research steps.
 **Why:** Required by `RESEARCH.md` to keep the root directory clean from execution debris.

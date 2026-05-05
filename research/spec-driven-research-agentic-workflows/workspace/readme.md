@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: spec-driven-research-agentic-workflows-workspace
+summary: "Holds chronological execution logs."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Workspace Directory
 
 Holds chronological execution logs.

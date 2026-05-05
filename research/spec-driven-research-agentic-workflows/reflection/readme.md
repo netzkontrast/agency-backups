@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: spec-driven-research-agentic-workflows-reflection
+summary: "Holds meta-learning artifacts."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Reflection Directory
 
 Holds meta-learning artifacts.

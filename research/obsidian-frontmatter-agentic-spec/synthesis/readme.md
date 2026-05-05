@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: obsidian-frontmatter-agentic-spec-synthesis
+summary: "**What:** This directory contains the structured aggregation of facts, checklists, and methodological evidence before generating the final spec."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Synthesis
 **What:** This directory contains the structured aggregation of facts, checklists, and methodological evidence before generating the final spec.
 **Why:** Required by `RESEARCH.md` to trace how facts were merged into the final output.

@@ -1,19 +1,10 @@
 ---
-type: task
+type: index
 status: active
 slug: skills-navigation-bootstrap-readme
 summary: "Readme for the skills navigation bootstrap task folder."
 created: 2026-05-04
-updated: 2026-05-04
-task_id: "006"
-task_status: done
-task_owner: "claude-code"
-task_priority: P1
-task_uses_prompts:
-  - skills-navigation-bootstrap
-task_spawns_research:
-  - skills-navigation-bootstrap
-task_affects_paths: []
+updated: 2026-05-05
 ---
 # /tasks/006-skills-navigation-bootstrap/
 

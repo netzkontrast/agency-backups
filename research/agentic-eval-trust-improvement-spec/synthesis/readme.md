@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: agentic-eval-trust-improvement-spec-synthesis
+summary: "This folder contains the flattened structural data utilized to assemble the final SPEC.md."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Synthesis
 
 This folder contains the flattened structural data utilized to assemble the final SPEC.md.

@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: ncp-novel-co-authoring-spec-output
+summary: "**What is this folder?** The final deliverables directory."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Output
 
 **What is this folder?** The final deliverables directory.

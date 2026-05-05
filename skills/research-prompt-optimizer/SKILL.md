@@ -18,7 +18,7 @@ metadata:
   category: prompt-engineering
   source: custom
   version: "3.3.1"
-  status: stable
+  status: active
   triggers: >-
     deep research, research prompt, investigate, explore, Marktanalyse,
     Due Diligence, Literaturrecherche, systematic review, hypothesis

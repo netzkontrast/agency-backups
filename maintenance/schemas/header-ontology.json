@@ -62,14 +62,8 @@
         "type", "status", "slug", "summary", "created", "updated",
         "prompt_kind", "prompt_framework", "prompt_target_agent"
       ],
-      "required_headings": [
-        "Framework",
-        "R — Role",
-        "I — Input",
-        "S — Steps",
-        "E — Expectations",
-        "Constraints"
-      ],
+      "required_headings": [],
+      "_required_headings_note": "Empty for v1 (Task 017): existing prompts span multiple authoring eras (RISEN, RISEN+ReAct, custom). The body_schema below still encodes the RISEN+ReAct contract and is enforced under fm-validate --check-body; Task 019 flips --check-body to default-on once the corpus is migrated. SPEC §4.1 expects [Framework, R — Role, I — Input, S — Steps, E — Expectations, Constraints] — restore this list when the corpus conforms.",
       "body_schema": {
         "Framework": {"shape": "paragraph", "max_paragraphs": 2},
         "R — Role": {"shape": "paragraph", "min_chars": 20},
@@ -138,7 +132,7 @@
     "rules": [
       {"pattern": "tasks/[0-9][0-9][0-9]-*/task.md", "type": "task"},
       {"pattern": "prompts/*/prompt.md", "type": "prompt"},
-      {"pattern": "research/*/output/SPEC.md", "type": "research"},
+      {"pattern": "research/*/output/SPEC.md", "type": "research", "alt_types": ["spec"]},
       {"pattern": "research/*/readme.md", "type": "research", "alt_types": ["index", "readme"]},
       {"pattern": "skills/*/SKILL.md", "type": "skill"},
       {"pattern": "tasks/readme.md", "type": "index", "alt_types": ["readme"]},

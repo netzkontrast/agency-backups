@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: obsidian-frontmatter-agentic-spec-reflection
+summary: "**What:** This directory contains rigorous self-reflection checkpoints mandated by CONSTRAINT BLOCK 0."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Reflection
 **What:** This directory contains rigorous self-reflection checkpoints mandated by CONSTRAINT BLOCK 0.
 **Why:** Required to enforce critical thinking, prevent confirmation bias, and log workflow friction.

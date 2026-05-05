@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: ncp-novel-co-authoring-spec-workspace
+summary: "**What is this folder?** The scratchpad and execution trace directory."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Workspace
 
 **What is this folder?** The scratchpad and execution trace directory.

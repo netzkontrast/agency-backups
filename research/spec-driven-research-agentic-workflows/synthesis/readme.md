@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: spec-driven-research-agentic-workflows-synthesis
+summary: "Holds the structural tracking of the research assembly process."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Synthesis Directory
 
 Holds the structural tracking of the research assembly process.

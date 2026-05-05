@@ -1,3 +1,12 @@
+---
+type: index
+status: active
+slug: ncp-novel-co-authoring-spec-synthesis
+summary: "**What is this folder?** The consolidated findings directory."
+created: 2026-05-05
+updated: 2026-05-05
+---
+
 # Synthesis
 
 **What is this folder?** The consolidated findings directory.

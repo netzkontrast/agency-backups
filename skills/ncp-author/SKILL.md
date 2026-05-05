@@ -17,7 +17,7 @@ description: >-
 metadata:
   category: narrative-systems
   source: user
-  status: mvp
+  status: active
   version: "0.4.0"
   date_added: "2026-05-03"
   upstream_pin: "0b9ab1223d3822a49eddc139bcdf2669aa067734"
