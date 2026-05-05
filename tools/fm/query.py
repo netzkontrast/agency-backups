@@ -94,17 +94,11 @@ def _matches(
             if v in fm:
                 return False
         elif k == "refers-to":
-            target = v
-            referenced_anywhere = False
-            for key, val in fm.items():
-                if isinstance(val, list) and key.endswith("_prompts") or \
-                   key.endswith("_research") or key.endswith("_tasks") or \
-                   key in ("task_uses_prompts", "task_spawns_research",
-                           "task_spawns_prompts"):
-                    if isinstance(val, list) and target in val:
-                        referenced_anywhere = True
-                        break
-            if not referenced_anywhere:
+            # SPEC §5.4: "files whose any *_<list> includes slug".
+            # Any list-valued frontmatter key counts; non-list values are
+            # ignored. Selector matches when at least one list contains v.
+            if not any(isinstance(val, list) and v in val
+                       for val in fm.values()):
                 return False
         elif k == "referenced-by":
             # `referenced-by=<slug>` means: this file's slug appears in any list

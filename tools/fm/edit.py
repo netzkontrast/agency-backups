@@ -21,7 +21,6 @@ from __future__ import annotations
 
 import argparse
 import datetime
-import re
 import sys
 from pathlib import Path
 
@@ -110,9 +109,11 @@ def _parse_lines(fm_body: str) -> list[dict]:
             })
             i = i + len(raws)
         else:
+            quoted = val.startswith(('"', "'"))
             entries.append({
-                "kind": "scalar", "key": key, "value": val.strip('"').strip("'"),
-                "raw": [raw],
+                "kind": "scalar", "key": key,
+                "value": val.strip('"').strip("'"),
+                "quoted": quoted, "raw": [raw],
             })
             i += 1
     return entries
@@ -125,11 +126,16 @@ def _render(entries: list[dict]) -> str:
             out.extend(e["raw"])
         elif e["kind"] == "scalar":
             v = e["value"]
-            # Quote when the value contains characters that yaml flow scalars hate.
-            if v == "":
-                out.append(f"{e['key']}: \"\"")
-            elif any(ch in v for ch in (":", "#", "[", "]", "{", "}", ",", "&", "*", "!", "|", ">", "%", "@", "`")):
-                # Conservatively quote scalars that would re-parse ambiguously.
+            # Preserve original quoting where present; quote anyway if the
+            # value contains characters that re-parse ambiguously without
+            # quotes, OR if it would otherwise be interpreted as a non-string
+            # scalar (digits-only, "true"/"false"/"null", ISO-date-like).
+            forced = (
+                v == ""
+                or any(ch in v for ch in (":", "#", "[", "]", "{", "}", ",",
+                                          "&", "*", "!", "|", ">", "%", "@", "`"))
+            )
+            if e.get("quoted") or forced:
                 escaped = v.replace("\\", "\\\\").replace('"', '\\"')
                 out.append(f"{e['key']}: \"{escaped}\"")
             else:
@@ -156,7 +162,11 @@ def _do_set(entries: list[dict], key: str, value: str) -> int:
     idx = _find(entries, key)
     if idx is not None and entries[idx]["kind"] == "list":
         return EXIT_TYPE_ERROR
-    new = {"kind": "scalar", "key": key, "value": value, "raw": []}
+    # Preserve the original quoting style if we're replacing an existing
+    # scalar, so `--set task_id=099` keeps `task_id: "099"` quoted.
+    quoted = entries[idx].get("quoted", False) if idx is not None else False
+    new = {"kind": "scalar", "key": key, "value": value,
+           "quoted": quoted, "raw": []}
     if idx is None:
         entries.append(new)
     else:

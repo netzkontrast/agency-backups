@@ -145,6 +145,45 @@ class TestRemoveFromList(unittest.TestCase):
             path.unlink()
 
 
+class TestQuotePreservation(unittest.TestCase):
+    """Regression: round-tripping must not silently re-type a quoted scalar.
+
+    `task_id: "099"` losing its quotes flips str→int under YAML 1.1
+    consumers, breaking downstream tooling. fm-edit MUST preserve the
+    original quoting style on unchanged AND replaced scalars.
+    """
+
+    def test_bump_updated_preserves_quoted_task_id(self):
+        text = ("---\n"
+                "slug: x\n"
+                "task_id: \"099\"\n"
+                "updated: 2020-01-01\n"
+                "---\n\nbody\n")
+        with tempfile.NamedTemporaryFile("w", suffix=".md", delete=False) as f:
+            f.write(text)
+            path = Path(f.name)
+        try:
+            rc, _, _ = _capture([str(path), "--bump-updated"])
+            self.assertEqual(rc, 0)
+            after = path.read_text(encoding="utf-8")
+            self.assertIn('task_id: "099"', after,
+                          "quoted scalar lost its quotes during round-trip")
+        finally:
+            path.unlink()
+
+    def test_set_idempotent_on_quoted_scalar(self):
+        text = "---\nslug: x\ntask_id: \"099\"\n---\n\nbody\n"
+        with tempfile.NamedTemporaryFile("w", suffix=".md", delete=False) as f:
+            f.write(text)
+            path = Path(f.name)
+        try:
+            rc, _, _ = _capture([str(path), "--set", "task_id=099"])
+            self.assertEqual(rc, 0)
+            self.assertIn('task_id: "099"', path.read_text(encoding="utf-8"))
+        finally:
+            path.unlink()
+
+
 class TestParallelAppendNoDup(unittest.TestCase):
     """M01-P4: two parallel `--append-list` runs MUST NOT produce duplicates."""
 
