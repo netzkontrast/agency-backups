@@ -44,21 +44,21 @@ The skill is the **JSON-IO and schema-compliance** layer. It deliberately does N
 
 ## Dramatica Integration Map
 
-> Call these skills at the checkpoints marked **[→ dramatica-theory]** or **[→ dramatica-vocabulary]** below. Don't improvise reasoning that belongs to them.
+> Call these skills at the checkpoints marked **[→ dramatica-theory]** or **[→ dramatica-vocabulary]** below. Don't improvise reasoning that belongs to them. **For mechanical lookups** (dynamic-pair partner, Quad membership, alias resolution, NCP enum closure), prefer `tools/dramatica-nav/nav.py` — it answers in JSON without loading the source chapters. The cross-skill load contract is documented in [`AGENTS.md § Narrative Ontology`](../../AGENTS.md), with rule **NO.2** binding NCP authoring directly: every Dramatica-flavored slot MUST resolve through the canonical ontology ID before the value is written into the JSON.
 
-| NCP entity / question | Skill to invoke |
-|---|---|
-| *Why* is this Class / Type / Variation correct? (theory reasoning) | **dramatica-theory** |
-| Storyform diagnosis — flat draft, unmotivated characters, act structure | **dramatica-theory** |
-| Story Mind, Grand Argument Story, four throughlines — conceptual | **dramatica-theory** |
-| Archetype definitions (Protagonist, Antagonist, Guardian …) | **dramatica-theory** |
-| Dynamic Pair check on any Element or Variation | **dramatica-vocabulary** |
-| KTAD coherence — Knowledge/Thought/Ability/Desire matrix | **dramatica-vocabulary** |
-| Element-Quad lookup (which 4 Elements share a Quad?) | **dramatica-vocabulary** |
-| Encoding-Vorschlag: abstract Element → concrete scene / lyric | **dramatica-vocabulary** |
-| Konsistenz-Check gegen die 75 Dynamic Pairs | **dramatica-vocabulary** |
-| NCP enum value for an `appreciation` or `narrative_function` field | **this skill** (canonical-vocabulary.md) |
-| Schema required-fields map, JSON validation, template population | **this skill** |
+| NCP entity / question | Skill to invoke | Navigator shortcut |
+|---|---|---|
+| *Why* is this Class / Type / Variation correct? (theory reasoning) | **dramatica-theory** | (prose; conceptual) |
+| Storyform diagnosis — flat draft, unmotivated characters, act structure | **dramatica-theory** | (prose; conceptual) |
+| Story Mind, Grand Argument Story, four throughlines — conceptual | **dramatica-theory** | (prose; conceptual) |
+| Archetype definitions (Protagonist, Antagonist, Guardian …) | **dramatica-theory** | `nav.py by-id arc.<slug>` |
+| Dynamic Pair check on any Element or Variation | **dramatica-vocabulary** | `nav.py by-id <id> --include-pairs` |
+| KTAD coherence — Knowledge/Thought/Ability/Desire matrix | **dramatica-vocabulary** | `nav.py by-ktad K\|T\|A\|D` |
+| Element-Quad lookup (which 4 Elements share a Quad?) | **dramatica-vocabulary** | `nav.py by-quad quad.<name>-el` |
+| Encoding-Vorschlag: abstract Element → concrete scene / lyric | **dramatica-vocabulary** | (prose; conceptual) |
+| Konsistenz-Check gegen die 75 Dynamic Pairs | **dramatica-vocabulary** | `nav.py by-pair <member-id>` |
+| NCP enum value for an `appreciation` or `narrative_function` field | **this skill** (canonical-vocabulary.md) | `nav.py by-ncp '<enum-string>'` |
+| Schema required-fields map, JSON validation, template population | **this skill** | `tools/dramatica-nav/validate.py` |
 
 > **DE-Notiz** — Schema-Felder bleiben Englisch (kanonisch). Die Skill-Anleitung ist EN-primär; deutschsprachige Sessions können trotzdem alle Workflows nutzen. Trigger und kanonische Slot-Namen werden bei Bedarf zweisprachig in den Reference-Dateien notiert.
 

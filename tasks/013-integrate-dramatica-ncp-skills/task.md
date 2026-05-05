@@ -12,6 +12,7 @@ task_status: in_progress
 task_priority: P1
 task_uses_prompts:
   - integrate-dramatica-ncp-skills
+task_spawns_prompts: []
 task_spawns_research:
   - integrate-dramatica-ncp-skills
 task_affects_paths:
