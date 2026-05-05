@@ -1,0 +1,94 @@
+# Session Log — skills-namespace-ontology
+
+Chronological terminal/decision trace per RESEARCH.md §4 §5.6.
+
+---
+
+## 2026-05-05T00:00Z — Kickoff
+
+**Source:** User requested analysis of Research folder for blockers; none found (all research_phase: complete). Brainstorm identified `skills-namespace-ontology` as highest-value next research: it unblocks Task 009 (P1, author-skills-root-spec) and Task 011 (P2, skills-frontmatter-schema-files) — the two tasks that complete the skills governance layer.
+
+**Action:** Read `prompts/skills-namespace-ontology/prompt.md` — confirmed slug, prompt_kind: follow-up, prompt_spawned_from_research: skills-navigation-bootstrap.
+
+---
+
+## 2026-05-05T00:05Z — Source Read: skills-navigation-bootstrap SPEC.md
+
+Read `research/skills-navigation-bootstrap/output/SPEC.md` in full.
+
+Key extractions:
+- §3.2 proposes six `skill_*` L2 keys: `skill_kind`, `skill_tier`, `skill_uses`, `skill_complements`, `skill_supersedes`, `skill_triggers`.
+- §3.2 proposed values: `skill_kind` ∈ {meta, domain, tool, bootstrap, adapter}; `skill_tier` ∈ {T1, T2, T3}.
+- §A.6: Reciprocity rule draft — warning (not error) when `B.skill_complements` does not list A while `A.skill_uses: [B]`.
+- §A.8: Pre-commit checks deferred to Task 010/011.
+- §A.10.3: When `references/` exceeds body by order of magnitude → T3 tier appropriate.
+
+---
+
+## 2026-05-05T00:10Z — Skill Inventory Audit
+
+Read all 14 `skills/*/SKILL.md` frontmatter (+ body description fields) and their `references/` directories.
+
+Findings:
+- 13 skills have SKILL.md: dramatica-theory, dramatica-vocabulary, drive-markdown-converter, gdrive-notion-curator, ncp-author, notebooklm-prompt-architect, novel-architect, pdf-to-markdown, prompt-optimizer, ralph-skill, research-prompt-optimizer, spec-skill, suno-lyric-writer, the-agency-system-architect. (14 total)
+- `skills-skill-bootstrap/` has NO SKILL.md — it is a management tool, not a skill. The folder houses sync.sh and verify.sh only. Not included in migration.
+- Reference-heavy skills (T3 candidates): dramatica-theory (15 files), dramatica-vocabulary (18 files).
+- Always-on skill: prompt-optimizer has `metadata.always_on: true` → T1.
+- Metadata key survey: 7 skills carry `metadata.*` keys; 7 do not.
+
+---
+
+## 2026-05-05T00:20Z — Reciprocity Rule Decision
+
+Deliberated on warning vs. error for the two reciprocity cases:
+
+Case A: `A.skill_uses: [B]` where B slug does not exist in the skills directory.
+→ Decision: **ERROR**. This is a broken operational dependency — A cannot function without B. The linter MUST block.
+
+Case B: `A.skill_uses: [B]` where B exists but `B.skill_complements` does not list A.
+→ Decision: **WARNING** only. `skill_uses` is directional (A depends on B); `skill_complements` is a symmetric navigation hint. Missing reciprocity reduces discoverability but does not break any function. Rationale aligns with RFC 2119 SHOULD (encouraged, not mandatory).
+
+Case C: `A.skill_complements: [B]` where `B.skill_complements` does not list A.
+→ Decision: **WARNING** only (same logic as Case B — purely navigational).
+
+This upgrades the original draft's undifferentiated "warning" to a two-level rule with a hard ERROR for missing dependency targets.
+
+---
+
+## 2026-05-05T00:30Z — Deprecated metadata.* Key Mapping
+
+Surveyed existing `metadata.*` sub-keys across all 14 SKILL.md files:
+- `metadata.always_on` (prompt-optimizer) → deprecated by `skill_tier: T1`
+- `metadata.category` (7 skills) → deprecated by `skill_kind`
+- `metadata.triggers` (8 skills) → deprecated by `skill_triggers`
+- `metadata.version` → NOT deprecated; no skill_* equivalent; retain
+- `metadata.status` → NOT deprecated; operational metadata; retain
+- `metadata.source` → NOT deprecated; attribution/provenance; retain
+- `metadata.date_added` → NOT deprecated; provenance; retain
+- `metadata.research_sources` (ralph-skill) → NOT deprecated; provenance; retain
+- `metadata.upstream_pin`, `metadata.upstream_repo` (ncp-author) → NOT deprecated; version pinning; retain
+- `metadata.project` (novel-architect) → NOT deprecated; project assignment; retain
+- `metadata.granularity`, `metadata.language` (ncp-author) → NOT deprecated; project-specific; retain
+
+---
+
+## 2026-05-05T00:40Z — Migration Order Planning
+
+Batched 14 skills into three migration groups to minimize PR churn:
+- Batch 1 (7 skills, add-only, no metadata changes)
+- Batch 2 (6 skills, add skill_* + deprecate metadata.category + metadata.triggers)
+- Batch 3 (1 skill, prompt-optimizer — highest risk, always_on flag change)
+
+---
+
+## 2026-05-05T00:50Z — SPEC.md Authored
+
+Produced `output/SPEC.md` with: ratified ontology table, extended reciprocity rule, skill-by-skill mapping table, deprecated key map, migration batch plan.
+
+No SKILL.md bodies were modified. No execution scripts produced.
+
+---
+
+## 2026-05-05T01:00Z — Synthesis and Reflection Complete
+
+`synthesis/state.md` all steps checked. `reflection/friction-log.md` filed at FL0 — no friction encountered. All pre-commit criteria satisfied except mechanical linter run (deferred; tools require Task 010/011 to exist).
