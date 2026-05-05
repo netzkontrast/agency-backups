@@ -107,6 +107,28 @@ Build a triage table in memory (or in a workspace scratch note if the delta exce
 
 ---
 
+### Step 2.5 — Linter-First Triage (Task 014 finding F3, Task 017 cutover)
+
+Before hand-classifying issues, run the canonical linter and let it pre-populate the triage table. This converts blind file-by-file inspection into a focused fix-list.
+
+```bash
+# Surface every ERROR-level diagnostic on the delta.
+python3 tools/fm/validate.py <changed-paths>
+
+# Slice by missing key (one of the most common F.3.1 / F.3.2 patterns):
+python3 tools/fm/query.py "type=task,task_status=open" --format=paths
+python3 tools/fm/query.py "missing-key=task_uses_prompts" --format=paths
+
+# When --check-body lands as default-on (Task 019), promote here:
+python3 tools/fm/validate.py --check-body <changed-paths>
+```
+
+For every diagnostic emitted, add a row to the triage table with the diagnostic code (e.g. `F.3.2`, `F.4.2`) in the **Issues found** column and the corresponding tier in **Repair tier** (`F.3.x` → T1/T2 if the missing key has an unambiguous value, else T3; `F.4.x` heading violations → T3 by default per `MAINTENANCE.md §1`).
+
+**Reflection gate R2.5:** Did the linter find any ERROR that the manual triage missed? If yes, the manual triage rules need an update — file a friction note before continuing.
+
+---
+
 ### Step 3 — Apply T1 and T2 Repairs
 
 Work through the triage table. For each file with a T1 or T2 issue, apply the repair immediately.
