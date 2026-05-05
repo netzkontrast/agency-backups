@@ -9,6 +9,7 @@ task_id: "012"
 task_status: done
 task_owner: "claude-sonnet-4-6"
 task_priority: P1
+task_spawns_prompts: []
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
