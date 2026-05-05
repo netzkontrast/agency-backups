@@ -1,13 +1,13 @@
 ---
 type: task
-status: active
+status: completed
 slug: adr-spec-research-synthesis
 summary: "Analyze root specs and tooling via /sc:analyze + /sc:brainstorm, then execute a Research run that produces the repo-native ADR governance specification integrating the Gemini draft with existing governance conventions."
 created: 2026-05-05
 updated: 2026-05-05
 task_id: "027"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts:
   - adr-spec-research-synthesis
@@ -89,15 +89,15 @@ The SPEC.md MUST:
 
 ## Todo
 
-- [ ] 1. Run `/sc:analyze` across all root specs and tooling listed in Phase 1.
-- [ ] 2. Produce analysis report in `research/adr-spec-research-synthesis/workspace/analysis.md`.
-- [ ] 3. Run `/sc:brainstorm` on the five integration questions in Phase 2.
-- [ ] 4. Record brainstorm output in `research/adr-spec-research-synthesis/workspace/brainstorm.md`.
-- [ ] 5. Execute `adr-spec-research-synthesis` prompt as a Research run.
-- [ ] 6. Produce `research/adr-spec-research-synthesis/output/SPEC.md`.
-- [ ] 7. Run `tools/check-governance.sh`; fix any failures.
-- [ ] 8. Set `task_status: done`.
-- [ ] 9. Confirm Task 028 and Task 029 are created and set to `open`.
+- [x] 1. Run `/sc:analyze` across all root specs and tooling listed in Phase 1.
+- [x] 2. Produce analysis report in `research/adr-spec-research-synthesis/workspace/analysis.md`.
+- [x] 3. Run `/sc:brainstorm` on the five integration questions in Phase 2.
+- [x] 4. Record brainstorm output in `research/adr-spec-research-synthesis/workspace/brainstorm.md`.
+- [x] 5. Execute `adr-spec-research-synthesis` prompt as a Research run.
+- [x] 6. Produce `research/adr-spec-research-synthesis/output/SPEC.md`.
+- [x] 7. Run `tools/check-governance.sh`; fix any failures.
+- [x] 8. Set `task_status: done`.
+- [x] 9. Confirm Task 028 and Task 029 are created and set to `open`.
 
 ## Links
 

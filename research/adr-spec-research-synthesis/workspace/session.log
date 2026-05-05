@@ -1,0 +1,20 @@
+2026-05-05T00:00:00Z  session-start  agent=claude-code  task=027-adr-spec-research-synthesis  branch=claude/adr-spec-research-NPwuc
+2026-05-05T00:00:01Z  bootstrap      ./install.sh exit=0 (PyYAML 6.0.1, jsonschema 4.26.0, pytest 9.0.3 verified)
+2026-05-05T00:00:02Z  governance     tools/check-governance.sh exit=0 (baseline PASS — frontmatter, structure, linkage, run-log, narrative-ontology, trust audit)
+2026-05-05T00:00:10Z  read           AGENTS.md TASK.md PROMPT.md RESEARCH.md FOLDERS.md PRE_COMMIT.md MAINTENANCE.md FRUSTRATED.md
+2026-05-05T00:00:11Z  read           tools/check-governance.sh tools/fm/validate.py (head) tools/lint-{linkage,structure,runlog}.py
+2026-05-05T00:00:12Z  read           maintenance/schemas/header-ontology.json (v1.1.0; L1 + per-type required_keys + body_schema)
+2026-05-05T00:00:13Z  read           research/gemini/agency-adr-governance-spec/adr-governance-spec.md (Gemini §0–§9 draft, reference only)
+2026-05-05T00:00:14Z  read           tasks/028-adr-tooling-impl-plan/task.md tasks/029-adr-assumption-audit/task.md (verified open + blocked_by 027)
+2026-05-05T00:00:20Z  init-workspace mkdir -p research/adr-spec-research-synthesis/{workspace,synthesis,reflection,output}  exit=0
+2026-05-05T00:00:21Z  snapshot       wrote prompt.md (immutable run-start snapshot)
+2026-05-05T00:00:30Z  sc-analyze     scope={AGENTS,TASK,PROMPT,RESEARCH,FOLDERS,PRE_COMMIT,MAINTENANCE,FRUSTRATED,README}.md + tools/* + header-ontology.json + Gemini draft  → workspace/analysis.md
+2026-05-05T00:00:31Z  sc-brainstorm  five integration questions answered; 6 [RESOLVED] / 5 [OPEN] / 2 [DEFERRED]  → workspace/brainstorm.md
+2026-05-05T00:00:40Z  reflection     wrote reflection/M06-source-triangulation.md M07-contradictions.md M08-what-would-change-my-mind.md M13-query-expansion.md
+2026-05-05T00:00:41Z  reflection     wrote reflection/friction-log.md  highest=FL1
+2026-05-05T00:00:50Z  synthesis      wrote synthesis/{readme,methodology,tracks,post-synthesis-log,state}.md
+2026-05-05T00:01:00Z  draft-spec     wrote output/SPEC.md (§0–§9 re-derived; ADR-A.<n>.<m> identifiers; Gherkin anchors per MUST)
+2026-05-05T00:01:10Z  governance     tools/check-governance.sh exit=0 against new files
+2026-05-05T00:01:11Z  close          set tasks/027-adr-spec-research-synthesis/task.md task_status=done; verified 028+029 open
+2026-05-05T00:01:12Z  index          updated tasks/readme.md and research/readme.md
+2026-05-05T00:01:20Z  session-end    pre-commit ready
