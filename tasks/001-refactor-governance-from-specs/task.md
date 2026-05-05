@@ -4,7 +4,7 @@ status: active
 slug: refactor-governance-from-specs
 summary: "Encode the rules from Spec-A/B/C (3-Systems SDD), Spec-G/H/I (Session Continuity), and Spec-J/K/L (Eval/Trust/Improvement) into repository linters, pre-commit hooks, and templates."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 task_id: "001"
 task_status: updated
 task_owner: "claude-code"
