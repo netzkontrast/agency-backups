@@ -4,11 +4,11 @@ status: active
 slug: integrate-dramatica-ncp-skills
 summary: "Spec-driven, scenario-keyed restructure of dramatica-theory + dramatica-vocabulary, deeply integrated with ncp-author and novel-architect via a shared Narrative Ontology, per-term frontmatter, and a token-efficient Python navigator suite."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 task_id: "015"
 task_notes_kickoff: "Research kickoff completed 2026-05-04 — see /research/integrate-dramatica-ncp-skills/output/SPEC.md for findings and Plan-step recommendations."
 task_owner: "claude-code"
-task_status: in_progress
+task_status: done
 task_priority: P1
 task_uses_prompts:
   - integrate-dramatica-ncp-skills
@@ -320,17 +320,17 @@ Walks `skills/dramatica-vocabulary/references/*.md`, parses every per-term front
 - [x] 4. Author `scenarios.json` (12 scenarios) — actually 11 v0.1 scenarios per the persona table; outer wrapper carries schema_version + ontology_version + created. Authored by Sonnet A.
 - [x] 5. Bootstrap `ontology.json` (~140 entries) — actually 304 entries (4 classes + 16 types + 4 throughlines + 8 archetypes + 4 char-dynamics + 4 plot-dynamics + 39 concepts + 35 quads + 65 dynamic-pairs + 62 variations + 63 elements). Authored across Sonnet C (74), Sonnet D (101), main-context (125 + 4 bridging concepts). Cross-entry invariants: 0 schema errors, 0 reciprocity violations, 0 unresolved pair_members, 0 unresolved quad_ids; 11/35 quads partial-membership (documented fractal-distortion limitation).
 - [x] 6. Insert per-term frontmatter (Strategic plan Step 5; via inline Python bulk-transform since morphllm MCP isn't loaded). 187 blocks across 11 files; 0 schema errors; pure-insertion diff. Coverage gaps documented in notes.md (~50 sub-headings + ~30 meta-meta + ~25 mismatched anchors deferred to v0.2 cleanup).
-- [ ] 7. Tag the top-≥40 terms with scenarios. (Strategic plan Step 6 — `/sc:improve --loop --iterations 3`)
-- [ ] 8. Add theory-chunk frontmatter to the nine `dramatica-theory/references/*.md` chapters.
-- [ ] 9. Implement `nav.py`, `extract.py`, `validate.py`, `ontology-build.py`, `lib/`.
-- [ ] 10. Write smoke tests; pytest passes.
-- [ ] 11. Update `dramatica-vocabulary/SKILL.md`, `dramatica-theory/SKILL.md`, `ncp-author/SKILL.md`, `novel-architect/SKILL.md` with navigator wiring.
-- [ ] 12. Wire `validate.py` into `tools/check-governance.sh`; update `PRE_COMMIT.md`.
-- [ ] 13. Run token-cost benchmark; record to `notes.md`.
+- [x] 7. Tag the top-≥40 terms with scenarios — 85 tagged via `/sc:improve --loop --iterations 3`; median 1, max 4; M01 contingency PASS (median ≤ 5).
+- [x] 8. Add theory-chunk frontmatter to the 15 `dramatica-theory/references/*.md` chapters — Sonnet B inserted all 15 in pure-insertion diff (275 insertions / 0 deletions).
+- [x] 9. Implement `nav.py`, `extract.py`, `validate.py`, `ontology-build.py`, `lib/` — 8 files, 1644 lines total; 4-Sonnet parallel dispatch + main-context lib authoring.
+- [x] 10. Write smoke tests; pytest passes — 42/42 tests across 7 files; 7-of-7 Gherkin acceptance scenarios covered; 5 broken-ontology fixtures for negative cases.
+- [x] 11. Update `dramatica-vocabulary/SKILL.md`, `dramatica-theory/SKILL.md`, `ncp-author/SKILL.md`, `novel-architect/SKILL.md` with navigator wiring — `--safe-mode` discipline; 65 lines added across 4 files; 0 prose modifications.
+- [x] 12. Wire `validate.py` into `tools/check-governance.sh`; update `PRE_COMMIT.md` — gated on `ontology.json` existing; 5-row error/warning table added to PRE_COMMIT.md §7.
+- [x] 13. Run token-cost benchmark; record to `notes.md` — **PASS at 83.4% avg reduction** across 10 lookup queries (gate ≥ 60%); aggregate 7.26% of prose-path size (92.7% reduction).
 - [x] 14. Write `/prompts/integrate-dramatica-ncp-skills/{readme.md,brief.md,prompt.md}` — promoted from `status: draft` to `status: active`; encodes the resolved OQ-A/B/C as binding requirements.
 - [x] 15a. Spawn `/research/integrate-dramatica-ncp-skills/` (kickoff phase) with frontmatter, three evidence streams, M01 + M07 reflections, and `output/SPEC.md` consolidating findings + recommendations addressed at Plan steps 2–11.
-- [ ] 15b. Run the synthesis-phase research pass after Plan steps 2–11 land (re-execute against the schemas + ontology + navigator to verify acceptance criteria empirically).
-- [ ] 16. Friction log; flip `task_status: done`; `/sc:createPR`.
+- [x] 15b. Run the synthesis-phase research pass — `synthesis/post-impl-acceptance.md` records 7-of-7 Gherkin scenarios as PASS; `reflection/M03-pre-mortem.md` records 0/5 predicted failures + 3 unpredicted delegation-protocol failures caught + fixed; `research_phase` flipped from `kickoff` to `synthesis`.
+- [x] 16. Friction log; flip `task_status: done` — FL1 declared (productive friction; zero abandoned steps; all events caught and resolved in same session). Renumbered 013→015 per TASK.md §8.1 due to mid-flight collision with main's Task 013.
 
 ## Acceptance Criteria (Gherkin)
 
