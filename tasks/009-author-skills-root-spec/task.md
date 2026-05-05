@@ -4,10 +4,10 @@ status: active
 slug: author-skills-root-spec
 summary: "Author SKILLS.md — the missing root governance spec for /skills/ — wire cross-references between skills, formalize the skill-bootstrap protocol, and harmonize AGENTS.md / PROMPT.md / RESEARCH.md to acknowledge skills as a fourth top-level concern."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 task_id: "009"
-task_owner: "unassigned"
-task_status: open
+task_owner: "jules"
+task_status: done
 task_priority: P1
 task_uses_prompts:
   - author-skills-root-spec
@@ -84,16 +84,16 @@ The 2026-05-04 surface-skills-architecture coherence run (Task 006) flagged that
 
 ## Todo
 
-- [ ] 1. Read TASK.md / PROMPT.md / RESEARCH.md and extract the shared section skeleton.
-- [ ] 2. Read the skills-skill-architecture SPEC and skills-skill-bootstrap readme; extract every normative claim.
-- [ ] 3. Author `SKILLS.md` at the repository root following the nine-section template.
-- [ ] 4. Author `templates/skill.md` matching the new `skill_*` L2 namespace.
-- [ ] 5. Update `AGENTS.md` routing table to include `SKILLS.md`.
-- [ ] 6. Update `FOLDERS.md §1, §6` to include `/skills/` and the skill-audit graph.
-- [ ] 7. Update `PROMPT.md` and `RESEARCH.md` with the cross-reference one-liners.
-- [ ] 8. Update `skills/readme.md` to reference `SKILLS.md` as the governing spec.
-- [ ] 9. Run `tools/check-governance.sh`; fix any failures.
-- [ ] 10. Set `task_status: done`, write `friction-log.md`, update `updated` field.
+- [x] 1. Read TASK.md / PROMPT.md / RESEARCH.md and extract the shared section skeleton.
+- [x] 2. Read the skills-skill-architecture SPEC and skills-skill-bootstrap readme; extract every normative claim.
+- [x] 3. Author `SKILLS.md` at the repository root following the nine-section template.
+- [x] 4. Author `templates/skill.md` matching the new `skill_*` L2 namespace.
+- [x] 5. Update `AGENTS.md` routing table to include `SKILLS.md`.
+- [x] 6. Update `FOLDERS.md §1, §6` to include `/skills/` and the skill-audit graph.
+- [x] 7. Update `PROMPT.md` and `RESEARCH.md` with the cross-reference one-liners.
+- [x] 8. Update `skills/readme.md` to reference `SKILLS.md` as the governing spec.
+- [x] 9. Run `tools/check-governance.sh`; fix any failures.
+- [x] 10. Set `task_status: done`, write `friction-log.md`, update `updated` field.
 
 ## Links
 

@@ -40,6 +40,8 @@ Subfolders MUST NOT be created unless 4+ same-category files (e.g., iteration dr
 
 `prompt.md` MUST carry the L1 Vault Core keys plus the L2 `prompt_*` namespace defined in `TASK.md` §3. Example:
 
+> **Note:** Prompts that target a skill MAY set `prompt_relates_to_skill: <slug>` once the schema is ratified (Task 011).
+
 ```yaml
 ---
 type: prompt

@@ -51,7 +51,7 @@ Claude.ai session. This folder is the durable mirror.
 ## Open Blockers
 
 - Gemini Deep Research PDF pending (required to resolve 6 UNCERTAIN markers in the architecture spec before `skills-skill` implementation can begin).
-- Jules and gemini-cli skill-loading conventions unknown — their portability to the `SKILL.md` format is unverified.
+- Jules and gemini-cli skill-loading conventions unknown — portability is governed by [SKILLS.md §8](../SKILLS.md#8-cross-agent-portability).
 
 ## Governance In Flight
 
