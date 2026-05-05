@@ -44,7 +44,7 @@ Two coupled deliverables:
    - **Bucket B (≈30): kind-concept slot specialisations** — `## Female Mental Sex`, `## Impact Character Concern`, `## Dividend (Overall Story Throughline)`. These are NOT terms in their own right; they are throughline-specific instances of canonical terms. Either (a) delete the heading and add the spelling as `aliases_en` on the canonical (preferred for the historic pseudo-entries like Female Mental Sex — coordinate with ST-4) or (b) mint a `kind: concept` ontology entry pointing back at the canonical. Decision criterion: if the body has unique content, mint the concept; if the body is "See X", delete and alias.
    - **Bucket C (≈50): structural prose** — `## Why Quads matter for Encoding`, `## Phase 1 — Throughline Class assignments`, `## Worked Example 2 — Star Wars`. These are workflow-chapter sub-headings inside extension files. They are NOT ontology candidates; they remain unmapped legitimately. ST-3 documents them in the partition table with reason "structural prose; not a term".
 
-3. **Mint `character-dynamic.approach` in `ontology.json`** per ST-2's coordination note. Frontmatter for the heading was authored by ST-2; ST-3 adds the matching ontology entry. Validate post-mint.
+3. **Update `character-dynamic.growth.term_file`** in `ontology.json` per ST-2's coordination note. ST-2 split the corrupted `## Approach` heading into `## Approach` + `## Growth`; ST-3 must update `character-dynamic.growth.term_file` from `...character-dynamics.md#approach` (its current pointer) to `...character-dynamics.md#growth` (the new heading ST-2 created). The `character-dynamic.approach` entry's pointer stays as `...character-dynamics.md#approach` (which is now the correctly-attributed heading).
 
 ## Falsification
 
@@ -63,7 +63,7 @@ Wrong cut **iff** the 106 unmapped headings turn out to need a fourth bucket (i.
 
 1. **0 anchor mismatches.** `python3 tools/dramatica-nav/validate.py` reports `term_file-anchor-mismatch: 0`.
 2. **Partition table emitted.** A new section `## Unmapped-heading partition` appears in [`tasks/026-cleanup-dramatica-skills-corpus/notes.md §5`](../notes.md). Each row: `file | heading | bucket (A/B/C/D) | resolution`. Sum of A+B+C+D = 106 (or whatever validate.py's current count is at ST-3's runtime).
-3. **`character-dynamic.approach` minted.** `nav.py by-id character-dynamic.approach` returns a valid entry. The ontology entry's `term_file` resolves to a heading in `character-dynamics.md` (created by ST-2).
+3. **`character-dynamic.growth.term_file` updated.** `nav.py by-id character-dynamic.growth` shows `term_file: skills/dramatica-vocabulary/references/character-dynamics.md#growth` (no longer pointing at `#approach`). `validate.py` reports both Approach and Growth as `term_file-anchor-match` rather than mismatched.
 4. **`var.work` resolved.** Either the heading moves to `variations.md` OR the ontology pointer moves to `plot-dynamics.md`. Whichever is chosen, `validate.py` reports clean.
 5. **5 missing canonical entries added.** `elements.md` carries `## Ability`, `## Change`, `## Non-acceptance`, `## Non-accurate`. `variations.md` carries `## Self-Interest`. Each has `<!-- nav-ontology -->` block + structural description ≤1 line of source-prose.
 6. **No new ontology kinds.** Schema is unchanged. If a Bucket B entry needs a kind that's not in the existing enum, file as a Bucket D + Task 027 issue; do NOT bump the schema here.
@@ -117,7 +117,9 @@ Implementation approach:
   4. For Bucket B entries decided as "alias on canonical", coordinate with
      ST-4 (alias additions overlap). DO NOT add aliases that ST-4 owns;
      leave a coordination note in the commit body.
-  5. Mint character-dynamic.approach with appropriate frontmatter.
+  5. Update character-dynamic.growth.term_file pointer to ...#growth
+     (the new heading ST-2 created); leave character-dynamic.approach alone
+     (its pointer is already correct).
   6. Run validate.py end-to-end. term_file-anchor-mismatch must drop to 0.
   7. Commit one focused commit; do NOT push.
 
@@ -133,8 +135,8 @@ Constraints:
 When done:
   - python3 tools/dramatica-nav/validate.py
     (term_file-anchor-mismatch: 0; unmapped-heading count drops by ≈25 anchor-format fixes)
-  - python3 tools/dramatica-nav/nav.py by-id character-dramatic.approach
-    (returns a valid entry)
+  - python3 tools/dramatica-nav/nav.py by-id character-dynamic.growth
+    (term_file now ends in #growth, not #approach)
   - cat tasks/026-cleanup-dramatica-skills-corpus/notes.md | grep -A1 "Unmapped-heading partition"
     (the partition table is present)
   - Commit "fix(dramatica): resolve 8 anchor mismatches + partition 106 unmapped headings (Task 026 ST-3)"

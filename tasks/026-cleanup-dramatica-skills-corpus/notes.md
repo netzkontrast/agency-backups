@@ -153,12 +153,9 @@ character-dynamics.md (line 21–30):
   ```
 ```
 
-**1 known occurrence.** The Approach heading carries Growth's frontmatter; Growth has no heading of its own. Cascades into:
+**1 known occurrence.** The Approach heading carries Growth's frontmatter; Growth has no heading of its own. Both ontology entries (`character-dynamic.approach` AND `character-dynamic.growth`) already exist and BOTH currently have `term_file` pointing at the same `character-dynamics.md#approach` anchor. `validate.py` doesn't surface this as `term_file-anchor-mismatch` because the anchor DOES exist (the lint can't detect that a YAML block sits under the wrong heading).
 
-- `ontology.json` `character-dynamic.growth` entry has `term_file: skills/dramatica-vocabulary/references/character-dynamics.md#approach` (pointing at the wrong anchor).
-- `validate.py` reports this as `term_file-anchor-mismatch` only because the anchor exists on a different term — there's no signal that the YAML was inserted under the wrong heading.
-
-ST-2's brief covers this; the fix is splitting `## Approach` into `## Approach` (with its own correct YAML for `character-dynamic.approach`) and a new `## Growth` heading carrying the existing `character-dynamic.growth` YAML. May need ontology entries minted: `character-dynamic.approach` does not currently appear in `ontology.json`.
+ST-2's brief covers this; the fix is splitting `## Approach` into `## Approach` (with its own correct YAML for `character-dynamic.approach`) and a new `## Growth` heading carrying the `character-dynamic.growth` YAML. ST-3 then updates `character-dynamic.growth.term_file` from `...#approach` to `...#growth` so the ontology table tracks the new anchor.
 
 ### 2.7 `term_file` anchor mismatches (8 from `validate.py`)
 
@@ -365,4 +362,17 @@ Both are SCHEMA-CHANGING decisions, and §Anti-Patterns explicitly says schema b
 ## 7. ReAct Trace
 
 (Will be populated during execution. Format from Task 015 §ReAct Trace: `**R:** what I'm about to do and why. **A:** what I did. **O:** what came back / what I learned.`)
+
+## 8. ST-7 Alias Conflict Report
+
+(Reserved for ST-7's `aliases.py conflict-report` output. Format: per-conflict — alias string / candidate ontology IDs / chosen disposition / rationale.)
+
+## 9. ST-8 Scenario-Tag Measurement Table
+
+(Reserved for ST-8's per-iteration measurement output. Format: iteration | tagged-count | median | mean | max | orphan-count | over-tagged-count | gate-status.)
+
+## 10. ST-9 Token-Cost Benchmark
+
+(Reserved for ST-9's `precompile.py benchmark` output. Format: scenario-id | prose-path-bytes | precompiled-path-bytes | reduction-% | gate-status.)
+
 

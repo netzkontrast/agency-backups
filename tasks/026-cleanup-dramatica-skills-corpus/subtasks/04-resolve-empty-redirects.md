@@ -34,7 +34,7 @@ Five "See X" pseudo-entries currently produce useless navigator hits. Resolve ea
 
 5. **TOC bullet `- [Focus](#focus) — See Symptom`** (`elements.md:31`).
    - Per the canonical structure, Focus IS a redirect to Symptom. The body section `## Focus` (line 1135) exists and uses content for Symptom. Two options:
-   - **Option A (preferred).** Add `Focus` to `aliases_en` on `el.symptom-element` (the canonical Symptom Element entry). Delete the `## Focus` body entirely. Update the TOC bullet to remove the entry.
+   - **Option A (preferred).** Add `Focus` to `aliases_en` on `concept.symptom-element` (the canonical Symptom Element entry). Delete the `## Focus` body entirely. Update the TOC bullet to remove the entry.
    - **Option B.** Keep both `## Symptom Element` and `## Focus` as kind:concept entries that mutually reference. Less clean; only choose if Option A breaks something downstream.
 
 ## Falsification
@@ -51,7 +51,7 @@ Wrong cut **iff** a redirect entry is load-bearing for an agent that searches by
 ## Acceptance Criteria
 
 1. **No "See X" empty bodies.** `grep -nE "^See [A-Z]" skills/dramatica-vocabulary/references/character-dynamics.md` returns 0 lines (currently returns 2 — the two Mental Sex redirects).
-2. **Aliases land in ontology.** `python3 tools/dramatica-nav/nav.py by-alias 'Female Mental Sex'` returns the canonical `character-dynamic.problem-solving-style` entry. Likewise for `'Male Mental Sex'` and `'Focus'` (the latter resolving to `el.symptom-element`).
+2. **Aliases land in ontology.** `python3 tools/dramatica-nav/nav.py by-alias 'Female Mental Sex'` returns the canonical `character-dynamic.problem-solving-style` entry. Likewise for `'Male Mental Sex'` and `'Focus'` (the latter resolving to `concept.symptom-element`).
 3. **TOC bullets repaired.** `elements.md` has no bullet whose description is just "See" — every TOC entry has a one-line meaningful description.
 4. **Validator clean.** `validate.py` reports no NEW `unmapped-heading` warnings beyond what existed pre-ST-4. The two deletions REDUCE the count; ST-3 partition table absorbs the reduction.
 5. **No new ontology kinds.** Schema is unchanged. If a case needs a new kind, file as Bucket D + Task 027 issue.
@@ -85,7 +85,7 @@ Context files (read first):
 Goal:
   Resolve the five "See X" empty redirect entries per the case-by-case
   treatment in §Goal of this subtask file. Three deletes + two TOC bullet
-  repairs. Two alias additions to ontology.json (one to el.symptom-element,
+  repairs. Two alias additions to ontology.json (one to concept.symptom-element,
   two to character-dynamic.problem-solving-style).
 
 Acceptance criteria (reproduce verbatim from this file's Acceptance Criteria
@@ -98,7 +98,7 @@ Implementation approach:
      headings + bodies; add deprecated_aliases_en entries on the canonical.
   3. Apply case #4 — repair the malformed TOC bullet description.
   4. Apply case #5 — pick Option A; delete ## Focus body, alias on
-     el.symptom-element, remove the TOC bullet.
+     concept.symptom-element, remove the TOC bullet.
   5. Run validate.py; expect unmapped-heading count to DROP by 2 or 3
      (ST-3 partition absorbs the rest).
   6. Run nav.py by-alias smoke tests for all three aliases.
@@ -117,7 +117,7 @@ When done:
   - python3 tools/dramatica-nav/nav.py by-alias "Female Mental Sex"
     (must return character-dynamic.problem-solving-style)
   - python3 tools/dramatica-nav/nav.py by-alias "Focus"
-    (must return el.symptom-element)
+    (must return concept.symptom-element)
   - grep -nE "^See [A-Z]" skills/dramatica-vocabulary/references/character-dynamics.md
     (must return zero lines)
   - Commit "fix(dramatica): resolve 5 empty redirect entries (Task 026 ST-4)"

@@ -22,10 +22,10 @@ Three concrete fixes:
    - **Option A (preferred).** If the body is a mis-cut from the canonical `## Mental Sex` entry (which exists in the same file at line 302 with proper frontmatter), DELETE this orphan heading and merge any non-redundant content into the canonical `## Mental Sex` body.
    - **Option B.** If the body is genuinely standalone, repair the heading text to match the body's actual content and DOCUMENT the fix in the commit body.
 
-2. **`## Approach` carrying `character-dynamic.growth` frontmatter.** In `skills/dramatica-vocabulary/references/character-dynamics.md` lines 21–30, the `## Approach` heading has YAML frontmatter for `character-dynamic.growth` (canonical_label: Growth). This is wrong: the heading and the YAML disagree on which term is being defined. The body following also mixes Approach + Growth content. Two-step fix:
+2. **`## Approach` carrying `character-dynamic.growth` frontmatter.** In `skills/dramatica-vocabulary/references/character-dynamics.md` lines 21–30, the `## Approach` heading has YAML frontmatter for `character-dynamic.growth` (canonical_label: Growth). This is wrong: the heading and the YAML disagree on which term is being defined. **Both entries already exist in `ontology.json`** (`character-dynamic.approach` AND `character-dynamic.growth`), and BOTH currently have `term_file` pointing at the same `character-dynamics.md#approach` anchor — that's why `validate.py` doesn't surface the wrong-YAML-on-Approach-heading as an error. The body following the heading mixes Approach + Growth content. Two-step fix:
    - Split the heading. Create a separate `## Growth` heading carrying the existing `character-dynamic.growth` frontmatter and the Growth-specific body lines.
-   - Rewrite `## Approach` with NEW correct frontmatter for `character-dynamic.approach` (this term doesn't currently exist in `ontology.json` — ST-3 mints it; ST-2 creates the frontmatter block referencing the to-be-minted ID).
-   - Coordinate with ST-3 via the commit body (one-line note: "ST-3 must mint character-dynamic.approach in ontology.json").
+   - Rewrite `## Approach`'s YAML block to reference the already-existing `character-dynamic.approach` ontology entry (which currently still points at the same anchor).
+   - Coordinate with ST-3 via the commit body (one-line note: "ST-3 must update `character-dynamic.growth.term_file` to `character-dynamics.md#growth` so the ontology table tracks the new heading anchor").
 
 3. **Truncated content blocks.** Search for body content that ends mid-word (e.g., line 160: `preferential method of approaching proble` followed by `### Type` heading). For each truncation:
    - If the missing tail is reconstructable from canonical Phillips/Huntley source AND the reconstruction is ≤1 line of prose, fix it (per repo's [Task 015 §Anti-Patterns](../../015-integrate-dramatica-ncp-skills/task.md) MUST-NOT-quote-more-than-1-line rule).
@@ -96,13 +96,16 @@ Implementation approach:
      headings before vs. after.
   2. Apply fix #1 (delete or rename), fix #2 (split into ## Approach + ##
      Growth with corrected YAML), fix #3 (catalog truncations).
-  3. For fix #2, the new `character-dynamic.approach` ontology entry will be
-     minted by ST-3 — your task here is to write the YAML referencing
-     `id: character-dynamic.approach` even though it doesn't exist in
-     ontology.json yet. Your commit body MUST flag this as the coordination
-     handoff to ST-3.
-  4. Run validate.py; expect a NEW warning for `character-dynamic.approach`
-     missing-from-ontology — this is the expected handoff.
+  3. For fix #2, BOTH character-dynamic.approach AND character-dynamic.growth
+     already exist in ontology.json — both currently have term_file pointing
+     at character-dynamics.md#approach. Your task here: write the correct
+     character-dynamic.approach YAML under ## Approach, AND write the
+     character-dynamic.growth YAML under a NEW ## Growth heading. ST-3
+     updates the ontology table's term_file pointer for character-dynamic.growth
+     to ...#growth (your commit body coordinates this).
+  4. Run validate.py; expect the term_file-anchor-mismatch count to stay
+     stable (the broken pointer for character-dynamic.growth is what ST-3
+     fixes) — no new warnings introduced.
   5. Commit one focused commit; do NOT push.
 
 Constraints:
