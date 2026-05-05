@@ -403,3 +403,51 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
     Friction logged as FL2 in
     `tasks/020-audit-prompt-fm-validate-conformance/friction-log.md`.
+
+### Run 2026-05-05 — Task 021 administrative close (deferred-coherence residual = empty)
+- agent: claude-code (session claude/apply-fm-edit-deferred-QKgda)
+- start_commit: 0669322
+- end_commit: d5fab39
+- baseline_commit: 3266fed (Task 020 closure)
+- files_in_delta: 0 (no operational frontmatter mutations — Task 021
+  closure artifacts only: task.md, readme.md, notes.md, friction-log.md
+  in tasks/021-apply-fm-edit-to-deferred-coherence/)
+- files_scanned: 252
+- t1_fixes: 0
+- t2_fixes: 0
+- t3_tasks_created: 0
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+    Task 021 closes administratively. Per task.md Goal: zero
+    F.3.1 / F.3.2 (missing-key) diagnostics across operational tree
+    using tools/fm/edit.py as the sole mutator.
+
+    Residual at run start (HEAD=0669322, post Task 020 merge):
+
+      $ python3 tools/fm/validate.py 2>&1 | grep -E "F\.3\.[12]"
+      (no output)
+      $ python3 tools/fm/validate.py
+      Checked 252 files; 0 diagnostic(s).
+
+    Task 017's bulk migration (commit b73e615) cleared the F.3
+    class entirely. Task 019 (toolchain integration) and Task 020
+    (RISEN+ReAct prompt conformance) drove fm-validate to 0
+    diagnostics across all 252 files. Task 021's "pick up the
+    residual" framing therefore evaluated to a no-op — no
+    fm-edit invocations were needed, no T3 escalations
+    (path-classification gaps) surfaced.
+
+    The Task remains valuable as the supersession-closure of
+    Task 005 per TASK.md §4.7 and as the documented confirmation
+    gate per MAINTENANCE.md §1: had migration left stragglers,
+    this Task would have absorbed them. It did not.
+
+    Out-of-scope clarification: fm-validate --check-body still
+    reports F.B.1/F.B.7 body-shape diagnostics across /tasks/.
+    Those are Phase 3 default-on flip work, held by Task 020's
+    friction-log FL2; explicitly NOT Task 021's mission per its
+    Goal predicate.
+
+    Friction logged as FL1 in
+    `tasks/021-apply-fm-edit-to-deferred-coherence/friction-log.md`.

@@ -6,16 +6,16 @@ summary: "Successor to Task 005. Apply the deferred T1/T2 frontmatter stubs acro
 created: 2026-05-05
 updated: 2026-05-05
 task_id: "021"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P3
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_supersedes:
-  - "005"
+  - 005
 task_blocked_by:
-  - "017"
+  - 017
 task_affects_paths:
   - research/
   - skills/
@@ -40,14 +40,19 @@ Successor to [Task 005](../005-address-deferred-coherence-issues/task.md). The o
 
 ## Todo
 
-- [ ] 1. Confirm Task 017 has `task_status: done` before transitioning to `in_progress`.
-- [ ] 2. Capture the residual `F.3.1`/`F.3.2` diagnostic list into `notes.md`.
-- [ ] 3. Apply `tools/fm/edit.py` mutations in tier-1 batches; one commit per logical group.
-- [ ] 4. Verify clean validator run; produce `friction-log.md` with FL[0-3].
+- [x] 1. Confirm Task 017 has `task_status: done` before transitioning to `in_progress`.
+- [x] 2. Capture the residual `F.3.1`/`F.3.2` diagnostic list into `notes.md`.
+- [x] 3. Apply `tools/fm/edit.py` mutations in tier-1 batches; one commit per logical group. *(No-op — residual was empty post-Task-017; see `notes.md` and `friction-log.md`.)*
+- [x] 4. Verify clean validator run; produce `friction-log.md` with FL[0-3]. *(FL1; `python3 tools/fm/validate.py` → 0 diagnostics across 252 files.)*
+
+## Closure Note
+
+Closed 2026-05-05 with `task_status: done`. Residual F.3.1/F.3.2 diagnostic count at run start: **zero**. Task 017's migration (followed by Task 019/020 toolchain and RISEN+ReAct work) cleared the missing-key class entirely; this Task acts as the confirmation gate per `MAINTENANCE.md §1`. See [`notes.md`](./notes.md) for the residual capture and [`friction-log.md`](./friction-log.md) for FL1 reasoning.
 
 ## Links
 
 - Predecessor: [`../005-address-deferred-coherence-issues/task.md`](../005-address-deferred-coherence-issues/task.md)
 - Canonical mutator: [`tools/fm/edit.py`](../../tools/fm/edit.py)
-- Blocker: [`../017-migrate-repo-to-flexible-toolchain/task.md`](../017-migrate-repo-to-flexible-toolchain/task.md)
+- Blocker (now `done`): [`../017-migrate-repo-to-flexible-toolchain/task.md`](../017-migrate-repo-to-flexible-toolchain/task.md)
 - Governing specs: [`TASK.md`](../../TASK.md), [`MAINTENANCE.md`](../../MAINTENANCE.md) §1
+- Closure artifacts: [`notes.md`](./notes.md), [`friction-log.md`](./friction-log.md)
