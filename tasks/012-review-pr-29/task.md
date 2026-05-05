@@ -11,6 +11,7 @@ task_owner: "claude-sonnet-4-6"
 task_priority: P1
 task_uses_prompts: []
 task_spawns_research: []
+task_spawns_prompts: []
 task_affects_paths:
   - tasks/012-review-pr-29/notes.md
   - tasks/012-review-pr-29/readme.md
