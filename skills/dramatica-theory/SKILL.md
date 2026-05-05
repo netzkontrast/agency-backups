@@ -249,6 +249,21 @@ These four checks surface most structural problems Dramatica is designed to surf
 
 For any definitional question ("what's the difference between Issue and Problem?"), `09-reference.md` is the right file. For any decision difficulty ("how do I pick Class for OS?"), `10-decision-heuristics.md`. For any "why is this draft off?" question, `11-anti-patterns.md` first, then the diagnostic workflow above.
 
+## Navigator
+
+Conceptual questions ("explain the Story Mind premise", "why does MC Resolve matter?") still want the chapter prose. But for *structural* questions about specific terms — dynamic-pair partners, Quad membership, KTAD position, NCP-enum mapping — `tools/dramatica-nav/nav.py` answers without loading a 90 KB chapter:
+
+```bash
+python3 tools/dramatica-nav/nav.py by-id el.trust                  # term record + term_file pointer
+python3 tools/dramatica-nav/nav.py by-id el.trust --full           # plus inlined prose section via extract.py
+python3 tools/dramatica-nav/nav.py by-quad quad.logic-feeling-el   # the four Quad members
+python3 tools/dramatica-nav/nav.py by-ncp 'Relationship Story'     # ontology entries with this NCP appreciation
+```
+
+When the navigator's `term_file` pointer indicates the answer needs prose, `tools/dramatica-nav/extract.py el.trust` returns just the heading-bound section, not the whole chapter — typically < 5 KB vs the 90–300 KB chapter source.
+
+Cross-cutting load triggers (NO.1–NO.6) for the Narrative Ontology live in [`AGENTS.md § Narrative Ontology`](../../AGENTS.md). Non-narrative work MUST NOT load the ontology (NO.5 — token economy).
+
 ## Integration with other narrative skills
 
 Dramatica is a structural model. It does not replace:

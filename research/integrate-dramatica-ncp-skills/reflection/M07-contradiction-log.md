@@ -1,0 +1,27 @@
+# M07 — Contradiction Log
+
+Conflicting claims surfaced during the kickoff walk, with hypothesised cause and the evidence that would resolve each.
+
+| # | Claim X | Counter-claim ¬X | Hypothesised cause | Evidence to resolve | Status |
+|---|---|---|---|---|---|
+| 1 | `dramatica-theory/SKILL.md` calls the 4th throughline "Subjective Story (SS)". | `ncp-author/canonical-vocabulary.md` calls it "Relationship Story". `dramatica-vocabulary` calls it "Relationship (RS)". | Dramatica project published two generations of the label; theory skill snapshot pre-dates the renaming, NCP encodes the post-rename canonical. | Diff against Phillips/Huntley 4th-ed prose vs. the storymind.com current pages. | **Resolvable.** Canonical: `Relationship Story` (NCP enum compliance). Aliases: SS, Subjective Story, Relationship, RS. |
+| 2 | `dramatica-theory` and `dramatica-vocabulary` call the 3rd throughline "Impact Character (IC)". | `ncp-author/canonical-vocabulary.md` calls it "Influence Character". | Same renaming generation as #1. | Same. | **Resolvable.** Canonical: `Influence Character`. Aliases: Impact Character, IC. |
+| 3 | `dramatica-theory + dramatica-vocabulary` use "Mental Sex (Linear/Holistic)". | `ncp-author` uses "Problem-solving Style". | Theory skill explicitly notes "original term … is dated"; NCP encodes the modern label. | Confirmed by inline note in `dramatica-theory/SKILL.md` line 88. | **Resolvable.** Canonical: `Problem-solving Style`. Aliases: Mental Sex. Deprecated: "Male/Female problem-solving". |
+| 4 | `dramatica-vocabulary/references/elements.md` heading says "Element (70)". | Canonical Dramatica theory specifies 64 Elements. | `elements.md` mixes canonical Elements with concept-level meta-entries (Crucial Element, Symptom, Focus, etc.) — the 70 includes both. | Manual classification of the 7 surplus rows. | **Resolvable.** Schema MUST split `kind: element` (64 canonical) from `kind: concept` (the 6–7 meta-entries). |
+| 5 | `dramatica-vocabulary/references/types.md` carries 41 entries. | Canonical theory specifies 16 Types. | Same as #4 — concept-level meta-entries about Type slots (Concern, Issue, Problem, etc.) live in the same file. | Manual classification of the 25 surplus rows. | **Resolvable.** Same kind split. |
+| 6 | `dramatica-vocabulary/references/classes.md` lists 4 Class entries but the source-file layer carries only 2 of the 4. | The vocabulary SKILL.md narrative reports all 4 Classes. | Original Dramatica Dictionary OCR loss — Universe + Mind missing in the source layer. | Cross-check against `dramatica-fundamentals.md` Extension entries. | **Already resolved by Extension layer.** Schema `provenance: extension-derived` flag captures the resolution. |
+| 7 | `dramatica-vocabulary/references/character-dynamics.md` includes "Resolve" but the entry is **empty**. | The vocabulary SKILL.md says Resolve is one of the four MC dynamics. | Same OCR/Dictionary gap as #6. | Extension file `dramatica-fundamentals.md` ships substantive Resolve entry. | **Already resolved by Extension layer.** |
+| 8 | The vocabulary `_synonym-lookup.md` is EN-only (512 rows, no DE). | `dramatica-vocabulary/SKILL.md` description triggers explicitly on German phrases ("Storyform anlegen", "Throughline bestimmen", etc.). | Bootstrap content was extracted from the EN source; DE aliases were never added. | None — this is a content gap, not a contradiction. | **Schema-level resolution.** Add `aliases.de` field to the term-frontmatter schema so DE→canonical lookup is symmetric to EN. |
+| 9 | `task.md § Target Architecture` proposes `ncp_appreciation_partial: false` as default per-term. | NCP only encodes Elements / Variations / Types via `<Throughline> <Slot>` storypoint strings, never as standalone enum values. | Task author wrote the schema before the kickoff audit measured NCP enum closure. | `synthesis/id-audit.md § NCP enum closure check`. | **Resolvable in the schema.** The `ncp_appreciation` field MUST be allowed *absent* (not just `_partial: true`). Realistic split per the audit: ≈60% partial / 30% omitted / 10% clean. |
+
+## How the contradictions ripple into Task 015 plan
+
+- Items 1–3 land directly in **Plan step 4** (`ontology.json` bootstrap) — author with the canonical labels above and populate the alias maps.
+- Items 4–5 modify **Plan step 2** (schema authoring) — the `kind` enum MUST include `concept` alongside `element` / `type` / `archetype`.
+- Items 6–7 are already encoded; the schema's `provenance` field is the carrier — **Plan step 2** unchanged.
+- Item 8 modifies **Plan step 2** — `term-frontmatter.schema.json` MUST allow `aliases.de` (and is open-ended for other locales).
+- Item 9 modifies **Plan step 2** — `ncp_appreciation` MUST be optional, and **Plan step 9** (`validate.py`) MUST treat absence-with-reason as legal (e.g. `kind: archetype` legitimately has no NCP target).
+
+## Open meta-question
+
+Is there a contradiction between **how the vocabulary SKILL.md treats provenance** ("Source has Vorrang for Wortlaut, Extension has Vorrang for Mechanik") and **how this kickoff treats it** (single `provenance` enum on each entry)? The kickoff treatment is coarser than the SKILL.md's; an entry may have *some fields* from source and *other fields* from extension. **Resolution direction:** the schema's `provenance` is per-*entry*, not per-*field*. If a finer split is ever needed, add a per-field provenance map. For the kickoff, the coarse split is enough (an entry comes from the file the navigator points to).

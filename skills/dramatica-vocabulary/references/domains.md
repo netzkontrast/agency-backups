@@ -92,6 +92,22 @@ reason, ability, emotion, or intellect.
 ---
 
 ## Perspective
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: throughline.relationship
+kind: throughline
+canonical_label: Relationship Story
+provenance: source-original
+ncp_appreciation: Relationship Story
+ncp_appreciation_partial: false
+scenarios:
+- novel.dual-storyform
+aliases_en:
+- Subjective Story
+- RS
+- SS
+```
+
 
 *Type: Domain*
 

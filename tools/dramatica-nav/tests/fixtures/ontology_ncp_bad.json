@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "ontology_version": "0.1-test-ncp-bad",
+  "created": "2026-05-04",
+  "entries": [
+    {
+      "id": "el.alpha",
+      "kind": "element",
+      "canonical_label": "Alpha",
+      "provenance": "source-original",
+      "ncp_appreciation": "TotallyBogusValueNotInAnyEnum",
+      "ncp_appreciation_partial": false
+    }
+  ]
+}

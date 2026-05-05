@@ -19,6 +19,16 @@ Four-axis configuration of the Main Character — Resolve, Growth, Approach, Men
 ---
 
 ## Approach
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: character-dynamic.growth
+kind: character-dynamic
+canonical_label: Growth
+provenance: source-original
+scenarios:
+- novel.character-arc
+```
+
 
 *Type: Character Dynamic / Variation / Variation*
 
@@ -290,6 +300,20 @@ Problem Solving Style
 ---
 
 ## Mental Sex
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: character-dynamic.problem-solving-style
+kind: character-dynamic
+canonical_label: Problem-solving Style
+provenance: source-original
+scenarios:
+- novel.character-arc
+aliases_en:
+- Mental Sex
+deprecated_aliases_en:
+- Male/Female problem-solving
+```
+
 
 *Type: Character Dynamic*
 

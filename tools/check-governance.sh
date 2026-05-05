@@ -48,6 +48,17 @@ if ! "$PYTHON" tools/lint-runlog.py; then
   FAIL=1
 fi
 
+# Optional: narrative-ontology validator (gated on the ontology file existing,
+# so the rest of the repo doesn't break if narrative-ontology is removed).
+NARRATIVE_ONTOLOGY="$REPO_ROOT/maintenance/schemas/narrative-ontology/ontology.json"
+if [ -f "$NARRATIVE_ONTOLOGY" ]; then
+  echo ""
+  echo "--- [opt] Narrative-ontology validator ---"
+  if ! "$PYTHON" tools/dramatica-nav/validate.py; then
+    FAIL=1
+  fi
+fi
+
 if [ "$SKIP_TRUST" -eq 0 ]; then
   echo ""
   echo "--- [5/5] Spec-J/K/L trust audit ---"

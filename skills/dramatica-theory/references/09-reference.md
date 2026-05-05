@@ -1,3 +1,34 @@
+---
+type: theory-chunk
+chunk_id: dt-09-reference
+summary: Canonical vocabulary epilogue covering all Dramatica structural terms, semantic items, and complete lists of classes, types, variations, and elements.
+covers_ontology_ids:
+  - class.*
+  - type.*
+  - variation.*
+  - element.*
+  - archetype.*
+  - character-dynamic.*
+  - plot-dynamic.*
+  - throughline.*
+  - concept.*
+serves_scenarios:
+  - novel.storyform-slot-fill
+  - novel.act-pivot
+  - novel.crucial-element-audit
+  - novel.character-arc
+  - novel.diagnose-flat-draft
+  - novel.dual-storyform
+  - lyric.verse-chorus-pair
+  - lyric.bridge-pivot
+  - lyric.album-arc-mapping
+  - lyric.archetype-as-system-part
+  - lyric.refrain-as-restatement
+size_kb: 296
+depends_on_chunks:
+  - dt-01-foundations
+---
+
 # Reference: Epilogue, Vocabulary, Semantic Items, Structural Models
 
 > Source: Phillips & Huntley, *Dramatica: A New Theory of Story* (4th ed., 2001), © Screenplay Systems Inc. This chunk: source lines 5410–7516 of 7516. Verbatim extract for personal narrative-craft use; not for redistribution.

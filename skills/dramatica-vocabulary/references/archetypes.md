@@ -16,6 +16,17 @@ The eight quintessential character arrangements. Each Archetype carries a fixed 
 ---
 
 ## Antagonist
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: arc.antagonist
+kind: archetype
+canonical_label: Antagonist
+provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
+```
+
 
 *Type: Archetype*
 
@@ -31,6 +42,17 @@ order for one to succeed the other MUST fail.
 ---
 
 ## Contagonist
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: arc.contagonist
+kind: archetype
+canonical_label: Contagonist
+provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
+```
+
 
 *Type: Archetype*
 
@@ -71,6 +93,17 @@ less destructive to himself and/or others.
 ---
 
 ## Emotion
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: arc.emotion
+kind: archetype
+canonical_label: Emotion
+provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
+```
+
 
 *Type: Archetype*
 
@@ -94,6 +127,17 @@ audience sees the story through his eyes.
 ---
 
 ## Guardian
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: arc.guardian
+kind: archetype
+canonical_label: Guardian
+provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
+```
+
 
 *Type: Archetype*
 
@@ -116,6 +160,17 @@ the actual climax of the story is reached.
 ---
 
 ## Protagonist
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: arc.protagonist
+kind: archetype
+canonical_label: Protagonist
+provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
+```
+
 
 *Type: Archetype*
 
@@ -153,6 +208,17 @@ for the Purpose that truly accommodates it.
 ---
 
 ## Reason
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: arc.reason
+kind: archetype
+canonical_label: Reason
+provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
+```
+
 
 *Type: Archetype*
 
@@ -205,6 +271,17 @@ created.
 ---
 
 ## Sidekick
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: arc.sidekick
+kind: archetype
+canonical_label: Sidekick
+provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
+```
+
 
 *Type: Archetype*
 
@@ -230,6 +307,17 @@ something he finds immoral or disappointing.
 ---
 
 ## Skeptic
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: arc.skeptic
+kind: archetype
+canonical_label: Skeptic
+provenance: source-original
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
+```
+
 
 *Type: Archetype*
 

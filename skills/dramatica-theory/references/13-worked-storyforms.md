@@ -1,3 +1,21 @@
+---
+type: theory-chunk
+chunk_id: dt-13-worked-storyforms
+summary: Compact storyform reference cards for analyzed stories from the source book, distinguishing verified-from-source from inferred values as calibration examples.
+covers_ontology_ids:
+  - concept.storyform
+  - throughline.*
+  - concept.crucial-element
+serves_scenarios:
+  - novel.storyform-slot-fill
+  - novel.character-arc
+  - novel.dual-storyform
+size_kb: 8
+depends_on_chunks:
+  - dt-01-foundations
+  - dt-06-storyforming
+---
+
 # Worked Storyforms
 
 > Anchor examples. Compact storyform cards for stories the source book analyzes. Use them as reference points: when you're working on your own storyform and a decision feels uncertain, compare against a known case at the same decision point. Each card distinguishes verified-from-source values from inferred values; treat inferred values as informed guesses, not authoritative.

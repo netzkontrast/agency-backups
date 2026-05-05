@@ -1,3 +1,19 @@
+---
+type: theory-chunk
+chunk_id: dt-08-storyweaving-reception
+summary: Covers Stage 3 storyweaving (ordering and interleaving story threads for the audience) and Stage 4 story reception (how audiences decode meaning).
+covers_ontology_ids:
+  - concept.storyweaving
+  - concept.story-reception
+  - concept.genre
+serves_scenarios:
+  - novel.act-pivot
+  - lyric.album-arc-mapping
+size_kb: 96
+depends_on_chunks:
+  - dt-07-storyencoding
+---
+
 # Storyweaving (Stage 3) and Story Reception (Stage 4)
 
 > Source: Phillips & Huntley, *Dramatica: A New Theory of Story* (4th ed., 2001), © Screenplay Systems Inc. This chunk: source lines 4614–5409 of 7516. Verbatim extract for personal narrative-craft use; not for redistribution.

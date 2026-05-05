@@ -1,3 +1,19 @@
+---
+type: theory-chunk
+chunk_id: dt-00-storyform-worksheet
+summary: Decision template for building a Grand Argument Story storyform step by step, tracking every slot from throughlines to story points.
+covers_ontology_ids:
+  - concept.storyform
+  - throughline.*
+  - concept.crucial-element
+serves_scenarios:
+  - novel.storyform-slot-fill
+  - novel.dual-storyform
+size_kb: 7
+depends_on_chunks:
+  - dt-01-foundations
+---
+
 # Storyform Worksheet
 
 > Template to be filled out for one Grand Argument Story. Copy this file into your novel project (e.g. `CANON_STATE/storyform.md`) and edit in place. Every field that's left empty is a decision deferred — that's fine, but track which ones. The order below is the recommended decision order; revisit earlier decisions when later ones expose contradictions.

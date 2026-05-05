@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "ontology_version": "0.1-test-recip",
+  "created": "2026-05-04",
+  "entries": [
+    {
+      "id": "el.alpha",
+      "kind": "element",
+      "canonical_label": "Alpha",
+      "provenance": "source-original",
+      "dynamic_pair_id": "el.beta"
+    },
+    {
+      "id": "el.beta",
+      "kind": "element",
+      "canonical_label": "Beta",
+      "provenance": "source-original",
+      "dynamic_pair_id": "el.gamma"
+    },
+    {
+      "id": "el.gamma",
+      "kind": "element",
+      "canonical_label": "Gamma",
+      "provenance": "source-original"
+    }
+  ]
+}

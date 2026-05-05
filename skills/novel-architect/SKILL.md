@@ -237,6 +237,23 @@ Aktueller Stand-Highlights:
 
 ---
 
+## Navigator-Backed Lookups
+
+Strukturelle Canon-Edits (Storyform-A/B-Slots, Storypoints, Players, Storybeats, Moments) referenzieren ab v0.1 Narrative-Ontology IDs statt freier Labels — Beispiel: `throughline.relationship` (kanonisch "Relationship Story") statt der älteren Bezeichnung "Subjective Story". Lade-Kontrakt liegt in [`AGENTS.md § Narrative Ontology`](../../AGENTS.md), Regel **NO.3** bindet Kohärenz-Protokoll-Strukturedits direkt.
+
+Bevorzugte `nav.py`-Aufrufe pro Workflow-Lookup-Schritt:
+
+| Workflow-Schritt | Lookup-Frage | Bevorzugter `nav.py`-Aufruf |
+|---|---|---|
+| throughline-encoding | „Welcher canonical_label hat die RS-Throughline?" | `nav.py by-id throughline.relationship` |
+| dynamics-encoding | „Welcher Dynamic-Pair ist Crucial Element X?" | `nav.py by-id <el.id> --include-pairs` |
+| storyweaving | „Welche Element pairs sitzen im Logic/Feeling Quad?" | `nav.py by-quad quad.logic-feeling-el` |
+| open-questions-resolution | „Welche Terms tagged sind mit `novel.diagnose-flat-draft`?" | `nav.py by-scenario novel.diagnose-flat-draft` |
+| canon-update (NCP) | „Was ist die NCP-Appreciation für Element X?" | `nav.py by-id <el.id>` (lese `ncp_appreciation`) |
+| chapter-drafting | „Welche Variation rollt zu welchem Type?" | `nav.py by-id <var.id>` (lese `type_id`) |
+
+Prose-Lookups bleiben für *konzeptuelle* Fragen (Was bedeutet Story Mind? Warum ist Resolve binär?) — die `nav.py`-Antwort enthält stets einen `term_file`-Pointer, der den Chapter-Read auf eine Section eingrenzt; `tools/dramatica-nav/extract.py <id>` liefert die Section ohne den umliegenden Chapter.
+
 ## Integration mit anderen Schreib-Skills
 
 | Skill | Relation | Wann |

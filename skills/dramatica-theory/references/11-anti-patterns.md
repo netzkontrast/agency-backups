@@ -1,3 +1,21 @@
+---
+type: theory-chunk
+chunk_id: dt-11-anti-patterns
+summary: Catalog of common Dramatica misapplications—everyday vs. technical word sense confusions and collapsed distinctions—with failure modes and fixes.
+covers_ontology_ids:
+  - concept.storyform
+  - throughline.*
+  - element.*
+serves_scenarios:
+  - novel.diagnose-flat-draft
+  - novel.character-arc
+size_kb: 12
+depends_on_chunks:
+  - dt-01-foundations
+  - dt-02-characters
+  - dt-04-theme
+---
+
 # Anti-Patterns
 
 > Common mistakes when applying Dramatica. Most of these come from misreading the model — using a familiar word in its everyday sense rather than its Dramatica-specific sense, or collapsing two distinctions the model treats as separate. Each pattern: the failure mode, why it happens, the fix.

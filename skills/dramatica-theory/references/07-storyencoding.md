@@ -1,3 +1,22 @@
+---
+type: theory-chunk
+chunk_id: dt-07-storyencoding
+summary: "Explains Stage 2 storyencoding: binding abstract structural slots to concrete subject matter, and how signposts and journeys become scene-level content."
+covers_ontology_ids:
+  - concept.signpost
+  - concept.journey
+  - concept.subject-matter
+  - throughline.*
+serves_scenarios:
+  - novel.storyform-slot-fill
+  - novel.act-pivot
+  - lyric.verse-chorus-pair
+  - lyric.bridge-pivot
+size_kb: 78
+depends_on_chunks:
+  - dt-06-storyforming
+---
+
 # Storyencoding (Stage 2): Dressing Structural Choices in Subject Matter
 
 > Source: Phillips & Huntley, *Dramatica: A New Theory of Story* (4th ed., 2001), © Screenplay Systems Inc. This chunk: source lines 3910–4613 of 7516. Verbatim extract for personal narrative-craft use; not for redistribution.

@@ -78,6 +78,17 @@ The 64 highest-resolution descriptions of approaches and attitudes — the atomi
 ---
 
 ## Acceptance
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.acceptance
+kind: element
+canonical_label: Acceptance
+provenance: source-original
+quad_id: quad.acceptance-reaction-el
+ktad_position: K
+dynamic_pair_id: el.non-acceptance
+```
+
 
 *Type: Element / Element*
 
@@ -107,6 +118,17 @@ allowance for, consent, submission
 ---
 
 ## Accurate
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.accurate
+kind: element
+canonical_label: Accurate
+provenance: source-original
+quad_id: quad.accurate-non-accurate-el
+ktad_position: K
+dynamic_pair_id: el.non-accurate
+```
+
 
 *Type: Element / Element*
 
@@ -142,6 +164,17 @@ within tolerance, sufficient, adequate, acceptable, passable
 ---
 
 ## Actuality
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.actuality
+kind: element
+canonical_label: Actuality
+provenance: source-original
+quad_id: quad.actuality-el
+ktad_position: K
+dynamic_pair_id: el.perception
+```
+
 
 *Type: Element / Element*
 
@@ -172,6 +205,21 @@ reality, factuality, demonstrable existence, demonstrable realit
 ---
 
 ## Avoid
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.avoid
+kind: element
+canonical_label: Avoid
+provenance: source-original
+quad_id: quad.pursuit-avoid-el
+ktad_position: T
+dynamic_pair_id: el.pursuit
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element*
 
@@ -183,6 +231,16 @@ clear of, prevent
 ---
 
 ## Aware
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.aware
+kind: element
+canonical_label: Aware
+provenance: source-original
+quad_id: quad.actuality-el
+ktad_position: A
+```
+
 
 *Type: Element / Element*
 
@@ -205,6 +263,21 @@ sensitivity, consciousness of the external, responsive
 ---
 
 ## Cause
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.cause
+kind: element
+canonical_label: Cause
+provenance: source-original
+quad_id: quad.effect-cause-el
+ktad_position: T
+dynamic_pair_id: el.effect
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Element*
 
@@ -236,6 +309,17 @@ reason for, factor, effector, source, agent, antecedent
 ---
 
 ## Certainty
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.certainty
+kind: element
+canonical_label: Certainty
+provenance: source-original
+quad_id: quad.certainty-potentiality-el
+ktad_position: K
+dynamic_pair_id: el.potentiality
+```
+
 
 *Type: Element / Element*
 
@@ -265,6 +349,19 @@ unmist
 ---
 
 ## Chaos
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.chaos
+kind: element
+canonical_label: Chaos
+provenance: source-original
+quad_id: quad.order-chaos-el
+ktad_position: T
+dynamic_pair_id: el.order
+scenarios:
+- lyric.verse-chorus-pair
+```
+
 
 *Type: Element / Element / Element*
 
@@ -374,6 +471,20 @@ formlessness, noncohesion
 ---
 
 ## Conscience
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.conscience
+kind: element
+canonical_label: Conscience
+provenance: source-original
+quad_id: quad.conscience-temptation-el
+ktad_position: K
+dynamic_pair_id: el.temptation
+scenarios:
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Element*
 
@@ -425,6 +536,15 @@ restraining oneself
 ---
 
 ## Consider
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.consider
+kind: element
+canonical_label: Consider
+provenance: source-original
+dynamic_pair_id: el.reconsider
+```
+
 
 *Type: Element / Element*
 
@@ -452,6 +572,21 @@ weigh in the mind, mull
 ---
 
 ## Control
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.control
+kind: element
+canonical_label: Control
+provenance: source-original
+quad_id: quad.logic-feeling-el
+ktad_position: A
+dynamic_pair_id: el.uncontrolled
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Element*
 
@@ -479,6 +614,18 @@ steer, conduct, guide, manipulate, focused organization
 ---
 
 ## Crucial Element
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.crucial-element
+kind: concept
+canonical_label: Crucial Element
+provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element*
 
@@ -491,6 +638,17 @@ stories together. The Main Ch
 ---
 
 ## Deduction
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.deduction
+kind: element
+canonical_label: Deduction
+provenance: source-original
+quad_id: quad.certainty-potentiality-el
+ktad_position: A
+dynamic_pair_id: el.induction
+```
+
 
 *Type: Element / Element*
 
@@ -524,6 +682,19 @@ single point
 ---
 
 ## Desire
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.desire
+kind: element
+canonical_label: Desire
+provenance: source-original
+quad_id: quad.knowledge-el
+ktad_position: D
+dynamic_pair_id: el.ability
+scenarios:
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Variation*
 
@@ -543,6 +714,17 @@ aspire
 ---
 
 ## Determination
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.determination
+kind: element
+canonical_label: Determination
+provenance: source-original
+quad_id: quad.accurate-non-accurate-el
+ktad_position: D
+dynamic_pair_id: el.expectation
+```
+
 
 *Type: Element / Element*
 
@@ -592,6 +774,17 @@ factors, discerning a
 ---
 
 ## Direction (Overall Story Throughline)
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.direction
+kind: concept
+canonical_label: Direction
+provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
+```
+
 
 *Type: Element*
 
@@ -602,6 +795,21 @@ See Response Element
 ---
 
 ## Disbelief
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.disbelief
+kind: element
+canonical_label: Disbelief
+provenance: source-original
+quad_id: quad.faith-disbelief-el
+ktad_position: T
+dynamic_pair_id: el.faith
+scenarios:
+- lyric.refrain-as-restatement
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+```
+
 
 *Type: Element / Element*
 
@@ -632,6 +840,21 @@ unconvincing, find false, unpersuadability
 ---
 
 ## Effect
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.effect
+kind: element
+canonical_label: Effect
+provenance: source-original
+quad_id: quad.effect-cause-el
+ktad_position: K
+dynamic_pair_id: el.cause
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element*
 
@@ -646,6 +869,17 @@ www.dramatica.com -- www.screenplay.com
 ---
 
 ## Ending
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.ending
+kind: element
+canonical_label: Ending
+provenance: source-original
+quad_id: quad.result-process-el
+ktad_position: A
+dynamic_pair_id: el.unending
+```
+
 
 *Type: Element / Element*
 
@@ -681,6 +915,17 @@ termination, close
 ---
 
 ## Equity
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.equity
+kind: element
+canonical_label: Equity
+provenance: source-original
+quad_id: quad.order-chaos-el
+ktad_position: A
+dynamic_pair_id: el.inequity
+```
+
 
 *Type: Element / Element*
 
@@ -713,6 +958,17 @@ level, even
 ---
 
 ## Evaluation
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.evaluation
+kind: element
+canonical_label: Evaluation
+provenance: source-original
+quad_id: quad.evaluation-re-evaluation-el
+ktad_position: K
+dynamic_pair_id: el.reevaluation
+```
+
 
 *Type: Element / Element*
 
@@ -743,6 +999,17 @@ survey, examination
 ---
 
 ## Expectation
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.expectation
+kind: element
+canonical_label: Expectation
+provenance: source-original
+quad_id: quad.accurate-non-accurate-el
+ktad_position: A
+dynamic_pair_id: el.determination
+```
+
 
 *Type: Element / Element*
 
@@ -771,6 +1038,21 @@ likely consequences
 ---
 
 ## Faith
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.faith
+kind: element
+canonical_label: Faith
+provenance: source-original
+quad_id: quad.faith-disbelief-el
+ktad_position: K
+dynamic_pair_id: el.disbelief
+scenarios:
+- lyric.refrain-as-restatement
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+```
+
 
 *Type: Element / Element*
 
@@ -804,6 +1086,22 @@ trust
 ---
 
 ## Feeling
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.feeling
+kind: element
+canonical_label: Feeling
+provenance: source-original
+quad_id: quad.logic-feeling-el
+ktad_position: T
+dynamic_pair_id: el.logic
+scenarios:
+- lyric.archetype-as-system-part
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Element*
 
@@ -835,6 +1133,17 @@ affective outlook, sentiment, emotional assessment
 ---
 
 ## Focus
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.focus
+kind: concept
+canonical_label: Focus
+provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
+```
+
 
 *Type: Element*
 
@@ -893,6 +1202,22 @@ is the operative word.
 ---
 
 ## Help
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.help
+kind: element
+canonical_label: Help
+provenance: source-original
+quad_id: quad.help-hinder-el
+ktad_position: A
+dynamic_pair_id: el.hinder
+scenarios:
+- lyric.archetype-as-system-part
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Element*
 
@@ -922,6 +1247,22 @@ aid, assist, support, bolster, abet
 ---
 
 ## Hinder
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.hinder
+kind: element
+canonical_label: Hinder
+provenance: source-original
+quad_id: quad.help-hinder-el
+ktad_position: D
+dynamic_pair_id: el.help
+scenarios:
+- lyric.archetype-as-system-part
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Element*
 
@@ -950,6 +1291,17 @@ undermine, block, burden, encumber, thwart
 ---
 
 ## Hunch
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.hunch
+kind: element
+canonical_label: Hunch
+provenance: source-original
+quad_id: quad.proven-unproven-el
+ktad_position: D
+dynamic_pair_id: el.theory
+```
+
 
 *Type: Element / Element*
 
@@ -985,6 +1337,16 @@ suspicion
 ---
 
 ## Inaction
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.inaction
+kind: element
+canonical_label: Inaction
+provenance: source-original
+quad_id: quad.evaluation-re-evaluation-el
+ktad_position: A
+```
+
 
 *Type: Element / Element*
 
@@ -1019,6 +1381,17 @@ achieve through not doing
 ---
 
 ## Induction
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.induction
+kind: element
+canonical_label: Induction
+provenance: source-original
+quad_id: quad.certainty-potentiality-el
+ktad_position: D
+dynamic_pair_id: el.deduction
+```
+
 
 *Type: Element / Element*
 
@@ -1057,6 +1430,17 @@ infer, hypothesize, determine possibility
 ---
 
 ## Inequity
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.inequity
+kind: element
+canonical_label: Inequity
+provenance: source-original
+quad_id: quad.order-chaos-el
+ktad_position: D
+dynamic_pair_id: el.equity
+```
+
 
 *Type: Element / Element*
 
@@ -1085,6 +1469,17 @@ imbalance, unfair, disparity, unequal, uneven, disproportionate
 ---
 
 ## Inertia
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.inertia
+kind: element
+canonical_label: Inertia
+provenance: source-original
+quad_id: quad.inertia-change-el
+ktad_position: K
+dynamic_pair_id: el.change
+```
+
 
 *Type: Element / Element*
 
@@ -1114,6 +1509,18 @@ direction
 ---
 
 ## Knowledge
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.knowledge
+kind: element
+canonical_label: Knowledge
+provenance: source-original
+quad_id: quad.knowledge-el
+ktad_position: K
+scenarios:
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Variation*
 
@@ -1132,6 +1539,22 @@ held truth, maintained information, presumed facts, accepted ideas
 ---
 
 ## Logic
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.logic
+kind: element
+canonical_label: Logic
+provenance: source-original
+quad_id: quad.logic-feeling-el
+ktad_position: K
+dynamic_pair_id: el.feeling
+scenarios:
+- lyric.archetype-as-system-part
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Element*
 
@@ -1262,6 +1685,16 @@ sensibility, syllogistics
 ---
 
 ## Main Character Problem
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.mc-problem
+kind: concept
+canonical_label: Main Character Problem
+provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+```
+
 
 *Type: Element*
 
@@ -1382,6 +1815,19 @@ Unique Ability. In either approach, it is essential to
 ---
 
 ## Oppose
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.oppose
+kind: element
+canonical_label: Oppose
+provenance: source-original
+quad_id: quad.help-hinder-el
+ktad_position: T
+dynamic_pair_id: el.support
+scenarios:
+- lyric.refrain-as-restatement
+```
+
 
 *Type: Element / Element*
 
@@ -1412,6 +1858,19 @@ from
 ---
 
 ## Order
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.order
+kind: element
+canonical_label: Order
+provenance: source-original
+quad_id: quad.order-chaos-el
+ktad_position: K
+dynamic_pair_id: el.chaos
+scenarios:
+- lyric.verse-chorus-pair
+```
+
 
 *Type: Element / Element*
 
@@ -1444,6 +1903,16 @@ organization, patterned formation, formation, configuration, patte
 ---
 
 ## Overall (Objective) Story Problem
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.os-problem
+kind: concept
+canonical_label: Overall Story Problem
+provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+```
+
 
 *Type: Element*
 
@@ -1454,6 +1923,14 @@ see Problem
 ---
 
 ## Overall (Objective) Story Response
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.os-response
+kind: concept
+canonical_label: Overall Story Response
+provenance: source-original
+```
+
 
 *Type: Element*
 
@@ -1464,6 +1941,14 @@ see Response.
 ---
 
 ## Overall (Objective) Story Solution
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.os-solution
+kind: concept
+canonical_label: Overall Story Solution
+provenance: source-original
+```
+
 
 *Type: Element*
 
@@ -1474,6 +1959,14 @@ see Solution
 ---
 
 ## Overall (Objective) Story Symptom
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.os-symptom
+kind: concept
+canonical_label: Overall Story Symptom
+provenance: source-original
+```
+
 
 *Type: Element*
 
@@ -1497,6 +1990,17 @@ comes from within the story.
 ---
 
 ## Perception
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.perception
+kind: element
+canonical_label: Perception
+provenance: source-original
+quad_id: quad.actuality-el
+ktad_position: T
+dynamic_pair_id: el.actuality
+```
+
 
 *Type: Element / Element*
 
@@ -1525,6 +2029,17 @@ of view on r
 ---
 
 ## Possibility
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.possibility
+kind: element
+canonical_label: Possibility
+provenance: source-original
+quad_id: quad.production-reduction-el
+ktad_position: D
+dynamic_pair_id: el.probability
+```
+
 
 *Type: Element / Element*
 
@@ -1554,6 +2069,17 @@ eventualities, open assessment
 ---
 
 ## Potentiality
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.potentiality
+kind: element
+canonical_label: Potentiality
+provenance: source-original
+quad_id: quad.certainty-potentiality-el
+ktad_position: T
+dynamic_pair_id: el.certainty
+```
+
 
 *Type: Element / Element*
 
@@ -1587,6 +2113,16 @@ focusing on the uncertain, going with the improbable
 ---
 
 ## Proaction
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.proaction
+kind: element
+canonical_label: Proaction
+provenance: source-original
+quad_id: quad.acceptance-reaction-el
+ktad_position: A
+```
+
 
 *Type: Element / Element*
 
@@ -1622,6 +2158,17 @@ likelihood, prospective, predictable, promising
 ---
 
 ## Probability
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.probability
+kind: element
+canonical_label: Probability
+provenance: source-original
+quad_id: quad.production-reduction-el
+ktad_position: A
+dynamic_pair_id: el.possibility
+```
+
 
 *Type: Element*
 
@@ -1641,6 +2188,14 @@ of many dangers but also tends to make it fickle.
 ---
 
 ## Problem
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.problem-slot
+kind: concept
+canonical_label: Problem
+provenance: source-original
+```
+
 
 *Type: Element*
 
@@ -1676,6 +2231,17 @@ uses to resolve problems he encounters.
 ---
 
 ## Process
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.process
+kind: element
+canonical_label: Process
+provenance: source-original
+quad_id: quad.result-process-el
+ktad_position: T
+dynamic_pair_id: el.result
+```
+
 
 *Type: Element / Element*
 
@@ -1705,6 +2271,17 @@ pull or tend
 ---
 
 ## Production
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.production
+kind: element
+canonical_label: Production
+provenance: source-original
+quad_id: quad.production-reduction-el
+ktad_position: K
+dynamic_pair_id: el.reduction
+```
+
 
 *Type: Element / Element*
 
@@ -1748,6 +2325,17 @@ possibilities, ruling out future impossibilities, discovering of pot
 ---
 
 ## Projection
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.projection
+kind: element
+canonical_label: Projection
+provenance: source-original
+quad_id: quad.inertia-change-el
+ktad_position: A
+dynamic_pair_id: el.speculation
+```
+
 
 *Type: Element / Element*
 
@@ -1775,6 +2363,16 @@ most likely, probable
 ---
 
 ## Protection
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.protection
+kind: element
+canonical_label: Protection
+provenance: source-original
+quad_id: quad.evaluation-re-evaluation-el
+ktad_position: D
+```
+
 
 *Type: Element / Element*
 
@@ -1811,6 +2409,17 @@ true self, essential nature, core being
 ---
 
 ## Proven
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.proven
+kind: element
+canonical_label: Proven
+provenance: source-original
+quad_id: quad.proven-unproven-el
+ktad_position: K
+dynamic_pair_id: el.unproven
+```
+
 
 *Type: Element / Element*
 
@@ -1859,6 +2468,21 @@ established, demonstrated, shown
 ---
 
 ## Pursuit
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.pursuit
+kind: element
+canonical_label: Pursuit
+provenance: source-original
+quad_id: quad.pursuit-avoid-el
+ktad_position: K
+dynamic_pair_id: el.avoid
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Element*
 
@@ -1891,6 +2515,16 @@ look for, directed effort
 ---
 
 ## Reaction
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.reaction
+kind: element
+canonical_label: Reaction
+provenance: source-original
+quad_id: quad.acceptance-reaction-el
+ktad_position: D
+```
+
 
 *Type: Element / Element*
 
@@ -1929,6 +2563,17 @@ benefits, intemperance, immoderation
 ---
 
 ## Reconsider
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.reconsider
+kind: element
+canonical_label: Reconsider
+provenance: source-original
+quad_id: quad.pursuit-avoid-el
+ktad_position: D
+dynamic_pair_id: el.consider
+```
+
 
 *Type: Element / Element*
 
@@ -1958,6 +2603,17 @@ additional scrutiny
 ---
 
 ## Reduction
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.reduction
+kind: element
+canonical_label: Reduction
+provenance: source-original
+quad_id: quad.production-reduction-el
+ktad_position: T
+dynamic_pair_id: el.production
+```
+
 
 *Type: Element / Element*
 
@@ -2004,6 +2660,15 @@ re-appraisal, further assessment, subsequent analysis, scrutiny of first impress
 ---
 
 ## Reevaluation
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.reevaluation
+kind: element
+canonical_label: Reevaluation
+provenance: source-original
+dynamic_pair_id: el.evaluation
+```
+
 
 *Type: Element*
 
@@ -2029,6 +2694,17 @@ and form new, mistaken understandings.
 ---
 
 ## Result
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.result
+kind: element
+canonical_label: Result
+provenance: source-original
+quad_id: quad.result-process-el
+ktad_position: K
+dynamic_pair_id: el.process
+```
+
 
 *Type: Element / Element*
 
@@ -2094,6 +2770,14 @@ ramifications of an effect, consequence, repercussion, impact, end product
 ---
 
 ## Solution
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.solution-slot
+kind: concept
+canonical_label: Solution
+provenance: source-original
+```
+
 
 *Type: Element*
 
@@ -2126,6 +2810,17 @@ same problem as the Overall Story.
 ---
 
 ## Speculation
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.speculation
+kind: element
+canonical_label: Speculation
+provenance: source-original
+quad_id: quad.inertia-change-el
+ktad_position: D
+dynamic_pair_id: el.projection
+```
+
 
 *Type: Element / Element*
 
@@ -2155,6 +2850,19 @@ possibilities, conjecturing
 ---
 
 ## Support
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.support
+kind: element
+canonical_label: Support
+provenance: source-original
+quad_id: quad.help-hinder-el
+ktad_position: K
+dynamic_pair_id: el.oppose
+scenarios:
+- lyric.refrain-as-restatement
+```
+
 
 *Type: Element / Element*
 
@@ -2186,6 +2894,17 @@ compliment, laud
 ---
 
 ## Symptom Element
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.symptom-element
+kind: concept
+canonical_label: Symptom Element
+provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
+```
+
 
 *Type: Element*
 
@@ -2198,6 +2917,20 @@ the source of the problem re
 ---
 
 ## Temptation
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.temptation
+kind: element
+canonical_label: Temptation
+provenance: source-original
+quad_id: quad.conscience-temptation-el
+ktad_position: T
+dynamic_pair_id: el.conscience
+scenarios:
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element*
 
@@ -2222,6 +2955,21 @@ cost you some bucks...")
 ---
 
 ## Test
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.test
+kind: element
+canonical_label: Test
+provenance: source-original
+quad_id: quad.effect-cause-el
+ktad_position: D
+dynamic_pair_id: el.trust
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Element*
 
@@ -2255,6 +3003,17 @@ inspection, scrutinization
 ---
 
 ## Theory
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.theory
+kind: element
+canonical_label: Theory
+provenance: source-original
+quad_id: quad.proven-unproven-el
+ktad_position: A
+dynamic_pair_id: el.hunch
+```
+
 
 *Type: Element / Element*
 
@@ -2290,6 +3049,18 @@ description of line
 ---
 
 ## Thought
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.thought
+kind: element
+canonical_label: Thought
+provenance: source-original
+quad_id: quad.knowledge-el
+ktad_position: T
+scenarios:
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Variation / Element / Variation*
 
@@ -2349,6 +3120,21 @@ ponderence, musing, reflection
 ---
 
 ## Trust
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.trust
+kind: element
+canonical_label: Trust
+provenance: source-original
+quad_id: quad.effect-cause-el
+ktad_position: A
+dynamic_pair_id: el.test
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Element*
 
@@ -2379,6 +3165,21 @@ relia
 ---
 
 ## Uncontrolled
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.uncontrolled
+kind: element
+canonical_label: Uncontrolled
+provenance: source-original
+quad_id: quad.logic-feeling-el
+ktad_position: D
+dynamic_pair_id: el.control
+scenarios:
+- lyric.verse-chorus-pair
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+```
+
 
 *Type: Element / Element*
 
@@ -2408,6 +3209,17 @@ unfocused, rampant, unguided, open, frenzy
 ---
 
 ## Unending
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.unending
+kind: element
+canonical_label: Unending
+provenance: source-original
+quad_id: quad.result-process-el
+ktad_position: D
+dynamic_pair_id: el.ending
+```
+
 
 *Type: Element / Element*
 
@@ -2442,6 +3254,17 @@ ceaseless, interminable, incessant, perennial
 ---
 
 ## Unproven
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.unproven
+kind: element
+canonical_label: Unproven
+provenance: source-original
+quad_id: quad.proven-unproven-el
+ktad_position: T
+dynamic_pair_id: el.proven
+```
+
 
 *Type: Element*
 

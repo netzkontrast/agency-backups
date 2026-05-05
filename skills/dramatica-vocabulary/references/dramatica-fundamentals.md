@@ -13,6 +13,18 @@
 ---
 
 ## The Four Classes — Complete Set
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: class.universe
+kind: class
+canonical_label: Universe
+provenance: extension-derived
+scenarios:
+- novel.dual-storyform
+aliases_en:
+- Situation
+```
+
 
 The original term files list only `Physics` and `Psychology` as Class entries, plus `Overall (Objective) Story Domain` (which is a Throughline-perspective wrapper, not a Class proper). **Universe and Mind are missing as Class entries** despite being two of the four Classes. Filled in here.
 
@@ -75,6 +87,16 @@ The Overall Story and Relationship Story Throughlines fill the remaining two Cla
 ---
 
 ## Resolve — Substantive Definition
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: character-dynamic.resolve
+kind: character-dynamic
+canonical_label: Resolve
+provenance: extension-derived
+scenarios:
+- novel.character-arc
+```
+
 
 The original term file `## Resolve` is empty (only the header remains). Filled in here.
 

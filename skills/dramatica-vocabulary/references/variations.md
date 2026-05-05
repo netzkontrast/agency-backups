@@ -71,6 +71,16 @@ Variations are the third-resolution layer (16 per Class, 64 total). Concerns and
 ---
 
 ## Ability
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.ability
+kind: variation
+canonical_label: Ability
+provenance: source-original
+quad_id: quad.knowledge-el
+ktad_position: A
+```
+
 
 *Type: Variation / Element / Variation*
 
@@ -124,6 +134,18 @@ faculty
 ---
 
 ## Analysis
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.analysis
+kind: variation
+canonical_label: Analysis
+provenance: source-original
+type_id: type.doing
+quad_id: quad.strategy-var
+ktad_position: T
+dynamic_pair_id: var.strategy
+```
+
 
 *Type: Variation / Variation*
 
@@ -143,6 +165,15 @@ evaluation, examination, breakdown of situation, close investigation, scrutiniza
 ---
 
 ## Appraisal
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.appraisal
+kind: variation
+canonical_label: Appraisal
+provenance: source-original
+dynamic_pair_id: var.reappraisal
+```
+
 
 *Type: Variation / Variation*
 
@@ -180,6 +211,15 @@ understanding, initial approach, initial assimilation
 ---
 
 ## Attempt
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.attempt
+kind: variation
+canonical_label: Attempt
+provenance: source-original
+dynamic_pair_id: var.work
+```
+
 
 *Type: Variation / Variation*
 
@@ -208,6 +248,17 @@ venture
 ---
 
 ## Attitude
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.attitude
+kind: variation
+canonical_label: Attitude
+provenance: source-original
+type_id: type.obtaining
+quad_id: quad.approach-var-physics
+ktad_position: T
+```
+
 
 *Type: Variation / Variation*
 
@@ -236,6 +287,15 @@ countenance, behavioral outlook, perspective on doing
 ---
 
 ## Attraction
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.attraction
+kind: variation
+canonical_label: Attraction
+provenance: source-original
+dynamic_pair_id: var.repulsion
+```
+
 
 *Type: Variation / Variation*
 
@@ -317,6 +377,14 @@ captivate, appeal, draw, lure
 ---
 
 ## Catalyst
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.catalyst
+kind: variation
+canonical_label: Catalyst
+provenance: source-original
+```
+
 
 *Type: Variation*
 
@@ -328,6 +396,17 @@ Catalyst is what creates breakthroughs and seems to
 ---
 
 ## Choice
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.choice
+kind: variation
+canonical_label: Choice
+provenance: source-original
+quad_id: quad.openness-var
+ktad_position: D
+dynamic_pair_id: var.delay
+```
+
 
 *Type: Variation / Variation*
 
@@ -361,6 +440,15 @@ pick
 ---
 
 ## Circumstances
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.circumstances
+kind: variation
+canonical_label: Circumstances
+provenance: source-original
+dynamic_pair_id: var.situation
+```
+
 
 *Type: Variation / Variation*
 
@@ -394,6 +482,18 @@ existing conditions,
 ---
 
 ## Closure
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.closure
+kind: variation
+canonical_label: Closure
+provenance: source-original
+type_id: type.subconscious
+quad_id: quad.hope-var
+ktad_position: A
+dynamic_pair_id: var.denial
+```
+
 
 *Type: Variation*
 
@@ -429,6 +529,18 @@ two dynamic pairs in a quad is selected as the "Reference Pair," the remaining d
 ---
 
 ## Commitment
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.commitment
+kind: variation
+canonical_label: Commitment
+provenance: source-original
+type_id: type.conceiving
+quad_id: quad.rationalization-var
+ktad_position: T
+dynamic_pair_id: var.responsibility
+```
+
 
 *Type: Variation / Variation*
 
@@ -462,6 +574,18 @@ dedication, devotion, steadfastness, zeal
 ---
 
 ## Conditioning
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.conditioning
+kind: variation
+canonical_label: Conditioning
+provenance: source-original
+type_id: type.past
+quad_id: quad.senses-var
+ktad_position: A
+dynamic_pair_id: var.instinct
+```
+
 
 *Type: Variation / Variation*
 
@@ -493,6 +617,17 @@ accustomed response, adaptive adjustments
 ---
 
 ## Confidence
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.confidence
+kind: variation
+canonical_label: Confidence
+provenance: source-original
+type_id: type.becoming
+quad_id: quad.conscience-var
+ktad_position: D
+```
+
 
 *Type: Variation / Variation*
 
@@ -527,6 +662,14 @@ expectations, faithful anticipation, optimism
 ---
 
 ## Critical Flaw
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.critical-flaw
+kind: variation
+canonical_label: Critical Flaw
+provenance: source-original
+```
+
 
 *Type: Variation*
 
@@ -569,6 +712,15 @@ because of the Impact Character's different purposes.
 ---
 
 ## Deficiency
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.deficiency
+kind: variation
+canonical_label: Deficiency
+provenance: source-original
+dynamic_pair_id: var.permission
+```
+
 
 *Type: Variation / Variation*
 
@@ -605,6 +757,17 @@ unfulfilled need
 ---
 
 ## Delay
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.delay
+kind: variation
+canonical_label: Delay
+provenance: source-original
+quad_id: quad.openness-var
+ktad_position: A
+dynamic_pair_id: var.choice
+```
+
 
 *Type: Variation / Variation*
 
@@ -648,6 +811,18 @@ suspend, prolong, procrastinate
 ---
 
 ## Denial
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.denial
+kind: variation
+canonical_label: Denial
+provenance: source-original
+type_id: type.subconscious
+quad_id: quad.hope-var
+ktad_position: D
+dynamic_pair_id: var.closure
+```
+
 
 *Type: Variation / Variation*
 
@@ -684,6 +859,17 @@ uncompli
 ---
 
 ## Destiny
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.destiny
+kind: variation
+canonical_label: Destiny
+provenance: source-original
+quad_id: quad.fate-var
+ktad_position: T
+dynamic_pair_id: var.fate
+```
+
 
 *Type: Variation*
 
@@ -696,6 +882,15 @@ unavoidabl
 ---
 
 ## Doubt
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.doubt
+kind: variation
+canonical_label: Doubt
+provenance: source-original
+dynamic_pair_id: var.investigation
+```
+
 
 *Type: Variation / Variation*
 
@@ -716,6 +911,18 @@ uncertainty, trepidation, distrust
 ---
 
 ## Dream
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.dream
+kind: variation
+canonical_label: Dream
+provenance: source-original
+type_id: type.subconscious
+quad_id: quad.hope-var
+ktad_position: T
+dynamic_pair_id: var.hope
+```
+
 
 *Type: Variation / Variation*
 
@@ -763,6 +970,18 @@ for the doubtful, airy hope, glimmer, far fetched desire
 ---
 
 ## Enlightenment
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.enlightenment
+kind: variation
+canonical_label: Enlightenment
+provenance: source-original
+type_id: type.understanding
+quad_id: quad.wisdom-var
+ktad_position: D
+dynamic_pair_id: var.wisdom
+```
+
 
 *Type: Variation / Variation*
 
@@ -794,6 +1013,18 @@ discernment, transcendent comprehension
 ---
 
 ## Evidence
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.evidence
+kind: variation
+canonical_label: Evidence
+provenance: source-original
+type_id: type.memory
+quad_id: quad.truth-var
+ktad_position: A
+dynamic_pair_id: var.suspicion
+```
+
 
 *Type: Variation / Variation*
 
@@ -830,6 +1061,15 @@ substantiation
 ---
 
 ## Expediency
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.expediency
+kind: variation
+canonical_label: Expediency
+provenance: source-original
+dynamic_pair_id: var.need
+```
+
 
 *Type: Variation / Variation*
 
@@ -869,6 +1109,18 @@ prudent efficiency
 ---
 
 ## Experience
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.experience
+kind: variation
+canonical_label: Experience
+provenance: source-original
+type_id: type.understanding
+quad_id: quad.wisdom-var
+ktad_position: A
+dynamic_pair_id: var.skill
+```
+
 
 *Type: Variation / Variation*
 
@@ -896,6 +1148,15 @@ dealings with
 ---
 
 ## Fact
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.fact
+kind: variation
+canonical_label: Fact
+provenance: source-original
+dynamic_pair_id: var.fantasy
+```
+
 
 *Type: Variation / Variation*
 
@@ -929,6 +1190,18 @@ idea
 ---
 
 ## Falsehood
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.falsehood
+kind: variation
+canonical_label: Falsehood
+provenance: source-original
+type_id: type.memory
+quad_id: quad.truth-var
+ktad_position: T
+dynamic_pair_id: var.truth
+```
+
 
 *Type: Variation / Variation*
 
@@ -962,6 +1235,15 @@ delusion, erroneous conviction
 ---
 
 ## Fantasy
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.fantasy
+kind: variation
+canonical_label: Fantasy
+provenance: source-original
+dynamic_pair_id: var.fact
+```
+
 
 *Type: Variation*
 
@@ -990,6 +1272,17 @@ imagined progress is ever made
 ---
 
 ## Fate
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.fate
+kind: variation
+canonical_label: Fate
+provenance: source-original
+quad_id: quad.fate-var
+ktad_position: K
+dynamic_pair_id: var.destiny
+```
+
 
 *Type: Variation / Variation*
 
@@ -1036,6 +1329,18 @@ not within tolerance, insufficiency, inadequacy, deviancy, deficient to the purp
 ---
 
 ## Hope
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.hope
+kind: variation
+canonical_label: Hope
+provenance: source-original
+type_id: type.subconscious
+quad_id: quad.hope-var
+ktad_position: K
+dynamic_pair_id: var.dream
+```
+
 
 *Type: Variation / Variation*
 
@@ -1089,6 +1394,18 @@ outlook
 ---
 
 ## Instinct
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.instinct
+kind: variation
+canonical_label: Instinct
+provenance: source-original
+type_id: type.past
+quad_id: quad.senses-var
+ktad_position: D
+dynamic_pair_id: var.conditioning
+```
+
 
 *Type: Variation / Variation*
 
@@ -1119,6 +1436,17 @@ unconditioned response, automatic response, unconditioned motivat
 ---
 
 ## Interdiction
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.interdiction
+kind: variation
+canonical_label: Interdiction
+provenance: source-original
+quad_id: quad.fate-var
+ktad_position: D
+dynamic_pair_id: var.prediction
+```
+
 
 *Type: Variation / Variation*
 
@@ -1148,6 +1476,18 @@ escaping the pred
 ---
 
 ## Interpretation
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.interpretation
+kind: variation
+canonical_label: Interpretation
+provenance: source-original
+type_id: type.past
+quad_id: quad.senses-var
+ktad_position: T
+dynamic_pair_id: var.senses
+```
+
 
 *Type: Variation / Variation*
 
@@ -1175,6 +1515,15 @@ meaning, elucidate, translating meaning
 ---
 
 ## Investigation
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.investigation
+kind: variation
+canonical_label: Investigation
+provenance: source-original
+dynamic_pair_id: var.doubt
+```
+
 
 *Type: Variation / Variation*
 
@@ -1209,6 +1558,14 @@ sleuthing, delving, query
 ---
 
 ## Issue
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.issue
+kind: variation
+canonical_label: Issue
+provenance: source-original
+```
+
 
 *Type: Variation*
 
@@ -1228,6 +1585,18 @@ be linked thematically by this particular item.
 ---
 
 ## Morality
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.morality
+kind: variation
+canonical_label: Morality
+provenance: source-original
+type_id: type.obtaining
+quad_id: quad.approach-var-physics
+ktad_position: D
+dynamic_pair_id: var.self-interest
+```
+
 
 *Type: Variation / Variation*
 
@@ -1273,6 +1642,15 @@ decline, repudiate, resist, refusal to compromise
 ---
 
 ## Need
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.need
+kind: variation
+canonical_label: Need
+provenance: source-original
+dynamic_pair_id: var.expediency
+```
+
 
 *Type: Variation*
 
@@ -1301,6 +1679,18 @@ that desire is the subjective Need.
 ---
 
 ## Obligation
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.obligation
+kind: variation
+canonical_label: Obligation
+provenance: source-original
+type_id: type.conceiving
+quad_id: quad.rationalization-var
+ktad_position: D
+dynamic_pair_id: var.rationalization
+```
+
 
 *Type: Variation / Variation*
 
@@ -1336,6 +1726,17 @@ accepted compulsion, emotional contract
 ---
 
 ## Openness
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.openness
+kind: variation
+canonical_label: Openness
+provenance: source-original
+quad_id: quad.openness-var
+ktad_position: K
+dynamic_pair_id: var.preconception
+```
+
 
 *Type: Variation / Variation*
 
@@ -1368,6 +1769,14 @@ willingness to reevaluate, receptiveness
 ---
 
 ## Overall (Objective) Story Catalyst
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.os-catalyst
+kind: concept
+canonical_label: Overall (Objective) Story Catalyst
+provenance: source-original
+```
+
 
 *Type: Variation*
 
@@ -1385,6 +1794,14 @@ story can continue.
 ---
 
 ## Overall (Objective) Story Inhibitor
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.os-inhibitor
+kind: concept
+canonical_label: Overall (Objective) Story Inhibitor
+provenance: source-original
+```
+
 
 *Type: Variation*
 
@@ -1401,6 +1818,14 @@ the Overall Story Catalyst.
 ---
 
 ## Overall (Objective) Story Issue
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.os-issue
+kind: concept
+canonical_label: Overall (Objective) Story Issue
+provenance: source-original
+```
+
 
 *Type: Variation*
 
@@ -1411,6 +1836,15 @@ see Issue
 ---
 
 ## Permission
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.permission
+kind: variation
+canonical_label: Permission
+provenance: source-original
+dynamic_pair_id: var.deficiency
+```
+
 
 *Type: Variation / Variation*
 
@@ -1453,6 +1887,17 @@ allowed limitations, restrained utility
 ---
 
 ## Preconception
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.preconception
+kind: variation
+canonical_label: Preconception
+provenance: source-original
+quad_id: quad.openness-var
+ktad_position: T
+dynamic_pair_id: var.openness
+```
+
 
 *Type: Variation / Variation*
 
@@ -1490,6 +1935,17 @@ conclusion
 ---
 
 ## Prediction
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.prediction
+kind: variation
+canonical_label: Prediction
+provenance: source-original
+quad_id: quad.fate-var
+ktad_position: A
+dynamic_pair_id: var.interdiction
+```
+
 
 *Type: Variation / Variation*
 
@@ -1522,6 +1978,14 @@ foretell, prognos
 ---
 
 ## Range
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.range
+kind: variation
+canonical_label: Range
+provenance: source-original
+```
+
 
 *Type: Variation*
 
@@ -1553,6 +2017,18 @@ justification, artificial reason
 ---
 
 ## Rationalization
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.rationalization
+kind: variation
+canonical_label: Rationalization
+provenance: source-original
+type_id: type.conceiving
+quad_id: quad.rationalization-var
+ktad_position: K
+dynamic_pair_id: var.obligation
+```
+
 
 *Type: Variation*
 
@@ -1564,6 +2040,15 @@ explanation, false justification, artificial reason
 ---
 
 ## Reappraisal
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.reappraisal
+kind: variation
+canonical_label: Reappraisal
+provenance: source-original
+dynamic_pair_id: var.appraisal
+```
+
 
 *Type: Variation*
 
@@ -1588,6 +2073,15 @@ fresh in his mind.
 ---
 
 ## Repulsion
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.repulsion
+kind: variation
+canonical_label: Repulsion
+provenance: source-original
+dynamic_pair_id: var.attraction
+```
+
 
 *Type: Variation / Variation*
 
@@ -1619,6 +2113,18 @@ unattractive, repellent, foreboding, unsavory, pushing away, forcing back
 ---
 
 ## Responsibility
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.responsibility
+kind: variation
+canonical_label: Responsibility
+provenance: source-original
+type_id: type.conceiving
+quad_id: quad.rationalization-var
+ktad_position: A
+dynamic_pair_id: var.commitment
+```
+
 
 *Type: Variation / Variation*
 
@@ -1661,6 +2167,15 @@ suitability
 ---
 
 ## Security
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.security
+kind: variation
+canonical_label: Security
+provenance: source-original
+dynamic_pair_id: var.threat
+```
+
 
 *Type: Variation / Variation*
 
@@ -1766,6 +2281,14 @@ narcissistic, selfishness, self-absorbed, egocentric
 ---
 
 ## Sense of Self
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.sense-of-self
+kind: variation
+canonical_label: Sense of Self
+provenance: source-original
+```
+
 
 *Type: Variation*
 
@@ -1777,6 +2300,18 @@ image, self identity, self attribution
 ---
 
 ## Senses
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.senses
+kind: variation
+canonical_label: Senses
+provenance: source-original
+type_id: type.past
+quad_id: quad.senses-var
+ktad_position: K
+dynamic_pair_id: var.interpretation
+```
+
 
 *Type: Variation / Variation*
 
@@ -1806,6 +2341,15 @@ sensory impressions, immediate impressions, perceptions
 ---
 
 ## Situation
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.situation
+kind: variation
+canonical_label: Situation
+provenance: source-original
+dynamic_pair_id: var.circumstances
+```
+
 
 *Type: Variation / Variation*
 
@@ -1834,6 +2378,18 @@ environmental s
 ---
 
 ## Skill
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.skill
+kind: variation
+canonical_label: Skill
+provenance: source-original
+type_id: type.understanding
+quad_id: quad.wisdom-var
+ktad_position: T
+dynamic_pair_id: var.experience
+```
+
 
 *Type: Variation / Variation*
 
@@ -1863,6 +2419,18 @@ ability
 ---
 
 ## Strategy
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.strategy
+kind: variation
+canonical_label: Strategy
+provenance: source-original
+type_id: type.doing
+quad_id: quad.strategy-var
+ktad_position: K
+dynamic_pair_id: var.analysis
+```
+
 
 *Type: Variation / Variation*
 
@@ -1910,6 +2478,18 @@ approach
 ---
 
 ## Suspicion
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.suspicion
+kind: variation
+canonical_label: Suspicion
+provenance: source-original
+type_id: type.memory
+quad_id: quad.truth-var
+ktad_position: D
+dynamic_pair_id: var.evidence
+```
+
 
 *Type: Variation / Variation*
 
@@ -1938,6 +2518,15 @@ apprehension, informed doubt, doubt based on evidence, sensible c
 ---
 
 ## Threat
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.threat
+kind: variation
+canonical_label: Threat
+provenance: source-original
+dynamic_pair_id: var.security
+```
+
 
 *Type: Variation / Variation*
 
@@ -1969,6 +2558,18 @@ perceived vulnerability, warning, detected hazard
 ---
 
 ## Truth
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.truth
+kind: variation
+canonical_label: Truth
+provenance: source-original
+type_id: type.memory
+quad_id: quad.truth-var
+ktad_position: K
+dynamic_pair_id: var.falsehood
+```
+
 
 *Type: Variation / Variation*
 
@@ -2001,6 +2602,14 @@ notion, verity
 ---
 
 ## Unique Ability
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.unique-ability
+kind: variation
+canonical_label: Unique Ability
+provenance: source-original
+```
+
 
 *Type: Variation*
 
@@ -2037,6 +2646,18 @@ difference in the outcome of a cosmic struggle.
 ---
 
 ## Value
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.value
+kind: variation
+canonical_label: Value
+provenance: source-original
+type_id: type.conscious
+quad_id: quad.value-var
+ktad_position: K
+dynamic_pair_id: var.worth
+```
+
 
 *Type: Variation*
 
@@ -2067,6 +2688,18 @@ conditional Value is a strong thematic message.
 ---
 
 ## Wisdom
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.wisdom
+kind: variation
+canonical_label: Wisdom
+provenance: source-original
+type_id: type.understanding
+quad_id: quad.wisdom-var
+ktad_position: K
+dynamic_pair_id: var.enlightenment
+```
+
 
 *Type: Variation*
 
@@ -2086,6 +2719,17 @@ bits of knowledge fit together .
 ---
 
 ## Worry
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.worry
+kind: variation
+canonical_label: Worry
+provenance: source-original
+type_id: type.becoming
+quad_id: quad.conscience-var
+ktad_position: A
+```
+
 
 *Type: Variation*
 
@@ -2109,6 +2753,18 @@ situations that might hold substantial rewards.
 ---
 
 ## Worth
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.worth
+kind: variation
+canonical_label: Worth
+provenance: source-original
+type_id: type.conscious
+quad_id: quad.value-var
+ktad_position: T
+dynamic_pair_id: var.value
+```
+
 
 *Type: Variation*
 

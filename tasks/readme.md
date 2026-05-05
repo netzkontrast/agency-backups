@@ -38,6 +38,7 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`012-review-pr-29/`](./012-review-pr-29/) — Structured code review of PR #29 (skills governance, Tasks 009–011). Status: `in_progress`.
 - [`013-renumber-duplicate-task-ids/`](./013-renumber-duplicate-task-ids/) — Resolve duplicate `task_id` collisions for ids 006 and 009 per TASK.md §8.1. Status: `open`.
 - [`014-improve-maintenance-spec-from-session/`](./014-improve-maintenance-spec-from-session/) — Capture maintenance-spec improvements distilled from the 2026-05-05 coherence run. Status: `open`.
+- [`015-integrate-dramatica-ncp-skills/`](./015-integrate-dramatica-ncp-skills/) — Spec-driven, scenario-keyed restructure of the dramatica skills with deep `ncp-author` + `novel-architect` integration via a shared Narrative Ontology, per-term frontmatter, and a token-efficient Python navigator suite. Status: `in_progress`. (Renumbered from 013 per TASK.md §8.1 — collided with main's Task 013.)
 
 ## Workflow Assumptions
 
