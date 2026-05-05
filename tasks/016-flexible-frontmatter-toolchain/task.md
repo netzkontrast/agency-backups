@@ -6,8 +6,8 @@ summary: "Implement the four-tool stateless toolchain (fm-validate, fm-extract, 
 created: 2026-05-05
 updated: 2026-05-05
 task_id: "016"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts:
   - build-flexible-frontmatter-toolchain
@@ -45,18 +45,18 @@ Ship the four CLI tools (`fm-validate`, `fm-extract`, `fm-edit`, `fm-query`) plu
 
 ## Todo
 
-- [ ] 1. Scaffold `tools/fm/` package + re-export shim.
-- [ ] 2. Implement `fm-validate` with §3 + §4 checks.
-- [ ] 3. Implement `fm-extract` with token caps.
-- [ ] 4. Implement `fm-edit` with file lock + body-byte invariant.
-- [ ] 5. Implement `fm-query` with stateless filesystem scan.
-- [ ] 6. Author `maintenance/schemas/header-ontology.json`.
-- [ ] 7. Write `tests/fm/` covering every Gherkin scenario + M01 attacks.
-- [ ] 8. Wire `fm-validate` into `tools/check-governance.sh` behind `FM_TOOLCHAIN=1`.
-- [ ] 9. Resolve SPEC §10 Q1 (submodule/sparse-checkout interaction) in `notes.md`.
-- [ ] 10. Resolve SPEC §10 Q2 (fm-edit `--batch` mode default-no decision) in `notes.md`.
-- [ ] 11. Run `tools/check-governance.sh` clean.
-- [ ] 12. Set `task_status: done`, `updated:`; write `friction-log.md`; append `maintenance/run-log.md`.
+- [x] 1. Scaffold `tools/fm/` package + re-export shim.
+- [x] 2. Implement `fm-validate` with §3 + §4 checks.
+- [x] 3. Implement `fm-extract` with token caps.
+- [x] 4. Implement `fm-edit` with file lock + body-byte invariant.
+- [x] 5. Implement `fm-query` with stateless filesystem scan.
+- [x] 6. Author `maintenance/schemas/header-ontology.json`.
+- [x] 7. Write `tests/fm/` covering every Gherkin scenario + M01 attacks.
+- [x] 8. Wire `fm-validate` into `tools/check-governance.sh` behind `FM_TOOLCHAIN=1`.
+- [x] 9. Resolve SPEC §10 Q1 (submodule/sparse-checkout interaction) in `notes.md`.
+- [x] 10. Resolve SPEC §10 Q2 (fm-edit `--batch` mode default-no decision) in `notes.md`.
+- [x] 11. Run `tools/check-governance.sh` clean.
+- [x] 12. Set `task_status: done`, `updated:`; write `friction-log.md`; append `maintenance/run-log.md`.
 
 ## Links
 

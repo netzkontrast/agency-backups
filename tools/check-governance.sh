@@ -21,13 +21,30 @@ for arg in "$@"; do
 done
 
 FAIL=0
+FM_TOOLCHAIN="${FM_TOOLCHAIN:-0}"
 
 echo "=== agency check-governance ==="
 
 echo ""
 echo "--- [1/3] Frontmatter linter ---"
-if ! "$PYTHON" tools/validate-frontmatter.py; then
-  FAIL=1
+# Task 016: dual-run during the migration window. The legacy validator
+# decides the exit code by default; fm-validate runs in advisory mode.
+# Set FM_TOOLCHAIN=1 to flip the gate (Task 017 makes that the default).
+if [ "$FM_TOOLCHAIN" = "1" ]; then
+  echo "(FM_TOOLCHAIN=1 — fm-validate is the gate; legacy runs advisory)"
+  if ! "$PYTHON" tools/fm/validate.py; then
+    FAIL=1
+  fi
+  echo "--- legacy validate-frontmatter.py (advisory) ---"
+  "$PYTHON" tools/validate-frontmatter.py || true
+else
+  if ! "$PYTHON" tools/validate-frontmatter.py; then
+    FAIL=1
+  fi
+  if [ -f "tools/fm/validate.py" ]; then
+    echo "--- fm-validate (advisory; set FM_TOOLCHAIN=1 to gate) ---"
+    "$PYTHON" tools/fm/validate.py >/dev/null 2>&1 || true
+  fi
 fi
 
 echo ""

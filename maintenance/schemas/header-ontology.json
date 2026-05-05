@@ -1,0 +1,81 @@
+{
+  "$schema-note": "Canonical machine-readable encoding of SPEC.md §3 (required keys per type) and §4 (required L2 headings per type). The prose in /research/flexible-frontmatter-toolchain/output/SPEC.md is the human-readable source; this JSON is the binding source for tooling. fm-validate MUST load required-keys and required-headings from this file; hardcoding the matrices in Python is forbidden.",
+  "version": "1.0.0",
+  "spec": "research/flexible-frontmatter-toolchain/output/SPEC.md",
+  "spec_anchors": ["F.3.1", "F.3.2", "F.3.3", "F.3.4", "F.4.1", "F.4.2", "F.4.3"],
+  "l1_required": ["type", "status", "slug", "summary", "created", "updated"],
+  "type_values": ["task", "prompt", "research", "spec", "readme", "note", "index", "skill"],
+  "status_values": ["draft", "active", "blocked", "completed", "archived"],
+  "types": {
+    "task": {
+      "required_keys": [
+        "type", "status", "slug", "summary", "created", "updated",
+        "task_id", "task_status", "task_owner", "task_priority",
+        "task_uses_prompts", "task_spawns_research", "task_spawns_prompts",
+        "task_affects_paths"
+      ],
+      "required_headings": ["Goal", "Plan", "Todo", "Links"]
+    },
+    "prompt": {
+      "required_keys": [
+        "type", "status", "slug", "summary", "created", "updated",
+        "prompt_kind", "prompt_framework", "prompt_target_agent"
+      ],
+      "required_headings": [
+        "Framework",
+        "R — Role",
+        "I — Input",
+        "S — Steps",
+        "E — Expectations",
+        "Constraints"
+      ]
+    },
+    "research": {
+      "required_keys": [
+        "type", "status", "slug", "summary", "created", "updated",
+        "research_phase", "research_executes_prompt", "research_friction_level"
+      ],
+      "required_headings": []
+    },
+    "skill": {
+      "required_keys": ["name", "description"],
+      "recommended_keys": ["skill_kind", "skill_target_agents"],
+      "required_headings": []
+    },
+    "spec": {
+      "required_keys": ["type", "status", "slug", "summary", "created", "updated"],
+      "required_headings": []
+    },
+    "index": {
+      "required_keys": ["type", "status", "slug", "summary", "created", "updated"],
+      "required_headings": []
+    },
+    "readme": {
+      "required_keys": ["type", "status", "slug", "summary", "created", "updated"],
+      "required_headings": []
+    },
+    "note": {
+      "required_keys": ["type", "status", "slug", "summary", "created", "updated"],
+      "required_headings": []
+    }
+  },
+  "path_classification": {
+    "note": "Maps file paths to expected type. The validator infers expected_type from path; the file's frontmatter type: MUST agree (or be one of the path-allowed alternates). Patterns are matched against repo-relative paths.",
+    "rules": [
+      {"pattern": "tasks/[0-9][0-9][0-9]-*/task.md", "type": "task"},
+      {"pattern": "prompts/*/prompt.md", "type": "prompt"},
+      {"pattern": "research/*/output/SPEC.md", "type": "research"},
+      {"pattern": "research/*/readme.md", "type": "research", "alt_types": ["index", "readme"]},
+      {"pattern": "skills/*/SKILL.md", "type": "skill"},
+      {"pattern": "tasks/readme.md", "type": "index", "alt_types": ["readme"]},
+      {"pattern": "prompts/readme.md", "type": "index", "alt_types": ["readme"]},
+      {"pattern": "research/readme.md", "type": "index", "alt_types": ["readme"]},
+      {"pattern": "skills/readme.md", "type": "index", "alt_types": ["readme"]},
+      {"pattern": "tasks/*/readme.md", "type": "index", "alt_types": ["readme"]},
+      {"pattern": "prompts/*/readme.md", "type": "index", "alt_types": ["readme"]},
+      {"pattern": "maintenance/readme.md", "type": "index", "alt_types": ["readme"]},
+      {"pattern": "tools/readme.md", "type": "index", "alt_types": ["readme"]},
+      {"pattern": "templates/readme.md", "type": "index", "alt_types": ["readme"]}
+    ]
+  }
+}
