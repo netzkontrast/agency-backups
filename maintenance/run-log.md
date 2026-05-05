@@ -297,7 +297,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run 2026-05-05 — Task 019 fm toolchain suite integration
 - agent: claude-code (session claude/complete-frontmatter-toolchain-l5Q8E)
 - start_commit: 3feee02
-- end_commit: PENDING
+- end_commit: 3e16a18
 - baseline_commit: 6c3329a (Task 018 final commit)
 - files_in_delta: 23 (8 new tools/fm/* modules, 6 new test files,
   2 new schema files, 1 ontology amendment, 5 task-folder closures)
