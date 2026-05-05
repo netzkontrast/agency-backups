@@ -13,7 +13,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -23,7 +22,6 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from lib import ontology as _ontology_lib
 from lib import frontmatter as _frontmatter_lib
-from lib import ncp_bridge as _ncp_bridge_lib
 from lib import OntologyError
 
 try:
@@ -164,29 +162,14 @@ def check_alias_uniqueness(entries: list[dict]) -> list[Finding]:
 
 
 def _build_ncp_valid_set(repo_root: Path) -> set[str]:
-    """Return the union of all NCP enum values from the pinned schema.
-
-    Combines both canonical_appreciation (463 full strings like
-    "Main Character Throughline") and canonical_narrative_function (144
-    shorthand labels like "Approach", "Driver") so that ontology entries
-    using either form pass closure checking.  Falls back to empty set
-    (= skip check) when the schema file is absent.
-    """
-    schema_path = (
-        repo_root
-        / "skills"
-        / "ncp-author"
-        / "upstream"
-        / "schema"
-        / "ncp-schema.json"
-    )
-    if not schema_path.exists():
+    """Return union of all enum values from the pinned NCP schema's $defs."""
+    p = repo_root / "skills" / "ncp-author" / "upstream" / "schema" / "ncp-schema.json"
+    if not p.exists():
         return set()
     try:
-        schema = json.loads(schema_path.read_text())
+        schema = json.loads(p.read_text())
     except json.JSONDecodeError:
         return set()
-
     defs = schema.get("definitions") or schema.get("$defs") or {}
     result: set[str] = set()
     for defn in defs.values():
@@ -200,45 +183,22 @@ def check_ncp_enum_closure(
     entries: list[dict],
     ncp_valid: set[str],
 ) -> tuple[list[Finding], bool]:
-    """Check 5: ncp_appreciation values are grounded in the NCP enum.
+    """Check 5: ncp_appreciation is grounded in the NCP enum.
 
-    Checks against the union of all NCP enum sets (canonical_appreciation
-    AND canonical_narrative_function).  An entry passes if:
-
-      a) Its ncp_appreciation value is an exact member of the enum set, OR
-      b) It is a prefix of some enum value (e.g. "Influence Character" is a
-         prefix of "Influence Character Throughline"), OR
-      c) Its ncp_appreciation_partial flag is True (explicit roll-up
-         approximation — the schema defines partial=True as "rolls up to a
-         Storypoint slot", so exact enum membership is not expected).
-
-    This handles v0.1 entries where the Dramatica shorthand label is used
-    instead of the full NCP string; the prefix relationship confirms the
-    mapping is semantically grounded even when not an exact match.
-
-    Returns (errors, skipped). skipped=True when enum is empty.
+    Passes when: (a) exact match, (b) value is a prefix of some enum string
+    (v0.1 entries use Dramatica shorthand like "Influence Character" that
+    prefix "Influence Character Throughline"), or (c) partial=True
+    (explicit roll-up). Returns (errors, skipped=True when enum empty).
     """
     if not ncp_valid:
         return [], True
-
     errors: list[Finding] = []
     for entry in entries:
         ncp = entry.get("ncp_appreciation")
-        if ncp is None:
+        if ncp is None or entry.get("ncp_appreciation_partial", False):
             continue
-        # partial=True means "rolls up to a slot" — not an exact enum match
-        if entry.get("ncp_appreciation_partial", False):
-            continue
-        # Exact match or prefix-of-some-enum-value match
-        if ncp in ncp_valid:
-            continue
-        if any(ev.startswith(ncp) for ev in ncp_valid):
-            continue
-        errors.append({
-            "check": "ncp-enum",
-            "id": entry.get("id", "<no-id>"),
-            "value": ncp,
-        })
+        if ncp not in ncp_valid and not any(ev.startswith(ncp) for ev in ncp_valid):
+            errors.append({"check": "ncp-enum", "id": entry.get("id", "<no-id>"), "value": ncp})
     return errors, False
 
 

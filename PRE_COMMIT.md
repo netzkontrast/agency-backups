@@ -44,7 +44,20 @@ tools/check-governance.sh
 python3 tools/validate-frontmatter.py   # L1+L2 frontmatter keys, YAML depth, slug format
 python3 tools/lint-structure.py         # task.md / prompt.md / brief.md / readme.md presence
 python3 tools/lint-linkage.py           # task_uses_prompts, task_spawns_research, reciprocity
+python3 tools/dramatica-nav/validate.py # narrative-ontology integrity (gated on ontology.json)
 ```
+
+The narrative-ontology validator runs automatically inside `check-governance.sh` when `maintenance/schemas/narrative-ontology/ontology.json` exists. It enforces five hard cross-entry invariants (errors → exit 1):
+
+| Check | What it catches |
+|---|---|
+| schema | Per-entry violations of `ontology.schema.json` (Draft 2020-12) |
+| reciprocity | Asymmetric `dynamic_pair_id` cross-references |
+| pair_member | `kind: dynamic-pair` entries pointing at non-existent members |
+| alias-uniqueness | Same alias string in two entries' `aliases_<locale>` lists |
+| ncp-enum | `ncp_appreciation` values not in any NCP enum surface |
+
+Three coverage warnings (do NOT fail CI; documented v0.1 limitations): `quad-membership` (fractal-distortion in quad members), `term_file-anchor` (hand-authored anchors that don't resolve), `unmapped-heading` (`##` headings without a backing ontology entry). Run with `--strict` to promote warnings to errors.
 
 The pre-commit hook under `.githooks/pre-commit` runs all three automatically. Install once per clone with **either** of the equivalent commands below:
 
