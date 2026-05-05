@@ -4,7 +4,7 @@ status: active
 slug: agents-spec
 summary: "Entry-point governance spec for all agents operating in this repository. Defines task routing, folder rules, spec language (RFC 2119 + Gherkin), and the Frontmatter Ontology every agent must apply."
 created: 2026-05-02
-updated: 2026-05-04
+updated: 2026-05-05
 ---
 
 # Agent Instructions
@@ -14,6 +14,48 @@ Welcome, agent. This repository manages development and deep research tasks.
 **Before committing any work:** You MUST review and abide by the checks defined in [PRE_COMMIT.md](./PRE_COMMIT.md).
 
 **Last step of every Claude Code run:** After your final commit and push succeed, you MUST invoke `/sc:createPR` to open a pull request for review. See [§ Closing Run Procedure (Claude Code)](#closing-run-procedure-claude-code) below for the binding rule.
+
+## Session Setup
+
+Before doing any other work, you MUST verify that all tooling dependencies are installed. Run the bootstrap script from the repository root:
+
+```bash
+./install.sh
+```
+
+This installs the packages declared in [`tools/requirements.txt`](./tools/requirements.txt) (`PyYAML`, `jsonschema`, `pytest`) and prints a per-package confirmation. The script is idempotent — rerunning it on an already-configured environment is safe and fast.
+
+After `install.sh` exits 0, you MUST confirm the full tooling stack is operational:
+
+```bash
+tools/check-governance.sh
+```
+
+If `check-governance.sh` exits non-zero, you MUST resolve all reported errors before proceeding. A failing governance check indicates a broken environment or uncommitted drift; starting work on top of it will compound the problem.
+
+### Normative Rules
+
+- **SS.1** An agent MUST run `./install.sh` at the start of every session before reading or writing any repository file.
+- **SS.2** An agent MUST run `tools/check-governance.sh` immediately after `install.sh` completes and MUST NOT proceed if it exits non-zero.
+- **SS.3** An agent MUST NOT skip setup on the assumption that dependencies are already installed — the script is idempotent and the cost of skipping is a silent broken environment.
+
+```gherkin
+Feature: Agent bootstraps tooling before session work
+
+  # anchor: SS.1.1
+  Scenario: Fresh session installs dependencies first
+    Given an agent has just started a new session in this repository
+    When the agent is about to read or write any file
+    Then the agent MUST run ./install.sh before any other action
+    And the agent MUST confirm install.sh exited 0
+
+  # anchor: SS.2.1
+  Scenario: Governance check gates all further work
+    Given ./install.sh has exited 0
+    When the agent runs tools/check-governance.sh
+    Then if it exits non-zero the agent MUST stop and report all errors to the user
+    And the agent MUST NOT create, edit, or commit any file until the check passes
+```
 
 ## Folder Management & Workflow Drift
 
