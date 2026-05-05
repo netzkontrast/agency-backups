@@ -39,6 +39,8 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`013-renumber-duplicate-task-ids/`](./013-renumber-duplicate-task-ids/) — Resolve duplicate `task_id` collisions for ids 006 and 009 per TASK.md §8.1. Status: `open`.
 - [`014-improve-maintenance-spec-from-session/`](./014-improve-maintenance-spec-from-session/) — Capture maintenance-spec improvements distilled from the 2026-05-05 coherence run. Status: `open`.
 - [`015-integrate-dramatica-ncp-skills/`](./015-integrate-dramatica-ncp-skills/) — Spec-driven, scenario-keyed restructure of the dramatica skills with deep `ncp-author` + `novel-architect` integration via a shared Narrative Ontology, per-term frontmatter, and a token-efficient Python navigator suite. Status: `in_progress`. (Renumbered from 013 per TASK.md §8.1 — collided with main's Task 013.)
+- [`016-flexible-frontmatter-toolchain/`](./016-flexible-frontmatter-toolchain/) — Implement the four-tool stateless toolchain (`fm-validate / fm-extract / fm-edit / fm-query`) and the per-type required-headings ontology specified in `research/flexible-frontmatter-toolchain/output/SPEC.md`. Status: `open`.
+- [`017-migrate-repo-to-flexible-toolchain/`](./017-migrate-repo-to-flexible-toolchain/) — Migrate the repo onto the flexible toolchain shipped by Task 016 in three batches (mechanical, additive, structural); retire the legacy linters; scope-narrow Task 010 per SPEC §C1. Status: `blocked` (gated on Task 016).
 
 ## Workflow Assumptions
 

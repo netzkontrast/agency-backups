@@ -33,6 +33,7 @@ Claude.ai session. This folder is the durable mirror.
 
 ## Management layer
 - [skills-skill-bootstrap/](./skills-skill-bootstrap/) — Sync tool: pulls skill bodies from `origin/main:skills/` into Claude Code's `~/.claude/skills/`.
+- [skill-creator/](./skill-creator/) — Verbatim mirror of [anthropics/skills · skills/skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) at 2026-05-05. Used as reference pattern by `/research/flexible-frontmatter-toolchain/` and Tasks 016/017.
 
 ## Current State
 
