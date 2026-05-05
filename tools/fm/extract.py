@@ -50,12 +50,51 @@ def _truncate(payload: str, cap: int) -> str:
     return head + marker
 
 
-def extract_section(path: Path, heading: str) -> tuple[str, int]:
+def extract_section(path: Path, heading: str, *, nth: int = 1,
+                    all_matches: bool = False) -> tuple[str, int]:
     text = path.read_text(encoding="utf-8")
-    body = _core.find_section_body(text, heading)
+    if all_matches:
+        bodies = _core.find_all_section_bodies(text, heading)
+        if not bodies:
+            return "", 3
+        # Form-feed separator per SPEC §13.3 / §14.1.
+        joined = "\f".join(_truncate(b, SECTION_CAP) for b in bodies)
+        return joined, 0
+    body = _core.find_section_body(text, heading, nth=nth)
     if body is None:
         return "", 3
     return _truncate(body, SECTION_CAP), 0
+
+
+def extract_sections(path: Path, names: list[str]) -> tuple[str, int]:
+    """SPEC §14.1: batch-read multiple sections, separator = single form-feed."""
+    text = path.read_text(encoding="utf-8")
+    parts: list[str] = []
+    missing: list[str] = []
+    for name in names:
+        body = _core.find_section_body(text, name)
+        if body is None:
+            missing.append(name)
+        else:
+            parts.append(_truncate(body, SECTION_CAP))
+    if missing:
+        return "", 3
+    return "\f".join(parts), 0
+
+
+def extract_body(path: Path) -> tuple[str, int]:
+    """SPEC §14.1: emit everything after the closing `---\\n`. No cap."""
+    text = path.read_text(encoding="utf-8")
+    _, body = _core.split_frontmatter_and_body(text)
+    return body, 0
+
+
+def extract_toc(path: Path) -> tuple[str, int]:
+    """SPEC §14.1: list `## ` headings, one per line. ≤ 1 KB."""
+    text = path.read_text(encoding="utf-8")
+    headings = _core.list_h2_headings(text)
+    out = "\n".join(headings) + ("\n" if headings else "")
+    return _truncate(out, 1024), 0
 
 
 def extract_frontmatter(path: Path, key: str | None) -> tuple[str, int]:
@@ -86,19 +125,46 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("path", type=Path)
     g = p.add_mutually_exclusive_group(required=True)
     g.add_argument("--section", metavar="HEADING")
+    g.add_argument("--sections", metavar="A,B,C",
+                   help="batch read; output separator is form-feed (\\f)")
     g.add_argument("--frontmatter", nargs="?", const="", metavar="KEY",
                    help="emit the frontmatter block, or one key when KEY given")
     g.add_argument("--whole-file", action="store_true")
+    g.add_argument("--body", action="store_true",
+                   help="emit everything after the closing frontmatter fence")
+    g.add_argument("--toc", action="store_true",
+                   help="list `## ` headings, one per line (≤ 1 KB)")
+    p.add_argument("--nth", type=int, default=1,
+                   help="for --section: 1-indexed match (default 1)")
+    p.add_argument("--all", action="store_true", dest="all_matches",
+                   help="for --section: emit every match (form-feed separated)")
     args = p.parse_args(argv)
 
     if not args.path.exists():
         print(f"fm-extract: no such file: {args.path}", file=sys.stderr)
         return 2
 
+    if args.nth < 1:
+        print(f"fm-extract: --nth must be ≥ 1, got {args.nth}", file=sys.stderr)
+        return 2
+
     if args.section is not None:
-        out, rc = extract_section(args.path, args.section)
+        out, rc = extract_section(args.path, args.section,
+                                  nth=args.nth, all_matches=args.all_matches)
         if rc != 0:
             print(f"fm-extract: heading '## {args.section}' not found in {args.path}",
+                  file=sys.stderr)
+            return rc
+        sys.stdout.write(out)
+        if not out.endswith("\n"):
+            sys.stdout.write("\n")
+        return 0
+
+    if args.sections is not None:
+        names = [s.strip() for s in args.sections.split(",") if s.strip()]
+        out, rc = extract_sections(args.path, names)
+        if rc != 0:
+            print(f"fm-extract: one or more sections not found in {args.path}",
                   file=sys.stderr)
             return rc
         sys.stdout.write(out)
@@ -118,6 +184,16 @@ def main(argv: list[str] | None = None) -> int:
         if not out.endswith("\n"):
             sys.stdout.write("\n")
         return 0
+
+    if args.body:
+        out, rc = extract_body(args.path)
+        sys.stdout.write(out)
+        return rc
+
+    if args.toc:
+        out, rc = extract_toc(args.path)
+        sys.stdout.write(out)
+        return rc
 
     if args.whole_file:
         out, rc = extract_whole_file(args.path)

@@ -50,11 +50,53 @@ def _all_known_required_keys(ontology: dict) -> set[str]:
     return keys
 
 
+def _check_body_for_type(
+    text: str, ontology: dict, type_for_keys: str, rel: str,
+) -> list[Diagnostic]:
+    """Apply SPEC §12 body-schema constraints for the file's type."""
+    out: list[Diagnostic] = []
+    body_schema = ontology["types"].get(type_for_keys, {}).get("body_schema") or {}
+    for section_name, section_schema in body_schema.items():
+        if section_name.startswith("_"):
+            continue  # informational notes (e.g., "_note")
+        body = _core.find_section_body(text, section_name)
+        if body is None:
+            # Heading absence is an F.4.2 ERROR; we don't double-count.
+            continue
+        for severity, code, message in _core.validate_section_body(
+            body, section_schema,
+        ):
+            out.append(Diagnostic(
+                rel, None, severity, code,
+                f"section '## {section_name}': {message}",
+            ))
+        # F.B.7 task_list completion ↔ frontmatter status (informational WARN).
+        completion_field = section_schema.get("completion_field")
+        if (completion_field
+                and section_schema.get("shape") == "task_list"
+                and _core.detect_shape(body) == "task_list"):
+            items = _core._list_items(body)
+            if items and all(_core.TASK_LIST_RE.match(line)
+                             and "[x]" in line.lower()
+                             for line in body.splitlines()
+                             if _core.TASK_LIST_RE.match(line)):
+                fm = _core.parse_frontmatter(text, strict=False)
+                actual = _core.str_val(fm, completion_field)
+                if actual and actual != "done":
+                    out.append(Diagnostic(
+                        rel, None, "WARN", "F.B.7",
+                        f"section '## {section_name}' all checked but "
+                        f"{completion_field}={actual!r} (expected 'done')",
+                    ))
+    return out
+
+
 def check_file(
     path: Path,
     repo_root: Path,
     ontology: dict,
     classification: _core.Classification | None = None,
+    check_body: bool = False,
 ) -> list[Diagnostic]:
     if classification is None:
         classification = _core.classify_path(path, repo_root, ontology)
@@ -164,6 +206,10 @@ def check_file(
                 f"missing required heading '## {required_heading}'",
             ))
 
+    # SPEC §12: opt-in per-section body schema check.
+    if check_body:
+        diags.extend(_check_body_for_type(text, ontology, type_for_keys, rel))
+
     return diags
 
 
@@ -187,6 +233,9 @@ def main(argv: list[str] | None = None) -> int:
                    help="comma-separated subset of operational roots")
     p.add_argument("--strict", action="store_true",
                    help="promote WARN to non-zero exit code")
+    p.add_argument("--check-body", action="store_true",
+                   help="also enforce SPEC §12 per-section body schemas "
+                        "(opt-in for v1; default off)")
     p.add_argument("--format", choices=("text", "json"), default="text")
     args = p.parse_args(argv)
 
@@ -205,7 +254,9 @@ def main(argv: list[str] | None = None) -> int:
         if cls.expected_type is None:
             continue
         checked += 1
-        diags.extend(check_file(path, repo_root, ontology, classification=cls))
+        diags.extend(check_file(path, repo_root, ontology,
+                                classification=cls,
+                                check_body=args.check_body))
 
     error_count = sum(1 for d in diags if d.severity == "ERROR")
     warn_count = sum(1 for d in diags if d.severity == "WARN")

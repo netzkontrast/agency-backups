@@ -1,11 +1,19 @@
 {
-  "$schema-note": "Canonical machine-readable encoding of SPEC.md §3 (required keys per type) and §4 (required L2 headings per type). The prose in /research/flexible-frontmatter-toolchain/output/SPEC.md is the human-readable source; this JSON is the binding source for tooling. fm-validate MUST load required-keys and required-headings from this file; hardcoding the matrices in Python is forbidden.",
-  "version": "1.0.0",
+  "$schema-note": "Canonical machine-readable encoding of SPEC.md §3 (required keys per type), §4 (required L2 headings per type), and §12 (per-section body schema). The prose at /research/flexible-frontmatter-toolchain/output/SPEC.md is the human-readable source; this JSON is the binding source for tooling. fm-validate MUST load all matrices from this file; hardcoding the matrices in Python is forbidden.",
+  "version": "1.1.0",
   "spec": "research/flexible-frontmatter-toolchain/output/SPEC.md",
-  "spec_anchors": ["F.3.1", "F.3.2", "F.3.3", "F.3.4", "F.4.1", "F.4.2", "F.4.3"],
+  "spec_anchors": [
+    "F.3.1", "F.3.2", "F.3.3", "F.3.4",
+    "F.4.1", "F.4.2", "F.4.3",
+    "F.12.1", "F.12.2", "F.12.3", "F.12.4", "F.12.5", "F.12.6"
+  ],
   "l1_required": ["type", "status", "slug", "summary", "created", "updated"],
   "type_values": ["task", "prompt", "research", "spec", "readme", "note", "index", "skill"],
   "status_values": ["draft", "active", "blocked", "completed", "archived"],
+  "shape_vocabulary": [
+    "paragraph", "ordered_list", "unordered_list", "task_list",
+    "link_list", "gherkin_block", "code_block", "definition_list", "mixed"
+  ],
   "types": {
     "task": {
       "required_keys": [
@@ -14,7 +22,32 @@
         "task_uses_prompts", "task_spawns_research", "task_spawns_prompts",
         "task_affects_paths"
       ],
-      "required_headings": ["Goal", "Plan", "Todo", "Links"]
+      "required_headings": ["Goal", "Plan", "Todo", "Links"],
+      "body_schema": {
+        "Goal": {
+          "shape": "paragraph",
+          "min_chars": 20,
+          "max_paragraphs": 3,
+          "doc": "One-paragraph statement of what success looks like."
+        },
+        "Plan": {
+          "shape": "ordered_list",
+          "min_items": 1,
+          "doc": "Numbered execution steps in order."
+        },
+        "Todo": {
+          "shape": "task_list",
+          "min_items": 1,
+          "completion_field": "task_status",
+          "doc": "Checkbox state mirrors task_status: all checked → done."
+        },
+        "Links": {
+          "shape": "link_list",
+          "min_items": 1,
+          "link_pattern": "^(\\.\\.?\\/|/)",
+          "doc": "Bulleted list of repo-relative markdown links."
+        }
+      }
     },
     "prompt": {
       "required_keys": [
@@ -28,35 +61,68 @@
         "S — Steps",
         "E — Expectations",
         "Constraints"
-      ]
+      ],
+      "body_schema": {
+        "Framework": {"shape": "paragraph", "max_paragraphs": 2},
+        "R — Role": {"shape": "paragraph", "min_chars": 20},
+        "I — Input": {"shape": "unordered_list", "min_items": 1},
+        "S — Steps": {"shape": "ordered_list", "min_items": 3},
+        "E — Expectations": {"shape": "unordered_list", "min_items": 1},
+        "Constraints": {
+          "shape": "unordered_list",
+          "min_items": 1,
+          "item_pattern": "\\b(MUST|MUST NOT|SHOULD|SHOULD NOT|MAY|REQUIRED|SHALL)\\b",
+          "item_pattern_severity": "WARN",
+          "doc": "Each constraint SHOULD use one RFC 2119 keyword (lang-spec U1)."
+        }
+      }
     },
     "research": {
       "required_keys": [
         "type", "status", "slug", "summary", "created", "updated",
         "research_phase", "research_executes_prompt", "research_friction_level"
       ],
-      "required_headings": []
+      "required_headings": [],
+      "body_schema": {
+        "§1": {
+          "shape": "paragraph",
+          "must_contain": "RFC 2119",
+          "doc": "Mandatory normative-keyword declaration block."
+        },
+        "§6": {
+          "shape": "gherkin_block",
+          "min_blocks": 1,
+          "doc": "Acceptance criteria — Gherkin only."
+        }
+      }
     },
     "skill": {
       "required_keys": ["name", "description"],
       "recommended_keys": ["skill_kind", "skill_target_agents"],
-      "required_headings": []
+      "required_headings": [],
+      "body_schema": {
+        "_note": "Anthropic SKILL.md owns the body — no schema enforced."
+      }
     },
     "spec": {
       "required_keys": ["type", "status", "slug", "summary", "created", "updated"],
-      "required_headings": []
+      "required_headings": [],
+      "body_schema": {}
     },
     "index": {
       "required_keys": ["type", "status", "slug", "summary", "created", "updated"],
-      "required_headings": []
+      "required_headings": [],
+      "body_schema": {}
     },
     "readme": {
       "required_keys": ["type", "status", "slug", "summary", "created", "updated"],
-      "required_headings": []
+      "required_headings": [],
+      "body_schema": {}
     },
     "note": {
       "required_keys": ["type", "status", "slug", "summary", "created", "updated"],
-      "required_headings": []
+      "required_headings": [],
+      "body_schema": {}
     }
   },
   "path_classification": {

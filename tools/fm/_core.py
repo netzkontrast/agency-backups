@@ -301,31 +301,46 @@ def iter_h2(body: str) -> Iterator[tuple[int, str]]:
             yield idx + 1, m.group(2)
 
 
-def find_section_body(text: str, heading: str) -> str | None:
-    """Return the body text of the named `## heading`, or None if absent.
+def find_section_body(text: str, heading: str, *, nth: int = 1) -> str | None:
+    """Return the body text of the n-th `## heading` match, or None if absent.
 
-    Matching is case-insensitive after `normalise_heading`. The body extends
-    from the line after the heading up to (but not including) the next `## `
-    heading or end-of-file. Headings inside fenced code blocks are ignored."""
+    Matching is case-insensitive after `normalise_heading`. `nth` is 1-indexed.
+    The body extends from the line after the heading up to (but not including)
+    the next `## ` heading or end-of-file. Headings inside fenced code blocks
+    are ignored. SPEC §13.3 addressing."""
+    bodies = find_all_section_bodies(text, heading)
+    if not bodies or nth < 1 or nth > len(bodies):
+        return None
+    return bodies[nth - 1]
+
+
+def find_all_section_bodies(text: str, heading: str) -> list[str]:
+    """Return every `## heading` body in document order. Empty list if none."""
     target = normalise_heading(heading)
     _, body = split_frontmatter_and_body(text)
     lines = body.splitlines(keepends=True)
-    start_line: int | None = None
-    end_line = len(lines)
+    matches: list[tuple[int, int]] = []   # (start_line, end_line)
+    open_start: int | None = None
     for idx, line in _iter_lines_outside_fence(lines):
         m = HEADING_RE.match(line.rstrip("\n"))
         if not m or len(m.group(1)) != 2:
             continue
         norm = normalise_heading(m.group(2))
-        if start_line is None:
-            if norm == target:
-                start_line = idx + 1
-        else:
-            end_line = idx
-            break
-    if start_line is None:
-        return None
-    return "".join(lines[start_line:end_line])
+        if open_start is not None:
+            matches.append((open_start, idx))
+            open_start = None
+        if norm == target:
+            open_start = idx + 1
+    if open_start is not None:
+        matches.append((open_start, len(lines)))
+    return ["".join(lines[s:e]) for s, e in matches]
+
+
+def list_h2_headings(text: str) -> list[str]:
+    """Return every `## ` heading in document order, raw text (not normalised).
+    SPEC §14.1 fm-extract --toc."""
+    _, body = split_frontmatter_and_body(text)
+    return [h for _, h in iter_h2(body)]
 
 
 # ---- Diagnostics -------------------------------------------------------------
@@ -384,6 +399,241 @@ def levenshtein(a: str, b: str) -> int:
         prev_prev = prev
         prev = curr
     return prev[-1]
+
+
+# ---- Body shape detection + validation (SPEC §12) ---------------------------
+
+ORDERED_LIST_RE = re.compile(r"^\s*\d+[.)]\s+")
+TASK_LIST_RE = re.compile(r"^\s*[-*]\s+\[[ xX]\]\s+")
+UNORDERED_LIST_RE = re.compile(r"^\s*[-*]\s+(?!\[[ xX]\])")
+LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
+DEFINITION_RE = re.compile(r"^\*\*[^*]+\*\*\s*:\s+\S")
+
+
+def _strip_fences(lines: list[str]) -> tuple[list[str], list[tuple[str, list[str]]]]:
+    """Return (lines_outside_fences, fenced_blocks).
+
+    fenced_blocks is a list of (lang_tag, body_lines) tuples; the lang_tag is
+    whatever follows the opening ``` (empty string when absent).
+    """
+    outside: list[str] = []
+    blocks: list[tuple[str, list[str]]] = []
+    in_fence = False
+    fence_marker: str | None = None
+    current_lang = ""
+    current_body: list[str] = []
+    for line in lines:
+        s = line.lstrip()
+        if s.startswith("```") or s.startswith("~~~"):
+            marker = s[:3]
+            if not in_fence:
+                in_fence = True
+                fence_marker = marker
+                current_lang = s[3:].strip()
+                current_body = []
+            elif fence_marker == marker:
+                blocks.append((current_lang, current_body))
+                in_fence = False
+                fence_marker = None
+                current_lang = ""
+                current_body = []
+            continue
+        if in_fence:
+            current_body.append(line)
+        else:
+            outside.append(line)
+    return outside, blocks
+
+
+def detect_shape(section_body: str) -> str:
+    """Return the closed-vocabulary shape name for `section_body`.
+
+    Detection is deterministic and uses §12.1 rules. Lines inside fenced
+    code blocks do not influence shape (except to flag code_block /
+    gherkin_block when no other shape applies). Empty input → 'mixed'.
+    """
+    lines = section_body.splitlines()
+    if not any(l.strip() for l in lines):
+        return "mixed"
+
+    outside, blocks = _strip_fences(lines)
+    has_gherkin = any(lang.lower() == "gherkin" for lang, _ in blocks)
+    has_code = bool(blocks)
+
+    nonblank_outside = [l for l in outside if l.strip()]
+
+    # If the section is *only* fenced blocks (no prose outside), classify by block.
+    if not nonblank_outside and blocks:
+        return "gherkin_block" if has_gherkin else "code_block"
+
+    if not nonblank_outside:
+        return "mixed"
+
+    # Walk top-level lines. Lines indented past column 4 are continuations.
+    top_lines = [l for l in nonblank_outside
+                 if (len(l) - len(l.lstrip(" "))) < 4]
+    if not top_lines:
+        return "mixed"
+
+    is_task = all(TASK_LIST_RE.match(l) for l in top_lines)
+    is_ordered = all(ORDERED_LIST_RE.match(l) for l in top_lines)
+    is_unordered = all(UNORDERED_LIST_RE.match(l) for l in top_lines)
+    is_definition = all(DEFINITION_RE.match(l.strip()) for l in top_lines)
+
+    if is_task:
+        return "task_list"
+    if is_ordered:
+        return "ordered_list"
+    if is_unordered:
+        items_have_links = all(LINK_RE.search(l) for l in top_lines)
+        return "link_list" if items_have_links else "unordered_list"
+    if is_definition:
+        return "definition_list"
+    if any(ORDERED_LIST_RE.match(l) or TASK_LIST_RE.match(l)
+           or UNORDERED_LIST_RE.match(l) for l in top_lines):
+        return "mixed"
+    if has_gherkin:
+        return "gherkin_block"
+    if has_code:
+        return "code_block"
+    return "paragraph"
+
+
+def _list_items(section_body: str) -> list[str]:
+    """Return the top-level list items (text after the marker) of section_body
+    as a list of strings. Works for ordered, unordered, task, and link lists."""
+    outside, _ = _strip_fences(section_body.splitlines())
+    items: list[str] = []
+    for line in outside:
+        if not line.strip():
+            continue
+        if (len(line) - len(line.lstrip(" "))) >= 4:
+            continue  # continuation of the previous item
+        m = (ORDERED_LIST_RE.match(line) or TASK_LIST_RE.match(line)
+             or UNORDERED_LIST_RE.match(line))
+        if m:
+            items.append(line[m.end():].strip())
+    return items
+
+
+def _paragraphs(section_body: str) -> list[str]:
+    """Split section_body into paragraphs separated by blank lines, ignoring
+    fenced code blocks."""
+    outside, _ = _strip_fences(section_body.splitlines())
+    paragraphs: list[list[str]] = [[]]
+    for line in outside:
+        if not line.strip():
+            if paragraphs[-1]:
+                paragraphs.append([])
+        else:
+            paragraphs[-1].append(line)
+    return ["\n".join(p) for p in paragraphs if p]
+
+
+def validate_section_body(
+    section_body: str,
+    schema: dict[str, Any],
+) -> list[tuple[str, str, str]]:
+    """Apply §12 schema constraints to one section's body.
+
+    Returns a list of (severity, code, message) tuples. Empty list means clean.
+    Caller wraps these in `Diagnostic` for emission.
+    """
+    diags: list[tuple[str, str, str]] = []
+    expected_shape = schema.get("shape")
+    if not expected_shape:
+        return diags
+
+    detected = detect_shape(section_body)
+    if expected_shape != "mixed" and detected != expected_shape:
+        # Allow link_list when ontology asks for unordered_list (link_list ⊂).
+        if not (expected_shape == "unordered_list" and detected == "link_list"):
+            diags.append((
+                "ERROR", "F.B.1",
+                f"shape mismatch: expected {expected_shape}, found {detected}",
+            ))
+            return diags  # downstream constraints assume the shape is correct
+
+    list_shapes = ("ordered_list", "unordered_list", "task_list", "link_list")
+    if expected_shape in list_shapes:
+        items = _list_items(section_body)
+        min_items = schema.get("min_items")
+        max_items = schema.get("max_items")
+        if min_items is not None and len(items) < min_items:
+            diags.append((
+                "ERROR", "F.B.2",
+                f"item count {len(items)} below min_items={min_items}",
+            ))
+        if max_items is not None and len(items) > max_items:
+            diags.append((
+                "ERROR", "F.B.2",
+                f"item count {len(items)} above max_items={max_items}",
+            ))
+        item_pattern = schema.get("item_pattern")
+        if item_pattern:
+            severity = schema.get("item_pattern_severity", "ERROR").upper()
+            patt = re.compile(item_pattern)
+            for i, item in enumerate(items, start=1):
+                if not patt.search(item):
+                    diags.append((
+                        severity, "F.B.3",
+                        f"item {i} does not match pattern {item_pattern!r}",
+                    ))
+
+    if expected_shape == "link_list":
+        link_pattern = schema.get("link_pattern")
+        if link_pattern:
+            patt = re.compile(link_pattern)
+            for i, item in enumerate(_list_items(section_body), start=1):
+                urls = LINK_RE.findall(item)
+                if not urls:
+                    diags.append((
+                        "ERROR", "F.B.6",
+                        f"item {i}: no markdown link found",
+                    ))
+                    continue
+                for url in urls:
+                    if not patt.match(url):
+                        diags.append((
+                            "ERROR", "F.B.6",
+                            f"item {i}: url {url!r} does not match link_pattern "
+                            f"{link_pattern!r}",
+                        ))
+
+    if expected_shape == "paragraph":
+        paragraphs = _paragraphs(section_body)
+        max_p = schema.get("max_paragraphs")
+        if max_p is not None and len(paragraphs) > max_p:
+            diags.append((
+                "ERROR", "F.B.4",
+                f"paragraph count {len(paragraphs)} above max_paragraphs={max_p}",
+            ))
+        min_chars = schema.get("min_chars")
+        if min_chars is not None:
+            length = len("".join(p.strip() for p in paragraphs))
+            if length < min_chars:
+                diags.append((
+                    "ERROR", "F.B.4",
+                    f"body length {length} below min_chars={min_chars}",
+                ))
+
+    if expected_shape in ("gherkin_block", "code_block"):
+        _, blocks = _strip_fences(section_body.splitlines())
+        min_blocks = schema.get("min_blocks")
+        if min_blocks is not None and len(blocks) < min_blocks:
+            diags.append((
+                "ERROR", "F.B.4",
+                f"block count {len(blocks)} below min_blocks={min_blocks}",
+            ))
+
+    must_contain = schema.get("must_contain")
+    if must_contain and must_contain.lower() not in section_body.lower():
+        diags.append((
+            "ERROR", "F.B.5",
+            f"section body missing required substring {must_contain!r}",
+        ))
+
+    return diags
 
 
 # ---- File locking ------------------------------------------------------------
