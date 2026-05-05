@@ -123,20 +123,37 @@ The agent MUST append its own record **before** committing the run's repairs, so
         improvements.
 
 ### Run 2026-05-05 — Repo Coherence Check
-- agent: jules
+- agent: claude-code (session claude/funny-curie-qTGQ1)
 - start_commit: 473cad7
-- end_commit: 628439e
-- baseline_commit: 2ac93bd (missing — fell back to 7 days log)
-- files_in_delta: 0
-- files_scanned: 106
+- end_commit: PENDING
+- baseline_commit: 2ac93bd (recovered cleanly via the awk-fall-forward — Task 008's hardening held)
+- files_in_delta: 131
+- files_scanned: 6
 - t1_fixes: 0
 - t2_fixes: 2
-- t3_tasks_created: 0
+- t3_tasks_created: 2
 - t4_skipped: 0
 - issues_skipped: 0
 - notes: >
-    Baseline 2ac93bd was not present in git history. Fell back to scanning last 7 days of changes.
-    Delta evaluation locally resulted in 0 files. Drove the repairs by output from tools/check-governance.sh
-    since the linter detects compliance issues.
-    T2 fixes applied to tasks/006-skills-navigation-bootstrap/task.md and tasks/012-review-pr-29/task.md to
-    add the missing `task_spawns_prompts` array.
+    Drove the run from `tools/check-governance.sh` output (linter-first triage), as in the
+    previous claude-code run. The linter reported 2 diagnostics:
+      - tasks/012-review-pr-29/task.md: missing L2 key task_spawns_prompts.
+      - tasks/006-skills-navigation-bootstrap/task.md: missing L2 key task_spawns_prompts.
+    Both fixed in-place by appending `task_spawns_prompts: []`.
+    T3 findings:
+      - Two duplicate task_id collisions (006 and 009) — TASK.md §8.1 violation. Filed as
+        Task 013 (renumber-duplicate-task-ids). Not fixed in-place because the cross-reference
+        sweep affects ~10 files including a closed task workspace; classified as T3.
+      - Per the operator's standing instruction, distilled session-level improvements to the
+        coherence prompt and MAINTENANCE.md into Task 014 (improve-maintenance-spec-from-session).
+        Findings F1–F7 cover: missing duplicate-task_id linter, ambiguous renumber tier,
+        large-delta budgeting, drift-check noise on review-bearing research, missing template
+        defaults, baseline-recovery gherkin coverage, and an explicit post-repair linter gate.
+    Surprises:
+      - `tasks/006-skills-navigation-bootstrap/` (task_status: done, merged via PR #40) was
+        created with task_id "006" despite the previous coherence run already having claimed
+        006 for surface-skills-architecture. The duplicate-task_id check in TASK.md §8.1 is
+        spec-bearing but not linter-enforced.
+      - Three delta research workspaces are research_phase: complete; only two carry
+        SPEC.md outputs. The drift checklist in the coherence prompt does not yet differentiate
+        spec-bearing vs review-bearing research, leading to false positives.
