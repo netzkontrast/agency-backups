@@ -14,6 +14,7 @@ task_uses_prompts:
   - skills-navigation-bootstrap
 task_spawns_research:
   - skills-navigation-bootstrap
+task_spawns_prompts: []
 task_affects_paths:
   - prompts/skills-navigation-bootstrap/
   - prompts/skills-namespace-ontology/

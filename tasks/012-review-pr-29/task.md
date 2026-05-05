@@ -6,12 +6,13 @@ summary: "Code review of PR #29 (tasks 009–011, skills governance). Produces a
 created: 2026-05-04
 updated: 2026-05-04
 task_id: "012"
-task_status: in_progress
+task_status: done
 task_owner: "claude-sonnet-4-6"
 task_priority: P1
 task_spawns_prompts: []
 task_uses_prompts: []
 task_spawns_research: []
+task_spawns_prompts: []
 task_affects_paths:
   - tasks/012-review-pr-29/notes.md
   - tasks/012-review-pr-29/readme.md
@@ -46,9 +47,9 @@ summarises the findings and links to `notes.md`.
 - [x] 1. Read governance specs.
 - [x] 2. Read all PR #29 new files.
 - [x] 3. Author `notes.md` with findings.
-- [ ] 4. Run governance checks.
-- [ ] 5. Commit and push.
-- [ ] 6. Post GitHub PR comment.
+- [x] 4. Run governance checks.
+- [x] 5. Commit and push.
+- [x] 6. Post GitHub PR comment.
 
 ## Links
 
