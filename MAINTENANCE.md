@@ -36,6 +36,8 @@ Not all fixes are equal. Before touching any file, the agent MUST classify the c
 
 **Mutation surface stability.** `tools/fm/edit.py` is the canonical T1/T2 mutator for frontmatter; coherence-check agents SHOULD prefer it over `sed`/`awk` because it preserves body bytes and quoting, takes a file lock, and rejects T3/T4 operations by construction (per [SPEC.md §7.2](./research/flexible-frontmatter-toolchain/output/SPEC.md)). Body-section mutations are deferred to `tools/fm/section.py` (Task 018).
 
+**Validation surface stability.** `tools/fm/validate.py` is the canonical linter (Task 017 cutover); `tools/check-governance.sh` defaults `FM_TOOLCHAIN=1`. The legacy frontmatter, structural, and linkage validators live under `tools/legacy/` for one release window and run advisory until their fm- successors land. Set `FM_TOOLCHAIN=0` only for a contested migration step; do not check that escape hatch into routine workflows.
+
 ---
 
 ## 2. Repo Coherence Check (Primary Routine)
