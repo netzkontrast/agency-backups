@@ -21,6 +21,7 @@ All work here MUST conform to [`RESEARCH.md`](../RESEARCH.md). Frontmatter and c
 
 ### In-House Research Workspaces
 
+- [`adr-spec-research-synthesis/`](./adr-spec-research-synthesis/) — Repo-native ADR Governance Specification (§0–§9): canonical `decisions/` storage path, `adr_*` L2 namespace, guarded-section AGENTS.md synthesis, and the `agency-adr` CLI shape under `tools/adr/`. Output: [`output/SPEC.md`](./adr-spec-research-synthesis/output/SPEC.md). Closes [Task 027](../tasks/027-adr-spec-research-synthesis/task.md).
 - [`agent-prompt-specs-3-systems-sdd/`](./agent-prompt-specs-3-systems-sdd/) — Spec-A/B/C: agentic prompt specifications (3-systems SDD).
 - [`agentic-eval-trust-improvement-spec/`](./agentic-eval-trust-improvement-spec/) — Spec-J/K/L: evaluation, trust, improvement loops.
 - [`agentic-session-continuity-spec/`](./agentic-session-continuity-spec/) — Spec-G/H/I: session continuity across runs.
