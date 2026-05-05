@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "ontology_version": "0.1-test-alias-dup",
+  "created": "2026-05-04",
+  "entries": [
+    {
+      "id": "el.alpha",
+      "kind": "element",
+      "canonical_label": "Alpha",
+      "provenance": "source-original",
+      "aliases_en": ["sample", "shared-alias"]
+    },
+    {
+      "id": "el.beta",
+      "kind": "element",
+      "canonical_label": "Beta",
+      "provenance": "source-original",
+      "aliases_en": ["other", "shared-alias"]
+    }
+  ]
+}

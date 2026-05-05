@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "ontology_version": "0.1-test-pair-member",
+  "created": "2026-05-04",
+  "entries": [
+    {
+      "id": "el.alpha",
+      "kind": "element",
+      "canonical_label": "Alpha",
+      "provenance": "source-original"
+    },
+    {
+      "id": "dp.alpha-orphan",
+      "kind": "dynamic-pair",
+      "canonical_label": "Alpha vs Orphan",
+      "provenance": "source-original",
+      "pair_member_a": "el.alpha",
+      "pair_member_b": "el.nonexistent"
+    }
+  ]
+}
