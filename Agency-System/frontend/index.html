@@ -1,0 +1,2659 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGENCY // Decoupled Orchestration Frontend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="agency-data.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:            #0B0D17;
+    --bg-panel:      #111318;
+    --bg-card:       #161820;
+    --border:        #252830;
+    --border-bright: #353840;
+    --fg:            #ffffff;
+    --fg-dim:        rgba(255,255,255,0.45);
+    --fg-mid:        rgba(255,255,255,0.72);
+    --green:         #00FF9F;
+    --green-dim:     rgba(0,255,159,0.12);
+    --green-glow:    0 0 12px rgba(0,255,159,0.35);
+    --yellow:        #FFD700;
+    --yellow-dim:    rgba(255,215,0,0.12);
+    --orange:        #FF4500;
+    --orange-dim:    rgba(255,69,0,0.12);
+    --violet:        #3B3355;
+    --gold:          #FFDF00;
+    --gold-dim:      rgba(255,223,0,0.12);
+    --blue:          #003366;
+    --primary:       hsl(56,50%,42%);
+    --primary-light: hsl(56,50%,55%);
+    --font-sans:     'Space Grotesk', system-ui, sans-serif;
+    --font-mono:     'JetBrains Mono', monospace;
+    --radius:        3px;
+  }
+
+  html, body, #root { height: 100%; overflow: hidden; }
+
+  /* Sidebar collapse */
+  .sidebar-collapsed { width: 44px !important; }
+  .sidebar-collapsed .sidebar-label,
+  .sidebar-collapsed .sidebar-search,
+  .sidebar-collapsed .sidebar-footer,
+  .sidebar-collapsed .sidebar-group-label { display: none !important; }
+  .sidebar-collapsed .sidebar-logo-full { display: none !important; }
+  .sidebar-collapsed .sidebar-logo-mini { display: flex !important; }
+  .sidebar-logo-mini { display: none; }
+  .sidebar-nav-item { transition: background 0.1s, border-color 0.1s, padding 0.2s; }
+  .sidebar-transition { transition: width 0.22s cubic-bezier(.4,0,.2,1), opacity 0.18s ease; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 13px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Scanline overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--fg-dim); }
+
+  /* Glitch animation */
+  @keyframes glitch-h {
+    0%,100% { clip-path: inset(0 0 100% 0); transform: translateX(0); }
+    20% { clip-path: inset(30% 0 50% 0); transform: translateX(-3px); }
+    40% { clip-path: inset(60% 0 20% 0); transform: translateX(2px); }
+    60% { clip-path: inset(10% 0 80% 0); transform: translateX(-1px); }
+    80% { clip-path: inset(80% 0 5% 0); transform: translateX(3px); }
+  }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+  @keyframes pulse-green { 0%,100% { box-shadow: 0 0 4px rgba(0,255,159,0.4); } 50% { box-shadow: 0 0 12px rgba(0,255,159,0.8); } }
+  @keyframes slide-in-right { from { opacity:0; transform:translateX(12px); } to { opacity:1; transform:translateX(0); } }
+  @keyframes slide-in-left { from { opacity:0; transform:translateX(-8px); } to { opacity:1; transform:translateX(0); } }
+  @keyframes fade-up { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes scan { 0% { top:-20%; } 100% { top:120%; } }
+  @keyframes type-cursor { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+  @keyframes glow-pulse {
+    0%,100% { box-shadow: 0 0 4px rgba(0,255,159,0.3); border-color: rgba(0,255,159,0.4); }
+    50%     { box-shadow: 0 0 14px rgba(0,255,159,0.7); border-color: rgba(0,255,159,0.9); }
+  }
+  @keyframes data-flow {
+    from { stroke-dashoffset: 24; }
+    to   { stroke-dashoffset: 0; }
+  }
+  @keyframes count-up { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes node-spawn {
+    0%   { opacity: 0; transform: scale(0.4); }
+    60%  { opacity: 1; transform: scale(1.08); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes status-blink {
+    0%, 90%, 100% { opacity: 1; }
+    92%, 98% { opacity: 0.3; }
+  }
+  @keyframes terminal-line {
+    from { opacity: 0; transform: translateY(-2px); clip-path: inset(0 100% 0 0); }
+    to   { opacity: 1; transform: translateY(0);    clip-path: inset(0 0 0 0); }
+  }
+  @keyframes sweep-bar {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(400%); }
+  }
+
+  .animate-in { animation: fade-up 0.22s ease both; }
+  .slide-right { animation: slide-in-right 0.18s ease both; }
+  .stagger-row { animation: terminal-line 0.28s cubic-bezier(.2,.8,.2,1) both; }
+  .stat-tile { animation: count-up 0.32s ease both; }
+  .pulse-glow { animation: glow-pulse 2.4s ease-in-out infinite; }
+  .blink-soft { animation: status-blink 4s ease-in-out infinite; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
+const D = window.AGENCY_DATA;
+
+// ── STATUS CONFIG ──────────────────────────────────────────────────────────
+const STATUS_CFG = {
+  done:        { label: 'DONE',        color: '#00FF9F', bg: 'rgba(0,255,159,0.1)' },
+  open:        { label: 'OPEN',        color: '#FFD700', bg: 'rgba(255,215,0,0.1)' },
+  in_progress: { label: 'IN_PROG',     color: '#FFDF00', bg: 'rgba(255,223,0,0.1)' },
+  blocked:     { label: 'BLOCKED',     color: '#FF4500', bg: 'rgba(255,69,0,0.1)' },
+  updated:     { label: 'SUPERSEDED',  color: '#8B8B00', bg: 'rgba(139,139,0,0.1)' },
+  complete:    { label: 'COMPLETE',    color: '#00FF9F', bg: 'rgba(0,255,159,0.1)' },
+  in_progress_r: { label: 'RUNNING',  color: '#FFDF00', bg: 'rgba(255,223,0,0.1)' },
+};
+
+const PRIORITY_COLOR = { P0: '#FF4500', P1: '#FFD700', P2: 'rgba(255,255,255,0.4)' };
+const KIND_COLOR = {
+  'task-spec':         '#00FF9F',
+  'research-proposal': '#FFD700',
+  'tool-instruction':  '#FFDF00',
+  'follow-up':         '#8B8B00',
+};
+
+// Counts up from 0 to target — terminal-style readout, instant for non-numbers
+function CountUp({ value, duration = 600 }) {
+  const [n, setN] = useState(typeof value === 'number' ? 0 : value);
+  useEffect(() => {
+    if (typeof value !== 'number') { setN(value); return; }
+    const start = performance.now();
+    let raf;
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setN(Math.round(value * eased));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [value, duration]);
+  return <>{n}</>;
+}
+
+function StatusBadge({ status, small }) {
+  const cfg = STATUS_CFG[status] || { label: status?.toUpperCase(), color: '#fff', bg: 'rgba(255,255,255,0.08)' };
+  return (
+    <span style={{
+      display:'inline-flex', alignItems:'center', gap:4,
+      fontFamily:'var(--font-mono)', fontSize: small ? 9 : 10,
+      fontWeight:700, letterSpacing:'0.08em',
+      color: cfg.color, background: cfg.bg,
+      border: `1px solid ${cfg.color}33`,
+      padding: small ? '1px 5px' : '2px 7px',
+      borderRadius: 2,
+    }}>
+      <span style={{width:5,height:5,borderRadius:'50%',background:cfg.color,flexShrink:0,
+        boxShadow:`0 0 4px ${cfg.color}`}}></span>
+      {cfg.label}
+    </span>
+  );
+}
+
+// ── COMMAND PALETTE ────────────────────────────────────────────────────────
+function CommandPalette({ onClose, onNavigate }) {
+  const [q, setQ] = useState('');
+  const inputRef = useRef();
+  useEffect(() => { inputRef.current?.focus(); }, []);
+
+  const allItems = useMemo(() => [
+    ...D.tasks.map(t => ({ type:'task', label:`[T${t.id}] ${t.slug}`, sub: t.summary, payload:{view:'tasks',item:t} })),
+    ...D.prompts.map(p => ({ type:'prompt', label:`[P] ${p.slug}`, sub: p.summary, payload:{view:'prompts',item:p} })),
+    ...D.research.map(r => ({ type:'research', label:`[R] ${r.slug}`, sub: r.summary, payload:{view:'research',item:r} })),
+    { type:'nav', label:'>> dashboard', sub:'Overview + metrics', payload:{view:'dashboard',item:null} },
+    { type:'nav', label:'>> graph', sub:'Audit graph visualization', payload:{view:'graph',item:null} },
+  ], []);
+
+  const results = useMemo(() => {
+    if (!q.trim()) return allItems.slice(0,12);
+    const lq = q.toLowerCase();
+    return allItems.filter(i => i.label.toLowerCase().includes(lq) || i.sub?.toLowerCase().includes(lq)).slice(0,12);
+  }, [q, allItems]);
+
+  const TYPE_COLOR = { task:'#00FF9F', prompt:'#FFD700', research:'#FFDF00', nav:'#fff' };
+
+  const [sel, setSel] = useState(0);
+  useEffect(() => setSel(0), [q]);
+
+  function handleKey(e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setSel(s => Math.min(s+1,results.length-1)); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); setSel(s => Math.max(s-1,0)); }
+    if (e.key === 'Enter' && results[sel]) { onNavigate(results[sel].payload); onClose(); }
+    if (e.key === 'Escape') onClose();
+  }
+
+  return (
+    <div style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.75)', zIndex:1000,
+      display:'flex', alignItems:'flex-start', justifyContent:'center', paddingTop:120 }}
+      onClick={onClose}>
+      <div style={{ width:620, background:'#0F1119', border:'1px solid #353840',
+        boxShadow:'0 24px 80px rgba(0,0,0,0.8)', borderRadius:4 }}
+        onClick={e => e.stopPropagation()}>
+        <div style={{ padding:'10px 14px', borderBottom:'1px solid #252830',
+          display:'flex', alignItems:'center', gap:10 }}>
+          <span style={{ fontFamily:'var(--font-mono)', color:'#00FF9F', fontSize:12 }}>▸</span>
+          <input ref={inputRef} value={q} onChange={e=>setQ(e.target.value)} onKeyDown={handleKey}
+            placeholder="search tasks / prompts / research…"
+            style={{ flex:1, background:'transparent', border:'none', outline:'none',
+              fontFamily:'var(--font-mono)', fontSize:13, color:'#fff',
+              letterSpacing:'0.02em' }}/>
+          <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.3)' }}>ESC</span>
+        </div>
+        <div style={{ maxHeight:360, overflowY:'auto' }}>
+          {results.map((item, i) => (
+            <div key={i}
+              onClick={() => { onNavigate(item.payload); onClose(); }}
+              style={{ padding:'9px 14px', cursor:'pointer', display:'flex', alignItems:'flex-start', gap:10,
+                background: i===sel ? 'rgba(0,255,159,0.06)' : 'transparent',
+                borderLeft: i===sel ? '2px solid #00FF9F' : '2px solid transparent' }}>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:TYPE_COLOR[item.type],
+                marginTop:3, flexShrink:0 }}>{item.type.toUpperCase()}</span>
+              <div>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:12, color: i===sel ? '#fff' : 'rgba(255,255,255,0.8)' }}>
+                  {item.label}
+                </div>
+                <div style={{ fontSize:11, color:'rgba(255,255,255,0.35)', marginTop:2, lineHeight:1.4 }}>
+                  {item.sub?.slice(0,90)}{item.sub?.length>90?'…':''}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style={{ padding:'6px 14px', borderTop:'1px solid #252830', display:'flex', gap:16 }}>
+          {[['↑↓','navigate'],['↵','select'],['Esc','close']].map(([k,l]) => (
+            <span key={k} style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.3)' }}>
+              <span style={{ color:'rgba(255,255,255,0.5)' }}>{k}</span> {l}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── SIDEBAR ────────────────────────────────────────────────────────────────
+function Sidebar({ view, onView, onPalette, collapsed, onToggle }) {
+  const groups = [
+    {
+      label: 'WORKSPACE',
+      items: [
+        { id:'dashboard', icon:'⬡', label:'DASH', tooltip:'Dashboard' },
+        { id:'tasks',     icon:'▸', label:'TASKS',    tooltip:'Tasks', badge: D.tasks.filter(t=>t.status==='open').length, badgeColor:'#FFD700' },
+        { id:'prompts',   icon:'◈', label:'PROMPTS',  tooltip:'Prompts', badge: D.prompts.length, badgeColor:'rgba(255,255,255,0.35)' },
+        { id:'research',  icon:'◎', label:'RESEARCH', tooltip:'Research', badge: D.research.length, badgeColor:'rgba(255,255,255,0.35)' },
+      ]
+    },
+    {
+      label: 'ANALYSIS',
+      items: [
+        { id:'graph',     icon:'⬢', label:'GRAPH',   tooltip:'Audit Graph' },
+        { id:'wiki',      icon:'◇', label:'WIKI',    tooltip:'LLM-Wiki' },
+      ]
+    },
+    {
+      label: 'OPS',
+      items: [
+        { id:'friction',  icon:'△', label:'FRICTION', tooltip:'Friction Log', badge: D.frictionLogs.filter(f=>f.level==='FL2'||f.level==='FL3').length, badgeColor:'#FF4500' },
+        { id:'precommit', icon:'▣', label:'GATE',     tooltip:'Pre-Commit Gate', badge: D.precommitRuns.filter(r=>r.status==='fail').length, badgeColor:'#FF4500' },
+      ]
+    },
+    {
+      label: 'SYS',
+      items: [
+        { id:'settings',  icon:'⚙', label:'CONFIG',  tooltip:'Settings' },
+      ]
+    },
+  ];
+
+  const blocked = D.tasks.filter(t=>t.status==='blocked').length;
+  const inProg  = D.tasks.filter(t=>t.status==='in_progress').length;
+
+  return (
+    <div className={`sidebar-transition${collapsed ? ' sidebar-collapsed' : ''}`}
+      style={{ width: collapsed ? 44 : 212,
+        background:'#09090F', borderRight:'1px solid #1A1C24',
+        display:'flex', flexDirection:'column', flexShrink:0, height:'100%',
+        overflow:'hidden' }}>
+
+      {/* Logo row */}
+      <div style={{ padding: collapsed ? '14px 0' : '16px 16px 12px',
+        borderBottom:'1px solid #1A1C24',
+        display:'flex', alignItems:'center',
+        justifyContent: collapsed ? 'center' : 'space-between', gap:8 }}>
+
+        {/* Mini logo (collapsed) */}
+        <div className="sidebar-logo-mini" style={{ display: collapsed ? 'flex' : 'none',
+          flexDirection:'column', alignItems:'center', gap:4 }}>
+          <div style={{ width:7, height:7, borderRadius:'50%', background:'#00FF9F',
+            boxShadow:'0 0 8px #00FF9F',
+            animation:'glow-pulse 2.4s ease-in-out infinite' }}></div>
+        </div>
+
+        {/* Full logo */}
+        <div className="sidebar-logo-full" style={{ display: collapsed ? 'none' : 'block', flex:1 }}>
+          <div style={{ display:'flex', alignItems:'center', gap:7, marginBottom:5 }}>
+            <div style={{ width:6, height:6, borderRadius:'50%', background:'#00FF9F',
+              boxShadow:'0 0 8px #00FF9F', flexShrink:0,
+              animation:'glow-pulse 2.4s ease-in-out infinite' }}></div>
+            <span style={{ fontFamily:'var(--font-mono)', fontSize:9,
+              color:'rgba(255,255,255,0.3)', letterSpacing:'0.1em' }}>AGENCY // v0.19</span>
+          </div>
+          <div style={{ fontFamily:'var(--font-sans)', fontWeight:700, fontSize:16,
+            letterSpacing:'-0.03em', lineHeight:1.1, whiteSpace:'nowrap' }}>
+            <span style={{ color:'#00FF9F' }}>netz</span>
+            <span style={{ color:'rgba(255,255,255,0.55)' }}>kontrast</span>
+          </div>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8,
+            color:'rgba(255,255,255,0.18)', marginTop:4, letterSpacing:'0.06em' }}>
+            machine · actor · space
+          </div>
+        </div>
+
+        {/* Collapse toggle */}
+        <button onClick={onToggle}
+          title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          style={{ background:'transparent', border:'none', cursor:'pointer',
+            color:'rgba(255,255,255,0.25)', fontSize:12, padding:'2px 4px',
+            flexShrink:0, lineHeight:1,
+            transition:'color 0.15s' }}
+          onMouseEnter={e => e.currentTarget.style.color='rgba(255,255,255,0.7)'}
+          onMouseLeave={e => e.currentTarget.style.color='rgba(255,255,255,0.25)'}>
+          {collapsed ? '›' : '‹'}
+        </button>
+      </div>
+
+      {/* Search trigger (expanded only) */}
+      <div className="sidebar-search"
+        onClick={onPalette}
+        style={{ margin:'10px 10px 4px', padding:'7px 10px', background:'#0F1018',
+          border:'1px solid #1E2028', borderRadius:3, cursor:'pointer',
+          display:'flex', alignItems:'center', gap:8, transition:'all 0.15s' }}
+        onMouseEnter={e=>{ e.currentTarget.style.borderColor='#2E3140'; e.currentTarget.style.background='#141620'; }}
+        onMouseLeave={e=>{ e.currentTarget.style.borderColor='#1E2028'; e.currentTarget.style.background='#0F1018'; }}>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'#00FF9F', opacity:0.7 }}>▸</span>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:11,
+          color:'rgba(255,255,255,0.22)', flex:1 }}>search…</span>
+        <kbd style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.22)',
+          background:'#1A1D24', border:'1px solid #252830', borderRadius:2,
+          padding:'1px 5px', lineHeight:1.4 }}>⌘K</kbd>
+      </div>
+
+      {/* Nav groups */}
+      <nav style={{ flex:1, overflowY:'auto', padding:'4px 0 8px', overflowX:'hidden' }}>
+        {groups.map((group, gi) => (
+          <div key={group.label}>
+            <div className="sidebar-group-label"
+              style={{ padding: gi===0 ? '8px 16px 3px' : '12px 16px 3px',
+                fontFamily:'var(--font-mono)', fontSize:8,
+                color:'rgba(255,255,255,0.18)', letterSpacing:'0.14em',
+                whiteSpace:'nowrap' }}>
+              {group.label}
+            </div>
+            {group.items.map(item => {
+              const active = view === item.id;
+              return (
+                <div key={item.id}
+                  className="sidebar-nav-item"
+                  onClick={() => onView(item.id)}
+                  title={collapsed ? item.tooltip : undefined}
+                  style={{ padding: collapsed ? '9px 0' : '7px 16px',
+                    cursor:'pointer', display:'flex',
+                    alignItems:'center', gap:9,
+                    justifyContent: collapsed ? 'center' : 'flex-start',
+                    background: active ? 'rgba(0,255,159,0.07)' : 'transparent',
+                    borderLeft: active ? '2px solid #00FF9F' : '2px solid transparent' }}
+                  onMouseEnter={e=>{ if(!active) e.currentTarget.style.background='rgba(255,255,255,0.03)'; }}
+                  onMouseLeave={e=>{ if(!active) e.currentTarget.style.background='transparent'; }}>
+                  <span style={{ fontFamily:'var(--font-mono)', fontSize:12,
+                    color: active ? '#00FF9F' : 'rgba(255,255,255,0.3)',
+                    flexShrink:0, textAlign:'center', lineHeight:1 }}>{item.icon}</span>
+                  <span className="sidebar-label"
+                    style={{ fontFamily:'var(--font-mono)', fontSize:10,
+                      letterSpacing:'0.05em',
+                      color: active ? '#fff' : 'rgba(255,255,255,0.5)',
+                      fontWeight: active ? 600 : 400, flex:1,
+                      whiteSpace:'nowrap', overflow:'hidden' }}>
+                    {item.label}
+                  </span>
+                  {!collapsed && item.badge > 0 && (
+                    <span style={{ fontFamily:'var(--font-mono)', fontSize:9,
+                      color: item.badgeColor?.startsWith('#FF') ? '#FF4500' : item.badgeColor || 'rgba(255,255,255,0.35)',
+                      background: item.badgeColor?.startsWith('#FF') ? 'rgba(255,69,0,0.12)' : 'rgba(255,255,255,0.06)',
+                      border: `1px solid ${item.badgeColor?.startsWith('#FF') ? 'rgba(255,69,0,0.3)' : 'rgba(255,255,255,0.1)'}`,
+                      padding:'1px 5px', borderRadius:2, flexShrink:0 }}>
+                      {item.badge}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </nav>
+
+      {/* Health footer (expanded only) */}
+      <div className="sidebar-footer"
+        style={{ padding:'10px 16px', borderTop:'1px solid #1A1C24', background:'#080A10' }}>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'3px 10px',
+          fontFamily:'var(--font-mono)', fontSize:9, lineHeight:1.7 }}>
+          <div style={{ color:'rgba(255,255,255,0.25)' }}>IN_PROG
+            <span style={{ color:'#FFDF00', marginLeft:5 }}>{inProg}</span>
+          </div>
+          <div style={{ color:'rgba(255,255,255,0.25)' }}>BLOCKED
+            <span style={{ color: blocked>0 ? '#FF4500' : 'rgba(255,255,255,0.4)', marginLeft:5 }}>{blocked}</span>
+          </div>
+          <div style={{ gridColumn:'1/-1', color:'rgba(255,255,255,0.2)', marginTop:2,
+            display:'flex', alignItems:'center', gap:5, fontSize:8 }}>
+            <span style={{ color:'#00FF9F' }}>●</span>
+            COHERENCE OK · 2026-05-05
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── DASHBOARD ──────────────────────────────────────────────────────────────
+function Dashboard({ onNavigate }) {
+  const stats = useMemo(() => {
+    const t = D.tasks;
+    return {
+      total: t.length,
+      done: t.filter(x=>x.status==='done').length,
+      open: t.filter(x=>x.status==='open').length,
+      in_progress: t.filter(x=>x.status==='in_progress').length,
+      blocked: t.filter(x=>x.status==='blocked').length,
+      updated: t.filter(x=>x.status==='updated').length,
+    };
+  }, []);
+
+  const recentTasks = D.tasks.filter(t=>['in_progress','open'].includes(t.status)).slice(0,6);
+  const liveTickRef = useRef(0);
+  const [, force] = useState(0);
+  useEffect(() => { const id = setInterval(() => { liveTickRef.current++; force(x=>x+1); }, 1800); return () => clearInterval(id); }, []);
+  const flCounts = { FL0:0, FL1:0, FL2:0, FL3:0 };
+  D.frictionLogs.forEach(f => { flCounts[f.level]++; });
+
+  return (
+    <div style={{ padding:'20px 24px', overflowY:'auto', height:'100%' }} className="animate-in">
+      {/* Header */}
+      <div style={{ marginBottom:24, borderBottom:'1px solid #1E2028', paddingBottom:16 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.3)', marginBottom:6 }}>
+          AGENCY // DASHBOARD // {new Date().toISOString().split('T')[0]}
+        </div>
+        <h1 style={{ fontFamily:'var(--font-sans)', fontSize:22, fontWeight:700, letterSpacing:'-0.02em',
+          color:'#fff', lineHeight:1.2 }}>
+          Decoupling Machine, Actor,<br/>
+          <span style={{ color:'#00FF9F' }}>and Space</span>
+        </h1>
+        <p style={{ marginTop:6, fontSize:12, color:'rgba(255,255,255,0.4)', fontFamily:'var(--font-mono)' }}>
+          Long-horizon AI agency governance substrate
+        </p>
+      </div>
+
+      {/* Stat tiles */}
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:10, marginBottom:20 }}>
+        {[
+          { label:'TASKS TOTAL', val:stats.total, color:'#fff', sub:'across 26 slugs' },
+          { label:'OPEN', val:stats.open, color:'#FFD700', sub:'awaiting execution' },
+          { label:'IN PROGRESS', val:stats.in_progress, color:'#FFDF00', sub:'active sessions' },
+          { label:'COMPLETED', val:stats.done, color:'#00FF9F', sub:'closed tasks' },
+          { label:'BLOCKED', val:stats.blocked, color:'#FF4500', sub:'needs unblocking' },
+          { label:'PROMPTS', val:D.prompts.length, color:'#FFDF00', sub:'executable instruction sets' },
+        ].map((s,i) => (
+          <div key={s.label} className="stat-tile"
+            style={{ background:'#111318', border:'1px solid #1E2028',
+            borderRadius:3, padding:'14px 16px', cursor:'default',
+            animationDelay: `${i*60}ms` }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.3)',
+              letterSpacing:'0.1em', marginBottom:6 }}>{s.label}</div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:28, fontWeight:700, color:s.color,
+              lineHeight:1, letterSpacing:'-0.02em' }}><CountUp value={s.val} /></div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.2)',
+              marginTop:4 }}>{s.sub}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Active tasks */}
+      <div style={{ marginBottom:20 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+          letterSpacing:'0.1em', marginBottom:10 }}>ACTIVE TASKS</div>
+        <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
+          {recentTasks.map((t,i) => (
+            <div key={t.id} onClick={() => onNavigate({view:'tasks',item:t})}
+              className="stagger-row"
+              style={{ background:'#111318', border:'1px solid #1E2028', borderRadius:3,
+                padding:'10px 14px', cursor:'pointer', display:'flex', alignItems:'center', gap:12,
+                transition:'all 0.12s', animationDelay: `${i*40+150}ms` }}
+              onMouseEnter={e=>{ e.currentTarget.style.borderColor='#353840'; e.currentTarget.style.background='#161820'; }}
+              onMouseLeave={e=>{ e.currentTarget.style.borderColor='#1E2028'; e.currentTarget.style.background='#111318'; }}>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.25)',
+                flexShrink:0, minWidth:28 }}>{t.id}</span>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'rgba(255,255,255,0.8)',
+                flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
+                {t.slug}
+              </span>
+              {t.priority && <span style={{ fontFamily:'var(--font-mono)', fontSize:9,
+                color:PRIORITY_COLOR[t.priority] }}>{t.priority}</span>}
+              <StatusBadge status={t.status} small />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Coherence runs + Friction */}
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+        <div>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+            letterSpacing:'0.1em', marginBottom:8 }}>COHERENCE RUNS</div>
+          {D.coherenceRuns.map((r,i) => (
+            <div key={i} style={{ background:'#111318', border:'1px solid #1E2028', borderRadius:3,
+              padding:'10px 12px', marginBottom:6 }}>
+              <div style={{ display:'flex', justifyContent:'space-between', marginBottom:4 }}>
+                <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.6)' }}>{r.date}</span>
+                <StatusBadge status={r.status === 'pass' ? 'done' : 'in_progress'} small />
+              </div>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)', lineHeight:1.5 }}>
+                {r.issues} issues · {r.deferred} deferred
+              </div>
+            </div>
+          ))}
+        </div>
+        <div>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+            letterSpacing:'0.1em', marginBottom:8 }}>FRICTION LOG SUMMARY</div>
+          {Object.entries(flCounts).map(([lvl, count]) => (
+            <div key={lvl} style={{ display:'flex', alignItems:'center', gap:10, marginBottom:6 }}>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:10,
+                color: lvl==='FL0' ? '#00FF9F' : lvl==='FL1' ? '#FFD700' : lvl==='FL2' ? '#FF4500' : '#FF4500',
+                minWidth:30 }}>{lvl}</span>
+              <div style={{ flex:1, height:4, background:'#1E2028', borderRadius:2, overflow:'hidden' }}>
+                <div style={{ height:'100%', width:`${(count/D.frictionLogs.length)*100}%`,
+                  background: lvl==='FL0' ? '#00FF9F' : lvl==='FL1' ? '#FFD700' : '#FF4500',
+                  transition:'width 0.4s ease' }}></div>
+              </div>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.4)',
+                minWidth:14, textAlign:'right' }}>{count}</span>
+            </div>
+          ))}
+          {D.frictionLogs.map((f,i) => (
+            <div key={i} style={{ background:'#111318', border:'1px solid #1E2028', borderRadius:3,
+              padding:'8px 12px', marginTop:8, borderLeft:`2px solid ${f.level==='FL0'?'#00FF9F':f.level==='FL1'?'#FFD700':'#FF4500'}` }}>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.5)', lineHeight:1.5 }}>
+                <span style={{ color: f.level==='FL0' ? '#00FF9F' : '#FFD700' }}>{f.level}</span>
+                {' '}<span style={{ color:'rgba(255,255,255,0.3)' }}>task:{f.task}</span>{' '}
+                {f.note.slice(0,60)}…
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── TASK LIST ──────────────────────────────────────────────────────────────
+function TaskList({ selected, onSelect, filter, onFilter }) {
+  const filtered = useMemo(() => {
+    if (!filter || filter === 'all') return D.tasks;
+    return D.tasks.filter(t => t.status === filter);
+  }, [filter]);
+
+  const filterOpts = [
+    { val:'all', label:'ALL' },
+    { val:'open', label:'OPEN' },
+    { val:'in_progress', label:'IN_PROG' },
+    { val:'blocked', label:'BLOCKED' },
+    { val:'done', label:'DONE' },
+    { val:'updated', label:'SUPERS.' },
+  ];
+
+  return (
+    <div style={{ display:'flex', flexDirection:'column', height:'100%' }}>
+      <div style={{ padding:'12px 14px 8px', borderBottom:'1px solid #1E2028', flexShrink:0 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+          letterSpacing:'0.1em', marginBottom:8 }}>TASKS // {filtered.length} records</div>
+        <div style={{ display:'flex', gap:4, flexWrap:'wrap' }}>
+          {filterOpts.map(f => (
+            <button key={f.val} onClick={() => onFilter(f.val)}
+              style={{ fontFamily:'var(--font-mono)', fontSize:9, letterSpacing:'0.06em',
+                padding:'3px 7px', borderRadius:2, cursor:'pointer', border:'1px solid',
+                borderColor: filter===f.val ? '#00FF9F' : '#252830',
+                background: filter===f.val ? 'rgba(0,255,159,0.08)' : 'transparent',
+                color: filter===f.val ? '#00FF9F' : 'rgba(255,255,255,0.3)',
+                transition:'all 0.1s' }}>
+              {f.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div style={{ flex:1, overflowY:'auto', padding:'8px 0' }}>
+        {filtered.map(task => {
+          const active = selected?.id === task.id;
+          return (
+            <div key={task.id} onClick={() => onSelect(task)}
+              style={{ padding:'10px 14px', cursor:'pointer',
+                background: active ? 'rgba(0,255,159,0.06)' : 'transparent',
+                borderLeft: active ? '2px solid #00FF9F' : '2px solid transparent',
+                borderBottom:'1px solid #12141A',
+                transition:'all 0.1s' }}
+              onMouseEnter={e=>{ if(!active){ e.currentTarget.style.background='rgba(255,255,255,0.025)'; }}}
+              onMouseLeave={e=>{ if(!active){ e.currentTarget.style.background='transparent'; }}}>
+              <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:4 }}>
+                <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.25)',
+                  minWidth:24, flexShrink:0 }}>{task.id}</span>
+                {task.priority && (
+                  <span style={{ fontFamily:'var(--font-mono)', fontSize:8, color:PRIORITY_COLOR[task.priority],
+                    border:`1px solid ${PRIORITY_COLOR[task.priority]}44`, padding:'1px 4px', borderRadius:2,
+                    flexShrink:0 }}>{task.priority}</span>
+                )}
+                <StatusBadge status={task.status} small />
+              </div>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color: active ? '#fff' : 'rgba(255,255,255,0.75)',
+                lineHeight:1.3, wordBreak:'break-all' }}>{task.slug}</div>
+              <div style={{ fontFamily:'var(--font-sans)', fontSize:11, color:'rgba(255,255,255,0.35)',
+                marginTop:3, lineHeight:1.4 }}>{task.summary?.slice(0,80)}{task.summary?.length>80?'…':''}</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── TASK DETAIL ────────────────────────────────────────────────────────────
+function TaskDetail({ task }) {
+  if (!task) return (
+    <div style={{ height:'100%', display:'flex', alignItems:'center', justifyContent:'center',
+      flexDirection:'column', gap:12 }}>
+      <span style={{ fontFamily:'var(--font-mono)', fontSize:22, color:'rgba(0,255,159,0.15)' }}>▸</span>
+      <span style={{ fontFamily:'var(--font-mono)', fontSize:12, color:'rgba(255,255,255,0.4)',
+        letterSpacing:'0.06em' }}>select a task to inspect</span>
+      <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.2)' }}>
+        {D.tasks.length} tasks available
+      </span>
+    </div>
+  );
+
+  const linkedPrompts = D.prompts.filter(p => task.uses_prompts?.includes(p.slug));
+  const linkedResearch = D.research.filter(r => task.spawns_research?.includes(r.slug));
+
+  return (
+    <div style={{ padding:'20px', overflowY:'auto', height:'100%' }} className="slide-right" key={task.id}>
+      {/* Header */}
+      <div style={{ marginBottom:16, paddingBottom:14, borderBottom:'1px solid #1E2028' }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.08em', marginBottom:6 }}>
+          TASK // {task.id} // {task.created}
+        </div>
+        <h2 style={{ fontFamily:'var(--font-mono)', fontSize:15, fontWeight:700, color:'#00FF9F',
+          letterSpacing:'-0.01em', marginBottom:8, lineHeight:1.3 }}>
+          {task.slug}
+        </h2>
+        <div style={{ display:'flex', gap:8, flexWrap:'wrap', alignItems:'center' }}>
+          <StatusBadge status={task.status} />
+          {task.priority && (
+            <span style={{ fontFamily:'var(--font-mono)', fontSize:10,
+              color:PRIORITY_COLOR[task.priority] }}>{task.priority}</span>
+          )}
+          {task.owner && (
+            <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+              background:'#1E2028', padding:'2px 8px', borderRadius:2 }}>
+              owner:{task.owner}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Summary */}
+      <div style={{ marginBottom:14 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.1em', marginBottom:6 }}>SUMMARY</div>
+        <p style={{ fontFamily:'var(--font-sans)', fontSize:12, color:'rgba(255,255,255,0.7)',
+          lineHeight:1.6 }}>{task.summary}</p>
+      </div>
+
+      {/* Frontmatter */}
+      <div style={{ background:'#0D0F18', border:'1px solid #1E2028', borderRadius:3,
+        padding:'12px 14px', marginBottom:14, fontFamily:'var(--font-mono)', fontSize:10 }}>
+        <div style={{ color:'rgba(255,255,255,0.2)', marginBottom:6 }}>--- frontmatter</div>
+        {[
+          ['type', 'task'],
+          ['status', task.status],
+          ['slug', task.slug],
+          ['task_id', `"${task.id}"`],
+          ['task_status', task.status],
+          ['task_priority', task.priority],
+          ['created', task.created],
+          ['updated', task.updated],
+        ].map(([k,v]) => (
+          <div key={k} style={{ display:'flex', gap:8, lineHeight:1.8 }}>
+            <span style={{ color:'rgba(255,255,255,0.35)' }}>{k}:</span>
+            <span style={{ color:'#FFDF00' }}>{v}</span>
+          </div>
+        ))}
+        {task.uses_prompts?.length > 0 && (
+          <div style={{ display:'flex', gap:8, lineHeight:1.8, flexWrap:'wrap' }}>
+            <span style={{ color:'rgba(255,255,255,0.35)' }}>task_uses_prompts:</span>
+            <span style={{ color:'#00FF9F' }}>[{task.uses_prompts.join(', ')}]</span>
+          </div>
+        )}
+        <div style={{ color:'rgba(255,255,255,0.2)', marginTop:6 }}>---</div>
+      </div>
+
+      {/* Linked Prompts */}
+      {linkedPrompts.length > 0 && (
+        <div style={{ marginBottom:14 }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+            letterSpacing:'0.1em', marginBottom:6 }}>LINKED PROMPTS ({linkedPrompts.length})</div>
+          {linkedPrompts.map(p => (
+            <div key={p.slug} style={{ background:'#111318', border:'1px solid #1E2028',
+              borderRadius:3, padding:'8px 12px', marginBottom:5,
+              borderLeft:'2px solid rgba(255,215,0,0.4)' }}>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'#FFD700' }}>{p.slug}</div>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+                marginTop:2 }}>{p.kind}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Linked Research */}
+      {linkedResearch.length > 0 && (
+        <div style={{ marginBottom:14 }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+            letterSpacing:'0.1em', marginBottom:6 }}>SPAWNED RESEARCH ({linkedResearch.length})</div>
+          {linkedResearch.map(r => (
+            <div key={r.slug} style={{ background:'#111318', border:'1px solid #1E2028',
+              borderRadius:3, padding:'8px 12px', marginBottom:5,
+              borderLeft:'2px solid rgba(255,223,0,0.4)' }}>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'#FFDF00' }}>{r.slug}</div>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+                marginTop:2 }}>phase:{r.phase}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Dates */}
+      <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.2)', lineHeight:1.8,
+        borderTop:'1px solid #1E2028', paddingTop:12, marginTop:4 }}>
+        <div>created: <span style={{ color:'rgba(255,255,255,0.4)' }}>{task.created}</span></div>
+        <div>updated: <span style={{ color:'rgba(255,255,255,0.4)' }}>{task.updated}</span></div>
+      </div>
+    </div>
+  );
+}
+
+// ── PROMPT LIST + DETAIL ───────────────────────────────────────────────────
+function PromptView({ selected, onSelect }) {
+  const [filter, setFilter] = useState('all');
+  const filtered = filter === 'all' ? D.prompts : D.prompts.filter(p => p.kind === filter);
+  const kinds = ['all', 'task-spec', 'research-proposal', 'tool-instruction'];
+
+  return (
+    <>
+      <div style={{ display:'flex', flexDirection:'column', height:'100%' }}>
+        <div style={{ padding:'12px 14px 8px', borderBottom:'1px solid #1E2028', flexShrink:0 }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+            letterSpacing:'0.1em', marginBottom:8 }}>PROMPTS // {filtered.length} records</div>
+          <div style={{ display:'flex', gap:4, flexWrap:'wrap' }}>
+            {kinds.map(k => (
+              <button key={k} onClick={() => setFilter(k)}
+                style={{ fontFamily:'var(--font-mono)', fontSize:9, letterSpacing:'0.04em',
+                  padding:'3px 7px', borderRadius:2, cursor:'pointer', border:'1px solid',
+                  borderColor: filter===k ? KIND_COLOR[k]||'#00FF9F' : '#252830',
+                  background: filter===k ? `${KIND_COLOR[k]||'#00FF9F'}14` : 'transparent',
+                  color: filter===k ? KIND_COLOR[k]||'#00FF9F' : 'rgba(255,255,255,0.3)',
+                  transition:'all 0.1s' }}>
+                {k.toUpperCase().replace(/-/g,'_')}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div style={{ flex:1, overflowY:'auto', padding:'8px 0' }}>
+          {filtered.map(p => {
+            const active = selected?.slug === p.slug;
+            return (
+              <div key={p.slug} onClick={() => onSelect(p)}
+                style={{ padding:'10px 14px', cursor:'pointer',
+                  background: active ? 'rgba(255,215,0,0.05)' : 'transparent',
+                  borderLeft: active ? `2px solid ${KIND_COLOR[p.kind]||'#FFD700'}` : '2px solid transparent',
+                  borderBottom:'1px solid #12141A', transition:'all 0.1s' }}
+                onMouseEnter={e=>{ if(!active) e.currentTarget.style.background='rgba(255,255,255,0.025)'; }}
+                onMouseLeave={e=>{ if(!active) e.currentTarget.style.background='transparent'; }}>
+                <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:4 }}>
+                  <span style={{ fontFamily:'var(--font-mono)', fontSize:9,
+                    color:KIND_COLOR[p.kind]||'#fff', background:`${KIND_COLOR[p.kind]||'#fff'}14`,
+                    border:`1px solid ${KIND_COLOR[p.kind]||'#fff'}33`,
+                    padding:'1px 5px', borderRadius:2, flexShrink:0 }}>
+                    {p.kind?.replace(/-/g,'_').toUpperCase()}
+                  </span>
+                </div>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:11,
+                  color: active ? '#fff' : 'rgba(255,255,255,0.75)' }}>{p.slug}</div>
+                <div style={{ fontFamily:'var(--font-sans)', fontSize:11, color:'rgba(255,255,255,0.35)',
+                  marginTop:3, lineHeight:1.4 }}>{p.summary?.slice(0,80)}{p.summary?.length>80?'…':''}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function PromptDetail({ prompt }) {
+  if (!prompt) return (
+    <div style={{ height:'100%', display:'flex', alignItems:'center', justifyContent:'center',
+      flexDirection:'column', gap:12 }}>
+      <span style={{ fontFamily:'var(--font-mono)', fontSize:22, color:'rgba(255,215,0,0.15)' }}>◈</span>
+      <span style={{ fontFamily:'var(--font-mono)', fontSize:12, color:'rgba(255,255,255,0.4)',
+        letterSpacing:'0.06em' }}>select a prompt to inspect</span>
+      <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.2)' }}>
+        {D.prompts.length} prompts available
+      </span>
+    </div>
+  );
+  const linkedTask = D.tasks.find(t => t.id === prompt.relates_to_task || t.slug === prompt.relates_to_task);
+  const linkedResearch = D.research.find(r => r.executes_prompt === prompt.slug);
+
+  return (
+    <div style={{ padding:'20px', overflowY:'auto', height:'100%' }} className="slide-right" key={prompt.slug}>
+      <div style={{ marginBottom:14, paddingBottom:12, borderBottom:'1px solid #1E2028' }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.08em', marginBottom:6 }}>PROMPT // {prompt.created}</div>
+        <h2 style={{ fontFamily:'var(--font-mono)', fontSize:14, fontWeight:700,
+          color:KIND_COLOR[prompt.kind]||'#FFD700', letterSpacing:'-0.01em', marginBottom:8 }}>
+          {prompt.slug}
+        </h2>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:10,
+          color:KIND_COLOR[prompt.kind]||'#fff', background:`${KIND_COLOR[prompt.kind]||'#fff'}14`,
+          border:`1px solid ${KIND_COLOR[prompt.kind]||'#fff'}33`,
+          padding:'2px 8px', borderRadius:2 }}>
+          {prompt.kind}
+        </span>
+      </div>
+
+      <div style={{ background:'#0D0F18', border:'1px solid #1E2028', borderRadius:3,
+        padding:'12px 14px', marginBottom:14, fontFamily:'var(--font-mono)', fontSize:10 }}>
+        <div style={{ color:'rgba(255,255,255,0.2)', marginBottom:6 }}>--- frontmatter</div>
+        {[
+          ['type', 'prompt'],
+          ['slug', prompt.slug],
+          ['prompt_kind', prompt.kind],
+          ['created', prompt.created],
+          ['updated', prompt.updated],
+          ['prompt_relates_to_task', prompt.relates_to_task || 'null'],
+        ].map(([k,v]) => (
+          <div key={k} style={{ display:'flex', gap:8, lineHeight:1.8 }}>
+            <span style={{ color:'rgba(255,255,255,0.35)' }}>{k}:</span>
+            <span style={{ color:'#FFDF00' }}>{v}</span>
+          </div>
+        ))}
+        <div style={{ color:'rgba(255,255,255,0.2)', marginTop:6 }}>---</div>
+      </div>
+
+      <div style={{ marginBottom:14 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.1em', marginBottom:6 }}>SUMMARY</div>
+        <p style={{ fontFamily:'var(--font-sans)', fontSize:12, color:'rgba(255,255,255,0.7)', lineHeight:1.6 }}>
+          {prompt.summary}
+        </p>
+      </div>
+
+      {linkedTask && (
+        <div style={{ marginBottom:12 }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+            letterSpacing:'0.1em', marginBottom:6 }}>LINKED TASK</div>
+          <div style={{ background:'#111318', border:'1px solid #1E2028', borderRadius:3,
+            padding:'8px 12px', borderLeft:'2px solid rgba(0,255,159,0.4)' }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'#00FF9F' }}>
+              [{linkedTask.id}] {linkedTask.slug}
+            </div>
+            <StatusBadge status={linkedTask.status} small />
+          </div>
+        </div>
+      )}
+
+      {linkedResearch && (
+        <div>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+            letterSpacing:'0.1em', marginBottom:6 }}>SPAWNED RESEARCH</div>
+          <div style={{ background:'#111318', border:'1px solid #1E2028', borderRadius:3,
+            padding:'8px 12px', borderLeft:'2px solid rgba(255,223,0,0.4)' }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'#FFDF00' }}>{linkedResearch.slug}</div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+              marginTop:2 }}>phase:{linkedResearch.phase}</div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── RESEARCH VIEW ──────────────────────────────────────────────────────────
+function ResearchView({ selected, onSelect }) {
+  return (
+    <div style={{ display:'flex', flexDirection:'column', height:'100%' }}>
+      <div style={{ padding:'12px 14px 8px', borderBottom:'1px solid #1E2028', flexShrink:0 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+          letterSpacing:'0.1em' }}>RESEARCH // {D.research.length} workspaces</div>
+      </div>
+      <div style={{ flex:1, overflowY:'auto', padding:'8px 0' }}>
+        {D.research.map(r => {
+          const active = selected?.slug === r.slug;
+          const phase = r.phase === 'complete' ? 'complete' : 'in_progress_r';
+          return (
+            <div key={r.slug} onClick={() => onSelect(r)}
+              style={{ padding:'10px 14px', cursor:'pointer',
+                background: active ? 'rgba(255,223,0,0.04)' : 'transparent',
+                borderLeft: active ? '2px solid #FFDF00' : '2px solid transparent',
+                borderBottom:'1px solid #12141A', transition:'all 0.1s' }}
+              onMouseEnter={e=>{ if(!active) e.currentTarget.style.background='rgba(255,255,255,0.025)'; }}
+              onMouseLeave={e=>{ if(!active) e.currentTarget.style.background='transparent'; }}>
+              <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:4 }}>
+                <StatusBadge status={phase} small />
+              </div>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:11,
+                color: active ? '#fff' : 'rgba(255,255,255,0.75)' }}>{r.slug}</div>
+              <div style={{ fontFamily:'var(--font-sans)', fontSize:11, color:'rgba(255,255,255,0.35)',
+                marginTop:3, lineHeight:1.4 }}>{r.summary?.slice(0,80)}{r.summary?.length>80?'…':''}</div>
+              {r.executes_prompt && (
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,215,0,0.5)',
+                  marginTop:4 }}>executes: {r.executes_prompt}</div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function ResearchDetail({ research }) {
+  if (!research) return (
+    <div style={{ height:'100%', display:'flex', alignItems:'center', justifyContent:'center',
+      flexDirection:'column', gap:12 }}>
+      <span style={{ fontFamily:'var(--font-mono)', fontSize:22, color:'rgba(255,223,0,0.15)' }}>◎</span>
+      <span style={{ fontFamily:'var(--font-mono)', fontSize:12, color:'rgba(255,255,255,0.4)',
+        letterSpacing:'0.06em' }}>select a workspace to inspect</span>
+      <span style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.2)' }}>
+        {D.research.length} workspaces available
+      </span>
+    </div>
+  );
+  const linkedPrompt = D.prompts.find(p => p.slug === research.executes_prompt);
+
+  return (
+    <div style={{ padding:'20px', overflowY:'auto', height:'100%' }} className="slide-right" key={research.slug}>
+      <div style={{ marginBottom:14, paddingBottom:12, borderBottom:'1px solid #1E2028' }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.08em', marginBottom:6 }}>RESEARCH WORKSPACE // {research.created}</div>
+        <h2 style={{ fontFamily:'var(--font-mono)', fontSize:13, fontWeight:700,
+          color:'#FFDF00', marginBottom:8, lineHeight:1.3 }}>{research.slug}</h2>
+        <StatusBadge status={research.phase === 'complete' ? 'complete' : 'in_progress_r'} />
+      </div>
+
+      <div style={{ background:'#0D0F18', border:'1px solid #1E2028', borderRadius:3,
+        padding:'12px 14px', marginBottom:14, fontFamily:'var(--font-mono)', fontSize:10 }}>
+        <div style={{ color:'rgba(255,255,255,0.2)', marginBottom:6 }}>--- frontmatter</div>
+        {[
+          ['type', 'research'],
+          ['slug', research.slug.replace(/\//g,'-')],
+          ['research_phase', research.phase],
+          ['research_executes_prompt', research.executes_prompt || 'null'],
+          ['created', research.created],
+          ['updated', research.updated],
+        ].map(([k,v]) => (
+          <div key={k} style={{ display:'flex', gap:8, lineHeight:1.8 }}>
+            <span style={{ color:'rgba(255,255,255,0.35)' }}>{k}:</span>
+            <span style={{ color:'#FFDF00' }}>{v}</span>
+          </div>
+        ))}
+        <div style={{ color:'rgba(255,255,255,0.2)', marginTop:6 }}>---</div>
+      </div>
+
+      <div style={{ marginBottom:14 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.1em', marginBottom:6 }}>SUMMARY</div>
+        <p style={{ fontFamily:'var(--font-sans)', fontSize:12, color:'rgba(255,255,255,0.7)', lineHeight:1.6 }}>
+          {research.summary}
+        </p>
+      </div>
+
+      {linkedPrompt && (
+        <div style={{ marginBottom:12 }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+            letterSpacing:'0.1em', marginBottom:6 }}>EXECUTES PROMPT</div>
+          <div style={{ background:'#111318', border:'1px solid #1E2028', borderRadius:3,
+            padding:'8px 12px', borderLeft:`2px solid ${KIND_COLOR[linkedPrompt.kind]||'#FFD700'}66` }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:10,
+              color:KIND_COLOR[linkedPrompt.kind]||'#FFD700' }}>{linkedPrompt.slug}</div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+              marginTop:2 }}>{linkedPrompt.kind}</div>
+          </div>
+        </div>
+      )}
+
+      <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.15)',
+        borderTop:'1px solid #1E2028', paddingTop:10, marginTop:4 }}>
+        Structure: workspace/ · synthesis/ · reflection/ · output/
+      </div>
+    </div>
+  );
+}
+
+// ── AUDIT GRAPH ────────────────────────────────────────────────────────────
+function AuditGraph() {
+  const svgRef = useRef();
+  const [tooltip, setTooltip] = useState(null);
+  const [highlighted, setHighlighted] = useState(null);
+
+  const W = 1100, H = 680;
+
+  // Build nodes + edges
+  const nodes = useMemo(() => {
+    const all = [];
+    const xT = 90, xP = 430, xR = 780;
+    const tasks = D.tasks.filter(t => !['updated'].includes(t.status)).slice(0,14);
+    const prompts = D.prompts.slice(0,14);
+    const research = D.research.slice(0,12);
+
+    tasks.forEach((t,i) => all.push({
+      id: `t:${t.slug}`, type:'task', label:t.slug.slice(0,18), slug:t.slug,
+      status:t.status, x:xT, y:60 + i*(H-80)/(tasks.length-1||1),
+      color: t.status==='done'?'#00FF9F':t.status==='in_progress'?'#FFDF00':t.status==='blocked'?'#FF4500':'#FFD700',
+      raw:t
+    }));
+    prompts.forEach((p,i) => all.push({
+      id:`p:${p.slug}`, type:'prompt', label:p.slug.slice(0,18), slug:p.slug,
+      x:xP, y:60 + i*(H-80)/(prompts.length-1||1),
+      color:KIND_COLOR[p.kind]||'#fff', raw:p
+    }));
+    research.forEach((r,i) => all.push({
+      id:`r:${r.slug}`, type:'research', label:r.slug.slice(0,22), slug:r.slug,
+      x:xR, y:60 + i*(H-80)/(research.length-1||1),
+      color: r.phase==='complete'?'#00FF9F':'#FFDF00', raw:r
+    }));
+    return all;
+  }, []);
+
+  const edges = useMemo(() => {
+    const edgeList = [];
+    D.tasks.forEach(t => {
+      t.uses_prompts?.forEach(ps => {
+        const src = nodes.find(n => n.id===`t:${t.slug}`);
+        const dst = nodes.find(n => n.id===`p:${ps}`);
+        if (src && dst) edgeList.push({ src, dst, color:'rgba(0,255,159,0.25)', type:'task-prompt' });
+      });
+      t.spawns_research?.forEach(rs => {
+        const src = nodes.find(n => n.id===`t:${t.slug}`);
+        const dst = nodes.find(n => n.id===`r:${rs}`);
+        if (src && dst) edgeList.push({ src, dst, color:'rgba(255,215,0,0.2)', type:'task-research' });
+      });
+    });
+    D.research.forEach(r => {
+      if (r.executes_prompt) {
+        const src = nodes.find(n => n.id===`p:${r.executes_prompt}`);
+        const dst = nodes.find(n => n.id===`r:${r.slug}`);
+        if (src && dst) edgeList.push({ src, dst, color:'rgba(255,223,0,0.3)', type:'prompt-research' });
+      }
+    });
+    return edgeList;
+  }, [nodes]);
+
+  const activeEdges = highlighted
+    ? edges.filter(e => e.src.id===highlighted || e.dst.id===highlighted)
+    : edges;
+
+  return (
+    <div style={{ height:'100%', display:'flex', flexDirection:'column' }}>
+      <div style={{ padding:'12px 20px 10px', borderBottom:'1px solid #1E2028', flexShrink:0 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+          letterSpacing:'0.1em', marginBottom:4 }}>AUDIT GRAPH // Task → Prompt → Research</div>
+        <div style={{ display:'flex', gap:16 }}>
+          {[['Task','#00FF9F'],['Prompt','#FFD700'],['Research','#FFDF00']].map(([l,c]) => (
+            <div key={l} style={{ display:'flex', alignItems:'center', gap:5 }}>
+              <div style={{ width:8, height:8, borderRadius:1, background:c }}></div>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.4)' }}>{l}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{ flex:1, overflow:'auto', position:'relative' }}>
+        <svg width={W} height={H} style={{ display:'block', minWidth:W, minHeight:H }}>
+          <defs>
+            <filter id="glow-green">
+              <feGaussianBlur stdDeviation="2" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          {/* Column labels */}
+          {[['TASKS',90],['PROMPTS',430],['RESEARCH',780]].map(([l,x]) => (
+            <text key={l} x={x} y={24} textAnchor="middle"
+              style={{ fontFamily:'var(--font-mono)', fontSize:9, fill:'rgba(255,255,255,0.2)',
+                letterSpacing:'0.1em' }}>{l}</text>
+          ))}
+
+          {/* Edges */}
+          {edges.map((e,i) => {
+            const isActive = !highlighted || e.src.id===highlighted || e.dst.id===highlighted;
+            const x1 = e.src.x + 78, y1 = e.src.y;
+            const x2 = e.dst.x - 78, y2 = e.dst.y;
+            const mx = (x1+x2)/2;
+            return (
+              <path key={i}
+                d={`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`}
+                fill="none"
+                stroke={isActive ? e.color : 'rgba(255,255,255,0.04)'}
+                strokeWidth={isActive && highlighted && (e.src.id===highlighted||e.dst.id===highlighted) ? 2 : 1}
+                style={{ transition:'all 0.2s' }}
+              />
+            );
+          })}
+
+          {/* Nodes */}
+          {nodes.map(n => (
+            <g key={n.id} transform={`translate(${n.x},${n.y})`}
+              style={{ cursor:'pointer' }}
+              onMouseEnter={() => { setHighlighted(n.id); setTooltip(n); }}
+              onMouseLeave={() => { setHighlighted(null); setTooltip(null); }}>
+              <rect x={-78} y={-13} width={156} height={26} rx={2}
+                fill={highlighted===n.id ? `${n.color}20` : '#111318'}
+                stroke={highlighted===n.id ? n.color : '#252830'}
+                strokeWidth={highlighted===n.id ? 1.5 : 1}
+                style={{ transition:'all 0.15s' }}
+              />
+              <circle cx={-64} cy={0} r={4} fill={n.color}
+                style={{ filter: highlighted===n.id ? `drop-shadow(0 0 4px ${n.color})` : 'none' }}/>
+              <text x={-54} y={4} style={{ fontFamily:'var(--font-mono)', fontSize:9,
+                fill: highlighted===n.id ? '#fff' : 'rgba(255,255,255,0.65)',
+                pointerEvents:'none' }}>
+                {n.label}
+              </text>
+            </g>
+          ))}
+        </svg>
+
+        {/* Tooltip */}
+        {tooltip && (
+          <div style={{ position:'absolute', top:20, right:20, width:260,
+            background:'#0D0F18', border:`1px solid ${tooltip.color}44`,
+            borderRadius:3, padding:'12px 14px', pointerEvents:'none',
+            boxShadow:`0 8px 32px rgba(0,0,0,0.6)` }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:tooltip.color,
+              letterSpacing:'0.1em', marginBottom:4 }}>{tooltip.type.toUpperCase()}</div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'#fff',
+              marginBottom:6 }}>{tooltip.slug}</div>
+            <div style={{ fontFamily:'var(--font-sans)', fontSize:11, color:'rgba(255,255,255,0.5)',
+              lineHeight:1.5 }}>{tooltip.raw.summary?.slice(0,100)}…</div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── FRICTION LOG VIEWER ────────────────────────────────────────────────────
+const FL_CFG = {
+  FL0: { label:'NO FRICTION',  color:'#00FF9F', desc:'clean run' },
+  FL1: { label:'MINOR',        color:'#FFD700', desc:'self-resolved' },
+  FL2: { label:'MAJOR',        color:'#FF8C00', desc:'manual triage required' },
+  FL3: { label:'BLOCKING',     color:'#FF4500', desc:'execution halted' },
+};
+
+function FrictionLogView() {
+  const [filter, setFilter] = useState('all');
+  const [selected, setSelected] = useState(D.frictionLogs[0]);
+
+  const filtered = filter==='all' ? D.frictionLogs : D.frictionLogs.filter(f => f.level === filter);
+  const counts = { FL0:0, FL1:0, FL2:0, FL3:0 };
+  D.frictionLogs.forEach(f => counts[f.level]++);
+  const total = D.frictionLogs.length;
+
+  const totalTokens = D.frictionLogs.reduce((s,f) => s + (f.tokens||0), 0);
+
+  return (
+    <div style={{ height:'100%', display:'flex', overflow:'hidden' }} className="animate-in">
+      {/* List column */}
+      <div style={{ width:340, borderRight:'1px solid #1E2028', display:'flex', flexDirection:'column', flexShrink:0 }}>
+        <div style={{ padding:'14px 16px 10px', borderBottom:'1px solid #1E2028' }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+            letterSpacing:'0.1em', marginBottom:8 }}>FRICTION LOG // {total} entries</div>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:6, marginBottom:10 }}>
+            {Object.entries(FL_CFG).map(([k,c]) => (
+              <div key={k} onClick={() => setFilter(filter===k ? 'all' : k)}
+                style={{ background: filter===k ? `${c.color}14` : '#111318',
+                  border: `1px solid ${filter===k ? c.color : '#1E2028'}`,
+                  borderRadius:2, padding:'6px 8px', cursor:'pointer',
+                  transition:'all 0.12s' }}>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:c.color, fontWeight:700 }}>{k}</div>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:14, color:'#fff', marginTop:2,
+                  letterSpacing:'-0.02em' }}>{counts[k]}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ display:'flex', gap:4, fontFamily:'var(--font-mono)', fontSize:9 }}>
+            <button onClick={() => setFilter('all')} style={{
+              padding:'3px 8px', border:`1px solid ${filter==='all' ? '#00FF9F' : '#252830'}`,
+              background: filter==='all' ? 'rgba(0,255,159,0.08)' : 'transparent',
+              color: filter==='all' ? '#00FF9F' : 'rgba(255,255,255,0.3)',
+              borderRadius:2, cursor:'pointer' }}>ALL</button>
+            <span style={{ marginLeft:'auto', color:'rgba(255,255,255,0.25)', alignSelf:'center' }}>
+              Σ {(totalTokens/1000).toFixed(1)}k tokens
+            </span>
+          </div>
+        </div>
+        <div style={{ flex:1, overflowY:'auto' }}>
+          {filtered.map((f,i) => {
+            const cfg = FL_CFG[f.level];
+            const active = selected === f;
+            return (
+              <div key={i} onClick={() => setSelected(f)}
+                style={{ padding:'12px 16px', cursor:'pointer',
+                  background: active ? `${cfg.color}0A` : 'transparent',
+                  borderLeft: active ? `2px solid ${cfg.color}` : '2px solid transparent',
+                  borderBottom:'1px solid #12141A',
+                  transition:'all 0.1s' }}
+                onMouseEnter={e=>{ if(!active) e.currentTarget.style.background='rgba(255,255,255,0.02)'; }}
+                onMouseLeave={e=>{ if(!active) e.currentTarget.style.background='transparent'; }}>
+                <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:5 }}>
+                  <span style={{ fontFamily:'var(--font-mono)', fontSize:9, fontWeight:700,
+                    color:cfg.color, background:`${cfg.color}14`,
+                    border:`1px solid ${cfg.color}33`,
+                    padding:'1px 6px', borderRadius:2 }}>{f.level}</span>
+                  <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.25)' }}>
+                    task:{f.task}
+                  </span>
+                  <span style={{ marginLeft:'auto', fontFamily:'var(--font-mono)', fontSize:9,
+                    color:'rgba(255,255,255,0.3)' }}>{f.duration}</span>
+                </div>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.3)',
+                  marginBottom:4 }}>{f.session.replace('T',' ').slice(0,16)}Z</div>
+                <div style={{ fontFamily:'var(--font-sans)', fontSize:11, color:'rgba(255,255,255,0.6)',
+                  lineHeight:1.5 }}>{f.note.slice(0,82)}{f.note.length>82?'…':''}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Detail */}
+      {selected && <FrictionDetail entry={selected} />}
+    </div>
+  );
+}
+
+function FrictionDetail({ entry }) {
+  const cfg = FL_CFG[entry.level];
+  const task = D.tasks.find(t => t.id === entry.task);
+  return (
+    <div style={{ flex:1, overflowY:'auto', padding:'24px' }} className="slide-right" key={entry.session}>
+      <div style={{ marginBottom:18, paddingBottom:14, borderBottom:'1px solid #1E2028' }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.08em', marginBottom:8 }}>FRICTION ENTRY // {entry.session}</div>
+        <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:6 }}>
+          <span style={{ fontFamily:'var(--font-mono)', fontSize:13, fontWeight:700, color:cfg.color,
+            background:`${cfg.color}14`, border:`1px solid ${cfg.color}55`,
+            padding:'4px 12px', borderRadius:2, letterSpacing:'0.08em' }}>
+            {entry.level} · {cfg.label}
+          </span>
+          <span style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'rgba(255,255,255,0.4)' }}>{cfg.desc}</span>
+        </div>
+        <h2 style={{ fontFamily:'var(--font-mono)', fontSize:14, color:'#fff', fontWeight:600, marginTop:8 }}>
+          ▸ task <span style={{ color:'#00FF9F' }}>{entry.task}</span>
+          {task && <span style={{ color:'rgba(255,255,255,0.4)' }}> · {task.slug}</span>}
+        </h2>
+      </div>
+
+      {/* Run stats */}
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:10, marginBottom:20 }}>
+        {[
+          { label:'AGENT', val:entry.agent, color:'#fff' },
+          { label:'DURATION', val:entry.duration, color:'#FFDF00' },
+          { label:'TOKENS', val:`${(entry.tokens/1000).toFixed(1)}k`, color:'#00FF9F' },
+        ].map(s => (
+          <div key={s.label} style={{ background:'#0D0F18', border:'1px solid #1E2028',
+            borderRadius:3, padding:'10px 12px' }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.3)',
+              letterSpacing:'0.1em', marginBottom:4 }}>{s.label}</div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:14, color:s.color, fontWeight:600 }}>{s.val}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Note */}
+      <div style={{ marginBottom:18 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.1em', marginBottom:6 }}>NOTE</div>
+        <div style={{ background:'#0D0F18', border:'1px solid #1E2028',
+          borderLeft:`2px solid ${cfg.color}`, borderRadius:3, padding:'14px 16px',
+          fontFamily:'var(--font-sans)', fontSize:13, color:'rgba(255,255,255,0.78)', lineHeight:1.65 }}>
+          {entry.note}
+        </div>
+      </div>
+
+      {/* Metric chart */}
+      <div style={{ marginBottom:14 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.1em', marginBottom:8 }}>SESSION TOKEN PROFILE (synthetic)</div>
+        <div style={{ background:'#0D0F18', border:'1px solid #1E2028', borderRadius:3,
+          padding:'14px', display:'flex', alignItems:'flex-end', gap:3, height:80 }}>
+          {Array.from({length:48}).map((_,i) => {
+            const seed = Math.sin(i * 0.7 + (entry.tokens||1)) * 0.5 + 0.5;
+            const h = 14 + seed * 56;
+            return <div key={i} style={{ flex:1, height:h, background: i > 36 && entry.level==='FL3' ? '#FF4500' : `${cfg.color}88`,
+              opacity: 0.4 + seed*0.6 }}></div>;
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── PRE-COMMIT VIEWER ──────────────────────────────────────────────────────
+const CHECK_CFG = {
+  pass: { color:'#00FF9F', sym:'✓' },
+  fail: { color:'#FF4500', sym:'✗' },
+  warn: { color:'#FFD700', sym:'!' },
+  skip: { color:'rgba(255,255,255,0.25)', sym:'∅' },
+};
+
+function PrecommitView() {
+  const [selected, setSelected] = useState(D.precommitRuns[0]);
+  return (
+    <div style={{ height:'100%', display:'flex', overflow:'hidden' }} className="animate-in">
+      {/* Run list */}
+      <div style={{ width:300, borderRight:'1px solid #1E2028', display:'flex', flexDirection:'column', flexShrink:0 }}>
+        <div style={{ padding:'14px 16px 10px', borderBottom:'1px solid #1E2028' }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+            letterSpacing:'0.1em' }}>PRE-COMMIT // {D.precommitRuns.length} runs</div>
+        </div>
+        <div style={{ flex:1, overflowY:'auto' }}>
+          {D.precommitRuns.map(run => {
+            const active = selected === run;
+            const passC = run.checks.filter(c => c.status==='pass').length;
+            const failC = run.checks.filter(c => c.status==='fail').length;
+            const warnC = run.checks.filter(c => c.status==='warn').length;
+            const cfg = run.status === 'pass' ? CHECK_CFG.pass : CHECK_CFG.fail;
+            return (
+              <div key={run.id} onClick={() => setSelected(run)}
+                style={{ padding:'12px 16px', cursor:'pointer',
+                  background: active ? `${cfg.color}0A` : 'transparent',
+                  borderLeft: active ? `2px solid ${cfg.color}` : '2px solid transparent',
+                  borderBottom:'1px solid #12141A' }}
+                onMouseEnter={e=>{ if(!active) e.currentTarget.style.background='rgba(255,255,255,0.025)'; }}
+                onMouseLeave={e=>{ if(!active) e.currentTarget.style.background='transparent'; }}>
+                <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:5 }}>
+                  <span style={{ fontFamily:'var(--font-mono)', fontSize:11, fontWeight:700,
+                    color:cfg.color }}>{cfg.sym}</span>
+                  <span style={{ fontFamily:'var(--font-mono)', fontSize:9, fontWeight:700,
+                    color:cfg.color, letterSpacing:'0.08em' }}>{run.status.toUpperCase()}</span>
+                  <span style={{ marginLeft:'auto', fontFamily:'var(--font-mono)', fontSize:9,
+                    color:'rgba(255,255,255,0.3)' }}>{run.duration}</span>
+                </div>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:10,
+                  color: active ? '#fff' : 'rgba(255,255,255,0.7)', marginBottom:3 }}>
+                  {run.commit} <span style={{ color:'rgba(255,255,255,0.3)' }}>· {run.branch}</span>
+                </div>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)' }}>
+                  {run.ts.replace('T',' ').slice(0,19)}Z
+                </div>
+                <div style={{ display:'flex', gap:8, marginTop:5, fontFamily:'var(--font-mono)', fontSize:9 }}>
+                  {passC > 0 && <span style={{ color:'#00FF9F' }}>{passC} pass</span>}
+                  {warnC > 0 && <span style={{ color:'#FFD700' }}>{warnC} warn</span>}
+                  {failC > 0 && <span style={{ color:'#FF4500' }}>{failC} fail</span>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Run detail / terminal output */}
+      {selected && <PrecommitDetail run={selected} />}
+    </div>
+  );
+}
+
+function PrecommitDetail({ run }) {
+  const overall = run.status === 'pass' ? CHECK_CFG.pass : CHECK_CFG.fail;
+  return (
+    <div style={{ flex:1, overflowY:'auto', padding:'24px' }} className="slide-right" key={run.id}>
+      <div style={{ marginBottom:16, paddingBottom:14, borderBottom:'1px solid #1E2028' }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.08em', marginBottom:6 }}>
+          GOVERNANCE GATE // {run.id}
+        </div>
+        <h2 style={{ fontFamily:'var(--font-mono)', fontSize:15, color:overall.color, marginBottom:8 }}>
+          {overall.sym} pre-commit {run.status.toUpperCase()}
+        </h2>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'rgba(255,255,255,0.5)' }}>
+          <span style={{ color:'#FFDF00' }}>{run.commit}</span> on <span style={{ color:'#00FF9F' }}>{run.branch}</span>
+          {' '}<span style={{ color:'rgba(255,255,255,0.3)' }}>· {run.author}</span>
+          {' '}<span style={{ color:'rgba(255,255,255,0.3)' }}>· {run.duration}</span>
+        </div>
+      </div>
+
+      {/* Terminal-style output */}
+      <div style={{ background:'#06080F', border:'1px solid #1E2028', borderRadius:3,
+        padding:'14px 16px', fontFamily:'var(--font-mono)', fontSize:11, lineHeight:1.7,
+        marginBottom:16 }}>
+        <div style={{ color:'rgba(255,255,255,0.3)' }}>
+          <span style={{ color:'#00FF9F' }}>$</span> agency precommit --branch {run.branch}
+        </div>
+        <div style={{ color:'rgba(255,255,255,0.25)', marginBottom:8 }}>
+          ┌─ governance gate · {run.checks.length} checks ─┐
+        </div>
+        {run.checks.map((c,i) => {
+          const cfg = CHECK_CFG[c.status];
+          return (
+            <div key={i} style={{ display:'flex', gap:10, padding:'4px 0',
+              borderBottom: i < run.checks.length-1 ? '1px dashed #161820' : 'none' }}>
+              <span style={{ color:cfg.color, fontWeight:700, minWidth:14 }}>{cfg.sym}</span>
+              <span style={{ color:cfg.color, minWidth:54, fontWeight:600 }}>[{c.status}]</span>
+              <span style={{ color:'rgba(255,255,255,0.65)', minWidth:200 }}>{c.id}</span>
+              <span style={{ color:'rgba(255,255,255,0.4)', flex:1 }}>{c.details}</span>
+            </div>
+          );
+        })}
+        <div style={{ color:'rgba(255,255,255,0.25)', marginTop:8 }}>
+          └─ exit {run.status === 'pass' ? '0' : '1'} · {run.duration}</div>
+        <div style={{ color: overall.color, marginTop:6, fontWeight:600 }}>
+          {overall.sym} {run.status === 'pass' ? 'commit allowed' : 'commit BLOCKED — fix and retry'}
+        </div>
+      </div>
+
+      {/* Per-check cards */}
+      <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.25)',
+        letterSpacing:'0.1em', marginBottom:8 }}>CHECK BREAKDOWN</div>
+      <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
+        {run.checks.map((c,i) => {
+          const cfg = CHECK_CFG[c.status];
+          return (
+            <div key={i} style={{ background:'#0D0F18', border:'1px solid #1E2028',
+              borderLeft:`2px solid ${cfg.color}`, borderRadius:3, padding:'10px 14px',
+              display:'flex', gap:14, alignItems:'center' }}>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:14, color:cfg.color,
+                fontWeight:700, minWidth:14 }}>{cfg.sym}</span>
+              <div style={{ flex:1 }}>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'#fff' }}>{c.id}</div>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.4)',
+                  marginTop:3, lineHeight:1.5 }}>{c.details}</div>
+              </div>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:9, fontWeight:700,
+                color:cfg.color, background:`${cfg.color}14`,
+                border:`1px solid ${cfg.color}44`,
+                padding:'2px 8px', borderRadius:2 }}>{c.status.toUpperCase()}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── LLM-WIKI ────────────────────────────────────────────────────────────
+// Obsidian-inspired bidirectional knowledge graph over frontmatter data.
+// Every task / prompt / research is a node; uses_prompts, executes_prompt,
+// relates_to_task, spawns_research are edges. Wikilinks resolved live.
+
+function buildWikiNode(item, type) {
+  let id, title, body, links, color;
+  if (type === 'task') {
+    id = `task/${item.id}`;
+    title = `Task ${item.id} · ${item.slug}`;
+    color = '#00FF9F';
+    links = [
+      ...(item.uses_prompts || []).map(s => ({ to: `prompt/${s}`, kind: 'uses prompt' })),
+      ...(item.spawns_research || []).map(s => ({ to: `research/${s}`, kind: 'spawns research' })),
+    ];
+    body = `# ${title}\n\n**Status:** ${item.status} · **Priority:** ${item.priority || '—'} · **Owner:** ${item.owner || 'unassigned'}\n\n## Summary\n\n${item.summary}\n\n## Linked Prompts\n\n${(item.uses_prompts||[]).length ? item.uses_prompts.map(p => `- [[prompt/${p}]]`).join('\\n') : '_none_'}\n\n## Spawned Research\n\n${(item.spawns_research||[]).length ? item.spawns_research.map(r => `- [[research/${r}]]`).join('\\n') : '_none_'}`;
+  } else if (type === 'prompt') {
+    id = `prompt/${item.slug}`;
+    title = `Prompt · ${item.slug}`;
+    color = '#FFD700';
+    links = item.relates_to_task ? [{ to: `task/${item.relates_to_task}`, kind: 'relates to task' }] : [];
+    body = `# ${title}\n\n**Kind:** ${item.kind}\n\n## Summary\n\n${item.summary}\n\n## Relates to\n\n${item.relates_to_task ? `[[task/${item.relates_to_task}]]` : '_unscoped_'}`;
+  } else {
+    id = `research/${item.slug}`;
+    title = `Research · ${item.slug}`;
+    color = '#FFDF00';
+    links = item.executes_prompt ? [{ to: `prompt/${item.executes_prompt}`, kind: 'executes prompt' }] : [];
+    body = `# ${title}\n\n**Phase:** ${item.phase}\n\n## Summary\n\n${item.summary}\n\n## Executes\n\n${item.executes_prompt ? `[[prompt/${item.executes_prompt}]]` : '_no upstream prompt_'}`;
+  }
+  return { id, type, title, body, links, color, raw: item };
+}
+
+const WIKI_NODES = (() => {
+  const all = [];
+  D.tasks.forEach(t => all.push(buildWikiNode(t, 'task')));
+  D.prompts.forEach(p => all.push(buildWikiNode(p, 'prompt')));
+  D.research.forEach(r => all.push(buildWikiNode(r, 'research')));
+  // backlinks index
+  const backlinks = {};
+  all.forEach(n => n.links.forEach(l => {
+    backlinks[l.to] = backlinks[l.to] || [];
+    backlinks[l.to].push({ from: n.id, kind: l.kind });
+  }));
+  all.forEach(n => { n.backlinks = backlinks[n.id] || []; });
+  return all;
+})();
+
+// Curated synthetic next-research questions, anchored to actual nodes
+const NEXT_RESEARCH = [
+  { q: "How should fm-edit semantically resolve nested-list mutations — merge or replace?", anchors: ["task/016", "research/flexible-frontmatter-toolchain"], priority: "P0", confidence: 0.82 },
+  { q: "What is the contract between skills-query and the stateless fm-query CLI under concurrent reads?", anchors: ["task/022", "prompt/skills-frontmatter-index-suite"], priority: "P1", confidence: 0.71 },
+  { q: "Can the duplicate task_id collisions (006a/b, 009a/b) be migrated without breaking historical friction-log references?", anchors: ["task/024", "task/007"], priority: "P1", confidence: 0.88 },
+  { q: "Which spec sections in Spec-J/K/L are not yet covered by any existing linter or hook?", anchors: ["task/001", "research/agentic-eval-trust-improvement-spec"], priority: "P1", confidence: 0.65 },
+  { q: "What is the empirical FL-distribution shift after enabling strict pre-commit governance?", anchors: ["task/008", "task/012"], priority: "P2", confidence: 0.58 },
+  { q: "How does Narrative Ontology composition interact with the skill_* L2 namespace under cross-skill triggers?", anchors: ["task/015", "research/skills-namespace-ontology"], priority: "P2", confidence: 0.49 },
+  { q: "Should the coherence-check baseline include a deferred-stub burn-down SLA?", anchors: ["task/008", "task/021"], priority: "P2", confidence: 0.74 },
+];
+
+function WikiView({ onNavigate }) {
+  const [currentId, setCurrentId] = useState('task/000');
+  const [graphHover, setGraphHover] = useState(null);
+  const [search, setSearch] = useState('');
+  const [history, setHistory] = useState(['task/000']);
+
+  const node = WIKI_NODES.find(n => n.id === currentId);
+
+  const navigateTo = useCallback((id) => {
+    if (!WIKI_NODES.find(n => n.id === id)) return;
+    setCurrentId(id);
+    setHistory(h => [...h.slice(-9), id]);
+  }, []);
+
+  const filtered = useMemo(() => {
+    if (!search.trim()) return WIKI_NODES;
+    const lq = search.toLowerCase();
+    return WIKI_NODES.filter(n => n.title.toLowerCase().includes(lq) || n.body.toLowerCase().includes(lq));
+  }, [search]);
+
+  // Suggested questions filtered by current node anchors
+  const relevantQuestions = NEXT_RESEARCH.filter(q => q.anchors.includes(currentId));
+  const otherQuestions = NEXT_RESEARCH.filter(q => !q.anchors.includes(currentId)).slice(0, 3);
+
+  return (
+    <div style={{ height:'100%', display:'flex', overflow:'hidden' }} className="animate-in">
+      {/* Files explorer */}
+      <div style={{ width:260, borderRight:'1px solid #1E2028', display:'flex',
+        flexDirection:'column', flexShrink:0, background:'#0B0D17' }}>
+        <div style={{ padding:'14px 14px 10px', borderBottom:'1px solid #1E2028' }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+            letterSpacing:'0.1em', marginBottom:8 }}>VAULT // {WIKI_NODES.length} notes</div>
+          <input value={search} onChange={e=>setSearch(e.target.value)}
+            placeholder="filter…"
+            style={{ width:'100%', background:'#06080F', border:'1px solid #1E2028',
+              borderRadius:2, padding:'5px 8px', color:'#fff',
+              fontFamily:'var(--font-mono)', fontSize:11, outline:'none' }}
+            onFocus={e => e.currentTarget.style.borderColor = '#00FF9F'}
+            onBlur={e => e.currentTarget.style.borderColor = '#1E2028'} />
+        </div>
+        <div style={{ flex:1, overflowY:'auto', padding:'4px 0' }}>
+          {['task','prompt','research'].map(t => {
+            const items = filtered.filter(n => n.type === t);
+            if (!items.length) return null;
+            const TYPE_LABEL = { task:'TASKS', prompt:'PROMPTS', research:'RESEARCH' };
+            const TYPE_COLOR = { task:'#00FF9F', prompt:'#FFD700', research:'#FFDF00' };
+            return (
+              <div key={t}>
+                <div style={{ padding:'8px 14px 4px', fontFamily:'var(--font-mono)', fontSize:8,
+                  color:'rgba(255,255,255,0.25)', letterSpacing:'0.1em' }}>
+                  ▸ {TYPE_LABEL[t]} <span style={{ color:'rgba(255,255,255,0.15)' }}>({items.length})</span>
+                </div>
+                {items.map(n => {
+                  const active = n.id === currentId;
+                  return (
+                    <div key={n.id} onClick={() => navigateTo(n.id)}
+                      style={{ padding:'5px 14px 5px 22px', cursor:'pointer',
+                        background: active ? `${TYPE_COLOR[t]}10` : 'transparent',
+                        borderLeft: active ? `2px solid ${TYPE_COLOR[t]}` : '2px solid transparent',
+                        fontFamily:'var(--font-mono)', fontSize:10,
+                        color: active ? '#fff' : 'rgba(255,255,255,0.55)',
+                        whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis',
+                        transition:'all 0.1s' }}
+                      onMouseEnter={e=>{ if(!active) e.currentTarget.style.background='rgba(255,255,255,0.025)'; }}
+                      onMouseLeave={e=>{ if(!active) e.currentTarget.style.background='transparent'; }}>
+                      {t === 'task' ? `${n.raw.id} · ${n.raw.slug}` : n.raw.slug}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Note pane */}
+      <div style={{ flex:1, display:'flex', flexDirection:'column', overflow:'hidden', minWidth:0 }}>
+        {/* Breadcrumb */}
+        <div style={{ padding:'10px 20px', borderBottom:'1px solid #1E2028',
+          display:'flex', alignItems:'center', gap:8, flexShrink:0 }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.3)' }}>
+            <span style={{ color:'rgba(255,255,255,0.2)' }}>/vault/</span>
+            <span style={{ color: node?.color }}>{node?.id}.md</span>
+          </div>
+          <div style={{ flex:1 }}></div>
+          <div style={{ display:'flex', gap:4 }}>
+            {history.slice(-5).reverse().map((h,i) => (
+              <button key={i} onClick={() => navigateTo(h)}
+                style={{ fontFamily:'var(--font-mono)', fontSize:9,
+                  padding:'2px 7px', border:'1px solid #1E2028', borderRadius:2,
+                  background: h === currentId ? '#1A1D24' : 'transparent',
+                  color: h === currentId ? '#fff' : 'rgba(255,255,255,0.4)',
+                  cursor:'pointer' }}>
+                {h.split('/')[1].slice(0,12)}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ flex:1, overflowY:'auto', padding:'24px 28px' }} key={currentId} className="animate-in">
+          {/* Title block */}
+          <div style={{ marginBottom:18 }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:9,
+              color:node?.color, letterSpacing:'0.1em', marginBottom:6 }}>
+              ◇ {node?.type.toUpperCase()} NODE · {node?.backlinks.length} backlink{node?.backlinks.length!==1?'s':''} · {node?.links.length} outgoing
+            </div>
+            <h1 style={{ fontFamily:'var(--font-sans)', fontSize:22, fontWeight:700,
+              color:'#fff', letterSpacing:'-0.02em', lineHeight:1.2 }}>
+              {node?.title}
+            </h1>
+          </div>
+
+          {/* Markdown body w/ wikilinks */}
+          <div style={{ marginBottom:24, fontFamily:'var(--font-sans)', fontSize:13,
+            color:'rgba(255,255,255,0.78)', lineHeight:1.65 }}>
+            {renderMarkdown(node?.body || '', navigateTo)}
+          </div>
+
+          {/* LLM next-research questions */}
+          <SuggestedQuestions current={currentId} relevant={relevantQuestions} other={otherQuestions}
+            navigateTo={navigateTo} />
+
+          {/* Backlinks */}
+          {node?.backlinks?.length > 0 && (
+            <div style={{ marginTop:24 }}>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:8,
+                color:'rgba(255,255,255,0.25)', letterSpacing:'0.1em', marginBottom:8 }}>
+                ◂ BACKLINKS ({node.backlinks.length})
+              </div>
+              <div style={{ display:'flex', flexDirection:'column', gap:5 }}>
+                {node.backlinks.map((b,i) => {
+                  const src = WIKI_NODES.find(n => n.id === b.from);
+                  return (
+                    <div key={i} onClick={() => navigateTo(b.from)}
+                      style={{ background:'#0D0F18', border:'1px solid #1E2028',
+                        borderLeft:`2px solid ${src?.color}66`,
+                        borderRadius:3, padding:'8px 12px', cursor:'pointer',
+                        transition:'all 0.12s' }}
+                      onMouseEnter={e=>{ e.currentTarget.style.borderLeftColor = src?.color; e.currentTarget.style.background='#111318'; }}
+                      onMouseLeave={e=>{ e.currentTarget.style.borderLeftColor = `${src?.color}66`; e.currentTarget.style.background='#0D0F18'; }}>
+                      <div style={{ fontFamily:'var(--font-mono)', fontSize:10,
+                        color:src?.color, marginBottom:2 }}>{src?.id}</div>
+                      <div style={{ fontFamily:'var(--font-mono)', fontSize:9,
+                        color:'rgba(255,255,255,0.4)' }}>via "{b.kind}"</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Right rail: filterable schema-aware graph */}
+      <div style={{ width:340, borderLeft:'1px solid #1E2028', display:'flex',
+        flexDirection:'column', flexShrink:0, background:'#0B0D17' }}>
+        <FilterableGraph current={currentId} navigateTo={navigateTo} />
+      </div>
+    </div>
+  );
+}
+
+// Inline markdown renderer with [[wikilink]] resolution
+function renderMarkdown(src, navigateTo) {
+  const lines = src.split('\n');
+  return lines.map((line, i) => {
+    if (line.startsWith('# ')) {
+      return null; // title shown separately
+    }
+    if (line.startsWith('## ')) {
+      return <h2 key={i} style={{ fontFamily:'var(--font-sans)', fontSize:13, fontWeight:600,
+        color:'#fff', marginTop:16, marginBottom:8, paddingBottom:4,
+        borderBottom:'1px solid #1E2028', letterSpacing:'-0.01em' }}>{line.slice(3)}</h2>;
+    }
+    if (line.startsWith('- ')) {
+      return <div key={i} style={{ paddingLeft:14, marginBottom:3 }}>
+        <span style={{ color:'rgba(255,255,255,0.3)', marginRight:6 }}>·</span>
+        {renderInline(line.slice(2), navigateTo)}
+      </div>;
+    }
+    if (!line.trim()) return <div key={i} style={{ height:6 }}></div>;
+    return <div key={i} style={{ marginBottom:6 }}>{renderInline(line, navigateTo)}</div>;
+  });
+}
+
+function renderInline(text, navigateTo) {
+  // [[wikilink]] then **bold** then _italic_
+  const parts = [];
+  const re = /\[\[([^\]]+)\]\]|\*\*([^*]+)\*\*|_([^_]+)_/g;
+  let last = 0; let m; let key = 0;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) parts.push(<span key={key++}>{text.slice(last, m.index)}</span>);
+    if (m[1]) {
+      const target = m[1];
+      const exists = WIKI_NODES.find(n => n.id === target);
+      const color = exists?.color || '#FF4500';
+      parts.push(
+        <span key={key++} onClick={() => exists && navigateTo(target)}
+          style={{ fontFamily:'var(--font-mono)', fontSize:12, color,
+            background:`${color}14`, border:`1px solid ${color}33`,
+            padding:'1px 6px', borderRadius:2, cursor: exists ? 'pointer' : 'not-allowed',
+            opacity: exists ? 1 : 0.5, textDecoration: exists ? 'none' : 'line-through',
+            transition:'all 0.1s' }}
+          onMouseEnter={e => exists && (e.currentTarget.style.background=`${color}28`)}
+          onMouseLeave={e => exists && (e.currentTarget.style.background=`${color}14`)}>
+          {target}
+        </span>
+      );
+    } else if (m[2]) {
+      parts.push(<strong key={key++} style={{ color:'#fff', fontWeight:600 }}>{m[2]}</strong>);
+    } else if (m[3]) {
+      parts.push(<em key={key++} style={{ color:'rgba(255,255,255,0.5)', fontStyle:'italic' }}>{m[3]}</em>);
+    }
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) parts.push(<span key={key++}>{text.slice(last)}</span>);
+  return parts;
+}
+
+// ── FILTERABLE SCHEMA-AWARE GRAPH ──────────────────────────────────────
+// Exposes every entity type + every frontmatter relation as a toggleable filter.
+// Walks the full graph (not just 1-hop) and ranks neighbours by graph distance.
+
+const ENTITY_SCHEMA = {
+  task:     { label:'Task',     color:'#00FF9F', sym:'▸',
+              statuses:['done','open','in_progress','blocked','updated'],
+              priorities:['P0','P1','P2'] },
+  prompt:   { label:'Prompt',   color:'#FFD700', sym:'◈',
+              kinds:['task-spec','research-proposal','tool-instruction','follow-up'] },
+  research: { label:'Research', color:'#FFDF00', sym:'◎',
+              phases:['complete','in_progress'] },
+};
+
+const RELATION_SCHEMA = [
+  { id:'uses_prompt',      label:'task → prompt',      from:'task',     to:'prompt',   color:'rgba(0,255,159,0.45)' },
+  { id:'spawns_research',  label:'task → research',    from:'task',     to:'research', color:'rgba(0,255,159,0.30)' },
+  { id:'relates_to_task',  label:'prompt → task',      from:'prompt',   to:'task',     color:'rgba(255,215,0,0.40)' },
+  { id:'executes_prompt',  label:'research → prompt',  from:'research', to:'prompt',   color:'rgba(255,223,0,0.45)' },
+];
+
+function buildFullGraph() {
+  const idx = {};
+  WIKI_NODES.forEach(n => { idx[n.id] = { ...n, edges: [] }; });
+  D.tasks.forEach(t => {
+    (t.uses_prompts||[]).forEach(s => {
+      const e = { rel:'uses_prompt', from:`task/${t.id}`, to:`prompt/${s}` };
+      if (idx[e.from] && idx[e.to]) { idx[e.from].edges.push(e); idx[e.to].edges.push(e); }
+    });
+    (t.spawns_research||[]).forEach(s => {
+      const e = { rel:'spawns_research', from:`task/${t.id}`, to:`research/${s}` };
+      if (idx[e.from] && idx[e.to]) { idx[e.from].edges.push(e); idx[e.to].edges.push(e); }
+    });
+  });
+  D.prompts.forEach(p => {
+    if (p.relates_to_task) {
+      const taskNode = D.tasks.find(t => t.id === p.relates_to_task || t.slug === p.relates_to_task);
+      if (taskNode) {
+        const e = { rel:'relates_to_task', from:`prompt/${p.slug}`, to:`task/${taskNode.id}` };
+        if (idx[e.from] && idx[e.to]) { idx[e.from].edges.push(e); idx[e.to].edges.push(e); }
+      }
+    }
+  });
+  D.research.forEach(r => {
+    if (r.executes_prompt) {
+      const e = { rel:'executes_prompt', from:`research/${r.slug}`, to:`prompt/${r.executes_prompt}` };
+      if (idx[e.from] && idx[e.to]) { idx[e.from].edges.push(e); idx[e.to].edges.push(e); }
+    }
+  });
+  return idx;
+}
+
+const FULL_GRAPH = buildFullGraph();
+
+function FilterableGraph({ current, navigateTo }) {
+  const [enabledTypes, setEnabledTypes] = useState({ task:true, prompt:true, research:true });
+  const [enabledRels, setEnabledRels] = useState(
+    Object.fromEntries(RELATION_SCHEMA.map(r => [r.id, true]))
+  );
+  const [statusFilter, setStatusFilter] = useState('all'); // task status
+  const [kindFilter, setKindFilter] = useState('all');     // prompt kind
+  const [phaseFilter, setPhaseFilter] = useState('all');   // research phase
+  const [hops, setHops] = useState(2); // 1, 2, all
+  const [hoveredNode, setHoveredNode] = useState(null);
+
+  // BFS from current up to N hops, respecting filters
+  const subgraph = useMemo(() => {
+    if (!FULL_GRAPH[current]) return { nodes:[], edges:[], distances:{} };
+
+    const matchesFilters = (node) => {
+      if (!enabledTypes[node.type]) return false;
+      if (node.type === 'task' && statusFilter !== 'all' && node.raw.status !== statusFilter) return false;
+      if (node.type === 'prompt' && kindFilter !== 'all' && node.raw.kind !== kindFilter) return false;
+      if (node.type === 'research' && phaseFilter !== 'all' && node.raw.phase !== phaseFilter) return false;
+      return true;
+    };
+
+    const visited = { [current]: 0 };
+    const queue = [current];
+    const maxHops = hops === 'all' ? 99 : hops;
+    while (queue.length) {
+      const cur = queue.shift();
+      const dist = visited[cur];
+      if (dist >= maxHops) continue;
+      (FULL_GRAPH[cur].edges || []).forEach(e => {
+        if (!enabledRels[e.rel]) return;
+        const next = e.from === cur ? e.to : e.from;
+        if (visited[next] !== undefined) return;
+        const nextNode = FULL_GRAPH[next];
+        if (!nextNode) return;
+        // Filter applies to all nodes EXCEPT the current centre
+        if (next !== current && !matchesFilters(nextNode)) return;
+        visited[next] = dist + 1;
+        queue.push(next);
+      });
+    }
+
+    const nodeIds = new Set(Object.keys(visited));
+    const nodes = Array.from(nodeIds).map(id => ({ ...FULL_GRAPH[id], dist: visited[id] }));
+    const edgeKey = e => `${e.from}|${e.to}|${e.rel}`;
+    const seenEdges = new Set();
+    const edges = [];
+    nodes.forEach(n => {
+      n.edges.forEach(e => {
+        if (!enabledRels[e.rel]) return;
+        if (!nodeIds.has(e.from) || !nodeIds.has(e.to)) return;
+        const k = edgeKey(e);
+        if (seenEdges.has(k)) return;
+        seenEdges.add(k);
+        edges.push(e);
+      });
+    });
+    return { nodes, edges, distances: visited };
+  }, [current, enabledTypes, enabledRels, statusFilter, kindFilter, phaseFilter, hops]);
+
+  // Layout: concentric rings by distance
+  const W = 340, H = 380, cx = W/2, cy = H/2;
+  const positions = useMemo(() => {
+    const byDist = {};
+    subgraph.nodes.forEach(n => {
+      if (!byDist[n.dist]) byDist[n.dist] = [];
+      byDist[n.dist].push(n);
+    });
+    const out = {};
+    Object.entries(byDist).forEach(([d, list]) => {
+      const dist = Number(d);
+      if (dist === 0) {
+        out[list[0].id] = { x: cx, y: cy };
+        return;
+      }
+      const r = 50 + dist * 55;
+      list.forEach((n, i) => {
+        const angle = (i / list.length) * Math.PI * 2 - Math.PI/2 + dist*0.3;
+        out[n.id] = { x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r };
+      });
+    });
+    return out;
+  }, [subgraph]);
+
+  const Toggle = ({ on, color, onClick, children, sub }) => (
+    <button onClick={onClick}
+      style={{ display:'flex', alignItems:'center', gap:5,
+        padding:'3px 7px', borderRadius:2, cursor:'pointer',
+        background: on ? `${color}14` : 'transparent',
+        border: `1px solid ${on ? color : '#252830'}`,
+        color: on ? color : 'rgba(255,255,255,0.3)',
+        fontFamily:'var(--font-mono)', fontSize:9, letterSpacing:'0.04em',
+        transition:'all 0.1s' }}>
+      {children}
+      {sub !== undefined && <span style={{ opacity:0.6 }}>·{sub}</span>}
+    </button>
+  );
+
+  // Counts visible per type
+  const typeCounts = { task:0, prompt:0, research:0 };
+  subgraph.nodes.forEach(n => { typeCounts[n.type]++; });
+  const totalNodes = WIKI_NODES.length;
+
+  return (
+    <>
+      <div style={{ padding:'12px 14px 10px', borderBottom:'1px solid #1E2028',
+        display:'flex', alignItems:'center', gap:8 }}>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+          letterSpacing:'0.1em' }}>SCHEMA GRAPH</span>
+        <span style={{ marginLeft:'auto', fontFamily:'var(--font-mono)', fontSize:9,
+          color:'rgba(255,255,255,0.4)' }}>
+          {subgraph.nodes.length}<span style={{ color:'rgba(255,255,255,0.2)' }}>/{totalNodes}</span> nodes
+        </span>
+      </div>
+
+      {/* Filters */}
+      <div style={{ padding:'10px 12px', borderBottom:'1px solid #1E2028',
+        display:'flex', flexDirection:'column', gap:8, flexShrink:0 }}>
+
+        <div>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8,
+            color:'rgba(255,255,255,0.25)', letterSpacing:'0.1em', marginBottom:5 }}>ENTITY TYPES</div>
+          <div style={{ display:'flex', gap:4, flexWrap:'wrap' }}>
+            {Object.entries(ENTITY_SCHEMA).map(([t, cfg]) => (
+              <Toggle key={t} on={enabledTypes[t]} color={cfg.color}
+                sub={typeCounts[t]}
+                onClick={() => setEnabledTypes(s => ({...s, [t]: !s[t]}))}>
+                {cfg.sym} {cfg.label}
+              </Toggle>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8,
+            color:'rgba(255,255,255,0.25)', letterSpacing:'0.1em', marginBottom:5 }}>RELATIONS</div>
+          <div style={{ display:'flex', gap:4, flexWrap:'wrap' }}>
+            {RELATION_SCHEMA.map(r => (
+              <Toggle key={r.id} on={enabledRels[r.id]} color={r.color.replace(/[\d.]+\)$/,'1)')}
+                onClick={() => setEnabledRels(s => ({...s, [r.id]: !s[r.id]}))}>
+                {r.label}
+              </Toggle>
+            ))}
+          </div>
+        </div>
+
+        {enabledTypes.task && (
+          <div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:8,
+              color:'rgba(255,255,255,0.25)', letterSpacing:'0.1em', marginBottom:5 }}>TASK STATUS</div>
+            <div style={{ display:'flex', gap:3, flexWrap:'wrap' }}>
+              {['all', ...ENTITY_SCHEMA.task.statuses].map(s => (
+                <Toggle key={s} on={statusFilter===s} color="#00FF9F"
+                  onClick={() => setStatusFilter(s)}>{s}</Toggle>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {enabledTypes.prompt && (
+          <div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:8,
+              color:'rgba(255,255,255,0.25)', letterSpacing:'0.1em', marginBottom:5 }}>PROMPT KIND</div>
+            <div style={{ display:'flex', gap:3, flexWrap:'wrap' }}>
+              {['all', ...ENTITY_SCHEMA.prompt.kinds].map(k => (
+                <Toggle key={k} on={kindFilter===k} color="#FFD700"
+                  onClick={() => setKindFilter(k)}>{k}</Toggle>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {enabledTypes.research && (
+          <div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:8,
+              color:'rgba(255,255,255,0.25)', letterSpacing:'0.1em', marginBottom:5 }}>RESEARCH PHASE</div>
+            <div style={{ display:'flex', gap:3, flexWrap:'wrap' }}>
+              {['all', ...ENTITY_SCHEMA.research.phases].map(p => (
+                <Toggle key={p} on={phaseFilter===p} color="#FFDF00"
+                  onClick={() => setPhaseFilter(p)}>{p}</Toggle>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8,
+            color:'rgba(255,255,255,0.25)', letterSpacing:'0.1em', marginBottom:5 }}>DEPTH</div>
+          <div style={{ display:'flex', gap:3 }}>
+            {[1, 2, 3, 'all'].map(h => (
+              <Toggle key={h} on={hops===h} color="#fff"
+                onClick={() => setHops(h)}>{h===1?'1 hop':h==='all'?'all':`${h} hops`}</Toggle>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Graph */}
+      <div style={{ flex:1, overflow:'hidden', position:'relative', minHeight:0 }}>
+        <svg width={W} height={H} style={{ display:'block' }}>
+          <defs>
+            {RELATION_SCHEMA.map(r => (
+              <marker key={r.id} id={`arr-${r.id}`} viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill={r.color.replace(/[\d.]+\)$/,'1)')}/>
+              </marker>
+            ))}
+            <radialGradient id="centreHalo" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#00FF9F" stopOpacity="0.18"/>
+              <stop offset="100%" stopColor="#00FF9F" stopOpacity="0"/>
+            </radialGradient>
+          </defs>
+
+          {/* concentric guides */}
+          {[1,2,3].map(d => (
+            <circle key={d} cx={cx} cy={cy} r={50 + d*55}
+              fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="1"
+              strokeDasharray="2 4" />
+          ))}
+
+          {/* edges */}
+          {subgraph.edges.map((e,i) => {
+            const a = positions[e.from], b = positions[e.to];
+            if (!a || !b) return null;
+            const rel = RELATION_SCHEMA.find(r => r.id === e.rel);
+            const dim = hoveredNode && hoveredNode !== e.from && hoveredNode !== e.to;
+            return (
+              <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y}
+                stroke={rel.color}
+                strokeWidth={dim ? 0.6 : 1}
+                opacity={dim ? 0.25 : 1}
+                markerEnd={`url(#arr-${e.rel})`}
+                style={{ transition:'all 0.15s',
+                  animation: `terminal-line 0.4s ease ${Math.min(i,12)*30}ms both` }}/>
+            );
+          })}
+
+          {/* centre halo */}
+          {positions[current] && (
+            <circle cx={cx} cy={cy} r="28" fill="url(#centreHalo)" />
+          )}
+
+          {/* nodes */}
+          {subgraph.nodes.map((n,i) => {
+            const p = positions[n.id];
+            if (!p) return null;
+            const isCurrent = n.id === current;
+            const isHovered = hoveredNode === n.id;
+            const dim = hoveredNode && !isHovered && n.id !== current;
+            return (
+              <g key={n.id} transform={`translate(${p.x},${p.y})`}
+                style={{ cursor:'pointer',
+                  animation: `node-spawn 0.35s ease ${Math.min(i,15)*30}ms both`,
+                  opacity: dim ? 0.35 : 1, transition:'opacity 0.15s' }}
+                onClick={() => navigateTo(n.id)}
+                onMouseEnter={() => setHoveredNode(n.id)}
+                onMouseLeave={() => setHoveredNode(null)}>
+                <circle r={isCurrent ? 8 : 5} fill={n.color}
+                  stroke={isCurrent ? '#fff' : n.color}
+                  strokeWidth={isCurrent ? 1.5 : 0}
+                  style={{ filter:`drop-shadow(0 0 ${isCurrent?6:3}px ${n.color}aa)` }}/>
+                {(isCurrent || isHovered) && (
+                  <text y={isCurrent ? 22 : 18} textAnchor="middle"
+                    style={{ fontFamily:'var(--font-mono)', fontSize:9,
+                      fill: isCurrent ? '#fff' : 'rgba(255,255,255,0.85)',
+                      pointerEvents:'none' }}>
+                    {n.id.split('/')[1].slice(0,16)}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </svg>
+
+        {/* Floating tooltip */}
+        {hoveredNode && FULL_GRAPH[hoveredNode] && (
+          <div style={{ position:'absolute', bottom:8, left:8, right:8,
+            background:'#06080F', border:`1px solid ${FULL_GRAPH[hoveredNode].color}55`,
+            borderRadius:3, padding:'8px 10px',
+            fontFamily:'var(--font-mono)', fontSize:10,
+            pointerEvents:'none' }}>
+            <div style={{ color: FULL_GRAPH[hoveredNode].color, marginBottom:3 }}>
+              {hoveredNode}
+            </div>
+            <div style={{ color:'rgba(255,255,255,0.5)', fontSize:9, lineHeight:1.4 }}>
+              {FULL_GRAPH[hoveredNode].raw.summary?.slice(0,90)}…
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Relation legend */}
+      <div style={{ padding:'8px 12px 10px', borderTop:'1px solid #1E2028',
+        display:'flex', flexDirection:'column', gap:3 }}>
+        {RELATION_SCHEMA.map(r => {
+          const count = subgraph.edges.filter(e => e.rel === r.id).length;
+          return (
+            <div key={r.id} style={{ display:'flex', alignItems:'center', gap:6,
+              opacity: enabledRels[r.id] ? 1 : 0.35 }}>
+              <div style={{ width:18, height:1, background: r.color.replace(/[\d.]+\)$/,'1)') }}></div>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:9,
+                color:'rgba(255,255,255,0.5)' }}>{r.label}</span>
+              <span style={{ marginLeft:'auto', fontFamily:'var(--font-mono)', fontSize:9,
+                color:'rgba(255,255,255,0.3)' }}>{count}</span>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+}
+
+// Local graph: current node + 1-hop neighbours, animated force-ish layout
+function LocalGraph({ current, navigateTo }) {
+  const center = WIKI_NODES.find(n => n.id === current);
+  if (!center) return null;
+
+  const neighbours = useMemo(() => {
+    const ns = [];
+    center.links.forEach(l => {
+      const t = WIKI_NODES.find(n => n.id === l.to);
+      if (t) ns.push({ ...t, dir: 'out', kind: l.kind });
+    });
+    center.backlinks.forEach(b => {
+      const t = WIKI_NODES.find(n => n.id === b.from);
+      if (t) ns.push({ ...t, dir: 'in', kind: b.kind });
+    });
+    return ns;
+  }, [current]);
+
+  const W = 250, H = 380, cx = W/2, cy = H/2 - 20;
+  const positions = useMemo(() => {
+    return neighbours.map((n, i) => {
+      const angle = (i / Math.max(neighbours.length, 1)) * Math.PI * 2 - Math.PI / 2;
+      const r = 110;
+      return { ...n, x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r };
+    });
+  }, [current, neighbours.length]);
+
+  return (
+    <svg width={W} height={H} style={{ display:'block' }} key={current}>
+      <defs>
+        <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor={center.color} stopOpacity="0.3"/>
+          <stop offset="100%" stopColor={center.color} stopOpacity="0"/>
+        </radialGradient>
+      </defs>
+
+      {/* edges */}
+      {positions.map((n,i) => (
+        <line key={i} x1={cx} y1={cy} x2={n.x} y2={n.y}
+          stroke={n.dir === 'out' ? `${center.color}55` : `${n.color}55`}
+          strokeWidth="1"
+          strokeDasharray={n.dir === 'in' ? '4 4' : '0'}
+          style={{ animation: `terminal-line 0.4s ease ${i*60}ms both` }}/>
+      ))}
+
+      {/* center halo */}
+      <circle cx={cx} cy={cy} r="40" fill="url(#centerGlow)" />
+      {/* center node */}
+      <circle cx={cx} cy={cy} r="10" fill={center.color}
+        style={{ filter:`drop-shadow(0 0 6px ${center.color})` }}/>
+      <text x={cx} y={cy + 28} textAnchor="middle"
+        style={{ fontFamily:'var(--font-mono)', fontSize:9, fill:'#fff', pointerEvents:'none' }}>
+        {center.id.split('/')[1].slice(0,14)}
+      </text>
+
+      {/* neighbour nodes */}
+      {positions.map((n,i) => (
+        <g key={i} transform={`translate(${n.x},${n.y})`}
+          style={{ cursor:'pointer', animation: `node-spawn 0.4s ease ${100+i*60}ms both` }}
+          onClick={() => navigateTo(n.id)}>
+          <circle r="6" fill={n.color}
+            stroke={n.color} strokeWidth="1"
+            style={{ filter:`drop-shadow(0 0 3px ${n.color}aa)` }}/>
+          <text y="18" textAnchor="middle"
+            style={{ fontFamily:'var(--font-mono)', fontSize:8,
+              fill:'rgba(255,255,255,0.7)', pointerEvents:'none' }}>
+            {n.id.split('/')[1].slice(0,12)}
+          </text>
+        </g>
+      ))}
+
+      {/* legend */}
+      <g transform={`translate(10, ${H-40})`}>
+        <text style={{ fontFamily:'var(--font-mono)', fontSize:8, fill:'rgba(255,255,255,0.3)', letterSpacing:'0.08em' }}>
+          ── outgoing
+        </text>
+        <text y="14" style={{ fontFamily:'var(--font-mono)', fontSize:8, fill:'rgba(255,255,255,0.3)', letterSpacing:'0.08em' }}>
+          ┄┄ backlink
+        </text>
+      </g>
+    </svg>
+  );
+}
+
+// Suggested next-research questions panel
+function SuggestedQuestions({ current, relevant, other, navigateTo }) {
+  const [generating, setGenerating] = useState(false);
+  const [streamedQ, setStreamedQ] = useState(null);
+
+  const askLLM = async () => {
+    setGenerating(true);
+    setStreamedQ('');
+    try {
+      const node = WIKI_NODES.find(n => n.id === current);
+      const ctx = `${node.title}\n\n${node.body.slice(0, 400)}`;
+      const resp = await window.claude.complete(
+        `You are a research-direction assistant for a long-horizon AI agency repo. Given this node:\n\n${ctx}\n\nPropose ONE concrete, falsifiable research question that follows naturally from this node and could spawn a /research/ workspace. Keep it under 25 words. Output only the question.`
+      );
+      setStreamedQ(resp.trim());
+    } catch (e) {
+      setStreamedQ('LLM unavailable — using offline catalogue.');
+    } finally {
+      setGenerating(false);
+    }
+  };
+
+  const renderQ = (q, i, highlighted) => (
+    <div key={i} className="stagger-row"
+      style={{ background:'#0D0F18',
+        border:`1px solid ${highlighted ? '#FFDF0044' : '#1E2028'}`,
+        borderLeft:`2px solid ${highlighted ? '#FFDF00' : 'rgba(255,255,255,0.15)'}`,
+        borderRadius:3, padding:'10px 14px',
+        animationDelay: `${i*60}ms` }}>
+      <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:6 }}>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:8, fontWeight:700,
+          color: q.priority==='P0' ? '#FF4500' : q.priority==='P1' ? '#FFD700' : 'rgba(255,255,255,0.4)',
+          border:'1px solid currentColor', padding:'1px 5px', borderRadius:2 }}>{q.priority}</span>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.35)' }}>
+          confidence
+        </span>
+        <div style={{ flex:1, height:3, background:'#1A1D24', borderRadius:1, overflow:'hidden', maxWidth:80 }}>
+          <div style={{ height:'100%', width:`${q.confidence*100}%`,
+            background: q.confidence > 0.75 ? '#00FF9F' : q.confidence > 0.6 ? '#FFD700' : '#FF8C00' }}></div>
+        </div>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:9,
+          color:'rgba(255,255,255,0.45)' }}>{(q.confidence*100).toFixed(0)}%</span>
+      </div>
+      <div style={{ fontFamily:'var(--font-sans)', fontSize:13, color:'rgba(255,255,255,0.85)',
+        lineHeight:1.55, marginBottom:8 }}>
+        <span style={{ color:'#FFDF00', fontFamily:'var(--font-mono)', marginRight:6 }}>?</span>
+        {q.q}
+      </div>
+      <div style={{ display:'flex', gap:6, flexWrap:'wrap', alignItems:'center' }}>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'rgba(255,255,255,0.3)',
+          letterSpacing:'0.1em' }}>ANCHORS:</span>
+        {q.anchors.map((a,j) => {
+          const an = WIKI_NODES.find(n => n.id === a);
+          if (!an) return null;
+          return (
+            <span key={j} onClick={() => navigateTo(a)}
+              style={{ fontFamily:'var(--font-mono)', fontSize:9, color:an.color,
+                background:`${an.color}14`, border:`1px solid ${an.color}33`,
+                padding:'1px 6px', borderRadius:2, cursor:'pointer' }}>
+              {a}
+            </span>
+          );
+        })}
+        <button style={{ marginLeft:'auto', fontFamily:'var(--font-mono)', fontSize:9,
+          color:'#00FF9F', background:'rgba(0,255,159,0.06)',
+          border:'1px solid rgba(0,255,159,0.25)', borderRadius:2,
+          padding:'2px 8px', cursor:'pointer' }}>
+          ▸ spawn research
+        </button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{ marginTop:8, marginBottom:8 }}>
+      <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:10 }}>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'#FFDF00',
+          letterSpacing:'0.1em' }}>◇ NEXT-RESEARCH SUGGESTIONS</span>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)' }}>
+          {relevant.length} anchored · {other.length} adjacent
+        </span>
+        <div style={{ flex:1 }}></div>
+        <button onClick={askLLM} disabled={generating}
+          style={{ fontFamily:'var(--font-mono)', fontSize:9, letterSpacing:'0.06em',
+            color: generating ? 'rgba(255,255,255,0.3)' : '#00FF9F',
+            background: generating ? '#1A1D24' : 'rgba(0,255,159,0.08)',
+            border:`1px solid ${generating ? '#252830' : 'rgba(0,255,159,0.4)'}`,
+            borderRadius:2, padding:'4px 10px',
+            cursor: generating ? 'wait' : 'pointer' }}>
+          {generating ? '◷ generating…' : '✦ ask LLM'}
+        </button>
+      </div>
+
+      {streamedQ && (
+        <div style={{ background:'rgba(0,255,159,0.05)', border:'1px solid rgba(0,255,159,0.3)',
+          borderLeft:'2px solid #00FF9F', borderRadius:3, padding:'10px 14px', marginBottom:10 }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:8, color:'#00FF9F',
+            letterSpacing:'0.1em', marginBottom:4 }}>✦ LIVE LLM SUGGESTION</div>
+          <div style={{ fontFamily:'var(--font-sans)', fontSize:13,
+            color:'rgba(255,255,255,0.9)', lineHeight:1.55 }}>{streamedQ}</div>
+        </div>
+      )}
+
+      <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
+        {relevant.map((q,i) => renderQ(q, i, true))}
+        {relevant.length === 0 && (
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:10,
+            color:'rgba(255,255,255,0.3)', padding:'6px 0' }}>
+            _no anchored questions for this node — see adjacent below_
+          </div>
+        )}
+        {other.map((q,i) => renderQ(q, relevant.length+i, false))}
+      </div>
+    </div>
+  );
+}
+
+// ── SETTINGS ───────────────────────────────────────────────────────────────
+function SettingsView() {
+  const [scanlines, setScanlines] = useState(true);
+  const [glow, setGlow] = useState(true);
+  const [autoSave, setAutoSave] = useState(true);
+  const [strictMode, setStrictMode] = useState(true);
+  const [defaultAgent, setDefaultAgent] = useState('claude-code');
+  const [coherenceCron, setCoherenceCron] = useState('0 2 * * *');
+  const [tokenBudget, setTokenBudget] = useState(500);
+
+  useEffect(() => {
+    const after = document.body.style;
+    document.body.dataset.scanlines = scanlines ? 'on' : 'off';
+  }, [scanlines]);
+
+  const Section = ({ title, code, children }) => (
+    <div style={{ marginBottom:24 }}>
+      <div style={{ display:'flex', alignItems:'baseline', gap:10, marginBottom:10 }}>
+        <span style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.25)',
+          letterSpacing:'0.1em' }}>{code}</span>
+        <h3 style={{ fontFamily:'var(--font-sans)', fontSize:14, fontWeight:600, color:'#fff' }}>{title}</h3>
+        <div style={{ flex:1, height:1, background:'#1E2028' }}></div>
+      </div>
+      <div style={{ display:'flex', flexDirection:'column', gap:2 }}>{children}</div>
+    </div>
+  );
+
+  const Toggle = ({ label, sub, value, onChange }) => (
+    <div style={{ display:'flex', alignItems:'center', gap:14, padding:'12px 16px',
+      background:'#0D0F18', border:'1px solid #1E2028', borderRadius:3 }}>
+      <div style={{ flex:1 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'#fff' }}>{label}</div>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.35)',
+          marginTop:3 }}>{sub}</div>
+      </div>
+      <div onClick={() => onChange(!value)}
+        style={{ width:40, height:20, background: value ? 'rgba(0,255,159,0.18)' : '#1E2028',
+          border:`1px solid ${value ? '#00FF9F' : '#252830'}`, borderRadius:10,
+          cursor:'pointer', position:'relative', transition:'all 0.15s' }}>
+        <div style={{ position:'absolute', top:1, left: value ? 21 : 1,
+          width:16, height:16, background: value ? '#00FF9F' : 'rgba(255,255,255,0.3)',
+          borderRadius:'50%', transition:'left 0.15s',
+          boxShadow: value ? '0 0 6px rgba(0,255,159,0.6)' : 'none' }}></div>
+      </div>
+    </div>
+  );
+
+  const TextInput = ({ label, sub, value, onChange, mono=true, suffix }) => (
+    <div style={{ display:'flex', alignItems:'center', gap:14, padding:'12px 16px',
+      background:'#0D0F18', border:'1px solid #1E2028', borderRadius:3 }}>
+      <div style={{ flex:1 }}>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'#fff' }}>{label}</div>
+        <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.35)',
+          marginTop:3 }}>{sub}</div>
+      </div>
+      <div style={{ display:'flex', alignItems:'center', gap:6 }}>
+        <input value={value} onChange={e=>onChange(e.target.value)}
+          style={{ background:'#06080F', border:'1px solid #252830', borderRadius:2,
+            padding:'5px 8px', color:'#FFDF00',
+            fontFamily: mono ? 'var(--font-mono)' : 'var(--font-sans)',
+            fontSize:11, width:160, outline:'none' }}
+          onFocus={e => e.currentTarget.style.borderColor = '#00FF9F'}
+          onBlur={e => e.currentTarget.style.borderColor = '#252830'} />
+        {suffix && <span style={{ fontFamily:'var(--font-mono)', fontSize:10,
+          color:'rgba(255,255,255,0.4)' }}>{suffix}</span>}
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{ height:'100%', overflowY:'auto', padding:'24px 32px' }} className="animate-in">
+      <div style={{ maxWidth:720 }}>
+        <div style={{ marginBottom:24, paddingBottom:16, borderBottom:'1px solid #1E2028' }}>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.3)',
+            marginBottom:6 }}>AGENCY // SETTINGS // v0.19</div>
+          <h1 style={{ fontFamily:'var(--font-sans)', fontSize:22, fontWeight:700, color:'#fff',
+            letterSpacing:'-0.02em' }}>Configuration</h1>
+          <p style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'rgba(255,255,255,0.4)',
+            marginTop:6 }}>Repo-scoped overrides · stored in <span style={{ color:'#FFDF00' }}>.agency/config.toml</span></p>
+        </div>
+
+        <Section title="Display" code="§01">
+          <Toggle label="Scanline overlay" sub="Adds CRT-style horizontal lines across the viewport"
+            value={scanlines} onChange={setScanlines} />
+          <Toggle label="Phosphor glow on accents" sub="Drop-shadow glow on green status indicators"
+            value={glow} onChange={setGlow} />
+        </Section>
+
+        <Section title="Governance" code="§02">
+          <Toggle label="Strict pre-commit mode" sub="Block commits on any failed gate; warnings still allow commit"
+            value={strictMode} onChange={setStrictMode} />
+          <TextInput label="Coherence-check schedule" sub="Cron expression for nightly maintenance protocol"
+            value={coherenceCron} onChange={setCoherenceCron} suffix="UTC" />
+          <TextInput label="Default agent" sub="Used when a task is created without an explicit owner"
+            value={defaultAgent} onChange={setDefaultAgent} />
+        </Section>
+
+        <Section title="Token budget" code="§03">
+          <Toggle label="Auto-save friction logs" sub="Commit FL entry when session terminates with FL≥1"
+            value={autoSave} onChange={setAutoSave} />
+          <TextInput label="Per-task token ceiling" sub="Trigger budget-enforcer fallback above this threshold"
+            value={tokenBudget} onChange={v => setTokenBudget(Number(v)||0)} suffix="k tokens" />
+        </Section>
+
+        <Section title="Identity" code="§04">
+          <div style={{ background:'#0D0F18', border:'1px solid #1E2028', borderRadius:3,
+            padding:'14px 16px', fontFamily:'var(--font-mono)', fontSize:10, lineHeight:1.9 }}>
+            <div><span style={{ color:'rgba(255,255,255,0.4)' }}>repo:</span> <span style={{ color:'#FFDF00' }}>netzkontrast/agency</span></div>
+            <div><span style={{ color:'rgba(255,255,255,0.4)' }}>branch:</span> <span style={{ color:'#00FF9F' }}>main</span></div>
+            <div><span style={{ color:'rgba(255,255,255,0.4)' }}>head:</span> <span style={{ color:'#FFDF00' }}>a3f7c91</span></div>
+            <div><span style={{ color:'rgba(255,255,255,0.4)' }}>actor:</span> claude-code <span style={{ color:'rgba(255,255,255,0.3)' }}>(default)</span></div>
+            <div><span style={{ color:'rgba(255,255,255,0.4)' }}>space:</span> /tasks · /prompts · /research · /skills</div>
+          </div>
+        </Section>
+
+        <Section title="Danger zone" code="§99">
+          <div style={{ display:'flex', gap:10 }}>
+            <button style={{ flex:1, padding:'10px 14px', background:'#0D0F18',
+              border:'1px solid rgba(255,69,0,0.4)', color:'#FF4500',
+              fontFamily:'var(--font-mono)', fontSize:11, cursor:'pointer', borderRadius:2 }}>
+              ▸ Rebuild coherence baseline
+            </button>
+            <button style={{ flex:1, padding:'10px 14px', background:'#0D0F18',
+              border:'1px solid rgba(255,69,0,0.4)', color:'#FF4500',
+              fontFamily:'var(--font-mono)', fontSize:11, cursor:'pointer', borderRadius:2 }}>
+              ▸ Reset frontmatter index
+            </button>
+          </div>
+        </Section>
+      </div>
+    </div>
+  );
+}
+
+// ── TOPBAR ─────────────────────────────────────────────────────────────────
+function TopBar({ view, onPalette }) {
+  const [time, setTime] = useState(new Date());
+  useEffect(() => { const t = setInterval(() => setTime(new Date()), 1000); return () => clearInterval(t); }, []);
+
+  return (
+    <div style={{ height:40, background:'#0D0F18', borderBottom:'1px solid #1E2028',
+      display:'flex', alignItems:'center', padding:'0 16px', flexShrink:0, gap:16 }}>
+      <div style={{ fontFamily:'var(--font-mono)', fontSize:10, color:'rgba(255,255,255,0.25)',
+        letterSpacing:'0.04em' }}>
+        <span className="blink-soft" style={{ color:'#00FF9F' }}>◼</span>{' '}
+        agency<span style={{ color:'rgba(255,255,255,0.15)' }}>/</span>
+        <span style={{ color:'rgba(255,255,255,0.5)' }}>{view}</span>
+      </div>
+      <div style={{ position:'relative', width:80, height:6, background:'#1A1D24',
+        borderRadius:1, overflow:'hidden' }}>
+        <div style={{ position:'absolute', top:0, left:0, height:'100%', width:'25%',
+          background:'linear-gradient(90deg, transparent, #00FF9F, transparent)',
+          animation:'sweep-bar 2.4s linear infinite' }}></div>
+      </div>
+      <div style={{ flex:1 }}></div>
+      <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.2)' }}>
+        {time.toISOString().replace('T',' ').slice(0,19)} UTC
+      </div>
+      <div style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(0,255,159,0.6)',
+        background:'rgba(0,255,159,0.06)', border:'1px solid rgba(0,255,159,0.15)',
+        padding:'2px 8px', borderRadius:2 }}>
+        COHERENCE OK
+      </div>
+      <button onClick={onPalette}
+        style={{ fontFamily:'var(--font-mono)', fontSize:9, color:'rgba(255,255,255,0.3)',
+          background:'#1A1D24', border:'1px solid #252830', borderRadius:2,
+          padding:'3px 10px', cursor:'pointer', letterSpacing:'0.04em' }}>
+        ⌘K SEARCH
+      </button>
+    </div>
+  );
+}
+
+// ── ROOT APP ───────────────────────────────────────────────────────────────
+function App() {
+  const [view, setView] = useState('dashboard');
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [selectedPrompt, setSelectedPrompt] = useState(null);
+  const [selectedResearch, setSelectedResearch] = useState(null);
+  const [taskFilter, setTaskFilter] = useState('all');
+  const [showPalette, setShowPalette] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); setShowPalette(p => !p); }
+      if (e.key === 'Escape') setShowPalette(false);
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, []);
+
+  function handleNavigate({ view: v, item }) {
+    setView(v);
+    if (v === 'tasks' && item) setSelectedTask(item);
+    if (v === 'prompts' && item) setSelectedPrompt(item);
+    if (v === 'research' && item) setSelectedResearch(item);
+  }
+
+  // Determine panel layout
+  const showDetail = view !== 'dashboard' && view !== 'graph';
+  const LIST_W = showDetail ? 280 : 0;
+  const DETAIL_W = showDetail ? undefined : 0;
+
+  return (
+    <div style={{ height:'100vh', display:'flex', flexDirection:'column' }}>
+      <TopBar view={view} onPalette={() => setShowPalette(true)} />
+
+      <div style={{ flex:1, display:'flex', overflow:'hidden', minHeight:0 }}>
+        <Sidebar view={view} onView={setView} onPalette={() => setShowPalette(true)}
+          collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed(c => !c)} />
+
+        {/* Main area */}
+        <div style={{ flex:1, display:'flex', overflow:'hidden', minWidth:0 }}>
+          {/* Dashboard */}
+          {view === 'dashboard' && (
+            <div style={{ flex:1, overflowY:'auto' }}>
+              <Dashboard onNavigate={handleNavigate} />
+            </div>
+          )}
+
+          {/* Graph */}
+          {view === 'graph' && (
+            <div style={{ flex:1, overflow:'auto' }}>
+              <AuditGraph />
+            </div>
+          )}
+
+          {/* LLM-Wiki */}
+          {view === 'wiki' && (
+            <div style={{ flex:1, overflow:'hidden' }}>
+              <WikiView onNavigate={handleNavigate} />
+            </div>
+          )}
+
+          {/* Friction Log */}
+          {view === 'friction' && (
+            <div style={{ flex:1, overflow:'hidden' }}>
+              <FrictionLogView />
+            </div>
+          )}
+
+          {/* Pre-commit */}
+          {view === 'precommit' && (
+            <div style={{ flex:1, overflow:'hidden' }}>
+              <PrecommitView />
+            </div>
+          )}
+
+          {/* Settings */}
+          {view === 'settings' && (
+            <div style={{ flex:1, overflow:'hidden' }}>
+              <SettingsView />
+            </div>
+          )}
+
+          {/* Tasks */}
+          {view === 'tasks' && (
+            <>
+              <div style={{ width:LIST_W, borderRight:'1px solid #1E2028', flexShrink:0, overflowY:'auto' }}>
+                <TaskList selected={selectedTask} onSelect={setSelectedTask}
+                  filter={taskFilter} onFilter={setTaskFilter} />
+              </div>
+              <div style={{ flex:1, overflowY:'auto', minWidth:0 }}>
+                <TaskDetail task={selectedTask} />
+              </div>
+            </>
+          )}
+
+          {/* Prompts */}
+          {view === 'prompts' && (
+            <>
+              <div style={{ width:LIST_W, borderRight:'1px solid #1E2028', flexShrink:0, overflowY:'auto' }}>
+                <PromptView selected={selectedPrompt} onSelect={setSelectedPrompt} />
+              </div>
+              <div style={{ flex:1, overflowY:'auto', minWidth:0 }}>
+                <PromptDetail prompt={selectedPrompt} />
+              </div>
+            </>
+          )}
+
+          {/* Research */}
+          {view === 'research' && (
+            <>
+              <div style={{ width:LIST_W, borderRight:'1px solid #1E2028', flexShrink:0, overflowY:'auto' }}>
+                <ResearchView selected={selectedResearch} onSelect={setSelectedResearch} />
+              </div>
+              <div style={{ flex:1, overflowY:'auto', minWidth:0 }}>
+                <ResearchDetail research={selectedResearch} />
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      {showPalette && (
+        <CommandPalette
+          onClose={() => setShowPalette(false)}
+          onNavigate={handleNavigate}
+        />
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

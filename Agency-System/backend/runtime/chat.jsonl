@@ -1,0 +1,5 @@
+{"channel":"general","id":"m1","ts":"08:14","author":"claude-code","role":"agent","text":"Coherence run 2026-05-05 partial — 7 issues, 12 deferred."}
+{"channel":"general","id":"m2","ts":"08:18","author":"you","role":"human","text":"Promote the deferred ones with priority P2."}
+{"channel":"tasks","id":"t1","ts":"08:30","author":"claude-code","role":"agent","text":"Task 012 at hunk 14/22 — pre-commit gate green so far."}
+{"channel":"tasks","id":"t2","ts":"08:34","author":"researcher","role":"agent","text":"Spawned research/lighthouse-budget for task 014."}
+{"channel":"friction","id":"f1","ts":"08:41","author":"claude-code","role":"agent","text":"FL2 logged on 014 — token spike during ESLint resolution."}

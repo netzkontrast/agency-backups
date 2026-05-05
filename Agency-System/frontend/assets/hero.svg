@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480" role="img" aria-label="Agency by Netzkontrast — repo dashboard hero">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0B0D17"></stop>
+      <stop offset="100%" stop-color="#06080F"></stop>
+    </linearGradient>
+    <linearGradient id="green-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00FF9F" stop-opacity="0.5"></stop>
+      <stop offset="100%" stop-color="#00FF9F" stop-opacity="0"></stop>
+    </linearGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.7" fill="rgba(255,255,255,0.05)"></circle>
+    </pattern>
+    <pattern id="scan2" width="2" height="3" patternUnits="userSpaceOnUse">
+      <rect width="2" height="1" fill="transparent"></rect>
+      <rect y="1" width="2" height="2" fill="rgba(0,0,0,0.18)"></rect>
+    </pattern>
+    <filter id="g" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+    </filter>
+    
+  </defs>
+
+  
+  <rect width="1200" height="480" fill="url(#bg)"></rect>
+  <rect width="1200" height="480" fill="url(#dots)"></rect>
+  <circle cx="980" cy="120" r="260" fill="url(#green-glow)" opacity="0.35"></circle>
+
+  
+  <g transform="translate(60,80)">
+    <g class="mono" font-size="11" letter-spacing="3" fill="#00FF9F">
+      <circle cx="0" cy="-4" r="3" fill="#00FF9F" filter="url(#g)"></circle>
+      <text x="10" y="0">AGENCY · v0.19 · LIVE</text>
+    </g>
+    <text class="sans" x="0" y="80" font-size="84" font-weight="700" letter-spacing="-3" fill="#FFFFFF">Agency</text>
+    <g transform="translate(0,118)">
+      <line x1="0" y1="0" x2="22" y2="0" stroke="#00FF9F" stroke-width="1.5"></line>
+      <text class="mono" x="30" y="4" font-size="16" letter-spacing="2" fill="rgba(255,255,255,0.78)">
+        by <tspan fill="#00FF9F">netz</tspan><tspan>kontrast</tspan>
+      </text>
+    </g>
+    <text class="sans" x="0" y="172" font-size="22" fill="rgba(255,255,255,0.65)" letter-spacing="-0.3">
+      A live cockpit for spec-driven
+    </text>
+    <text class="sans" x="0" y="200" font-size="22" fill="rgba(255,255,255,0.65)" letter-spacing="-0.3">
+      agentic repos.
+    </text>
+
+    
+    <g transform="translate(0,240)" class="mono">
+      <g>
+        <rect width="120" height="68" fill="#0F1118" stroke="#1E2028"></rect>
+        <text x="12" y="22" font-size="9" letter-spacing="2" fill="rgba(255,255,255,0.4)">TASKS</text>
+        <text x="12" y="50" font-size="26" fill="#FFFFFF">26</text>
+        <text x="62" y="50" font-size="11" fill="#FFD700">·11 open</text>
+      </g>
+      <g transform="translate(132,0)">
+        <rect width="120" height="68" fill="#0F1118" stroke="#1E2028"></rect>
+        <text x="12" y="22" font-size="9" letter-spacing="2" fill="rgba(255,255,255,0.4)">AGENTS</text>
+        <text x="12" y="50" font-size="26" fill="#00FF9F">8</text>
+        <text x="42" y="50" font-size="11" fill="rgba(255,255,255,0.55)">·4 active</text>
+      </g>
+      <g transform="translate(264,0)">
+        <rect width="120" height="68" fill="#0F1118" stroke="#1E2028"></rect>
+        <text x="12" y="22" font-size="9" letter-spacing="2" fill="rgba(255,255,255,0.4)">TOKENS</text>
+        <text x="12" y="50" font-size="26" fill="#FFD700">1.4M</text>
+      </g>
+    </g>
+
+    <text class="mono" x="0" y="370" font-size="10" letter-spacing="3" fill="rgba(255,255,255,0.32)">
+      MACHINE · ACTOR · SPACE
+    </text>
+  </g>
+
+  
+  <g transform="translate(620,60)">
+    
+    <rect width="540" height="360" rx="4" fill="#0F1118" stroke="#1E2028"></rect>
+    
+    <rect width="540" height="28" fill="#09090F" stroke="#1A1C24"></rect>
+    <circle cx="14" cy="14" r="4" fill="#FF4500"></circle>
+    <circle cx="28" cy="14" r="4" fill="#FFD700"></circle>
+    <circle cx="42" cy="14" r="4" fill="#00FF9F"></circle>
+    <text class="mono" x="62" y="18" font-size="10" fill="rgba(255,255,255,0.4)">agency · netzkontrast.local:8080</text>
+
+    
+    <rect x="0" y="28" width="120" height="332" fill="#09090F"></rect>
+    <line x1="120" y1="28" x2="120" y2="360" stroke="#1A1C24"></line>
+    <g class="mono" font-size="9" fill="rgba(255,255,255,0.55)">
+      <text x="14" y="56" letter-spacing="2" fill="rgba(255,255,255,0.3)">WORKSPACE</text>
+      <text x="14" y="78">⬡ DASH</text>
+      <rect x="0" y="86" width="3" height="14" fill="#00FF9F"></rect>
+      <text x="14" y="98" fill="#FFFFFF">▸ TASKS</text>
+      <text x="14" y="118">◈ PROMPTS</text>
+      <text x="14" y="138">◎ RESEARCH</text>
+      <text x="14" y="170" letter-spacing="2" fill="rgba(255,255,255,0.3)">RUNTIME</text>
+      <text x="14" y="192">❖ AGENTS</text>
+      <text x="14" y="212">▤ CHAT</text>
+      <text x="14" y="244" letter-spacing="2" fill="rgba(255,255,255,0.3)">OPS</text>
+      <text x="14" y="266">△ FRICTION</text>
+      <text x="14" y="286">▣ GATE</text>
+    </g>
+
+    
+    <g transform="translate(140,48)">
+      <text class="mono" x="0" y="0" font-size="9" letter-spacing="2" fill="rgba(255,255,255,0.35)">AUDIT GRAPH · 14 nodes · 22 edges</text>
+
+      
+      <g class="mono" font-size="9" fill="rgba(255,255,255,0.35)" letter-spacing="2">
+        <text x="20" y="22">TASKS</text>
+        <text x="160" y="22">PROMPTS</text>
+        <text x="290" y="22">RESEARCH</text>
+      </g>
+
+      
+      <g stroke-width="1" fill="none">
+        <path d="M 64 50 C 110 50, 130 70, 184 70" stroke="rgba(0,255,159,0.45)"></path>
+        <path d="M 64 80 C 110 80, 130 100, 184 100" stroke="rgba(0,255,159,0.30)"></path>
+        <path d="M 64 110 C 110 110, 130 70, 184 70" stroke="rgba(0,255,159,0.20)"></path>
+        <path d="M 64 140 C 110 140, 130 130, 184 130" stroke="rgba(255,215,0,0.30)"></path>
+        <path d="M 64 170 C 110 170, 130 160, 184 160" stroke="rgba(255,215,0,0.30)"></path>
+        <path d="M 224 70 C 250 70, 260 80, 308 90" stroke="rgba(255,223,0,0.45)"></path>
+        <path d="M 224 100 C 250 100, 260 110, 308 120" stroke="rgba(255,223,0,0.40)"></path>
+        <path d="M 224 130 C 250 130, 260 150, 308 150" stroke="rgba(255,223,0,0.35)"></path>
+        <path d="M 224 160 C 250 160, 260 170, 308 180" stroke="rgba(255,223,0,0.30)"></path>
+        
+        <path d="M 308 210 C 260 210, 250 200, 224 195" stroke="rgba(255,215,0,0.22)"></path>
+        <path d="M 184 195 C 130 195, 110 220, 64 220" stroke="rgba(0,255,159,0.18)"></path>
+      </g>
+
+      
+      <g>
+        <rect x="0" y="40" width="64" height="20" fill="#0A1A14" stroke="#00FF9F"></rect>
+        <text class="mono" x="6" y="54" font-size="9" fill="#00FF9F">T012 ▸</text>
+        <rect x="0" y="70" width="64" height="20" fill="#0A1A14" stroke="rgba(0,255,159,0.6)"></rect>
+        <text class="mono" x="6" y="84" font-size="9" fill="#00FF9F">T015</text>
+        <rect x="0" y="100" width="64" height="20" fill="#181408" stroke="#FFD700"></rect>
+        <text class="mono" x="6" y="114" font-size="9" fill="#FFD700">T016 P0</text>
+        <rect x="0" y="130" width="64" height="20" fill="#181408" stroke="rgba(255,215,0,0.6)"></rect>
+        <text class="mono" x="6" y="144" font-size="9" fill="#FFD700">T009a</text>
+        <rect x="0" y="160" width="64" height="20" fill="#1A0A05" stroke="#FF4500"></rect>
+        <text class="mono" x="6" y="174" font-size="9" fill="#FF4500">T017 ✕</text>
+        <rect x="0" y="190" width="64" height="20" fill="#0A1A14" stroke="rgba(0,255,159,0.4)"></rect>
+        <text class="mono" x="6" y="204" font-size="9" fill="rgba(0,255,159,0.85)">T024 ✓</text>
+      </g>
+
+      
+      <g>
+        <rect x="184" y="60" width="40" height="20" rx="2" fill="#181408" stroke="#FFD700"></rect>
+        <text class="mono" x="190" y="74" font-size="9" fill="#FFD700">◈ p1</text>
+        <rect x="184" y="90" width="40" height="20" rx="2" fill="#181408" stroke="#FFD700"></rect>
+        <text class="mono" x="190" y="104" font-size="9" fill="#FFD700">◈ p2</text>
+        <rect x="184" y="120" width="40" height="20" rx="2" fill="#181408" stroke="rgba(255,215,0,0.6)"></rect>
+        <text class="mono" x="190" y="134" font-size="9" fill="#FFD700">◈ p3</text>
+        <rect x="184" y="150" width="40" height="20" rx="2" fill="#181408" stroke="rgba(255,215,0,0.6)"></rect>
+        <text class="mono" x="190" y="164" font-size="9" fill="#FFD700">◈ p4</text>
+        <rect x="184" y="185" width="40" height="20" rx="2" fill="#181408" stroke="rgba(255,215,0,0.4)"></rect>
+        <text class="mono" x="190" y="199" font-size="9" fill="rgba(255,215,0,0.7)">◈ p5</text>
+      </g>
+
+      
+      <g>
+        <circle cx="328" cy="80" r="11" fill="#181808" stroke="#FFDF00"></circle>
+        <text class="mono" x="324" y="84" font-size="9" fill="#FFDF00">◎</text>
+        <circle cx="328" cy="120" r="11" fill="#181808" stroke="#FFDF00"></circle>
+        <text class="mono" x="324" y="124" font-size="9" fill="#FFDF00">◎</text>
+        <circle cx="328" cy="155" r="11" fill="#181808" stroke="rgba(255,223,0,0.6)"></circle>
+        <text class="mono" x="324" y="159" font-size="9" fill="#FFDF00">◎</text>
+        <circle cx="328" cy="190" r="11" fill="#181808" stroke="rgba(255,223,0,0.5)"></circle>
+        <text class="mono" x="324" y="194" font-size="9" fill="#FFDF00">◎</text>
+        <circle cx="328" cy="220" r="11" fill="#181808" stroke="rgba(255,223,0,0.4)"></circle>
+        <text class="mono" x="324" y="224" font-size="9" fill="#FFDF00">◎</text>
+      </g>
+    </g>
+
+    
+    <g transform="translate(380,40)">
+      <text class="mono" x="0" y="0" font-size="9" letter-spacing="2" fill="rgba(255,255,255,0.35)">AGENTS · 4 LIVE</text>
+
+      <g transform="translate(0,16)">
+        <rect width="148" height="44" fill="#0A0C12" stroke="#1E2028"></rect>
+        <circle cx="10" cy="14" r="3" fill="#00FF9F" filter="url(#g)"></circle>
+        <text class="mono" x="20" y="17" font-size="10" fill="#FFFFFF">claude-code</text>
+        <text class="mono" x="20" y="30" font-size="8" fill="rgba(255,255,255,0.5)">sonnet · T012</text>
+        <rect x="20" y="34" width="80" height="2" fill="rgba(255,255,255,0.06)"></rect>
+        <rect x="20" y="34" width="62" height="2" fill="#00FF9F"></rect>
+        <text class="mono" x="106" y="36" font-size="8" fill="rgba(255,255,255,0.4)">76%</text>
+      </g>
+      <g transform="translate(0,68)">
+        <rect width="148" height="44" fill="#0A0C12" stroke="#1E2028"></rect>
+        <circle cx="10" cy="14" r="3" fill="#FFD700" filter="url(#g)"></circle>
+        <text class="mono" x="20" y="17" font-size="10" fill="#FFFFFF">spec-synth</text>
+        <text class="mono" x="20" y="30" font-size="8" fill="rgba(255,255,255,0.5)">opus · T001</text>
+        <rect x="20" y="34" width="80" height="2" fill="rgba(255,255,255,0.06)"></rect>
+        <rect x="20" y="34" width="35" height="2" fill="#FFD700"></rect>
+        <text class="mono" x="106" y="36" font-size="8" fill="rgba(255,255,255,0.4)">44%</text>
+      </g>
+      <g transform="translate(0,120)">
+        <rect width="148" height="44" fill="#0A0C12" stroke="#1E2028"></rect>
+        <circle cx="10" cy="14" r="3" fill="#FF4500" filter="url(#g)"></circle>
+        <text class="mono" x="20" y="17" font-size="10" fill="#FFFFFF">audit-walker</text>
+        <text class="mono" x="20" y="30" font-size="8" fill="#FF4500">BLOCKED · T017</text>
+      </g>
+      <g transform="translate(0,172)">
+        <rect width="148" height="44" fill="#0A0C12" stroke="#1E2028"></rect>
+        <circle cx="10" cy="14" r="3" fill="#00FF9F" filter="url(#g)"></circle>
+        <text class="mono" x="20" y="17" font-size="10" fill="#FFFFFF">skills-architect</text>
+        <text class="mono" x="20" y="30" font-size="8" fill="rgba(255,255,255,0.5)">opus · T009a</text>
+        <rect x="20" y="34" width="80" height="2" fill="rgba(255,255,255,0.06)"></rect>
+        <rect x="20" y="34" width="42" height="2" fill="#00FF9F"></rect>
+        <text class="mono" x="106" y="36" font-size="8" fill="rgba(255,255,255,0.4)">53%</text>
+      </g>
+
+      
+      <g transform="translate(0,232)">
+        <text class="mono" x="0" y="0" font-size="9" letter-spacing="2" fill="rgba(255,255,255,0.35)">#tasks</text>
+        <text class="mono" x="0" y="18" font-size="9" fill="#00FF9F">claude-code</text>
+        <text class="mono" x="64" y="18" font-size="8" fill="rgba(255,255,255,0.35)">08:30</text>
+        <text class="sans" x="0" y="34" font-size="10" fill="rgba(255,255,255,0.7)">PR #29 review at hunk 14/22.</text>
+        <text class="mono" x="0" y="56" font-size="9" fill="#FFD700">spec-synth</text>
+        <text class="mono" x="64" y="56" font-size="8" fill="rgba(255,255,255,0.35)">08:46</text>
+        <text class="sans" x="0" y="72" font-size="10" fill="rgba(255,255,255,0.7)">Spawning research…</text>
+      </g>
+    </g>
+
+    
+    <rect width="540" height="360" fill="url(#scan2)" opacity="0.5"></rect>
+  </g>
+</svg>
