@@ -34,10 +34,6 @@ Diag = _core.Diag
 SLUG_RE = re.compile(r"^[a-z0-9-]+$")
 
 
-def _classify(path: Path, repo_root: Path, ontology: dict) -> _core.Classification:
-    return _core.classify_path(path, repo_root, ontology)
-
-
 def _expected_required_keys(ontology: dict, type_name: str) -> list[str]:
     return list(ontology["types"].get(type_name, {}).get("required_keys", []))
 
@@ -58,8 +54,10 @@ def check_file(
     path: Path,
     repo_root: Path,
     ontology: dict,
+    classification: _core.Classification | None = None,
 ) -> list[Diagnostic]:
-    classification = _classify(path, repo_root, ontology)
+    if classification is None:
+        classification = _core.classify_path(path, repo_root, ontology)
     if classification.expected_type is None:
         return []
 
@@ -203,11 +201,11 @@ def main(argv: list[str] | None = None) -> int:
     diags: list[Diagnostic] = []
     checked = 0
     for path in _iter_targets(args.paths, repo_root, scope):
-        cls = _classify(path, repo_root, ontology)
+        cls = _core.classify_path(path, repo_root, ontology)
         if cls.expected_type is None:
             continue
         checked += 1
-        diags.extend(check_file(path, repo_root, ontology))
+        diags.extend(check_file(path, repo_root, ontology, classification=cls))
 
     error_count = sum(1 for d in diags if d.severity == "ERROR")
     warn_count = sum(1 for d in diags if d.severity == "WARN")
