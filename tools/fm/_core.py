@@ -388,11 +388,20 @@ def levenshtein(a: str, b: str) -> int:
 
 # ---- File locking ------------------------------------------------------------
 
+try:
+    import fcntl as _fcntl  # POSIX
+except ImportError:  # pragma: no cover — non-POSIX (Windows, sandboxes)
+    _fcntl = None
+
+
 class FileLock:
     """Best-effort exclusive OS file lock for read-modify-write.
 
-    Uses fcntl.flock on POSIX. On Windows / non-POSIX, degrades to a no-op
-    (the test harness is POSIX-only, per CI assumptions).
+    Uses fcntl.flock on POSIX (the standard CI platform for this repo).
+    On Windows or any environment without fcntl, the lock degrades to a
+    no-op — fm-edit's idempotency guarantees still hold across single
+    invocations, but two simultaneous writers would race. Real
+    concurrency safety is a POSIX-only contract.
     """
 
     def __init__(self, path: Path) -> None:
@@ -400,20 +409,21 @@ class FileLock:
         self._fh = None
 
     def __enter__(self):
+        if _fcntl is None:
+            return self
         try:
-            import fcntl
             self._fh = open(self.path, "r+b")
-            fcntl.flock(self._fh.fileno(), fcntl.LOCK_EX)
-        except (ImportError, OSError):
+            _fcntl.flock(self._fh.fileno(), _fcntl.LOCK_EX)
+        except OSError:
             self._fh = None
         return self
 
     def __exit__(self, exc_type, exc, tb):
-        if self._fh is not None:
-            try:
-                import fcntl
-                fcntl.flock(self._fh.fileno(), fcntl.LOCK_UN)
-            except Exception:
-                pass
+        if self._fh is None:
+            return
+        try:
+            if _fcntl is not None:
+                _fcntl.flock(self._fh.fileno(), _fcntl.LOCK_UN)
+        finally:
             self._fh.close()
             self._fh = None
