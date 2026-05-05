@@ -1,13 +1,13 @@
 ---
 type: task
-status: draft
+status: active
 slug: fm-section-editor
 summary: "Build the fm-section editor (replace/append/insert/delete/rename) per SPEC §13. Promote --check-body from opt-in to default-on once the corpus is migrated (Task 019)."
 created: 2026-05-05
 updated: 2026-05-05
 task_id: "018"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
@@ -38,15 +38,15 @@ Ship the body-side complement to fm-edit: a single CLI (`tools/fm/section.py`) t
 
 ## Todo
 
-- [ ] 1. Implement `tools/fm/section.py` per SPEC §13.1.
-- [ ] 2. Address resolution: `--nth`, `--anchor`, ambiguity → exit 5.
-- [ ] 3. Body-bytes-outside-section invariant + FileLock.
-- [ ] 4. Schema gate: refuse mutations that break §12.
-- [ ] 5. Tier guard: refuse cross-file `--rename`.
-- [ ] 6. Tests: every op + invariants.
-- [ ] 7. Flip `--check-body` default-on behind `FM_TOOLCHAIN=1`.
-- [ ] 8. SPEC amendments for Q4 and Q5.
-- [ ] 9. Friction-log + run-log entry on close.
+- [x] 1. Implement `tools/fm/section.py` per SPEC §13.1.
+- [x] 2. Address resolution: `--nth`, `--anchor`, ambiguity → exit 5.
+- [x] 3. Body-bytes-outside-section invariant + FileLock.
+- [x] 4. Schema gate: refuse mutations that break §12.
+- [x] 5. Tier guard: refuse cross-file `--rename`.
+- [x] 6. Tests: every op + invariants.
+- [x] 7. Flip `--check-body` default-on behind `FM_TOOLCHAIN=1`. *(Deferred to Task 020 per SPEC §12.6 — Phase 3 requires Task 019 to migrate the corpus first; recorded in friction-log.)*
+- [x] 8. SPEC amendments for Q4 and Q5.
+- [x] 9. Friction-log + run-log entry on close.
 
 ## Links
 

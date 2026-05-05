@@ -253,3 +253,43 @@ The agent MUST append its own record **before** committing the run's repairs, so
     `tasks/017-migrate-repo-to-flexible-toolchain/friction-log.md`;
     SPEC §10 Q3 (programmatic API for non-Python callers) resolved
     in `tasks/017-migrate-repo-to-flexible-toolchain/notes.md`.
+
+### Run 2026-05-05 — Task 018 implementation
+- agent: claude-code (session claude/complete-frontmatter-toolchain-l5Q8E)
+- start_commit: 3feee02
+- end_commit: PENDING
+- baseline_commit: 3feee02 (Task 017 final commit)
+- files_in_delta: 4 (tools/fm/section.py new; tools/fm/_core.py
+  extended; tests/fm/test_section.py new; SPEC.md amended) plus
+  task-folder closure
+- files_scanned: 252
+- t1_fixes: 0
+- t2_fixes: 1 (--check-task on tasks/018/task.md, then reverted as a
+  smoke test only)
+- t3_tasks_created: 0
+- t4_skipped: 1 (Phase 3 --check-body default-on flip — explicit
+  Task 020 territory per SPEC §12.6, not in Task 018 scope)
+- issues_skipped: 0
+- notes: >
+    Task implementation record per MAINTENANCE.md §2.3, NOT a coherence
+    run. Shipped fm-section per SPEC §13: a single-section body editor
+    with --replace, --append-to, --append-list-item, --check-task,
+    --insert-{after,before}, --delete, --rename. Addressing supports
+    --nth and --anchor (`<!-- anchor: ID -->` markers). Byte-for-byte
+    invariant outside the addressed span enforced; mutations are
+    schema-checked against the §12 body_schema and rejected with
+    exit 4 if they would leave the section in violation.
+    --rename refuses with exit 6 when another operational file links
+    to the old heading (T3 cross-file reference). SectionSpan +
+    find_section_spans helpers added to _core.py;
+    load_ontology() falls back to a module-relative path so callers
+    from outside the repo CWD still resolve the schema. 19 new tests
+    in tests/fm/test_section.py; total fm test count 83/83 passing.
+
+    SPEC §10 amendments folded back: Q3 documented (the CLI is the
+    API), Q4 (Levenshtein → OSA), Q5 (skill keys → name+description).
+
+    Phase 3 (--check-body default-on) intentionally NOT shipped here;
+    SPEC §12.6 places it in Task 020 after Task 019 migrates the
+    corpus. Friction logged as FL1 in
+    `tasks/018-fm-section-editor/friction-log.md`.
