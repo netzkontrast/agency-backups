@@ -4,7 +4,7 @@ status: active
 slug: tasks-root
 summary: "Root of /tasks/. Each subfolder is one orchestrated unit of work linking prompts, research, and code via frontmatter."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 ---
 
 # Tasks Root
@@ -35,7 +35,10 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`009-author-skills-root-spec/`](./009-author-skills-root-spec/) — Author `SKILLS.md`, the missing root governance spec for `/skills/`, and wire skill-to-skill cross-references. Status: `open`.
 - [`010-skills-frontmatter-index-suite/`](./010-skills-frontmatter-index-suite/) — Build the token-efficient frontmatter index + skills tool suite that operationalizes `SKILLS.md §B.5` for cross-agent navigation. Status: `open`.
 - [`011-skills-frontmatter-schema-files/`](./011-skills-frontmatter-schema-files/) — Author JSON Schemas for L1/L2 frontmatter and the canonical header ontology so tools and external agents share one machine-readable contract. Status: `open`.
-- [`015-integrate-dramatica-ncp-skills/`](./015-integrate-dramatica-ncp-skills/) — Spec-driven, scenario-keyed restructure of the dramatica skills with deep `ncp-author` + `novel-architect` integration via a shared Narrative Ontology, per-term frontmatter, and a token-efficient Python navigator suite. Status: `in_progress`.
+- [`012-review-pr-29/`](./012-review-pr-29/) — Structured code review of PR #29 (skills governance, Tasks 009–011). Status: `in_progress`.
+- [`013-renumber-duplicate-task-ids/`](./013-renumber-duplicate-task-ids/) — Resolve duplicate `task_id` collisions for ids 006 and 009 per TASK.md §8.1. Status: `open`.
+- [`014-improve-maintenance-spec-from-session/`](./014-improve-maintenance-spec-from-session/) — Capture maintenance-spec improvements distilled from the 2026-05-05 coherence run. Status: `open`.
+- [`015-integrate-dramatica-ncp-skills/`](./015-integrate-dramatica-ncp-skills/) — Spec-driven, scenario-keyed restructure of the dramatica skills with deep `ncp-author` + `novel-architect` integration via a shared Narrative Ontology, per-term frontmatter, and a token-efficient Python navigator suite. Status: `in_progress`. (Renumbered from 013 per TASK.md §8.1 — collided with main's Task 013.)
 
 ## Workflow Assumptions
 

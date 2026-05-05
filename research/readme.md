@@ -26,6 +26,7 @@ All work here MUST conform to [`RESEARCH.md`](../RESEARCH.md). Frontmatter and c
 - [`agentic-session-continuity-spec/`](./agentic-session-continuity-spec/) — Spec-G/H/I: session continuity across runs.
 - [`ncp-novel-co-authoring-spec/`](./ncp-novel-co-authoring-spec/) — Narrative Context Protocol / Dramatica integration.
 - [`obsidian-frontmatter-agentic-spec/`](./obsidian-frontmatter-agentic-spec/) — The Layered Schema with Namespacing model that backs this repo's frontmatter ontology.
+- [`skills-namespace-ontology/`](./skills-namespace-ontology/) — Ratified `skill_*` L2 namespace: five kind values, three tier values, 14-skill mapping, two-case reciprocity rule, migration plan. Unblocks Tasks 009 and 011.
 - [`spec-driven-research-agentic-workflows/`](./spec-driven-research-agentic-workflows/) — Spec-driven research workflow patterns.
 
 ### External Research Results (Third-Party Sources)
