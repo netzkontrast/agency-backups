@@ -9,6 +9,7 @@ updated: 2026-05-05
 
 # Prompt — adr-tooling-impl-plan
 
+- [`brief.md`](./brief.md) — Raw user request and context.
 - [`prompt.md`](./prompt.md) — The executable task-spec prompt.
 
 ## Usage
