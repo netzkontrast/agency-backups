@@ -226,6 +226,203 @@ def _iter_targets(args_paths: list[str], repo_root: Path,
     yield from _core.iter_operational_files(repo_root, scope=scope)
 
 
+# ---- --type-check (Task 019 ST-5) -------------------------------------------
+
+
+def _build_slug_index(repo_root: Path, ontology: dict
+                      ) -> tuple[dict[str, dict], dict[tuple[str, str], dict]]:
+    """Return (any_index, by_type_index).
+
+    `any_index` maps slug → first entry (used for dangling-ref resolution
+    when the caller doesn't care about type).
+    `by_type_index` maps (slug, type) → entry, so reciprocity rules and
+    task_id resolution can disambiguate when a slug is shared between
+    a task.md and its sibling prompt.md.
+    """
+    any_index: dict[str, dict] = {}
+    by_type: dict[tuple[str, str], dict] = {}
+    for path in _core.iter_operational_files(repo_root):
+        cls = _core.classify_path(path, repo_root, ontology)
+        if cls.expected_type is None:
+            continue
+        try:
+            fm = _core.read_fm(path, strict=False)
+        except Exception:
+            continue
+        slug = _core.str_val(fm, "slug")
+        if not slug:
+            continue
+        rel = path.resolve().relative_to(repo_root.resolve()).as_posix()
+        declared = _core.str_val(fm, "type") or cls.expected_type
+        entry = {"path": rel, "type": declared, "fm": fm}
+        by_type.setdefault((slug, declared), entry)
+        any_index.setdefault(slug, entry)
+    return any_index, by_type
+
+
+def _build_task_id_index(by_type: dict[tuple[str, str], dict]) -> dict[str, str]:
+    """Return {task_id: slug} for tasks that declare task_id."""
+    out: dict[str, str] = {}
+    for (slug, declared), entry in by_type.items():
+        if declared != "task":
+            continue
+        tid = _core.str_val(entry["fm"], "task_id")
+        if tid:
+            out[tid] = slug
+    return out
+
+
+_LIST_REF_FIELDS = (
+    "task_uses_prompts",
+    "task_spawns_research",
+    "task_spawns_prompts",
+    "task_blocked_by",
+    "task_supersedes",
+    "task_superseded_by",
+)
+
+
+def _resolve_ref(ref: str, any_index: dict[str, dict],
+                 task_id_index: dict[str, str]) -> str | None:
+    """Resolve a slug-or-task-id reference to its canonical slug, or None."""
+    if ref in any_index:
+        return ref
+    if ref in task_id_index:
+        return task_id_index[ref]
+    return None
+
+
+def type_check(repo_root: Path, ontology: dict) -> list[Diagnostic]:
+    """SPEC §5.1 + Task 019 ST-5: emit F.T.1 (dangling) and F.T.2 (reciprocity)
+    diagnostics across the slug graph."""
+    diags: list[Diagnostic] = []
+    any_index, by_type = _build_slug_index(repo_root, ontology)
+    task_id_index = _build_task_id_index(by_type)
+
+    for (slug, declared), entry in by_type.items():
+        fm = entry["fm"]
+        path = entry["path"]
+        for field in _LIST_REF_FIELDS:
+            for ref in _core.str_list(fm, field):
+                if not ref or ref.startswith("REPLACE"):
+                    continue
+                if _resolve_ref(ref, any_index, task_id_index) is None:
+                    diags.append(Diagnostic(
+                        path, None, "ERROR", "F.T.1",
+                        f"dangling reference {field}={ref!r} (slug/task_id has no matching file)",
+                    ))
+        # Scalar reference fields.
+        for field in ("prompt_relates_to_task", "prompt_spawned_from_research",
+                       "research_executes_prompt"):
+            ref = _core.str_val(fm, field)
+            if not ref or ref.startswith("REPLACE"):
+                continue
+            if _resolve_ref(ref, any_index, task_id_index) is None:
+                diags.append(Diagnostic(
+                    path, None, "ERROR", "F.T.1",
+                    f"dangling reference {field}={ref!r} (slug/task_id has no matching file)",
+                ))
+
+    # Reciprocity rules.
+    for rule in ontology.get("reciprocity", {}).get("rules", []):
+        fwd_type = rule["forward"]["type"]
+        fwd_field = rule["forward"]["field"]
+        back_type = rule["back"]["type"]
+        back_field = rule["back"]["field"]
+        back_scalar = rule["back"].get("scalar", False)
+
+        for (slug, declared), entry in by_type.items():
+            if declared != fwd_type:
+                continue
+            for ref in _core.str_list(entry["fm"], fwd_field):
+                if not ref or ref.startswith("REPLACE"):
+                    continue
+                resolved = _resolve_ref(ref, any_index, task_id_index)
+                if resolved is None:
+                    continue  # dangling; F.T.1 covers it
+                target = by_type.get((resolved, back_type))
+                if target is None:
+                    continue
+                if back_scalar:
+                    back_val = _core.str_val(target["fm"], back_field)
+                    matched = back_val == slug
+                else:
+                    matched = slug in _core.str_list(target["fm"], back_field)
+                if not matched:
+                    diags.append(Diagnostic(
+                        target["path"], None, "ERROR", "F.T.2",
+                        f"reciprocity break: {entry['path']} declares "
+                        f"{fwd_field} contains {ref!r} but {back_field} on "
+                        f"this file does not name back to {slug!r}",
+                    ))
+    return diags
+
+
+# ---- --explain (Task 019 ST-5) ----------------------------------------------
+
+
+def _load_explanations(repo_root: Path) -> dict:
+    candidates = [
+        repo_root / "maintenance" / "schemas" / "diagnostic-explanations.json",
+        Path(__file__).resolve().parents[1].parent
+            / "maintenance" / "schemas" / "diagnostic-explanations.json",
+    ]
+    for p in candidates:
+        if p.exists():
+            return json.loads(p.read_text(encoding="utf-8"))
+    return {"codes": {}}
+
+
+def _annotate(d: Diagnostic, explanations: dict) -> str:
+    code = explanations.get("codes", {}).get(d.code)
+    base = d.render()
+    if not code:
+        return base
+    trailer = (
+        f"  what: {code['what']}\n"
+        f"  why:  {code['why']}\n"
+        f"  fix:  {code['fix']}"
+    )
+    return f"{base}\n{trailer}"
+
+
+# ---- --baseline (Task 019 ST-5) ---------------------------------------------
+
+
+def _diags_for_baseline(ref: str, paths: list[Path], repo_root: Path,
+                        ontology: dict, *, check_body: bool) -> set[tuple]:
+    """Return {(path, line, code, message)} for the snapshot at <ref>."""
+    import subprocess
+    out: set[tuple] = set()
+    for path in paths:
+        rel = path.resolve().relative_to(repo_root.resolve()).as_posix()
+        result = subprocess.run(
+            ["git", "show", f"{ref}:{rel}"],
+            cwd=repo_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            continue
+        # Run check_file against an in-memory snapshot via a temp file.
+        import tempfile
+        with tempfile.NamedTemporaryFile(
+                "w", suffix=".md", dir=repo_root, delete=False, encoding="utf-8") as tf:
+            tf.write(result.stdout)
+            tmp_path = Path(tf.name)
+        try:
+            cls = _core.classify_path(path, repo_root, ontology)
+            if cls.expected_type is None:
+                continue
+            for d in check_file(tmp_path, repo_root, ontology,
+                                classification=cls, check_body=check_body):
+                out.add((rel, d.line, d.code, d.message))
+        finally:
+            tmp_path.unlink(missing_ok=True)
+    return out
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="fm-validate", add_help=True)
     p.add_argument("paths", nargs="*")
@@ -236,6 +433,14 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--check-body", action="store_true",
                    help="also enforce SPEC §12 per-section body schemas "
                         "(opt-in for v1; default off)")
+    p.add_argument("--type-check", action="store_true",
+                   help="emit F.T.* diagnostics for dangling slug references "
+                        "and reciprocity breaks (Task 019 ST-5)")
+    p.add_argument("--explain", action="store_true",
+                   help="annotate each diagnostic with what/why/fix from "
+                        "maintenance/schemas/diagnostic-explanations.json")
+    p.add_argument("--baseline", default=None, metavar="GIT_REF",
+                   help="emit only diagnostics introduced since <GIT_REF>")
     p.add_argument("--format", choices=("text", "json"), default="text")
     args = p.parse_args(argv)
 
@@ -249,14 +454,29 @@ def main(argv: list[str] | None = None) -> int:
 
     diags: list[Diagnostic] = []
     checked = 0
+    walked: list[Path] = []
     for path in _iter_targets(args.paths, repo_root, scope):
         cls = _core.classify_path(path, repo_root, ontology)
         if cls.expected_type is None:
             continue
         checked += 1
+        walked.append(path)
         diags.extend(check_file(path, repo_root, ontology,
                                 classification=cls,
                                 check_body=args.check_body))
+
+    if args.type_check:
+        diags.extend(type_check(repo_root, ontology))
+
+    if args.baseline:
+        baseline_set = _diags_for_baseline(
+            args.baseline, walked, repo_root, ontology,
+            check_body=args.check_body,
+        )
+        diags = [
+            d for d in diags
+            if (d.path, d.line, d.code, d.message) not in baseline_set
+        ]
 
     error_count = sum(1 for d in diags if d.severity == "ERROR")
     warn_count = sum(1 for d in diags if d.severity == "WARN")
@@ -269,8 +489,10 @@ def main(argv: list[str] | None = None) -> int:
             "warnings": warn_count,
         }, indent=2))
     else:
+        explanations = _load_explanations(repo_root) if args.explain else {"codes": {}}
         for d in diags:
-            print(d.render(), file=sys.stderr)
+            line = _annotate(d, explanations) if args.explain else d.render()
+            print(line, file=sys.stderr)
         print(f"Checked {checked} files; {len(diags)} diagnostic(s).")
 
     if error_count > 0:

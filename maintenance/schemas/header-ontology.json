@@ -127,6 +127,15 @@
       "body_schema": {}
     }
   },
+  "reciprocity": {
+    "note": "Reciprocal slug-graph edges checked by fm-validate --type-check (F.T.2). Each rule names a forward field on the source type and the back-reference field expected on the target type. fm-validate walks every operational file, builds the slug→file index, and verifies every forward reference has a matching back-reference. Note: `prompt_spawned_from_research` is intentionally NOT listed here — the spawn relationship is one-to-many and the back-edge `research_executes_prompt` is a scalar that names only the original prompt, not the follow-ups.",
+    "rules": [
+      {
+        "forward": {"type": "task", "field": "task_uses_prompts"},
+        "back":    {"type": "prompt", "field": "prompt_relates_to_task"}
+      }
+    ]
+  },
   "path_classification": {
     "note": "Maps file paths to expected type. The validator infers expected_type from path; the file's frontmatter type: MUST agree (or be one of the path-allowed alternates). Patterns are matched against repo-relative paths.",
     "rules": [
