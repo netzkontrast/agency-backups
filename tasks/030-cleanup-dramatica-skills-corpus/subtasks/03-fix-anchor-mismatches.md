@@ -1,7 +1,7 @@
 ---
 type: note
 status: draft
-slug: task-026-st3-fix-anchor-mismatches
+slug: task-030-st3-fix-anchor-mismatches
 summary: "Subtask ST-3: repair the 8 known term_file anchor mismatches and partition the 106 unmapped headings into ontology-adoptable vs. structural-prose categories. Mint the small set of canonical entries Task 015 explicitly missed (Ability, Change, Non-acceptance, Non-accurate, character-dynamic.approach)."
 created: 2026-05-05
 updated: 2026-05-05
@@ -62,12 +62,12 @@ Wrong cut **iff** the 106 unmapped headings turn out to need a fourth bucket (i.
 ## Acceptance Criteria
 
 1. **0 anchor mismatches.** `python3 tools/dramatica-nav/validate.py` reports `term_file-anchor-mismatch: 0`.
-2. **Partition table emitted.** A new section `## Unmapped-heading partition` appears in [`tasks/026-cleanup-dramatica-skills-corpus/notes.md §5`](../notes.md). Each row: `file | heading | bucket (A/B/C/D) | resolution`. Sum of A+B+C+D = 106 (or whatever validate.py's current count is at ST-3's runtime).
+2. **Partition table emitted.** A new section `## Unmapped-heading partition` appears in [`tasks/030-cleanup-dramatica-skills-corpus/notes.md §5`](../notes.md). Each row: `file | heading | bucket (A/B/C/D) | resolution`. Sum of A+B+C+D = 106 (or whatever validate.py's current count is at ST-3's runtime).
 3. **`character-dynamic.growth.term_file` updated.** `nav.py by-id character-dynamic.growth` shows `term_file: skills/dramatica-vocabulary/references/character-dynamics.md#growth` (no longer pointing at `#approach`). `validate.py` reports both Approach and Growth as `term_file-anchor-match` rather than mismatched.
 4. **`var.work` resolved.** Either the heading moves to `variations.md` OR the ontology pointer moves to `plot-dynamics.md`. Whichever is chosen, `validate.py` reports clean.
 5. **5 missing canonical entries added.** `elements.md` carries `## Ability`, `## Change`, `## Non-acceptance`, `## Non-accurate`. `variations.md` carries `## Self-Interest`. Each has `<!-- nav-ontology -->` block + structural description ≤1 line of source-prose.
 6. **No new ontology kinds.** Schema is unchanged. If a Bucket B entry needs a kind that's not in the existing enum, file as a Bucket D + Task 027 issue; do NOT bump the schema here.
-7. **Single commit.** Title: `fix(dramatica): resolve 8 anchor mismatches + partition 106 unmapped headings (Task 026 ST-3)`.
+7. **Single commit.** Title: `fix(dramatica): resolve 8 anchor mismatches + partition 106 unmapped headings (Task 030 ST-3)`.
 
 ## Dependencies
 
@@ -80,16 +80,16 @@ Medium-Large (~5 hours: partition is 106 rows, each needs a one-line decision + 
 ## Agent Prompt
 
 ```text
-You are implementing ST-3 of Task 026 (cleanup-dramatica-skills-corpus) for
+You are implementing ST-3 of Task 030 (cleanup-dramatica-skills-corpus) for
 the netzkontrast/agency repo on branch claude/cleanup-dramatica-skills-1cEOO.
 
 Repo root: /home/user/agency
 Working directory: /home/user/agency
 
 Context files (read first):
-  - tasks/026-cleanup-dramatica-skills-corpus/task.md
-  - tasks/026-cleanup-dramatica-skills-corpus/subtasks/03-fix-anchor-mismatches.md (this file)
-  - tasks/026-cleanup-dramatica-skills-corpus/notes.md §2.7 (the 8 mismatches) and §2.8 (the 106)
+  - tasks/030-cleanup-dramatica-skills-corpus/task.md
+  - tasks/030-cleanup-dramatica-skills-corpus/subtasks/03-fix-anchor-mismatches.md (this file)
+  - tasks/030-cleanup-dramatica-skills-corpus/notes.md §2.7 (the 8 mismatches) and §2.8 (the 106)
   - tasks/015-integrate-dramatica-ncp-skills/notes.md §Plan Step 4 (historical context on the 5 missing canonical entries)
   - tasks/015-integrate-dramatica-ncp-skills/notes.md §Plan Step 5 (historical context on the 106 unmapped headings)
   - maintenance/schemas/narrative-ontology/ontology.schema.json
@@ -98,7 +98,7 @@ Context files (read first):
 Two coupled deliverables:
   1. Fix all 8 term_file-anchor-mismatch warnings from validate.py.
   2. Partition the 106 unmapped-heading warnings into Buckets A/B/C/D and
-     emit the partition table to tasks/026-cleanup-dramatica-skills-corpus/notes.md §5.
+     emit the partition table to tasks/030-cleanup-dramatica-skills-corpus/notes.md §5.
 
 Plus mint character-dynamic.approach (per ST-2's coordination note) in
 ontology.json.
@@ -137,8 +137,8 @@ When done:
     (term_file-anchor-mismatch: 0; unmapped-heading count drops by ≈25 anchor-format fixes)
   - python3 tools/dramatica-nav/nav.py by-id character-dynamic.growth
     (term_file now ends in #growth, not #approach)
-  - cat tasks/026-cleanup-dramatica-skills-corpus/notes.md | grep -A1 "Unmapped-heading partition"
+  - cat tasks/030-cleanup-dramatica-skills-corpus/notes.md | grep -A1 "Unmapped-heading partition"
     (the partition table is present)
-  - Commit "fix(dramatica): resolve 8 anchor mismatches + partition 106 unmapped headings (Task 026 ST-3)"
+  - Commit "fix(dramatica): resolve 8 anchor mismatches + partition 106 unmapped headings (Task 030 ST-3)"
   - Do NOT push.
 ```

@@ -1,4 +1,4 @@
-# Task 026 — Notes
+# Task 030 — Notes
 
 > Running scratchpad. Three sections, in this order:
 > 1. **Assumption Log** — every choice the planner made that a downstream agent could reasonably challenge, plus the rationale.
@@ -39,7 +39,7 @@ Format: `**A-N.** Assumption.` followed by *Rationale.* + *What would invalidate
 
 *Rationale.* No canonical "subtask spec" exists in the repo (this is part of why Task 027 exists). Task 019's `subtasks/<NN>-<name>.md` layout — frontmatter + Goal + Falsification + Inputs + Acceptance + Dependencies + Agent Prompt — is the most-recent and most-load-bearing precedent. Copying it preserves the audit graph.
 
-*What would invalidate.* Task 027's research output could ratify a different shape (e.g., requiring a Pre-Mortem section, or a different agent-prompt embedding format, or a normative statement on whether `# anchor:`-style stable IDs apply at the subtask level). The task body explicitly flags subtask format as PROVISIONAL.
+*What would invalidate.* Task 029's audit output could ratify a different shape (e.g., requiring a Pre-Mortem section, or a different agent-prompt embedding format, or a normative statement on whether `# anchor:`-style stable IDs apply at the subtask level). The task body explicitly flags subtask format as PROVISIONAL.
 
 ### A-6. Sub-prompt format = subtask file's "Agent Prompt" code block, copy-pasted into `/sc:agent`.
 
@@ -219,11 +219,11 @@ ST-8 brings coverage up; target ≥250 entries with ≥1 scenario, median ≤4, 
 
 **Workaround.** Reverse-engineered Task 019's `subtasks/<NN>-<name>.md` files; they collectively encode an implicit format. Copied the structure verbatim.
 
-**Risk this incurs.** If Task 027 ratifies a different layout, every subtask file under `tasks/026-cleanup-dramatica-skills-corpus/subtasks/` re-renders. That is an entirely mechanical edit but it WILL produce a noisy commit. Better outcome: ratify Task 019's pattern AS the canonical template before Task 026 dispatches; freeze it.
+**Risk this incurs.** If Task 027 ratifies a different layout, every subtask file under `tasks/030-cleanup-dramatica-skills-corpus/subtasks/` re-renders. That is an entirely mechanical edit but it WILL produce a noisy commit. Better outcome: ratify Task 019's pattern AS the canonical template before Task 030 dispatches; freeze it.
 
 **Pattern this exposes.** The repo has L1+L2 frontmatter ontologies for tasks/prompts/research but NOT for subtasks. A subtask is not a Task (no own task_id), not a Prompt (it doesn't live in `/prompts/`), and not a Research artefact. Where does it sit? Task 027 needs to answer this.
 
-**Suggested rule for Task 027 to ratify.** Subtasks are L2.1 artefacts under their parent Task. They MUST carry an L2.1 namespace (`subtask_id`, `subtask_status`, `subtask_recommended_agent`, `subtask_phase`, `subtask_depends_on`, `subtask_falsification`). They MUST live under `<parent-task-folder>/subtasks/<NN>-<slug>.md` and MUST NOT have their own folder.
+**Suggested rule for Task 029 to ratify.** Subtasks are L2.1 artefacts under their parent Task. They MUST carry an L2.1 namespace (`subtask_id`, `subtask_status`, `subtask_recommended_agent`, `subtask_phase`, `subtask_depends_on`, `subtask_falsification`). They MUST live under `<parent-task-folder>/subtasks/<NN>-<slug>.md` and MUST NOT have their own folder.
 
 ### FE-2 (FL1, Minor) — `/sc:agent` invocation syntax is undocumented in the repo.
 
@@ -235,19 +235,19 @@ ST-8 brings coverage up; target ≥250 entries with ≥1 scenario, median ≤4, 
 
 **Pattern this exposes.** The repo treats `/sc:*` commands as opaque magic — they appear in task plans and friction logs but no spec describes them. Task 027 needs to either ratify `/sc:agent` as semantically equivalent to the harness `Agent` tool OR define it as a separate entity with its own contract.
 
-**Suggested rule for Task 027 to ratify.** `/sc:agent` is the canonical dispatcher for subtasks. Its invocation surface MUST match the harness `Agent` tool's parameters (description / subagent_type / prompt / isolation / model). The subtask file's "Agent Prompt" block MUST be copy-pasteable into `/sc:agent`'s prompt parameter.
+**Suggested rule for Task 029 to ratify.** `/sc:agent` is the canonical dispatcher for subtasks. Its invocation surface MUST match the harness `Agent` tool's parameters (description / subagent_type / prompt / isolation / model). The subtask file's "Agent Prompt" block MUST be copy-pasteable into `/sc:agent`'s prompt parameter.
 
 ### FE-3 (FL2, Significant) — `task_status` mismatch between Task 015's `task.md` and `tasks/readme.md`.
 
-**What happened.** Task 015's task.md frontmatter says `task_status: done`. But [tasks/readme.md line 43](../readme.md) says "Status: `in_progress`". This is a 2026-05-05 staleness window. When I tried to figure out whether to mark Task 026 as `task_blocked_by: ["015"]`, I had to read both, plus the friction log, plus Task 015's notes.md, to confirm: 015 IS done. The readme is stale.
+**What happened.** Task 015's task.md frontmatter says `task_status: done`. But [tasks/readme.md line 43](../readme.md) says "Status: `in_progress`". This is a 2026-05-05 staleness window. When I tried to figure out whether to mark Task 030 as `task_blocked_by: ["015"]`, I had to read both, plus the friction log, plus Task 015's notes.md, to confirm: 015 IS done. The readme is stale.
 
-**Workaround.** Trusted task.md (canonical per [TASK.md §3.1](../../TASK.md)). Marked Task 026 as `task_blocked_by: []` (Task 015's deliverables exist; no real blocker).
+**Workaround.** Trusted task.md (canonical per [TASK.md §3.1](../../TASK.md)). Marked Task 030 as `task_blocked_by: []` (Task 015's deliverables exist; no real blocker).
 
 **Risk this incurs.** Other agents reading `tasks/readme.md` first will conclude 015 is `in_progress` and might pile work onto its branch instead of opening 026. Mitigation: this task's `links` section names 015 as predecessor and explicitly notes "Task 015's deliverables landed".
 
 **Pattern this exposes.** Two-source-of-truth drift between an L0 frontmatter field and its denormalised mention in a parent index file. This is the EXACT failure mode Task 015 §Pre-Mortem item 1 ("Schema bloat") was supposed to prevent at the schema layer; it has reappeared at the readme-index layer. The repo needs a "tasks/readme.md is regenerated, not hand-maintained" linter (Task 023's mirror-divergence gate is the right precedent).
 
-**Suggested rule for Task 027 to ratify.** `tasks/readme.md` MUST be regenerated from each `task.md`'s frontmatter at pre-commit (similar to `tools/fm/gen_schema_mirror.py` per Task 023). Manual edits to status fields in the readme are forbidden.
+**Suggested rule for Task 029 to ratify.** `tasks/readme.md` MUST be regenerated from each `task.md`'s frontmatter at pre-commit (similar to `tools/fm/gen_schema_mirror.py` per Task 023). Manual edits to status fields in the readme are forbidden.
 
 ### FE-4 (FL1, Minor) — Renderer-emitted prompt has depth-2 YAML, breaking repo rule.
 
@@ -259,19 +259,19 @@ ST-8 brings coverage up; target ≥250 entries with ≥1 scenario, median ≤4, 
 
 **Pattern this exposes.** The renderer's output schema is incompatible with the repo's frontmatter rule. Either the renderer needs to flatten its provenance metadata, OR the repo's rule needs an exception for renderer-produced documents (e.g., "renderer output is a Body Concern, not a Frontmatter Concern; the executing agent extracts what it needs at run-time").
 
-**Suggested rule for Task 027 to ratify.** Renderer-produced prompts (any artefact bearing a `schema:` field naming a renderer schema) are exempt from the YAML-depth-1 rule for the renderer's metadata blocks ONLY when those blocks are wrapped inside a fenced code block in the body. The top-level frontmatter MUST still conform to the repo rule. This formalises the workaround above.
+**Suggested rule for Task 029 to ratify.** Renderer-produced prompts (any artefact bearing a `schema:` field naming a renderer schema) are exempt from the YAML-depth-1 rule for the renderer's metadata blocks ONLY when those blocks are wrapped inside a fenced code block in the body. The top-level frontmatter MUST still conform to the repo rule. This formalises the workaround above.
 
 ### FE-5 (FL1, Minor) — No clear contract for "task spawns prompts that are CONSUMED by ANOTHER task".
 
-**What happened.** Task 026's `task_spawns_prompts` lists `agency-adr-governance-spec`. But that prompt is NOT consumed by Task 026 — it's consumed by Task 027. The TASK.md §3.3 description of `task_spawns_prompts` says: "Slugs of follow-up prompts generated by this Task". Authored, yes; consumed-elsewhere, also yes — but the field doesn't carry that distinction. There's also no reciprocal field on the prompt (`prompt_relates_to_task` IS set on the prompt, pointing to Task 027 — but TASK.md doesn't say whether that's the consumer or the spawner).
+**What happened.** Task 030's `task_spawns_prompts` lists `agency-adr-governance-spec`. But that prompt is NOT consumed by Task 030 — it's consumed by Task 027. The TASK.md §3.3 description of `task_spawns_prompts` says: "Slugs of follow-up prompts generated by this Task". Authored, yes; consumed-elsewhere, also yes — but the field doesn't carry that distinction. There's also no reciprocal field on the prompt (`prompt_relates_to_task` IS set on the prompt, pointing to Task 027 — but TASK.md doesn't say whether that's the consumer or the spawner).
 
-**Workaround.** Set Task 026's `task_spawns_prompts: ["agency-adr-governance-spec"]` (it spawned the prompt while planning), Task 027's `task_uses_prompts: ["agency-adr-governance-spec"]` (it executes the prompt), and the prompt's `prompt_relates_to_task: spec-subagent-subtask-prompt-format` (pointing to its consumer Task 027, not its spawner Task 026). This satisfies all three frontmatter rules but is non-obvious.
+**Workaround.** Set Task 030's `task_spawns_prompts: ["agency-adr-governance-spec"]` (it spawned the prompt while planning), Task 027's `task_uses_prompts: ["agency-adr-governance-spec"]` (it executes the prompt), and the prompt's `prompt_relates_to_task: spec-subagent-subtask-prompt-format` (pointing to its consumer Task 027, not its spawner Task 030). This satisfies all three frontmatter rules but is non-obvious.
 
-**Risk this incurs.** Audit-graph queries that walk "Task A spawned prompts → those prompts' consumers" might not find Task 026 → prompt → Task 027. The chain is correct but the schema doesn't surface "spawner ≠ consumer" cleanly.
+**Risk this incurs.** Audit-graph queries that walk "Task A spawned prompts → those prompts' consumers" might not find Task 030 → prompt → Task 027. The chain is correct but the schema doesn't surface "spawner ≠ consumer" cleanly.
 
 **Pattern this exposes.** The audit-graph supports "Task uses Prompt" and "Task spawns Prompt" but treats them as orthogonal. In practice, "Task A spawns a Prompt that Task B uses" is a common pattern (this exact flow). The schema needs a `prompt_spawned_by_task` field to capture the third edge.
 
-**Suggested rule for Task 027 to ratify.** Prompts SHOULD carry a `prompt_spawned_by_task` field when they were authored as a deliverable of a different Task than the one that consumes them. Reciprocity rules: if `prompt.prompt_spawned_by_task == X`, then `tasks/X/task.md` MUST list this prompt in `task_spawns_prompts`. If `prompt.prompt_relates_to_task == Y`, then `tasks/Y/task.md` MUST list this prompt in `task_uses_prompts` (existing reciprocity).
+**Suggested rule for Task 029 to ratify.** Prompts SHOULD carry a `prompt_spawned_by_task` field when they were authored as a deliverable of a different Task than the one that consumes them. Reciprocity rules: if `prompt.prompt_spawned_by_task == X`, then `tasks/X/task.md` MUST list this prompt in `task_spawns_prompts`. If `prompt.prompt_relates_to_task == Y`, then `tasks/Y/task.md` MUST list this prompt in `task_uses_prompts` (existing reciprocity).
 
 ### FE-6 (FL1, Minor) — No spec for /sc: command lifecycle / which command does what.
 
@@ -279,11 +279,11 @@ ST-8 brings coverage up; target ≥250 entries with ≥1 scenario, median ≤4, 
 
 **Workaround.** Inferred the command set from usage context: `/sc:agent` (subtask dispatch), `/sc:research` (research-prompt execution), `/sc:improve --loop` (iterative refinement), `/sc:test` (test runner), `/sc:cleanup` (lint/cleanup), `/sc:createPR` (closing). Each invocation in the cleanup task's Plan is justified inline.
 
-**Risk this incurs.** If a `/sc:*` command works differently than expected, the task's plan misroutes work. Concrete unknown: does `/sc:improve --loop --iterations 3` count its iterations including the initial pass or only after-the-first? Task 015 used 3 iterations and produced 85 tagged terms; Task 026's ST-8 expects ~250 — does that mean 6 iterations? 9? Unknown until a Task-027 ADR settles it.
+**Risk this incurs.** If a `/sc:*` command works differently than expected, the task's plan misroutes work. Concrete unknown: does `/sc:improve --loop --iterations 3` count its iterations including the initial pass or only after-the-first? Task 015 used 3 iterations and produced 85 tagged terms; Task 030's ST-8 expects ~250 — does that mean 6 iterations? 9? Unknown until a Task-027 ADR settles it.
 
 **Pattern this exposes.** `/sc:*` commands are part of the repo's working surface but not part of any spec under `/maintenance/` or `/AGENTS.md`. The closest thing to documentation is the SuperClaude Framework upstream URL in [AGENTS.md § Skill Provenance](../../AGENTS.md), but that points at one command (`createPR`) and not the rest.
 
-**Suggested rule for Task 027 to ratify.** A new spec `maintenance/sc-command-spec.md` MUST enumerate every `/sc:*` command used in repo task plans, give each a one-paragraph description, list its expected parameters, list its expected outputs, and list which Task lifecycle phases SHOULD invoke it. This is the same shape `language-spec.md` takes for normative keywords.
+**Suggested rule for Task 029 to ratify.** A new spec `maintenance/sc-command-spec.md` MUST enumerate every `/sc:*` command used in repo task plans, give each a one-paragraph description, list its expected parameters, list its expected outputs, and list which Task lifecycle phases SHOULD invoke it. This is the same shape `language-spec.md` takes for normative keywords.
 
 ### FE-7 (FL2, Significant) — Tension between user's "be verbose in your Frustration log" and the repo's general anti-verbosity discipline.
 
@@ -297,53 +297,53 @@ But the user's literal request was *"please… be verbose in your Frustration lo
 
 **Pattern this exposes.** The repo's anti-bloat rule [FRUSTRATED.md § Special Triggers] does not have an exception for "intentional verbose record per user request". It would benefit from one.
 
-**Suggested rule for Task 027 to ratify.** "Verbose-by-design" sections MUST be marked with a `@verbose-load-bearing` HTML comment at the top of the section, with a `since: <date>` and `requested-by: <user|agent>` attribute. Linters MUST NOT flag content inside such marks as bloat. (Or: the rule already doesn't apply to `notes.md` body content; the repo's existing tooling never flagged it; this entire sub-frustration is a paranoia event. A Task-027 ADR could state the rule explicitly to remove the paranoia.)
+**Suggested rule for Task 029 to ratify.** "Verbose-by-design" sections MUST be marked with a `@verbose-load-bearing` HTML comment at the top of the section, with a `since: <date>` and `requested-by: <user|agent>` attribute. Linters MUST NOT flag content inside such marks as bloat. (Or: the rule already doesn't apply to `notes.md` body content; the repo's existing tooling never flagged it; this entire sub-frustration is a paranoia event. A Task-027 ADR could state the rule explicitly to remove the paranoia.)
 
 ### FE-8 (FL1, Minor) — No clear precedent for "task that spawns a research-task that produces a spec that ratifies the parent task's own conventions".
 
-**What happened.** Task 026 uses provisional conventions (subtask format / sub-prompt format / `/sc:*` usage) and explicitly ASKS Task 027 to ratify them. The repo has the `task_supersedes` / `task_superseded_by` pattern (Task 015 § friction log §Action Items references its three OQs as "can be standalone follow-up tasks") but the supersession pattern is for *Tasks* superseding *Tasks*. Here we have a *Task* spawning a *prompt* that drives a *research* whose output is a *spec* that retroactively binds the *Task*. Five layers, no canonical name.
+**What happened.** Task 030 uses provisional conventions (subtask format / sub-prompt format / `/sc:*` usage) and explicitly ASKS Task 029 to ratify them. The repo has the `task_supersedes` / `task_superseded_by` pattern (Task 015 § friction log §Action Items references its three OQs as "can be standalone follow-up tasks") but the supersession pattern is for *Tasks* superseding *Tasks*. Here we have a *Task* spawning a *prompt* that drives a *research* whose output is a *spec* that retroactively binds the *Task*. Five layers, no canonical name.
 
-**Workaround.** Authored both Task 026 and Task 027 in the same session. Task 026's `task.md §Anti-Patterns` says explicitly "MUST NOT treat the subtask format / sub-prompt format / /sc:* usage in this task as a precedent. They are PROVISIONAL pending Task 027's research output." This pushes the "ratification" pattern into prose rather than into the audit graph.
+**Workaround.** Authored both Task 030 and Task 027 in the same session. Task 030's `task.md §Anti-Patterns` says explicitly "MUST NOT treat the subtask format / sub-prompt format / /sc:* usage in this task as a precedent. They are PROVISIONAL pending Task 029's audit output." This pushes the "ratification" pattern into prose rather than into the audit graph.
 
-**Risk this incurs.** A subagent reading Task 026's subtasks might assume the provisional conventions are normative because they LOOK like the rest of the repo's conventions. The Anti-Patterns line is one human-readable sentence; not a machine-checkable invariant.
+**Risk this incurs.** A subagent reading Task 030's subtasks might assume the provisional conventions are normative because they LOOK like the rest of the repo's conventions. The Anti-Patterns line is one human-readable sentence; not a machine-checkable invariant.
 
 **Pattern this exposes.** The repo doesn't have a way to mark a Task as "depends on a future spec that the current task itself surfaces the need for". This is exactly the M03 Pre-Mortem item Task 015 raised about "Cross-skill ontology drift" — but at a meta level (cross-task convention drift).
 
-**Suggested rule for Task 027 to ratify.** A Task MAY declare `task_provisional_conventions: [list-of-convention-names]` in frontmatter. Each entry resolves to a section in [`maintenance/`](../../maintenance/) or to a future Task that will ratify the convention. While the convention is provisional, a linter MAY emit an advisory but MUST NOT fail.
+**Suggested rule for Task 029 to ratify.** A Task MAY declare `task_provisional_conventions: [list-of-convention-names]` in frontmatter. Each entry resolves to a section in [`maintenance/`](../../maintenance/) or to a future Task that will ratify the convention. While the convention is provisional, a linter MAY emit an advisory but MUST NOT fail.
 
 ### FE-9 (FL1, Minor) — Unclear cardinality on `task_spawns_prompts` reciprocity.
 
 **What happened.** Task 015's frontmatter has `task_spawns_prompts: []` (empty). But it spawned the `integrate-dramatica-ncp-skills` prompt. Task 015's `task.md §Plan Step 13` calls for authoring the prompt; the prompt exists; both `task_uses_prompts` and `prompt_relates_to_task` are populated reciprocally. Yet `task_spawns_prompts` is `[]`. So `task_spawns_prompts` apparently does NOT include prompts the Task ITSELF authors as part of its own deliverables — only prompts the Task spawns for OTHER Tasks to consume.
 
-This is the convention I had to infer to avoid double-counting. Setting Task 026's `task_spawns_prompts: ["agency-adr-governance-spec"]` IS correct under this convention because Task 026 authored the prompt for Task 027 to consume.
+This is the convention I had to infer to avoid double-counting. Setting Task 030's `task_spawns_prompts: ["agency-adr-governance-spec"]` IS correct under this convention because Task 030 authored the prompt for Task 027 to consume.
 
-**Workaround.** Trust the convention from Task 015's example. Set Task 026's `task_uses_prompts: []` (it uses no prompts) and `task_spawns_prompts: ["agency-adr-governance-spec"]` (it spawns one for Task 027).
+**Workaround.** Trust the convention from Task 015's example. Set Task 030's `task_uses_prompts: []` (it uses no prompts) and `task_spawns_prompts: ["agency-adr-governance-spec"]` (it spawns one for Task 027).
 
 **Risk this incurs.** TASK.md §3.3 doesn't make the "uses vs. spawns" distinction explicit. A future agent could plausibly read either interpretation.
 
 **Pattern this exposes.** Same as FE-5 — the audit graph's edges are under-typed.
 
-**Suggested rule for Task 027 to ratify.** Restate TASK.md §3.3's definitions of `task_uses_prompts` vs. `task_spawns_prompts` to make explicit:
+**Suggested rule for Task 029 to ratify.** Restate TASK.md §3.3's definitions of `task_uses_prompts` vs. `task_spawns_prompts` to make explicit:
 - `task_uses_prompts`: prompts this Task EXECUTES.
 - `task_spawns_prompts`: prompts this Task AUTHORS for another Task to execute.
 - A Task can list a prompt in BOTH if it both authored and executed the prompt within the same Task.
 
 ### FE-10 (FL1, Minor) — Persona scenarios have no schema-level contract for new precompiled artefacts.
 
-**What happened.** Task 026 §Goal #4 introduces a NEW directory structure: `maintenance/schemas/narrative-ontology/precompiled/<scenario-id>.json` plus a `precompiled.schema.json`. Doing so:
+**What happened.** Task 030 §Goal #4 introduces a NEW directory structure: `maintenance/schemas/narrative-ontology/precompiled/<scenario-id>.json` plus a `precompiled.schema.json`. Doing so:
 
 1. Implicitly extends the Narrative Ontology surface ([AGENTS.md § Authoritative Location](../../AGENTS.md) lists 7 files; this adds an 8th category).
 2. Implicitly extends the load-trigger rule ([AGENTS.md § NO.5](../../AGENTS.md) MUST be amended to forbid loading `precompiled/*.json` in non-narrative work).
 
-Both are SCHEMA-CHANGING decisions, and §Anti-Patterns explicitly says schema bumps are out of scope for Task 026 and require a Task-027 ADR.
+Both are SCHEMA-CHANGING decisions, and §Anti-Patterns explicitly says schema bumps are out of scope for Task 030 and require a Task-027 ADR.
 
-**Workaround.** Scoped Task 026 §Goal #4 to "produce JSON files passing a schema in this folder; do NOT amend [AGENTS.md § Narrative Ontology] yet". The amendment lands in Task 027 (or a new mini-task spawned from 027) once the ADR-governance pattern decides whether `precompiled/` is part of the Narrative Ontology canonical surface or a separate "denormalised projection layer".
+**Workaround.** Scoped Task 030 §Goal #4 to "produce JSON files passing a schema in this folder; do NOT amend [AGENTS.md § Narrative Ontology] yet". The amendment lands in Task 027 (or a new mini-task spawned from 027) once the ADR-governance pattern decides whether `precompiled/` is part of the Narrative Ontology canonical surface or a separate "denormalised projection layer".
 
 **Risk this incurs.** ST-9 ships a `precompiled.schema.json` whose status is "not yet ratified by [AGENTS.md § Narrative Ontology]". An agent following the rule literally won't load it; an agent ignoring the rule will. The status quo is worse than the schema being clearly absent.
 
 **Pattern this exposes.** New ontology-surface artefacts need a "preview" lifecycle that's not the same as "schema bump" or "regular file". This is exactly the architectural-decision-record use case Task 027's ADR-governance spec is meant to address — full-circle.
 
-**Suggested rule for Task 027 to ratify.** New ontology-surface artefacts get a `status: preview` lifecycle. A `preview` artefact is loaded under a separate trigger rule; agents that don't explicitly handle `preview` artefacts treat them as `status: archived`. Promoting `preview` → `active` requires an ADR.
+**Suggested rule for Task 029 to ratify.** New ontology-surface artefacts get a `status: preview` lifecycle. A `preview` artefact is loaded under a separate trigger rule; agents that don't explicitly handle `preview` artefacts treat them as `status: archived`. Promoting `preview` → `active` requires an ADR.
 
 ---
 

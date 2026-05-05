@@ -1,15 +1,15 @@
 ---
 type: index
 status: active
-slug: task-026-subtasks-index
-summary: "Subtask index for Task 026. Each file is a self-contained /sc:agent prompt scoped to one cleanup or tooling deliverable; four run in parallel in Phase A (markdown cleanup, main-tree), three run in parallel in Phase B (tooling, worktree-isolated), two run sequentially in Phase C (content coverage). Format is PROVISIONAL pending Task 027's ADR-governance ratification."
+slug: task-030-subtasks-index
+summary: "Subtask index for Task 030. Each file is a self-contained /sc:agent prompt scoped to one cleanup or tooling deliverable; four run in parallel in Phase A (markdown cleanup, main-tree), three run in parallel in Phase B (tooling, worktree-isolated), two run sequentially in Phase C (content coverage). Format is PROVISIONAL pending Task 029's ADR-governance ratification."
 created: 2026-05-05
 updated: 2026-05-05
 ---
 
-# Task 026 — Subtask Index
+# Task 030 — Subtask Index
 
-> **Provisional status notice.** The structure of every file in this folder follows the [Task 019 subtask convention](../../019-fm-toolchain-suite-integration/subtasks/) — frontmatter + Goal + Falsification + Inputs + Acceptance + Dependencies + Estimated Effort + Agent Prompt. That convention has not been spec-ratified. [Task 027](../../027-spec-subagent-subtask-prompt-format/) is expected to ratify or amend it. Do not propagate this layout to other tasks until 027 closes.
+> **Provisional status notice.** The structure of every file in this folder follows the [Task 019 subtask convention](../../019-fm-toolchain-suite-integration/subtasks/) — frontmatter + Goal + Falsification + Inputs + Acceptance + Dependencies + Estimated Effort + Agent Prompt. That convention has not been spec-ratified. [Task 029](../../029-adr-assumption-audit/) is expected to ratify or amend it. Do not propagate this layout to other tasks until 027 closes.
 
 Each subtask file below contains:
 - a self-contained briefing (context the agent will not have from this conversation),
@@ -91,7 +91,7 @@ The cuts above optimise for three properties (research-prompt-optimizer pattern)
 
 1. **Independence at execution time.** Phase A subtasks share files; merge conflicts are localised. Phase B subtasks share NO source files — each ships a single new script. Phase C subtasks share input (the cleaned-up corpus) but produce different output surfaces.
 2. **Falsifiable scope.** Each subtask file's "Falsification" section names the single observation that would prove the cut wrong. "Done" is mechanical.
-3. **Tier discipline.** No subtask is allowed to make T3/T4 changes. Schema bumps (term-frontmatter.schema.json, ontology.schema.json), new ontology kinds, or amendments to AGENTS.md § Narrative Ontology are FORBIDDEN here and must be filed against [Task 027](../../027-spec-subagent-subtask-prompt-format/).
+3. **Tier discipline.** No subtask is allowed to make T3/T4 changes. Schema bumps (term-frontmatter.schema.json, ontology.schema.json), new ontology kinds, or amendments to AGENTS.md § Narrative Ontology are FORBIDDEN here and must be filed against [Task 029](../../029-adr-assumption-audit/).
 
 ## Convention-Provisional Notice
 

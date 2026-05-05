@@ -1,7 +1,7 @@
 ---
 type: note
 status: draft
-slug: task-026-st8-scenario-tag-coverage
+slug: task-030-st8-scenario-tag-coverage
 summary: "Subtask ST-8: bring scenario coverage from 85 → ~250 entries via three /sc:improve --loop iterations. Maintain Task 015's M01 invariant (median ≤5, max ≤8 per term)."
 created: 2026-05-05
 updated: 2026-05-05
@@ -65,9 +65,9 @@ If the cut is wrong, the friction event surfaces TWO ratifiable patterns for Tas
 2. **M01 invariant holds.** Median scenarios-per-tagged-term ≤4 (stricter than Task 015's ≤5). Max ≤4. Schema cap (≤8) untouched.
 3. **No orphan scenarios.** Every scenario in `scenarios.json` has ≥3 entries tagged with it.
 4. **No over-tagged scenarios.** No scenario has >75 entries tagged with it (ratio sanity — at 304 total entries, no single scenario should claim >25%).
-5. **Measurement table emitted.** `tasks/026-cleanup-dramatica-skills-corpus/notes.md §9` (a new section) carries a per-iteration measurement table.
+5. **Measurement table emitted.** `tasks/030-cleanup-dramatica-skills-corpus/notes.md §9` (a new section) carries a per-iteration measurement table.
 6. **Validator clean.** `validate.py` reports 0 schema or scenario-tag-resolvability errors.
-7. **Single commit per iteration.** Three commits total. Titles: `feat(dramatica-nav): scenario coverage iter <N>/3 (Task 026 ST-8)`.
+7. **Single commit per iteration.** Three commits total. Titles: `feat(dramatica-nav): scenario coverage iter <N>/3 (Task 030 ST-8)`.
 
 ## Dependencies
 
@@ -80,15 +80,15 @@ Medium (~3 hours wall-clock; iteration-bound).
 ## Agent Prompt
 
 ```text
-You are implementing ST-8 of Task 026 (cleanup-dramatica-skills-corpus) for
+You are implementing ST-8 of Task 030 (cleanup-dramatica-skills-corpus) for
 the netzkontrast/agency repo on branch claude/cleanup-dramatica-skills-1cEOO.
 
 Repo root: /home/user/agency
 Working directory: /home/user/agency
 
 Context files (read first):
-  - tasks/026-cleanup-dramatica-skills-corpus/task.md
-  - tasks/026-cleanup-dramatica-skills-corpus/subtasks/08-scenario-tag-coverage.md (this file)
+  - tasks/030-cleanup-dramatica-skills-corpus/task.md
+  - tasks/030-cleanup-dramatica-skills-corpus/subtasks/08-scenario-tag-coverage.md (this file)
   - tasks/015-integrate-dramatica-ncp-skills/notes.md §Plan Step 6 (the
     precedent for the 3-iteration /sc:improve loop against scenario tagging)
   - maintenance/schemas/narrative-ontology/scenarios.json (the 11 canonical
@@ -135,7 +135,7 @@ When done (after all three iterations):
   - python3 -c "import json; e=json.load(open('maintenance/schemas/narrative-ontology/ontology.json'))['entries']; \
       tagged=[x for x in e if x.get('scenarios')]; print(f'tagged: {len(tagged)} / {len(e)}')"
                                                                               (must show ≥250 / 304)
-  - cat tasks/026-cleanup-dramatica-skills-corpus/notes.md | grep -A3 "§9"   (must show measurement table)
-  - Three commits, titled "feat(dramatica-nav): scenario coverage iter <N>/3 (Task 026 ST-8)"
+  - cat tasks/030-cleanup-dramatica-skills-corpus/notes.md | grep -A3 "§9"   (must show measurement table)
+  - Three commits, titled "feat(dramatica-nav): scenario coverage iter <N>/3 (Task 030 ST-8)"
   - Do NOT push.
 ```

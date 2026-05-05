@@ -1,7 +1,7 @@
 ---
 type: note
 status: draft
-slug: task-026-st7-bulk-alias-loader
+slug: task-030-st7-bulk-alias-loader
 summary: "Subtask ST-7: ship tools/dramatica-nav/aliases.py — parse skills/dramatica-vocabulary/references/_synonym-lookup.md (~512 alias rows) into aliases_en across the ontology, plus a hand-curated DE starter set for ~50 high-frequency terms (Hauptfigur, Vertrauen, Wandel, Wendepunkt, Akt, etc.)."
 created: 2026-05-05
 updated: 2026-05-05
@@ -52,7 +52,7 @@ Two coupled deliverables:
 
 ## Falsification
 
-Wrong cut **iff** the synonym-lookup contains alias entries that conflict with already-distinct ontology IDs (e.g., the alias "Resolve" mapping ambiguously to both `character-dynamic.resolve` AND `el.solution`). Mitigation: ST-7's `conflict-report` subcommand emits the full conflict set FIRST. The agent reviews; only conflict-free aliases are auto-loaded. Conflicts are filed as Bucket-D-style entries in [`notes.md`](../notes.md) for Task 027 to ratify.
+Wrong cut **iff** the synonym-lookup contains alias entries that conflict with already-distinct ontology IDs (e.g., the alias "Resolve" mapping ambiguously to both `character-dynamic.resolve` AND `el.solution`). Mitigation: ST-7's `conflict-report` subcommand emits the full conflict set FIRST. The agent reviews; only conflict-free aliases are auto-loaded. Conflicts are filed as Bucket-D-style entries in [`notes.md`](../notes.md) for Task 029 to ratify.
 
 ## Inputs
 
@@ -67,10 +67,10 @@ Wrong cut **iff** the synonym-lookup contains alias entries that conflict with a
 1. **CLI complete.** Five subcommands work as documented.
 2. **`load-en` smoke-passes.** Running `aliases.py load-en --source skills/dramatica-vocabulary/references/_synonym-lookup.md` projects ≥250 aliases into `ontology.json` (the conflict-free subset of 512). Running it again produces no diff.
 3. **`load-de` smoke-passes.** Running `aliases.py load-de --source tools/dramatica-nav/data/aliases_de_starter.json` projects ~50 DE aliases. Running it again produces no diff.
-4. **Conflict report emitted.** `tasks/026-cleanup-dramatica-skills-corpus/notes.md §8` (a new section) lists every conflict the run found.
+4. **Conflict report emitted.** `tasks/030-cleanup-dramatica-skills-corpus/notes.md §8` (a new section) lists every conflict the run found.
 5. **Validator clean.** `validate.py` reports 0 alias-uniqueness violations after both loads.
 6. **Tests.** `tools/dramatica-nav/tests/test_aliases.py` covers parse / resolve / project / idempotency / conflict-report (≥6 tests).
-7. **Single commit.** Title: `feat(dramatica-nav): aliases.py — bulk EN loader + DE starter set (Task 026 ST-7)`. Body lists the project counts (EN: ≥250, DE: ~50) and the conflict count.
+7. **Single commit.** Title: `feat(dramatica-nav): aliases.py — bulk EN loader + DE starter set (Task 030 ST-7)`. Body lists the project counts (EN: ≥250, DE: ~50) and the conflict count.
 
 ## Dependencies
 
@@ -83,7 +83,7 @@ Medium (~200 LOC tool + ~100 LOC tests + ~50 hand-curated DE entries).
 ## Agent Prompt
 
 ```text
-You are implementing ST-7 of Task 026 (cleanup-dramatica-skills-corpus) for
+You are implementing ST-7 of Task 030 (cleanup-dramatica-skills-corpus) for
 the netzkontrast/agency repo on branch claude/cleanup-dramatica-skills-1cEOO.
 
 This subtask runs in worktree isolation.
@@ -92,8 +92,8 @@ Repo root: /home/user/agency
 Working directory: /home/user/agency
 
 Context files (read first):
-  - tasks/026-cleanup-dramatica-skills-corpus/task.md
-  - tasks/026-cleanup-dramatica-skills-corpus/subtasks/07-bulk-alias-loader.md (this file)
+  - tasks/030-cleanup-dramatica-skills-corpus/task.md
+  - tasks/030-cleanup-dramatica-skills-corpus/subtasks/07-bulk-alias-loader.md (this file)
   - skills/dramatica-vocabulary/references/_synonym-lookup.md (the 512-row source)
   - skills/dramatica-vocabulary/SKILL.md (the German-primary persona context)
   - tools/dramatica-nav/lib/ontology.py (reuse helpers)
@@ -151,6 +151,6 @@ When done:
   - python3 tools/dramatica-nav/aliases.py conflict-report                     (must exit 0 if all conflicts moved to notes.md)
   - python3 tools/dramatica-nav/nav.py by-alias 'Vertrauen' --lang de          (must return el.trust)
   - python3 tools/dramatica-nav/validate.py                                    (must exit 0)
-  - Commit "feat(dramatica-nav): aliases.py — bulk EN loader + DE starter set (Task 026 ST-7)"
+  - Commit "feat(dramatica-nav): aliases.py — bulk EN loader + DE starter set (Task 030 ST-7)"
   - Do NOT push.
 ```

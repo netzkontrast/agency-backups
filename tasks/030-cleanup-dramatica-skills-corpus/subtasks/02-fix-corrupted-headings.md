@@ -1,7 +1,7 @@
 ---
 type: note
 status: draft
-slug: task-026-st2-fix-corrupted-headings
+slug: task-030-st2-fix-corrupted-headings
 summary: "Subtask ST-2: repair structurally corrupted headings — `## Sex)` lone-paren artefact, the `## Approach` heading carrying Growth's frontmatter, and any other heading-level corruption discovered during ST-1's diff review."
 created: 2026-05-05
 updated: 2026-05-05
@@ -42,7 +42,7 @@ Wrong cut **iff** the broken `## Sex)` body actually encodes dictionary informat
 - `skills/dramatica-vocabulary/references/elements.md` — spot-check for similar patterns (one known: `## Hinder` body says `>Help` instead of Hinder content).
 - `maintenance/schemas/narrative-ontology/ontology.json` — read-only consultation for canonical labels and IDs.
 - `maintenance/schemas/narrative-ontology/term-frontmatter.schema.json` — the schema any new YAML block must satisfy.
-- `tasks/026-cleanup-dramatica-skills-corpus/notes.md §2.4 + §2.6` — exact line numbers + context for the known cases.
+- `tasks/030-cleanup-dramatica-skills-corpus/notes.md §2.4 + §2.6` — exact line numbers + context for the known cases.
 
 ## Acceptance Criteria
 
@@ -52,7 +52,7 @@ Wrong cut **iff** the broken `## Sex)` body actually encodes dictionary informat
 4. **No quoted source prose >1 line.** `git diff -- skills/dramatica-vocabulary/references/character-dynamics.md | grep '^+' | grep -v '^+++' | wc -l` should be small (<30 lines for content additions); any larger means prose was added.
 5. **Truncation catalog emitted.** Commit body MUST include a markdown table listing every truncation found, with file:line and canonical-source pointer (page range in `dramatica-theory/references/0X-foo.md` if reconstructable).
 6. **Coordination note for ST-3.** Commit body MUST include a single-line item: `ST-3 must mint character-dynamic.approach in ontology.json` (or similar) so ST-3's brief is unambiguous.
-7. **Single commit.** Title: `fix(dramatica): repair corrupted headings + mis-attributed YAML (Task 026 ST-2)`.
+7. **Single commit.** Title: `fix(dramatica): repair corrupted headings + mis-attributed YAML (Task 030 ST-2)`.
 
 ## Dependencies
 
@@ -65,16 +65,16 @@ Medium (~3 hours of careful prose decisions + frontmatter authoring).
 ## Agent Prompt
 
 ```text
-You are implementing ST-2 of Task 026 (cleanup-dramatica-skills-corpus) for
+You are implementing ST-2 of Task 030 (cleanup-dramatica-skills-corpus) for
 the netzkontrast/agency repo on branch claude/cleanup-dramatica-skills-1cEOO.
 
 Repo root: /home/user/agency
 Working directory: /home/user/agency
 
 Context files (read first):
-  - tasks/026-cleanup-dramatica-skills-corpus/task.md
-  - tasks/026-cleanup-dramatica-skills-corpus/subtasks/02-fix-corrupted-headings.md (this file)
-  - tasks/026-cleanup-dramatica-skills-corpus/notes.md (specifically §2.4 and §2.6)
+  - tasks/030-cleanup-dramatica-skills-corpus/task.md
+  - tasks/030-cleanup-dramatica-skills-corpus/subtasks/02-fix-corrupted-headings.md (this file)
+  - tasks/030-cleanup-dramatica-skills-corpus/notes.md (specifically §2.4 and §2.6)
   - tasks/015-integrate-dramatica-ncp-skills/task.md §Anti-Patterns
     (MUST-NOT-quote-source-prose-over-1-line rule)
   - skills/dramatica-vocabulary/references/character-dynamics.md
@@ -123,6 +123,6 @@ When done:
   - grep -E "^## .*\)$" skills/dramatica-vocabulary/references/*.md
     (must return zero lines)
   - Commit "fix(dramatica): repair corrupted headings + mis-attributed YAML
-    (Task 026 ST-2)" with the truncation catalog table in the body.
+    (Task 030 ST-2)" with the truncation catalog table in the body.
   - Do NOT push.
 ```

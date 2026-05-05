@@ -1,7 +1,7 @@
 ---
 type: note
 status: draft
-slug: task-026-st5-build-term-editor
+slug: task-030-st5-build-term-editor
 summary: "Subtask ST-5: ship tools/dramatica-nav/term.py — a CLI for create / edit / move / deprecate workflows on per-term entries (frontmatter + body coordination + ontology.json sync). Removes the manual hand-edit-then-validate loop currently required for any term mutation."
 created: 2026-05-05
 updated: 2026-05-05
@@ -72,7 +72,7 @@ Wrong cut **iff** the term-editor surface conflicts with `tools/fm/edit.py` ergo
 4. **No clobber.** Every subcommand refuses to overwrite without explicit `--force`.
 5. **Idempotent.** Running the same `term.py edit --refresh <id>` twice produces no diff.
 6. **Gates pass.** `pytest tools/dramatica-nav/tests/`, `tools/check-governance.sh`, and `python3 tools/dramatica-nav/validate.py` all exit 0 after ST-5 lands.
-7. **Single commit.** Title: `feat(dramatica-nav): term.py for create/edit/move/deprecate (Task 026 ST-5)`.
+7. **Single commit.** Title: `feat(dramatica-nav): term.py for create/edit/move/deprecate (Task 030 ST-5)`.
 
 ## Dependencies
 
@@ -85,7 +85,7 @@ Medium (~250 LOC + ~150 LOC tests).
 ## Agent Prompt
 
 ```text
-You are implementing ST-5 of Task 026 (cleanup-dramatica-skills-corpus) for
+You are implementing ST-5 of Task 030 (cleanup-dramatica-skills-corpus) for
 the netzkontrast/agency repo on branch claude/cleanup-dramatica-skills-1cEOO.
 
 This subtask runs in worktree isolation.
@@ -94,8 +94,8 @@ Repo root: /home/user/agency
 Working directory: /home/user/agency
 
 Context files (read first):
-  - tasks/026-cleanup-dramatica-skills-corpus/task.md
-  - tasks/026-cleanup-dramatica-skills-corpus/subtasks/05-build-term-editor.md (this file)
+  - tasks/030-cleanup-dramatica-skills-corpus/task.md
+  - tasks/030-cleanup-dramatica-skills-corpus/subtasks/05-build-term-editor.md (this file)
   - tools/fm/edit.py (the existing frontmatter editor — DO REUSE)
   - tools/fm/_core.py (helper module)
   - tools/dramatica-nav/lib/ontology.py (the existing ontology load/index)
@@ -142,6 +142,6 @@ When done:
   - tools/check-governance.sh                         (must exit 0)
   - python3 tools/dramatica-nav/term.py create --id el.smoke --kind element \
       --label "Smoke" --file /tmp/test-elements.md   (smoke test)
-  - Commit "feat(dramatica-nav): term.py for create/edit/move/deprecate (Task 026 ST-5)"
+  - Commit "feat(dramatica-nav): term.py for create/edit/move/deprecate (Task 030 ST-5)"
   - Do NOT push.
 ```

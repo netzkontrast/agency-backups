@@ -1,7 +1,7 @@
 ---
 type: note
 status: draft
-slug: task-026-st9-precompile-encoding-hints
+slug: task-030-st9-precompile-encoding-hints
 summary: "Subtask ST-9: ship tools/dramatica-nav/precompile.py + emit one JSON per persona scenario under maintenance/schemas/narrative-ontology/precompiled/. Token cost for a typical scenario query MUST drop ≥40% vs. the prose path."
 created: 2026-05-05
 updated: 2026-05-05
@@ -79,7 +79,7 @@ The precompiled path MUST consume ≤60% of the prose path on average. If not, t
 
 ## Falsification
 
-Wrong cut **iff** the precompiled payloads turn out to be redundant with calling `nav.py by-scenario <id>` directly. Mitigation: ST-9's `benchmark` subcommand does the token-cost measurement explicitly. If precompiled doesn't beat nav.py by ≥40%, the artefacts are deleted in the same commit and the task's §Goal item 4 is documented as "investigated; not landed; ratification deferred to Task 027".
+Wrong cut **iff** the precompiled payloads turn out to be redundant with calling `nav.py by-scenario <id>` directly. Mitigation: ST-9's `benchmark` subcommand does the token-cost measurement explicitly. If precompiled doesn't beat nav.py by ≥40%, the artefacts are deleted in the same commit and the task's §Goal item 4 is documented as "investigated; not landed; ratification deferred to Task 029".
 
 ## Inputs
 
@@ -95,10 +95,10 @@ Wrong cut **iff** the precompiled payloads turn out to be redundant with calling
 2. **11 JSON files emitted.** One per scenario under `maintenance/schemas/narrative-ontology/precompiled/`. Each passes `precompiled.schema.json`.
 3. **Schema authored.** `maintenance/schemas/narrative-ontology/precompiled.schema.json` exists and is referenced from [`maintenance/schemas/narrative-ontology/readme.md`](../../../maintenance/schemas/narrative-ontology/readme.md).
 4. **Idempotent.** Running `precompile.py emit-all` twice produces a byte-identical filesystem state.
-5. **Benchmark passes.** Token-cost benchmark shows precompiled path ≤60% of prose path on average across all 11 scenarios. Per-scenario results recorded in `tasks/026-cleanup-dramatica-skills-corpus/notes.md §10` (a new section).
+5. **Benchmark passes.** Token-cost benchmark shows precompiled path ≤60% of prose path on average across all 11 scenarios. Per-scenario results recorded in `tasks/030-cleanup-dramatica-skills-corpus/notes.md §10` (a new section).
 6. **Tests.** `tools/dramatica-nav/tests/test_precompile.py` covers schema validation, idempotency, benchmark sanity (≥4 tests).
 7. **No new ontology-surface amendment.** [AGENTS.md § Narrative Ontology](../../../AGENTS.md) is NOT modified — the load-trigger amendment is deferred to a Task-027 follow-up. ST-9 emits the artefacts; consumers don't load them yet (per FE-10 in [notes.md §3](../notes.md)).
-8. **Single commit.** Title: `feat(dramatica-nav): precompile persona-scenario encoding hints (Task 026 ST-9)`.
+8. **Single commit.** Title: `feat(dramatica-nav): precompile persona-scenario encoding hints (Task 030 ST-9)`.
 
 ## Dependencies
 
@@ -111,7 +111,7 @@ Medium (~250 LOC tool + ~150 LOC tests + 11 JSON artefacts emitted by the tool i
 ## Agent Prompt
 
 ```text
-You are implementing ST-9 of Task 026 (cleanup-dramatica-skills-corpus) for
+You are implementing ST-9 of Task 030 (cleanup-dramatica-skills-corpus) for
 the netzkontrast/agency repo on branch claude/cleanup-dramatica-skills-1cEOO.
 
 This subtask runs in worktree isolation.
@@ -120,8 +120,8 @@ Repo root: /home/user/agency
 Working directory: /home/user/agency
 
 Context files (read first):
-  - tasks/026-cleanup-dramatica-skills-corpus/task.md
-  - tasks/026-cleanup-dramatica-skills-corpus/subtasks/09-precompile-encoding-hints.md (this file)
+  - tasks/030-cleanup-dramatica-skills-corpus/task.md
+  - tasks/030-cleanup-dramatica-skills-corpus/subtasks/09-precompile-encoding-hints.md (this file)
   - maintenance/schemas/narrative-ontology/ontology.json (post-ST-8 source)
   - maintenance/schemas/narrative-ontology/scenarios.json
   - skills/dramatica-vocabulary/references/encoding-patterns.md (read-only consultation)
@@ -178,7 +178,7 @@ When done:
   - python3 tools/dramatica-nav/precompile.py validate                      (must succeed)
   - python3 tools/dramatica-nav/precompile.py benchmark --query novel.crucial-element-audit
                                                                               (must show precompiled ≤60% of prose path)
-  - cat tasks/026-cleanup-dramatica-skills-corpus/notes.md | grep -A3 "§10" (must show benchmark table)
-  - Commit "feat(dramatica-nav): precompile persona-scenario encoding hints (Task 026 ST-9)"
+  - cat tasks/030-cleanup-dramatica-skills-corpus/notes.md | grep -A3 "§10" (must show benchmark table)
+  - Commit "feat(dramatica-nav): precompile persona-scenario encoding hints (Task 030 ST-9)"
   - Do NOT push.
 ```

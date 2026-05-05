@@ -1,7 +1,7 @@
 ---
 type: note
 status: draft
-slug: task-026-st6-build-cleanup-linter
+slug: task-030-st6-build-cleanup-linter
 summary: "Subtask ST-6: ship tools/dramatica-nav/cleanup.py — a pre-commit linter that prevents PDF artefacts, broken-paren headings, double-apostrophe escapes, and 'See X' empty-redirect entries from re-entering the corpus."
 created: 2026-05-05
 updated: 2026-05-05
@@ -16,7 +16,7 @@ subtask_falsification: "Wrong cut iff cleanup.py becomes a bottomless pit of ad-
 
 ## Goal
 
-Ship `tools/dramatica-nav/cleanup.py` that prevents the four corruption classes from re-entering the corpus after Task 026 ST-1/ST-2/ST-4 clean it up. The linter is the long-term enforcement mechanism; ST-1 was the one-shot mass deletion.
+Ship `tools/dramatica-nav/cleanup.py` that prevents the four corruption classes from re-entering the corpus after Task 030 ST-1/ST-2/ST-4 clean it up. The linter is the long-term enforcement mechanism; ST-1 was the one-shot mass deletion.
 
 CLI surface:
 
@@ -28,7 +28,7 @@ tools/dramatica-nav/cleanup.py --explain <rule-id>   # print rationale + cite-an
 tools/dramatica-nav/cleanup.py --baseline            # emit current diagnostic count as a JSON baseline file
 ```
 
-Lock the v0.1 lint catalogue at exactly four rules (matching the four cleanup classes from Task 026 §Goal #1 and ST-1):
+Lock the v0.1 lint catalogue at exactly four rules (matching the four cleanup classes from Task 030 §Goal #1 and ST-1):
 
 ```
 DR-CLEAN-001  copyright-footer       Block any line matching the Screenplay Systems copyright footer regex.
@@ -62,7 +62,7 @@ If a corruption class appears that's not covered by the four rules, ST-6 surface
 
 - `tools/dramatica-nav/lib/` — reuse helpers, do not re-author.
 - `tools/check-governance.sh` — write surface for the new gate stanza.
-- `tasks/026-cleanup-dramatica-skills-corpus/notes.md §2` — baseline numbers for the regression test.
+- `tasks/030-cleanup-dramatica-skills-corpus/notes.md §2` — baseline numbers for the regression test.
 - ST-1's `_strip_artifacts.py` (will be deleted post-ST-1 per its agent prompt) — read-only consultation for the regex set; do not re-import.
 
 ## Acceptance Criteria
@@ -73,7 +73,7 @@ If a corruption class appears that's not covered by the four rules, ST-6 surface
 4. **Wired into pre-commit.** `tools/check-governance.sh` invokes `python3 tools/dramatica-nav/cleanup.py --check` after `validate.py` (same gate predicate). Failing exit propagates.
 5. **Idempotent.** `cleanup.py --apply` followed by `cleanup.py --check` produces zero diagnostics on a clean tree.
 6. **PRE_COMMIT.md amended.** A new row in [PRE_COMMIT.md §7's table](../../../PRE_COMMIT.md) documents the gate.
-7. **Single commit.** Title: `feat(dramatica-nav): cleanup.py — corpus cleanup linter (Task 026 ST-6)`.
+7. **Single commit.** Title: `feat(dramatica-nav): cleanup.py — corpus cleanup linter (Task 030 ST-6)`.
 
 ## Dependencies
 
@@ -86,7 +86,7 @@ Small (~150 LOC + ~120 LOC tests).
 ## Agent Prompt
 
 ```text
-You are implementing ST-6 of Task 026 (cleanup-dramatica-skills-corpus) for
+You are implementing ST-6 of Task 030 (cleanup-dramatica-skills-corpus) for
 the netzkontrast/agency repo on branch claude/cleanup-dramatica-skills-1cEOO.
 
 This subtask runs in worktree isolation.
@@ -95,9 +95,9 @@ Repo root: /home/user/agency
 Working directory: /home/user/agency
 
 Context files (read first):
-  - tasks/026-cleanup-dramatica-skills-corpus/task.md
-  - tasks/026-cleanup-dramatica-skills-corpus/subtasks/06-build-cleanup-linter.md (this file)
-  - tasks/026-cleanup-dramatica-skills-corpus/notes.md §2 (corruption baseline)
+  - tasks/030-cleanup-dramatica-skills-corpus/task.md
+  - tasks/030-cleanup-dramatica-skills-corpus/subtasks/06-build-cleanup-linter.md (this file)
+  - tasks/030-cleanup-dramatica-skills-corpus/notes.md §2 (corruption baseline)
   - tools/check-governance.sh (the pre-commit gate to wire into)
   - tools/dramatica-nav/lib/ (helper modules to reuse)
   - PRE_COMMIT.md §7 (the diagnostic-table row pattern to follow)
@@ -146,6 +146,6 @@ When done:
   - python3 tools/dramatica-nav/cleanup.py --check                 (post-Phase-A: must exit 0)
   - python3 tools/dramatica-nav/cleanup.py --explain DR-CLEAN-002  (must print rationale)
   - tools/check-governance.sh                                      (must exit 0)
-  - Commit "feat(dramatica-nav): cleanup.py — corpus cleanup linter (Task 026 ST-6)"
+  - Commit "feat(dramatica-nav): cleanup.py — corpus cleanup linter (Task 030 ST-6)"
   - Do NOT push.
 ```

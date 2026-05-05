@@ -1,7 +1,7 @@
 ---
 type: note
 status: draft
-slug: task-026-st1-strip-pdf-artifacts
+slug: task-030-st1-strip-pdf-artifacts
 summary: "Subtask ST-1: strip PDF page-break footers, page-number-only lines, double-apostrophe escapes, and stray > prefix artefacts from skills/dramatica-{theory,vocabulary}/references/*.md. Pure deletion, no semantic edits."
 created: 2026-05-05
 updated: 2026-05-05
@@ -46,7 +46,7 @@ Wrong cut **iff** a deleted artefact turns out to be load-bearing for an agent. 
 2. **Heading preservation.** All `## ` and `### ` headings present BEFORE ST-1 are still present AFTER. Verify via diff of `grep -c '^## '` per file (counts unchanged).
 3. **Validator clean.** `python3 tools/dramatica-nav/validate.py` exits 0 with the same warning count as before (modulo the `unmapped-heading` count for any heading whose anchor changed because of `''` → `'` slug normalization — flag these for ST-3).
 4. **Diff is pure deletion.** `git diff --stat` shows insertion count ≤ 5 (for §1.4 Contents-list rewrites). Anything more means non-deletion edits crept in; revert.
-5. **Single commit.** Title: `chore(dramatica): strip PDF artefacts from references (Task 026 ST-1)`. Body lists the four artefact classes and per-class deletion counts.
+5. **Single commit.** Title: `chore(dramatica): strip PDF artefacts from references (Task 030 ST-1)`. Body lists the four artefact classes and per-class deletion counts.
 
 ## Dependencies
 
@@ -59,15 +59,15 @@ Small (~80 LOC of regex-driven Python helper script + manual review of dry-run d
 ## Agent Prompt
 
 ```text
-You are implementing ST-1 of Task 026 (cleanup-dramatica-skills-corpus) for
+You are implementing ST-1 of Task 030 (cleanup-dramatica-skills-corpus) for
 the netzkontrast/agency repo on branch claude/cleanup-dramatica-skills-1cEOO.
 
 Repo root: /home/user/agency
 Working directory: /home/user/agency
 
 Context files (read first; do not load other ontology files):
-  - tasks/026-cleanup-dramatica-skills-corpus/task.md (the parent task)
-  - tasks/026-cleanup-dramatica-skills-corpus/subtasks/01-strip-pdf-artifacts.md (this file)
+  - tasks/030-cleanup-dramatica-skills-corpus/task.md (the parent task)
+  - tasks/030-cleanup-dramatica-skills-corpus/subtasks/01-strip-pdf-artifacts.md (this file)
   - skills/dramatica-vocabulary/references/character-dynamics.md (worst-case sample)
   - skills/dramatica-theory/references/02-characters.md (worst-case sample)
 
@@ -102,6 +102,6 @@ When done:
   - python3 tools/dramatica-nav/validate.py        (must exit 0)
   - git diff --stat                                (deletions ≫ insertions)
   - git diff -- skills/                            (visually confirm only artefacts removed)
-  - Commit "chore(dramatica): strip PDF artefacts from references (Task 026 ST-1)"
+  - Commit "chore(dramatica): strip PDF artefacts from references (Task 030 ST-1)"
   - Do NOT push.
 ```

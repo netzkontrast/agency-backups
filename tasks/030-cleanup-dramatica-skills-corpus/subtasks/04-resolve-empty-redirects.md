@@ -1,7 +1,7 @@
 ---
 type: note
 status: draft
-slug: task-026-st4-resolve-empty-redirects
+slug: task-030-st4-resolve-empty-redirects
 summary: "Subtask ST-4: resolve the five 'See X' empty redirect entries (Female Mental Sex, Male Mental Sex, Sex), Direction (OS Throughline), Focus). Per case: delete + alias on canonical, OR reify with substantive prose."
 created: 2026-05-05
 updated: 2026-05-05
@@ -55,7 +55,7 @@ Wrong cut **iff** a redirect entry is load-bearing for an agent that searches by
 3. **TOC bullets repaired.** `elements.md` has no bullet whose description is just "See" — every TOC entry has a one-line meaningful description.
 4. **Validator clean.** `validate.py` reports no NEW `unmapped-heading` warnings beyond what existed pre-ST-4. The two deletions REDUCE the count; ST-3 partition table absorbs the reduction.
 5. **No new ontology kinds.** Schema is unchanged. If a case needs a new kind, file as Bucket D + Task 027 issue.
-6. **Single commit.** Title: `fix(dramatica): resolve 5 empty redirect entries (Task 026 ST-4)`.
+6. **Single commit.** Title: `fix(dramatica): resolve 5 empty redirect entries (Task 030 ST-4)`.
 
 ## Dependencies
 
@@ -68,16 +68,16 @@ Small (~1.5 hours).
 ## Agent Prompt
 
 ```text
-You are implementing ST-4 of Task 026 (cleanup-dramatica-skills-corpus) for
+You are implementing ST-4 of Task 030 (cleanup-dramatica-skills-corpus) for
 the netzkontrast/agency repo on branch claude/cleanup-dramatica-skills-1cEOO.
 
 Repo root: /home/user/agency
 Working directory: /home/user/agency
 
 Context files (read first):
-  - tasks/026-cleanup-dramatica-skills-corpus/task.md
-  - tasks/026-cleanup-dramatica-skills-corpus/subtasks/04-resolve-empty-redirects.md (this file)
-  - tasks/026-cleanup-dramatica-skills-corpus/notes.md §2.5 (the 5 redirect cases)
+  - tasks/030-cleanup-dramatica-skills-corpus/task.md
+  - tasks/030-cleanup-dramatica-skills-corpus/subtasks/04-resolve-empty-redirects.md (this file)
+  - tasks/030-cleanup-dramatica-skills-corpus/notes.md §2.5 (the 5 redirect cases)
   - skills/dramatica-vocabulary/references/character-dynamics.md
   - skills/dramatica-vocabulary/references/elements.md
   - tasks/015-integrate-dramatica-ncp-skills/task.md §Contradiction Log §C4 (the canonical-naming history)
@@ -120,6 +120,6 @@ When done:
     (must return concept.symptom-element)
   - grep -nE "^See [A-Z]" skills/dramatica-vocabulary/references/character-dynamics.md
     (must return zero lines)
-  - Commit "fix(dramatica): resolve 5 empty redirect entries (Task 026 ST-4)"
+  - Commit "fix(dramatica): resolve 5 empty redirect entries (Task 030 ST-4)"
   - Do NOT push.
 ```
