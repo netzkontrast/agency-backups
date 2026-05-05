@@ -187,7 +187,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run 2026-05-05 — Task 017 migration
 - agent: claude-code (session claude/complete-frontmatter-toolchain-l5Q8E)
 - start_commit: 94eb4b4
-- end_commit: PENDING
+- end_commit: ea3f260
 - baseline_commit: 6b0480a (Task 016 final commit)
 - files_in_delta: ~50
 - files_scanned: 252
