@@ -145,9 +145,13 @@ def main(argv: list[str] | None = None) -> int:
                    help="comma-joined selectors, e.g., 'type=task,status=active'")
     p.add_argument("--scope", default=None,
                    help="comma-separated subset of operational roots")
-    p.add_argument("--limit", type=int, default=0)
+    p.add_argument("--limit", type=int, default=0,
+                   help="cap the result count (0 = unlimited)")
     p.add_argument("--format", choices=("text", "json", "paths"), default="paths")
     args = p.parse_args(argv)
+
+    if args.limit < 0:
+        raise SystemExit(f"fm-query: --limit must be ≥ 0, got {args.limit}")
 
     repo_root = _core.repo_root_from_cwd()
     ontology = _core.load_ontology(repo_root)
@@ -168,9 +172,16 @@ def main(argv: list[str] | None = None) -> int:
     if any(k == "referenced-by" for k, _ in selectors):
         referenced_index = _build_referenced_index(repo_root, scope)
 
+    # path-classification is only consulted by the `missing-key` selector
+    # (to derive the expected type when frontmatter omits it). Skip the
+    # fnmatch sweep entirely when no selector needs it.
+    needs_classification = any(k == "missing-key" for k, _ in selectors)
+    empty_classification = _core.Classification(None)
+
     matches: list[str] = []
     for path in _core.iter_operational_files(repo_root, scope=scope):
-        cls = _core.classify_path(path, repo_root, ontology)
+        cls = (_core.classify_path(path, repo_root, ontology)
+               if needs_classification else empty_classification)
         # fm-query MAY consider files outside path classification, but we
         # still respect operational scope. Read frontmatter leniently.
         fm = _core.read_fm(path, strict=False)
