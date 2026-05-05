@@ -117,6 +117,19 @@ The repository self-defends against drift via a pre-commit hook that runs three 
 
 Closing a Task additionally runs [`tools/check-trust.py`](./tools/check-trust.py) to verify a friction log exists with a traceable FL declaration.
 
+### 6.1 Flexible toolchain (Task 016)
+
+A successor toolchain ships in [`tools/fm/`](./tools/fm/) per [`research/flexible-frontmatter-toolchain/output/SPEC.md`](./research/flexible-frontmatter-toolchain/output/SPEC.md). Four single-file CLIs, Python 3.11 stdlib only, no runtime dependencies:
+
+| Tool | Surface |
+|---|---|
+| [`tools/fm/validate.py`](./tools/fm/validate.py) | Required-only frontmatter + heading checks (§3, §4); opt-in body-schema check (`--check-body`, §12) for per-section shape, item-count, link-pattern, RFC-2119-keyword constraints. |
+| [`tools/fm/extract.py`](./tools/fm/extract.py) | Read one section, the frontmatter, a single FM key, the whole body, the H2 table-of-contents, batch-read multiple sections, or any nth-occurrence/all-occurrences of a duplicate-named section. |
+| [`tools/fm/edit.py`](./tools/fm/edit.py) | Frontmatter-only mutations: `--set`/`--unset`/`--append-list`/`--remove-from-list`/`--bump-updated`. OS file lock; preserves body bytes; preserves scalar quoting style; refuses T3/T4 operations. |
+| [`tools/fm/query.py`](./tools/fm/query.py) | Stateless filesystem query: `type=`/`status=`/`slug=`/`has-key=`/`missing-key=`/`refers-to=`/`referenced-by=`/`stale-since=`. No persisted index. |
+
+Activated via `FM_TOOLCHAIN=1 tools/check-governance.sh`; the legacy linters remain the default gate until [Task 019](./tasks/019-fm-toolchain-suite-integration/) flips it.
+
 Install once per clone:
 
 ```bash

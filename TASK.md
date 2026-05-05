@@ -4,7 +4,7 @@ status: active
 slug: task-spec
 summary: "Root specification governing the /tasks/ orchestration directory, the Task lifecycle, and the Frontmatter Ontology that links Tasks to Prompts and Research."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 ---
 
 # Task Orchestration Specification
@@ -42,6 +42,8 @@ Subfolders inside a Task directory MUST NOT be created unless 4+ files of the sa
 ## 3. Frontmatter Ontology (Layered Schema with Namespacing)
 
 This repository adopts the **Layered Schema with Namespacing** model from `research/obsidian-frontmatter-agentic-spec/output/SPEC.md`. Every markdown file in this repository SHOULD carry frontmatter conforming to L0+L1; files in operational directories (`/tasks/`, `/prompts/`, `/research/`) MUST additionally carry the L2 namespace appropriate to their directory. YAML MUST NOT nest deeper than one level.
+
+**Canonical machine-readable encoding.** The required-key matrix and per-type body-schema (per [`research/flexible-frontmatter-toolchain/output/SPEC.md`](./research/flexible-frontmatter-toolchain/output/SPEC.md) §3, §4, §12) live in [`maintenance/schemas/header-ontology.json`](./maintenance/schemas/header-ontology.json). The prose tables in §3.1–§3.3 are the human-readable mirror; the JSON is the source for tooling. When the JSON and prose drift, the JSON wins for `tools/fm/validate.py` and the prose is amended in the next coherence run.
 
 ### 3.1 L0 — Obsidian Reserved (optional)
 
@@ -186,15 +188,18 @@ The agent MUST run `tools/check-governance.sh` before committing any change to `
 
 ### 7.0 Mechanical Enforcement Mapping
 
-| Check | Tool | Failure mode |
-|---|---|---|
-| §7.1 Frontmatter Integrity | [`tools/validate-frontmatter.py`](./tools/validate-frontmatter.py) | Missing L1/L2 keys, YAML depth > 1, non-kebab slug |
-| §7.2 Prompt Linkage | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `task_uses_prompts` slug doesn't resolve |
-| §7.3 Research Linkage | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `task_spawns_research` slug doesn't resolve (closed tasks only) |
-| §7.4 Path Containment | human review | No mechanical check — human responsibility |
-| §7.5 Todo Completion | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `task_status: done` with unchecked `- [ ]` items |
-| §7.6 Readme Audit | [`tools/lint-structure.py`](./tools/lint-structure.py) | Missing `readme.md` in task folder |
-| §7.7 Friction Log | [`tools/lint-linkage.py`](./tools/lint-linkage.py) + [`tools/check-trust.py`](./tools/check-trust.py) | `task_status: done` without `friction-log.md` containing an FL[0-3] declaration |
+The legacy column lists the historical linter set; the flexible-toolchain column lists the successor that supersedes it once `FM_TOOLCHAIN=1` is the default (per [SPEC.md §12.6](./research/flexible-frontmatter-toolchain/output/SPEC.md), Phase 3, owned by Task 019).
+
+| Check | Legacy linter | Flexible-toolchain successor | Failure mode |
+|---|---|---|---|
+| §7.1 Frontmatter Integrity | [`tools/validate-frontmatter.py`](./tools/validate-frontmatter.py) | [`tools/fm/validate.py`](./tools/fm/validate.py) | Missing L1/L2 keys (F.3.1/F.3.2), YAML depth > 1 (F.3.3), non-kebab slug (F.3.3), did-you-mean typo (F.3.4) |
+| §7.2 Body Schema (opt-in) | — | [`tools/fm/validate.py --check-body`](./tools/fm/validate.py) | Section shape mismatch (F.B.1), item-count (F.B.2), item_pattern miss (F.B.3) |
+| §7.3 Prompt Linkage | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `tools/fm/validate.py --type-check` (Task 019) | `task_uses_prompts` slug doesn't resolve |
+| §7.4 Research Linkage | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `tools/fm/validate.py --type-check` (Task 019) | `task_spawns_research` slug doesn't resolve (closed tasks only) |
+| §7.5 Path Containment | human review | human review | No mechanical check — human responsibility |
+| §7.6 Todo Completion | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `tools/fm/validate.py --check-body` (F.B.7) | `task_status: done` with unchecked `- [ ]` items |
+| §7.7 Readme Audit | [`tools/lint-structure.py`](./tools/lint-structure.py) | `tools/fm/query.py missing-key=...` (Task 019) | Missing `readme.md` in task folder |
+| §7.8 Friction Log | [`tools/lint-linkage.py`](./tools/lint-linkage.py) + [`tools/check-trust.py`](./tools/check-trust.py) | `tools/fm/query.py status=done,missing-file=friction-log.md` (Task 019) | `task_status: done` without `friction-log.md` containing an FL[0-3] declaration |
 
 Before committing a Task that is being closed, the agent MUST verify:
 

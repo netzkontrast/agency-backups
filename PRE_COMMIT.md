@@ -40,11 +40,16 @@ If the change touches any file under `/tasks/`, `/prompts/`, or `/research/`, th
 # Unified (recommended):
 tools/check-governance.sh
 
-# Individual linters:
+# Individual linters (legacy — gating until Task 019 retires them):
 python3 tools/validate-frontmatter.py   # L1+L2 frontmatter keys, YAML depth, slug format
 python3 tools/lint-structure.py         # task.md / prompt.md / brief.md / readme.md presence
 python3 tools/lint-linkage.py           # task_uses_prompts, task_spawns_research, reciprocity
 python3 tools/dramatica-nav/validate.py # narrative-ontology integrity (gated on ontology.json)
+
+# Flexible toolchain (Task 016 — opt-in until Task 019 flips the default):
+FM_TOOLCHAIN=1 tools/check-governance.sh   # gates on tools/fm/validate.py instead of legacy
+python3 tools/fm/validate.py --check-body  # adds SPEC §12 per-section body-schema checks
+python3 tools/fm/validate.py --strict      # promotes WARN-severity diagnostics to non-zero exit
 ```
 
 The narrative-ontology validator runs automatically inside `check-governance.sh` when `maintenance/schemas/narrative-ontology/ontology.json` exists. It enforces five hard cross-entry invariants (errors → exit 1):
