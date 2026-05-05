@@ -4,7 +4,7 @@ status: active
 slug: research-root
 summary: "Root of /research/. Each subfolder is the workspace produced by executing a prompt of matching slug; /research/ does not house prompt drafts."
 created: 2026-05-02
-updated: 2026-05-04
+updated: 2026-05-05
 ---
 
 # Research Root
@@ -24,6 +24,7 @@ All work here MUST conform to [`RESEARCH.md`](../RESEARCH.md). Frontmatter and c
 - [`agent-prompt-specs-3-systems-sdd/`](./agent-prompt-specs-3-systems-sdd/) — Spec-A/B/C: agentic prompt specifications (3-systems SDD).
 - [`agentic-eval-trust-improvement-spec/`](./agentic-eval-trust-improvement-spec/) — Spec-J/K/L: evaluation, trust, improvement loops.
 - [`agentic-session-continuity-spec/`](./agentic-session-continuity-spec/) — Spec-G/H/I: session continuity across runs.
+- [`flexible-frontmatter-toolchain/`](./flexible-frontmatter-toolchain/) — Synthesis run: distils prior research + Anthropic's `skill-creator` into a flexible (required-only) maintenance contract plus a stateless `fm-validate / fm-extract / fm-edit / fm-query` toolchain. Supersedes the persisted-index strategy from Task 010 (see `M07-contradiction-log.md §C1`).
 - [`ncp-novel-co-authoring-spec/`](./ncp-novel-co-authoring-spec/) — Narrative Context Protocol / Dramatica integration.
 - [`obsidian-frontmatter-agentic-spec/`](./obsidian-frontmatter-agentic-spec/) — The Layered Schema with Namespacing model that backs this repo's frontmatter ontology.
 - [`skills-namespace-ontology/`](./skills-namespace-ontology/) — Ratified `skill_*` L2 namespace: five kind values, three tier values, 14-skill mapping, two-case reciprocity rule, migration plan. Unblocks Tasks 009 and 011.

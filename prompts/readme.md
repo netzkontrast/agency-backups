@@ -4,8 +4,8 @@ status: active
 slug: prompts-root
 summary: "Root of /prompts/. Holds every executable instruction set: research proposals, follow-ups, tool instructions, task-specs."
 created: 2026-05-02
-updated: 2026-05-04
-# (also lists: author-skills-root-spec, skills-frontmatter-index-suite, skills-frontmatter-schema-files)
+updated: 2026-05-05
+# (also lists: author-skills-root-spec, skills-frontmatter-index-suite, skills-frontmatter-schema-files, flexible-frontmatter-toolchain, build-flexible-frontmatter-toolchain, migrate-repo-to-flexible-toolchain)
 ---
 
 # Prompts Root
@@ -31,6 +31,9 @@ All work in this folder MUST conform to [`PROMPT.md`](../PROMPT.md). Frontmatter
 - [`author-skills-root-spec/`](./author-skills-root-spec/) — Task-spec prompt that authors `SKILLS.md` at the repository root, plus the supporting edits to AGENTS.md / FOLDERS.md / templates. Drives Task 009.
 - [`skills-frontmatter-index-suite/`](./skills-frontmatter-index-suite/) — Research-proposal + build prompt for the token-efficient frontmatter index, query CLI, and skills manifest emitter. Drives Task 010.
 - [`skills-frontmatter-schema-files/`](./skills-frontmatter-schema-files/) — Task-spec prompt that authors JSON Schemas for L1/L2 frontmatter and the header ontology. Drives Task 011.
+- [`flexible-frontmatter-toolchain/`](./flexible-frontmatter-toolchain/) — Research-proposal prompt that synthesises prior research + Anthropic's `skill-creator` into a flexible (required-only) maintenance contract plus a stateless toolchain spec. Drives `/research/flexible-frontmatter-toolchain/`.
+- [`build-flexible-frontmatter-toolchain/`](./build-flexible-frontmatter-toolchain/) — Task-spec prompt for Task 016 (build the four-tool CLI surface + header-ontology JSON).
+- [`migrate-repo-to-flexible-toolchain/`](./migrate-repo-to-flexible-toolchain/) — Task-spec prompt for Task 017 (three-batch migration; retires legacy linters; scope-narrows Task 010).
 
 ## Workflow Assumptions
 
