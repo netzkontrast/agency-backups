@@ -111,12 +111,23 @@ class TestTypeCheckDangling(_Scratch):
 
 class TestTypeCheckReciprocity(_Scratch):
     def test_one_way_link_emits_FT2(self) -> None:
+        # Task names beta; prompt names a *different* task → genuine
+        # reciprocity break (not shared/general).
         self._write_task("000", "alpha", uses_prompts=["beta"])
-        # Prompt does NOT name the task back.
-        self._write_prompt("beta", relates_to_task="")
+        self._write_task("001", "gamma")
+        self._write_prompt("beta", relates_to_task="gamma")
         diags = fm_validate.type_check(self.root, _ONTOLOGY)
         codes = {d.code for d in diags}
         self.assertIn("F.T.2", codes)
+
+    def test_empty_back_edge_is_shared_general(self) -> None:
+        # Empty `prompt_relates_to_task` means the prompt is shared across
+        # multiple tasks; reciprocity check is skipped.
+        self._write_task("000", "alpha", uses_prompts=["beta"])
+        self._write_prompt("beta", relates_to_task="")
+        diags = fm_validate.type_check(self.root, _ONTOLOGY)
+        codes = {d.code for d in diags}
+        self.assertNotIn("F.T.2", codes)
 
     def test_reciprocal_pair_is_clean(self) -> None:
         self._write_task("000", "alpha", uses_prompts=["beta"])

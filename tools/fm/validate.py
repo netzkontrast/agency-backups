@@ -345,6 +345,10 @@ def type_check(repo_root: Path, ontology: dict) -> list[Diagnostic]:
                     continue
                 if back_scalar:
                     back_val = _core.str_val(target["fm"], back_field)
+                    # Empty string is "shared / general" (used by multiple
+                    # forwards); skip the reciprocity assertion for that case.
+                    if back_val == "":
+                        continue
                     matched = back_val == slug
                 else:
                     matched = slug in _core.str_list(target["fm"], back_field)

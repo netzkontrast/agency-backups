@@ -132,7 +132,7 @@
     "rules": [
       {
         "forward": {"type": "task", "field": "task_uses_prompts"},
-        "back":    {"type": "prompt", "field": "prompt_relates_to_task"}
+        "back":    {"type": "prompt", "field": "prompt_relates_to_task", "scalar": true}
       }
     ]
   },
