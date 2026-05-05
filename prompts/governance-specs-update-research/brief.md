@@ -1,0 +1,1 @@
+The user wants to review the current tooling and specs (`MAINTENANCE.md`, `PRE_COMMIT.md`, `FOLDERS.md`, etc.), particularly focusing on how to update them after Task 001. The objective is to create an update plan for these specs.
