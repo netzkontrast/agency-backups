@@ -44,8 +44,9 @@ L2 by type (required when present in the matching directory):
   type: prompt      →  prompt_kind, prompt_framework, prompt_target_agent
   type: research    →  research_phase, research_executes_prompt,
                        research_friction_level
-  type: skill       →  skill_kind, skill_target_agents
-                       (further skill_* keys are RECOMMENDED, not required)
+  type: skill       →  name, description (Anthropic SKILL.md format)
+                       (skill_kind, skill_target_agents and further
+                        skill_* keys are RECOMMENDED, not required)
   type: spec        →  (no L2 required; L1 only)
   type: index       →  (no L2 required; L1 only)
   type: readme      →  (no L2 required; L1 only)
@@ -77,9 +78,16 @@ fm-validate MUST PASS when:
 ```text
 # anchor: F.3.4
 fm-validate MUST emit a `did-you-mean` diagnostic (severity: ERROR) when an
-unknown key's name is within Levenshtein-distance 1 of any required key.
+unknown key's name is within Optimal String Alignment distance 1
+(Damerau-restricted Levenshtein, transposition-aware) of any required key.
 This rule preserves the "extras pass" principle (intentional optional keys
-like `tags`, `aliases` are not near-misses) while catching typo regressions.
+like `tags`, `aliases` are not near-misses) while catching typo regressions
+including single-character transpositions (`tpye` → `type`).
+
+Amendment history:
+  - v1.0 said "Levenshtein-distance 1"; the §6.1 example (`tpye` → `type`)
+    is OSA 1 but standard Levenshtein 2. Task 018 amended this clause to
+    OSA per Task 016 implementation (resolved Q4 in §10).
 ```
 
 ## §4. Required Headings (Per `type:`)
@@ -417,20 +425,20 @@ Q2. Should fm-edit grow a --batch mode reading mutations from stdin/JSON?
     caller demonstrates a workload where shell-loop overhead dominates.
 
 Q3. How does the toolchain expose a programmatic API for non-Python callers
-    (e.g., gemini-cli scripts)? (Task 017 todo; candidate: a thin JSON-RPC
-    over stdio wrapper, deferred to a follow-up.)
+    (e.g., gemini-cli scripts)? Resolved by Task 017: the CLI is the API.
+    Every command supports --format=json (validate, query) or returns
+    deterministic plain text (extract --frontmatter), so a non-Python
+    caller invokes the binary and parses stdout. A JSON-RPC wrapper is
+    filed as a candidate follow-up if subprocess overhead becomes a
+    benchmarked problem; until then it is intentionally absent.
 
-Q4. Should `Levenshtein-distance 1` in §3.4 be amended to read
-    `Optimal String Alignment distance 1` (transposition-aware)? The §6.1
-    example (`tpye` → `type`) is OSA 1, not standard Levenshtein 1.
-    Task 016 implementation uses OSA; this clause should be amended for
-    consistency. (Task 018 follow-up.)
+Q4. RESOLVED by Task 018. §3.4 now reads "Optimal String Alignment
+    distance 1 (Damerau-restricted Levenshtein, transposition-aware)".
 
-Q5. Should the §6.1 row for `type=skill` require `name` (per the example) or
-    `skill_kind, skill_target_agents` (per §3.2)? The Anthropic SKILL.md
-    format only carries `name` + `description`. Task 016 encoded
-    `name`/`description` as REQUIRED for `type=skill` and the skill_* keys
-    as RECOMMENDED. (Task 018 follow-up.)
+Q5. RESOLVED by Task 018. §3.2 now lists `name, description` as
+    REQUIRED for `type: skill` (matching Anthropic SKILL.md format),
+    with `skill_kind, skill_target_agents` and further `skill_*` keys
+    RECOMMENDED.
 ```
 
 ## §12. Body Data Schema (Per Section)
