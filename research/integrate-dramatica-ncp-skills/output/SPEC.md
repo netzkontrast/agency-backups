@@ -5,7 +5,7 @@ slug: integrate-dramatica-ncp-skills
 summary: "Kickoff specification — consolidated findings from the corpus inventory, cross-skill ID audit, and scenario-tag survey, with concrete recommendations addressed at Task 013 plan steps 2 through 11."
 created: 2026-05-04
 updated: 2026-05-04
-research_phase: kickoff
+research_phase: synthesis
 research_executes_prompt: integrate-dramatica-ncp-skills
 research_friction_level: FL0
 ---

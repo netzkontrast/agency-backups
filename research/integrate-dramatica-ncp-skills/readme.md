@@ -5,7 +5,7 @@ slug: integrate-dramatica-ncp-skills
 summary: "Research workspace for the kickoff phase of Task 013 — corpus inventory, cross-skill ID audit, and scenario-tag survey of the dramatica skills, NCP, and novel-architect."
 created: 2026-05-04
 updated: 2026-05-04
-research_phase: kickoff
+research_phase: synthesis
 research_executes_prompt: integrate-dramatica-ncp-skills
 research_friction_level: FL0
 ---

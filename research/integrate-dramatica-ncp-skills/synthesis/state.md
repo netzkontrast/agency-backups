@@ -14,3 +14,5 @@ Checklist of kickoff synthesis steps. All boxes MUST be `[x]` before pre-commit 
 - [x] Output deliverable at `output/SPEC.md` with required `research_*` frontmatter.
 - [x] `output/readme.md` index.
 - [x] Pre-commit `tools/check-governance.sh --no-trust` exits 0 on the new files.
+- [x] **Synthesis phase** — `post-impl-acceptance.md` records 7-of-7 Gherkin scenarios as PASS post-Step-12.
+- [x] **Synthesis phase** — `reflection/M03-pre-mortem.md` records the post-implementation pre-mortem (0/5 predicted failures materialized; 3 unpredicted delegation-protocol failures caught + fixed).
