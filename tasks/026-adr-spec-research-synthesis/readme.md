@@ -10,6 +10,8 @@ updated: 2026-05-05
 # Task 026 — ADR Spec Research Synthesis
 
 - [`task.md`](./task.md) — Goal, Plan, Todo, Links.
+- [`notes.md`](./notes.md) — Pre-execution review of PR #52 (ADR governance pipeline critique).
+- [`review-pr54.md`](./review-pr54.md) — Meta-review of PR #54: protocol compliance audit of the notes.md session.
 
 ## State
 
