@@ -293,3 +293,60 @@ The agent MUST append its own record **before** committing the run's repairs, so
     SPEC §12.6 places it in Task 020 after Task 019 migrates the
     corpus. Friction logged as FL1 in
     `tasks/018-fm-section-editor/friction-log.md`.
+
+### Run 2026-05-05 — Task 019 fm toolchain suite integration
+- agent: claude-code (session claude/complete-frontmatter-toolchain-l5Q8E)
+- start_commit: 3feee02
+- end_commit: PENDING
+- baseline_commit: 6c3329a (Task 018 final commit)
+- files_in_delta: 23 (8 new tools/fm/* modules, 6 new test files,
+  2 new schema files, 1 ontology amendment, 5 task-folder closures)
+- files_scanned: 252
+- t1_fixes: 0
+- t2_fixes: 1 (--type-check added to the fm-validate gate)
+- t3_tasks_created: 0 (one ontology rule scalar:true correction
+  recorded as a SPEC clarification)
+- t4_skipped: 1 (Phase 3 --check-body default-on flip — explicit
+  Task 020 territory per SPEC §12.6; corpus has 71 F.B.* drifts
+  to migrate first)
+- issues_skipped: 0
+- notes: >
+    Task implementation record per MAINTENANCE.md §2.3. Six parallel
+    /sc:agent-style subagents launched via Agent isolation:"worktree";
+    three of those landed on stale worktree bases (no tools/fm/ at
+    HEAD) and one fabricated scaffolding instead of merging in the
+    current branch. Re-spawns hit the org's monthly usage limit, so
+    ST-3 (fm-new), ST-5 (validate extensions), ST-6 (lint-linkage
+    shim), and ST-8 (single fm wrapper) were implemented in-session.
+
+    Surface delivered:
+      - tools/fm/rename.py    (ST-1) — cross-file slug rename
+      - tools/fm/graph.py     (ST-2) — dependency graph + cycles/orphans
+      - tools/fm/new.py       (ST-3) — task/prompt/research scaffolder
+      - tools/fm/fix.py       (ST-4) — T1/T2 auto-repair driver
+      - tools/fm/validate.py  (ST-5) — --explain, --baseline, --type-check
+      - tools/fm/readme.md +
+        tools/fm/cookbook.md  (ST-7) — docs (8 workflows)
+      - tools/legacy/lint-linkage.py (ST-6) — thin shim around
+                                             fm-validate --type-check
+      - tools/fm/fm.py        (ST-8) — single-entry dispatcher with
+                                       lazy subcommand imports
+      - maintenance/schemas/diagnostic-explanations.json — JSON
+                                       catalogue for --explain
+      - reciprocity table in header-ontology.json (one rule for v1:
+        task_uses_prompts ↔ prompt_relates_to_task)
+
+    tools/check-governance.sh: now runs fm-validate --type-check by
+    default (FM_TOOLCHAIN=1 was already the default after Task 017).
+    The explicit lint-linkage step is reduced to a documentation
+    note since lint-linkage.py is now a thin shim around the same
+    --type-check.
+
+    Tests: 154 fm tests, 1 skipped (graphviz), 0 failures.
+
+    SPEC §12.6 Phase 3 (--check-body default-on) explicitly NOT
+    flipped here: 71 pre-existing F.B.1/6 ERRORs in the corpus need
+    migration first. Filed as Task 020's mission per SPEC §12.6.
+
+    Friction logged as FL3 in
+    `tasks/019-fm-toolchain-suite-integration/friction-log.md`.

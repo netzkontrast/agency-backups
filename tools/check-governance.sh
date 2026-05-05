@@ -32,7 +32,7 @@ echo "=== agency check-governance ==="
 echo ""
 echo "--- [1/3] Frontmatter linter ---"
 if [ "$FM_TOOLCHAIN" = "1" ]; then
-  if ! "$PYTHON" tools/fm/validate.py; then
+  if ! "$PYTHON" tools/fm/validate.py --type-check; then
     FAIL=1
   fi
   echo "--- legacy validate-frontmatter.py (advisory; one release window) ---"
@@ -53,10 +53,8 @@ if ! "$PYTHON" tools/lint-structure.py; then
 fi
 
 echo ""
-echo "--- [3/3] Cross-reference linkage linter ---"
-if ! "$PYTHON" tools/lint-linkage.py; then
-  FAIL=1
-fi
+echo "--- [3/3] Cross-reference linkage (folded into fm-validate --type-check) ---"
+echo "(legacy tools/lint-linkage.py is now a shim around fm-validate --type-check; checked above)"
 
 echo ""
 echo "--- [4/4] Run-log record validator ---"
