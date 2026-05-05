@@ -15,7 +15,7 @@ updated: 2026-05-05
 
 ## Target Audience
 
-Repository maintainer and any agent executing Task 026.
+Repository maintainer and any agent executing Task 027.
 
 ## Intended Model / Agent
 

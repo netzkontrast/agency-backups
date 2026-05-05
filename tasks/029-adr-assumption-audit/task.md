@@ -5,7 +5,7 @@ slug: adr-assumption-audit
 summary: "Multi-subagent critical-thinking audit: surface hidden assumptions baked into the ADR governance spec, catalogue which architectural decisions are already implicitly in force in this repo, and enumerate the decisions that must still be made before implementation can begin."
 created: 2026-05-05
 updated: 2026-05-05
-task_id: "028"
+task_id: "029"
 task_status: open
 task_owner: "unassigned"
 task_priority: P2
@@ -16,19 +16,19 @@ task_spawns_research:
 task_spawns_prompts: []
 task_supersedes: []
 task_blocked_by:
-  - "026"
+  - "027"
 task_affects_paths:
   - research/adr-assumption-audit/
   - prompts/adr-assumption-audit/
 ---
 
-# Task 028 — ADR Assumption Audit (Critical-Thinking)
+# Task 029 — ADR Assumption Audit (Critical-Thinking)
 
 ## Goal
 
 Use **three parallel subagents** — each governed by a distinct critical-thinking method from the Research Prompt Optimizer (M06, M07, M13) — to produce an exhaustive audit of:
 
-1. **Hidden assumptions** embedded in the Gemini ADR governance spec and the Task 026 synthesis, which, if violated, would silently break the governance model.
+1. **Hidden assumptions** embedded in the Gemini ADR governance spec and the Task 027 synthesis, which, if violated, would silently break the governance model.
 2. **Implicit ADRs already in force** — architectural decisions the repo has already made (in root specs, tooling, or branching conventions) that the ADR spec must acknowledge, formalize, or supersede.
 3. **Pending decisions** that block implementation — explicit open questions that require a human architectural judgment call before tooling can be built.
 
@@ -87,7 +87,7 @@ For each open question, apply M08: write the concrete observable evidence that w
 > **Option A:** [Choice] — confirmed by [evidence type needed]
 > **Option B:** [Choice] — confirmed by [evidence type needed]
 > **Current lean:** [Which way the spec implicitly leans and why]
-> **Blocking:** [Which Task 027 module cannot be built until this is resolved]
+> **Blocking:** [Which Task 028 module cannot be built until this is resolved]
 
 Examples of known open questions:
 - Storage path: `docs/decisions/` vs `research/adr/` vs `decisions/`
@@ -104,24 +104,24 @@ Merge the three subagent outputs into `research/adr-assumption-audit/output/REPO
 
 1. **§1 Hidden Assumptions** — from Subagent A (ranked by blast radius if assumption is violated)
 2. **§2 Implicit ADRs in Force** — from Subagent B (table format, recommended formalization priority)
-3. **§3 Pending Decisions** — from Subagent C (sorted by blocking dependency on Task 027)
-4. **§4 Recommended Actions** — concrete next steps for each category, mapped to Task 026/027 or new tasks
+3. **§3 Pending Decisions** — from Subagent C (sorted by blocking dependency on Task 028)
+4. **§4 Recommended Actions** — concrete next steps for each category, mapped to Task 027/028 or new tasks
 
 ## Todo
 
-- [ ] 1. Confirm Task 026 is `done` and `research/adr-spec-research-synthesis/output/SPEC.md` exists.
+- [ ] 1. Confirm Task 027 is `done` and `research/adr-spec-research-synthesis/output/SPEC.md` exists.
 - [ ] 2. Launch Subagent A (M13) — produce `m13-hidden-assumptions.md`.
 - [ ] 3. Launch Subagent B (M07) — produce `m07-implicit-adrs.md`.
 - [ ] 4. Launch Subagent C (M06+M08) — produce `m06-m08-pending-decisions.md`.
 - [ ] 5. Merge into `research/adr-assumption-audit/output/REPORT.md`.
-- [ ] 6. Map pending decisions to Task 027 modules; update Task 027 open-decisions list.
+- [ ] 6. Map pending decisions to Task 028 modules; update Task 028 open-decisions list.
 - [ ] 7. Run `tools/check-governance.sh`; fix failures.
 - [ ] 8. Set `task_status: done`.
 
 ## Links
 
-- Blocked by: [`026-adr-spec-research-synthesis/task.md`](../026-adr-spec-research-synthesis/task.md)
-- Feeds into: [`027-adr-tooling-impl-plan/task.md`](../027-adr-tooling-impl-plan/task.md) (pending decisions inform open-decisions list)
+- Blocked by: [`027-adr-spec-research-synthesis/task.md`](../027-adr-spec-research-synthesis/task.md)
+- Feeds into: [`028-adr-tooling-impl-plan/task.md`](../028-adr-tooling-impl-plan/task.md) (pending decisions inform open-decisions list)
 - Executing prompt: [`prompts/adr-assumption-audit/prompt.md`](../../prompts/adr-assumption-audit/prompt.md)
 - Critical-thinking source: [`research/gemini/slug/research-prompt_agency-adr-governance-spec.md`](../../research/gemini/slug/research-prompt_agency-adr-governance-spec.md)
 - Governing specs: [`TASK.md`](../../TASK.md), [`RESEARCH.md`](../../RESEARCH.md), [`FRUSTRATED.md`](../../FRUSTRATED.md)

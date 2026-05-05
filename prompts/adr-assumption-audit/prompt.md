@@ -2,7 +2,7 @@
 type: prompt
 status: active
 slug: adr-assumption-audit
-summary: "Drives Task 028: three parallel subagents apply M13, M07, and M06+M08 critical-thinking methods to audit hidden assumptions, catalogue implicit ADRs in force, and enumerate pending decisions that block the agency-adr implementation."
+summary: "Drives Task 029: three parallel subagents apply M13, M07, and M06+M08 critical-thinking methods to audit hidden assumptions, catalogue implicit ADRs in force, and enumerate pending decisions that block the agency-adr implementation."
 created: 2026-05-05
 updated: 2026-05-05
 prompt_kind: research-proposal
@@ -27,7 +27,7 @@ You operate by deploying three subagents — each with a distinct critical-think
 3. **Research prompt methods:** `research/gemini/slug/research-prompt_agency-adr-governance-spec.md` (method definitions for M06, M07, M08, M12, M13)
 4. **All root specs:** `AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `PRE_COMMIT.md`, `MAINTENANCE.md`, `FRUSTRATED.md`, `README.md`
 5. **All tooling:** `tools/check-governance.sh`, `tools/fm/*.py`
-6. **Task 028 plan:** `tasks/028-adr-assumption-audit/task.md`
+6. **Task 029 plan:** `tasks/029-adr-assumption-audit/task.md`
 
 ## S — Steps
 
@@ -113,13 +113,13 @@ Output: `research/adr-assumption-audit/workspace/m07-implicit-adrs.md`
 
 **Subagent briefing (self-contained):**
 
-You are Subagent C. Your methods are [M06] Source Triangulation and [M08] What Would Change My Mind. Your task: enumerate every open architectural question that must be decided before Task 027's implementation plan can be executed without ambiguity.
+You are Subagent C. Your methods are [M06] Source Triangulation and [M08] What Would Change My Mind. Your task: enumerate every open architectural question that must be decided before Task 028's implementation plan can be executed without ambiguity.
 
 Sources to triangulate (three must agree before a question is marked "resolved"):
 - `research/adr-spec-research-synthesis/output/SPEC.md` §8 (Known Limitations)
-- `tasks/027-adr-tooling-impl-plan/task.md` §6 (Open Decisions list, if present)
-- `tasks/028-adr-assumption-audit/workspace/m13-hidden-assumptions.md` (Subagent A output)
-- `tasks/028-adr-assumption-audit/workspace/m07-implicit-adrs.md` (Subagent B output)
+- `tasks/028-adr-tooling-impl-plan/task.md` §6 (Open Decisions list, if present)
+- `tasks/029-adr-assumption-audit/workspace/m13-hidden-assumptions.md` (Subagent A output)
+- `tasks/029-adr-assumption-audit/workspace/m07-implicit-adrs.md` (Subagent B output)
 
 For each open question, apply [M08] Pre-Commitment:
 
@@ -131,8 +131,8 @@ Option B: [Choice] — what would confirm this: [concrete observable evidence]
 Option C (if applicable): [Choice]
 Current spec lean: [Which way the spec implicitly leans, with quote]
 Triangulation status: [resolved — 3 sources agree / open — sources conflict / deferred — insufficient evidence]
-Blocks: [Task 027 module name(s) that cannot be built until this is resolved]
-Recommended owner: [human architect / agent-resolvable / defer to Task 028 REPORT.md]
+Blocks: [Task 028 module name(s) that cannot be built until this is resolved]
+Recommended owner: [human architect / agent-resolvable / defer to Task 029 REPORT.md]
 ```
 
 Known open questions to address (not exhaustive):
@@ -162,7 +162,7 @@ Merge all three subagent outputs into `research/adr-assumption-audit/output/REPO
 
 ## §4 Recommended Actions
 [One action per finding category:
-  - §1 → which assumptions must be resolved in SPEC.md §8 before Task 027 starts
+  - §1 → which assumptions must be resolved in SPEC.md §8 before Task 028 starts
   - §2 → which implicit ADRs must be bootstrapped as ADR-0001..N before synthesis pipeline runs
   - §3 → which pending decisions require a synchronous human decision; which can be agent-resolved]
 ```
@@ -179,8 +179,8 @@ Use the five-question CB0 template verbatim from `research/gemini/slug/research-
 
 1. Run `tools/check-governance.sh`; fix failures.
 2. Populate `research/adr-assumption-audit/reflection/friction-log.md` with FL[0-3].
-3. Update `tasks/027-adr-tooling-impl-plan/task.md` §Open Decisions with any PD-NNN items found in Step 4.
-4. Mark `task_status: done` in `tasks/028-adr-assumption-audit/task.md`.
+3. Update `tasks/028-adr-tooling-impl-plan/task.md` §Open Decisions with any PD-NNN items found in Step 4.
+4. Mark `task_status: done` in `tasks/029-adr-assumption-audit/task.md`.
 
 ## E — Expectations
 
@@ -196,8 +196,8 @@ Use the five-question CB0 template verbatim from `research/gemini/slug/research-
 
 ## N — Narrowing
 
-- Do not modify the ADR governance spec (Task 026 output). This is a read-only audit.
-- Do not implement any recommendations. Record them for human or Task 027 action only.
+- Do not modify the ADR governance spec (Task 027 output). This is a read-only audit.
+- Do not implement any recommendations. Record them for human or Task 028 action only.
 - Critical-thinking methods MUST be applied as defined in the Research Prompt Optimizer source — do not abbreviate.
 - Subagents are parallel workers. They MAY read each other's output directories after their own Step is complete, but MUST NOT wait for each other before producing their own output.
 - Blast radius classification: high = breaks AGENTS.md synthesis silently; medium = requires spec amendment; low = documentation gap only.

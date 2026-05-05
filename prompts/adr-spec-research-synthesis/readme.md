@@ -2,7 +2,7 @@
 type: index
 status: active
 slug: adr-spec-research-synthesis-prompt-readme
-summary: "Index for prompt adr-spec-research-synthesis — drives Task 026 via /sc:analyze, /sc:brainstorm, and a full RISEN+ReAct research run producing the repo-native ADR governance spec."
+summary: "Index for prompt adr-spec-research-synthesis — drives Task 027 via /sc:analyze, /sc:brainstorm, and a full RISEN+ReAct research run producing the repo-native ADR governance spec."
 created: 2026-05-05
 updated: 2026-05-05
 ---
@@ -14,7 +14,7 @@ updated: 2026-05-05
 
 ## Usage
 
-Execute via Task 026: `tasks/026-adr-spec-research-synthesis/task.md`. The prompt spawns a Research workspace at `research/adr-spec-research-synthesis/`.
+Execute via Task 027: `tasks/027-adr-spec-research-synthesis/task.md`. The prompt spawns a Research workspace at `research/adr-spec-research-synthesis/`.
 
 ## Key Constraints
 

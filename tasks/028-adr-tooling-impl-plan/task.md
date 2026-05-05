@@ -2,10 +2,10 @@
 type: task
 status: active
 slug: adr-tooling-impl-plan
-summary: "From the spec produced by Task 026, design the concrete implementation plan for the agency-adr CLI tool suite: validate, synthesize (MDL), DAG cycle-detection, JSON-Schema linter, and GitHub Actions integration."
+summary: "From the spec produced by Task 027, design the concrete implementation plan for the agency-adr CLI tool suite: validate, synthesize (MDL), DAG cycle-detection, JSON-Schema linter, and GitHub Actions integration."
 created: 2026-05-05
 updated: 2026-05-05
-task_id: "027"
+task_id: "028"
 task_status: open
 task_owner: "unassigned"
 task_priority: P2
@@ -15,7 +15,7 @@ task_spawns_research: []
 task_spawns_prompts: []
 task_supersedes: []
 task_blocked_by:
-  - "026"
+  - "027"
 task_affects_paths:
   - tools/adr/
   - prompts/adr-tooling-impl-plan/
@@ -24,17 +24,17 @@ task_affects_paths:
   - .github/workflows/
 ---
 
-# Task 027 — ADR Tooling Implementation Plan
+# Task 028 — ADR Tooling Implementation Plan
 
 ## Goal
 
-Produce a **concrete, executable implementation plan** for the `agency-adr` CLI tool suite specified in Task 026's output (`research/adr-spec-research-synthesis/output/SPEC.md`). The plan resolves every "interface contract yes, working code no" boundary of the spec into a sequenced build order, module decomposition, and acceptance test map — without writing the implementation itself.
+Produce a **concrete, executable implementation plan** for the `agency-adr` CLI tool suite specified in Task 027's output (`research/adr-spec-research-synthesis/output/SPEC.md`). The plan resolves every "interface contract yes, working code no" boundary of the spec into a sequenced build order, module decomposition, and acceptance test map — without writing the implementation itself.
 
-The task is **done** when `prompts/adr-tooling-impl-plan/prompt.md` is ready to hand to an implementing agent and a `tasks/027-adr-tooling-impl-plan/implementation-plan.md` artefact exists that a developer can follow without ambiguity.
+The task is **done** when `prompts/adr-tooling-impl-plan/prompt.md` is ready to hand to an implementing agent and a `tasks/028-adr-tooling-impl-plan/implementation-plan.md` artefact exists that a developer can follow without ambiguity.
 
 ## Context
 
-The ADR governance spec (Task 026 output) defines:
+The ADR governance spec (Task 027 output) defines:
 - `agency-adr validate` — checks ADR corpus against JSON-Schema
 - `agency-adr synthesize --mdl-floor 0.95 --token-limit 2000` — MDL compression pipeline → `AGENTS.md`
 - A DAG of supersession edges with cycle-detection
@@ -84,7 +84,7 @@ Define the hook entry for `PRE_COMMIT.md`:
 
 ### Phase 6 — Produce Implementation Plan Artefact
 
-Write `tasks/027-adr-tooling-impl-plan/implementation-plan.md` containing:
+Write `tasks/028-adr-tooling-impl-plan/implementation-plan.md` containing:
 1. Module decomposition table (Phase 2)
 2. Build sequencing: which modules must exist before others
 3. Test coverage map (Phase 3)
@@ -94,7 +94,7 @@ Write `tasks/027-adr-tooling-impl-plan/implementation-plan.md` containing:
 
 ## Todo
 
-- [ ] 1. Read Task 026 output at `research/adr-spec-research-synthesis/output/SPEC.md` — block until Task 026 is done.
+- [ ] 1. Read Task 027 output at `research/adr-spec-research-synthesis/output/SPEC.md` — block until Task 027 is done.
 - [ ] 2. Audit existing tooling surface per Phase 1.
 - [ ] 3. Produce module decomposition per Phase 2.
 - [ ] 4. Map Gherkin scenarios to test files per Phase 3.
@@ -107,6 +107,6 @@ Write `tasks/027-adr-tooling-impl-plan/implementation-plan.md` containing:
 
 ## Links
 
-- Blocked by: [`026-adr-spec-research-synthesis/task.md`](../026-adr-spec-research-synthesis/task.md)
+- Blocked by: [`027-adr-spec-research-synthesis/task.md`](../027-adr-spec-research-synthesis/task.md)
 - Executing prompt: [`prompts/adr-tooling-impl-plan/prompt.md`](../../prompts/adr-tooling-impl-plan/prompt.md)
 - Governing specs: [`TASK.md`](../../TASK.md), [`PRE_COMMIT.md`](../../PRE_COMMIT.md), [`MAINTENANCE.md`](../../MAINTENANCE.md)

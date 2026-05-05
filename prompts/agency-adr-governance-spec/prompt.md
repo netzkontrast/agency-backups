@@ -22,4 +22,4 @@ The result lives at:
 
 [`research/gemini/slug/result.md`](../../research/gemini/slug/result.md)
 
-Downstream analysis task: [`tasks/026-adr-spec-research-synthesis/`](../../tasks/026-adr-spec-research-synthesis/)
+Downstream analysis task: [`tasks/027-adr-spec-research-synthesis/`](../../tasks/027-adr-spec-research-synthesis/)

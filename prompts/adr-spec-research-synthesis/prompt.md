@@ -2,7 +2,7 @@
 type: prompt
 status: active
 slug: adr-spec-research-synthesis
-summary: "Drives Task 026: analyze root specs + tooling via /sc:analyze and /sc:brainstorm, then synthesize the repo-native ADR governance specification (§0–§9) that integrates the Gemini draft with this repo's actual governance conventions."
+summary: "Drives Task 027: analyze root specs + tooling via /sc:analyze and /sc:brainstorm, then synthesize the repo-native ADR governance specification (§0–§9) that integrates the Gemini draft with this repo's actual governance conventions."
 created: 2026-05-05
 updated: 2026-05-05
 prompt_kind: research-proposal
@@ -62,7 +62,7 @@ Invoke `/sc:brainstorm` using the analysis from Step 1 as context. Brainstorm an
 4. **AGENTS.md ownership:** How is the synthesis pipeline's overwrite authority reconciled with the manually authored content currently in `AGENTS.md`?
 5. **Migration path:** How are implicit architectural decisions (found in Step 1) bootstrapped as the first batch of formal ADRs?
 
-Record output in `research/adr-spec-research-synthesis/workspace/brainstorm.md`. Every brainstorm conclusion MUST be labelled as either `[RESOLVED]`, `[OPEN — needs human decision]`, or `[DEFERRED to Task 028]`.
+Record output in `research/adr-spec-research-synthesis/workspace/brainstorm.md`. Every brainstorm conclusion MUST be labelled as either `[RESOLVED]`, `[OPEN — needs human decision]`, or `[DEFERRED to Task 029]`.
 
 Apply [M07] Contradiction Log: when two brainstorm conclusions conflict, log both in `research/adr-spec-research-synthesis/reflection/M07-contradictions.md`.
 
@@ -99,8 +99,8 @@ Mandatory content per section:
 
 ### Step 6 — Closure
 
-1. Mark `task_status: done` in `tasks/026-adr-spec-research-synthesis/task.md`.
-2. Confirm `tasks/027-adr-tooling-impl-plan/task.md` and `tasks/028-adr-assumption-audit/task.md` exist and are set to `open`.
+1. Mark `task_status: done` in `tasks/027-adr-spec-research-synthesis/task.md`.
+2. Confirm `tasks/028-adr-tooling-impl-plan/task.md` and `tasks/029-adr-assumption-audit/task.md` exist and are set to `open`.
 
 ## E — Expectations
 
@@ -113,9 +113,9 @@ Mandatory content per section:
 - Friction log declares FL[0-3].
 
 **Non-goals (do not produce):**
-- Working implementation code for `agency-adr` (that is Task 027's scope).
+- Working implementation code for `agency-adr` (that is Task 028's scope).
 - Concrete ADR records (the spec governs HOW, not WHAT decisions to record).
-- Changes to `AGENTS.md` content (the spec defines synthesis rules; execution is Task 027).
+- Changes to `AGENTS.md` content (the spec defines synthesis rules; execution is Task 028).
 
 ## N — Narrowing
 

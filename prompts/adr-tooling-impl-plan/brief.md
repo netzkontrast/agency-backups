@@ -15,7 +15,7 @@ updated: 2026-05-05
 
 ## Target Audience
 
-Repository maintainer and any agent executing Task 027.
+Repository maintainer and any agent executing Task 028.
 
 ## Intended Model / Agent
 
@@ -23,4 +23,4 @@ Claude Code.
 
 ## Use-Case Context
 
-Task 026 will produce a governance spec that defines the `agency-adr` CLI interface (validate, synthesize) and its acceptance criteria. This prompt drives the downstream planning task: decompose the spec into a build-sequenced implementation plan covering module decomposition, test mapping, CI/CD integration, and an open-decisions list — without writing any implementation code.
+Task 027 will produce a governance spec that defines the `agency-adr` CLI interface (validate, synthesize) and its acceptance criteria. This prompt drives the downstream planning task: decompose the spec into a build-sequenced implementation plan covering module decomposition, test mapping, CI/CD integration, and an open-decisions list — without writing any implementation code.

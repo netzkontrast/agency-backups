@@ -2,7 +2,7 @@
 type: prompt
 status: active
 slug: adr-tooling-impl-plan
-summary: "Drives Task 027: from the repo-native ADR governance spec (Task 026 output), produce a concrete, sequenced implementation plan for the agency-adr CLI tool suite — module decomposition, acceptance test map, CI/CD integration, and open-decisions list."
+summary: "Drives Task 028: from the repo-native ADR governance spec (Task 027 output), produce a concrete, sequenced implementation plan for the agency-adr CLI tool suite — module decomposition, acceptance test map, CI/CD integration, and open-decisions list."
 created: 2026-05-05
 updated: 2026-05-05
 prompt_kind: task-spec
@@ -37,7 +37,7 @@ Read all files under `tools/fm/` and `tools/check-governance.sh`. Produce a tabl
 | File traversal | … | … | … |
 | Schema validation | … | … | … |
 
-Identify the repo's Python dependency management approach (requirements.txt / pyproject.toml). Record in `tasks/027-adr-tooling-impl-plan/implementation-plan.md §1`.
+Identify the repo's Python dependency management approach (requirements.txt / pyproject.toml). Record in `tasks/028-adr-tooling-impl-plan/implementation-plan.md §1`.
 
 ### Step 2 — Module Decomposition
 
@@ -85,8 +85,8 @@ Write in `implementation-plan.md §5`.
 Enumerate every implementation decision the spec left open (flagged in §8 of the spec or inferred from the module decomposition). For each:
 - Decision statement
 - Options (A/B/C if applicable)
-- Which Task 027 module is blocked until it is resolved
-- Recommended owner (human architect / agent / defer to Task 028 report)
+- Which Task 028 module is blocked until it is resolved
+- Recommended owner (human architect / agent / defer to Task 029 report)
 
 Write in `implementation-plan.md §6`.
 
@@ -97,11 +97,11 @@ For each module (Step 2) and test file (Step 3), assign a complexity estimate: S
 ### Step 8 — Verification and Closure
 
 1. Run `tools/check-governance.sh` against all new files.
-2. Mark `task_status: done` in `tasks/027-adr-tooling-impl-plan/task.md`.
+2. Mark `task_status: done` in `tasks/028-adr-tooling-impl-plan/task.md`.
 
 ## E — Expectations
 
-**Deliverable:** `tasks/027-adr-tooling-impl-plan/implementation-plan.md` with §1–§7 fully populated.
+**Deliverable:** `tasks/028-adr-tooling-impl-plan/implementation-plan.md` with §1–§7 fully populated.
 
 The plan MUST be executable by a fresh agent with no prior context beyond this plan and the referenced input files. Ambiguity is a defect.
 
@@ -112,7 +112,7 @@ The plan MUST be executable by a fresh agent with no prior context beyond this p
 
 ## N — Narrowing
 
-- Scope: implementation planning only. Do not modify the ADR governance spec produced by Task 026.
+- Scope: implementation planning only. Do not modify the ADR governance spec produced by Task 027.
 - Tool boundary: `agency-adr` MUST reuse existing `tools/fm/` parsing primitives; it MUST NOT duplicate them.
 - No working code: interface contracts (type signatures, CLI shape, JSON-Schema) yes; implementations no.
 - RFC 2119 normativity in the plan: one keyword per sentence; stable IDs from the spec MUST be cited.

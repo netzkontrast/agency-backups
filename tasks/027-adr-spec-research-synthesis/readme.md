@@ -2,18 +2,18 @@
 type: index
 status: active
 slug: adr-spec-research-synthesis-readme
-summary: "Index for Task 026 — analyze root specs via /sc:analyze + /sc:brainstorm, then execute a Research run producing the repo-native ADR governance spec."
+summary: "Index for Task 027 — analyze root specs via /sc:analyze + /sc:brainstorm, then execute a Research run producing the repo-native ADR governance spec."
 created: 2026-05-05
 updated: 2026-05-05
 ---
 
-# Task 026 — ADR Spec Research Synthesis
+# Task 027 — ADR Spec Research Synthesis
 
 - [`task.md`](./task.md) — Goal, Plan, Todo, Links.
 
 ## State
 
-`task_status: open`. No blockers. Spawns Task 027 and Task 028 upon completion.
+`task_status: open`. No blockers. Spawns Task 028 and Task 029 upon completion.
 
 ## Artefacts
 

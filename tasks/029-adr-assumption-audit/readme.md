@@ -2,18 +2,18 @@
 type: index
 status: active
 slug: adr-assumption-audit-readme
-summary: "Index for Task 028 — three parallel subagents (M13, M07, M06+M08) audit hidden assumptions, implicit ADRs, and pending decisions in the ADR governance spec."
+summary: "Index for Task 029 — three parallel subagents (M13, M07, M06+M08) audit hidden assumptions, implicit ADRs, and pending decisions in the ADR governance spec."
 created: 2026-05-05
 updated: 2026-05-05
 ---
 
-# Task 028 — ADR Assumption Audit (Critical-Thinking)
+# Task 029 — ADR Assumption Audit (Critical-Thinking)
 
 - [`task.md`](./task.md) — Goal, Plan, Todo, Links.
 
 ## State
 
-`task_status: open`, blocked by Task 026. The three subagents cannot run until the Task 026 SPEC.md exists as their primary input.
+`task_status: open`, blocked by Task 027. The three subagents cannot run until the Task 027 SPEC.md exists as their primary input.
 
 ## Subagent Map
 

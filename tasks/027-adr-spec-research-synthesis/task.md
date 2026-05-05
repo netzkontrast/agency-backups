@@ -5,7 +5,7 @@ slug: adr-spec-research-synthesis
 summary: "Analyze root specs and tooling via /sc:analyze + /sc:brainstorm, then execute a Research run that produces the repo-native ADR governance specification integrating the Gemini draft with existing governance conventions."
 created: 2026-05-05
 updated: 2026-05-05
-task_id: "026"
+task_id: "027"
 task_status: open
 task_owner: "unassigned"
 task_priority: P1
@@ -26,7 +26,7 @@ task_affects_paths:
   - TASK.md
 ---
 
-# Task 026 — ADR Spec Research Synthesis
+# Task 027 — ADR Spec Research Synthesis
 
 ## Goal
 
@@ -34,7 +34,7 @@ Produce the **repo-native ADR governance specification** for `netzkontrast/agenc
 
 The task is **done** when `research/adr-spec-research-synthesis/output/SPEC.md` exists, passes `tools/check-governance.sh`, and is acknowledged by the maintainer as the authoritative ADR governance document for this repository.
 
-Spawns Task 027 (tooling implementation plan) and Task 028 (assumption audit) upon completion.
+Spawns Task 028 (tooling implementation plan) and Task 029 (assumption audit) upon completion.
 
 ## Context
 
@@ -84,8 +84,8 @@ The SPEC.md MUST:
 
 1. Run `tools/check-governance.sh` against all new files; resolve any failures.
 2. Mark this task `done`.
-3. Spawn Task 027 (`027-adr-tooling-impl-plan`) for implementation planning.
-4. Spawn Task 028 (`028-adr-assumption-audit`) for the critical-thinking assumption audit.
+3. Spawn Task 028 (`028-adr-tooling-impl-plan`) for implementation planning.
+4. Spawn Task 029 (`029-adr-assumption-audit`) for the critical-thinking assumption audit.
 
 ## Todo
 
@@ -97,12 +97,12 @@ The SPEC.md MUST:
 - [ ] 6. Produce `research/adr-spec-research-synthesis/output/SPEC.md`.
 - [ ] 7. Run `tools/check-governance.sh`; fix any failures.
 - [ ] 8. Set `task_status: done`.
-- [ ] 9. Confirm Task 027 and Task 028 are created and set to `open`.
+- [ ] 9. Confirm Task 028 and Task 029 are created and set to `open`.
 
 ## Links
 
 - ADR Governance draft: [`research/gemini/slug/adr-governance-spec.md`](../../research/gemini/slug/adr-governance-spec.md)
 - Originating research prompt: [`research/gemini/slug/research-prompt_agency-adr-governance-spec.md`](../../research/gemini/slug/research-prompt_agency-adr-governance-spec.md)
 - Executing prompt: [`prompts/adr-spec-research-synthesis/prompt.md`](../../prompts/adr-spec-research-synthesis/prompt.md)
-- Spawns: [`027-adr-tooling-impl-plan/task.md`](../027-adr-tooling-impl-plan/task.md), [`028-adr-assumption-audit/task.md`](../028-adr-assumption-audit/task.md)
+- Spawns: [`028-adr-tooling-impl-plan/task.md`](../028-adr-tooling-impl-plan/task.md), [`029-adr-assumption-audit/task.md`](../029-adr-assumption-audit/task.md)
 - Governing specs: [`TASK.md`](../../TASK.md), [`RESEARCH.md`](../../RESEARCH.md), [`PROMPT.md`](../../PROMPT.md), [`AGENTS.md`](../../AGENTS.md)
