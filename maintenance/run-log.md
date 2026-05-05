@@ -407,7 +407,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run 2026-05-05 — Task 021 administrative close (deferred-coherence residual = empty)
 - agent: claude-code (session claude/apply-fm-edit-deferred-QKgda)
 - start_commit: 0669322
-- end_commit: pending
+- end_commit: d5fab39
 - baseline_commit: 3266fed (Task 020 closure)
 - files_in_delta: 0 (no operational frontmatter mutations — Task 021
   closure artifacts only: task.md, readme.md, notes.md, friction-log.md
