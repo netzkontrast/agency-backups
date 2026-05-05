@@ -1,13 +1,13 @@
 ---
 type: task
-status: active
+status: completed
 slug: adr-tooling-impl-plan
 summary: "From the spec produced by Task 027, design the concrete implementation plan for the agency-adr CLI tool suite: validate, synthesize (MDL), DAG cycle-detection, JSON-Schema linter, and GitHub Actions integration."
 created: 2026-05-05
 updated: 2026-05-05
 task_id: "028"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts:
   - adr-tooling-impl-plan
@@ -94,19 +94,23 @@ Write `tasks/028-adr-tooling-impl-plan/implementation-plan.md` containing:
 
 ## Todo
 
-- [ ] 1. Read Task 027 output at `research/adr-spec-research-synthesis/output/SPEC.md` — block until Task 027 is done.
-- [ ] 2. Audit existing tooling surface per Phase 1.
-- [ ] 3. Produce module decomposition per Phase 2.
-- [ ] 4. Map Gherkin scenarios to test files per Phase 3.
-- [ ] 5. Draft GitHub Actions workflow spec per Phase 4.
-- [ ] 6. Draft PRE_COMMIT.md hook spec per Phase 5.
-- [ ] 7. Write `implementation-plan.md` per Phase 6.
-- [ ] 8. Flesh out `prompts/adr-tooling-impl-plan/prompt.md` as a ready-to-execute task-spec prompt.
-- [ ] 9. Run `tools/check-governance.sh`; fix failures.
-- [ ] 10. Set `task_status: done`.
+- [x] 1. Read Task 027 output at `research/adr-spec-research-synthesis/output/SPEC.md` — block until Task 027 is done.
+- [x] 2. Audit existing tooling surface per Phase 1.
+- [x] 3. Produce module decomposition per Phase 2.
+- [x] 4. Map Gherkin scenarios to test files per Phase 3.
+- [x] 5. Draft GitHub Actions workflow spec per Phase 4.
+- [x] 6. Draft PRE_COMMIT.md hook spec per Phase 5.
+- [x] 7. Write `implementation-plan.md` per Phase 6.
+- [x] 8. Verify `prompts/adr-tooling-impl-plan/prompt.md` is a ready-to-execute task-spec prompt (already complete; re-checked against `header-ontology.json` types.prompt schema).
+- [x] 9. Run `tools/check-governance.sh`; fix failures.
+- [x] 10. Set `task_status: done`.
 
 ## Links
 
-- Blocked by: [`027-adr-spec-research-synthesis/task.md`](../027-adr-spec-research-synthesis/task.md)
+- Implementation plan: [`./implementation-plan.md`](./implementation-plan.md) — §1–§7 deliverable.
+- Closure friction log: [`./friction-log.md`](./friction-log.md) — FL1.
+- Blocked by (resolved): [`027-adr-spec-research-synthesis/task.md`](../027-adr-spec-research-synthesis/task.md) (`task_status: done`)
+- Sibling: [`029-adr-assumption-audit/task.md`](../029-adr-assumption-audit/task.md) — feeds OD.1, OD.2, OD.4, OD.10 in `implementation-plan.md §6`.
 - Executing prompt: [`prompts/adr-tooling-impl-plan/prompt.md`](../../prompts/adr-tooling-impl-plan/prompt.md)
 - Governing specs: [`TASK.md`](../../TASK.md), [`PRE_COMMIT.md`](../../PRE_COMMIT.md), [`MAINTENANCE.md`](../../MAINTENANCE.md)
+- Source spec: [`research/adr-spec-research-synthesis/output/SPEC.md`](../../research/adr-spec-research-synthesis/output/SPEC.md)
