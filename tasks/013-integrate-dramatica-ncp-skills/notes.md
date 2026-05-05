@@ -324,3 +324,43 @@ dynamic_pair_id: el.test
 **M01 contingency status: PASS** (median 1 ≤ 5; per-term frontmatter remains structurally sufficient; no `scenario-index.py` build pass required for v0.1).
 
 **Sync verified:** all 68 modified per-term frontmatter blocks under `skills/dramatica-vocabulary/references/*.md` carry the same `scenarios:` field as the matching ontology entry. Cross-skill `frontmatter ↔ ontology` equality invariant satisfied.
+
+## Plan Step 12 — Token-Cost Benchmark (the acceptance gate)
+
+10 representative queries (3 Anna, 3 Otto, 4 storyform-validation), measuring bytes loaded via prose-only path vs navigator path. Acceptance gate from prompt § Closing: ≥60% average reduction on lookup-shaped queries.
+
+| ID | Persona | Prose KB | Nav KB | Reduction | Query |
+|---|---|---:|---:|---:|---|
+| Q01 | novel | 85.5 | 0.39 | **99.5%** | el.trust dynamic-pair partner |
+| Q02 | novel | 106.6 | 7.42 | **93.0%** | Element-pairs commonly Crucial |
+| Q03 | novel | 8.8 | 1.80 | **79.4%** | Logic/Feeling Quad members |
+| Q04 | lyric | 85.5 | 6.80 | **92.0%** | Verse↔Chorus Element-pairs |
+| Q05 | lyric | 12.1 | 0.42 | **96.5%** | IC alias → canonical NCP label |
+| Q06 | lyric | 2.7 | 0.28 | **89.4%** | dp.* containing el.trust |
+| Q07 | novel | 12.1 | 0.45 | **96.3%** | NCP enum for "Relationship Story" |
+| Q08 | novel | 8.8 | 8.95 | **−2.2%** | All KTAD=K entries |
+| Q09 | novel | 85.5 | 0.71 | **99.2%** | el.trust + inlined dp partner |
+| Q10 | novel | 97.6 | 9.45 | **90.3%** | All `novel.crucial-element-audit` tags |
+
+### Verdict: **PASS**
+
+- **Average reduction across 10 lookup queries: 83.4%**
+- Acceptance gate: ≥60%
+- Aggregate prose path: 505.1 KB
+- Aggregate navigator path: 36.67 KB
+- **Aggregate compression: 7.26% of prose-path size (92.7% reduction)**
+- 9/10 queries clear the 60% gate individually
+
+### Notable edge case (Q08 — `by-ktad K`)
+
+`by-ktad K` returns 26 entries (one per K-position member across all Quads). The output (8.95 KB) slightly exceeds the source prose file `element-quads.md` (8.8 KB) for a -2.2% "reduction". This is a legitimate edge case for fan-out queries against a small source file: the navigator JSON includes per-entry metadata (id, kind, canonical_label, term_file, scenarios, etc.) for each of the 26 records, while the prose file is concise.
+
+It does NOT invalidate the gate (the average is what matters), but it surfaces a v0.2 design note: very-fan-out queries on already-compact sources may not benefit from the navigator. Treat as known and move on.
+
+### What this empirically validates
+
+1. **The navigator earns its keep on lookup-shaped queries.** Median reduction is in the 90s.
+2. **The schema/ontology/per-term-frontmatter design holds at production load.** Cross-entry resolution, alias lookup, scenario-tag filtering, KTAD walks all return tractable results.
+3. **The token-economy claim from prompt § Closing is no longer a hypothesis.** It's a measurement.
+
+The full Task 013 falsifiable acceptance gate is satisfied. Plan Step 12 closes.
