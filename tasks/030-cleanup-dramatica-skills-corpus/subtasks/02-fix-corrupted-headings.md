@@ -8,6 +8,7 @@ updated: 2026-05-05
 subtask_id: "ST-2"
 subtask_phase: "A"
 subtask_recommended_agent: "technical-writer"
+subtask_status: not-started
 subtask_depends_on: []
 subtask_falsification: "Wrong cut iff broken headings encode dictionary information that a re-extraction from canonical PDF could recover. Mitigated by forbidding source-prose quoting >1 line per repo's existing rule."
 ---

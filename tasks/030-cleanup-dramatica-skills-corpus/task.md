@@ -14,8 +14,7 @@ task_spawns_research: []
 task_spawns_prompts: []
 task_supersedes: []
 task_superseded_by: []
-task_blocked_by:
-  - "028"
+task_blocked_by: []
 task_affects_paths:
   - skills/dramatica-theory/
   - skills/dramatica-vocabulary/
@@ -32,8 +31,8 @@ The dramatica corpus is operational but degraded. **Phase 0 (now)** of this task
 
 1. **Corpus is artefact-free.** `tools/dramatica-nav/cleanup.py --check` (delivered by ST-3) reports zero PDF page-break footers, zero stray page-number lines, zero double-apostrophe escapes, zero broken-parenthesis headings, zero "See X" empty redirect entries across `skills/dramatica-theory/references/*.md` and `skills/dramatica-vocabulary/references/*.md`. Concrete starting baseline: ≥38 copyright footers in vocabulary, ≥324 page-number artefacts in theory chunks, 1 broken `## Sex)` heading, 2 empty "See Intuitive / See Logical" redirects, 8 known `term_file` anchor mismatches.
 2. **Anchors and frontmatter agree.** `tools/dramatica-nav/validate.py` reports zero `term_file-anchor-mismatch` warnings AND zero `unmapped-heading` warnings for canonical kinds (`element`, `variation`, `type`, `archetype`, `class`, `throughline`, `character-dynamic`, `plot-dynamic`, `concept`). The 17 partial-quad-membership warnings remain (they require an OQ-X schema decision deferred to Task 029) and are acknowledged as accepted v0.1 limitations.
-3. **Tooling is mechanical.** Five new scripts under `tools/dramatica-nav/` (`term.py`, `aliases.py`, `cleanup.py`, `precompile.py`, `deprecate.py`) cover the create / edit / deprecate / alias-load / scenario-tag / encoding-hint-precompile workflows. Each ships with smoke tests under `tools/dramatica-nav/tests/`. The hand-edit path remains supported but is no longer required for any of those workflows.
-4. **Consumer-side payloads exist.** `maintenance/schemas/narrative-ontology/precompiled/` contains one JSON file per persona scenario (`novel.crucial-element-audit.json`, `lyric.verse-chorus-pair.json`, …) holding the pre-compiled element/variation payload `novel-architect` and `ncp-author` need. Each file passes a new `precompiled.schema.json` and is regenerated idempotently from the ontology. Token cost for a typical `novel.crucial-element-audit` query drops from "load the navigator + the prose section" (≈3–5 KB) to "load one precompiled JSON" (≈1 KB target).
+3. **Tooling is mechanical.** Four new scripts under `tools/dramatica-nav/` (`term.py`, `aliases.py`, `cleanup.py`, `precompile.py`) cover the create / edit / deprecate / alias-load / scenario-tag / encoding-hint-precompile workflows. Deprecation is a subcommand on `term.py` (`term.py deprecate …`), not a standalone script — see ST-5's CLI surface. Each ships with smoke tests under `tools/dramatica-nav/tests/`. The hand-edit path remains supported but is no longer required for any of those workflows.
+4. **Consumer-side payloads exist.** `maintenance/schemas/narrative-ontology/precompiled/` contains one JSON file per persona scenario (`novel.crucial-element-audit.json`, `lyric.verse-chorus-pair.json`, …) holding the pre-compiled element/variation payload `novel-architect` and `ncp-author` need. Each file passes a new `precompiled.schema.json` and is regenerated idempotently from the ontology. **Bytes loaded** for a typical `novel.crucial-element-audit` query drop from "load the navigator + the prose section" (≈3–5 KB) to "load one precompiled JSON" (≈1 KB target). The acceptance gate `CL.1.5` measures bytes (not tokens) — for plain-ASCII JSON+prose the two are within 5%, but the byte measurement is unambiguous and the only thing the smoke tooling can assert directly.
 
 **Phase 1 deferrals (out of scope here, captured for Task 029 to ratify):** schema bumps for term-level deprecation lifecycle, multi-quad encoding (`quad_ids: array`), structured `encoding_hints` field on the term schema. These are ontology-extension decisions that the ADR-governance research must surface BEFORE we cement them.
 
@@ -43,7 +42,7 @@ The dramatica corpus is operational but degraded. **Phase 0 (now)** of this task
 
 The "Phase 1" schema-decision questions (deprecation lifecycle, multi-quad encoding, structured `encoding_hints` field) are deferred to main's ADR-governance pipeline — [Task 027](../027-adr-spec-research-synthesis/) (canonical ADR spec from the executed Gemini draft), [Task 028](../028-adr-tooling-impl-plan/) (ADR tooling impl plan), and [Task 029](../029-adr-assumption-audit/) (assumption audit). The FE-1…FE-10 items in this task's `notes.md §3` are intended inputs to Task 029.
 
-**Blocking dependency on Task 028.** This task SHOULD consume the `agency-adr` CLI tool suite that [Task 028](../028-adr-tooling-impl-plan/) ships (validate / synthesize / DAG / JSON-Schema linter / GHA integration). Concretely: ST-6's `cleanup.py` lint catalogue and ST-5's `term.py` deprecation lifecycle are natural callers of `agency-adr validate` and the JSON-Schema linter, and the schema-bump procedure ST-5 surfaces (term-level `status: deprecated`) is precisely the kind of decision the `agency-adr` synthesise pipeline records as an ADR. `task_blocked_by: ["028"]` is set so Task 030 does not begin Phase A until the `agency-adr` tooling is authored and ready for use; if the maintainer chooses to unblock early, the affected subtasks (ST-5, ST-6) reflect the unblock by stubbing the `agency-adr` integration with explicit `# TODO(after-028)` markers in code.
+**Per-subtask dependency on Task 028 (NOT task-level).** ST-5 and ST-6 — and only those two — depend on the `agency-adr` CLI tool suite that [Task 028](../028-adr-tooling-impl-plan/) ships (validate / synthesize / DAG / JSON-Schema linter / GHA integration). Concretely: ST-6's `cleanup.py` lint catalogue and ST-5's `term.py` deprecation lifecycle are natural callers of `agency-adr validate` and the JSON-Schema linter; the schema-bump procedure ST-5 surfaces (term-level `status: deprecated`) is precisely the kind of decision the `agency-adr` synthesise pipeline records as an ADR. The dependency is recorded in ST-5 and ST-6's `## Dependencies` sections as a **Pre-dispatch Gate** rather than as a task-level `task_blocked_by` so Phase A (ST-1…ST-4) and ST-7 / ST-8 / ST-9 can proceed without waiting for `agency-adr`. Per [PR #55 review C1](https://github.com/netzkontrast/agency/pull/55) and Assumption A-11.
 
 This task adds:
 
@@ -165,7 +164,7 @@ Feature: Cleaned-up dramatica corpus passes the four §Goal gates
 
   # anchor: CL.1.4
   Scenario: Tooling covers the create/edit/deprecate/alias-load/precompile workflows
-    Given tools/dramatica-nav/term.py, aliases.py, cleanup.py, deprecate.py, precompile.py exist
+    Given tools/dramatica-nav/term.py (with `deprecate` subcommand), aliases.py, cleanup.py, precompile.py exist
     When pytest tools/dramatica-nav/tests/ runs
     Then every script MUST have ≥3 smoke tests (happy path + edge case + failure)
     And the test suite MUST pass with 0 failures

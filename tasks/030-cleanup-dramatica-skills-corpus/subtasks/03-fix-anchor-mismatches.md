@@ -8,8 +8,9 @@ updated: 2026-05-05
 subtask_id: "ST-3"
 subtask_phase: "A"
 subtask_recommended_agent: "refactoring-expert"
+subtask_status: not-started
 subtask_depends_on:
-  - "ST-2"  # via commit body — ST-3 needs ST-2's coordination note for character-dynamic.approach
+  - "ST-2"
 subtask_falsification: "Wrong cut iff the 106 unmapped headings turn out to need a fourth bucket (e.g., terms that ARE canonical but were missed in Task 015's bootstrap). Mitigated by surfacing any such terms as named friction items rather than silently bucketing them."
 ---
 
@@ -71,7 +72,7 @@ Wrong cut **iff** the 106 unmapped headings turn out to need a fourth bucket (i.
 
 ## Dependencies
 
-ST-2 (via coordination note in ST-2's commit body).
+ST-2 — recorded as `subtask_depends_on: ["ST-2"]` in this file's frontmatter. The dependency exists because ST-2 splits the corrupted `## Approach` heading into `## Approach` + `## Growth` (parent task §FE-fixes / notes.md §2.6); ST-3 then updates `character-dynamic.growth.term_file` from `…#approach` to `…#growth` so the ontology table tracks the new anchor. The dispatching agent reads this dependency from the frontmatter; the rationale is here in prose so it survives YAML parsers that strip comments (per [PR #55 review S1](https://github.com/netzkontrast/agency/pull/55)).
 
 ## Estimated Effort
 

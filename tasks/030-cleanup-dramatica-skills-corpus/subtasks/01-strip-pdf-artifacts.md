@@ -8,6 +8,7 @@ updated: 2026-05-05
 subtask_id: "ST-1"
 subtask_phase: "A"
 subtask_recommended_agent: "refactoring-expert"
+subtask_status: not-started
 subtask_depends_on: []
 subtask_falsification: "Wrong cut iff a deleted artefact turns out to be load-bearing for an agent (e.g., a copyright footer used as a section terminator). Mitigated by --dry-run first and human-reviewed diff."
 ---

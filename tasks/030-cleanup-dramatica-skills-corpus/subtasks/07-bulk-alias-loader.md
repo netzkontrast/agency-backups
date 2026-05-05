@@ -8,7 +8,12 @@ updated: 2026-05-05
 subtask_id: "ST-7"
 subtask_phase: "B"
 subtask_recommended_agent: "python-expert"
-subtask_depends_on: []
+subtask_status: not-started
+subtask_depends_on:
+  - "ST-1"
+  - "ST-2"
+  - "ST-3"
+  - "ST-4"
 subtask_falsification: "Wrong cut iff the synonym-lookup contains alias entries that conflict with already-distinct ontology IDs. Mitigated by a conflict-report dry-run pass; only conflict-free aliases are committed."
 ---
 

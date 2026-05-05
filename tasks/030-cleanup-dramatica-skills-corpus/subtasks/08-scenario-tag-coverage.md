@@ -8,12 +8,14 @@ updated: 2026-05-05
 subtask_id: "ST-8"
 subtask_phase: "C"
 subtask_recommended_agent: "quality-engineer"
+subtask_status: not-started
 subtask_depends_on:
   - "ST-1"
   - "ST-2"
   - "ST-3"
   - "ST-4"
   - "ST-5"
+  - "ST-6"
   - "ST-7"
 subtask_falsification: "Wrong cut iff scenario tagging at scale dilutes the median below the 5-tag M01 invariant. Mitigated by capping per-term tags at 4 (subtask-enforced) and 8 (schema-enforced) plus per-iteration M01 gate."
 ---

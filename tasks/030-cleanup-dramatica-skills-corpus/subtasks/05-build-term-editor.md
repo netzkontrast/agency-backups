@@ -8,7 +8,12 @@ updated: 2026-05-05
 subtask_id: "ST-5"
 subtask_phase: "B"
 subtask_recommended_agent: "python-expert"
-subtask_depends_on: []
+subtask_status: not-started
+subtask_depends_on:
+  - "ST-1"
+  - "ST-2"
+  - "ST-3"
+  - "ST-4"
 subtask_falsification: "Wrong cut iff the term-editor surface conflicts with tools/fm/edit.py ergonomics. Mitigation: tool reuses tools/fm/edit.py for frontmatter-only operations and only adds new code for term-spanning operations (create/move/deprecate)."
 ---
 
@@ -42,7 +47,7 @@ Per-subcommand contracts:
 - **`move`** rewrites the `term_file` pointer, optionally renames the heading anchor, and physically moves the heading + body + frontmatter block from one source file to another. Refuses if the target file lacks a clean section break to insert at; emits a hint to re-run with `--position before-section <slug>` or `--position end-of-file`.
 - **`deprecate`** marks an entry as deprecated. Two lifecycles:
   - With `--alias-on <successor-id>`: deletes the source heading, adds the deprecated label as `deprecated_aliases_en` on the successor's ontology entry, removes the original ontology entry. (Same pattern ST-4 applies to Female Mental Sex.)
-  - Without `--alias-on`: keeps the source heading + frontmatter, adds `status: deprecated` to the YAML block, prefixes the source body with a `> **Deprecated** — <reason>` admonition. **NOTE:** this requires an ontology schema bump for term-level `status` field — IF the schema doesn't yet support it, `term.py deprecate` MUST file the schema-bump request as an ADR via the `agency-adr` CLI shipped by [Task 028](../../028-adr-tooling-impl-plan/) (the parent task is `task_blocked_by: ["028"]`). The ADR carries the proposed schema delta + the term that triggered the request; `term.py` then falls back to the alias-on path so the user is never blocked. If `agency-adr` is not yet on PATH at ST-5 dispatch time, this branch emits a `# TODO(after-028)` stderr line and the alias-on fallback runs unconditionally. Schema bumps are explicitly out of scope here.
+  - Without `--alias-on`: keeps the source heading + frontmatter, adds `status: deprecated` to the YAML block, prefixes the source body with a `> **Deprecated** — <reason>` admonition. **NOTE:** this requires an ontology schema bump for term-level `status` field — IF the schema doesn't yet support it, `term.py deprecate` MUST file the schema-bump request as an ADR via the `agency-adr` CLI shipped by [Task 028](../../028-adr-tooling-impl-plan/) (see the §Dependencies Pre-dispatch Gate). The ADR carries the proposed schema delta + the term that triggered the request; `term.py` then falls back to the alias-on path so the user is never blocked. If the dispatcher honoured the Pre-dispatch Gate, `agency-adr` will be on PATH; if (against the gate) it isn't, this branch emits a `# TODO(after-028)` stderr line and the alias-on fallback runs unconditionally. Schema bumps are explicitly out of scope here.
 
 After every subcommand, `term.py`:
 1. Re-runs `ontology-build.py --check` (existing tool).
@@ -76,7 +81,10 @@ Wrong cut **iff** the term-editor surface conflicts with `tools/fm/edit.py` ergo
 
 ## Dependencies
 
-None. Phase B (parallel with ST-6 and ST-7).
+Phase B (parallel with ST-6 and ST-7) — but with two gates:
+
+1. **Phase A merged.** ST-1 / ST-2 / ST-3 / ST-4 must have landed on the integration branch before ST-5 dispatches. Building the term-editor against an artefact-bearing corpus would produce false-positive validate.py warnings that the editor's smoke tests would have to whitelist.
+2. **Pre-dispatch Gate — Task 028.** ST-5's `term.py deprecate` files schema-bump requests as ADRs via the `agency-adr` CLI shipped by [Task 028](../../028-adr-tooling-impl-plan/). The dispatching agent MUST verify Task 028 is `task_status: done` before opening a worktree for ST-5; if Task 028 is not yet done, the dispatch MUST defer ST-5 (and ONLY ST-5 — the other Phase B subtasks remain dispatchable). Per [PR #55 review C1](https://github.com/netzkontrast/agency/pull/55) and parent task §Background.
 
 ## Estimated Effort
 

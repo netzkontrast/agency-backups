@@ -8,7 +8,9 @@ updated: 2026-05-05
 subtask_id: "ST-4"
 subtask_phase: "A"
 subtask_recommended_agent: "technical-writer"
-subtask_depends_on: []
+subtask_status: not-started
+subtask_depends_on:
+  - "ST-2"
 subtask_falsification: "Wrong cut iff a redirect entry is load-bearing for an agent that searches by the historic vocabulary. Mitigated by reifying as deprecated_aliases_en on the canonical instead of pure deletion."
 ---
 

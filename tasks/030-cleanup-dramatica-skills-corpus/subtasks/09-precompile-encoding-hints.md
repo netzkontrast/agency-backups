@@ -8,6 +8,7 @@ updated: 2026-05-05
 subtask_id: "ST-9"
 subtask_phase: "C"
 subtask_recommended_agent: "python-expert"
+subtask_status: not-started
 subtask_depends_on:
   - "ST-1"
   - "ST-2"

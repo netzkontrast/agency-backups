@@ -8,8 +8,13 @@ updated: 2026-05-05
 subtask_id: "ST-6"
 subtask_phase: "B"
 subtask_recommended_agent: "python-expert"
-subtask_depends_on: []
-subtask_falsification: "Wrong cut iff cleanup.py becomes a bottomless pit of ad-hoc regex bandaids. Mitigated by a fixed v0.1 lint catalogue that refuses to grow without a Task 027 ADR."
+subtask_status: not-started
+subtask_depends_on:
+  - "ST-1"
+  - "ST-2"
+  - "ST-3"
+  - "ST-4"
+subtask_falsification: "Wrong cut iff cleanup.py becomes a bottomless pit of ad-hoc regex bandaids. Mitigated by a fixed v0.1 lint catalogue that refuses to grow without an agency-adr ADR (Task 027 spec, Task 028 CLI)."
 ---
 
 # ST-6: `cleanup.py` — Corpus Cleanup Linter
@@ -48,13 +53,13 @@ Each rule has:
 
 Wire into `tools/check-governance.sh` per Task 015's pattern (gated on `narrative-ontology/ontology.json` existing, so non-narrative branches don't break).
 
-**`agency-adr` integration (per parent task `task_blocked_by: ["028"]`).** Each `cleanup.py --check` violation that requires a normative-rule decision (e.g., adding a fifth rule, changing the auto-fix path of an existing rule) MUST be filed as an ADR via `agency-adr` rather than as an ad-hoc lint update. The `--explain` payload SHOULD include the ADR ID once the rule is ratified. If the `agency-adr` CLI is not yet available at ST-6 dispatch time, the integration point is a `# TODO(after-028)` marker that emits the rule-violation log to stderr in an ADR-ingestible format (one JSON-line per violation, schema TBD by Task 028).
+**`agency-adr` integration (per §Dependencies Pre-dispatch Gate).** Each `cleanup.py --check` violation that requires a normative-rule decision (e.g., adding a fifth rule, changing the auto-fix path of an existing rule) MUST be filed as an ADR via `agency-adr` rather than as an ad-hoc lint update. The `--explain` payload SHOULD include the ADR ID once the rule is ratified. If the dispatcher honoured the Pre-dispatch Gate, `agency-adr` will be on PATH; if (against the gate) it isn't, the integration point is a `# TODO(after-028)` marker that emits the rule-violation log to stderr in an ADR-ingestible format (one JSON-line per violation, schema TBD by [Task 028](../../028-adr-tooling-impl-plan/)).
 
 ## Falsification
 
 Wrong cut **iff** `cleanup.py` becomes a bottomless pit of ad-hoc regex bandaids. Mitigation: the v0.1 lint catalogue is FOUR rules, period. Adding a fifth requires:
 
-1. Filing a Task 027 issue.
+1. Filing an ADR via `agency-adr` (the spec lives in main's [Task 027](../../027-adr-spec-research-synthesis/); the CLI is delivered by [Task 028](../../028-adr-tooling-impl-plan/)).
 2. Documenting the new rule in this subtask's brief OR in a new task.
 3. Bumping `cleanup.py`'s `--check`-output version field.
 
@@ -70,7 +75,7 @@ If a corruption class appears that's not covered by the four rules, ST-6 surface
 ## Acceptance Criteria
 
 1. **CLI complete.** All five flags (`--check`, `--apply`, `--apply --dry-run`, `--explain`, `--baseline`) work as documented.
-2. **Catalogue locked at 4 rules.** The Python module has exactly four rule constants. Adding a fifth without a Task 027 ADR is caught by code review (the Anti-Patterns section names this as a violation).
+2. **Catalogue locked at 4 rules.** The Python module has exactly four rule constants. Adding a fifth without an `agency-adr` ADR (per the §Falsification process above) is caught by code review (the Anti-Patterns section names this as a violation).
 3. **Tests.** `tools/dramatica-nav/tests/test_cleanup.py` covers each rule's check + auto-fix paths (8 tests) plus `--baseline` round-trip (1 test) plus uncategorised-friction (1 test). Total ≥10.
 4. **Wired into pre-commit.** `tools/check-governance.sh` invokes `python3 tools/dramatica-nav/cleanup.py --check` after `validate.py` (same gate predicate). Failing exit propagates.
 5. **Idempotent.** `cleanup.py --apply` followed by `cleanup.py --check` produces zero diagnostics on a clean tree.
@@ -79,7 +84,10 @@ If a corruption class appears that's not covered by the four rules, ST-6 surface
 
 ## Dependencies
 
-None. Phase B (parallel with ST-5 and ST-7).
+Phase B (parallel with ST-5 and ST-7) — but with two gates:
+
+1. **Phase A merged.** ST-1 / ST-2 / ST-3 / ST-4 must have landed. Otherwise the linter's `--baseline` would record artefact-bearing state as the floor.
+2. **Pre-dispatch Gate — Task 028.** ST-6's lint-rule additions and auto-fix-path changes route through `agency-adr` ADR records (§Goal `--explain` payload references the ratified ADR ID). The dispatching agent MUST verify Task 028 is `task_status: done` before opening a worktree for ST-6; if Task 028 is not yet done, the dispatch MUST defer ST-6. Per [PR #55 review C1](https://github.com/netzkontrast/agency/pull/55) and parent task §Background.
 
 ## Estimated Effort
 
