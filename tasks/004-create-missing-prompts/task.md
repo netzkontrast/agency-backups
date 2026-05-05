@@ -4,14 +4,16 @@ status: active
 slug: create-missing-prompts
 summary: "Found by coherence check 2026-05-04: Tasks 001 and 002 use prompts that do not currently exist."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 task_id: "004"
-task_status: open
-task_owner: "unassigned"
+task_status: updated
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
+task_superseded_by:
+  - "020"
 task_affects_paths:
   - prompts/refactor-governance-from-specs/prompt.md
   - prompts/token-efficiency-tool-suite/prompt.md

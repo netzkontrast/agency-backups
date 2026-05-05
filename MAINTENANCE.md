@@ -101,6 +101,28 @@ The repository self-improves by converting friction into Tasks.
 1. **Extract friction** — scan all `reflection/friction-log.md` files. Identify FL1–FL3 entries and unresolved contradictions.
 2. **Package as Tasks** — for each FL1+ issue, create a Task in `/tasks/<NNN>-<slug>/task.md` per `TASK.md`. The Task MUST link to a prompt in `/prompts/<slug>/prompt.md` that a future agent can execute. The agent MUST NOT fix the complex issues directly during the maintenance run.
 
+### 3.4 Stale-Task Audit and the `updated` Lifecycle
+
+The Coherence Check and the Nightly Maintenance Run MUST audit the freshness of every open Task whose `created` date precedes the most recent `done` Task by more than the staleness window (default: 7 days, configurable via `MAINT_STALE_DAYS`). For each candidate the agent MUST classify the Task into one of four buckets:
+
+| Bucket | Symptom | Action |
+|---|---|---|
+| **Still accurate** | Plan, Todo, and `task_affects_paths` still describe work that needs doing in the form described. | No action. Optionally bump `updated:` to today (T1). |
+| **Drifted (re-frame)** | Goal is still desirable, but Plan/Todo no longer reflect the current repo state — usually because a successor Task or a research SPEC shipped tooling that subsumes part of the original plan. | Apply the **`updated` lifecycle** per `TASK.md §4.7`: create a successor Task, set `task_supersedes`/`task_superseded_by` reciprocally, flip the predecessor's `task_status: updated`, write a `friction-log.md` with a Supersession Rationale paragraph. This is a **T3 action** (§1) — the agent MUST file the lifecycle transition itself as a Task only if the supersession spans more than the typical two-Task pair (e.g. when one predecessor splits into multiple successors with non-trivial scoping decisions). For ordinary 1→1 supersessions, the maintenance agent MAY perform the transition directly because every step is mechanical (frontmatter mutations + a one-paragraph friction log) and reversible. |
+| **Completed by drift** | Every Todo item is satisfied by other commits (the artefacts now exist) but the Task was never closed. | Close as `task_status: done` with a `friction-log.md` noting "completed-by-drift" and pointing at the commits that satisfied each Todo. |
+| **No longer desirable** | The Task's intent is not relevant any more (e.g. a feature was deleted). | Close as `task_status: abandoned` per `TASK.md §8.3`. Do NOT use `updated` for cancellation. |
+
+**Decision algorithm.** For a candidate Task:
+
+1. Read `task.md` and every artefact path in `task_affects_paths`.
+2. For each Todo item, attempt to verify whether it has been satisfied (artefact exists and matches the Todo's intent).
+3. If 100% satisfied → **completed-by-drift**.
+4. Else if the Task references mechanisms that have been retired or superseded (legacy linters, persistent indexes when `tools/fm/` is the canonical surface, etc.) → **drifted (re-frame)**.
+5. Else if the Task's Goal is no longer endorsed by any current spec → **no longer desirable**.
+6. Else → **still accurate**.
+
+**Successor naming.** A successor Task uses the next free `<NNN>` and a slug that signals continuity with the predecessor (e.g. `<predecessor-slug>-v2` or a more specific re-framing such as `<predecessor-slug>-via-fm-edit`). The successor's `## Goal` MUST open with a one-line "Successor to Task NNN" pointer; the body re-frames the work against current repo state.
+
 ---
 
 ## 4. Finalising Any Run

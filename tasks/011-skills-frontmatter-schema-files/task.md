@@ -4,15 +4,17 @@ status: active
 slug: skills-frontmatter-schema-files
 summary: "Author machine-readable JSON Schemas for L1 / L2 frontmatter (task, prompt, research, skill) and the canonical header ontology, so tools can extract precision data from any operational markdown file."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 task_id: "011"
-task_owner: "unassigned"
-task_status: open
+task_owner: "claude-code"
+task_status: updated
 task_priority: P2
 task_uses_prompts:
   - skills-frontmatter-schema-files
 task_spawns_research: []
 task_spawns_prompts: []
+task_superseded_by:
+  - "023"
 task_affects_paths:
   - maintenance/schemas/l1-vault-core.schema.json
   - maintenance/schemas/l2-task.schema.json

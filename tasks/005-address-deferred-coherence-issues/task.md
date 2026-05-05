@@ -4,14 +4,16 @@ status: active
 slug: address-deferred-coherence-issues
 summary: "Found by coherence check 2026-05-04: 148 T1/T2 Issues deferred — too large for atomic commit."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 task_id: "005"
-task_status: open
-task_owner: "unassigned"
+task_status: updated
+task_owner: "claude-code"
 task_priority: P3
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
+task_superseded_by:
+  - "021"
 task_affects_paths: []
 ---
 

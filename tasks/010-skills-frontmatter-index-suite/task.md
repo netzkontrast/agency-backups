@@ -4,16 +4,18 @@ status: active
 slug: skills-frontmatter-index-suite
 summary: "Design and implement a token-efficient frontmatter index + tool suite that lets Claude Code, Jules, and Gemini agents navigate /skills/ (and the rest of the repo) without opening file bodies."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-05
 task_id: "010"
-task_owner: "unassigned"
-task_status: open
+task_owner: "claude-code"
+task_status: updated
 task_priority: P1
 task_uses_prompts:
   - skills-frontmatter-index-suite
 task_spawns_research:
   - skills-frontmatter-index-suite
 task_spawns_prompts: []
+task_superseded_by:
+  - "022"
 task_affects_paths:
   - tools/build-frontmatter-index.py
   - tools/query-frontmatter-index.py
