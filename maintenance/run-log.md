@@ -161,7 +161,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run 2026-05-05 — Task 016 implementation
 - agent: claude-code (session claude/execute-task-16-ZrBJe)
 - start_commit: 9850947
-- end_commit: PENDING
+- end_commit: 6b0480a
 - baseline_commit: 9850947 (no preceding coherence run since merge of PR #46)
 - files_in_delta: 0
 - files_scanned: 0
