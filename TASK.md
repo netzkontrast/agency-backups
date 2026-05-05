@@ -163,6 +163,26 @@ Closing as `updated` MUST produce a `friction-log.md` in the predecessor folder 
 
 The `updated` state is **not** an excuse to skip work. If the Task's intent is no longer relevant, use `abandoned` (§8.3) instead. If the Task's plan executed cleanly to completion, use `done` (§4.6) instead. The `updated` state is reserved for *re-framing*, not *cancellation* and not *completion-by-drift*.
 
+### 4.8 Mandatory Tasks-Index Update (`tasks/readme.md`)
+
+Every change that affects the membership or `task_status` of any Task — namely:
+
+- creating a new `tasks/<NNN>-<slug>/` folder,
+- renaming a Task folder per §8.1,
+- transitioning `task_status` (e.g. `open` → `in_progress`, `in_progress` → `done`/`updated`/`abandoned`/`blocked`), or
+- setting/changing `task_blocked_by`, `task_supersedes`, or `task_superseded_by`,
+
+MUST be accompanied **in the same commit** by an update to [`tasks/readme.md`](./tasks/readme.md) that brings the index into sync with the new state. The index is the single human-readable surface every agent (Claude Code, Jules, Gemini) consults before opening a Task body; a stale index is a session-continuity failure.
+
+The agent MUST verify, before staging the commit:
+
+1. **Membership** — every `tasks/<NNN>-<slug>/` folder on disk has exactly one bullet under `## Contents` in `tasks/readme.md`. No folder is missing; no bullet is orphaned.
+2. **Status fidelity** — each bullet ends with `Status: \`<task_status>\`` matching the `task_status` value in that Task's `task.md` frontmatter.
+3. **Lineage annotation** — any bullet whose Task is `task_status: updated` MUST carry a `→ superseded by [<NNN>](./<NNN>-<slug>/)` suffix; any Task with non-empty `task_blocked_by` SHOULD carry a `(blocked on Task <NNN>)` suffix.
+4. **Index frontmatter freshness** — `tasks/readme.md`'s own `updated:` field MUST be bumped to today's ISO date on every such change (T1 mutation per `MAINTENANCE.md §1`).
+
+The maintenance and coherence-check agents enforce this rule on every run; per-session agents enforce it at commit time. A commit that touches `task.md` or creates/renames a `tasks/<NNN>-<slug>/` folder without a corresponding edit to `tasks/readme.md` MUST be rejected by the linter mapping in §7.0 row §7.11.
+
 ## 5. `task.md` Required Sections
 
 Every `task.md` MUST contain, in order:
@@ -242,6 +262,21 @@ Feature: Task pickup and linkage
     Then Task B MUST exist
     And Task B's frontmatter MUST contain A's task_id in "task_supersedes"
     And the linter MUST emit an ERROR if reciprocity is broken in either direction
+
+  Scenario: Tasks-index stays in sync with task_status changes
+    Given a Task's "task_status" is changed in "tasks/<NNN>-<slug>/task.md"
+    When the agent stages the commit
+    Then "tasks/readme.md" MUST be modified in the same commit
+    And the bullet for that Task MUST cite the new "task_status"
+    And "tasks/readme.md" frontmatter "updated" MUST be set to today's ISO date
+    And the linter (§7.11) MUST emit an ERROR if any of these conditions fails
+
+  Scenario: New Task folder appears in the index immediately
+    Given a new "tasks/<NNN>-<slug>/" folder is created
+    When the agent stages the commit that introduces it
+    Then "tasks/readme.md" MUST contain a bullet for the new folder in the same commit
+    And the linter MUST emit an ERROR if the index lacks a bullet for any tasks/<NNN>-<slug>/ on disk
+    And the linter MUST emit an ERROR if the index contains a bullet whose tasks/<NNN>-<slug>/ folder does not exist
 ```
 
 ## 7. Mandatory Pre-Commit Checks for Task Tasks
@@ -264,6 +299,7 @@ The legacy column lists the historical linter set; the flexible-toolchain column
 | §7.8 Friction Log | [`tools/lint-linkage.py`](./tools/lint-linkage.py) + [`tools/check-trust.py`](./tools/check-trust.py) | `tools/fm/query.py status=done,missing-file=friction-log.md` (Task 019) | `task_status` ∈ {`done`, `updated`, `abandoned`} without `friction-log.md` containing an FL[0-3] declaration |
 | §7.9 Blocker Satisfaction | — (new) | `tools/fm/validate.py --type-check` (Task 019) | `task_status: in_progress` while any `task_blocked_by` entry resolves to a Task whose `task_status` ≠ `done` |
 | §7.10 Supersession Reciprocity | — (new) | `tools/fm/validate.py --type-check` (Task 019) | `task_supersedes` / `task_superseded_by` are not reciprocal across the two referenced Task folders |
+| §7.11 Tasks-Index Freshness | — (new) | `tools/fm/query.py status,supersession --diff tasks/readme.md` (Task 019) | `tasks/readme.md` does not list every `tasks/<NNN>-<slug>/` folder, omits its current `task_status`, or fails to mark `updated`/`done`/`abandoned` rows with their supersession or closure pointer |
 
 Before committing a Task that is being closed, the agent MUST verify:
 
@@ -276,6 +312,11 @@ Before committing a Task that is being closed, the agent MUST verify:
 7. **Friction Log** — `friction-log.md` MUST exist for every closed task (`done`, `updated`, or `abandoned`) and MUST contain an `FL[0-3]` declaration, including for FL0 runs (FRUSTRATED.md). For `updated` closures the log MUST additionally carry a `## Supersession Rationale` paragraph (per §4.7). An inline declaration in the commit message is NOT a substitute.
 8. **Blocker Satisfaction** — Every `task_id` in `task_blocked_by` MUST resolve to an existing Task whose `task_status` is `done`. A successor referenced in `task_superseded_by` does NOT itself satisfy a blocker; the *original* blocker Task must be `done` (or itself superseded by a chain that terminates in `done`).
 9. **Supersession Reciprocity** — When `task_status: updated` is set, `task_superseded_by` MUST be non-empty AND every entry MUST resolve to an existing Task whose `task_supersedes` contains this Task's `task_id`.
+10. **Tasks-Index Freshness** — `tasks/readme.md` MUST be updated in the **same commit** as any change that creates, renames, or transitions a Task. The index MUST contain one bullet per `tasks/<NNN>-<slug>/` folder on disk, MUST cite each Task's current `task_status`, AND MUST annotate any non-terminal closure with its lineage pointer:
+   - `task_status: updated` → "→ superseded by [`<NNN>`](./NNN-<slug>/)" suffix.
+   - `task_status: done`/`abandoned` → no suffix required, but the bullet's status MUST match the `task.md` frontmatter.
+   - `task_status: blocked` → SHOULD note the blocker (`(blocked on Task NNN)`).
+   This is a **mechanical, mandatory** sync — see §4.8 for the operational rule and §6 for the Gherkin scenario.
 
 ## 8. Edge Cases & Open Questions
 

@@ -284,6 +284,46 @@ def lint_research(
     return errors
 
 
+def lint_tasks_index(tasks_root: Path) -> list[str]:
+    """Enforce TASK.md §4.8 / §7.11: tasks/readme.md MUST list every
+    tasks/<NNN>-<slug>/ folder on disk, and every bullet pointer MUST
+    resolve to an existing folder. The index is the human-readable surface
+    every agent consults before opening a Task body; a stale index is a
+    session-continuity failure.
+    """
+    errors: list[str] = []
+    index_path = tasks_root / "readme.md"
+    if not index_path.exists():
+        errors.append(f"{index_path}: missing tasks/readme.md (TASK.md §4.8)")
+        return errors
+
+    index_text = index_path.read_text(encoding="utf-8")
+
+    # Membership: every tasks/<NNN>-<slug>/ folder MUST appear in the index.
+    folder_re = re.compile(r"^[0-9]{3}-[a-z0-9-]+$")
+    on_disk = [
+        p.name for p in tasks_root.iterdir()
+        if p.is_dir() and folder_re.match(p.name)
+    ]
+    referenced_re = re.compile(r"\(\./([0-9]{3}-[a-z0-9-]+)/\)")
+    referenced = set(referenced_re.findall(index_text))
+
+    for folder in sorted(on_disk):
+        if folder not in referenced:
+            errors.append(
+                f"{index_path}: missing bullet for tasks/{folder}/ "
+                f"(TASK.md §4.8 / §7.11)"
+            )
+
+    for ref in sorted(referenced):
+        if ref not in on_disk:
+            errors.append(
+                f"{index_path}: bullet references tasks/{ref}/ which does "
+                f"not exist on disk (TASK.md §4.8 / §7.11)"
+            )
+    return errors
+
+
 def main(argv: list[str]) -> int:
     root = Path(".")
     tasks_root = root / "tasks"
@@ -296,6 +336,7 @@ def main(argv: list[str]) -> int:
         all_errors.extend(lint_tasks(tasks_root, prompts_root, research_root))
         all_errors.extend(lint_prompts(prompts_root, tasks_root, research_root))
         all_errors.extend(lint_research(research_root, prompts_root, tasks_root))
+        all_errors.extend(lint_tasks_index(tasks_root))
     else:
         missing = [
             str(d)
