@@ -28,7 +28,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run YYYY-MM-DD — <routine-type>
 - agent: <agent-identifier>
 - start_commit: <hash of HEAD when the run began>
-- end_commit: 4c5e7e4 <hash of HEAD after repairs are committed — fill in before final commit>
+- end_commit: 4c5e7e4 628439e
 - baseline_commit: <the end_commit from the previous run — what was used as the delta base>
 - files_in_delta: <count of files changed between baseline and start_commit>
 - files_scanned: <count of files the agent actually opened>
