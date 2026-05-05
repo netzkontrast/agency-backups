@@ -34,7 +34,7 @@ All work in this folder MUST conform to [`PROMPT.md`](../PROMPT.md). Frontmatter
 - [`flexible-frontmatter-toolchain/`](./flexible-frontmatter-toolchain/) — Research-proposal prompt that synthesises prior research + Anthropic's `skill-creator` into a flexible (required-only) maintenance contract plus a stateless toolchain spec. Drives `/research/flexible-frontmatter-toolchain/`.
 - [`build-flexible-frontmatter-toolchain/`](./build-flexible-frontmatter-toolchain/) — Task-spec prompt for Task 016 (build the four-tool CLI surface + header-ontology JSON).
 - [`migrate-repo-to-flexible-toolchain/`](./migrate-repo-to-flexible-toolchain/) — Task-spec prompt for Task 017 (three-batch migration; retires legacy linters; scope-narrows Task 010).
-- [`agency-adr-governance-spec/`](./agency-adr-governance-spec/) — Research-proposal prompt rendered by `research-prompt-optimizer v3.2.0` (Category B / RISEN+ReAct). Drives Task 027 — produces a normative ADR-governance spec covering ADR lifecycle, token-efficient rule synthesis, and tooling acceptance criteria.
+- [`governance-specs-update-research/`](./governance-specs-update-research/) — Research proposal to assess and create an update plan for governance specs after Task 001.
 
 ## Workflow Assumptions
 

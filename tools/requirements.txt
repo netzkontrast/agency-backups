@@ -1,0 +1,14 @@
+# tools/requirements.txt — runtime and test dependencies for /tools/
+#
+# PyYAML: used by tools/dramatica-nav/ for YAML block parsing in nav, validate,
+#         extract, and ontology-build scripts.
+#
+# jsonschema: used by tools/dramatica-nav/validate.py and ontology-build.py
+#             for Draft202012Validator (narrative-ontology schema enforcement).
+#             Required by tools/check-governance.sh [opt] narrative-ontology step.
+#
+# pytest: test runner for tools/dramatica-nav/tests/ suite.
+
+PyYAML>=6.0
+jsonschema>=4.18
+pytest>=7.0

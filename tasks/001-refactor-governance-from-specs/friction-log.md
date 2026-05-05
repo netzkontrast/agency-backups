@@ -45,3 +45,7 @@ The initial `lint-linkage.py` errored on `tasks/002-token-efficiency-tool-suite/
 ## Governance Note (FL1 → routed to prompt improvement, not governance block update)
 
 The FL1 issues above are prompt-level improvements (clearer waiver burn protocol, spec wording clarification). No FL2+ governance block update is required.
+
+## Supersession Rationale
+
+The original goal of encoding theoretical rules from Spec-A/B/C, G/H/I, and J/K/L into enforced repository linters was achieved. However, the subsequent coherence runs and new tooling updates (like the flexible frontmatter toolchain in Task 016) mean the documentation in `MAINTENANCE.md`, `PRE_COMMIT.md`, `FOLDERS.md`, and `TASK.md` needs to be brought into sync with these new systems. The remaining documentation syncing effort has been superseded by Task 026 (`026-update-governance-specs-from-research`), shifting the status to `updated`.
