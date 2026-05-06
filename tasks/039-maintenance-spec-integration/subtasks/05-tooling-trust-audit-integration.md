@@ -13,6 +13,8 @@ updated: 2026-05-06
 
 **Insertion point:** Not in `tools/check-governance.sh`; invoked by the nightly maintenance run.
 
+**Parallelism:** Phase A (parallel-grouped, hard-blocked) — runs alongside ST-1/ST-3/ST-4 but hard-depends on Task 035 ST-4 (GATE) which exports the DIAGNOSTIC_SCHEMA this AGGREGATOR imports. **C3 partition: AGGREGATOR only**; never duplicates per-workspace logic.
+
 ## Goal
 
 Ship `tools/maintenance/trust-audit.py` implementing the cross-research AGGREGATOR per the spec-panel C3 partition. Imports the per-workspace GATE module from Task 035 ST-4; iterates `/research/<slug>/` workspaces; rolls per-workspace findings into a single maintenance-run report for MAINTENANCE.md §3.2 friction-aggregation consumption. MUST NOT duplicate per-workspace logic.

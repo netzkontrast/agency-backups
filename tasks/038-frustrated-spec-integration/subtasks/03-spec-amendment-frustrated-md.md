@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase B (sequential) — depends on ST-1, ST-2. **Joint commit with Task 037 ST-4** — §28 wording in this subtask MUST be byte-identical to §2 wording in Task 037 ST-4.
+
 ## Goal
 
 Land the FRUSTRATED.md edits per Task 038 (a)-(d). §28 wording = PRE_COMMIT.md §2 wording (byte-identical modulo prefix). §FL.0 carries the ST-1-research-backed rationale. §FL.Log references the ST-2 linter as the enforcement mechanism. ≥4 Gherkin scenarios per FR.B.1-FR.B.4 anchors.

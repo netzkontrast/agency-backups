@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-2, ST-3, ST-4. No inter-dependencies. Sibling research subtask Task 038 ST-1 (FL0 justification) reads same corpus and may run in parallel for token-cost amortization.
+
 ## Goal
 
 Produce `research/friction-pattern-synthesis/output/SPEC.md` aggregating every `friction-log.md` in `/tasks/<NNN>-<slug>/` and `/research/<slug>/reflection/` into a structured synthesis: (a) FL distribution histogram, (b) recurring root-cause taxonomy (≥6 categories), (c) per-spec friction-attribution (which root spec generated which friction), (d) recommended TASK.md / FRUSTRATED.md amendments grounded in evidence.
@@ -89,7 +91,7 @@ None. Phase A.
 
 Large (~5 hours; corpus aggregation + thematic coding).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Run the research-prompt-optimizer pipeline (Phase 1–3) against the intent

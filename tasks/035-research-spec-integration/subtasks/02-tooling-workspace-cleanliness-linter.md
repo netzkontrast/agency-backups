@@ -13,6 +13,8 @@ updated: 2026-05-06
 
 **Insertion point:** `[opt]` WARN-tier — runs over changed `/research/<slug>/workspace/` paths only.
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-1, ST-3, ST-4. No inter-dependencies.
+
 ## Goal
 
 Ship `tools/check-workspace-cleanliness.py` that scans staged `/research/<slug>/workspace/` paths for execution-script stragglers (`.py`, `.sh`, `.log`) and emits a WARN diagnostic. Closes the R.4.4 enforcement gap (currently human-review only).

@@ -13,6 +13,8 @@ updated: 2026-05-06
 
 **Insertion point:** `[2/5]` directory-structure linter extension.
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-1, ST-3. No inter-dependencies.
+
 ## Goal
 
 Ship `tools/check-clean-working-directory.py` that scans staged paths for `.py`/`.sh` scratchpads outside designated tool/test directories. Closes PC.1.1 (currently relies on agent discipline). Exempts `/decisions/`, `/tools/`, `/tests/`, `/skills/<slug>/scripts/`, `/maintenance/scripts/` per the §8 FOLDERS.md exemption pattern.

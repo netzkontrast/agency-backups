@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-2, ST-3. **Cross-Task: this subtask's output also feeds Task 038 ST-3 (FRUSTRATED.md §28 reconciliation); both Task 037 ST-4 and Task 038 ST-3 consume the same SPEC.**
+
 ## Goal
 
 Produce `research/pre-commit-readme-update-cadence/output/SPEC.md` that resolves the contradiction surfaced by the spec audit. Output: (a) a single normative rule on when readme.md is updated (immediate / batched-at-pre-commit / hybrid), (b) token-cost data backing the choice, (c) verbatim before/after wording for FRUSTRATED.md §28 and PRE_COMMIT.md §2.
@@ -91,7 +93,7 @@ None. Phase A.
 
 Medium (~3 hours).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Run research-prompt-optimizer Phase 1–3. Repo root: /home/user/agency.

@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase B (sequential) — depends on ST-1, ST-2, ST-3, ST-4. MUST wait for all four to land.
+
 ## Goal
 
 Land the RESEARCH.md edits per Task 035 (a)-(g): §2.2 spec-chunking rule, §4 session-continuity reference, §5.7 trust-audit clause, R.4.3 prompt-snapshot mid-run disambiguation, ≥6 Gherkin scenarios per R.B.1-R.B.6 anchors, references to ST-2/ST-3/ST-4 linters.

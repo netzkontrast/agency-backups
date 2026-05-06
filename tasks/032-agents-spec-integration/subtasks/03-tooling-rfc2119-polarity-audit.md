@@ -12,6 +12,8 @@ updated: 2026-05-06
 **Executor:** main-agent
 **Insertion point:** `[opt]` WARN-tier — runs after step `[5/5]` ADR validator; gates only on `--strict` invocation.
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-1, ST-2, ST-4. No inter-dependencies.
+
 ## Goal
 
 Ship `tools/check-rfc2119-polarity.py` that scans every root spec, every `research/<slug>/output/SPEC.md`, **AND every `decisions/<NNNN>-<slug>.md`** for adjacent `MUST` / `MUST NOT` clauses on the same subject, reporting candidates for human review. Mitigates the polarity-inversion blind spot identified in `research/adr-assumption-audit/output/REPORT.md §1 ASM-001`.
@@ -44,7 +46,7 @@ None. Phase A.
 
 Medium (~150 LOC + 100 LOC tests; subject-extraction heuristic is the bulk).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Implement tools/check-rfc2119-polarity.py.

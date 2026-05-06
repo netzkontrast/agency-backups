@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase B (sequential) — depends on ST-1, ST-2, ST-3. **Joint commit with Task 038 ST-3** — §2 wording in this subtask MUST be byte-identical to §28 wording in Task 038 ST-3.
+
 ## Goal
 
 Land the PRE_COMMIT.md edits per Task 037 (a)-(e). Reconciled §2 wording matches Task 038 ST-3's §28 wording byte-for-byte (modulo spec-name prefix). §7.A becomes a three-column tool-mapping table (Legacy / Flexible / ADR §7.C). New linters from ST-2 + ST-3 documented. ≥4 Gherkin scenarios per PC.B.1-PC.B.4 anchors.

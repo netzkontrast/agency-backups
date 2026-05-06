@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase B (sequential) — depends on ST-1 (research SPEC) + ST-2/ST-3/ST-4 (linter implementations). MUST wait for all four to land.
+
 ## Goal
 
 Apply the concrete AGENTS.md edits that close out Task 032 — outside the `<!-- BEGIN/END AGENCY-ADR SYNTHESIS -->` markers — referencing the ST-1 research SPEC, the ST-2/3/4 linters, and the four under-cited research outputs (adr-assumption-audit ASM-001/004/005/009, skills-skill-container-capabilities U1-U2, gemini agency-adr-governance-spec, ncp-novel-co-authoring-spec).

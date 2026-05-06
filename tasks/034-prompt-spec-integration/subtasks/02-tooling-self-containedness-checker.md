@@ -12,6 +12,8 @@ updated: 2026-05-06
 **Executor:** main-agent
 **Insertion point:** `[opt]` WARN-tier — runs only on changed `/prompts/<slug>/prompt.md` files.
 
+**Parallelism:** Phase A (parallel-grouped, soft-blocked) — runs alongside ST-3 but soft-depends on ST-1 SPEC §3 heuristic recipe. Phase A may proceed with stub heuristic + upgrade post-ST-1.
+
 ## Goal
 
 Ship `tools/check-prompt-self-containedness.py` that scans `/prompts/<slug>/prompt.md` files and detects self-containedness violations: external context references that the executor cannot resolve. Per the FPR taxonomy from Task 034 ST-1, focus on the highest-leverage signals (e.g., references to "this conversation", "the user mentioned", "as discussed", "see above").
@@ -42,7 +44,7 @@ ST-1 (research) MUST land first.
 
 Medium (~120 LOC + 100 LOC tests).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Implement tools/check-prompt-self-containedness.py per ST-1 SPEC §3.

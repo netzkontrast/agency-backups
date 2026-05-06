@@ -9,6 +9,10 @@ updated: 2026-05-06
 
 # ST-2: Research — Staleness Decision Formalization (cross-link)
 
+**Executor:** main-agent
+
+**Parallelism:** Phase A (parallel) — **Cross-Task shared with Task 033 ST-2** — see that file for the canonical briefing; this is a cross-link stub. Whichever Task dispatches first authors the SPEC; the second consumes via filesystem detection (`test -f`).
+
 This subtask is the **same research run** as Task 033 ST-2. The full briefing, intent block, and agent prompt live there:
 
 → [`/tasks/033-task-spec-integration/subtasks/02-research-spec-staleness-decision-formalization.md`](../../033-task-spec-integration/subtasks/02-research-spec-staleness-decision-formalization.md)

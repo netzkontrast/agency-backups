@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase B (sequential) — depends on ST-1, ST-2, ST-3, ST-4, ST-5. MUST wait for all five Phase A subtasks to land.
+
 ## Goal
 
 Land the MAINTENANCE.md edits per Task 039 (a)-(f). §1.1.2 becomes a three-way Legacy/Flexible/ADR toolchain table with explicit flip criteria from ST-1. §2.3 mandates the trust-audit gate. §3.2 mandates dynamic-readme partition (cites ST-4). §3.4 has the deterministic algorithm (cites ST-2/ST-3). §3.5 resolves the dup-id circular dependency (cites Task 033 ST-3). §1 documents ADR T4-immutability per FOLDERS.md:115. ≥7 Gherkin scenarios per M.B.1-M.B.7 anchors.

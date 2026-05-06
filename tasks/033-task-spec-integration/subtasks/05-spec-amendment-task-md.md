@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase B (sequential) — depends on ST-1, ST-2, ST-3 (and soft-depends on ST-4). MUST wait for Phase A converge.
+
 ## Goal
 
 Land the TASK.md edits per Task 033 (a)-(f): close T.8.1 enforcement gap (cross-link to ST-3 linter), refine §4.7 boundary using ST-2 algorithm, add §6 supersession-blocker scenario, cross-link §3.3 to flexible-frontmatter-toolchain SPEC, add `skill_*` + `adr_*` L2 subsections.

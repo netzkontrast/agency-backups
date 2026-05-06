@@ -12,6 +12,8 @@ updated: 2026-05-06
 **Executor:** main-agent
 **Insertion point:** `[opt]` WARN-tier — runs alongside the existing narrative-ontology validator block (does not gate).
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-1, ST-3, ST-4. No inter-dependencies.
+
 ## Goal
 
 Ship `tools/check-narrative-ontology-load.py` that scans a recent session's tool-call log and emits a WARN when the 215-entry `maintenance/schemas/narrative-ontology/ontology.json` was loaded by an agent whose Task did not declare `task_affects_paths` referencing dramatica/ncp/skills folders. Closes the AGENTS.md NO.5 (§251) enforcement gap.
@@ -43,7 +45,7 @@ None. Phase A.
 
 Small (~80 LOC + 60 LOC tests).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Implement tools/check-narrative-ontology-load.py for the netzkontrast/agency

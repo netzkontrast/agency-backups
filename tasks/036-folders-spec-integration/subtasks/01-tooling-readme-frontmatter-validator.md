@@ -13,6 +13,8 @@ updated: 2026-05-06
 
 **Insertion point:** `[2/5]` directory-structure linter — extends `tools/lint-structure.py`.
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-2. No inter-dependencies.
+
 ## Goal
 
 Ship `tools/check-readme-frontmatter.py` that scans every operational-folder `readme.md` and verifies L1 Vault Core frontmatter is present (type, status, slug, summary, created, updated). Promotes F.5 from SHOULD to mechanically-enforced MUST in the post-Task-035 amendment.

@@ -13,6 +13,8 @@ updated: 2026-05-06
 
 **Insertion point:** Not in `tools/check-governance.sh`; invoked by the nightly maintenance run only.
 
+**Parallelism:** Phase A (parallel-grouped, soft-blocked) — runs alongside ST-1/ST-4/ST-5 but soft-depends on ST-2 SPEC. May ship with stub algorithm + upgrade post-ST-2.
+
 ## Goal
 
 Ship `tools/maintenance/staleness-audit.py` that, given the active task corpus, assigns each open task to one of {still-accurate, drifted, completed-by-drift, no-longer-desirable} per the deterministic algorithm in ST-2's SPEC. Configurable via `MAINT_STALE_DAYS` (default 7).

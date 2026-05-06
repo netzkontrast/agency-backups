@@ -12,6 +12,8 @@ updated: 2026-05-06
 **Executor:** main-agent
 **Insertion point:** `[1/5]` frontmatter linter — extends `tools/fm/validate.py --type-check`. Default OFF in legacy mode; ERROR-tier when `FM_TOOLCHAIN=1`.
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-1, ST-2, ST-4. No inter-dependencies.
+
 ## Goal
 
 Ship `tools/fm/check-duplicate-task-id.py` that scans `tasks/<NNN>-<slug>/task.md` files, extracts `task_id` from each frontmatter, and exits 1 if any value appears more than once across active (non-`updated`, non-`abandoned`) tasks. Closes the gap acknowledged in TASK.md §8.1 (lines 321–336).
@@ -46,7 +48,7 @@ None. Phase A. NOTE: this linter is *expected to fail* on the current repo (006/
 
 Small (~100 LOC + 80 LOC tests).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Implement tools/fm/check-duplicate-task-id.py.

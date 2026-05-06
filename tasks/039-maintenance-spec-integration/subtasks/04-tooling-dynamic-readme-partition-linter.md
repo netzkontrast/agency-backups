@@ -13,6 +13,8 @@ updated: 2026-05-06
 
 **Insertion point:** `[opt]` WARN-tier — runs over operational-folder readmes only; advisory.
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-1, ST-2, ST-3, ST-5. No inter-dependencies.
+
 ## Goal
 
 Ship `tools/maintenance/dynamic-readme-partition.py` that scans operational-folder `readme.md` files and verifies the static/dynamic section partition: static sections (Purpose, Navigation, Assumptions Log) live above the `<!-- BEGIN DYNAMIC -->` marker; dynamic sections (Current State, Recent Activity, Open Blockers) live below. Closes the orphaning of `repo-maintenance-protocol-spec/output/SPEC.md §3.1`.

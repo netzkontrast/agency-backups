@@ -13,6 +13,8 @@ updated: 2026-05-06
 
 **Insertion point:** `[opt]` WARN-tier — advisory only, since FOLDERS.md §6 explicitly encourages body links for human navigation.
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-1. No inter-dependencies.
+
 ## Goal
 
 Ship `tools/check-audit-graph-consistency.py` that, for every body-level Markdown link in operational-folder `task.md` / `prompt.md` / `readme.md` referencing a sibling folder (`tasks/<NNN>-<slug>/`, `prompts/<slug>/`, `research/<slug>/`), verifies a corresponding frontmatter linkage exists (`task_uses_prompts`, `task_spawns_research`, `prompt_relates_to_task`, `prompt_spawned_from_research`, `research_executes_prompt`).

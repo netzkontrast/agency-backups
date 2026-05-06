@@ -12,6 +12,8 @@ updated: 2026-05-06
 **Executor:** main-agent
 **Insertion point:** `[opt]` WARN-tier — invoked over operational `readme.md` files only; never gating.
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-1, ST-2, ST-3. No inter-dependencies.
+
 ## Goal
 
 Ship `tools/check-assumption-log.py` that scans every operational-folder `readme.md` for an `## Assumptions Log` section and validates: (a) section exists when the parent task involved a non-trivial decision, (b) entries are not stale (currency check via `updated:` frontmatter), (c) entries are non-empty (substance check).
@@ -46,7 +48,7 @@ Reuses `tools/fm/extract.py` — gracefully degrade to grep if not available.
 
 Small (~80 LOC + 60 LOC tests).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Implement tools/check-assumption-log.py.

@@ -13,6 +13,8 @@ updated: 2026-05-06
 
 **Insertion point:** `[trust]` step — extends `tools/check-trust.py` rather than introducing a parallel pipeline.
 
+**Parallelism:** Phase A (parallel-grouped, soft-blocked) — runs alongside ST-1 but soft-depends on ST-1 SPEC §2 (variant-form set). Phase A may ship with strict canonical form + upgrade post-ST-1.
+
 ## Goal
 
 Ship `tools/check-fl-declaration.py` that parses `friction-log.md` (research) and PR-description `## Frustration Log` sections (standard), validates the presence of a canonical `Highest Frustration Level: FL[0-3]` line, and rejects task closure when the declaration is missing or malformed. Closes the FRUSTRATED.md enforcement gap.

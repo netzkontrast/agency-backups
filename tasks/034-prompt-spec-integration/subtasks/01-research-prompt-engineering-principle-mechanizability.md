@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-2, ST-3. No inter-dependencies.
+
 ## Goal
 
 Produce `research/prompt-engineering-principle-mechanizability/output/SPEC.md` containing a per-principle assessment for PROMPT.md §5.1 (self-containedness), §5.2 (framework declaration), §5.3 (RFC 2119), §5.4 (deliverable lock), §5.5 (anti-ambiguity), §5.6 (constraint isolation), §5.7 (failure handling). For each: (a) is it mechanically expressible? (b) what tool/heuristic? (c) false-positive rate against existing `/prompts/<slug>/prompt.md` corpus, (d) recommended ERROR vs WARN vs human-only verdict.
@@ -87,7 +89,7 @@ None. Phase A.
 
 Medium (~3 hours; corpus-scan + statistical FPR calc).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Run research-prompt-optimizer Phase 1–3 against the intent. Repo root:

@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase B (sequential) — depends on ST-1, ST-2. MUST wait for Phase A converge.
+
 ## Goal
 
 Land the FOLDERS.md edits per Task 036 (a)-(d): F.1.1 explicit provider-research + `/decisions/` exemption clause, F.5 promotion to MUST (cross-references ST-1), F.6 dual-surface guidance (cross-references ST-2), ≥5 Gherkin scenarios per F.B.1-F.B.5 anchors.

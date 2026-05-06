@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-2, ST-3, ST-4. No inter-dependencies.
+
 ## Goal
 
 Produce `research/adr-corpus-extraction-from-governance-specs/output/SPEC.md` containing 15–30 implicit ADRs already in force across `AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `PRE_COMMIT.md`, `FRUSTRATED.md`, `MAINTENANCE.md`, formatted in the MADR shape mandated by `research/adr-spec-research-synthesis/output/SPEC.md`. Each implicit ADR includes (a) extracted decision, (b) source clause + line number, (c) supersession history if any, (d) rationale, (e) consequences, (f) recommended ADR ID.
@@ -95,7 +97,7 @@ None. Phase A.
 
 Medium (~3 hours focused research; 8-spec scan).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 You are running Phase 1–3 of the research-prompt-optimizer pipeline against the

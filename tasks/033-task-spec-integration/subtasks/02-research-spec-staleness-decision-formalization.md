@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-1, ST-3, ST-4. **Cross-Task shared with Task 039 ST-2** — whichever Task dispatches first authors the SPEC; the other consumes via filesystem detection (test -f).
+
 ## Goal
 
 Produce `research/spec-staleness-decision-formalization/output/SPEC.md` containing a decision tree that converts observable git-history + repo-state signals into one of four staleness buckets without subjective judgment, plus the `MAINT_STALE_DAYS` declaration mechanism.
@@ -90,7 +92,7 @@ None. Phase A. NOTE: Task 039 ST-2 is the *same* research subtask (cross-Task sh
 
 Medium (~3 hours).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Run research-prompt-optimizer Phase 1–3 against the intent above. Repo root:

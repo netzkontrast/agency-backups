@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase B (sequential) — depends on ST-1, ST-2, ST-3. MUST wait for Phase A converge.
+
 ## Goal
 
 Land the PROMPT.md edits closing Task 034: ≥6 Gherkin scenarios per P.B.1-P.B.6 anchors (one per principle), §4.3 framework-selection decision tree, §6.5 provider-folder backward-link clarification, references to ST-2/ST-3 linters.

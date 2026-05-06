@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** maintenance-agent
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-2, ST-3, ST-4, ST-5. No inter-dependencies.
+
 ## Goal
 
 Produce `research/toolchain-flip-criteria/output/SPEC.md` containing the deterministic flip criteria + post-flip cleanup checklist for the MAINTENANCE.md §1.1.2 dual-toolchain transition. Includes: (a) quantifiable criteria (zero outstanding waivers, X% test coverage, all required Tasks done), (b) flip-day procedure (atomic commit shape), (c) post-flip cleanup (which legacy linters retire, which warning-mode rules graduate to ERROR), (d) rollback plan if the flip breaks production.
@@ -91,7 +93,7 @@ None. Phase A. Sibling subtask ST-2 (staleness formalization) runs in parallel.
 
 Medium (~3 hours).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Run research-prompt-optimizer Phase 1–3. Repo root: /home/user/agency.

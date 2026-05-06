@@ -13,6 +13,8 @@ updated: 2026-05-06
 
 **Insertion point:** `[1/5]` frontmatter linter extension — runs as part of `tools/fm/validate.py --type-check` when external-research files are staged.
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-1, ST-2, ST-4. No inter-dependencies.
+
 ## Goal
 
 Ship `tools/check-external-result-downstream-task.py` that, for every staged `/research/<provider>/<slug>/result.md`, verifies a corresponding `/tasks/<NNN>-<slug-or-related>/task.md` exists and references the result. Closes R.6.5 (currently human-review only).

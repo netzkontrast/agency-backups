@@ -13,6 +13,8 @@ updated: 2026-05-06
 
 **Insertion point:** `[opt]` WARN-tier — runs only on changed `/prompts/<slug>/prompt.md` files.
 
+**Parallelism:** Phase A (parallel-grouped, soft-blocked) — runs alongside ST-2; soft-depends on ST-1 SPEC §3 framework-list extension.
+
 ## Goal
 
 Ship `tools/check-prompt-framework-declaration.py` that scans `/prompts/<slug>/prompt.md` and verifies (a) frontmatter `prompt_framework` is set to a canonical value (`RISEN`, `RISE-DX`, `ReAct`, `RISEN+ReAct`, `CoT`, or the post-ST-1-decision-tree-extended set), (b) a `## Framework` section in the body exists and matches the frontmatter value, (c) the body declares why this framework fits.

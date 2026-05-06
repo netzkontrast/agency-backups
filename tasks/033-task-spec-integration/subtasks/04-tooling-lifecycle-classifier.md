@@ -12,6 +12,8 @@ updated: 2026-05-06
 **Executor:** main-agent
 **Insertion point:** (none) — manual helper invoked by maintenance agents only; not part of `tools/check-governance.sh`.
 
+**Parallelism:** Phase A (parallel-grouped, soft-blocked) — sibling of ST-1/ST-2/ST-3 but blocked on ST-2 SPEC output. Runs after ST-2 (or Task 039 ST-2) lands.
+
 ## Goal
 
 Ship `tools/fm/check-task-lifecycle-classification.py` that, given a Task path and a proposed `task_status` transition, evaluates the four conditions in TASK.md §4.7 (Goal still desirable / Plan-Todo drifted / successor exists / supersession reciprocity) and outputs PASS or FAIL with the missing condition(s). Built atop the algorithm SPEC produced by Task 033 ST-2.
@@ -41,7 +43,7 @@ ST-2 (research) MUST land first. Phase B-within-A: blocked on ST-2 output.
 
 Small (~80 LOC + 80 LOC tests; the algorithm work is ST-2's job).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Implement tools/fm/check-task-lifecycle-classification.py.

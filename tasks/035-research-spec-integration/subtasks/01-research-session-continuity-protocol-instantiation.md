@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-2, ST-3, ST-4. No inter-dependencies.
+
 ## Goal
 
 Produce `research/session-continuity-protocol-instantiation/output/SPEC.md` containing a concrete, file-format-spec'd instantiation of the abstract Spec-I from `agentic-session-continuity-spec/output/SPEC.md`. Output: (a) `state.md` schema (frontmatter + sections), (b) checkpoint emission cadence (every N synthesis steps), (c) epistemic-delta encoding format, (d) restore procedure for a fresh-context successor agent, (e) integration points with RESEARCH.md §4.
@@ -92,7 +94,7 @@ None. Phase A.
 
 Large (~5 hours; protocol design + worked example + token measurement).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Run research-prompt-optimizer Phase 1–3. Repo root: /home/user/agency.

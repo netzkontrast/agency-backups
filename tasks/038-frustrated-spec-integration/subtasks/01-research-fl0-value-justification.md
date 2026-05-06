@@ -11,6 +11,8 @@ updated: 2026-05-06
 
 **Executor:** main-agent
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-2. No inter-dependencies.
+
 ## Goal
 
 Produce `research/fl0-value-justification/output/SPEC.md` answering the question "what does an FL0 entry contribute upstream that an absent log does not". Inputs: every closed-task friction log. Outputs: (a) FL0-frequency stats, (b) qualitative analysis of FL0 entry content, (c) the upstream consumers that depend on FL0 presence (e.g., MAINTENANCE.md §3.2 friction aggregation), (d) verbatim §FL.0 rationale paragraph for FRUSTRATED.md.
@@ -89,7 +91,7 @@ None. Phase A. NOTE: Task 033 ST-1 (friction-pattern-synthesis) is a sibling —
 
 Medium (~2.5 hours).
 
-## Execution Brief (for the main agent — do NOT dispatch via /sc:agent)
+## Execution Brief
 
 ```text
 Run research-prompt-optimizer Phase 1–3. Repo root: /home/user/agency.

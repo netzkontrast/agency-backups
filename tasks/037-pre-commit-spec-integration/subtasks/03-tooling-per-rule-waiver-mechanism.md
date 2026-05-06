@@ -13,6 +13,8 @@ updated: 2026-05-06
 
 **Insertion point:** `[1/5]` frontmatter linter — modifies the existing waiver-loading pathway in `tools/fm/validate.py`.
 
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-1, ST-2. No inter-dependencies.
+
 ## Goal
 
 Refactor `tools/.frontmatter-waivers` from per-file scope to per-rule scope. Each waiver row now carries (path-glob, rule-id, rationale, expires) where rule-id is a diagnostic code (e.g., `L1.summary-too-long`, `ADR.A.3.5`, `R.4.4`). Closes the spec-acknowledged weakness in PC.7.B.
