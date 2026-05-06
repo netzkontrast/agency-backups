@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISE-DX
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: refactor-governance-from-specs
-prompt_spawned_from_research: ""
 ---
 
 # Refactor Governance from Specs — Task-Spec Prompt (Skeleton)

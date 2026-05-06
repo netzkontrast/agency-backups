@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: agency-adr-governance-spec-brief
 summary: "Stub brief for the externally executed Gemini research run. The originating user request was to research ADR governance for netzkontrast/agency with a lifecycle, token-efficient synthesis, and tooling acceptance criteria focus."

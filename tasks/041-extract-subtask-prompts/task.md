@@ -6,10 +6,11 @@ summary: "Close the audit-graph debt surfaced by PR #70 review C.3 — extract t
 created: 2026-05-06
 updated: 2026-05-06
 task_id: "041"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P1
-task_uses_prompts: []
+task_uses_prompts:
+  - extract-subtask-prompts
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by: []
@@ -81,11 +82,11 @@ Scenario: Parent task lists every child subtask's prompt
 
 ## Todo
 
-- [ ] 1. Phase 1 — author `slug-manifest.md` (35 source rows → ~28–35 target slugs).
-- [ ] 2. Phase 2 — bulk-scaffold the target prompt folders + populate prompt.md / brief.md from migrated content.
-- [ ] 3. Phase 3 — append slugs to parent `task_uses_prompts`; replace subtask Execution Brief blocks with one-line prompt cross-references.
-- [ ] 4. Phase 4 — `tools/check-governance.sh` exits 0 with reciprocity verified.
-- [ ] 5. Phase 5 — update `tasks/readme.md` + `prompts/readme.md`; author `friction-log.md`; set `task_status: done`.
+- [x] 1. Phase 1 — `slug-manifest.md` authored: 35 source rows → 35 target slugs (consolidation rejected; rationale in `slug-manifest.md` §Decision).
+- [x] 2. Phase 2 — `/prompts/<slug>/{brief.md,prompt.md,readme.md}` scaffold authored for all 35 slugs; content migrated from each parent subtask's Goal / Falsification / Inputs / Acceptance / Dependencies / Estimated Effort / Execution Brief sections. Driver: `scripts/extract.py`.
+- [x] 3. Phase 3 — `task_uses_prompts` populated on Tasks 032–039 (5/5/4/5/3/4/3/6 entries respectively); each subtask file collapsed to a thin pointer carrying only L1 frontmatter, H1, Executor / Parallelism / Insertion-point lines, and a one-line `**Prompt:**` cross-reference.
+- [x] 4. Phase 4 — `tools/check-governance.sh --no-trust` exits 0; `tools/fm/validate.py --type-check` reports `Checked 370 files; 0 diagnostic(s)`; reciprocity verified across `task_uses_prompts ↔ prompt_relates_to_task` for all 8 parent tasks × 35 child prompts.
+- [x] 5. Phase 5 — `tasks/readme.md` updated (Task 041 status flipped to `done`); `prompts/readme.md` lists the 35 new entries grouped by parent task; `friction-log.md` authored with FL[1] declaration; `task_status: done`.
 
 ## Falsification
 

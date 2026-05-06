@@ -9,7 +9,12 @@ task_id: "033"
 task_status: open
 task_owner: "unassigned"
 task_priority: P1
-task_uses_prompts: []
+task_uses_prompts:
+  - research-friction-pattern-synthesis
+  - research-spec-staleness-decision-formalization
+  - tooling-duplicate-task-id-linter
+  - tooling-lifecycle-classifier
+  - spec-amendment-task-md
 task_spawns_research: []
 task_spawns_prompts: []
 task_affects_paths:

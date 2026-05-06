@@ -10,38 +10,8 @@ updated: 2026-05-06
 # ST-4: `check-trust-audit` — Per-Workspace GATE (C3 Partition)
 
 **Executor:** main-agent
-
 **Insertion point:** `[opt]` WARN-tier; promoted to ERROR-tier when target workspace is transitioning to `research_phase: complete`.
 
 **Parallelism:** Phase A (parallel) — runs concurrently with ST-1, ST-2, ST-3. No inter-dependencies. **C3 partition: GATE only**; Task 039 ST-5 (AGGREGATOR) imports this module's diagnostic schema and MUST be authored after ST-4 here.
 
-## Goal
-
-Ship `tools/check-trust-audit.py` implementing the per-workspace trust-audit gate from `research/agentic-eval-trust-improvement-spec/output/SPEC.md`. Three thresholds: schema-conformance ≥80%, behavioral ≥90%, governance ≥95%. Owns the diagnostic-format contract that Task 039 ST-5 (AGGREGATOR) imports.
-
-## Falsification
-
-Wrong cut **iff** ST-4 includes cross-workspace logic — that belongs in Task 039 ST-5 per the spec-panel C3 partition. Mitigation: ST-4's CLI accepts exactly one workspace argument; rejects multi-workspace invocations.
-
-## Inputs
-
-- `research/agentic-eval-trust-improvement-spec/output/SPEC.md` (three-tier rubric).
-- `tools/adr/runlog.py` (diagnostic format prior art — `<relpath>::<TIER>:<code>:<message>`).
-- `tools/fm/extract.py` (workspace artefact iteration).
-
-## Acceptance Criteria
-
-1. **Surface.** `python3 tools/check-trust-audit.py <workspace-path>` exits 0 / 1.
-2. **Thresholds.** Three checks per the SPEC; per-check diagnostic on miss.
-3. **Diagnostic format.** `<relpath>::ERROR:TRUST.<code>:<message>` (TRUST namespace; matches the `ADR.A.*` shape so MAINTENANCE.md aggregation can ingest both via one parser).
-4. **Tests.** `tests/test_trust_audit.py` covers: passing workspace, schema-fail, behavioral-fail, governance-fail.
-5. **Schema export.** Module exports a `DIAGNOSTIC_SCHEMA` constant Task 039 ST-5 imports.
-6. **Single-workspace constraint.** Multi-workspace invocations exit 1 with diagnostic `TRUST.PARTITION:single-workspace-only`.
-
-## Dependencies
-
-None. Phase A. Task 039 ST-5 (AGGREGATOR) MUST be authored after ST-4 to import this module's schema.
-
-## Estimated Effort
-
-Medium (~150 LOC + 120 LOC tests).
+**Prompt:** [`/prompts/tooling-trust-audit-gate/prompt.md`](../../../prompts/tooling-trust-audit-gate/prompt.md) — the executable instruction set for this subtask. The Goal, Falsification, Inputs, Acceptance Criteria, Dependencies, and Estimated Effort sections that previously lived inline have moved to that prompt's [`brief.md`](../../../prompts/tooling-trust-audit-gate/brief.md) per Task 041 (PR #70 review C.3 audit-graph repair).

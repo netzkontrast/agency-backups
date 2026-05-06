@@ -9,7 +9,6 @@ prompt_kind: research-proposal
 prompt_framework: RISEN
 prompt_target_agent: external
 prompt_relates_to_task: analyze-skillmd-novel-authoring
-prompt_spawned_from_research: ""
 ---
 
 # GitHub SKILL.md Novel-Authoring Repositories (DE/EN) — Stub Prompt

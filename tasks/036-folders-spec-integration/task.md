@@ -9,7 +9,10 @@ task_id: "036"
 task_status: open
 task_owner: "unassigned"
 task_priority: P3
-task_uses_prompts: []
+task_uses_prompts:
+  - tooling-readme-frontmatter-validator
+  - tooling-audit-graph-consistency-checker
+  - spec-amendment-folders-md
 task_spawns_research: []
 task_spawns_prompts: []
 task_affects_paths:

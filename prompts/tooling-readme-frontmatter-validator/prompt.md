@@ -1,0 +1,59 @@
+---
+type: prompt
+status: active
+slug: tooling-readme-frontmatter-validator
+summary: "Ship `tools/check-readme-frontmatter.py` that scans every operational-folder `readme.md` and verifies L1 Vault Core frontmatter is present (type, status, slug, summary, created, updated). Promotes F.5 from SHOULD to mechanically-enforced..."
+created: 2026-05-06
+updated: 2026-05-06
+prompt_kind: task-spec
+prompt_framework: RISEN+ReAct
+prompt_target_agent: "Claude Code"
+prompt_relates_to_task: folders-spec-integration
+---
+
+# ST-1: `check-readme-frontmatter` — F.5 SHOULD → MUST — Task-Spec Prompt
+
+## Framework
+
+RISEN+ReAct. The prompt declares the framework in frontmatter (`prompt_framework: RISEN+ReAct`) and restates it here for `fm-validate` header conformance. The R/I/S/E sections below carry the canonical roles; a final **Constraints** section groups normative scope/failure rules per repo convention.
+
+## R — Role
+
+You are the **main-agent** dispatched to execute subtask ST-1 of [Task folders-spec-integration](../../tasks/036-folders-spec-integration/task.md). Your remit is bounded by the Acceptance Criteria in [`brief.md`](./brief.md); you MUST NOT expand scope beyond those criteria without surfacing the divergence in `friction-log.md`.
+
+**Parallelism:** Phase A (parallel) — runs concurrently with ST-2. No inter-dependencies..
+
+## I — Input
+
+- `FOLDERS.md` F.5 (rule statement).
+- `maintenance/schemas/header-ontology.json` (type-aware required-key matrix).
+- `tools/fm/_core.py`, `tools/fm/validate.py`.
+- `tasks/036-folders-spec-integration/task.md` — parent task chain-level context.
+
+## S — Steps
+
+1. The agent MUST produce the artefact required by acceptance criterion: **Surface.** `python3 tools/check-readme-frontmatter.py [<paths>]`.
+2. The agent MUST produce the artefact required by acceptance criterion: **Checks.** L1 Vault Core key presence + slug-vs-folder agreement.
+3. The agent MUST produce the artefact required by acceptance criterion: **Tests.** `tests/test_readme_frontmatter.py` covers: clean, missing-key, slug-mismatch, exempt provider folder.
+4. The agent MUST produce the artefact required by acceptance criterion: **Integration.** ERROR-tier in step `[2/5]` of `tools/check-governance.sh`.
+5. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+6. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+7. The agent SHOULD author or update `tasks/036-folders-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+8. The agent MUST commit with a message that names `Task 036 ST-1` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
+
+## E — Expectations
+
+- **Surface.** `python3 tools/check-readme-frontmatter.py [<paths>]`.
+- **Checks.** L1 Vault Core key presence + slug-vs-folder agreement.
+- **Tests.** `tests/test_readme_frontmatter.py` covers: clean, missing-key, slug-mismatch, exempt provider folder.
+- **Integration.** ERROR-tier in step `[2/5]` of `tools/check-governance.sh`.
+- `tools/check-governance.sh` exits 0 on the produced commit.
+- Commit message follows the parent task's convention; the commit cites `Task 036 ST-1` in its trailer.
+
+## Constraints
+
+- Dependency: None. Phase A.
+- MUST NOT trigger the subtask's Falsification clause: Wrong cut **iff** legitimate readmes (e.g. provider-folder `readme.md` under `/research/<provider>/`) need different frontmatter shape. Mitigation: the linter honours the `types.index` and `types.readme` patterns from `header-ontology.json` and falls back to L1 only.
+- MUST NOT inline this prompt's Goal/Inputs/Acceptance back into the subtask file — the subtask body is now a thin pointer per Task 041.
+- MUST run `tools/check-governance.sh` before pushing; a non-zero exit MUST block the push.
+- SHOULD cite the parent task's `task_id` in any commit-message trailer for traceability.

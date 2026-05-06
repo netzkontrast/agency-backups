@@ -9,7 +9,6 @@ prompt_kind: research-proposal
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: "token-efficiency-tool-suite"
-prompt_spawned_from_research: ""
 ---
 
 # Token Efficiency Tool Suite — Research Proposal

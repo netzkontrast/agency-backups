@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: skills-frontmatter-schema-files
-prompt_spawned_from_research: ""
 ---
 
 # Author Schema Files for Frontmatter & Headers
