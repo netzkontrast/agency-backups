@@ -45,6 +45,7 @@ python3 tools/fm/validate.py               # L1+L2 keys, type/path agreement, re
 python3 tools/fm/validate.py --check-body  # adds SPEC §12 per-section body-schema checks
 python3 tools/fm/validate.py --strict      # promotes WARN-severity diagnostics to non-zero exit
 python3 tools/dramatica-nav/validate.py    # narrative-ontology integrity (gated on ontology.json)
+python3 tools/dramatica-nav/cleanup.py --check   # dramatica corpus cleanup linter (Task 030 ST-6; gated on ontology.json)
 
 # Legacy escape hatches (one-release deprecation window):
 FM_TOOLCHAIN=0 tools/check-governance.sh   # restore the legacy validate-frontmatter gate
@@ -89,6 +90,7 @@ The narrative-ontology validator runs automatically inside `check-governance.sh`
 | pair_member | `kind: dynamic-pair` entries pointing at non-existent members |
 | alias-uniqueness | Same alias string in two entries' `aliases_<locale>` lists |
 | ncp-enum | `ncp_appreciation` values not in any NCP enum surface |
+| dramatica-cleanup (Task 030 ST-6) | Four locked corruption classes — `DR-CLEAN-001` Screenplay Systems copyright footer, `DR-CLEAN-002` orphan page-number-only line, `DR-CLEAN-003` `''` double-apostrophe escape, `DR-CLEAN-004` `## ` heading whose body is `See <Other>` with ≤2 lines (NON-AUTO-FIX). Run via `python3 tools/dramatica-nav/cleanup.py --check` (gated on `ontology.json`, like `validate.py`). The catalogue is locked at four rules; growing it requires an `agency-adr` ADR. |
 
 Three coverage warnings (do NOT fail CI; documented v0.1 limitations): `quad-membership` (fractal-distortion in quad members), `term_file-anchor` (hand-authored anchors that don't resolve), `unmapped-heading` (`##` headings without a backing ontology entry). Run with `--strict` to promote warnings to errors.
 

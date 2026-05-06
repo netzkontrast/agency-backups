@@ -71,6 +71,12 @@ if [ -f "$NARRATIVE_ONTOLOGY" ]; then
   if ! "$PYTHON" tools/dramatica-nav/validate.py; then
     FAIL=1
   fi
+
+  echo ""
+  echo "--- [opt] Dramatica corpus cleanup linter (Task 030 ST-6) ---"
+  if ! "$PYTHON" tools/dramatica-nav/cleanup.py --check; then
+    FAIL=1
+  fi
 fi
 
 if [ "$SKIP_TRUST" -eq 0 ]; then
