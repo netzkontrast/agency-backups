@@ -1,0 +1,639 @@
+{
+  "consumer_hints": {
+    "ncp-author": "primary_terms[].ncp_appreciation maps each entry to its closest NCP enum (or null when absent — archetypes / quads / dynamic-pairs / concepts have no NCP target).",
+    "novel-architect": "Load this file when answering lyric.album-arc-mapping queries; cite ontology entries by id, not label."
+  },
+  "generated_at": "2026-05-06",
+  "generated_from_ontology_version": "0.1",
+  "persona": "lyric",
+  "primary_pairs": [
+    {
+      "canonical_label": "Conscience ↔ Temptation",
+      "id": "dp.conscience-temptation",
+      "pair_member_a": "el.conscience",
+      "pair_member_b": "el.temptation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Conscious ↔ Memory",
+      "id": "dp.conscious-memory",
+      "pair_member_a": "type.conscious",
+      "pair_member_b": "type.memory",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Consider ↔ Reconsider",
+      "id": "dp.consider-reconsider",
+      "pair_member_a": "el.consider",
+      "pair_member_b": "el.reconsider",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Control ↔ Uncontrolled",
+      "id": "dp.control-uncontrolled",
+      "pair_member_a": "el.control",
+      "pair_member_b": "el.uncontrolled",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Deduction ↔ Induction",
+      "id": "dp.deduction-induction",
+      "pair_member_a": "el.deduction",
+      "pair_member_b": "el.induction",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Deficiency ↔ Permission",
+      "id": "dp.deficiency-permission",
+      "pair_member_a": "var.deficiency",
+      "pair_member_b": "var.permission",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Destiny ↔ Fate",
+      "id": "dp.destiny-fate",
+      "pair_member_a": "var.destiny",
+      "pair_member_b": "var.fate",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Determination ↔ Expectation",
+      "id": "dp.determination-expectation",
+      "pair_member_a": "el.determination",
+      "pair_member_b": "el.expectation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Disbelief ↔ Faith",
+      "id": "dp.disbelief-faith",
+      "pair_member_a": "el.disbelief",
+      "pair_member_b": "el.faith",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Doing ↔ Obtaining",
+      "id": "dp.doing-obtaining",
+      "pair_member_a": "type.doing",
+      "pair_member_b": "type.obtaining",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Doubt ↔ Investigation",
+      "id": "dp.doubt-investigation",
+      "pair_member_a": "var.doubt",
+      "pair_member_b": "var.investigation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Dream ↔ Hope",
+      "id": "dp.dream-hope",
+      "pair_member_a": "var.dream",
+      "pair_member_b": "var.hope",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Ending ↔ Unending",
+      "id": "dp.ending-unending",
+      "pair_member_a": "el.ending",
+      "pair_member_b": "el.unending",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Enlightenment ↔ Wisdom",
+      "id": "dp.enlightenment-wisdom",
+      "pair_member_a": "var.enlightenment",
+      "pair_member_b": "var.wisdom",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Equity ↔ Inequity",
+      "id": "dp.equity-inequity",
+      "pair_member_a": "el.equity",
+      "pair_member_b": "el.inequity",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    }
+  ],
+  "primary_quads": [],
+  "primary_terms": [
+    {
+      "canonical_label": "Physics",
+      "dynamic_pair_id": null,
+      "encoding_hint": "an activity, an enterprise, an initiative, an endeavor, an operation",
+      "id": "class.physics",
+      "kind": "class",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/classes.md#physics"
+    },
+    {
+      "canonical_label": "Universe",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The original term files list only `Physics` and `Psychology` as Class entries, plus `Overall (Objective) Story Domain` (which is a Throughline-perspective wrapper, not a Class proper). **Universe and Mind are missing as Class entries** despite being two of the four Classes.",
+      "id": "class.universe",
+      "kind": "class",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/dramatica-fundamentals.md#the-four-classes-complete-set"
+    },
+    {
+      "canonical_label": "Act",
+      "dynamic_pair_id": null,
+      "encoding_hint": "an Act is a noticeable shift or division in the dramatic flow of a story which is created by the convergence of dynamics pertaining to Character, Theme, and Plot. These dynamics are represented in Dramatica by a sequential progression through different categories of subject matter called Types.",
+      "id": "concept.act",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#act"
+    },
+    {
+      "canonical_label": "Consequences",
+      "dynamic_pair_id": null,
+      "encoding_hint": "For every goal there is a consequence. Consequence describes the results of failing to achieve the goal.",
+      "id": "concept.consequences",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#consequence"
+    },
+    {
+      "canonical_label": "Costs",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Requirements are not always met just by applying effort. Sometimes they involve trade-offs necessitating the acceptance of loss in another area in order to meet the requirement.",
+      "id": "concept.costs",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#cost"
+    },
+    {
+      "canonical_label": "Dividends",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Although meeting the requirements of a goal can incur costs, it can also provide dividends along the way. Sometimes solving one of the pre-requisites or attaining one of the pre-conditions of the requirement has its own reward.",
+      "id": "concept.dividends",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#dividend-overall-story-throughline"
+    },
+    {
+      "canonical_label": "Event",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Sometimes it becomes convenient to group a number of units of similar nature together and treat the",
+      "id": "concept.event",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#item"
+    },
+    {
+      "canonical_label": "Forewarnings",
+      "dynamic_pair_id": null,
+      "encoding_hint": "see Forewarnings.",
+      "id": "concept.forewarnings",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#overall-objective-story-forewarnings"
+    },
+    {
+      "canonical_label": "Journey",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Sequential markers of a story's progress that indicate the shift from one concern to another as each",
+      "id": "concept.journey",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#journey"
+    },
+    {
+      "canonical_label": "Preconditions",
+      "dynamic_pair_id": null,
+      "encoding_hint": "When meeting the requirement is made contingent upon some non-essential restriction, the extra baggage is referred to as Preconditions. Depending upon the nature of the Preconditions and the nature of a character, it may turn out that although the prerequisites will achieve the goal, the",
+      "id": "concept.preconditions",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#preconditions"
+    },
+    {
+      "canonical_label": "Prerequisites",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Prerequisites are the essential or necessary steps or accomplishments that must be achieved in order for something to occur. If a goal has a single requirement, there may be many prerequisites to achieving that requirement.",
+      "id": "concept.prerequisites",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#prerequisites"
+    },
+    {
+      "canonical_label": "Requirements",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Achieving a goal is not a one-step activity. Rather, all the cogs and wheels of a situation must be adjusted and realigned first in order to enable the goal.",
+      "id": "concept.requirements",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#requirements"
+    },
+    {
+      "canonical_label": "Scene",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Dramatica breaks down the components of story into the smallest possible building blocks that have m",
+      "id": "concept.scene",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#unit"
+    },
+    {
+      "canonical_label": "Sequence",
+      "dynamic_pair_id": null,
+      "encoding_hint": "A set is a grouping of 16 units. Although the set contains four separate quads and the units are all",
+      "id": "concept.sequence",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#set"
+    },
+    {
+      "canonical_label": "Signpost",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Sequential markers of a story's progress that indicate the kind of concern central to each throughli",
+      "id": "concept.signpost",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#signpost"
+    },
+    {
+      "canonical_label": "Story Driver",
+      "dynamic_pair_id": null,
+      "encoding_hint": "All stories have both Action and Decision, however one will take precedence over",
+      "id": "concept.story-driver",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#action"
+    },
+    {
+      "canonical_label": "Story Goal",
+      "dynamic_pair_id": null,
+      "encoding_hint": null,
+      "id": "concept.story-goal",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#overall-objective-story-goal"
+    },
+    {
+      "canonical_label": "Story Judgment",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The notion that the good guys win and the bad guys lose is not always true. In stories, as in life, we often see very bad people doing very well for themselves (if not for others).",
+      "id": "concept.story-judgment",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#judgment"
+    },
+    {
+      "canonical_label": "Story Outcome",
+      "dynamic_pair_id": null,
+      "encoding_hint": "When one is creating a story, one must consider how it all comes out. This will not just be a description of the situation but also of what potentials",
+      "id": "concept.story-outcome",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#outcome"
+    },
+    {
+      "canonical_label": "Determination",
+      "dynamic_pair_id": "el.expectation",
+      "encoding_hint": "a conclusion as to the cause behind a particular effect -- Determination is an evaluation of the forces driving a process. This allows one to anticipate future effects or to take action to stop or enhance a current effect.",
+      "id": "el.determination",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.accurate-non-accurate-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#determination"
+    },
+    {
+      "canonical_label": "Ending",
+      "dynamic_pair_id": "el.unending",
+      "encoding_hint": "The Ending characteristic",
+      "id": "el.ending",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.result-process-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#ending"
+    },
+    {
+      "canonical_label": "Expectation",
+      "dynamic_pair_id": "el.determination",
+      "encoding_hint": "a conclusion as to the eventual effect of a particular cause -- Expectation is the projection of what one expects to find at the end of a path. Expectations allow one to anticipate and make plans for both rewards and troubles.",
+      "id": "el.expectation",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.accurate-non-accurate-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#expectation"
+    },
+    {
+      "canonical_label": "Possibility",
+      "dynamic_pair_id": "el.probability",
+      "encoding_hint": "a determination that something might be true -The Possibility element endows a character with an open-minded assessment of his environment and relationships. However, it gives less weight to the single most likely explanation, looking instead at the whole range of known alternatives.",
+      "id": "el.possibility",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.production-reduction-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#possibility"
+    },
+    {
+      "canonical_label": "Potentiality",
+      "dynamic_pair_id": "el.certainty",
+      "encoding_hint": "a determination that something has the capacity to become true -- The element of Potentiality drives a character to take risks on long odds. Always looking at what is not specifically ruled out, he is even beyond the realm of possibility and spends his time focusing on the greatest possible potential.",
+      "id": "el.potentiality",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.certainty-potentiality-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#potentiality"
+    },
+    {
+      "canonical_label": "Proaction",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Proactive characteristic will urge a character to begin problem solving on his own. This character will be a self-starter who is up and at it the moment he realizes a potential problem exists.",
+      "id": "el.proaction",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.acceptance-reaction-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#proaction"
+    },
+    {
+      "canonical_label": "Process",
+      "dynamic_pair_id": "el.result",
+      "encoding_hint": "the mechanism through which a cause leads to an effect -A Process is a series of interactions that create results. The character representing Process will concentrate on keeping the engine running smoothly.",
+      "id": "el.process",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.result-process-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#process"
+    },
+    {
+      "canonical_label": "Reaction",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Reaction characteristic leads a character to strike back at the source of a problem. Reaction is less precipitous than Proaction requiring the problem to materialize before it acts.",
+      "id": "el.reaction",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.acceptance-reaction-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#reaction"
+    },
+    {
+      "canonical_label": "Result",
+      "dynamic_pair_id": "el.process",
+      "encoding_hint": "the ramifications of a specific effect -- Result is a holistic view of all the end products of a process. When a cause generates an effect, how does the effect upset the overall balance of a situation?",
+      "id": "el.result",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.result-process-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#result"
+    },
+    {
+      "canonical_label": "Speculation",
+      "dynamic_pair_id": "el.projection",
+      "encoding_hint": "an extension of possibility into the future -Speculation is the effort to determine what could conceivably happen in the future even though it is not the most likely scenario. Speculation leads a character to expect the unlikely in the event that it actually occurs.",
+      "id": "el.speculation",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.inertia-change-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#speculation"
+    },
+    {
+      "canonical_label": "Unending",
+      "dynamic_pair_id": "el.ending",
+      "encoding_hint": "a continuance without cessation -- The Unending characteristic sees nothing as ever coming to completion. What others may see as an end, this characteristic sees as a change of direction.",
+      "id": "el.unending",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.result-process-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#unending"
+    },
+    {
+      "canonical_label": "Driver",
+      "dynamic_pair_id": null,
+      "encoding_hint": "All stories have both Action and Decision, however one will take precedence over",
+      "id": "plot-dynamic.driver",
+      "kind": "plot-dynamic",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#action"
+    },
+    {
+      "canonical_label": "Judgment",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The notion that the good guys win and the bad guys lose is not always true. In stories, as in life, we often see very bad people doing very well for themselves (if not for others).",
+      "id": "plot-dynamic.judgment",
+      "kind": "plot-dynamic",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#judgment"
+    },
+    {
+      "canonical_label": "Limit",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Limit is what forces the story to a close. One of the functions of a story is to give the audience the value of experiences it has not had itself by living",
+      "id": "plot-dynamic.limit",
+      "kind": "plot-dynamic",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#limit"
+    },
+    {
+      "canonical_label": "Outcome",
+      "dynamic_pair_id": null,
+      "encoding_hint": "When one is creating a story, one must consider how it all comes out. This will not just be a description of the situation but also of what potentials",
+      "id": "plot-dynamic.outcome",
+      "kind": "plot-dynamic",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#outcome"
+    },
+    {
+      "canonical_label": "Future",
+      "dynamic_pair_id": null,
+      "encoding_hint": "what is to come, what will be, prospect, prospective",
+      "id": "type.future",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#future"
+    },
+    {
+      "canonical_label": "Progress",
+      "dynamic_pair_id": null,
+      "encoding_hint": "flowing, advancing, proceeding, moving forward, developing step by step, graduated, staging, success",
+      "id": "type.progress",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#progress"
+    },
+    {
+      "canonical_label": "Circumstances",
+      "dynamic_pair_id": "var.situation",
+      "encoding_hint": "the relationship of oneself to the environment -- Circumstances describes the way a character feels about his environment. Whereas Situation is rated in terms of satisfaction, Circumstances are rated in terms of fulfillment.",
+      "id": "var.circumstances",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#circumstances"
+    },
+    {
+      "canonical_label": "Closure",
+      "dynamic_pair_id": "var.denial",
+      "encoding_hint": "Closure can be seen in two ways. One, it can be an ending.",
+      "id": "var.closure",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.hope-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#closure"
+    },
+    {
+      "canonical_label": "Destiny",
+      "dynamic_pair_id": "var.fate",
+      "encoding_hint": "inescapable path, predetermined trajectory, set direction of the future, inevitable path, unavoidabl",
+      "id": "var.destiny",
+      "kind": "variation",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.fate-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#destiny"
+    },
+    {
+      "canonical_label": "Enlightenment",
+      "dynamic_pair_id": "var.wisdom",
+      "encoding_hint": "an understanding that transcends knowledge -- Not all meaning comes from experience. The mind has the ability to synthesize abstract truth that has not been or cannot be observed.",
+      "id": "var.enlightenment",
+      "kind": "variation",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.wisdom-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#enlightenment"
+    },
+    {
+      "canonical_label": "Experience",
+      "dynamic_pair_id": "var.skill",
+      "encoding_hint": "Experience refers to the cumulative effect of observing or participating in mental or physical activities until they become familiar. However, just because the activities become second nature does not mean a character is necessarily good at them.",
+      "id": "var.experience",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.wisdom-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#experience"
+    },
+    {
+      "canonical_label": "Fate",
+      "dynamic_pair_id": "var.destiny",
+      "encoding_hint": "a future situation that will befall an individual -- The distinction between Fate and destiny is an important one. Destiny is the direction one's life must take, Fate is any given moment along that direction.",
+      "id": "var.fate",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.fate-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#fate"
+    },
+    {
+      "canonical_label": "Hope",
+      "dynamic_pair_id": "var.dream",
+      "encoding_hint": "a desired future if things go as expected -- Hope is based on a projection of the way things are going. When one looks at the present situation and notes the direction of change, Hope lies somewhere along that line.",
+      "id": "var.hope",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.hope-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#hope"
+    },
+    {
+      "canonical_label": "Range",
+      "dynamic_pair_id": null,
+      "encoding_hint": "See Issue Rationalization",
+      "id": "var.range",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#range"
+    },
+    {
+      "canonical_label": "Responsibility",
+      "dynamic_pair_id": "var.commitment",
+      "encoding_hint": "the belief that one is best suited to accomplish a task -- The instinct for survival is paramount under normal circumstances. Still, even animals throw themselves into danger to help a human friend.",
+      "id": "var.responsibility",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.rationalization-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#responsibility"
+    },
+    {
+      "canonical_label": "Situation",
+      "dynamic_pair_id": "var.circumstances",
+      "encoding_hint": "the arrangement of one's environment -Situation describes the ins, outs, and practical considerations of the environment in which a character finds himself. Throughout a story, the situation may evolve or may remain constant, depending upon the essence of the message and the nature of the plot.",
+      "id": "var.situation",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#situation"
+    },
+    {
+      "canonical_label": "Wisdom",
+      "dynamic_pair_id": "var.enlightenment",
+      "encoding_hint": "understanding how to apply Knowledge -Wisdom is the meaning of what is known. A Character may be aware of facts but unless he sees the pattern that organizes those facts, the knowledge alone may be useless.",
+      "id": "var.wisdom",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.wisdom-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#wisdom"
+    }
+  ],
+  "scenario_id": "lyric.album-arc-mapping",
+  "scenario_summary": "Map an album's Story Driver, Outcome, and Judgment onto a track-by-track dramatic arc using Dramatica's four ending categories.",
+  "schema_version": "0.1"
+}

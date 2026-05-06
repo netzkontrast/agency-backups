@@ -9,7 +9,7 @@ updated: 2026-05-04
 
 # Narrative Ontology — Schemas
 
-Four JSON Schemas (Draft 2020-12) plus two data files form the canonical contract between [`dramatica-theory`](../../../skills/dramatica-theory/), [`dramatica-vocabulary`](../../../skills/dramatica-vocabulary/), [`ncp-author`](../../../skills/ncp-author/), and [`novel-architect`](../../../skills/novel-architect/). The contract is governed by [Task 015](../../../tasks/015-integrate-dramatica-ncp-skills/) and named in [`AGENTS.md § Narrative Ontology`](../../../AGENTS.md). Most repository tasks do not load these files — see `AGENTS.md` rule **NO.5** (token economy: non-narrative work MUST NOT load the ontology).
+Five JSON Schemas (Draft 2020-12) plus two data files form the canonical contract between [`dramatica-theory`](../../../skills/dramatica-theory/), [`dramatica-vocabulary`](../../../skills/dramatica-vocabulary/), [`ncp-author`](../../../skills/ncp-author/), and [`novel-architect`](../../../skills/novel-architect/). The contract is governed by [Task 015](../../../tasks/015-integrate-dramatica-ncp-skills/) and named in [`AGENTS.md § Narrative Ontology`](../../../AGENTS.md). Most repository tasks do not load these files — see `AGENTS.md` rule **NO.5** (token economy: non-narrative work MUST NOT load the ontology).
 
 ## Files
 
@@ -19,6 +19,7 @@ Four JSON Schemas (Draft 2020-12) plus two data files form the canonical contrac
 | [`scenarios.schema.json`](./scenarios.schema.json) | One persona-scenario entry — `novel.*` or `lyric.*` ID, persona, summary. |
 | [`term-frontmatter.schema.json`](./term-frontmatter.schema.json) | Per-term YAML block embedded at every `## <Term>` anchor in `dramatica-vocabulary/references/*.md`. Mirrors `ontology.schema.json` minus `term_file`. |
 | [`theory-chunk.schema.json`](./theory-chunk.schema.json) | Chapter-head YAML for `dramatica-theory/references/*.md`. Lists `covers_ontology_ids` + `serves_scenarios`. |
+| [`precompiled.schema.json`](./precompiled.schema.json) | One denormalised persona-scenario bundle — `primary_terms[]`, `primary_quads[]`, `primary_pairs[]`, `consumer_hints`. Authored by `tools/dramatica-nav/precompile.py`; emitted artefacts live under [`precompiled/`](./precompiled/) (one JSON per scenario). Read by consumers (`novel-architect`, `ncp-author`) as a token-cheap projection of the prose path. |
 | `ontology.json` | Canonical entry table (~215 entries). Authored in Task 015 plan step 4; rebuilt from the per-term frontmatter by `tools/dramatica-nav/ontology-build.py`. |
 | `scenarios.json` | The eleven v0.1 persona scenarios. Authored in Task 015 plan step 3. |
 
@@ -87,6 +88,7 @@ Every entry carries `provenance: source-original | extension-derived`. The split
 |---|---|---|
 | `tools/dramatica-nav/validate.py` | all four | Every CI run, gated on `ontology.json` existing. |
 | `tools/dramatica-nav/ontology-build.py` | `term-frontmatter`, `ontology` | When rebuilding `ontology.json` from the per-term frontmatter. |
+| `tools/dramatica-nav/precompile.py` | `ontology`, `scenarios`, `precompiled` | When emitting / validating the eleven persona-scenario bundles under `precompiled/`. |
 | Authoring agent inserting a per-term block | `term-frontmatter` | At every `## <Term>` heading touched. |
 | External agents (Jules, Gemini) | `ontology` | When validating an ontology entry handed to them by a user. The schemas are self-contained; no other repo files are required. |
 | Non-narrative work | none | `AGENTS.md` rule NO.5 — token economy. |

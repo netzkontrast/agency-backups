@@ -1,0 +1,584 @@
+{
+  "consumer_hints": {
+    "ncp-author": "primary_terms[].ncp_appreciation maps each entry to its closest NCP enum (or null when absent — archetypes / quads / dynamic-pairs / concepts have no NCP target).",
+    "novel-architect": "Load this file when answering novel.act-pivot queries; cite ontology entries by id, not label."
+  },
+  "generated_at": "2026-05-06",
+  "generated_from_ontology_version": "0.1",
+  "persona": "novel",
+  "primary_pairs": [
+    {
+      "canonical_label": "Evaluation ↔ Re-evaluation",
+      "id": "dp.evaluation-re-evaluation",
+      "pair_member_a": "el.evaluation",
+      "pair_member_b": "el.reevaluation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Evidence ↔ Suspicion",
+      "id": "dp.evidence-suspicion",
+      "pair_member_a": "var.evidence",
+      "pair_member_b": "var.suspicion",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Expediency ↔ Need",
+      "id": "dp.expediency-need",
+      "pair_member_a": "var.expediency",
+      "pair_member_b": "var.need",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Experience ↔ Skill",
+      "id": "dp.experience-skill",
+      "pair_member_a": "var.experience",
+      "pair_member_b": "var.skill",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Fact ↔ Fantasy",
+      "id": "dp.fact-fantasy",
+      "pair_member_a": "var.fact",
+      "pair_member_b": "var.fantasy",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Falsehood ↔ Truth",
+      "id": "dp.falsehood-truth",
+      "pair_member_a": "var.falsehood",
+      "pair_member_b": "var.truth",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Feeling ↔ Logic",
+      "id": "dp.feeling-logic",
+      "pair_member_a": "el.feeling",
+      "pair_member_b": "el.logic",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Future ↔ Progress",
+      "id": "dp.future-progress",
+      "pair_member_a": "type.future",
+      "pair_member_b": "type.progress",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Help ↔ Hinder",
+      "id": "dp.help-hinder",
+      "pair_member_a": "el.help",
+      "pair_member_b": "el.hinder",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Hunch ↔ Theory",
+      "id": "dp.hunch-theory",
+      "pair_member_a": "el.hunch",
+      "pair_member_b": "el.theory",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Interdiction ↔ Prediction",
+      "id": "dp.interdiction-prediction",
+      "pair_member_a": "var.interdiction",
+      "pair_member_b": "var.prediction",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Interpretation ↔ Senses",
+      "id": "dp.interpretation-senses",
+      "pair_member_a": "var.interpretation",
+      "pair_member_b": "var.senses",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Learning ↔ Understanding",
+      "id": "dp.learning-understanding",
+      "pair_member_a": "type.learning",
+      "pair_member_b": "type.understanding",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Mind ↔ Universe",
+      "id": "dp.mind-universe",
+      "pair_member_a": "class.mind",
+      "pair_member_b": "class.universe",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Morality ↔ SelfInterest",
+      "id": "dp.morality-self-interest",
+      "pair_member_a": "var.morality",
+      "pair_member_b": "var.self-interest",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    }
+  ],
+  "primary_quads": [],
+  "primary_terms": [
+    {
+      "canonical_label": "Physics",
+      "dynamic_pair_id": null,
+      "encoding_hint": "an activity, an enterprise, an initiative, an endeavor, an operation",
+      "id": "class.physics",
+      "kind": "class",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/classes.md#physics"
+    },
+    {
+      "canonical_label": "Psychology",
+      "dynamic_pair_id": null,
+      "encoding_hint": "ways of thinking, thinking process, activity of the psyche, manipulation of others",
+      "id": "class.psychology",
+      "kind": "class",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/classes.md#psychology"
+    },
+    {
+      "canonical_label": "Universe",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The original term files list only `Physics` and `Psychology` as Class entries, plus `Overall (Objective) Story Domain` (which is a Throughline-perspective wrapper, not a Class proper). **Universe and Mind are missing as Class entries** despite being two of the four Classes.",
+      "id": "class.universe",
+      "kind": "class",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/dramatica-fundamentals.md#the-four-classes-complete-set"
+    },
+    {
+      "canonical_label": "Act",
+      "dynamic_pair_id": null,
+      "encoding_hint": "an Act is a noticeable shift or division in the dramatic flow of a story which is created by the convergence of dynamics pertaining to Character, Theme, and Plot. These dynamics are represented in Dramatica by a sequential progression through different categories of subject matter called Types.",
+      "id": "concept.act",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#act"
+    },
+    {
+      "canonical_label": "Event",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Sometimes it becomes convenient to group a number of units of similar nature together and treat the",
+      "id": "concept.event",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#item"
+    },
+    {
+      "canonical_label": "Forewarnings",
+      "dynamic_pair_id": null,
+      "encoding_hint": "see Forewarnings.",
+      "id": "concept.forewarnings",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#overall-objective-story-forewarnings"
+    },
+    {
+      "canonical_label": "Journey",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Sequential markers of a story's progress that indicate the shift from one concern to another as each",
+      "id": "concept.journey",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#journey"
+    },
+    {
+      "canonical_label": "Overall (Objective) Story Catalyst",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Overall Story Catalyst is what creates breakthroughs and seems to accelerate the development of the Overall Story. In both the Overall and Main vs.",
+      "id": "concept.os-catalyst",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#overall-story-catalyst"
+    },
+    {
+      "canonical_label": "Overall (Objective) Story Inhibitor",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Overall Story Inhibitor is what prevents a story from just rushing full speed to the solution. It is like a brake mechanism which can be applied as the author pleases.",
+      "id": "concept.os-inhibitor",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#overall-story-inhibitor"
+    },
+    {
+      "canonical_label": "Overall Story Symptom",
+      "dynamic_pair_id": null,
+      "encoding_hint": "see Symptom. Overall (Objective) Story Throughline -- The plot as it concerns the story goal -- The Overall Story Line is a distinct act by act sequence of events that involves all of the Overall Throughline Story Points and none of the Main vs.",
+      "id": "concept.os-symptom",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#overall-objective-story-symptom"
+    },
+    {
+      "canonical_label": "Preconditions",
+      "dynamic_pair_id": null,
+      "encoding_hint": "When meeting the requirement is made contingent upon some non-essential restriction, the extra baggage is referred to as Preconditions. Depending upon the nature of the Preconditions and the nature of a character, it may turn out that although the prerequisites will achieve the goal, the",
+      "id": "concept.preconditions",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#preconditions"
+    },
+    {
+      "canonical_label": "Prerequisites",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Prerequisites are the essential or necessary steps or accomplishments that must be achieved in order for something to occur. If a goal has a single requirement, there may be many prerequisites to achieving that requirement.",
+      "id": "concept.prerequisites",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#prerequisites"
+    },
+    {
+      "canonical_label": "Requirements",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Achieving a goal is not a one-step activity. Rather, all the cogs and wheels of a situation must be adjusted and realigned first in order to enable the goal.",
+      "id": "concept.requirements",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#requirements"
+    },
+    {
+      "canonical_label": "Scene",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Dramatica breaks down the components of story into the smallest possible building blocks that have m",
+      "id": "concept.scene",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#unit"
+    },
+    {
+      "canonical_label": "Sequence",
+      "dynamic_pair_id": null,
+      "encoding_hint": "A set is a grouping of 16 units. Although the set contains four separate quads and the units are all",
+      "id": "concept.sequence",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#set"
+    },
+    {
+      "canonical_label": "Signpost",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Sequential markers of a story's progress that indicate the kind of concern central to each throughli",
+      "id": "concept.signpost",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#signpost"
+    },
+    {
+      "canonical_label": "Driver",
+      "dynamic_pair_id": null,
+      "encoding_hint": "All stories have both Action and Decision, however one will take precedence over",
+      "id": "plot-dynamic.driver",
+      "kind": "plot-dynamic",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#action"
+    },
+    {
+      "canonical_label": "Limit",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Limit is what forces the story to a close. One of the functions of a story is to give the audience the value of experiences it has not had itself by living",
+      "id": "plot-dynamic.limit",
+      "kind": "plot-dynamic",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#limit"
+    },
+    {
+      "canonical_label": "Becoming",
+      "dynamic_pair_id": null,
+      "encoding_hint": "embodying, manifesting, personifying, incarnating, transforming",
+      "id": "type.becoming",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#becoming"
+    },
+    {
+      "canonical_label": "Being",
+      "dynamic_pair_id": null,
+      "encoding_hint": "pretending, appearing, acting like, seeming as, fulfilling a role",
+      "id": "type.being",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#being"
+    },
+    {
+      "canonical_label": "Conceiving",
+      "dynamic_pair_id": null,
+      "encoding_hint": "originating, inventing, devising, engendering, hatching ideas",
+      "id": "type.conceiving",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#conceiving"
+    },
+    {
+      "canonical_label": "Conceptualizing",
+      "dynamic_pair_id": null,
+      "encoding_hint": "visualizing, imagining, envisioning, visualizing implementation",
+      "id": "type.conceptualizing",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#conceptualizing"
+    },
+    {
+      "canonical_label": "Conscious",
+      "dynamic_pair_id": null,
+      "encoding_hint": "considerations, sensibilities, cognizant, ability to consider, sensible, informed contemplation, con",
+      "id": "type.conscious",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#conscious"
+    },
+    {
+      "canonical_label": "Doing",
+      "dynamic_pair_id": null,
+      "encoding_hint": "engaging in a physical activity -- Doing is the process of being physically active. In and of itself, Doing does not require any purpose but simply describes engaging in a process, task, or endeavor, whether for pleasure or by necessity or compulsion.",
+      "id": "type.doing",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#doing"
+    },
+    {
+      "canonical_label": "Future",
+      "dynamic_pair_id": null,
+      "encoding_hint": "what is to come, what will be, prospect, prospective",
+      "id": "type.future",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#future"
+    },
+    {
+      "canonical_label": "Learning",
+      "dynamic_pair_id": null,
+      "encoding_hint": "cultivating experience, acquiring information, collecting data, gathering knowledge",
+      "id": "type.learning",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#learning"
+    },
+    {
+      "canonical_label": "Memory",
+      "dynamic_pair_id": null,
+      "encoding_hint": "remembering, recollections, reminiscence, recalling, retention Mind",
+      "id": "type.memory",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#memory"
+    },
+    {
+      "canonical_label": "Obtaining",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Obtaining includes not only that which is possessed but also that which is achieved. For example, one might obtain a law degree or the love of a parent.",
+      "id": "type.obtaining",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#obtaining"
+    },
+    {
+      "canonical_label": "Past",
+      "dynamic_pair_id": null,
+      "encoding_hint": "history, what has happened, former times, retrospective",
+      "id": "type.past",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#past"
+    },
+    {
+      "canonical_label": "Preconscious",
+      "dynamic_pair_id": null,
+      "encoding_hint": "unthinking responses, immediate responses, impulse, impulsive response, instinctive response, innate",
+      "id": "type.preconscious",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#preconscious"
+    },
+    {
+      "canonical_label": "Present",
+      "dynamic_pair_id": null,
+      "encoding_hint": "how things stand, the here and now, current situation, as of this moment",
+      "id": "type.present",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#present"
+    },
+    {
+      "canonical_label": "Progress",
+      "dynamic_pair_id": null,
+      "encoding_hint": "flowing, advancing, proceeding, moving forward, developing step by step, graduated, staging, success",
+      "id": "type.progress",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#progress"
+    },
+    {
+      "canonical_label": "Subconscious",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Mind-class Type paired with Preconscious in the dynamic pair Subconscious <--> Preconscious (cf. line 735 above).",
+      "id": "type.subconscious",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#subconscious"
+    },
+    {
+      "canonical_label": "Understanding",
+      "dynamic_pair_id": null,
+      "encoding_hint": "appreciating the meaning of something -Understanding is different from knowledge. From knowledge one gets awareness, from Understanding one gets meaning.",
+      "id": "type.understanding",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#understanding"
+    },
+    {
+      "canonical_label": "Catalyst",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Catalyst is what creates breakthroughs and seems to",
+      "id": "var.catalyst",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#catalyst"
+    },
+    {
+      "canonical_label": "Choice",
+      "dynamic_pair_id": "var.delay",
+      "encoding_hint": "making a decision -- Choice is simply a decision as to which is the best path toward resolving a problem. A character will ponder all the information and factor in all his feelings and arrive at a decision.",
+      "id": "var.choice",
+      "kind": "variation",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.openness-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#choice"
+    },
+    {
+      "canonical_label": "Closure",
+      "dynamic_pair_id": "var.denial",
+      "encoding_hint": "Closure can be seen in two ways. One, it can be an ending.",
+      "id": "var.closure",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.hope-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#closure"
+    },
+    {
+      "canonical_label": "Commitment",
+      "dynamic_pair_id": "var.responsibility",
+      "encoding_hint": "a decision to stick with something regardless of the consequences -- A commitment forms the essence of the steadfast character. When a character makes a commitment, it is a decision not to quit regardless of the obstacles that may come.",
+      "id": "var.commitment",
+      "kind": "variation",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.rationalization-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#commitment"
+    },
+    {
+      "canonical_label": "Delay",
+      "dynamic_pair_id": "var.choice",
+      "encoding_hint": "putting off until later -- Delay is the decision not to make a decision. Whenever the options are too closely balanced to see a clear path, whenever there is not enough information to be confident of an outcome, a character will Delay.",
+      "id": "var.delay",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.openness-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#delay"
+    },
+    {
+      "canonical_label": "Interdiction",
+      "dynamic_pair_id": "var.prediction",
+      "encoding_hint": "an effort to change a pre-determined course -Interdiction is the effort to change the course of one's destiny. Once a character determines that his destiny is pulling him toward an undesirable fate, he tries to Interdict and thereby avoid the fate.",
+      "id": "var.interdiction",
+      "kind": "variation",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.fate-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#interdiction"
+    },
+    {
+      "canonical_label": "Permission",
+      "dynamic_pair_id": "var.deficiency",
+      "encoding_hint": "one's ability based on what is allowed -- Permission means Ability limited by restrictions. These constraints may be self imposed or imposed by others.",
+      "id": "var.permission",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#permission"
+    },
+    {
+      "canonical_label": "Strategy",
+      "dynamic_pair_id": "var.analysis",
+      "encoding_hint": "a plan to achieve one's purpose or a plan of response -The specific plan or series of interconnected plans that are intended to produce a desired result is called a Strategy. The sophistication of a strategy can range from complex to non-existent (if a character prefers to wing it).",
+      "id": "var.strategy",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.strategy-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#strategy"
+    }
+  ],
+  "scenario_id": "novel.act-pivot",
+  "scenario_summary": "Determine the canonical Type-level Signpost transition at the OS Driver pivot between Acts 2 and 3.",
+  "schema_version": "0.1"
+}

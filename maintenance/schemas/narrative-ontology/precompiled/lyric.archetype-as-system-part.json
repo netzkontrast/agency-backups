@@ -1,0 +1,625 @@
+{
+  "consumer_hints": {
+    "ncp-author": "primary_terms[].ncp_appreciation maps each entry to its closest NCP enum (or null when absent — archetypes / quads / dynamic-pairs / concepts have no NCP target).",
+    "novel-architect": "Load this file when answering lyric.archetype-as-system-part queries; cite ontology entries by id, not label."
+  },
+  "generated_at": "2026-05-06",
+  "generated_from_ontology_version": "0.1",
+  "persona": "lyric",
+  "primary_pairs": [
+    {
+      "canonical_label": "Ability ↔ Desire",
+      "id": "dp.ability-desire",
+      "pair_member_a": "el.ability",
+      "pair_member_b": "el.desire",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Acceptance ↔ Non-acceptance",
+      "id": "dp.acceptance-non-acceptance",
+      "pair_member_a": "el.acceptance",
+      "pair_member_b": "el.non-acceptance",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Accurate ↔ Non-accurate",
+      "id": "dp.accurate-non-accurate",
+      "pair_member_a": "el.accurate",
+      "pair_member_b": "el.non-accurate",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Actuality ↔ Perception",
+      "id": "dp.actuality-perception",
+      "pair_member_a": "el.actuality",
+      "pair_member_b": "el.perception",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Analysis ↔ Strategy",
+      "id": "dp.analysis-strategy",
+      "pair_member_a": "var.analysis",
+      "pair_member_b": "var.strategy",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Appraisal ↔ Reappraisal",
+      "id": "dp.appraisal-reappraisal",
+      "pair_member_a": "var.appraisal",
+      "pair_member_b": "var.reappraisal",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Attempt ↔ Work",
+      "id": "dp.attempt-work",
+      "pair_member_a": "var.attempt",
+      "pair_member_b": "var.work",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Attraction ↔ Repulsion",
+      "id": "dp.attraction-repulsion",
+      "pair_member_a": "var.attraction",
+      "pair_member_b": "var.repulsion",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Avoid ↔ Pursuit",
+      "id": "dp.avoid-pursuit",
+      "pair_member_a": "el.avoid",
+      "pair_member_b": "el.pursuit",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Becoming ↔ Being",
+      "id": "dp.becoming-being",
+      "pair_member_a": "type.becoming",
+      "pair_member_b": "type.being",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Cause ↔ Effect",
+      "id": "dp.cause-effect",
+      "pair_member_a": "el.cause",
+      "pair_member_b": "el.effect",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Certainty ↔ Potentiality",
+      "id": "dp.certainty-potentiality",
+      "pair_member_a": "el.certainty",
+      "pair_member_b": "el.potentiality",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Change ↔ Inertia",
+      "id": "dp.change-inertia",
+      "pair_member_a": "el.inertia",
+      "pair_member_b": "el.change",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Chaos ↔ Order",
+      "id": "dp.chaos-order",
+      "pair_member_a": "el.chaos",
+      "pair_member_b": "el.order",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Choice ↔ Delay",
+      "id": "dp.choice-delay",
+      "pair_member_a": "var.choice",
+      "pair_member_b": "var.delay",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Circumstances ↔ Situation",
+      "id": "dp.circumstances-situation",
+      "pair_member_a": "var.circumstances",
+      "pair_member_b": "var.situation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Closure ↔ Denial",
+      "id": "dp.closure-denial",
+      "pair_member_a": "var.closure",
+      "pair_member_b": "var.denial",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Commitment ↔ Responsibility",
+      "id": "dp.commitment-responsibility",
+      "pair_member_a": "var.commitment",
+      "pair_member_b": "var.responsibility",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Conceiving ↔ Conceptualizing",
+      "id": "dp.conceiving-conceptualizing",
+      "pair_member_a": "type.conceiving",
+      "pair_member_b": "type.conceptualizing",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Conditioning ↔ Instinct",
+      "id": "dp.conditioning-instinct",
+      "pair_member_a": "var.conditioning",
+      "pair_member_b": "var.instinct",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Evaluation ↔ Re-evaluation",
+      "id": "dp.evaluation-re-evaluation",
+      "pair_member_a": "el.evaluation",
+      "pair_member_b": "el.reevaluation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Evidence ↔ Suspicion",
+      "id": "dp.evidence-suspicion",
+      "pair_member_a": "var.evidence",
+      "pair_member_b": "var.suspicion",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Expediency ↔ Need",
+      "id": "dp.expediency-need",
+      "pair_member_a": "var.expediency",
+      "pair_member_b": "var.need",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Experience ↔ Skill",
+      "id": "dp.experience-skill",
+      "pair_member_a": "var.experience",
+      "pair_member_b": "var.skill",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Fact ↔ Fantasy",
+      "id": "dp.fact-fantasy",
+      "pair_member_a": "var.fact",
+      "pair_member_b": "var.fantasy",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Falsehood ↔ Truth",
+      "id": "dp.falsehood-truth",
+      "pair_member_a": "var.falsehood",
+      "pair_member_b": "var.truth",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Feeling ↔ Logic",
+      "id": "dp.feeling-logic",
+      "pair_member_a": "el.feeling",
+      "pair_member_b": "el.logic",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Future ↔ Progress",
+      "id": "dp.future-progress",
+      "pair_member_a": "type.future",
+      "pair_member_b": "type.progress",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Help ↔ Hinder",
+      "id": "dp.help-hinder",
+      "pair_member_a": "el.help",
+      "pair_member_b": "el.hinder",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Hunch ↔ Theory",
+      "id": "dp.hunch-theory",
+      "pair_member_a": "el.hunch",
+      "pair_member_b": "el.theory",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Interdiction ↔ Prediction",
+      "id": "dp.interdiction-prediction",
+      "pair_member_a": "var.interdiction",
+      "pair_member_b": "var.prediction",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Interpretation ↔ Senses",
+      "id": "dp.interpretation-senses",
+      "pair_member_a": "var.interpretation",
+      "pair_member_b": "var.senses",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Learning ↔ Understanding",
+      "id": "dp.learning-understanding",
+      "pair_member_a": "type.learning",
+      "pair_member_b": "type.understanding",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Mind ↔ Universe",
+      "id": "dp.mind-universe",
+      "pair_member_a": "class.mind",
+      "pair_member_b": "class.universe",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Morality ↔ SelfInterest",
+      "id": "dp.morality-self-interest",
+      "pair_member_a": "var.morality",
+      "pair_member_b": "var.self-interest",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    }
+  ],
+  "primary_quads": [],
+  "primary_terms": [
+    {
+      "canonical_label": "Antagonist",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Antagonist and Protagonist are diametrically opposed. What the Protagonist pursues, the Antagonist seeks to avoid or prevent.",
+      "id": "arc.antagonist",
+      "kind": "archetype",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#antagonist"
+    },
+    {
+      "canonical_label": "Contagonist",
+      "dynamic_pair_id": null,
+      "encoding_hint": "A concept unique to Dramatica, the Contagonist is the character that balances the Guardian. If Protagonist and Antagonist can archetypically be thought of as \"Good\" versus \"Evil,\" the Contagonist is \"Temptation\" to the Guardian's \"Conscience.\" Because the Contagonist",
+      "id": "arc.contagonist",
+      "kind": "archetype",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#contagonist"
+    },
+    {
+      "canonical_label": "Emotion",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Emotional Archetypal Character reacts passionately to turns of events without considering the consequences or best course to achieve his purpose. Frequently portrayed as a \"screamer\" or \"big dumb ox\" this character is really not stupid.",
+      "id": "arc.emotion",
+      "kind": "archetype",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#emotion"
+    },
+    {
+      "canonical_label": "Guardian",
+      "dynamic_pair_id": null,
+      "encoding_hint": "This Archetypal character acts as teacher/helper to the Protagonist. As Conscience, he provides the audience with the story's assessment of what is good and bad in the world it describes.",
+      "id": "arc.guardian",
+      "kind": "archetype",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#guardian"
+    },
+    {
+      "canonical_label": "Protagonist",
+      "dynamic_pair_id": null,
+      "encoding_hint": "An Overall Story Character charged with the responsibility of pursuing a solution to the story's Overall (Objective) problem. An Overall (Objective) problem does not mean it can't be personal.",
+      "id": "arc.protagonist",
+      "kind": "archetype",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#protagonist"
+    },
+    {
+      "canonical_label": "Reason",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Reason Archetypal Character evaluates and acts solely on the basis of calm logic, never becoming enraged, passionate or emotionally involved in a decision. Although common in simple stories, the Reason character is hard to empathize with.",
+      "id": "arc.reason",
+      "kind": "archetype",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#reason"
+    },
+    {
+      "canonical_label": "Sidekick",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Sidekick is the absolutely faithful and supportive member of the Archetypal character set. Although frequently attached to the Protagonist, the Sidekick is identified by what his qualities are, not by who he is working for.",
+      "id": "arc.sidekick",
+      "kind": "archetype",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#sidekick"
+    },
+    {
+      "canonical_label": "Skeptic",
+      "dynamic_pair_id": null,
+      "encoding_hint": "If a Sidekick is a cheer leader, a Skeptic is a heckler. The Skeptic still wants to see its team win, but doesn't think it can and is sure this is because the team members are going about it all wrong.",
+      "id": "arc.skeptic",
+      "kind": "archetype",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#skeptic"
+    },
+    {
+      "canonical_label": "Approach",
+      "dynamic_pair_id": null,
+      "encoding_hint": "By temperament, Main Characters (like each of us) have a preferential method of approaching problems. Some would rather adapt their environment to themselves, others would rather adapt themselves to their environment.",
+      "id": "character-dynamic.approach",
+      "kind": "character-dynamic",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#approach"
+    },
+    {
+      "canonical_label": "Psychology",
+      "dynamic_pair_id": null,
+      "encoding_hint": "ways of thinking, thinking process, activity of the psyche, manipulation of others",
+      "id": "class.psychology",
+      "kind": "class",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/classes.md#psychology"
+    },
+    {
+      "canonical_label": "Archetype",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Meta-entry for the Archetype kind itself. The eight quintessential character arrangements (Antagonist, Contagonist, Emotion, Guardian, Protagonist, Reason, Sidekick, Skeptic) listed below each carry a fixed motivation Element pair.",
+      "id": "concept.archetype",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#archetype-concept"
+    },
+    {
+      "canonical_label": "Aware",
+      "dynamic_pair_id": null,
+      "encoding_hint": "A character that represents Awareness misses nothing that happens around him. A drawback is he may forget to figure himself into the equation.",
+      "id": "el.aware",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.actuality-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#aware"
+    },
+    {
+      "canonical_label": "Consider",
+      "dynamic_pair_id": "el.reconsider",
+      "encoding_hint": "weighing pros and cons -- A Consideration is the act of deliberation. A character possessing the Consideration characteristic keeps pondering an issue, running it over in his mind.",
+      "id": "el.consider",
+      "kind": "element",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#consider"
+    },
+    {
+      "canonical_label": "Deduction",
+      "dynamic_pair_id": "el.induction",
+      "encoding_hint": "a process of thought that determines certainty -Deduction is the process of thought that arrives at a determination of what is by limiting out all that cannot be. It has been said, \"When you have ruled out the impossible, whatever is left, no matter how improbable, must be true.\" The characteristic representing Deduction will arrive at conclusions by eliminating all competing theories that have holes until only one remains.",
+      "id": "el.deduction",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.certainty-potentiality-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#deduction"
+    },
+    {
+      "canonical_label": "Equity",
+      "dynamic_pair_id": "el.inequity",
+      "encoding_hint": "a balance, fairness, or stability -- Equity is balance. The Equity characteristic makes a character want everything to work out fair and square.",
+      "id": "el.equity",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.order-chaos-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#equity"
+    },
+    {
+      "canonical_label": "Feeling",
+      "dynamic_pair_id": "el.logic",
+      "encoding_hint": "an emotional sense of how things are going -- Feeling is the mental process of seeking the most fulfilling course or correct explanation based on emotion. The Feeling characteristic believes \"ya gotta have heart.\" It cares not for what is efficient or even practical as long as it is \"feels\" right.",
+      "id": "el.feeling",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.logic-feeling-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#feeling"
+    },
+    {
+      "canonical_label": "Help",
+      "dynamic_pair_id": "el.hinder",
+      "encoding_hint": "a direct assistance to another's effort to achieve their goal -The Help characteristic assists another's efforts. This can be a real boon to someone struggling to achieve.",
+      "id": "el.help",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.help-hinder-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#help"
+    },
+    {
+      "canonical_label": "Hinder",
+      "dynamic_pair_id": "el.help",
+      "encoding_hint": "a direct detraction from another's effort to achieve their goal -The Hinder characteristic strives to undermine another's efforts. This might be seen as a negative, as it often is.",
+      "id": "el.hinder",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.help-hinder-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#hinder"
+    },
+    {
+      "canonical_label": "Induction",
+      "dynamic_pair_id": "el.deduction",
+      "encoding_hint": "Induction is the process of thought that determines where an unbroken line of causal relationships leads. The purpose is to see if it is possible that something connects to something else.",
+      "id": "el.induction",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.certainty-potentiality-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#induction"
+    },
+    {
+      "canonical_label": "Inequity",
+      "dynamic_pair_id": "el.equity",
+      "encoding_hint": "an unbalance, unfairness, or lack or stability -- When a character focuses on Inequity he is evaluating in terms of what is wrong or unfair with a situation. No matter how much is working right or how much is good, it is the part that is out of balance that occupies his attention.",
+      "id": "el.inequity",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.order-chaos-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#inequity"
+    },
+    {
+      "canonical_label": "Logic",
+      "dynamic_pair_id": "el.feeling",
+      "encoding_hint": "a rational sense of how things are related -- Logic is the mental process of choosing the most efficient course or explanation based on reason. The Logic characteristic exemplifies the theory behind \"Occam's Razor,\" that the simplest explanation is the correct explanation.",
+      "id": "el.logic",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.logic-feeling-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#logic"
+    },
+    {
+      "canonical_label": "Protection",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Protection is the act of building one's defenses against actual and potential threats. Certainly, preparing for problems brings a character advantages should the problems occur.",
+      "id": "el.protection",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.evaluation-re-evaluation-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#protection"
+    },
+    {
+      "canonical_label": "Reconsider",
+      "dynamic_pair_id": "el.consider",
+      "encoding_hint": "questioning a conclusion based on additional information -- The Reconsideration characteristic represents the drive to re-examine one's conclusions to see if they are still valid. This leads to a pragmatic approach to one's own beliefs but also undermines resolve with every new obstacle that crosses one's path.",
+      "id": "el.reconsider",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.pursuit-avoid-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#reconsider"
+    },
+    {
+      "canonical_label": "Influence Character",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Every Main Character has a single Impact Character that forces him to face his personal problems. From the Main Character's point of view, the Impact Character may seem to be blocking the road to the solution of the Main Character's personal problem, or he may seem to be trying to knock the Main Character off the road to the solution.",
+      "id": "throughline.influence",
+      "kind": "throughline",
+      "ktad_position": null,
+      "ncp_appreciation": "Influence Character",
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/main-vs-impact-character.md#impact-character"
+    },
+    {
+      "canonical_label": "Conscious",
+      "dynamic_pair_id": null,
+      "encoding_hint": "considerations, sensibilities, cognizant, ability to consider, sensible, informed contemplation, con",
+      "id": "type.conscious",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#conscious"
+    },
+    {
+      "canonical_label": "Memory",
+      "dynamic_pair_id": null,
+      "encoding_hint": "remembering, recollections, reminiscence, recalling, retention Mind",
+      "id": "type.memory",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#memory"
+    },
+    {
+      "canonical_label": "Preconscious",
+      "dynamic_pair_id": null,
+      "encoding_hint": "unthinking responses, immediate responses, impulse, impulsive response, instinctive response, innate",
+      "id": "type.preconscious",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#preconscious"
+    },
+    {
+      "canonical_label": "Subconscious",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Mind-class Type paired with Preconscious in the dynamic pair Subconscious <--> Preconscious (cf. line 735 above).",
+      "id": "type.subconscious",
+      "kind": "type",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/types.md#subconscious"
+    },
+    {
+      "canonical_label": "Attitude",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Attitude describes the manner in which a character proceeds with an approach. One character might be hard-driven, another laid back.",
+      "id": "var.attitude",
+      "kind": "variation",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.approach-var-physics",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#attitude"
+    },
+    {
+      "canonical_label": "Conditioning",
+      "dynamic_pair_id": "var.instinct",
+      "encoding_hint": "responses based on experience or training -Conditioning describes learned responses to various stimuli. Similar to Instinct in that the Consciousness in not involved until after the fact, Conditioning differs insofar as it was not inherent in the basic nature of a character but acquired though training or familiarity to impose its triggers on the mind.",
+      "id": "var.conditioning",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.senses-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#conditioning"
+    },
+    {
+      "canonical_label": "Instinct",
+      "dynamic_pair_id": "var.conditioning",
+      "encoding_hint": "Instinct describes those built- in responses to situations and circumstances that are not learned, yet drive one to comply with their urges. How much sway they have over an individual depends both upon the nature of the instinct and the intensity of conditioning against the instinct that he has experienced by accident, design, or choice.",
+      "id": "var.instinct",
+      "kind": "variation",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.senses-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#instinct"
+    },
+    {
+      "canonical_label": "Responsibility",
+      "dynamic_pair_id": "var.commitment",
+      "encoding_hint": "the belief that one is best suited to accomplish a task -- The instinct for survival is paramount under normal circumstances. Still, even animals throw themselves into danger to help a human friend.",
+      "id": "var.responsibility",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.rationalization-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#responsibility"
+    },
+    {
+      "canonical_label": "Self-Interest",
+      "dynamic_pair_id": "var.morality",
+      "encoding_hint": "Variation paired with Morality in the approach/physics quad. Heading minted by ST-3 to reify the canonical `var.self-interest` ontology entry; the truncated body fragment (\"doing or being based on what is best for oneself\") survives mid-document below in the broken Security/Self-Awareness sequence and is flagged for re-extraction.",
+      "id": "var.self-interest",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.approach-var-physics",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#self-interest"
+    }
+  ],
+  "scenario_id": "lyric.archetype-as-system-part",
+  "scenario_summary": "Map system architecture roles onto Dramatica archetypes to surface the Element-pair tension between two character-functions.",
+  "schema_version": "0.1"
+}

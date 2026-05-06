@@ -640,6 +640,55 @@ every iteration; halting on breach is the M01 invariant from Task 015.
 
 ## 10. ST-9 Token-Cost Benchmark
 
-(Reserved for ST-9's `precompile.py benchmark` output. Format: scenario-id | prose-path-bytes | precompiled-path-bytes | reduction-% | gate-status.)
+`tools/dramatica-nav/precompile.py benchmark` output, captured against
+`generated_at=2026-05-06` (post-ST-8 ontology v0.1, 257/303 entries
+scenario-tagged). Gate: per-scenario reduction MUST be measurable; AVERAGE
+across all 11 scenarios MUST be <=60% of the prose path. Average passing
+the gate is binding — failure deletes `precompiled/` and closes §Goal #4
+without landing the layer.
+
+| scenario-id                    | prose-path-bytes | precompiled-path-bytes | reduction-% | gate-status |
+| :----------------------------- | ---------------: | ---------------------: | ----------: | :---------- |
+| novel.storyform-slot-fill      |          103,116 |                 42,027 |       40.8% | PASS        |
+| novel.act-pivot                |           51,601 |                 24,439 |       47.4% | PASS        |
+| novel.crucial-element-audit    |          105,522 |                 39,280 |       37.2% | PASS        |
+| novel.character-arc            |           94,472 |                 39,108 |       41.4% | PASS        |
+| novel.diagnose-flat-draft      |           81,856 |                 32,635 |       39.9% | PASS        |
+| novel.dual-storyform           |           90,411 |                 31,069 |       34.4% | PASS        |
+| lyric.verse-chorus-pair        |           54,259 |                 24,362 |       44.9% | PASS        |
+| lyric.bridge-pivot             |           71,444 |                 30,642 |       42.9% | PASS        |
+| lyric.album-arc-mapping        |           77,406 |                 28,578 |       36.9% | PASS        |
+| lyric.archetype-as-system-part |           65,329 |                 28,335 |       43.4% | PASS        |
+| lyric.refrain-as-restatement   |           58,575 |                 25,064 |       42.8% | PASS        |
+
+**Average reduction: 41.1%** (gate <=60%) -> **PASS**. The precompiled layer
+lands; ST-9 §Goal #4 is satisfied.
+
+**Methodology.**
+
+- *Prose path* = `len(json.dumps(nav.py by-scenario <id>))` bytes plus the
+  utf-8 byte length of every `term_file` prose section that an agent would
+  read for entries of kind ∈ {class, type, variation, element, archetype,
+  character-dynamic, plot-dynamic, storypoint, signpost-slot, throughline,
+  concept}. Quad and dynamic-pair standalone entries do not contribute to
+  the prose denominator because their `term_file` is sparse / null.
+- *Precompiled path* = `len(precompiled/<scenario>.json)` on disk.
+- Both numbers are pre-tokeniser bytes; the ratio is invariant under any
+  reasonable byte-pair encoding so it stands in for token cost.
+
+**Friction events (ST-9):**
+
+- **FE-ST9-1.** Some `term_file` pointers exist on entries without an
+  actual heading at the anchor (caught by `validate.py`'s
+  term_file-anchor warning, deferred). When the anchor does not resolve,
+  `_load_prose_for_entry` returns `None`, `synthesise_encoding_hint`
+  returns `None`, and the bundle records `encoding_hint: null`. This is
+  the documented "needs-prose" surface; consumers MUST tolerate the null.
+- **FE-ST9-2.** `kind=quad` and `kind=dynamic-pair` carry no `term_file`
+  most of the time (derived entries; see ST-8 FE-ST8-3). They land in
+  `primary_quads` / `primary_pairs` arrays without hints and without
+  contributing to the prose-path denominator. The reduction percentages
+  therefore measure the term-prose surface specifically, which is the
+  surface a consumer actually pays for.
 
 
