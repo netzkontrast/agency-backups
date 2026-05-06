@@ -38,6 +38,8 @@ All work here MUST conform to [`RESEARCH.md`](../RESEARCH.md). Frontmatter and c
 See [`RESEARCH.md`](../RESEARCH.md) §6 for ingestion rules.
 
 - [`gemini/github-skillmd-novel-authoring-de-en/result.md`](./gemini/github-skillmd-novel-authoring-de-en/result.md) — Gemini analysis of GitHub repos with SKILL.md-conformant novel-authoring capabilities (DE/EN). Downstream analysis: [`tasks/003-analyze-skillmd-novel-authoring/`](../tasks/003-analyze-skillmd-novel-authoring/).
+- [`gemini/agency-adr-governance-spec/`](./gemini/agency-adr-governance-spec/) — Gemini-authored ADR governance spec (§0–§9) — MDL compression + supersession DAG paradigm. Downstream analysis: [`tasks/027-adr-spec-research-synthesis/`](../tasks/027-adr-spec-research-synthesis/) → implemented in [`tasks/031-adr-tooling-impl/`](../tasks/031-adr-tooling-impl/).
+- [`gemini/superclaude-agency-orchestration-spec/`](./gemini/superclaude-agency-orchestration-spec/) — Gemini-authored SuperClaude Orchestration & Meta-Governance spec (§0–§10) proposing workspace↔command↔MCP-server mapping and `SC.CMD.*` Gherkin anchors. Self-asserts binding status; binding decision pending. Downstream analysis: [`tasks/040-superclaude-spec-evaluation/`](../tasks/040-superclaude-spec-evaluation/).
 
 ## Workflow Assumptions
 
