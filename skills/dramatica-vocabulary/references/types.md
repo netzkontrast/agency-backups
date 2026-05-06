@@ -56,9 +56,11 @@ canonical_label: Becoming
 provenance: source-original
 aliases_de:
 - Werden
+class_id: class.psychology
 scenarios:
 - novel.act-pivot
-class_id: class.psychology
+- novel.character-arc
+- novel.crucial-element-audit
 ```
 
 
@@ -79,9 +81,11 @@ canonical_label: Being
 provenance: source-original
 aliases_de:
 - Sein
+class_id: class.psychology
 scenarios:
 - novel.act-pivot
-class_id: class.psychology
+- novel.character-arc
+- novel.crucial-element-audit
 ```
 
 
@@ -119,6 +123,8 @@ provenance: source-original
 class_id: class.psychology
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- novel.crucial-element-audit
 ```
 
 
@@ -141,6 +147,8 @@ provenance: source-original
 class_id: class.psychology
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- novel.crucial-element-audit
 ```
 
 
@@ -182,6 +190,8 @@ provenance: source-original
 class_id: class.mind
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- lyric.archetype-as-system-part
 ```
 
 
@@ -303,15 +313,17 @@ id: type.doing
 kind: type
 canonical_label: Doing
 provenance: source-original
-aliases_en:
-- executing
-- performing
 aliases_de:
 - Handeln
 - Tun
+aliases_en:
+- executing
+- performing
+class_id: class.physics
 scenarios:
 - novel.act-pivot
-class_id: class.physics
+- novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 
@@ -375,9 +387,11 @@ canonical_label: Future
 provenance: source-original
 aliases_de:
 - Zukunft
+class_id: class.universe
 scenarios:
 - novel.act-pivot
-class_id: class.universe
+- novel.character-arc
+- lyric.album-arc-mapping
 ```
 
 
@@ -447,6 +461,8 @@ provenance: source-original
 class_id: class.physics
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 
@@ -469,6 +485,8 @@ provenance: source-original
 class_id: class.mind
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- lyric.archetype-as-system-part
 ```
 
 
@@ -495,9 +513,11 @@ canonical_label: Obtaining
 provenance: source-original
 aliases_en:
 - controlling for
+class_id: class.physics
 scenarios:
 - novel.act-pivot
-class_id: class.physics
+- novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 
@@ -669,9 +689,11 @@ canonical_label: Past
 provenance: source-original
 aliases_de:
 - Vergangenheit
+class_id: class.universe
 scenarios:
 - novel.act-pivot
-class_id: class.universe
+- novel.character-arc
+- lyric.album-arc-mapping
 ```
 
 
@@ -799,6 +821,8 @@ provenance: source-original
 class_id: class.mind
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- lyric.archetype-as-system-part
 ```
 
 
@@ -868,9 +892,11 @@ canonical_label: Present
 provenance: source-original
 aliases_de:
 - Gegenwart
+class_id: class.universe
 scenarios:
 - novel.act-pivot
-class_id: class.universe
+- novel.character-arc
+- lyric.album-arc-mapping
 ```
 
 
@@ -926,9 +952,11 @@ canonical_label: Progress
 provenance: source-original
 aliases_de:
 - Fortschritt
+class_id: class.universe
 scenarios:
 - novel.act-pivot
-class_id: class.universe
+- novel.character-arc
+- lyric.album-arc-mapping
 ```
 
 
@@ -1124,11 +1152,13 @@ id: type.subconscious
 kind: type
 canonical_label: Subconscious
 provenance: source-original
-class_id: class.mind
 aliases_en:
 - Innermost Desires
+class_id: class.mind
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- lyric.archetype-as-system-part
 ```
 
 
@@ -1292,16 +1322,18 @@ id: type.understanding
 kind: type
 canonical_label: Understanding
 provenance: source-original
+aliases_de:
+- Verständnis
 aliases_en:
 - appreciating
 - comprehending
 - grasping
 - obtaining meaning
-aliases_de:
-- Verständnis
+class_id: class.physics
 scenarios:
 - novel.act-pivot
-class_id: class.physics
+- novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 

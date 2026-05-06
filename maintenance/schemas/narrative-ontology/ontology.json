@@ -2843,7 +2843,9 @@
       "class_id": "class.psychology",
       "term_file": "skills/dramatica-vocabulary/references/types.md#becoming",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "novel.crucial-element-audit"
       ],
       "aliases_de": [
         "Werden"
@@ -2857,7 +2859,9 @@
       "class_id": "class.psychology",
       "term_file": "skills/dramatica-vocabulary/references/types.md#being",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "novel.crucial-element-audit"
       ],
       "aliases_de": [
         "Sein"
@@ -2871,7 +2875,9 @@
       "class_id": "class.psychology",
       "term_file": "skills/dramatica-vocabulary/references/types.md#conceiving",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "novel.crucial-element-audit"
       ]
     },
     {
@@ -2882,7 +2888,9 @@
       "class_id": "class.psychology",
       "term_file": "skills/dramatica-vocabulary/references/types.md#conceptualizing",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "novel.crucial-element-audit"
       ]
     },
     {
@@ -2893,7 +2901,9 @@
       "class_id": "class.mind",
       "term_file": "skills/dramatica-vocabulary/references/types.md#conscious",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "lyric.archetype-as-system-part"
       ]
     },
     {
@@ -2904,7 +2914,9 @@
       "class_id": "class.physics",
       "term_file": "skills/dramatica-vocabulary/references/types.md#doing",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "novel.diagnose-flat-draft"
       ],
       "aliases_en": [
         "executing",
@@ -2923,7 +2935,9 @@
       "class_id": "class.universe",
       "term_file": "skills/dramatica-vocabulary/references/types.md#future",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "lyric.album-arc-mapping"
       ],
       "aliases_de": [
         "Zukunft"
@@ -2937,7 +2951,9 @@
       "class_id": "class.physics",
       "term_file": "skills/dramatica-vocabulary/references/types.md#learning",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -2948,7 +2964,9 @@
       "class_id": "class.mind",
       "term_file": "skills/dramatica-vocabulary/references/types.md#memory",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "lyric.archetype-as-system-part"
       ]
     },
     {
@@ -2959,7 +2977,9 @@
       "class_id": "class.physics",
       "term_file": "skills/dramatica-vocabulary/references/types.md#obtaining",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "novel.diagnose-flat-draft"
       ],
       "aliases_en": [
         "controlling for"
@@ -2987,7 +3007,9 @@
       "class_id": "class.mind",
       "term_file": "skills/dramatica-vocabulary/references/types.md#preconscious",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "lyric.archetype-as-system-part"
       ]
     },
     {
@@ -3012,7 +3034,9 @@
       "class_id": "class.universe",
       "term_file": "skills/dramatica-vocabulary/references/types.md#progress",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "lyric.album-arc-mapping"
       ],
       "aliases_de": [
         "Fortschritt"
@@ -3026,7 +3050,9 @@
       "class_id": "class.mind",
       "term_file": "skills/dramatica-vocabulary/references/types.md#subconscious",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "lyric.archetype-as-system-part"
       ],
       "aliases_en": [
         "Innermost Desires"
@@ -3040,7 +3066,9 @@
       "class_id": "class.physics",
       "term_file": "skills/dramatica-vocabulary/references/types.md#understanding",
       "scenarios": [
-        "novel.act-pivot"
+        "novel.act-pivot",
+        "novel.character-arc",
+        "novel.diagnose-flat-draft"
       ],
       "aliases_en": [
         "appreciating",
@@ -3067,6 +3095,11 @@
         "innate capacity",
         "knack",
         "talent"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.character-arc",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -3078,7 +3111,12 @@
       "type_id": "type.doing",
       "quad_id": "quad.strategy-var",
       "ktad_position": "T",
-      "dynamic_pair_id": "var.strategy"
+      "dynamic_pair_id": "var.strategy",
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
+      ]
     },
     {
       "id": "var.appraisal",
@@ -3089,6 +3127,11 @@
       "dynamic_pair_id": "var.reappraisal",
       "aliases_en": [
         "first impres"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3104,6 +3147,11 @@
         "speculative endeavor",
         "try",
         "uncertain undertaking"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3118,6 +3166,11 @@
       "aliases_en": [
         "demeanor",
         "manner of"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.archetype-as-system-part",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -3137,6 +3190,11 @@
         "escape",
         "evade",
         "steer clear of"
+      ],
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.bridge-pivot",
+        "novel.crucial-element-audit"
       ]
     },
     {
@@ -3144,7 +3202,12 @@
       "kind": "variation",
       "canonical_label": "Catalyst",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/variations.md#catalyst"
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#catalyst",
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.bridge-pivot",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "var.choice",
@@ -3159,6 +3222,11 @@
         "decision",
         "pick",
         "selection"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "novel.act-pivot"
       ]
     },
     {
@@ -3172,6 +3240,11 @@
         "emotional evaluation of the environment",
         "how things stand emotionally",
         "value of existing"
+      ],
+      "scenarios": [
+        "novel.dual-storyform",
+        "lyric.album-arc-mapping",
+        "novel.crucial-element-audit"
       ]
     },
     {
@@ -3189,6 +3262,11 @@
         "finishing",
         "recursive",
         "resolution"
+      ],
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3203,6 +3281,11 @@
       "dynamic_pair_id": "var.responsibility",
       "aliases_en": [
         "dedication"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.character-arc",
+        "novel.act-pivot"
       ]
     },
     {
@@ -3220,6 +3303,11 @@
         "adaptive adjustments",
         "habituation",
         "trained response"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.archetype-as-system-part",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -3234,6 +3322,11 @@
       "aliases_en": [
         "hopeful prospects",
         "positive"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.character-arc",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -3248,6 +3341,11 @@
         "character flaw",
         "critical flaw",
         "flaw"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -3259,6 +3357,11 @@
       "dynamic_pair_id": "var.permission",
       "aliases_en": [
         "inadequacy"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -3274,6 +3377,11 @@
         "defer",
         "postpone",
         "put off"
+      ],
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.bridge-pivot",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -3290,6 +3398,11 @@
         "not accepting",
         "refusal to end",
         "unwillingness to let go"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.dual-storyform",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3300,7 +3413,12 @@
       "term_file": "skills/dramatica-vocabulary/references/variations.md#destiny",
       "quad_id": "quad.fate-var",
       "ktad_position": "T",
-      "dynamic_pair_id": "var.fate"
+      "dynamic_pair_id": "var.fate",
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "var.doubt",
@@ -3312,6 +3430,11 @@
       "aliases_en": [
         "pessimism",
         "uninformed"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.diagnose-flat-draft",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3329,6 +3452,11 @@
         "aspire",
         "desiring the unlikely",
         "pulling for the doubtful"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.crucial-element-audit",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -3346,6 +3474,11 @@
         "insight",
         "intuitive discernment",
         "transcendent"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.crucial-element-audit",
+        "lyric.album-arc-mapping"
       ]
     },
     {
@@ -3360,6 +3493,11 @@
       "dynamic_pair_id": "var.suspicion",
       "aliases_en": [
         "proof"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3373,6 +3511,11 @@
         "advisability",
         "convenience",
         "prudent"
+      ],
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -3391,6 +3534,11 @@
         "familiarization",
         "level of practice",
         "seasoning"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -3404,6 +3552,11 @@
         "belief in the genuine",
         "truly real",
         "ultimately real beliefs"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3420,6 +3573,11 @@
         "erroneous notion",
         "erroneousness",
         "untruth"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3431,6 +3589,11 @@
       "dynamic_pair_id": "var.fact",
       "aliases_en": [
         "false belief"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.crucial-element-audit",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -3445,6 +3608,11 @@
       "aliases_en": [
         "inevitable events",
         "unpreventable"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -3461,6 +3629,11 @@
         "desired expectation",
         "moving forward",
         "optimistic anticipation"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.refrain-as-restatement",
+        "lyric.album-arc-mapping"
       ]
     },
     {
@@ -3476,6 +3649,11 @@
       "aliases_en": [
         "innate",
         "involuntary drive"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.archetype-as-system-part",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3489,6 +3667,11 @@
       "dynamic_pair_id": "var.prediction",
       "aliases_en": [
         "altering the"
+      ],
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.bridge-pivot",
+        "novel.crucial-element-audit"
       ]
     },
     {
@@ -3506,6 +3689,11 @@
         "elucidate",
         "rendering meaning",
         "rendition"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3520,6 +3708,11 @@
         "probe",
         "research",
         "sleuthing"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3527,7 +3720,12 @@
       "kind": "variation",
       "canonical_label": "Issue",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/variations.md#issue"
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#issue",
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "var.morality",
@@ -3544,6 +3742,11 @@
         "benevolence",
         "generosity",
         "selflessness"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.crucial-element-audit",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -3552,7 +3755,12 @@
       "canonical_label": "Need",
       "provenance": "source-original",
       "term_file": "skills/dramatica-vocabulary/references/variations.md#need",
-      "dynamic_pair_id": "var.expediency"
+      "dynamic_pair_id": "var.expediency",
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "lyric.refrain-as-restatement"
+      ]
     },
     {
       "id": "var.obligation",
@@ -3567,6 +3775,11 @@
       "aliases_en": [
         "agreement",
         "pledge"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.crucial-element-audit",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -3580,6 +3793,11 @@
       "dynamic_pair_id": "var.preconception",
       "aliases_en": [
         "broad"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.verse-chorus-pair",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3593,6 +3811,11 @@
         "constrained ability",
         "limited capability",
         "restricted"
+      ],
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.bridge-pivot",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -3607,6 +3830,11 @@
       "aliases_en": [
         "closed",
         "prejudice"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.diagnose-flat-draft",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3621,6 +3849,11 @@
       "aliases_en": [
         "foreseeing",
         "foresight"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3633,6 +3866,11 @@
         "fabricated excuse",
         "false",
         "ulterior explanation"
+      ],
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "lyric.album-arc-mapping",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3644,7 +3882,12 @@
       "type_id": "type.conceiving",
       "quad_id": "quad.rationalization-var",
       "ktad_position": "K",
-      "dynamic_pair_id": "var.obligation"
+      "dynamic_pair_id": "var.obligation",
+      "scenarios": [
+        "novel.character-arc",
+        "novel.diagnose-flat-draft",
+        "lyric.bridge-pivot"
+      ]
     },
     {
       "id": "var.reappraisal",
@@ -3659,6 +3902,11 @@
         "reassess",
         "rechecking",
         "reevaluating a"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3672,6 +3920,11 @@
         "foreboding",
         "repellent",
         "unattractive"
+      ],
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.bridge-pivot",
+        "novel.crucial-element-audit"
       ]
     },
     {
@@ -3689,6 +3942,11 @@
         "assumed propriety",
         "believed appropriateness",
         "self designated aptness"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.archetype-as-system-part",
+        "lyric.album-arc-mapping"
       ]
     },
     {
@@ -3710,6 +3968,11 @@
         "self-conscious",
         "self-serving",
         "selfishness"
+      ],
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -3721,14 +3984,24 @@
       "type_id": "type.obtaining",
       "quad_id": "quad.approach-var-physics",
       "ktad_position": "A",
-      "dynamic_pair_id": "var.morality"
+      "dynamic_pair_id": "var.morality",
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.archetype-as-system-part",
+        "lyric.refrain-as-restatement"
+      ]
     },
     {
       "id": "var.sense-of-self",
       "kind": "variation",
       "canonical_label": "Sense of Self",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/variations.md#sense-of-self"
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#sense-of-self",
+      "scenarios": [
+        "novel.character-arc",
+        "novel.crucial-element-audit",
+        "lyric.refrain-as-restatement"
+      ]
     },
     {
       "id": "var.senses",
@@ -3744,6 +4017,11 @@
         "perceptual data",
         "raw sensations",
         "sensory impressions"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3755,6 +4033,11 @@
       "dynamic_pair_id": "var.circumstances",
       "aliases_en": [
         "how things"
+      ],
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -3771,6 +4054,11 @@
         "aptitude",
         "competence",
         "proficiency"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.character-arc",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -3792,6 +4080,11 @@
         "ploy",
         "scheme",
         "tactic"
+      ],
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.act-pivot",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3809,6 +4102,11 @@
         "informed doubt",
         "partially justified apprehensiveness",
         "wary approach"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -3820,6 +4118,11 @@
       "dynamic_pair_id": "var.security",
       "aliases_en": [
         "perceived"
+      ],
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -3837,6 +4140,11 @@
         "correct notion",
         "honesty",
         "verity"
+      ],
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -3844,7 +4152,12 @@
       "kind": "variation",
       "canonical_label": "Unique Ability",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/variations.md#unique-ability"
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#unique-ability",
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "var.value",
@@ -3860,6 +4173,11 @@
         "general usefulness",
         "objective appraisal",
         "utility"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -3874,6 +4192,11 @@
       "dynamic_pair_id": "var.enlightenment",
       "aliases_en": [
         "mental mastery"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.album-arc-mapping",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -3905,6 +4228,11 @@
         "anxiety",
         "apprehension",
         "misgivings"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.diagnose-flat-draft",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -3916,7 +4244,12 @@
       "type_id": "type.conscious",
       "quad_id": "quad.value-var",
       "ktad_position": "T",
-      "dynamic_pair_id": "var.value"
+      "dynamic_pair_id": "var.value",
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.crucial-element-audit",
+        "lyric.bridge-pivot"
+      ]
     }
   ]
 }
