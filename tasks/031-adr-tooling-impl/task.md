@@ -1,12 +1,12 @@
 ---
 type: task
-status: active
+status: completed
 slug: adr-tooling-impl
 summary: "Successor to Task 028 (plan-only). Implements the agency-adr CLI suite (validate / synthesize), tests, GitHub Actions workflow, governance hook integration, and AGENTS.md guarded-section markers per the build contract in tasks/028-adr-tooling-impl-plan/implementation-plan.md."
 created: 2026-05-06
 updated: 2026-05-06
 task_id: "031"
-task_status: in_progress
+task_status: done
 task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts:
@@ -72,8 +72,8 @@ Land the `agency-adr` CLI suite specified by [Task 028's implementation plan](..
 - [x] 13. Author `.github/workflows/adr-validate.yml`.
 - [x] 14. Apply PR #67 review T.1–T.4 fixes.
 - [x] 15. Run pytest + governance gate; commit; push (commits `97719e7`, `1643110`, `01c8a96`, `6a30991`).
-- [ ] 16. PR #67 `adr-validate` CI job exits 0 on the head commit.
-- [ ] 17. PR #67 merges to `main`; flip `task_status: done` and finalise [`./friction-log.md`](./friction-log.md).
+- [x] 16. PR #67 `adr-validate` CI job exits 0 on the head commit.
+- [x] 17. PR #67 merged to `main` (merge commit `bf90826`); `task_status` flipped to `done` and [`./friction-log.md`](./friction-log.md) finalised.
 
 ## Links
 
