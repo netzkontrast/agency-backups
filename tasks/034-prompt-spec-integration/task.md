@@ -9,7 +9,11 @@ task_id: "034"
 task_status: open
 task_owner: "unassigned"
 task_priority: P2
-task_uses_prompts: []
+task_uses_prompts:
+  - research-prompt-engineering-principle-mechanizability
+  - tooling-self-containedness-checker
+  - tooling-framework-declaration-validator
+  - spec-amendment-prompt-md
 task_spawns_research: []
 task_spawns_prompts: []
 task_affects_paths:

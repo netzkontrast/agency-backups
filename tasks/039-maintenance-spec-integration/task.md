@@ -9,7 +9,13 @@ task_id: "039"
 task_status: open
 task_owner: "unassigned"
 task_priority: P1
-task_uses_prompts: []
+task_uses_prompts:
+  - research-toolchain-flip-criteria
+  - research-staleness-decision-formalization
+  - tooling-staleness-audit-script
+  - tooling-dynamic-readme-partition-linter
+  - tooling-trust-audit-integration
+  - spec-amendment-maintenance-md
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by: []

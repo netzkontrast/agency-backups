@@ -9,7 +9,11 @@ task_id: "037"
 task_status: open
 task_owner: "unassigned"
 task_priority: P2
-task_uses_prompts: []
+task_uses_prompts:
+  - research-pre-commit-readme-update-cadence
+  - tooling-clean-working-directory-linter
+  - tooling-per-rule-waiver-mechanism
+  - spec-amendment-pre-commit-md
 task_spawns_research: []
 task_spawns_prompts: []
 task_affects_paths:

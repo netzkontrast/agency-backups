@@ -9,7 +9,12 @@ task_id: "035"
 task_status: open
 task_owner: "unassigned"
 task_priority: P1
-task_uses_prompts: []
+task_uses_prompts:
+  - research-session-continuity-protocol-instantiation
+  - tooling-workspace-cleanliness-linter
+  - tooling-external-result-downstream-task-linter
+  - tooling-trust-audit-gate
+  - spec-amendment-research-md
 task_spawns_research: []
 task_spawns_prompts: []
 task_affects_paths:
