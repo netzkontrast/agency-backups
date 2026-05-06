@@ -1,0 +1,658 @@
+{
+  "consumer_hints": {
+    "ncp-author": "primary_terms[].ncp_appreciation maps each entry to its closest NCP enum (or null when absent — archetypes / quads / dynamic-pairs / concepts have no NCP target).",
+    "novel-architect": "Load this file when answering lyric.bridge-pivot queries; cite ontology entries by id, not label."
+  },
+  "generated_at": "2026-05-06",
+  "generated_from_ontology_version": "0.1",
+  "persona": "lyric",
+  "primary_pairs": [
+    {
+      "canonical_label": "Conscience ↔ Temptation",
+      "id": "dp.conscience-temptation",
+      "pair_member_a": "el.conscience",
+      "pair_member_b": "el.temptation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Conscious ↔ Memory",
+      "id": "dp.conscious-memory",
+      "pair_member_a": "type.conscious",
+      "pair_member_b": "type.memory",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Consider ↔ Reconsider",
+      "id": "dp.consider-reconsider",
+      "pair_member_a": "el.consider",
+      "pair_member_b": "el.reconsider",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Control ↔ Uncontrolled",
+      "id": "dp.control-uncontrolled",
+      "pair_member_a": "el.control",
+      "pair_member_b": "el.uncontrolled",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Deduction ↔ Induction",
+      "id": "dp.deduction-induction",
+      "pair_member_a": "el.deduction",
+      "pair_member_b": "el.induction",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Deficiency ↔ Permission",
+      "id": "dp.deficiency-permission",
+      "pair_member_a": "var.deficiency",
+      "pair_member_b": "var.permission",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Destiny ↔ Fate",
+      "id": "dp.destiny-fate",
+      "pair_member_a": "var.destiny",
+      "pair_member_b": "var.fate",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Determination ↔ Expectation",
+      "id": "dp.determination-expectation",
+      "pair_member_a": "el.determination",
+      "pair_member_b": "el.expectation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Disbelief ↔ Faith",
+      "id": "dp.disbelief-faith",
+      "pair_member_a": "el.disbelief",
+      "pair_member_b": "el.faith",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Doing ↔ Obtaining",
+      "id": "dp.doing-obtaining",
+      "pair_member_a": "type.doing",
+      "pair_member_b": "type.obtaining",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Doubt ↔ Investigation",
+      "id": "dp.doubt-investigation",
+      "pair_member_a": "var.doubt",
+      "pair_member_b": "var.investigation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Dream ↔ Hope",
+      "id": "dp.dream-hope",
+      "pair_member_a": "var.dream",
+      "pair_member_b": "var.hope",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Ending ↔ Unending",
+      "id": "dp.ending-unending",
+      "pair_member_a": "el.ending",
+      "pair_member_b": "el.unending",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Enlightenment ↔ Wisdom",
+      "id": "dp.enlightenment-wisdom",
+      "pair_member_a": "var.enlightenment",
+      "pair_member_b": "var.wisdom",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Equity ↔ Inequity",
+      "id": "dp.equity-inequity",
+      "pair_member_a": "el.equity",
+      "pair_member_b": "el.inequity",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    }
+  ],
+  "primary_quads": [
+    {
+      "canonical_label": "Actuality",
+      "id": "quad.actuality-el",
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+    },
+    {
+      "canonical_label": "Conscience / Temptation",
+      "id": "quad.conscience-temptation-el",
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+    },
+    {
+      "canonical_label": "Effect / Cause",
+      "id": "quad.effect-cause-el",
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+    },
+    {
+      "canonical_label": "Help / Hinder",
+      "id": "quad.help-hinder-el",
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+    },
+    {
+      "canonical_label": "Knowledge",
+      "id": "quad.knowledge-el",
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+    },
+    {
+      "canonical_label": "Logic / Feeling",
+      "id": "quad.logic-feeling-el",
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+    },
+    {
+      "canonical_label": "Order / Chaos",
+      "id": "quad.order-chaos-el",
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+    },
+    {
+      "canonical_label": "Pursuit / Avoid",
+      "id": "quad.pursuit-avoid-el",
+      "term_file": "skills/dramatica-vocabulary/references/element-quads.md"
+    }
+  ],
+  "primary_terms": [
+    {
+      "canonical_label": "Certainty",
+      "dynamic_pair_id": "el.potentiality",
+      "encoding_hint": "a conclusion that something is absolutely true -- The character representing the Certainty characteristic is not a risk taker. It must be completely sure before it takes action or accepts information as true.",
+      "id": "el.certainty",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.certainty-potentiality-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#certainty"
+    },
+    {
+      "canonical_label": "Change",
+      "dynamic_pair_id": "el.inertia",
+      "encoding_hint": "Element paired with Inertia in the inertia/change quad. Heading minted by ST-3 to satisfy the canonical entry recorded in `el.change` (Task 015 §Plan Step 4 added the ontology entry; the source heading was never created).",
+      "id": "el.change",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.inertia-change-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#change"
+    },
+    {
+      "canonical_label": "Consider",
+      "dynamic_pair_id": "el.reconsider",
+      "encoding_hint": "weighing pros and cons -- A Consideration is the act of deliberation. A character possessing the Consideration characteristic keeps pondering an issue, running it over in his mind.",
+      "id": "el.consider",
+      "kind": "element",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#consider"
+    },
+    {
+      "canonical_label": "Evaluation",
+      "dynamic_pair_id": "el.reevaluation",
+      "encoding_hint": "an appraisal of a situation and/or circumstances -- Evaluation is the meaning a character finds in a situation or circumstances. Rather than just grappling with the bits and pieces, the character creates an understanding of how all the parts fit together.",
+      "id": "el.evaluation",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.evaluation-re-evaluation-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#evaluation"
+    },
+    {
+      "canonical_label": "Inaction",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Inaction does not mean simply sitting still. The Inactive characteristic might choose to allow a course of action by not interfering.",
+      "id": "el.inaction",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.evaluation-re-evaluation-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#inaction"
+    },
+    {
+      "canonical_label": "Induction",
+      "dynamic_pair_id": "el.deduction",
+      "encoding_hint": "Induction is the process of thought that determines where an unbroken line of causal relationships leads. The purpose is to see if it is possible that something connects to something else.",
+      "id": "el.induction",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.certainty-potentiality-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#induction"
+    },
+    {
+      "canonical_label": "Inertia",
+      "dynamic_pair_id": "el.change",
+      "encoding_hint": "a continuation of a state or process -- Inertia is a tendency to maintain the status quo. That which is moving wants to keep moving.",
+      "id": "el.inertia",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.inertia-change-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#inertia"
+    },
+    {
+      "canonical_label": "Proaction",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Proactive characteristic will urge a character to begin problem solving on his own. This character will be a self-starter who is up and at it the moment he realizes a potential problem exists.",
+      "id": "el.proaction",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.acceptance-reaction-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#proaction"
+    },
+    {
+      "canonical_label": "Production",
+      "dynamic_pair_id": "el.reduction",
+      "encoding_hint": "a process of thought that determines potential -Production is a process of thought that determines potential. Almost like deduction in reverse, rather than arriving at a present truth by limiting out what cannot be, Production arrives at a future truth by limiting out what can not happen.",
+      "id": "el.production",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.production-reduction-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#production"
+    },
+    {
+      "canonical_label": "Reaction",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Reaction characteristic leads a character to strike back at the source of a problem. Reaction is less precipitous than Proaction requiring the problem to materialize before it acts.",
+      "id": "el.reaction",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.acceptance-reaction-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#reaction"
+    },
+    {
+      "canonical_label": "Reconsider",
+      "dynamic_pair_id": "el.consider",
+      "encoding_hint": "questioning a conclusion based on additional information -- The Reconsideration characteristic represents the drive to re-examine one's conclusions to see if they are still valid. This leads to a pragmatic approach to one's own beliefs but also undermines resolve with every new obstacle that crosses one's path.",
+      "id": "el.reconsider",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.pursuit-avoid-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#reconsider"
+    },
+    {
+      "canonical_label": "Reduction",
+      "dynamic_pair_id": "el.production",
+      "encoding_hint": "a process of thought that determines probability - Reduction is a process of thought that compares the likelihood of several incomplete lines of deduction. Sometimes there is not enough information to fully deduce the ultimate truth in a matter.",
+      "id": "el.reduction",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.production-reduction-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#reduction"
+    },
+    {
+      "canonical_label": "Reevaluation",
+      "dynamic_pair_id": "el.evaluation",
+      "encoding_hint": "a reappraisal of a situation or circumstances -- Reevaluation is the act of reconsidering one's first impressions. This may be in regard to a person, situation, goal, or even oneself.",
+      "id": "el.reevaluation",
+      "kind": "element",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#reevaluation"
+    },
+    {
+      "canonical_label": "Analysis",
+      "dynamic_pair_id": "var.strategy",
+      "encoding_hint": ">Analysis -evaluation of the situation and/or circumstances -Analysis sits on one side of planning a",
+      "id": "var.analysis",
+      "kind": "variation",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.strategy-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#analysis"
+    },
+    {
+      "canonical_label": "Appraisal",
+      "dynamic_pair_id": "var.reappraisal",
+      "encoding_hint": "an initial understanding -- When determining which parts of evidence he should investigate and which parts he doubts and therefore chooses to ignore, a character makes an initial Appraisal of where the evidence seems to be leading. Although there is not enough evidence to really draw a conclusion, there is enough to indicate the direction evidence seems to be leading.",
+      "id": "var.appraisal",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#appraisal"
+    },
+    {
+      "canonical_label": "Attempt",
+      "dynamic_pair_id": "var.work",
+      "encoding_hint": "When there is a question as to the match-up of one's abilities to the demands of a task, one may still elect to attempt to complete the task. However, sometimes a character has lost sight of the purpose of the task or underestimated his progress and has actually done the work while continuing to try beyond the point originally aimed at.",
+      "id": "var.attempt",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#attempt"
+    },
+    {
+      "canonical_label": "Attraction",
+      "dynamic_pair_id": "var.repulsion",
+      "encoding_hint": "drawing or being drawn to something -- How hard should one try? How much work should one do?",
+      "id": "var.attraction",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#attraction"
+    },
+    {
+      "canonical_label": "Catalyst",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Catalyst is what creates breakthroughs and seems to",
+      "id": "var.catalyst",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#catalyst"
+    },
+    {
+      "canonical_label": "Closure",
+      "dynamic_pair_id": "var.denial",
+      "encoding_hint": "Closure can be seen in two ways. One, it can be an ending.",
+      "id": "var.closure",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.hope-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#closure"
+    },
+    {
+      "canonical_label": "Delay",
+      "dynamic_pair_id": "var.choice",
+      "encoding_hint": "putting off until later -- Delay is the decision not to make a decision. Whenever the options are too closely balanced to see a clear path, whenever there is not enough information to be confident of an outcome, a character will Delay.",
+      "id": "var.delay",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.openness-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#delay"
+    },
+    {
+      "canonical_label": "Denial",
+      "dynamic_pair_id": "var.closure",
+      "encoding_hint": "the refusal to let something go -- Denial is the refusal to accept that something is or has become closed. How many people continue to make a point after they have won the argument?",
+      "id": "var.denial",
+      "kind": "variation",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.hope-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#denial"
+    },
+    {
+      "canonical_label": "Doubt",
+      "dynamic_pair_id": "var.investigation",
+      "encoding_hint": ">Doubt -questioning validity without investigating to be sure -Here Doubt is defined as the lack of",
+      "id": "var.doubt",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#doubt"
+    },
+    {
+      "canonical_label": "Evidence",
+      "dynamic_pair_id": "var.suspicion",
+      "encoding_hint": "Evidence is information one gathers to develop an understanding about something. When looking at Evidence, a character does not necessarily have to know exactly what he is looking for, just that the information pertains to the nature of what he is trying to learn about.",
+      "id": "var.evidence",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.truth-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#evidence"
+    },
+    {
+      "canonical_label": "Expediency",
+      "dynamic_pair_id": "var.need",
+      "encoding_hint": "most efficient course considering repercussions -- It is important not to consider Expediency as only meaning efficiency. In terms of story, Expediency describes what a character feels he must do or be in order to",
+      "id": "var.expediency",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#expediency"
+    },
+    {
+      "canonical_label": "Fact",
+      "dynamic_pair_id": "var.fantasy",
+      "encoding_hint": "belief in something real -- Fact is something that is truly real as opposed to just seeming to be real. Of course, from a character's subjective view, when something seems to be real it is impossible to tell from actual fact.",
+      "id": "var.fact",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#fact"
+    },
+    {
+      "canonical_label": "Falsehood",
+      "dynamic_pair_id": "var.truth",
+      "encoding_hint": "Falsehood does not mean incorrect but in error. In other words, what is presented may be absolutely accurate and yet not reflect what is really going on.",
+      "id": "var.falsehood",
+      "kind": "variation",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.truth-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#falsehood"
+    },
+    {
+      "canonical_label": "Instinct",
+      "dynamic_pair_id": "var.conditioning",
+      "encoding_hint": "Instinct describes those built- in responses to situations and circumstances that are not learned, yet drive one to comply with their urges. How much sway they have over an individual depends both upon the nature of the instinct and the intensity of conditioning against the instinct that he has experienced by accident, design, or choice.",
+      "id": "var.instinct",
+      "kind": "variation",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.senses-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#instinct"
+    },
+    {
+      "canonical_label": "Interdiction",
+      "dynamic_pair_id": "var.prediction",
+      "encoding_hint": "an effort to change a pre-determined course -Interdiction is the effort to change the course of one's destiny. Once a character determines that his destiny is pulling him toward an undesirable fate, he tries to Interdict and thereby avoid the fate.",
+      "id": "var.interdiction",
+      "kind": "variation",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.fate-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#interdiction"
+    },
+    {
+      "canonical_label": "Interpretation",
+      "dynamic_pair_id": "var.senses",
+      "encoding_hint": "determination of possible meaning -- Once an observation is made, its meaning must be Interpreted by the mind. Even if seen exactly as it happened, the forces or intents behind what is seen are often misconstrued.",
+      "id": "var.interpretation",
+      "kind": "variation",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.senses-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#interpretation"
+    },
+    {
+      "canonical_label": "Investigation",
+      "dynamic_pair_id": "var.doubt",
+      "encoding_hint": "gathering evidence to resolve questions of validity -- Investigation is a pro-active word for it describes a character who makes an effort to seek out evidence. Obviously this usually tends to bring one closer to a conclusion sooner than without the effort.",
+      "id": "var.investigation",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#investigation"
+    },
+    {
+      "canonical_label": "Openness",
+      "dynamic_pair_id": "var.preconception",
+      "encoding_hint": "willingness to re-evaluate -- Openness simply means entertaining alternatives. When a character's pre-conceptions come into conflict with new information, if he is open, he will not be biased or blind to it.",
+      "id": "var.openness",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.openness-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#openness"
+    },
+    {
+      "canonical_label": "Permission",
+      "dynamic_pair_id": "var.deficiency",
+      "encoding_hint": "one's ability based on what is allowed -- Permission means Ability limited by restrictions. These constraints may be self imposed or imposed by others.",
+      "id": "var.permission",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#permission"
+    },
+    {
+      "canonical_label": "Preconception",
+      "dynamic_pair_id": "var.openness",
+      "encoding_hint": "unwillingness to re-evaluate -- Preconception is a pre-conception that prevents one from entertaining information contrary to a held conclusion. When one shuts his mind to additional data, there is no way to realize that the conclusion might be in error.",
+      "id": "var.preconception",
+      "kind": "variation",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.openness-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#preconception"
+    },
+    {
+      "canonical_label": "Prediction",
+      "dynamic_pair_id": "var.interdiction",
+      "encoding_hint": "a determination of a future state of affairs -Prediction explores the effort to learn the course of one's destiny. Destiny is the path to a particular fate or through a series of fates.",
+      "id": "var.prediction",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.fate-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#prediction"
+    },
+    {
+      "canonical_label": "Range",
+      "dynamic_pair_id": null,
+      "encoding_hint": "See Issue Rationalization",
+      "id": "var.range",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#range"
+    },
+    {
+      "canonical_label": "Rationalization",
+      "dynamic_pair_id": "var.obligation",
+      "encoding_hint": "fabricated excuse, ulterior explanation, false justification, artificial reason",
+      "id": "var.rationalization",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.rationalization-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#rationalization"
+    },
+    {
+      "canonical_label": "Reappraisal",
+      "dynamic_pair_id": "var.appraisal",
+      "encoding_hint": "a reconsideration of a conclusion -- When one has made an initial appraisal as to where preliminary evidence seems to be leading, there comes a time when one must make a Reappraisal of the evidence to see if its direction has changed. This tends to keep one on the right track.",
+      "id": "var.reappraisal",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#reappraisal"
+    },
+    {
+      "canonical_label": "Repulsion",
+      "dynamic_pair_id": "var.attraction",
+      "encoding_hint": "pushing or being pushed away from -- A character's path to his goal is blocked by many curtains. The future beyond each cannot be seen until he has passed through to the other side.",
+      "id": "var.repulsion",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#repulsion"
+    },
+    {
+      "canonical_label": "Security",
+      "dynamic_pair_id": "var.threat",
+      "encoding_hint": "an evaluation of one's protections -- Before one can expand to greater achievements, it is important to protect what one has already achieved. When a character is concerned with Security, he builds defenses against threats both known and anticipated.",
+      "id": "var.security",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#security"
+    },
+    {
+      "canonical_label": "Senses",
+      "dynamic_pair_id": "var.interpretation",
+      "encoding_hint": "Senses refers to the raw data supplied to the mind to interpret. Sometimes the data is accurate, other times it is faulty even before the mind gets hold of it.",
+      "id": "var.senses",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.senses-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#senses"
+    },
+    {
+      "canonical_label": "Strategy",
+      "dynamic_pair_id": "var.analysis",
+      "encoding_hint": "a plan to achieve one's purpose or a plan of response -The specific plan or series of interconnected plans that are intended to produce a desired result is called a Strategy. The sophistication of a strategy can range from complex to non-existent (if a character prefers to wing it).",
+      "id": "var.strategy",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.strategy-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#strategy"
+    },
+    {
+      "canonical_label": "Suspicion",
+      "dynamic_pair_id": "var.evidence",
+      "encoding_hint": "questioning a belief based on evidence -- Suspicion is a preliminary conclusion arrived at with insufficient evidence. It is valuable in helping one know what kinds of things to look for in gathering additional evidence.",
+      "id": "var.suspicion",
+      "kind": "variation",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.truth-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#suspicion"
+    },
+    {
+      "canonical_label": "Threat",
+      "dynamic_pair_id": "var.security",
+      "encoding_hint": "an evaluation of one's vulnerabilities -- Threats are indicators or warnings that danger lurks. Avoiding real danger can be enhanced by acting at the first sign of a Threat.",
+      "id": "var.threat",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#threat"
+    },
+    {
+      "canonical_label": "Truth",
+      "dynamic_pair_id": "var.falsehood",
+      "encoding_hint": "that which has been proven correct -- Truth is more than facts and accuracy. Truth is meaning.",
+      "id": "var.truth",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.truth-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#truth"
+    },
+    {
+      "canonical_label": "Worth",
+      "dynamic_pair_id": "var.value",
+      "encoding_hint": "a rating of usefulness or desirability to oneself -- Worth describes the subjective value of an item or action to an individual. Of course, this varies greatly from individual to individual.",
+      "id": "var.worth",
+      "kind": "variation",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.value-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#worth"
+    }
+  ],
+  "scenario_id": "lyric.bridge-pivot",
+  "scenario_summary": "Design a track bridge that flips the verse's dynamic pair, anchored to Variation parents and Class context.",
+  "schema_version": "0.1"
+}

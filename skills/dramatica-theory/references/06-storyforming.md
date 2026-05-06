@@ -41,8 +41,6 @@ This half of the book explores The Art Of Storytelling, which documents the proc
 
 An author might begin either with Structure or Storytelling, depending upon his personal interests and/or style.  If you come to a concept that is unfamiliar or unclear, you may wish to use the index to reference that topic in The Elements Of Structure or to take advantage of the extensive appendices at the back of the book. 
 
-149. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **The Four Stages of Communication** 
@@ -61,8 +59,6 @@ In bringing a story to an audience, through any media, there are four distinct _
 
 **Stage 3** :  Storyweaving — where the author selects an order and emphasis to use in presenting his encoded story to his audience in the final work.  The way in which to deliver a story to an audience, piece by piece, involves decisions about what to present first, second, and last.  The potential strategies are countless: you may start with the beginning, as in Star Wars, or you my start with the end, as in Remains of the Day, or with some combination, as in The Usual Suspects.  What you most want the audience to be thinking about will guide your decisions in this stage, because choices made here have the most effect on the experience of receiving the story as an audience member. 
 
-150. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 **Stage 4** :  Reception — where the audience takes over, interpreting the symbols they've received and making meaning of the story.  The audience is a very active participant in its relationship with a story.  It has preconceptions which affect how it will see anything you put in front of it.  The audience is presented with a finished, Storywoven work and hopes to be able to be able to interpret the work's symbols and decipher the Storyforming intent of the authors behind the work.  The accuracy with which this is accomplished has a lot to do with how the story was developed in the other three stages of communication. 
@@ -78,8 +74,6 @@ Naturally, with so many internal steps and story points, the opportunity for mis
 ## **How Dramatica Fits In** 
 
 The study of Reception theory is well documented in many books, articles, and essays.  The process of storytelling is brilliantly covered by many inspired teachers of the art, including Aristotle himself.  Dramatica provides a view of story never before seen so clearly: an actual model of the structure and dynamics that lie at the heart of communication - the Story Mind itself.  By using the structure of story as a foundation, the process of communication becomes much more accurate, giving the author much more control over the audience experience. 
-
-151. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -101,8 +95,6 @@ In short, it is fine to stand back and admire one's handiwork, criticize it, and
 
 In keeping with this philosophy, this book began by outlining The Elements Of Structure.  Now it is time to shift mental gears and outline the process of communication itself as expressed in The Art Of Storytelling. 
 
-152. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## The Art of Storytelling Stage One: **Storyforming** 
@@ -120,8 +112,6 @@ Another thing usually happens along the way.  One creative thought leads to anot
 The author as analyst examines what he has so far.  Intuitively he can sense that some sort of structure is developing.  The trick now is to get a grip on the "big picture." Four aspects of this emerging story become immediately apparent: Character, Theme, Plot, and Genre.  An author may find that the points of view expressed by certain characters are unopposed in the story, making the author's point of view seem heavyhanded and biased.  In other places, logic fails, and the current explanation of how point A got to point C is incomplete.  She may also notice that some kind of overall theme is partially developed, and that the entire work could be improved by shading more dramatic elements with the same issues. 
 
 So far, our intrepid author has still not created a story.  Oh, there's one in there somewhere, but much needs to be done to bring it out.  For one thing, certain items that have been developed may begin to seem out of place.  They don't fit in with the feel of 
-
-153. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -143,8 +133,6 @@ Fortunately, another pathway exists.  Because the eventual storyform outlines al
 
 To create a storyform, an author will need to make decisions about the kinds of 
 
-154. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 topics he wishes to explore and the kinds of impact he wishes to have on his audience. This can sometimes be a daunting task.  Most authors prefer to stumble into the answers to these questions during the writing process, rather than deliberate over them in advance.  Still, with a little consideration up front, much grief can be prevented later on as the story develops. 
@@ -158,8 +146,6 @@ There are eight questions about a story that are so crucial and powerful that we
 Both structure and dynamics can be seen at work in characters.  Structural relationships are seen most easily in the Overall Story Characters who serve to illustrate fixed dramatic relationships that define the potentials at work in a story from an objective point of view.  Dynamic relationships are seen more easily in the Subjective Characters who serve to illustrate growth in themselves and their relationships over the course of a story. 
 
 The Subjective Characters are best described by the forces that drive them, rather than by the characteristics they contain.  These forces are most clearly seen (and therefore best determined) in reference to the Main Character.  There are four Dynamics that determine the nature of the Main Character's problem-solving efforts.  The four Character Dynamics specify the shape of the Main Character's growth.  Let's explore each of the four essential character dynamics and their impact on the story as a whole. 
-
-155. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -189,8 +175,6 @@ _Female Mental Sex Characters:  Laura Wingfield in The Glass Menagerie;  Nora in
 
 _Male Mental Sex Characters:  Frank Galvin in The Verdict; Wilber in Charlotte's Web;  Jake Gittes in Chinatown;  Clarice Starling in The Silence of the Lambs;  Michael Corleone in The Godfather;  Rick in Casablanca:  Scrooge in A Christmas Carol; Hamlet in Hamlet;  Chance Gardener in Being There;  Job in the Bible_ 
 
-156. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Main Character Resolve:  Change or Steadfast?** 
@@ -219,8 +203,6 @@ Regardless of the benefits to be had by remaining steadfast, the audience will w
 
 Your selection of Change or Steadfast has wide-ranging effects on the dynamics of your story.  Such things as the relationship between the Overall and Subjective Story 
 
-157. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Throughlines and the order of exploration of your thematic points is adjusted in the Dramatica model to create and support the ultimate decision of your Main Character to either change or remain steadfast. 
@@ -247,8 +229,6 @@ A good way to get a feel for this dynamic in Change Characters is to picture the
 
 Of course, to the character, neither of these perspectives on the problem is _obvious_ , as he must grow and learn to see it.  The audience can empathize with the character's failure to see himself as the source of the problem even while recognizing that he should or should not change because the audience is shown another view the character 
 
-158. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 does not get: the objective view.  It is here that Start and Stop register with the audience as being obvious. 
@@ -258,8 +238,6 @@ Essentially, if you want to tell a story about someone who learns he has actuall
 A Steadfast Main Character's Resolve needs to grow regardless of Start or Stop.  If he is a Start Character, he will be tempted by indications that the desired outcome is not going to happen or is unattainable.  If he is a Stop Character, he will find himself pressured to _give in_ . 
 
 Remember that Growth in a Steadfast Character is largely seen in his environment. His personal growth is seen as a matter of degree. 
-
-159. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -293,8 +271,6 @@ A Do-er deals in competition, a Be-er in collaboration.
 
 The Main Character's effect on the story is both one of rearranging the dramatic potentials of the story, and also one of reordering the sequence of dramatic events. 
 
-160. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Main Character Mental Sex:  Male or Female?** 
@@ -315,8 +291,6 @@ _Female:_ looks at motivations _Male:_ looks at purposes _Female:_ tries to see 
 
 In stories, more often than not, physical gender matches Mental Sex.  From time to time, however, gender and Mental Sex are cross-matched to create unusual and interesting characters.  For example, Ripley in Alien and Clarice Starling in The Silence of the Lambs are **Male Mental Sex** characters.  Tom Wingo in The Prince of Tides and 
 
-161. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Jack Ryan in The Hunt for Red October are **Female Mental Sex** .  In most episodes of The X Files, Scully (the female F.B.I. agent) is **Male Mental Sex** and Mulder (the male F.B.I. agent) is **Female Mental Sex** , which is part of the series' unusual feel. Note that Mental Sex has nothing to do with a character's sexual preferences or tendency toward being masculine or feminine in mannerism —it simply deals with the character's problem-solving techniques. 
@@ -328,8 +302,6 @@ Sometimes stereotypes are propagated by what an audience expects to see, which f
 We have presented four simple questions, yet each carries such weight in regard to the way an audience will be struck by a story that knowing the answers provides a strong sense of guidelines for an author in the construction of his message.  The one seeming drawback is that each of the questions appears binary in nature, which can easily lead to concerns that this kind of approach will generate an overly structured or formulaic story.  One should keep in mind that this is just the first stage of communication, storyforming, which is intended to create a solid structure upon which the other three stages can be built. 
 
 As we proceed through this process, we shall learn how the remaining three stages bring shading, tonality, and more of a gray-scale feel to each of these questions.  For example,  the question of Resolve leads to other questions in each of the other stages that determine such things as how _strongly_ the Main Character has embraced change or how weakly he now clings to his steadfastness, how big was the scope of the change or how small the attitudes that didn't budge, how much does change or steadfast really matter to the state of things in the story: will it alter everything or just a few things in the big pond.  In the end, the Character Dynamics firmly yet gently mold the point of view from which the audience will receive its most personal experiences in the story. 
-
-162. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -361,8 +333,6 @@ _Stories with a Judgment of Good:  Being There; A Christmas Carol; The Verdict; 
 
 _Stories with a Judgment of Bad:  Hamlet; The Silence of the Lambs;  Chinatown;  The Godfather; The Glass Menagerie_ 
 
-163. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Overall Story Driver:  Action or Decision?** 
@@ -384,8 +354,6 @@ Similarly, a deliberating Main Character (called a Be-er) would find himself whi
 These mixed stories appear everywhere from tragedy to comedy and can add an extra dimension to an otherwise one-sided argument. 
 
 Since a story has both Actions and Decisions, it is really a question of which an author wants to come first: chicken or egg?  By selecting one over the other, you instruct Dramatica to establish a causal order between dynamic movements in the Action line and the Decision line. 
-
-164. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -417,8 +385,6 @@ A better way to gauge which is at work is to look at the nature of the obstacles
 
 An author may feel more comfortable building tension by delays or building tension by missing pieces.  Choose the kind of lock most meaningful for you. 
 
-165. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Overall Story Outcome:  Success or Failure?** 
@@ -449,8 +415,6 @@ A Success/Bad story might end with a Main Character achieving his  dreams only t
 
 Because Success and Failure are measurements of how well specific requirements have been met, they are by nature objective.  In contrast, Good and Bad are subjective value Judgments based on an appreciation of the Main Character's personal fulfillment. 
 
-166. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Storyforming Structural Story Points**_ 
@@ -464,8 +428,6 @@ One of the easiest ways to identify the four Throughlines in your story (Overall
 ## **For the Overall Story Throughline:** 
 
 When looking at the characters in the Overall Story Throughline, identify them by the roles they play instead of their names.  This keeps them at a distance, making them a lot easier to evaluate _objectively_ .  For instance, some of the characters in Shakespeare's Hamlet might be the king, the queen, the ghost, the prince, the chancellor, and the chancellor's daughter, while the characters in The Fugitive might be the fugitive doctor, the federal marshal, the dead wife, the one-armed man, and so on.  By avoiding the characters' proper names you also avoid identifying with them and confusing their personal concerns with their concerns as Overall Story Characters. 
-
-167. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -481,8 +443,6 @@ So if your Main Character happens to be the Protagonist as well, then it is pure
 
 In every story, these two will at least be called upon in the Overall Story to represent the story's Crucial Element and its dynamic opposite.  It is possible that the Main and Impact Characters could have no other relationship with the Overall Story than these single characteristics.  The point is that their importance to the Overall Story should be thought of completely in terms of these and any other Overall Story characteristics which are assigned. 
 
-168. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **For the Subjective Story Throughline:** 
@@ -496,8 +456,6 @@ When looking at the Main Character's Throughline, all other characters are unimp
 ## **For the Impact Character Throughline:** 
 
 When considering the Impact Character's Throughline, look at their identity in terms of their impact on others, particularly the Main Character.  Think of the Impact Character in terms of his name, but it's the name of someone _else_ , someone who can really get under your skin.  In viewing the Impact Character this way, it is easier to identify the kind of impact that he has on others.  Obi Wan Kenobi's fanaticism (regarding _using the force)_ in Star Wars and Deputy Marshal Sam Gerard's tenacity (in _out-thinking his prey_ ) in The Fugitive are aspects of these Impact Characters that are inherent to their nature and would continue to be so in any story they might be found in. 
-
-169. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -517,8 +475,6 @@ There are four Classes containing all the possible kinds of problems that can be
 In Dramatica, a story will contain all four areas to explore (Classes) and all four points of view (throughlines).  Each Class will be explored from one of the throughlines. The combination of Class and throughline into a Throughline is the broadest way to describe the meaning in a story.  For example, exploring a Main Character in terms of his situation is quite different than exploring a Main Character in terms of his attitude, the activities he is involved in, or how he is being manipulated.  Which is right for _your_ story? 
 
 Pairing the appropriate Class with the proper throughline for your story can be difficult.  An approach you may find useful is to pick a throughline, adopt the audience 
-
-170. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -544,8 +500,6 @@ For example, matching the Main Character throughline with the Situation (Univers
 
 Likewise, matching the Overall Story throughline with Manipulation (Psychology) to create an Overall Story Throughline of Manipulation (Psychology) will automatically 
 
-171. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 create a Subjective Story Throughline of Activity (Physics) at the same time.  The reasoning is the same here as it was for the Main and Impact Character throughlines.  No matter which Class you match with one of the throughlines on the Dramatica structure, the dynamic pair of that class will be matched to the dynamic pair of that throughline. 
@@ -567,8 +521,6 @@ When looking from the Main Character's perspective, use the first person singula
 When considering the Impact Character's perspective, it is best to use the second person singular ("You") voice to evaluate the Classes.  This is best imagined as if one is addressing the Impact Character directly, where _"You"_ is referring to the Impact Character. 
 
 - -- If the Impact Character's Throughline is Situation (Universe) ( _e.g. Marley's Ghost in A Christmas Carol_ ), you might ask them:  What is it 
-
-172. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -592,8 +544,6 @@ When considering the Subjective Story perspective, it is best to use the first p
 
 - -- If the Subjective Story's Throughline is Manipulation (Psychology) 
 
-173. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ( _e.g. Obi Wan & Luke's relationship in Star Wars_ ):  Who are we really?  How should we act?  How can we become different people? Why are we so angry, or reserved, or whatever?  How are we manipulating or being manipulated? 
@@ -609,8 +559,6 @@ When considering the Overall Story perspective, it is best to use the third pers
 - -- If the Overall Story's Throughline is Fixed Attitude (Mind) ( _e.g. Hamlet or To Kill A Mockingbird_ ):  What are they afraid of?  What is their opinion?  How do they react to that?  How do they feel about this or that?  What is it that they remember about that night? 
 
 - -- If the Overall Story's Throughline is Manipulation (Psychology) ( _e.g. Who's Afraid of Virginia Woolf?_ or _Four Weddings and a Funeral_ ): Who are they really?  How should they act?  How can they become different people?  Why are they so angry, or reserved, or whatever? How are they manipulating or being manipulated? 
-
-174. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -630,8 +578,6 @@ Each throughline will have its own Concern.  When the audience considers each th
 
 Since emphasis is a gray-scale kind of process, the story Goal may appear to be a highly focused issue in some stories and of lesser concern in others.  In fact, all four throughlines might be equally emphasized, which would result in an audience being unable to easily answer the question, _what was this story about?_ Just because no overall Goal is identifiable does not mean the plot necessarily has a hole.  It might mean that the issues explored in the story are more evenly considered in a holistic sense, and the story is simply not as Goal-oriented.  In contrast, the Concern of each Throughline _must_ appear clearly in a complete story, for Concerns are purely structural story points which are developed through storytelling, but not dependent upon it. 
 
-175. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 When selecting a Goal, some authors prefer to first select the Concerns for each Throughline.  In this way, all of the potential objectives of the story have been predetermined and the author then simply needs to choose which one to emphasize. Other authors prefer not to choose the Goal at all, since it is not truly an essential part of a story's _structure_ .  Instead, they select their Concerns and then let the muse guide them in how much they emphasize one throughline over another.  In this way, the Goal will emerge all by itself in a much more organic way.  Still, other authors like to select the Goal before any of the Concerns.  In this case, they may not even know which Throughline the Goal will ultimately be a part of.  For this kind of author, the principal question they wish to answer is, _what is my story about?_ By approaching the selection of your story Goal from one of these three directions, you can begin to create a storyform that reflects your personal interests in telling this particular story. 
@@ -647,8 +593,6 @@ Whether you have narrowed your potential selections to eight or just jump right 
 Requirements are the essential steps or circumstances which must be met in order to reach the story's Goal.  If we were to select a story's Requirements before any other appreciation, it would simply be a decision about the kinds of activities or endeavors we want to concentrate on as the central effort of our story.  If we have already selected our story's Goal, however, much has already been determined that may limit which Types are appropriate to support that Goal. 
 
 Although the model of dramatic relationships implemented in the Dramatica software 
-
-176. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -670,8 +614,6 @@ Can the Forewarnings be anything at all then?  No, and to see why we need look n
 
 When selecting the Type of Forewarning for your story, think of this appreciation both by itself and also in conjunction with the Consequences.  By itself, examine the Types to see which one feels like the area from which you want tension, fear, or stress to flow for your audience and/or characters.  Then, in conjunction with the Consequences, determine if you see a way in which this Type of Forewarning might be the harbinger that will herald the imminent approach of the Consequences.  If it all fits, use it.  If not, you may need to rethink either your selection for Forewarnings or your choice for Consequences. 
 
-177. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Driver and Passenger Plot Story Points** 
@@ -692,8 +634,6 @@ Dividends are benefits accrued on the way to the Goal.  Goal, Requirements, Cons
 
 No matter what emphasis Dividends are given in your story, they are still modifiers of the Goal.  As such, when selecting the Type of Dividends for your story, consider how well your choice will dovetail with your Goal.  Sometimes Dividends are very close in nature to the Goal, almost as natural results of getting closer to the Goal.  Other times Dividends may be quite different in nature than the Goal, and are simply positive items or experiences that cross the characters' paths during the quest. 
 
-178. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 As with the Driver Story Points, this choice is not arbitrary.  The dynamics that determine it, however, are so many and varied that only a software system can calculate it. Still, when one has answered the essential questions, it is likely one's writing instincts have become so fine-tuned for a story as to sense which kinds of Dividends will seem appropriate to the Goal _under those particular dynamic conditions._ 
@@ -713,8 +653,6 @@ Prerequisites may open the opportunity for easy ways to bring in Dividends, Cost
 Preconditions are _non-essential_ steps or items that become attached to the effort to achieve the Goal through someone's insistence.  A keen distinction here is that while Pre-requisites are almost always used in relation to the Requirements in a story, Preconditions are likely to apply to either Requirements or the Goal itself.  As such, both Goal and Requirements should be taken into account when selecting Preconditions. 
 
 Think about the sorts of petty annoyances, frustrations, and sources of friction with which your characters might become saddled with, in exchange for assistance with 
-
-179. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -742,8 +680,6 @@ _The Story Consequences in Hamlet are_ _**The Past** :_ If the memory of King Ha
 
 _The Story Consequences in The Godfather are_ _**Changing One's Nature [Becoming]** :_ If the Corleone family fails to reclaim their power then they will be forced to become one of the secondary families in the New York crime scene, a fate which hasn't been theirs for a very long time. 
 
-180. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## FOREWARNINGS: 
@@ -761,8 +697,6 @@ _The Story Dividends in The Godfather are_ _**The Future** :_ The struggle in th
 ## COSTS: 
 
 _The Story Costs in Hamlet are_ _**Understanding** :_ In Hamlet, understanding is seen as a high price to pay — sometimes too high.  King Claudius comes to the understanding that Hamlet is on to him and won't stop pushing until his father's death is avenged; Ophelia comes to the understanding that Hamlet does not love her and is also responsible for her father's death, so she loses her 
-
-181. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -782,13 +716,9 @@ _Preconditions in Hamlet are_ _**Obtaining** :_ Hamlet needs hard evidence of hi
 
 _Preconditions in The Godfather are_ _**Impulsive Responses [Preconscious]** :_ In order for someone to be a good Don, they have to have the correct kinds of immediate responses.  Sonny was "not a good Don," because he was too hot-headed.  A precondition, which Michael fulfills, is that he have the instincts to guide the family well.  He demonstrates these when he has no frightened responses while protecting his father at the hospital and when he immediately insists on killing the "Turk" himself; once again when 
 
-182. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 he accepts the news of Tessio's betrayal without blinking an eye or betraying himself at any point through Impulsive Responses [Preconscious]; etc.  When Sonny's hot-headed attempts to muscle the Corleone's back to the top failed, it became apparent that there are preconditions set as to who could be the next "Godfather."  Only someone with a steel control over his Impulsive Responses [Preconscious] could be cool enough to successfully lead the Corleone family back to prominence. 
-
-183. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -808,8 +738,6 @@ Static plot story points are _Goal, Requirements, Consequences, Forewarnings, Di
 
 Progressive Plot story points are _Acts, Sequences, Scenes,_ and _Events_ .  These story points describe the experience of moving _through_ the story so it is important to look at them in sequence. Whichever kind of progressive appreciation you are looking at, it is how they relate from one item to the next which is most important aspect about them to understand. 
 
-184. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Progressive Plot Story Points**_ 
@@ -828,8 +756,6 @@ In the second wing, our characters also find four rooms and explore them one aft
 
 At this point, the characters have gathered all the information they are going to be given about the house.  If the Overall Story Characters have gather enough clues to find the treasure, their problem is solved.  If the Main Character buys the house, he is a change character.  The question then remains, is he solving his problem of having a 
 
-185. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 place to live or buying into even more problems with the faulty plumbing. 
@@ -846,8 +772,6 @@ Each throughline has its own four structural acts, which are like the three floo
 
 If we establish an order for each of the throughlines, we might feel our act level work is done.  That would be true if the throughlines were not connected.  As we already know, however, there is a strong connection between the four throughlines, for each really represents only one angle on the same overall story.  All four throughlines are really happening simultaneously, just as the characters in our story house all take the tour at the same time.  To truly understand the impact of our decisions for act order, we must lay out all four sets of our cards in parallel rows, side by side, and compare what is happening in the same act in all four throughlines. 
 
-186. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 |Objective Story<br>Learning<br>**OS Act #1**||Objective Story<br>Understanding<br>**OS Act #2**||Objective Story<br>Doing<br>**OS Act #3**||Objective Story<br>Obtaining<br>**OS Act #4**|
@@ -862,8 +786,6 @@ As we can see in the illustration above, the flavor of our story as a whole depe
 It is important to remember when making these decisions that the order we're talking about reflects only the _internal_ logic of the story, not necessarily the order in which it will be revealed to the audience.  How exposition is presented to the audience is a whole different area of concern that is covered extensively in Storyweaving.  Here we simply want to make sure that the act progression in each of the throughlines supports the outcomes, judgments, and conclusions of our story both from a logical and emotional perspective. 
 
 Obviously, such considerations must rely heavily on intuition.  That is why it is often best to select all of the static story points before determining the progressive story points.  That extra familiarity with your story will go a long way toward clarifying your intent, thereby providing a more solid foundation for your intuition.  In addition, for those who find constructing act order a daunting task, the Dramatica software model is able to _calculate_ the best progression for each throughline's acts, based on your selection of static story points.  In this manner, authors who would like some guidance in designing their plots can approach their stories by subject matter and have that input translated into the key stages of plot development and character growth. 
-
-187. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -885,8 +807,6 @@ Although the exploration of a thematic focus will develop nuance and detail, the
 
 As described earlier in the section on Theme, there are 64 Variations, grouped into four sets of 16.  Each set has four quads as illustrated below.  We can start by selecting a set, then a quad, then a conflict and finally a Issue, similar to the manner in which we 
 
-188. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 originally explored the thematic structure by starting with the broad stroke Classes and then sub-dividing each into Types, then Variations, and finally Elements. 
@@ -902,8 +822,6 @@ Fate Prediction Fact Security Instinct Senses Wisdom Skill<br>Interdiction Desti
 
 
 Manipulation  Variations Fixed Attitude Variations (Psychology) (Mind) 
-
-189. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -925,8 +843,6 @@ In the quad you have selected there are two different diagonal pairs of Variatio
 
 In this manner, you can begin with a feeling and end up with a specific dramatic choice that will affect not only theme, but character and plot as well. 
 
-190. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Selecting Character Story Points**_ 
@@ -938,8 +854,6 @@ What is so special about the Main Character?  The Main Character is uniquely qua
 The Main Character need not be the source of the problem, but might contain the Element crucial to the solution.  This is why it is so easy to make the Protagonist the Main Character.  The Protagonist is pursuing the Overall Story goal already; why not have him pursue the subjective one as well?  If he is taking the correct approach in the author's view, he contains the solution.  If he is taking the incorrect approach, he contains the problem.  Either way, the Main Character, as Protagonist or not, is the linchpin that holds the Overall and Subjective Stories together. 
 
 The act of pursuing a goal and being crucial to achieving it are two completely different things.  For example, it might be the Main Character's insight or resolve that spurs the Protagonist on to success or distracts it into failure.  Either way, the Main Character _precipitates_ the outcome of the story by changing or by remaining steadfast in regard to that crucial Element. 
-
-191. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -971,8 +885,6 @@ Focus is simply descriptive of what the Main Character believes the problem to b
 
 In the case of a _Change_ Main Character, he will either contain the Problem or Solution Element.  In the case of a _Steadfast_ Main Character, he will either contain the Focus or the Direction Element. 
 
-192. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Why would a Change Main Character contain the problem or solution?  In a sense, the inequity of the story is not just in the Main Character or in their environment, but exists between the two.  It is created out of an imbalance in the distribution of Elements. When a Main Character solves a problem by changing, he restores balance either by taking an Element from himself and placing it back in the environment where it belongs, or by grabbing an Element out of the environment and putting it within himself where it is needed.  If he must give up an Element, he contains the solution to the problem.  If he must receive an Element, he contains the problem.  Either way, the Main Character must change his internal make-up:  his very nature. 
@@ -990,7 +902,5 @@ We could write endlessly on how to evaluate each appreciation.  But in truth, th
 When previous selections have already been made, however, then the logistics of the story's argument begin to take a degree of control.  The more selections that are made, the greater that control becomes until all remaining selections have already been pre-determined by the author's earlier choices. 
 
 Understanding which story points have the greatest influence on others goes a long way to helping an author make appropriate choices that keep his message and the feelings generated by his story's structure consistent.  Still, such considerations are intuitive in nature, and when intuition fails, it helps to employ the model of the relationships between story points contained in the Dramatica software. 
-
-193. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved

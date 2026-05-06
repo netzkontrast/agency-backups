@@ -9,7 +9,7 @@ Story-level dynamics: Driver, Limit, Outcome, Judgment. These set the shape of t
 - [Decision](#decision) — in terms of the objective plot,
 - [Failure](#failure) — the original goal is not
 - [Good](#good) — If at the end of the story the Main
-- [Judgment](#judgment) — The author''s assessment of
+- [Judgment](#judgment) — The author's assessment of
 - [Limit](#limit) — The restricted amount of time or
 - [Optionlock](#optionlock) — the story climax occurs
 - [Outcome](#outcome) — an assessment of how things
@@ -26,9 +26,13 @@ id: plot-dynamic.driver
 kind: plot-dynamic
 canonical_label: Driver
 provenance: source-original
+aliases_de:
+- Antrieb
 scenarios:
-- lyric.album-arc-mapping
 - novel.act-pivot
+- lyric.album-arc-mapping
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -38,11 +42,6 @@ scenarios:
 
 All stories have both Action
 and Decision, however one will take precedence over
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-4.
-
 the other. Typically, one defines an Action story as
 having more Action or more intense Action than a
 Decision story. This view is overly influenced by how
@@ -133,11 +132,6 @@ In fact, it may be put on, as an act or to deceive.
 However, as long as there is nothing more or less to
 the functioning of person or thing, it can be said to "be"
 what it appears to be. Stories often focus on someone
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-7.
-
 who wants to "be" something without actually "becoming" it. The important difference is that to "be" requires
 that all the elements of what one wants to be are
 present in oneself. To "become" requires that there are
@@ -182,11 +176,6 @@ For example, in the course of trying to arrive at an
 outcome, the characters may decide it was wrong to
 want it or learn that achieving it would hurt people.
 Whatever the reason, be it nobility or no ability, if the
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-18.
-
 outcome desired at the story's beginning is not
 achieved, the story ends in Failure.
 
@@ -219,8 +208,19 @@ id: plot-dynamic.judgment
 kind: plot-dynamic
 canonical_label: Judgment
 provenance: source-original
+aliases_de:
+- Urteil
+aliases_en:
+- authoritative
+- held truth
+- held truths
+- judgment
+- learnedness
+- maintained
 scenarios:
 - lyric.album-arc-mapping
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -266,11 +266,6 @@ Justification, having no impact and leaving no mark.
 This is how preconceptions, prejudices, and blind spots
 are created. It is also how we learn, for only by accepting some things as givens can we build complex
 understandings on those foundations. Justification also
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-25.
-
 creates the motivation to change things rather than
 accept them, but in so doing also creates a blind spot
 that keeps us from seeing a solution in ourselves in
@@ -337,8 +332,15 @@ id: plot-dynamic.limit
 kind: plot-dynamic
 canonical_label: Limit
 provenance: source-original
+aliases_de:
+- Begrenzung
+- Limit
+aliases_en:
+- limit
 scenarios:
 - lyric.album-arc-mapping
+- novel.act-pivot
+- novel.dual-storyform
 ```
 
 
@@ -349,11 +351,6 @@ scenarios:
 The Limit is what forces the story to a close. One of
 the functions of a story is to give the audience the
 value of experiences it has not had itself by living
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-26.
-
 through the Main Character. As such, the Main Character in the story Changes or Remains Steadfast and
 hopes for the best, and we learn from his accomplishments or disappointments. Yet, even a Main Character
 would not jump into the void and commit to a course of
@@ -417,8 +414,15 @@ id: plot-dynamic.outcome
 kind: plot-dynamic
 canonical_label: Outcome
 provenance: source-original
+aliases_de:
+- Ausgang
+- Ergebnis
+aliases_en:
+- outcome
 scenarios:
 - lyric.album-arc-mapping
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -429,11 +433,6 @@ scenarios:
 When one is creating a story, one must
 consider how it all comes out. This will not just be a
 description of the situation but also of what potentials
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-32.
-
 remain and how they have changed over the course of
 the story. Often, an author may wish to show the
 Outcome of a dramatic movement at the beginning or

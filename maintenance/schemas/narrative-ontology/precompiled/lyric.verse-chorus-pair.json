@@ -1,0 +1,587 @@
+{
+  "consumer_hints": {
+    "ncp-author": "primary_terms[].ncp_appreciation maps each entry to its closest NCP enum (or null when absent — archetypes / quads / dynamic-pairs / concepts have no NCP target).",
+    "novel-architect": "Load this file when answering lyric.verse-chorus-pair queries; cite ontology entries by id, not label."
+  },
+  "generated_at": "2026-05-06",
+  "generated_from_ontology_version": "0.1",
+  "persona": "lyric",
+  "primary_pairs": [
+    {
+      "canonical_label": "Ability ↔ Desire",
+      "id": "dp.ability-desire",
+      "pair_member_a": "el.ability",
+      "pair_member_b": "el.desire",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Acceptance ↔ Non-acceptance",
+      "id": "dp.acceptance-non-acceptance",
+      "pair_member_a": "el.acceptance",
+      "pair_member_b": "el.non-acceptance",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Accurate ↔ Non-accurate",
+      "id": "dp.accurate-non-accurate",
+      "pair_member_a": "el.accurate",
+      "pair_member_b": "el.non-accurate",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Actuality ↔ Perception",
+      "id": "dp.actuality-perception",
+      "pair_member_a": "el.actuality",
+      "pair_member_b": "el.perception",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Analysis ↔ Strategy",
+      "id": "dp.analysis-strategy",
+      "pair_member_a": "var.analysis",
+      "pair_member_b": "var.strategy",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Appraisal ↔ Reappraisal",
+      "id": "dp.appraisal-reappraisal",
+      "pair_member_a": "var.appraisal",
+      "pair_member_b": "var.reappraisal",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Attempt ↔ Work",
+      "id": "dp.attempt-work",
+      "pair_member_a": "var.attempt",
+      "pair_member_b": "var.work",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Attraction ↔ Repulsion",
+      "id": "dp.attraction-repulsion",
+      "pair_member_a": "var.attraction",
+      "pair_member_b": "var.repulsion",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Avoid ↔ Pursuit",
+      "id": "dp.avoid-pursuit",
+      "pair_member_a": "el.avoid",
+      "pair_member_b": "el.pursuit",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Becoming ↔ Being",
+      "id": "dp.becoming-being",
+      "pair_member_a": "type.becoming",
+      "pair_member_b": "type.being",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Cause ↔ Effect",
+      "id": "dp.cause-effect",
+      "pair_member_a": "el.cause",
+      "pair_member_b": "el.effect",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Certainty ↔ Potentiality",
+      "id": "dp.certainty-potentiality",
+      "pair_member_a": "el.certainty",
+      "pair_member_b": "el.potentiality",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Change ↔ Inertia",
+      "id": "dp.change-inertia",
+      "pair_member_a": "el.inertia",
+      "pair_member_b": "el.change",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Chaos ↔ Order",
+      "id": "dp.chaos-order",
+      "pair_member_a": "el.chaos",
+      "pair_member_b": "el.order",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Choice ↔ Delay",
+      "id": "dp.choice-delay",
+      "pair_member_a": "var.choice",
+      "pair_member_b": "var.delay",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Circumstances ↔ Situation",
+      "id": "dp.circumstances-situation",
+      "pair_member_a": "var.circumstances",
+      "pair_member_b": "var.situation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Closure ↔ Denial",
+      "id": "dp.closure-denial",
+      "pair_member_a": "var.closure",
+      "pair_member_b": "var.denial",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Commitment ↔ Responsibility",
+      "id": "dp.commitment-responsibility",
+      "pair_member_a": "var.commitment",
+      "pair_member_b": "var.responsibility",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Conceiving ↔ Conceptualizing",
+      "id": "dp.conceiving-conceptualizing",
+      "pair_member_a": "type.conceiving",
+      "pair_member_b": "type.conceptualizing",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Conditioning ↔ Instinct",
+      "id": "dp.conditioning-instinct",
+      "pair_member_a": "var.conditioning",
+      "pair_member_b": "var.instinct",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Conscience ↔ Temptation",
+      "id": "dp.conscience-temptation",
+      "pair_member_a": "el.conscience",
+      "pair_member_b": "el.temptation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Conscious ↔ Memory",
+      "id": "dp.conscious-memory",
+      "pair_member_a": "type.conscious",
+      "pair_member_b": "type.memory",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Consider ↔ Reconsider",
+      "id": "dp.consider-reconsider",
+      "pair_member_a": "el.consider",
+      "pair_member_b": "el.reconsider",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Control ↔ Uncontrolled",
+      "id": "dp.control-uncontrolled",
+      "pair_member_a": "el.control",
+      "pair_member_b": "el.uncontrolled",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Deduction ↔ Induction",
+      "id": "dp.deduction-induction",
+      "pair_member_a": "el.deduction",
+      "pair_member_b": "el.induction",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Deficiency ↔ Permission",
+      "id": "dp.deficiency-permission",
+      "pair_member_a": "var.deficiency",
+      "pair_member_b": "var.permission",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Destiny ↔ Fate",
+      "id": "dp.destiny-fate",
+      "pair_member_a": "var.destiny",
+      "pair_member_b": "var.fate",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Determination ↔ Expectation",
+      "id": "dp.determination-expectation",
+      "pair_member_a": "el.determination",
+      "pair_member_b": "el.expectation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Disbelief ↔ Faith",
+      "id": "dp.disbelief-faith",
+      "pair_member_a": "el.disbelief",
+      "pair_member_b": "el.faith",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Doing ↔ Obtaining",
+      "id": "dp.doing-obtaining",
+      "pair_member_a": "type.doing",
+      "pair_member_b": "type.obtaining",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Doubt ↔ Investigation",
+      "id": "dp.doubt-investigation",
+      "pair_member_a": "var.doubt",
+      "pair_member_b": "var.investigation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Dream ↔ Hope",
+      "id": "dp.dream-hope",
+      "pair_member_a": "var.dream",
+      "pair_member_b": "var.hope",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Ending ↔ Unending",
+      "id": "dp.ending-unending",
+      "pair_member_a": "el.ending",
+      "pair_member_b": "el.unending",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Enlightenment ↔ Wisdom",
+      "id": "dp.enlightenment-wisdom",
+      "pair_member_a": "var.enlightenment",
+      "pair_member_b": "var.wisdom",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Equity ↔ Inequity",
+      "id": "dp.equity-inequity",
+      "pair_member_a": "el.equity",
+      "pair_member_b": "el.inequity",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Evaluation ↔ Re-evaluation",
+      "id": "dp.evaluation-re-evaluation",
+      "pair_member_a": "el.evaluation",
+      "pair_member_b": "el.reevaluation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Evidence ↔ Suspicion",
+      "id": "dp.evidence-suspicion",
+      "pair_member_a": "var.evidence",
+      "pair_member_b": "var.suspicion",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Expediency ↔ Need",
+      "id": "dp.expediency-need",
+      "pair_member_a": "var.expediency",
+      "pair_member_b": "var.need",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Experience ↔ Skill",
+      "id": "dp.experience-skill",
+      "pair_member_a": "var.experience",
+      "pair_member_b": "var.skill",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Fact ↔ Fantasy",
+      "id": "dp.fact-fantasy",
+      "pair_member_a": "var.fact",
+      "pair_member_b": "var.fantasy",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Falsehood ↔ Truth",
+      "id": "dp.falsehood-truth",
+      "pair_member_a": "var.falsehood",
+      "pair_member_b": "var.truth",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Feeling ↔ Logic",
+      "id": "dp.feeling-logic",
+      "pair_member_a": "el.feeling",
+      "pair_member_b": "el.logic",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Future ↔ Progress",
+      "id": "dp.future-progress",
+      "pair_member_a": "type.future",
+      "pair_member_b": "type.progress",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Help ↔ Hinder",
+      "id": "dp.help-hinder",
+      "pair_member_a": "el.help",
+      "pair_member_b": "el.hinder",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Hunch ↔ Theory",
+      "id": "dp.hunch-theory",
+      "pair_member_a": "el.hunch",
+      "pair_member_b": "el.theory",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Interdiction ↔ Prediction",
+      "id": "dp.interdiction-prediction",
+      "pair_member_a": "var.interdiction",
+      "pair_member_b": "var.prediction",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Interpretation ↔ Senses",
+      "id": "dp.interpretation-senses",
+      "pair_member_a": "var.interpretation",
+      "pair_member_b": "var.senses",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Learning ↔ Understanding",
+      "id": "dp.learning-understanding",
+      "pair_member_a": "type.learning",
+      "pair_member_b": "type.understanding",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Mind ↔ Universe",
+      "id": "dp.mind-universe",
+      "pair_member_a": "class.mind",
+      "pair_member_b": "class.universe",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Morality ↔ SelfInterest",
+      "id": "dp.morality-self-interest",
+      "pair_member_a": "var.morality",
+      "pair_member_b": "var.self-interest",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    }
+  ],
+  "primary_quads": [],
+  "primary_terms": [
+    {
+      "canonical_label": "Avoid",
+      "dynamic_pair_id": "el.pursuit",
+      "encoding_hint": "evade, dodge, elude, escape, steer clear of, prevent",
+      "id": "el.avoid",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.pursuit-avoid-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#avoid"
+    },
+    {
+      "canonical_label": "Cause",
+      "dynamic_pair_id": "el.effect",
+      "encoding_hint": "the specific circumstances that lead to an effect -- The character containing the Cause characteristic is concerned with what is behind a situation or its circumstances. This can lead it right to the source of trouble, the source of control.",
+      "id": "el.cause",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.effect-cause-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#cause"
+    },
+    {
+      "canonical_label": "Chaos",
+      "dynamic_pair_id": "el.order",
+      "encoding_hint": "random change or a lack of order -- Chaos is disorder, randomness, anarchy. The Chaos characteristic is brilliant at cutting through a Gordian knot.",
+      "id": "el.chaos",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.order-chaos-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#chaos"
+    },
+    {
+      "canonical_label": "Control",
+      "dynamic_pair_id": "el.uncontrolled",
+      "encoding_hint": "The Control characteristic causes a character to methodically direct its actions and deliberations to the specific purpose at hand. This leads to a great degree of focus.",
+      "id": "el.control",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.logic-feeling-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#control"
+    },
+    {
+      "canonical_label": "Disbelief",
+      "dynamic_pair_id": "el.faith",
+      "encoding_hint": "the belief that something is untrue -- Disbelief is not the same thing as a lack of faith. Lack of faith is the absence of absolute confidence that something is or will be true.",
+      "id": "el.disbelief",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.faith-disbelief-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#disbelief"
+    },
+    {
+      "canonical_label": "Effect",
+      "dynamic_pair_id": "el.cause",
+      "encoding_hint": "www.dramatica.com -- www.screenplay.com",
+      "id": "el.effect",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.effect-cause-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#effect"
+    },
+    {
+      "canonical_label": "Faith",
+      "dynamic_pair_id": "el.disbelief",
+      "encoding_hint": "accepting something as certain without proof -- Faith is a belief in something without the support of proof. Since the future is uncertain, Faith in one's ability to arrive at one's purpose is a very strong motivator.",
+      "id": "el.faith",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.faith-disbelief-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#faith"
+    },
+    {
+      "canonical_label": "Feeling",
+      "dynamic_pair_id": "el.logic",
+      "encoding_hint": "an emotional sense of how things are going -- Feeling is the mental process of seeking the most fulfilling course or correct explanation based on emotion. The Feeling characteristic believes \"ya gotta have heart.\" It cares not for what is efficient or even practical as long as it is \"feels\" right.",
+      "id": "el.feeling",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.logic-feeling-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#feeling"
+    },
+    {
+      "canonical_label": "Help",
+      "dynamic_pair_id": "el.hinder",
+      "encoding_hint": "a direct assistance to another's effort to achieve their goal -The Help characteristic assists another's efforts. This can be a real boon to someone struggling to achieve.",
+      "id": "el.help",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.help-hinder-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#help"
+    },
+    {
+      "canonical_label": "Hinder",
+      "dynamic_pair_id": "el.help",
+      "encoding_hint": "a direct detraction from another's effort to achieve their goal -The Hinder characteristic strives to undermine another's efforts. This might be seen as a negative, as it often is.",
+      "id": "el.hinder",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.help-hinder-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#hinder"
+    },
+    {
+      "canonical_label": "Logic",
+      "dynamic_pair_id": "el.feeling",
+      "encoding_hint": "a rational sense of how things are related -- Logic is the mental process of choosing the most efficient course or explanation based on reason. The Logic characteristic exemplifies the theory behind \"Occam's Razor,\" that the simplest explanation is the correct explanation.",
+      "id": "el.logic",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.logic-feeling-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#logic"
+    },
+    {
+      "canonical_label": "Order",
+      "dynamic_pair_id": "el.chaos",
+      "encoding_hint": "an arrangement in which patterns are seen -- The character containing the Order characteristic is concerned with keeping things organized. Change is not a problem as long as it is orderly.",
+      "id": "el.order",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.order-chaos-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#order"
+    },
+    {
+      "canonical_label": "Perception",
+      "dynamic_pair_id": "el.actuality",
+      "encoding_hint": "the way things seem to be -- Perception is a point of view on reality. In truth, we cannot truly get beyond perception in our understanding of our world.",
+      "id": "el.perception",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.actuality-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#perception"
+    },
+    {
+      "canonical_label": "Pursuit",
+      "dynamic_pair_id": "el.avoid",
+      "encoding_hint": "a directed effort to resolve a problem -- The character representing Pursuit is a real self-starter. The Pursuit characteristic leads a character to determine what he needs to achieve and then make a bee-line for it.",
+      "id": "el.pursuit",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.pursuit-avoid-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#pursuit"
+    },
+    {
+      "canonical_label": "Test",
+      "dynamic_pair_id": "el.trust",
+      "encoding_hint": "a trial to determine something's validity -- To test is to try out a supposition to determine if it is correct. \"Run it up the flagpole and see if people salute it\" is the concept here.",
+      "id": "el.test",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.effect-cause-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#test"
+    },
+    {
+      "canonical_label": "Trust",
+      "dynamic_pair_id": "el.test",
+      "encoding_hint": "an acceptance of knowledge as proven without first testing its validity -- To Trust is to accept without trial. Whether a concept, relationship, person, or mechanism, it will be accepted by the character possessing the Trust characteristic without supportive evidence.",
+      "id": "el.trust",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.effect-cause-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#trust"
+    },
+    {
+      "canonical_label": "Uncontrolled",
+      "dynamic_pair_id": "el.control",
+      "encoding_hint": "a disorganized response -- The character representing Uncontrolled spreads himself very thin by expending his energy and motivation in all directions at once. As a result, he is fully involved in his environment, which covers all the bases.",
+      "id": "el.uncontrolled",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.logic-feeling-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#uncontrolled"
+    },
+    {
+      "canonical_label": "Attraction",
+      "dynamic_pair_id": "var.repulsion",
+      "encoding_hint": "drawing or being drawn to something -- How hard should one try? How much work should one do?",
+      "id": "var.attraction",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#attraction"
+    },
+    {
+      "canonical_label": "Openness",
+      "dynamic_pair_id": "var.preconception",
+      "encoding_hint": "willingness to re-evaluate -- Openness simply means entertaining alternatives. When a character's pre-conceptions come into conflict with new information, if he is open, he will not be biased or blind to it.",
+      "id": "var.openness",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.openness-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#openness"
+    },
+    {
+      "canonical_label": "Repulsion",
+      "dynamic_pair_id": "var.attraction",
+      "encoding_hint": "pushing or being pushed away from -- A character's path to his goal is blocked by many curtains. The future beyond each cannot be seen until he has passed through to the other side.",
+      "id": "var.repulsion",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#repulsion"
+    }
+  ],
+  "scenario_id": "lyric.verse-chorus-pair",
+  "scenario_summary": "Select the dynamic Element pair that drives dramatic tension between a track's Verse and Chorus sections.",
+  "schema_version": "0.1"
+}

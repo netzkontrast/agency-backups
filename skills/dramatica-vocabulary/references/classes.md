@@ -38,10 +38,15 @@ id: class.physics
 kind: class
 canonical_label: Physics
 provenance: source-original
-scenarios:
-- novel.dual-storyform
+aliases_de:
+- Physik
 aliases_en:
 - Activity
+- physics
+scenarios:
+- novel.dual-storyform
+- novel.act-pivot
+- lyric.album-arc-mapping
 ```
 
 
@@ -61,10 +66,15 @@ id: class.psychology
 kind: class
 canonical_label: Psychology
 provenance: source-original
-scenarios:
-- novel.dual-storyform
+aliases_de:
+- Psychologie
 aliases_en:
 - Manipulation
+- psychology
+scenarios:
+- novel.dual-storyform
+- novel.act-pivot
+- lyric.archetype-as-system-part
 ```
 
 

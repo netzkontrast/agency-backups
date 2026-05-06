@@ -4,69 +4,69 @@ Variations are the third-resolution layer (16 per Class, 64 total). Concerns and
 
 ## Contents
 
-- [Ability](#ability) — >Ability
-- [Analysis](#analysis) — >Analysis -evaluation of the situation and/or circumstances -Analysis
-- [Appraisal](#appraisal) — >Appraisal
-- [Attempt](#attempt) — >Attempt -applying oneself to something not known to be within
-- [Attitude](#attitude) — >Attitude -one''s demeanor while doing or being
-- [Attraction](#attraction) — >Attraction
+- [Ability](#ability) — Ability
+- [Analysis](#analysis) — Analysis -evaluation of the situation and/or circumstances -Analysis
+- [Appraisal](#appraisal) — Appraisal
+- [Attempt](#attempt) — Attempt -applying oneself to something not known to be within
+- [Attitude](#attitude) — Attitude -one's demeanor while doing or being
+- [Attraction](#attraction) — Attraction
 - [Catalyst](#catalyst) — The item whose presence always
-- [Choice](#choice) — >Choice
+- [Choice](#choice) — Choice
 - [Circumstances](#circumstances) — dyn.pr. Situation<->Circumstances
-- [Closure](#closure) — >Closure -bringing something to an end
+- [Closure](#closure) — Closure -bringing something to an end
 - [Commitment](#commitment) — dyn.pr. Responsibility<->Commitment
-- [Conditioning](#conditioning) — >Conditioning
-- [Confidence](#confidence) — >Confidence
+- [Conditioning](#conditioning) — Conditioning
+- [Confidence](#confidence) — Confidence
 - [Critical Flaw](#critical-flaw) — The Main vs. Impact Charac-
-- [Deficiency](#deficiency) — >Deficiency
-- [Delay](#delay) — >Delay
-- [Denial](#denial) — >Denial
+- [Deficiency](#deficiency) — Deficiency
+- [Delay](#delay) — Delay
+- [Denial](#denial) — Denial
 - [Destiny](#destiny) — inescapable path, predetermined
-- [Doubt](#doubt) — >Doubt -questioning validity without investigating to be sure
-- [Dream](#dream) — >Dream
-- [Enlightenment](#enlightenment) — >Enlightenment
-- [Evidence](#evidence) — >Evidence -information supporting a belief
-- [Expediency](#expediency) — >Expediency
-- [Experience](#experience) — >Experience -the gaining of familiarity
-- [Fact](#fact) — >Fact
-- [Falsehood](#falsehood) — >Falsehood -that which has been shown to be erroneous
-- [Fantasy](#fantasy) — >Fantasy
-- [Fate](#fate) — >Fantasy
-- [Hope](#hope) — >Hope
-- [Instinct](#instinct) — >Instinct -intrinsic unconditioned responses
-- [Interdiction](#interdiction) — >Interdiction
-- [Interpretation](#interpretation) — >Interpretation
-- [Investigation](#investigation) — >Investigation
+- [Doubt](#doubt) — Doubt -questioning validity without investigating to be sure
+- [Dream](#dream) — Dream
+- [Enlightenment](#enlightenment) — Enlightenment
+- [Evidence](#evidence) — Evidence -information supporting a belief
+- [Expediency](#expediency) — Expediency
+- [Experience](#experience) — Experience -the gaining of familiarity
+- [Fact](#fact) — Fact
+- [Falsehood](#falsehood) — Falsehood -that which has been shown to be erroneous
+- [Fantasy](#fantasy) — Fantasy
+- [Fate](#fate) — Fantasy
+- [Hope](#hope) — Hope
+- [Instinct](#instinct) — Instinct -intrinsic unconditioned responses
+- [Interdiction](#interdiction) — Interdiction
+- [Interpretation](#interpretation) — Interpretation
+- [Investigation](#investigation) — Investigation
 - [Issue](#issue) — The thematic focus or topic of the
-- [Morality](#morality) — >Morality -doing or being based on what is best for others
-- [Need](#need) — >Need
+- [Morality](#morality) — Morality -doing or being based on what is best for others
+- [Need](#need) — Need
 - [Obligation](#obligation) — dyn.pr. Rationalization<->Obligation
 - [Openness](#openness) — dyn.pr. Preconception<->Openness
 - [Overall (Objective) Story Catalyst](#overall-objective-story-catalyst) — The
 - [Overall (Objective) Story Inhibitor](#overall-objective-story-inhibitor) — The
 - [Overall (Objective) Story Issue](#overall-objective-story-issue) — The
-- [Permission](#permission) — >Permission
+- [Permission](#permission) — Permission
 - [Preconception](#preconception) — dyn.pr. Preconception<->Openness
-- [Prediction](#prediction) — >Prediction
+- [Prediction](#prediction) — Prediction
 - [Range](#range) — See Issue
 - [Rationalization](#rationalization) — fabricated excuse, ulterior
-- [Reappraisal](#reappraisal) — >Reappraisal
-- [Repulsion](#repulsion) — >Repulsion
+- [Reappraisal](#reappraisal) — Reappraisal
+- [Repulsion](#repulsion) — Repulsion
 - [Responsibility](#responsibility) — dyn.pr. Commitment<->Responsibility
-- [Security](#security) — >Security
+- [Security](#security) — Security
 - [Sense of Self](#sense-of-self) — perception of self, self
-- [Senses](#senses) — >Senses -sensory observations
+- [Senses](#senses) — Senses -sensory observations
 - [Situation](#situation) — dyn.pr. Circumstances<->Situation
-- [Skill](#skill) — >Skill
-- [Strategy](#strategy) — >Strategy
-- [Suspicion](#suspicion) — >Suspicion
-- [Threat](#threat) — >Threat
-- [Truth](#truth) — >Truth
+- [Skill](#skill) — Skill
+- [Strategy](#strategy) — Strategy
+- [Suspicion](#suspicion) — Suspicion
+- [Threat](#threat) — Threat
+- [Truth](#truth) — Truth
 - [Unique Ability](#unique-ability) — The item that makes the
-- [Value](#value) — >Value
-- [Wisdom](#wisdom) — >Wisdom
-- [Worry](#worry) — >Worry -concern for the future
-- [Worth](#worth) — >Worth
+- [Value](#value) — Value
+- [Wisdom](#wisdom) — Wisdom
+- [Worry](#worry) — Worry -concern for the future
+- [Worth](#worth) — Worth
 
 ---
 
@@ -77,8 +77,19 @@ id: var.ability
 kind: variation
 canonical_label: Ability
 provenance: source-original
-quad_id: quad.knowledge-el
+aliases_en:
+- capability
+- capacity
+- faculty
+- innate capacity
+- knack
+- talent
 ktad_position: A
+quad_id: quad.knowledge-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.character-arc
+- lyric.refrain-as-restatement
 ```
 
 
@@ -140,10 +151,14 @@ id: var.analysis
 kind: variation
 canonical_label: Analysis
 provenance: source-original
-type_id: type.doing
-quad_id: quad.strategy-var
-ktad_position: T
 dynamic_pair_id: var.strategy
+ktad_position: T
+quad_id: quad.strategy-var
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- lyric.bridge-pivot
+type_id: type.doing
 ```
 
 
@@ -171,7 +186,13 @@ id: var.appraisal
 kind: variation
 canonical_label: Appraisal
 provenance: source-original
+aliases_en:
+- first impres
 dynamic_pair_id: var.reappraisal
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- lyric.bridge-pivot
 ```
 
 
@@ -217,7 +238,17 @@ id: var.attempt
 kind: variation
 canonical_label: Attempt
 provenance: source-original
+aliases_en:
+- dubious effort
+- endeavor
+- speculative endeavor
+- try
+- uncertain undertaking
 dynamic_pair_id: var.work
+scenarios:
+- novel.character-arc
+- novel.crucial-element-audit
+- lyric.bridge-pivot
 ```
 
 
@@ -254,9 +285,16 @@ id: var.attitude
 kind: variation
 canonical_label: Attitude
 provenance: source-original
-type_id: type.obtaining
-quad_id: quad.approach-var-physics
+aliases_en:
+- demeanor
+- manner of
 ktad_position: T
+quad_id: quad.approach-var-physics
+scenarios:
+- novel.character-arc
+- lyric.archetype-as-system-part
+- novel.diagnose-flat-draft
+type_id: type.obtaining
 ```
 
 
@@ -293,7 +331,21 @@ id: var.attraction
 kind: variation
 canonical_label: Attraction
 provenance: source-original
+aliases_en:
+- allure
+- captivate
+- charm
+- dodge
+- elude
+- enticement
+- escape
+- evade
+- steer clear of
 dynamic_pair_id: var.repulsion
+scenarios:
+- lyric.verse-chorus-pair
+- lyric.bridge-pivot
+- novel.crucial-element-audit
 ```
 
 
@@ -322,11 +374,6 @@ carrot.
 
 Technically speaking, the
 moment of climax in a story is the intersecting point
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-6.
-
 where the nature of the Main Character crosses paths
 with the nature of the Overall (Objective) story. It is
 here that the course of one, both or neither of them
@@ -383,6 +430,10 @@ id: var.catalyst
 kind: variation
 canonical_label: Catalyst
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- lyric.bridge-pivot
+- novel.diagnose-flat-draft
 ```
 
 
@@ -402,9 +453,17 @@ id: var.choice
 kind: variation
 canonical_label: Choice
 provenance: source-original
-quad_id: quad.openness-var
-ktad_position: D
+aliases_en:
+- decision
+- pick
+- selection
 dynamic_pair_id: var.delay
+ktad_position: D
+quad_id: quad.openness-var
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- novel.act-pivot
 ```
 
 
@@ -446,7 +505,15 @@ id: var.circumstances
 kind: variation
 canonical_label: Circumstances
 provenance: source-original
+aliases_en:
+- emotional evaluation of the environment
+- how things stand emotionally
+- value of existing
 dynamic_pair_id: var.situation
+scenarios:
+- novel.dual-storyform
+- lyric.album-arc-mapping
+- novel.crucial-element-audit
 ```
 
 
@@ -488,10 +555,19 @@ id: var.closure
 kind: variation
 canonical_label: Closure
 provenance: source-original
-type_id: type.subconscious
-quad_id: quad.hope-var
-ktad_position: A
+aliases_en:
+- completion
+- finishing
+- recursive
+- resolution
 dynamic_pair_id: var.denial
+ktad_position: A
+quad_id: quad.hope-var
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- lyric.bridge-pivot
+type_id: type.subconscious
 ```
 
 
@@ -535,10 +611,16 @@ id: var.commitment
 kind: variation
 canonical_label: Commitment
 provenance: source-original
-type_id: type.conceiving
-quad_id: quad.rationalization-var
-ktad_position: T
+aliases_en:
+- dedication
 dynamic_pair_id: var.responsibility
+ktad_position: T
+quad_id: quad.rationalization-var
+scenarios:
+- novel.storyform-slot-fill
+- novel.character-arc
+- novel.act-pivot
+type_id: type.conceiving
 ```
 
 
@@ -580,10 +662,19 @@ id: var.conditioning
 kind: variation
 canonical_label: Conditioning
 provenance: source-original
-type_id: type.past
-quad_id: quad.senses-var
-ktad_position: A
+aliases_en:
+- accustomed response
+- adaptive adjustments
+- habituation
+- trained response
 dynamic_pair_id: var.instinct
+ktad_position: A
+quad_id: quad.senses-var
+scenarios:
+- novel.character-arc
+- lyric.archetype-as-system-part
+- novel.diagnose-flat-draft
+type_id: type.past
 ```
 
 
@@ -623,9 +714,16 @@ id: var.confidence
 kind: variation
 canonical_label: Confidence
 provenance: source-original
-type_id: type.becoming
-quad_id: quad.conscience-var
+aliases_en:
+- hopeful prospects
+- positive
 ktad_position: D
+quad_id: quad.conscience-var
+scenarios:
+- novel.storyform-slot-fill
+- novel.character-arc
+- lyric.refrain-as-restatement
+type_id: type.becoming
 ```
 
 
@@ -668,6 +766,16 @@ id: var.critical-flaw
 kind: variation
 canonical_label: Critical Flaw
 provenance: source-original
+aliases_en:
+- antagonist flaw
+- antagonist's flaw
+- character flaw
+- critical flaw
+- flaw
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
 ```
 
 
@@ -676,8 +784,6 @@ provenance: source-original
 ### Variation
 
 www.dramatica.com -- www.screenplay.com
-
-12.
 
 ter trait that inhibits or undermines the effectiveness of
 that Main vs. Impact Character's Unique Ability -- To
@@ -718,7 +824,13 @@ id: var.deficiency
 kind: variation
 canonical_label: Deficiency
 provenance: source-original
+aliases_en:
+- inadequacy
 dynamic_pair_id: var.permission
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
 ```
 
 
@@ -763,9 +875,17 @@ id: var.delay
 kind: variation
 canonical_label: Delay
 provenance: source-original
-quad_id: quad.openness-var
-ktad_position: A
+aliases_en:
+- defer
+- postpone
+- put off
 dynamic_pair_id: var.choice
+ktad_position: A
+quad_id: quad.openness-var
+scenarios:
+- novel.act-pivot
+- lyric.bridge-pivot
+- novel.diagnose-flat-draft
 ```
 
 
@@ -789,11 +909,6 @@ unresolved, and unless it intrudes upon his thinking, it
 will never be thought of again. Yet deep within him, he
 will be influenced to avoid what created that problem or
 to take steps to protect against its recurrence. Until the
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-13.
-
 original problem is addressed and a choice of path is
 made, the character will not be free of the problem's
 influence.
@@ -817,10 +932,18 @@ id: var.denial
 kind: variation
 canonical_label: Denial
 provenance: source-original
-type_id: type.subconscious
-quad_id: quad.hope-var
-ktad_position: D
+aliases_en:
+- not accepting
+- refusal to end
+- unwillingness to let go
 dynamic_pair_id: var.closure
+ktad_position: D
+quad_id: quad.hope-var
+scenarios:
+- novel.character-arc
+- novel.dual-storyform
+- lyric.bridge-pivot
+type_id: type.subconscious
 ```
 
 
@@ -865,9 +988,13 @@ id: var.destiny
 kind: variation
 canonical_label: Destiny
 provenance: source-original
-quad_id: quad.fate-var
-ktad_position: T
 dynamic_pair_id: var.fate
+ktad_position: T
+quad_id: quad.fate-var
+scenarios:
+- novel.character-arc
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -888,7 +1015,14 @@ id: var.doubt
 kind: variation
 canonical_label: Doubt
 provenance: source-original
+aliases_en:
+- pessimism
+- uninformed
 dynamic_pair_id: var.investigation
+scenarios:
+- novel.character-arc
+- novel.diagnose-flat-draft
+- lyric.bridge-pivot
 ```
 
 
@@ -917,10 +1051,19 @@ id: var.dream
 kind: variation
 canonical_label: Dream
 provenance: source-original
-type_id: type.subconscious
-quad_id: quad.hope-var
-ktad_position: T
+aliases_en:
+- airy
+- aspire
+- desiring the unlikely
+- pulling for the doubtful
 dynamic_pair_id: var.hope
+ktad_position: T
+quad_id: quad.hope-var
+scenarios:
+- novel.character-arc
+- novel.crucial-element-audit
+- lyric.refrain-as-restatement
+type_id: type.subconscious
 ```
 
 
@@ -976,10 +1119,19 @@ id: var.enlightenment
 kind: variation
 canonical_label: Enlightenment
 provenance: source-original
-type_id: type.understanding
-quad_id: quad.wisdom-var
-ktad_position: D
+aliases_en:
+- illumination
+- insight
+- intuitive discernment
+- transcendent
 dynamic_pair_id: var.wisdom
+ktad_position: D
+quad_id: quad.wisdom-var
+scenarios:
+- novel.character-arc
+- novel.crucial-element-audit
+- lyric.album-arc-mapping
+type_id: type.understanding
 ```
 
 
@@ -1019,10 +1171,16 @@ id: var.evidence
 kind: variation
 canonical_label: Evidence
 provenance: source-original
-type_id: type.memory
-quad_id: quad.truth-var
-ktad_position: A
+aliases_en:
+- proof
 dynamic_pair_id: var.suspicion
+ktad_position: A
+quad_id: quad.truth-var
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- lyric.bridge-pivot
+type_id: type.memory
 ```
 
 
@@ -1067,7 +1225,15 @@ id: var.expediency
 kind: variation
 canonical_label: Expediency
 provenance: source-original
+aliases_en:
+- advisability
+- convenience
+- prudent
 dynamic_pair_id: var.need
+scenarios:
+- novel.crucial-element-audit
+- lyric.bridge-pivot
+- novel.diagnose-flat-draft
 ```
 
 
@@ -1115,10 +1281,20 @@ id: var.experience
 kind: variation
 canonical_label: Experience
 provenance: source-original
-type_id: type.understanding
-quad_id: quad.wisdom-var
-ktad_position: A
+aliases_en:
+- accumulated dealings with
+- accumulated feelings
+- familiarization
+- level of practice
+- seasoning
 dynamic_pair_id: var.skill
+ktad_position: A
+quad_id: quad.wisdom-var
+scenarios:
+- novel.character-arc
+- lyric.album-arc-mapping
+- novel.dual-storyform
+type_id: type.understanding
 ```
 
 
@@ -1154,7 +1330,15 @@ id: var.fact
 kind: variation
 canonical_label: Fact
 provenance: source-original
+aliases_en:
+- belief in the genuine
+- truly real
+- ultimately real beliefs
 dynamic_pair_id: var.fantasy
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- lyric.bridge-pivot
 ```
 
 
@@ -1196,10 +1380,18 @@ id: var.falsehood
 kind: variation
 canonical_label: Falsehood
 provenance: source-original
-type_id: type.memory
-quad_id: quad.truth-var
-ktad_position: T
+aliases_en:
+- erroneous notion
+- erroneousness
+- untruth
 dynamic_pair_id: var.truth
+ktad_position: T
+quad_id: quad.truth-var
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- lyric.bridge-pivot
+type_id: type.memory
 ```
 
 
@@ -1241,7 +1433,13 @@ id: var.fantasy
 kind: variation
 canonical_label: Fantasy
 provenance: source-original
+aliases_en:
+- false belief
 dynamic_pair_id: var.fact
+scenarios:
+- novel.character-arc
+- novel.crucial-element-audit
+- lyric.refrain-as-restatement
 ```
 
 
@@ -1278,9 +1476,16 @@ id: var.fate
 kind: variation
 canonical_label: Fate
 provenance: source-original
-quad_id: quad.fate-var
-ktad_position: K
+aliases_en:
+- inevitable events
+- unpreventable
 dynamic_pair_id: var.destiny
+ktad_position: K
+quad_id: quad.fate-var
+scenarios:
+- novel.character-arc
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -1335,10 +1540,18 @@ id: var.hope
 kind: variation
 canonical_label: Hope
 provenance: source-original
-type_id: type.subconscious
-quad_id: quad.hope-var
-ktad_position: K
+aliases_en:
+- desired expectation
+- moving forward
+- optimistic anticipation
 dynamic_pair_id: var.dream
+ktad_position: K
+quad_id: quad.hope-var
+scenarios:
+- novel.character-arc
+- lyric.refrain-as-restatement
+- lyric.album-arc-mapping
+type_id: type.subconscious
 ```
 
 
@@ -1400,10 +1613,17 @@ id: var.instinct
 kind: variation
 canonical_label: Instinct
 provenance: source-original
-type_id: type.past
-quad_id: quad.senses-var
-ktad_position: D
+aliases_en:
+- innate
+- involuntary drive
 dynamic_pair_id: var.conditioning
+ktad_position: D
+quad_id: quad.senses-var
+scenarios:
+- novel.character-arc
+- lyric.archetype-as-system-part
+- lyric.bridge-pivot
+type_id: type.past
 ```
 
 
@@ -1442,9 +1662,15 @@ id: var.interdiction
 kind: variation
 canonical_label: Interdiction
 provenance: source-original
-quad_id: quad.fate-var
-ktad_position: D
+aliases_en:
+- altering the
 dynamic_pair_id: var.prediction
+ktad_position: D
+quad_id: quad.fate-var
+scenarios:
+- novel.act-pivot
+- lyric.bridge-pivot
+- novel.crucial-element-audit
 ```
 
 
@@ -1482,10 +1708,19 @@ id: var.interpretation
 kind: variation
 canonical_label: Interpretation
 provenance: source-original
-type_id: type.past
-quad_id: quad.senses-var
-ktad_position: T
+aliases_en:
+- construe
+- elucidate
+- rendering meaning
+- rendition
 dynamic_pair_id: var.senses
+ktad_position: T
+quad_id: quad.senses-var
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- lyric.bridge-pivot
+type_id: type.past
 ```
 
 
@@ -1521,7 +1756,16 @@ id: var.investigation
 kind: variation
 canonical_label: Investigation
 provenance: source-original
+aliases_en:
+- inquiry
+- probe
+- research
+- sleuthing
 dynamic_pair_id: var.doubt
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- lyric.bridge-pivot
 ```
 
 
@@ -1564,6 +1808,10 @@ id: var.issue
 kind: variation
 canonical_label: Issue
 provenance: source-original
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
 ```
 
 
@@ -1591,10 +1839,19 @@ id: var.morality
 kind: variation
 canonical_label: Morality
 provenance: source-original
-type_id: type.obtaining
-quad_id: quad.approach-var-physics
-ktad_position: D
+aliases_en:
+- altruism
+- benevolence
+- generosity
+- selflessness
 dynamic_pair_id: var.self-interest
+ktad_position: D
+quad_id: quad.approach-var-physics
+scenarios:
+- novel.character-arc
+- novel.crucial-element-audit
+- lyric.refrain-as-restatement
+type_id: type.obtaining
 ```
 
 
@@ -1609,11 +1866,6 @@ of character that puts others before self. This is not,
 however, always a good thing. If a character is besieged by Self-Interested parties that grasp and take
 whatever they can, Morality (in this limited sense) is
 most inappropriate. Also, Morality does not always
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-30.
-
 require sacrifice. It simply means that a Moral character will consider the needs of others before his own. If
 the needs are compatible, it can create a win/win
 scenario where no one need suffer.
@@ -1649,6 +1901,10 @@ kind: variation
 canonical_label: Need
 provenance: source-original
 dynamic_pair_id: var.expediency
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- lyric.refrain-as-restatement
 ```
 
 
@@ -1685,10 +1941,17 @@ id: var.obligation
 kind: variation
 canonical_label: Obligation
 provenance: source-original
-type_id: type.conceiving
-quad_id: quad.rationalization-var
-ktad_position: D
+aliases_en:
+- agreement
+- pledge
 dynamic_pair_id: var.rationalization
+ktad_position: D
+quad_id: quad.rationalization-var
+scenarios:
+- novel.character-arc
+- novel.crucial-element-audit
+- lyric.refrain-as-restatement
+type_id: type.conceiving
 ```
 
 
@@ -1732,9 +1995,15 @@ id: var.openness
 kind: variation
 canonical_label: Openness
 provenance: source-original
-quad_id: quad.openness-var
-ktad_position: K
+aliases_en:
+- broad
 dynamic_pair_id: var.preconception
+ktad_position: K
+quad_id: quad.openness-var
+scenarios:
+- novel.character-arc
+- lyric.verse-chorus-pair
+- lyric.bridge-pivot
 ```
 
 
@@ -1775,6 +2044,10 @@ id: concept.os-catalyst
 kind: concept
 canonical_label: Overall (Objective) Story Catalyst
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- novel.diagnose-flat-draft
+- novel.dual-storyform
 ```
 
 
@@ -1800,6 +2073,10 @@ id: concept.os-inhibitor
 kind: concept
 canonical_label: Overall (Objective) Story Inhibitor
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- novel.diagnose-flat-draft
+- novel.dual-storyform
 ```
 
 
@@ -1824,6 +2101,10 @@ id: concept.os-issue
 kind: concept
 canonical_label: Overall (Objective) Story Issue
 provenance: source-original
+scenarios:
+- novel.diagnose-flat-draft
+- novel.dual-storyform
+- novel.character-arc
 ```
 
 
@@ -1842,7 +2123,15 @@ id: var.permission
 kind: variation
 canonical_label: Permission
 provenance: source-original
+aliases_en:
+- constrained ability
+- limited capability
+- restricted
 dynamic_pair_id: var.deficiency
+scenarios:
+- novel.act-pivot
+- lyric.bridge-pivot
+- novel.dual-storyform
 ```
 
 
@@ -1879,8 +2168,6 @@ Reach, Apparent or Actual Dilemma stories, etc.
 
 www.dramatica.com -- www.screenplay.com
 
-52.
-
 capability, restricted capacity, hindered performance,
 allowed limitations, restrained utility
 
@@ -1893,9 +2180,16 @@ id: var.preconception
 kind: variation
 canonical_label: Preconception
 provenance: source-original
-quad_id: quad.openness-var
-ktad_position: T
+aliases_en:
+- closed
+- prejudice
 dynamic_pair_id: var.openness
+ktad_position: T
+quad_id: quad.openness-var
+scenarios:
+- novel.character-arc
+- novel.diagnose-flat-draft
+- lyric.bridge-pivot
 ```
 
 
@@ -1941,9 +2235,16 @@ id: var.prediction
 kind: variation
 canonical_label: Prediction
 provenance: source-original
-quad_id: quad.fate-var
-ktad_position: A
+aliases_en:
+- foreseeing
+- foresight
 dynamic_pair_id: var.interdiction
+ktad_position: A
+quad_id: quad.fate-var
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- lyric.bridge-pivot
 ```
 
 
@@ -1984,6 +2285,14 @@ id: var.range
 kind: variation
 canonical_label: Range
 provenance: source-original
+aliases_en:
+- fabricated excuse
+- "false"
+- ulterior explanation
+scenarios:
+- novel.crucial-element-audit
+- lyric.album-arc-mapping
+- lyric.bridge-pivot
 ```
 
 
@@ -2023,10 +2332,14 @@ id: var.rationalization
 kind: variation
 canonical_label: Rationalization
 provenance: source-original
-type_id: type.conceiving
-quad_id: quad.rationalization-var
-ktad_position: K
 dynamic_pair_id: var.obligation
+ktad_position: K
+quad_id: quad.rationalization-var
+scenarios:
+- novel.character-arc
+- novel.diagnose-flat-draft
+- lyric.bridge-pivot
+type_id: type.conceiving
 ```
 
 
@@ -2046,7 +2359,17 @@ id: var.reappraisal
 kind: variation
 canonical_label: Reappraisal
 provenance: source-original
+aliases_en:
+- checking up
+- re-examining a conclusion
+- reassess
+- rechecking
+- reevaluating a
 dynamic_pair_id: var.appraisal
+scenarios:
+- novel.character-arc
+- novel.crucial-element-audit
+- lyric.bridge-pivot
 ```
 
 
@@ -2079,7 +2402,15 @@ id: var.repulsion
 kind: variation
 canonical_label: Repulsion
 provenance: source-original
+aliases_en:
+- foreboding
+- repellent
+- unattractive
 dynamic_pair_id: var.attraction
+scenarios:
+- lyric.verse-chorus-pair
+- lyric.bridge-pivot
+- novel.crucial-element-audit
 ```
 
 
@@ -2119,10 +2450,19 @@ id: var.responsibility
 kind: variation
 canonical_label: Responsibility
 provenance: source-original
-type_id: type.conceiving
-quad_id: quad.rationalization-var
-ktad_position: A
+aliases_en:
+- accepted suitability
+- assumed propriety
+- believed appropriateness
+- self designated aptness
 dynamic_pair_id: var.commitment
+ktad_position: A
+quad_id: quad.rationalization-var
+scenarios:
+- novel.character-arc
+- lyric.archetype-as-system-part
+- lyric.album-arc-mapping
+type_id: type.conceiving
 ```
 
 
@@ -2137,11 +2477,6 @@ accomplish a task -- The instinct for survival is paramount under normal circums
 throw themselves into danger to help a human friend.
 The drive that overcomes self-interest is Responsibility.
 Responsibility exists when one cares more for others
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-40.
-
 than for oneself. The problem occurs when a character
 believes he knows what is best for someone and that
 someone doesn't agree. "It's for your own good," and
@@ -2173,7 +2508,23 @@ id: var.security
 kind: variation
 canonical_label: Security
 provenance: source-original
+aliases_en:
+- conscious of
+- egocentric
+- evaluation of safety
+- measure of safeguards
+- narcissistic
+- perception of self
+- self-absorbed
+- self-centered
+- self-conscious
+- self-serving
+- selfishness
 dynamic_pair_id: var.threat
+scenarios:
+- novel.crucial-element-audit
+- lyric.bridge-pivot
+- novel.dual-storyform
 ```
 
 
@@ -2198,6 +2549,32 @@ hungry so often as a child. When a character's experiences motivate him to over 
 dangers, Security may actually become a danger itself.
 
 **Synonyms**: evaluation of safety, measure of safeguards
+
+---
+
+## Self-Interest
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.self-interest
+kind: variation
+canonical_label: Self-Interest
+provenance: source-original
+dynamic_pair_id: var.morality
+ktad_position: A
+quad_id: quad.approach-var-physics
+scenarios:
+- novel.character-arc
+- lyric.archetype-as-system-part
+- lyric.refrain-as-restatement
+type_id: type.obtaining
+```
+
+
+*Type: Variation*
+
+Variation paired with Morality in the approach/physics quad. Heading minted by ST-3 to reify the canonical `var.self-interest` ontology entry; the truncated body fragment ("doing or being based on what is best for oneself") survives mid-document below in the broken Security/Self-Awareness sequence and is flagged for re-extraction.
+
+---
 
 ### Element
 
@@ -2244,11 +2621,6 @@ provide a warped feedback that creates a false Sense
 of Self in the character. This erroneous image may be
 far better, far worse, or simply different than his actual
 state of being. Other stories force a character to come
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-41.
-
 to grips with the fact that he is wrong about himself,
 and the opinions of others are accurate. In a Main
 Character, the differential between Sense of Self and
@@ -2287,6 +2659,10 @@ id: var.sense-of-self
 kind: variation
 canonical_label: Sense of Self
 provenance: source-original
+scenarios:
+- novel.character-arc
+- novel.crucial-element-audit
+- lyric.refrain-as-restatement
 ```
 
 
@@ -2306,10 +2682,18 @@ id: var.senses
 kind: variation
 canonical_label: Senses
 provenance: source-original
-type_id: type.past
-quad_id: quad.senses-var
-ktad_position: K
+aliases_en:
+- perceptual data
+- raw sensations
+- sensory impressions
 dynamic_pair_id: var.interpretation
+ktad_position: K
+quad_id: quad.senses-var
+scenarios:
+- novel.character-arc
+- novel.crucial-element-audit
+- lyric.bridge-pivot
+type_id: type.past
 ```
 
 
@@ -2347,7 +2731,13 @@ id: var.situation
 kind: variation
 canonical_label: Situation
 provenance: source-original
+aliases_en:
+- how things
 dynamic_pair_id: var.circumstances
+scenarios:
+- novel.crucial-element-audit
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -2384,10 +2774,18 @@ id: var.skill
 kind: variation
 canonical_label: Skill
 provenance: source-original
-type_id: type.understanding
-quad_id: quad.wisdom-var
-ktad_position: T
+aliases_en:
+- aptitude
+- competence
+- proficiency
 dynamic_pair_id: var.experience
+ktad_position: T
+quad_id: quad.wisdom-var
+scenarios:
+- novel.storyform-slot-fill
+- novel.character-arc
+- lyric.refrain-as-restatement
+type_id: type.understanding
 ```
 
 
@@ -2425,10 +2823,23 @@ id: var.strategy
 kind: variation
 canonical_label: Strategy
 provenance: source-original
-type_id: type.doing
-quad_id: quad.strategy-var
-ktad_position: K
+aliases_en:
+- basic drives
+- basic motivations
+- decided approach
+- libido
+- plan
+- ploy
+- scheme
+- tactic
 dynamic_pair_id: var.analysis
+ktad_position: K
+quad_id: quad.strategy-var
+scenarios:
+- novel.crucial-element-audit
+- novel.act-pivot
+- lyric.bridge-pivot
+type_id: type.doing
 ```
 
 
@@ -2484,10 +2895,19 @@ id: var.suspicion
 kind: variation
 canonical_label: Suspicion
 provenance: source-original
-type_id: type.memory
-quad_id: quad.truth-var
-ktad_position: D
+aliases_en:
+- doubt based on evidence
+- informed doubt
+- partially justified apprehensiveness
+- wary approach
 dynamic_pair_id: var.evidence
+ktad_position: D
+quad_id: quad.truth-var
+scenarios:
+- novel.character-arc
+- novel.crucial-element-audit
+- lyric.bridge-pivot
+type_id: type.memory
 ```
 
 
@@ -2524,7 +2944,13 @@ id: var.threat
 kind: variation
 canonical_label: Threat
 provenance: source-original
+aliases_en:
+- perceived
 dynamic_pair_id: var.security
+scenarios:
+- novel.crucial-element-audit
+- lyric.bridge-pivot
+- novel.diagnose-flat-draft
 ```
 
 
@@ -2564,10 +2990,19 @@ id: var.truth
 kind: variation
 canonical_label: Truth
 provenance: source-original
-type_id: type.memory
-quad_id: quad.truth-var
-ktad_position: K
+aliases_en:
+- correct information
+- correct notion
+- honesty
+- verity
 dynamic_pair_id: var.falsehood
+ktad_position: K
+quad_id: quad.truth-var
+scenarios:
+- novel.crucial-element-audit
+- lyric.bridge-pivot
+- novel.diagnose-flat-draft
+type_id: type.memory
 ```
 
 
@@ -2608,6 +3043,10 @@ id: var.unique-ability
 kind: variation
 canonical_label: Unique Ability
 provenance: source-original
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
 ```
 
 
@@ -2652,10 +3091,18 @@ id: var.value
 kind: variation
 canonical_label: Value
 provenance: source-original
-type_id: type.conscious
-quad_id: quad.value-var
-ktad_position: K
+aliases_en:
+- general usefulness
+- objective appraisal
+- utility
 dynamic_pair_id: var.worth
+ktad_position: K
+quad_id: quad.value-var
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- lyric.refrain-as-restatement
+type_id: type.conscious
 ```
 
 
@@ -2694,10 +3141,16 @@ id: var.wisdom
 kind: variation
 canonical_label: Wisdom
 provenance: source-original
-type_id: type.understanding
-quad_id: quad.wisdom-var
-ktad_position: K
+aliases_en:
+- mental mastery
 dynamic_pair_id: var.enlightenment
+ktad_position: K
+quad_id: quad.wisdom-var
+scenarios:
+- novel.character-arc
+- lyric.album-arc-mapping
+- lyric.refrain-as-restatement
+type_id: type.understanding
 ```
 
 
@@ -2725,9 +3178,17 @@ id: var.worry
 kind: variation
 canonical_label: Worry
 provenance: source-original
-type_id: type.becoming
-quad_id: quad.conscience-var
+aliases_en:
+- anxiety
+- apprehension
+- misgivings
 ktad_position: A
+quad_id: quad.conscience-var
+scenarios:
+- novel.character-arc
+- novel.diagnose-flat-draft
+- lyric.refrain-as-restatement
+type_id: type.becoming
 ```
 
 
@@ -2759,10 +3220,14 @@ id: var.worth
 kind: variation
 canonical_label: Worth
 provenance: source-original
-type_id: type.conscious
-quad_id: quad.value-var
-ktad_position: T
 dynamic_pair_id: var.value
+ktad_position: T
+quad_id: quad.value-var
+scenarios:
+- novel.storyform-slot-fill
+- novel.crucial-element-audit
+- lyric.bridge-pivot
+type_id: type.conscious
 ```
 
 

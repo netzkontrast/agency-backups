@@ -43,8 +43,6 @@ To convince ourselves (and others) that our actions are justified, we say things
 
 Whenever the "proper" response is unclear, the legitimacy of our actions is open to interpretation.  If there were a way to stand outside of it all and take a truly objective view, we could see absolutely which actions were justifiable and which were not.  Unfortunately, we are not afforded this objective view in real life.  So, we create stories to try and approximate the objective truth. 
 
-77. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **The Author Giveth; the Audience Taketh Away** 
@@ -65,8 +63,6 @@ In a binary sense, the best path of all will be represented by either the Main o
 
 From an author's perspective, though it is important to know how things will turn out, it is equally important to know how things got started.  How is it that people can become so misguided?  How is it that characters can become so justified? 
 
-78. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Problems Start Innocently Enough....** 
@@ -84,8 +80,6 @@ Problem solving requires identifying the source of the inequity and/or the kind 
 ## **Characters, Problems, and Justification** 
 
 Stories are about one character who is truly problem solving and a second character who believes they are problem solving but are in error.  One will be the Main Character and the other the Impact Character.  In terms of the Story Mind, these two characters represent our own inability to know in advance if the method we have chosen to apply to a problem will lead to success or failure.  When our approach leads to failure Dramatica does not refer to the process as problem solving, but calls that process _Justification_ . 
-
-79. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -107,8 +101,6 @@ As we are driven by life experiences and since the experiences of each of us are
 
 If a character stands by his life experience, then it stands to reason his approach served him well in other scenarios.  Similarly, his counterpart has had different life experiences that served him equally well.  In the context of the current inequity in question, each life experience generates an approach incompatible with the other.  In one context, each set of experiences was problem solving.  In the current context, one will be seen to be problem solving, the other justification. 
 
-80. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Tell Me A Message, Mommy....** 
@@ -129,8 +121,6 @@ To carry an emotional appeal to an audience, a story must not only show the resu
 
 Imagine a waitress coming through the one-way door from the kitchen into the restaurant.  Her nose begins to itch.  She cannot scratch her nose because her hands are full of plates.  She looks for a place to lay down the plates, but all the counter space is cluttered.  She tries to call to a waiter, but he cannot hear her across the noisy room. 
 
-81. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 She hollers to a bus boy who gets the waiter who takes her plates so she can scratch her nose.  Problem solved!  Or was it justification? 
@@ -147,8 +137,6 @@ But, what if there was a limit: her itching nose was about to make her sneeze an
 
 Clearly, problem solving turns into justification and vice-versa, depending on the context.  So how is it that achieving results in the rational sense is not the only determining factor as to which is which?  Simply because sometimes the costs that must be paid in suffering in a long, indirect path to a goal far outweigh the benefits of achieving the goal itself.  When we try to overcome obstacles that stand between us and a goal (pre-requisites and requirements) we pay a price in effort, resources, physical and emotional hardship.  We suffer unpleasant conditions now in the hope of a reward later. This is fine as long as the rewards justify the expenses.  But if they do not, and yet we 
 
-82. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 continue to persevere, we cannot possibly recoup enough to make up for our losses, much as a gambler goes into the hole after losing her intended stake. 
@@ -164,8 +152,6 @@ Does this mean the only danger lies in the round-about path?  Not at all.  If it
 But let's complicate this even more...  Suppose the inequity doesn't worsen at first, but only gets worse after a while.  Then what may have been the most appropriate response for problem solving at one stage in the game becomes inappropriate at a later stage.  In such a complex web of changing conditions and shifting context, how is an individual to know what choices are best?  We can't.  That is the point: we can never know which path is best because we cannot predict the future.  We can only choose what our life experience has shown to be most often effective in similar situations and hope for the best.  It does not matter how often we re-evaluate.  The situation can change in unpredictable ways at any time, throwing all of our plans and efforts into new contexts that change their evaluation from positive to negative or the vice versa. 
 
 Stories serve as collective truisms, much like the way insurance works.  Through 
-
-83. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -187,8 +173,6 @@ In such a scenario, we would not learn from our mistakes, much less our successe
 
 We all know the truisms, "where there's smoke, there's fire," "guilt by association," "one bad apple spoils the bunch," "the only good (fill in the blank) is a dead (fill in the blank)."  In each of these cases we assume a different kind of causal relationship than is generally scrutinized in our culture.  Each of these phrases asserts that when you see one thing, another thing will either be there also, or will certainly follow.  Why do we make these assumptions?  Because, in context, they are often true.  But as soon as we apply them _out of context_ they are just as likely false. 
 
-84. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Associations in Space and Time** 
@@ -206,8 +190,6 @@ First, there is the notion of how many times a character has seen things go one 
 ## **Context is a Sneaky Thing** 
 
 Of course, one is more sensitive to the most recent patterns, so an equal number of false items (or alternative truths) is not really required when one is aware he has entered a new situation.  However, situations often change slowly and even in ways we are not aware.  So context is in a constant state of flux.  If something has always proven true in _all contexts up to this point_ then one is not conscious of entering a whole new context.  Rather, as we move in and out of contexts, a truism that was ALWAYS true may now be true sometimes and not true at other times.  It may have an increasing or decreasing frequency of proving true or may _tend_ toward being false for a while, only to _tend_ toward being true again later.  This kind of dynamic context requires that something be seen as false as often as it has been seen as true in order to arrive even at a neutral point where one perspective is not held more strongly than the other. 
-
-85. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -227,8 +209,6 @@ This is the nature of the Main Character's struggle in a story.  He has either b
 
 The story unfolds as the Main and Impact Characters argue over direct vs. indirect, repetition vs. framework, strategy vs. analysis, and problem solving vs. justification.  As the story progresses, it is the Impact Character's function to force the Main Character through all four of these conflicts, each representing a different "level" of justification (problem solving) until they both stand at the neutral point where one means of problem solving/evaluation is as good as the next.  This is the moment of the Leap of Faith, 
 
-86. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 where life experience has been completely counterbalanced by what has been recently learned.  This is the moment the Main Character must step into the void with absolutely no personal experiences to guide him, and choose to continue with the path he has always taken or adopt a new one. 
@@ -240,7 +220,5 @@ The story then resolves in Success/Good, Success/Bad, Failure/Good, Failure/ Bad
 From this perspective, we can see how the sequence in which dramatic events occur has tremendous impact not on the structure of a story, but on the meaning derived from that structure.  The "feel" of the passionate argument will be determined by the order in which the Main Character passes through the levels of justification to face the real source of the story's inequity. 
 
 This sequence affects not only character, but plot and theme as well, and is therefore a complex series of cycles within cycles that is unpredictable during the viewing of a work, but falls into understanding at the conclusion or _denouement_ .  Because it is so complex, this is the part of Dramatica best left to computer calculation or to the intuition of the author himself. 
-
-87. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved

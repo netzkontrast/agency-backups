@@ -39,8 +39,6 @@ As a familiar example, think of the old adage about three blind men trying to de
 
 _Where_ we are looking from are the four points of view represented by the four throughlines (Overall Story, Main Character, Impact Character, and Subjective Story).  In stories, _what_ we are looking at is the problem that the Story Mind is considering.    So, to truly understand perspective (and therefore theme) we must be able to accurately describe the nature of the story's problem, and then see how its appearance changes when seen from each different point of view. 
 
-88. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Describing The Story's Problem** 
@@ -58,8 +56,6 @@ Universe Physics<br>A Situation An Activity<br>Psychology Mind<br>A Manner of Th
 
 
 Since these four categories classify the problem, Dramatica refers to them as CLASSES. 
-
-89. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -87,8 +83,6 @@ Overall Story Throughline:  Activity (Physics) (the Class of Activities)— Star
 
 Main Character Throughline:  Situation (Universe) (the Class of Situations)— Luke Skywalker is a whiny farm-boy from a small desert planet.  He has a tremendous amount of unrealized talent because his father was a Jedi, but everyone sees him as a kid from the edge of the galaxy. 
 
-90. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Impact Character Throughline:  Fixed Attitude (Mind) (the Class of Fixed Attitudes) — Obi Wan Kenobi lives in the world of the Force.  His attitude about the Force's power and impact, the existence of the Light and Dark sides of the Force, and the importance of the Force is unshakable. 
@@ -96,8 +90,6 @@ Impact Character Throughline:  Fixed Attitude (Mind) (the Class of Fixed Attitud
 Subjective Story Throughline:  Manipulation (Psychology) (the Class of Ways of Thinking) — Obi Wan clearly manipulates Luke through psychological means.  He attempts to coerce Luke to help him get to Alderaan, which Luke resists; Obi Wan does not reveal the fate of Luke's aunt and uncle to Luke even though Obi Wan is clearly not surprised when he hears the news; Obi Wan purposely keeps Luke in the dark about his resources while bartering with Han Solo, hushing him up when Luke can barely contain himself; Obi Wan keeps Luke under his thumb by doling out information about the Force, the Empire, the Past, and everything else; and it's Obi Wan who whispers into Luke's head at several critical moments... "Run, Luke, run!" and "Trust your feelings, Luke." 
 
 At this point, we have achieved a clearer understanding of our story's theme by classifying the story's problem.  In our own lives, however, this would not be enough information to identify the problem clearly enough to begin solving it, and so it is with the Story Mind as well.  We need to dig deeper and be more precise if we are to eventually pin-point the source of the story's problem so it can be addressed at the root. 
-
-91. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -114,8 +106,6 @@ As you can see, the TYPE level of resolution on our story's problem is much more
 If we compare the Types in one Class to those in the others, we can see how the chart does not cater to our culture's biases.  Rather, it presents a neutral set of subcategories so that any kind of problem an author might wish to address is treated with equal weight. 
 
 One of the first things we can begin to feel about the Types is that their position within each quad has an influence on the nature of the Type, which is reflected in its name.  For example, in the upper left hand corner of the Situation (Universe) Class we find the Type, "Past."  By comparison, in the upper left hand corner of the Fixed Attitude (Mind) Class we find the Type, "Memory."  The balance of the chart can be easily illustrated in the phrase, "Past is to Situation (Universe) as Memory is to Fixed Attitude 
-
-92. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -137,8 +127,6 @@ Impact Character Concern:  Impulsive Responses [Preconscious] (Immediate respons
 
 Subjective Story Concern:  Playing A Role [Being] (Temporarily adopting a lifestyle)— Obi Wan wants Luke to be the faithful stu- 
 
-93. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 dent, while Luke just wants to be a Hero without really understanding what good it does to be quiet and controlled like Obi Wan. Luke's farm-boy lifestyle is not at all in sync with his true nature as Obi Wan sees him.  Obi Wan knows that Luke is the son of a Jedi and therefore he tries to manipulate Luke out of being what he's not. 
@@ -154,8 +142,6 @@ When we sub-divide the Types, we can establish four different VARIATIONS of each
 **----- Start of picture text -----**<br>
 Fate Prediction Fact Security Instinct Senses Wisdom Skill<br>Interdiction Destiny Threat Fantasy Interpre- Conditioning Experience Enlighten-<br>tation ment<br>Openness Delay Work Attract Approach Self  Pre- Strategy<br>Interest requisites<br>Choice Pre- Repel Attempt Morality Attitude Analysis Pre-<br>conception conditions<br>State of  Situation Knowledge Ability Truth Evidence Value Confidence<br>Being<br>Circum- Sense of  Desire Thought Suspicion Falsehood Worry Worth<br>stances Self<br>Rationali- Commitment Permission Need Closure Hope Investigation Appraisal<br>zation<br>Responsi- Obligation Expediency Deficiency Dream Denial Reappraisal Doubt<br>bility<br>**----- End of picture text -----**<br>
 
-
-94. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -173,8 +159,6 @@ As a means of zeroing in on the Variation that best describes the thematic natur
 
 Later we shall return to describe how each dynamic pair in the chart can form the basis for a thematic premise in your story.  We will also show how this kind of dynamic conflict does not have to be a good vs. bad situation, but can create a "lesser of two evils" or "better of two goods" situation as well. 
 
-95. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Issues** 
@@ -189,13 +173,9 @@ Main Character Issue:  Fantasy (Belief in something unreal)— Fantasy is an imp
 
 Impact Character Issue:  Worth (A rating of usefulness or desirability to oneself)— Obi Wan's impact forces considerations of what should be thought to have true worth (as opposed to objective value).  Obi Wan makes it clear that he believes the Force is what everyone should see as having the greatest worth in the galaxy, and then he backs up his opinion by using it to get himself and others out of tight jams.  He also appears at first to be a nutty old hermit, but is revealed to be a person of great worth in the eyes of Princess Leia, an important leader in the Rebellion.  Because Obi Wan shows that things are seldom what they seem, his impact often causes people to reevaluate what they find of worth and what they don't.  These re-evaluations of worth generally lead to a greater understanding — especially for Luke Skywalker.  Obi Wan shows Worth to be advantageous. 
 
-96. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Subjective Story Issue:  Ability (The innate capacity to do or be)— The most focused aspect of Luke's and Obi Wan's relationship has to do with developing the abilities of a Jedi Knight.  When Luke is either improving his own abilities or admiring Obi Wan's, everyone sees this relationship as a positive one for both people involved.  Obi Wan's influence helps Luke see abilities which he didn't ever allow himself to see, such as the ability to leave home and join the Rebellion.  Clarifying these abilities, however, would not be positive to their relationship if these two didn't also share similar desires.  Fortunately for them, every time Obi Wan uncovers a new ability, such as being able to use a light saber without looking, it makes Luke want more.  These kinds of demonstrable abilities make others, such as Han Solo, see that there really is something good happening between this teacher and student—even if it does involve ancient religion.  Ability in this relationship is advantageous. 
-
-97. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -213,8 +193,6 @@ Each Variation can be sub-divided again into four Elements.  And, it turns out t
 
 Identifying the Element at the heart of each throughline puts a specific name on the Problem which drives that throughline through the story. 
 
-98. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## Star Wars 
@@ -228,8 +206,6 @@ Impact Character Problem:  Unproven (A rating of knowledge that has not been tes
 Subjective Story Problem:  Non-Accurate (Not within tolerances)— Obi Wan's secrecy and misleading comments to Luke keeps their relationship off balance.  Obi Wan attempts to lure Luke away with him to Alderaan, then feigns indifference when Luke wimps out; Obi Wan marginally warns Luke to be careful at the cantina without giving Luke a real idea of the dangers within; Obi Wan's vagueness about the necessary "pains" associated with Luke's Jedi training (like getting zapped by the trainer robot) jostles their relationship. 
 
 We need to take a breather here!  Much new material has been covered and it takes quite some time to assimilate.  We suggest you put the book down for a while, ponder what we've just explored, have a snack, watch a program on TV, and then return once 
-
-99. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -247,8 +223,6 @@ Physics<br>Universe<br>Mind<br>Psychology<br>**----- End of picture text -----**
 
 This projection gives a good feel for how Classes, Types, Variations, and Elements relate to one another.  We start at the top by loosely classifying our story's problem, then sub-divide each Class into Types.  Each Type is refined into Variations and then defined in terms of its basic Elements.  Remember, our purpose here is only to identify the components of theme.  Later in THE ART OF STORYTELLING we will illustrate how to construct and develop your story's theme. 
 
-100. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Matching Points Of View To The Chart** 
@@ -258,8 +232,6 @@ To reiterate: Theme is perspective.  Perspective is created by the relationship 
 To define the story's problem we start with its Class, then find out what Type of problem it is within that Class.  Next we see what Variation of that Type the problem is and then finally work down to the Elemental nature of the problem, which is reflected in Character. 
 
 Now we need to see what each of those aspects of the problem looks like from each of the four points of view an audience will expect in a complete story.  Let's begin with the Class level. 
-
-101. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -276,8 +248,6 @@ As an example, objectively, the problem in a particular story might seem to be a
 For example, if Situation (Universe) is the Overall Story Throughline, the story at large would be about a situation that affects all the characters in the story to some degree.  Such a story might be about people in a post-nuclear holocaust world, prisoners of war in a concentration camp, or two teenagers from rival gang families who have fallen in love.  In each case, the external situation is the cause of the story's problems, when we see them objectively.  Also in each case, all of the characters in the story will be affected by the same situation, which is the definition of the problem when seen from the "they" point of view, like that of the general on the hill watching the battle.  The audience will want to see what the problem looks like from this point of view to feel that the issues of the story have been fully explored. 
 
 In contrast, if the Main Character point of view were assigned to the Situation (Universe) Class, the Situation (Universe) Class would become the Main Character Throughline.  In a different hypothetical story with this arrangement, only the Main Character would be in the situation; the other characters would be involved in one of the remaining Classes.  In such a story where Situation (Universe) is the Main Character Throughline, the situation might be that the Main Character is second in command on a battleship, has a physical deformity like The Elephant Man, or particular race or sex.  In other words, the Main Character will be best described as a result of his personal situation, which will be some external condition that is causing difficulties only for that character.  Quite a difference from an Overall Story situation that affects _all_ the characters in a story (including the Main Character). 
-
-102. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -299,8 +269,6 @@ It is easy to think of kinds of activities that border on being situations.  For
 
 Fixed Attitude (Mind) is an internal state, describing problems which come from fixed attitudes.  When Fixed Attitude (Mind) is chosen as the Overall Story Throughline, the problems that affect all the characters will stem from internal attitudes and fixations.  For example, an Overall Story Throughline of Fixed Attitude (Mind) might be about how prejudice affects a town or how a humiliating memory affects a kingdom.  In contrast, Situation (Universe) and Activity (Physics) Overall Stories deal with external states and 
 
-103. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 processes.  A selection of Fixed Attitude (Mind) as the Overall Story Throughline specifically means that the source of the difficulties between all the Overall Story Characters is best seen as a problematic state of mind. 
@@ -308,8 +276,6 @@ processes.  A selection of Fixed Attitude (Mind) as the Overall Story Throughlin
 ## **Manipulation (Psychology) as Overall Story Throughline** 
 
 Manipulation (Psychology) is an internal process, describing problems which come from the ways in which people think.  When Manipulation (Psychology) is chosen as the Overall Story Throughline, the problems that affect all the characters will stem from manipulations and conflicting processes of thought.  As opposed to the fixed attitudes described in the Fixed Attitude (Mind) Class, Manipulation (Psychology) is about problems which arise from manners of thinking.  For example, an Overall Story Throughline of Manipulation (Psychology) might be about the problems caused in a regiment that has been overly trained to follow orders or in a dysfunctional family which is trying to manipulate each other into  a nervous breakdown. 
-
-104. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -333,8 +299,6 @@ An Activity (Physics) Main Character is a person of action.  For example, he mig
 
 A Main Character Throughline of Manipulation (Psychology) indicates an individual who is best described by how he thinks.  This could be a flighty person, someone who jumps to conclusions, or even a calculating, manipulative person.  In each of these scenarios, the opinions the Main Character holds are not what sets him apart, but rather the kinds of mental processes he goes through.  Though there may be many Overall Story Characters who represent manners of thinking, only the Main Character will pro- 
 
-105. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 vide the audience with the experience of thinking that way. 
@@ -342,8 +306,6 @@ vide the audience with the experience of thinking that way.
 ## The Main Character has Class 
 
 Clearly, the nature and concerns of a Main Character change radically from Class to Class.  If you are most interested in exploring your Main Character in a story, then choosing the Main Character Class before any others is the way to approach developing a story.  Keep in mind, though, that once a Class has been assigned to one of the four Throughlines in a story, it cannot be assigned to any of the others.  So whatever you might pick for your Main Character's Class will not be available for the Overall Story, Subjective Story or Impact Character. 
-
-106. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -365,15 +327,11 @@ An Activity (Physics) Throughline Impact Character will be a person whose action
 
 The Fixed Attitude (Mind) Impact Character exhibits a fixation or attitude dealing primarily with memories, desires, immediate responses or considerations.  It is this attitude that causes the Main Character to reconsider and/or justify his position. 
 
-107. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Manipulation (Psychology) as Impact Character Throughline** 
 
 A Manipulation (Psychology) Impact Character influences others through direct manipulation or may just have an impact because of the way in which he thinks.  In either case, the focus of this Throughline is an external view of how thought process affect those whom come in contact with them. 
-
-108. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -393,15 +351,11 @@ If Activity (Physics) is the Subjective Story Throughline, the Main and Impact C
 
 When Fixed Attitude (Mind) is selected as the Subjective Story Throughline, fixed attitudes or mind-sets form the battleground of the Main and Impact Characters.  How many fixed attitudes can we see as a personal point of contention between two people? A prejudice, political view, religion, an attitude toward a child or parent, or a feeling of worthlessness would do the trick.  A scenario that portrays the troubles between the Main and Impact Characters as revolving around a fixed state of mind, will successfully represent Fixed Attitude (Mind) as the Subjective Story Throughline. 
 
-109. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Manipulation (Psychology) as Subjective Story Throughline** 
 
 Manipulation (Psychology) as the Subjective Story Throughline has the Main and Impact Characters diverging over a manner of thinking.  Phrases like, "You always get this way when we argue," and "No, I don't - it's _you_ that keeps changing subjects," are referring not to a particular attitude, but a manner of thinking that is not appreciated between the Main and Impact Characters.  When the way one goes about working something out becomes the issue between the Main and Impact Characters, the Subjective Story Throughline will be Manipulation (Psychology). 
-
-110. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -416,8 +370,6 @@ To recap, the Main Character Throughline represents the audience point of view i
 So, a Main Character _Throughline_ explores what it looks like and feels like to have a particular kind of problem (often seen as drive).  The Impact Character Throughline explores what kind of impact someone with that kind of problem (or drive) has on the people and events around him.  The Subjective Story Throughline determines which is the better position to be in personally between Main and Impact, according to the author.  The Overall Story Throughline determines which is the better position to be in for the benefit of everyone else. 
 
 Keeping these points of view in mind, let's see what other story points are created at the Type, Variation, and Element levels. 
-
-111. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -439,8 +391,6 @@ As one would expect, the Main Character Concern is of interest only to the Main 
 
 If Obtaining were the Main Character Concern, the Main Character alone would be trying to get or get rid of (hold on to or refuse to hold on to) something.  None of the 
 
-112. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 other characters would share this Concern because the other throughlines are all in other Classes with different Types.  This divergence is what gives a story some breadth and a sense of completeness for an audience.  Rather than focusing on just one issue, every point of view regarding the story's problem falls into a different Throughline with its own unique Concern. 
@@ -460,8 +410,6 @@ If the Subjective Story Concern were Obtaining, the Main and Impact would argue 
 ## **Wrapping Up Our Concerns** 
 
 As we have seen, matching a Type with a throughline creates a Concern.  Each Concern provides a deeper appreciation of a different side of the story's problem for the audience. 
-
-113. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -483,8 +431,6 @@ The Main Character Issue (and its counterpoint) represent the thematic conflict 
 
 The Impact Character Issue provides a way of evaluating the appropriateness of the Impact Character's impact.  The Impact Character Issue and Counterpoint act as a balance or scale against which the results of the Impact Character's point of view are weighed.  This is where an author can truly tip the balance as to which point of view the 
 
-114. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 audience comes to favor.  Later we shall explore how that balance might be tipped back and forth over the course of the story, making a more realistic and less heavy-handed statement of the author's bias. 
@@ -492,8 +438,6 @@ audience comes to favor.  Later we shall explore how that balance might be tippe
 ## **Subjective Story Issue** 
 
 The Subjective Story Concern describes the area of shared concern for the Main and Impact Characters.  The Subjective Story Issue and Counterpoint describe why they come to blows over it.  The Main Character will believe the Subjective Story Issue (or counterpoint) is the value standard that should be used when looking at the Subjective Story Concern.  As a result, The Main Character will see the Concern in a particular light.  In contrast, the Impact Character will believe the other Variation (Issue or counterpoint) is the proper way to evaluate the Concern.  Since this standard of measure results in different conclusions about the Concern, the Main and Impact Characters come into conflict.  They use these two points as they argue over two issues: what should be done about the Concern, and which is the best way to look at it. 
-
-115. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -508,8 +452,6 @@ The Impact Character Problem is the source of his drive as well, but rather than
 Lastly, let's examine the Subjective Story Problem.  Unlike the Problems in each of the other throughlines, this one is not about an item, but a relationship - the relationship between Main and Impact.  What is at the heart of their disagreements?  What is the most essential issue from which all their conflict grows?  The Subjective Story Problem describes the most refined view of what drives (or pulls) the Main and Impact Characters apart. 
 
 At this point we have defined all of the principal thematic perspectives in a story.  We have determined that any Problem might be understood in terms of its Class, Type, Variation, and Element.  We have further described that the story's central Problem itself can never be seen directly, but will be approximated by exploring how it appears from four different points of view.  Each view will provide its own understanding of the nature of the Problem's Class, Type, Variation, and Element.  Each of these is called an appreciation.  When all the story points are considered together in the mind of the audience, the author's bias on the issues at the heart of a story is established. 
-
-116. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -533,8 +475,6 @@ The Issue itself forms one side of the thematic conflict and the Counterpoint fo
 
 The advantage of the thematic conflict is that it spells out _both_ sides of the thematic 
 
-117. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 argument  Both Issue and counterpoint must be played against one another over the course of the story if the author is to make a case that one is better than the other. 
@@ -555,8 +495,6 @@ Dramatica sees goals and yearnings as two different things: one born of reason a
 
 The degree of success or failure, good or bad, is determined in storytelling.  The thematic story points of Success, Failure, Good, and Bad simply indicate on which side of the fence the conclusion settled.  As a result, there are two different aspects to the conclusion of a Dramatica thematic argument — the outcome (Success or Failure) and 
 
-118. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 the Judgment (Good or Bad). 
@@ -575,8 +513,6 @@ It is important to note that a Failure/Good story, for example, does not mean th
 
 Similarly, Success/Bad stories are like Remains of the Day in which Mr. Stevens (Anthony Hopkins) successfully maintains the household through thick and thin, yet in the end finds himself empty and alone.  This is a Personal Tragedy. 
 
-119. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Sewing Together The Themes** 
@@ -592,8 +528,6 @@ This point of view is deceptive, however.  The meaning which Story Points hold i
 The connections these Story Points have with one another is exceedingly complex.  Beyond the obvious links between such items as Throughlines/Concerns/ and Issues, the web of dramatic relationships between the Story Points of a single story can only be kept fully consistent using a computer. 
 
 The purpose of this section, The Elements of Structure, is just to catalogue the pieces of story structure.  The second half of this book, titled The Art of Storytelling, will explore exactly how creating a story determines what relationships will exist between that story's Story Points. 
-
-120. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -615,8 +549,6 @@ In the Impact Character Throughline, the Focus is where this character hopes to 
 
 Focus in the Subjective Story Throughline is the actual topic over which Main and Impact Characters argue because it gets their attention.  The audience will see the real Problem between them, but the Main Character and Impact Character will only see the 
 
-121. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Focus.  Subjective Story Direction describes the direction in which the argument tends to lead. 
@@ -637,8 +569,6 @@ In the Subjective Story Throughline, Catalyst and Inhibitor control the rate at 
 
 At the Type level, each of the four throughlines has one additional appreciation.  It is called a Benchmark, because it is a measure of the growth of each throughline.  The Benchmark provides a category in which the progress of each throughline can be charted.  For example, an Overall Story Benchmark of Obtaining might be seen in the characters gathering cash receipts in their efforts to afford tuition.  In the Main Character Throughline, a Benchmark of Obtaining might be the unused concert tickets on a shy man's bed stand from all the times he bought them but then was too afraid to ask someone out to the show. 
 
-122. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **What about the Class level?** 
@@ -648,7 +578,5 @@ The Class level has no additional story points, since it only has four items and
 ## **Is That About It?** 
 
 Please keep in mind that this section of the Dramatica Theory Book deals with The Elements Of Structure.  It describes what the pieces are, not how to put them together. That comes later in The Art Of Storytelling. 
-
-123. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved

@@ -1,0 +1,531 @@
+{
+  "consumer_hints": {
+    "ncp-author": "primary_terms[].ncp_appreciation maps each entry to its closest NCP enum (or null when absent — archetypes / quads / dynamic-pairs / concepts have no NCP target).",
+    "novel-architect": "Load this file when answering lyric.refrain-as-restatement queries; cite ontology entries by id, not label."
+  },
+  "generated_at": "2026-05-06",
+  "generated_from_ontology_version": "0.1",
+  "persona": "lyric",
+  "primary_pairs": [
+    {
+      "canonical_label": "Ability ↔ Desire",
+      "id": "dp.ability-desire",
+      "pair_member_a": "el.ability",
+      "pair_member_b": "el.desire",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Acceptance ↔ Non-acceptance",
+      "id": "dp.acceptance-non-acceptance",
+      "pair_member_a": "el.acceptance",
+      "pair_member_b": "el.non-acceptance",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Accurate ↔ Non-accurate",
+      "id": "dp.accurate-non-accurate",
+      "pair_member_a": "el.accurate",
+      "pair_member_b": "el.non-accurate",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Actuality ↔ Perception",
+      "id": "dp.actuality-perception",
+      "pair_member_a": "el.actuality",
+      "pair_member_b": "el.perception",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Analysis ↔ Strategy",
+      "id": "dp.analysis-strategy",
+      "pair_member_a": "var.analysis",
+      "pair_member_b": "var.strategy",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Appraisal ↔ Reappraisal",
+      "id": "dp.appraisal-reappraisal",
+      "pair_member_a": "var.appraisal",
+      "pair_member_b": "var.reappraisal",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Attempt ↔ Work",
+      "id": "dp.attempt-work",
+      "pair_member_a": "var.attempt",
+      "pair_member_b": "var.work",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Attraction ↔ Repulsion",
+      "id": "dp.attraction-repulsion",
+      "pair_member_a": "var.attraction",
+      "pair_member_b": "var.repulsion",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Avoid ↔ Pursuit",
+      "id": "dp.avoid-pursuit",
+      "pair_member_a": "el.avoid",
+      "pair_member_b": "el.pursuit",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Becoming ↔ Being",
+      "id": "dp.becoming-being",
+      "pair_member_a": "type.becoming",
+      "pair_member_b": "type.being",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Cause ↔ Effect",
+      "id": "dp.cause-effect",
+      "pair_member_a": "el.cause",
+      "pair_member_b": "el.effect",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Certainty ↔ Potentiality",
+      "id": "dp.certainty-potentiality",
+      "pair_member_a": "el.certainty",
+      "pair_member_b": "el.potentiality",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Change ↔ Inertia",
+      "id": "dp.change-inertia",
+      "pair_member_a": "el.inertia",
+      "pair_member_b": "el.change",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Chaos ↔ Order",
+      "id": "dp.chaos-order",
+      "pair_member_a": "el.chaos",
+      "pair_member_b": "el.order",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Choice ↔ Delay",
+      "id": "dp.choice-delay",
+      "pair_member_a": "var.choice",
+      "pair_member_b": "var.delay",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Circumstances ↔ Situation",
+      "id": "dp.circumstances-situation",
+      "pair_member_a": "var.circumstances",
+      "pair_member_b": "var.situation",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Closure ↔ Denial",
+      "id": "dp.closure-denial",
+      "pair_member_a": "var.closure",
+      "pair_member_b": "var.denial",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Commitment ↔ Responsibility",
+      "id": "dp.commitment-responsibility",
+      "pair_member_a": "var.commitment",
+      "pair_member_b": "var.responsibility",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Conceiving ↔ Conceptualizing",
+      "id": "dp.conceiving-conceptualizing",
+      "pair_member_a": "type.conceiving",
+      "pair_member_b": "type.conceptualizing",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    },
+    {
+      "canonical_label": "Conditioning ↔ Instinct",
+      "id": "dp.conditioning-instinct",
+      "pair_member_a": "var.conditioning",
+      "pair_member_b": "var.instinct",
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+    }
+  ],
+  "primary_quads": [],
+  "primary_terms": [
+    {
+      "canonical_label": "Contagonist",
+      "dynamic_pair_id": null,
+      "encoding_hint": "A concept unique to Dramatica, the Contagonist is the character that balances the Guardian. If Protagonist and Antagonist can archetypically be thought of as \"Good\" versus \"Evil,\" the Contagonist is \"Temptation\" to the Guardian's \"Conscience.\" Because the Contagonist",
+      "id": "arc.contagonist",
+      "kind": "archetype",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#contagonist"
+    },
+    {
+      "canonical_label": "Emotion",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Emotional Archetypal Character reacts passionately to turns of events without considering the consequences or best course to achieve his purpose. Frequently portrayed as a \"screamer\" or \"big dumb ox\" this character is really not stupid.",
+      "id": "arc.emotion",
+      "kind": "archetype",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#emotion"
+    },
+    {
+      "canonical_label": "Guardian",
+      "dynamic_pair_id": null,
+      "encoding_hint": "This Archetypal character acts as teacher/helper to the Protagonist. As Conscience, he provides the audience with the story's assessment of what is good and bad in the world it describes.",
+      "id": "arc.guardian",
+      "kind": "archetype",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#guardian"
+    },
+    {
+      "canonical_label": "Reason",
+      "dynamic_pair_id": null,
+      "encoding_hint": "The Reason Archetypal Character evaluates and acts solely on the basis of calm logic, never becoming enraged, passionate or emotionally involved in a decision. Although common in simple stories, the Reason character is hard to empathize with.",
+      "id": "arc.reason",
+      "kind": "archetype",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#reason"
+    },
+    {
+      "canonical_label": "Quad Structure",
+      "dynamic_pair_id": null,
+      "encoding_hint": "hence the name QUAD. In each quad of four dramatic units, special relationships and functions exist between diagonal, horizontal, and vertical pairs.",
+      "id": "concept.quad-structure",
+      "kind": "concept",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#quad"
+    },
+    {
+      "canonical_label": "Acceptance",
+      "dynamic_pair_id": "el.non-acceptance",
+      "encoding_hint": "a decision not to oppose -- When a character represents Acceptance, it simply adapts to whatever comes its way without opposition. Of course, this can eliminate many potential conflicts by refusing to stand against inequity.",
+      "id": "el.acceptance",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.acceptance-reaction-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#acceptance"
+    },
+    {
+      "canonical_label": "Accurate",
+      "dynamic_pair_id": "el.non-accurate",
+      "encoding_hint": "being within tolerances -- Not all concepts work all the time. When an understanding has uses within",
+      "id": "el.accurate",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.accurate-non-accurate-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#accurate"
+    },
+    {
+      "canonical_label": "Aware",
+      "dynamic_pair_id": null,
+      "encoding_hint": "A character that represents Awareness misses nothing that happens around him. A drawback is he may forget to figure himself into the equation.",
+      "id": "el.aware",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.actuality-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#aware"
+    },
+    {
+      "canonical_label": "Disbelief",
+      "dynamic_pair_id": "el.faith",
+      "encoding_hint": "the belief that something is untrue -- Disbelief is not the same thing as a lack of faith. Lack of faith is the absence of absolute confidence that something is or will be true.",
+      "id": "el.disbelief",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.faith-disbelief-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#disbelief"
+    },
+    {
+      "canonical_label": "Equity",
+      "dynamic_pair_id": "el.inequity",
+      "encoding_hint": "a balance, fairness, or stability -- Equity is balance. The Equity characteristic makes a character want everything to work out fair and square.",
+      "id": "el.equity",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.order-chaos-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#equity"
+    },
+    {
+      "canonical_label": "Faith",
+      "dynamic_pair_id": "el.disbelief",
+      "encoding_hint": "accepting something as certain without proof -- Faith is a belief in something without the support of proof. Since the future is uncertain, Faith in one's ability to arrive at one's purpose is a very strong motivator.",
+      "id": "el.faith",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.faith-disbelief-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#faith"
+    },
+    {
+      "canonical_label": "Hunch",
+      "dynamic_pair_id": "el.theory",
+      "encoding_hint": "a conclusion based on intuition -- A Hunch is an understanding arrived at by circumstantial evidence. The",
+      "id": "el.hunch",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.proven-unproven-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#hunch"
+    },
+    {
+      "canonical_label": "Inequity",
+      "dynamic_pair_id": "el.equity",
+      "encoding_hint": "an unbalance, unfairness, or lack or stability -- When a character focuses on Inequity he is evaluating in terms of what is wrong or unfair with a situation. No matter how much is working right or how much is good, it is the part that is out of balance that occupies his attention.",
+      "id": "el.inequity",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.order-chaos-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#inequity"
+    },
+    {
+      "canonical_label": "Non-acceptance",
+      "dynamic_pair_id": "el.acceptance",
+      "encoding_hint": "Element paired with Acceptance in the acceptance/reaction quad. Heading minted by ST-3 to satisfy the canonical entry recorded in `el.non-acceptance` (Task 015 §Plan Step 4 added the ontology entry; the source heading was never created).",
+      "id": "el.non-acceptance",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.acceptance-reaction-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#non-acceptance"
+    },
+    {
+      "canonical_label": "Non-accurate",
+      "dynamic_pair_id": "el.accurate",
+      "encoding_hint": "Element paired with Accurate in the accurate/non-accurate quad. Heading minted by ST-3 to satisfy the canonical entry recorded in `el.non-accurate` (Task 015 §Plan Step 4 added the ontology entry; the source heading was never created).",
+      "id": "el.non-accurate",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.accurate-non-accurate-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#non-accurate"
+    },
+    {
+      "canonical_label": "Oppose",
+      "dynamic_pair_id": "el.support",
+      "encoding_hint": "an indirect detraction from another's effort -- The Oppose characteristic causes a character to speak out against any effort, although he does not actively engage in preventing it. As in \"the Loyal Opposition,\" an opposing view can be useful in seeing the negative side of an endeavor.",
+      "id": "el.oppose",
+      "kind": "element",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.help-hinder-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#oppose"
+    },
+    {
+      "canonical_label": "Speculation",
+      "dynamic_pair_id": "el.projection",
+      "encoding_hint": "an extension of possibility into the future -Speculation is the effort to determine what could conceivably happen in the future even though it is not the most likely scenario. Speculation leads a character to expect the unlikely in the event that it actually occurs.",
+      "id": "el.speculation",
+      "kind": "element",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.inertia-change-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#speculation"
+    },
+    {
+      "canonical_label": "Support",
+      "dynamic_pair_id": "el.oppose",
+      "encoding_hint": "an indirect assistance given to another's efforts -- Support is not direct help. Direct help is actively joining someone in an effort.",
+      "id": "el.support",
+      "kind": "element",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.help-hinder-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#support"
+    },
+    {
+      "canonical_label": "Theory",
+      "dynamic_pair_id": "el.hunch",
+      "encoding_hint": "an unbroken chain of relationships leading from a premise to a conclusion -- A Theory is an unbroken web of relationships that describes a mechanism. To be a theory, the actual mechanism of each relationship in the Theory must be known as well.",
+      "id": "el.theory",
+      "kind": "element",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.proven-unproven-el",
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#theory"
+    },
+    {
+      "canonical_label": "Relationship Story",
+      "dynamic_pair_id": null,
+      "encoding_hint": "To complete the creation of one of the four perspectives (or Throughlines) for any particular story, a viewpoint must be matched to a Class so that the place which the perspective is looking from is defined and the nature of the perspective is defined. The four viewpoints include the Overall Story, the Main vs.",
+      "id": "throughline.relationship",
+      "kind": "throughline",
+      "ktad_position": null,
+      "ncp_appreciation": "Relationship Story",
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/domains.md#perspective"
+    },
+    {
+      "canonical_label": "Ability",
+      "dynamic_pair_id": null,
+      "encoding_hint": "being suited to handle a task; the innate capacity to do or be - Ability describes the actual capacity to accomplish something. However, even the greatest Ability may need experience to become practical.",
+      "id": "var.ability",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.knowledge-el",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#ability"
+    },
+    {
+      "canonical_label": "Confidence",
+      "dynamic_pair_id": null,
+      "encoding_hint": "belief in the accuracy of an expectation -- Confidence points to the future. It is not a rating of the present situation but a positive evaluation of how things will turn out.",
+      "id": "var.confidence",
+      "kind": "variation",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.conscience-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#confidence"
+    },
+    {
+      "canonical_label": "Dream",
+      "dynamic_pair_id": "var.hope",
+      "encoding_hint": "a desired future that requires unexpected developments - Dream describes a character who speculates on a future that has not been ruled out, however unlikely. Dreaming is full of \"what ifs.\" Cinderella Dreamed of her prince because it wasn't quite unimaginable.",
+      "id": "var.dream",
+      "kind": "variation",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.hope-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#dream"
+    },
+    {
+      "canonical_label": "Fantasy",
+      "dynamic_pair_id": "var.fact",
+      "encoding_hint": "belief in something unreal -- Fantasy is something that although seemingly real, truly is not. Fantasies exist subjectively so they can either be misinterpretations of the meaning of actual things or internal fabrications of meanings that are not accurate.",
+      "id": "var.fantasy",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#fantasy"
+    },
+    {
+      "canonical_label": "Hope",
+      "dynamic_pair_id": "var.dream",
+      "encoding_hint": "a desired future if things go as expected -- Hope is based on a projection of the way things are going. When one looks at the present situation and notes the direction of change, Hope lies somewhere along that line.",
+      "id": "var.hope",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.hope-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#hope"
+    },
+    {
+      "canonical_label": "Morality",
+      "dynamic_pair_id": "var.self-interest",
+      "encoding_hint": "Not to be taken as a spiritual or religious sense of right and wrong, Morality here is intended to describe the quality of character that puts others before self. This is not, however, always a good thing.",
+      "id": "var.morality",
+      "kind": "variation",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.approach-var-physics",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#morality"
+    },
+    {
+      "canonical_label": "Need",
+      "dynamic_pair_id": "var.expediency",
+      "encoding_hint": "that which is required -- Needs are always based upon a",
+      "id": "var.need",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#need"
+    },
+    {
+      "canonical_label": "Obligation",
+      "dynamic_pair_id": "var.rationalization",
+      "encoding_hint": "accepting a task or situation in exchange for someone's potential favors -- Obligation is a mental trick we play when we accept a poor situation now in the hopes it will lead to a better one later. If we do not feel Obligated, we know we are really in control of the situation since we can leave at any time.",
+      "id": "var.obligation",
+      "kind": "variation",
+      "ktad_position": "D",
+      "ncp_appreciation": null,
+      "quad_id": "quad.rationalization-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#obligation"
+    },
+    {
+      "canonical_label": "Self-Interest",
+      "dynamic_pair_id": "var.morality",
+      "encoding_hint": "Variation paired with Morality in the approach/physics quad. Heading minted by ST-3 to reify the canonical `var.self-interest` ontology entry; the truncated body fragment (\"doing or being based on what is best for oneself\") survives mid-document below in the broken Security/Self-Awareness sequence and is flagged for re-extraction.",
+      "id": "var.self-interest",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.approach-var-physics",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#self-interest"
+    },
+    {
+      "canonical_label": "Sense of Self",
+      "dynamic_pair_id": null,
+      "encoding_hint": "perception of self, self image, self identity, self attribution",
+      "id": "var.sense-of-self",
+      "kind": "variation",
+      "ktad_position": null,
+      "ncp_appreciation": null,
+      "quad_id": null,
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#sense-of-self"
+    },
+    {
+      "canonical_label": "Skill",
+      "dynamic_pair_id": "var.experience",
+      "encoding_hint": "practiced ability -- Skill is the innate potential to accomplish either that which is physical or mental. It does not require the practical experience necessary to tap that potential, just that the latent capacity exists.",
+      "id": "var.skill",
+      "kind": "variation",
+      "ktad_position": "T",
+      "ncp_appreciation": null,
+      "quad_id": "quad.wisdom-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#skill"
+    },
+    {
+      "canonical_label": "Value",
+      "dynamic_pair_id": "var.worth",
+      "encoding_hint": "the objective usefulness or desirability of something in general -- Value is a good indicator by which to predict its import to others. However, no one really thinks completely objectively so there is always a degree of personal preference included in a determination of Value.",
+      "id": "var.value",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.value-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#value"
+    },
+    {
+      "canonical_label": "Wisdom",
+      "dynamic_pair_id": "var.enlightenment",
+      "encoding_hint": "understanding how to apply Knowledge -Wisdom is the meaning of what is known. A Character may be aware of facts but unless he sees the pattern that organizes those facts, the knowledge alone may be useless.",
+      "id": "var.wisdom",
+      "kind": "variation",
+      "ktad_position": "K",
+      "ncp_appreciation": null,
+      "quad_id": "quad.wisdom-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#wisdom"
+    },
+    {
+      "canonical_label": "Worry",
+      "dynamic_pair_id": null,
+      "encoding_hint": "Like confidence, Worry looks toward the future but is based on a projection of negative experience. When in the past seemingly innocuous situations have developed into disasters, one learns to Worry at the slightest evidence of instability.",
+      "id": "var.worry",
+      "kind": "variation",
+      "ktad_position": "A",
+      "ncp_appreciation": null,
+      "quad_id": "quad.conscience-var",
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#worry"
+    }
+  ],
+  "scenario_id": "lyric.refrain-as-restatement",
+  "scenario_summary": "Determine when a refrain restating the same Element across verses is structurally valid using companion-pair vs. dynamic-pair geometry.",
+  "schema_version": "0.1"
+}

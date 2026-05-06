@@ -4,7 +4,7 @@ Throughline domains — the four perspective lenses through which a story argues
 
 ## Contents
 
-- [Impact Character Throughline](#impact-character-throughline) — The dramatic progression which builds the Impact Character''s
+- [Impact Character Throughline](#impact-character-throughline) — The dramatic progression which builds the Impact Character's
 - [Perspective](#perspective)
 
 ---
@@ -98,14 +98,19 @@ id: throughline.relationship
 kind: throughline
 canonical_label: Relationship Story
 provenance: source-original
-ncp_appreciation: Relationship Story
-ncp_appreciation_partial: false
-scenarios:
-- novel.dual-storyform
+aliases_de:
+- Beziehung
+- Beziehungs-Handlungsstrang
 aliases_en:
 - Subjective Story
 - RS
 - SS
+ncp_appreciation: Relationship Story
+ncp_appreciation_partial: false
+scenarios:
+- novel.dual-storyform
+- novel.character-arc
+- lyric.refrain-as-restatement
 ```
 
 
@@ -156,11 +161,6 @@ the core. In fact, it may be put on, as an act or to
 deceive. However, as long as there is nothing more or
 less to the functioning of person or thing, it can be said
 to "be" what it appears to be. Stories often focus on
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-34.
-
 someone who wants to "Play a Role" without actually
 "becoming" it. The important difference is that to "Play
 a Role" requires that all the elements of what one

@@ -29,9 +29,9 @@ def test_extract_blocks_empty_when_no_marker():
 
 
 def test_walk_vocab_blocks_count(repo_root):
-    """Confirm 187 per-term blocks land — matches Step 5 commit."""
+    """Block count: 187 baseline (Task 015) + 7 from Task 030 ST-2/ST-3 (Approach split into Approach + Growth + Intuitive; 5 missing canonicals minted: Ability, Change, Non-acceptance, Non-accurate, Self-Interest)."""
     blocks = list(frontmatter.walk_vocab_blocks(repo_root))
-    assert len(blocks) == 187, f"expected 187 blocks per Step 5; found {len(blocks)}"
+    assert len(blocks) == 194, f"expected 194 blocks post-Task-030 ST-2/ST-3; found {len(blocks)}"
 
 
 def test_slugify_variants():

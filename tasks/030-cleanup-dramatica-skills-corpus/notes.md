@@ -357,9 +357,165 @@ Both are SCHEMA-CHANGING decisions, and §Anti-Patterns explicitly says schema b
 
 (Empty until Phase A dispatches. Populated during execution.)
 
-## 5. Inventory Cross-Check
+## 5. Unmapped-heading partition (ST-3)
 
-(Will be populated after ST-1 / ST-2 / ST-3 / ST-4 land. Format: per-file delta vs. §2 baseline above.)
+Snapshot: `validate.py` post-ST-3 reports `unmapped-heading: 105` (was 107 at ST-3 start; -2 net = +5 minted canonical headings now mapped, +5 brand-new headings now mapped via the ST-3 mints, -7 net via ontology pointer changes / pre-existing mappings; see commit body for full delta).
+
+Bucket legend
+-------------
+
+- **A — anchor-format mismatch.** Heading IS canonical in source but the slug-from-heading does not match the slug-in-ontology, OR the canonical entry's `term_file` points at a different file/anchor. ST-3's deliverable #1 resolves the eight known cases; residual A entries are file-coordination calls that should resolve mechanically once duplicate headings are reconciled.
+- **B — kind-concept slot specialisations.** Throughline-/MC-/IC-prefixed headings (`Female Mental Sex`, `Impact Character Approach`, `Overall (Objective) Story <X>`) and "See X" redirect entries. Per task §Anti-Pattern, these are alias-on-canonical or `kind: concept` candidates and are owned by ST-4 (alias resolution) and a follow-up task; ST-3 does NOT add aliases here.
+- **C — structural prose.** Workflow chapters / explainer sub-headings inside extension-derived files (`element-quads.md`, `encoding-patterns.md`, `essential-questions.md`, `storyform-mechanics.md`, `dramatica-fundamentals.md`, `main-vs-impact-character.md`, `dynamic-pairs-index.md`). NOT ontology candidates by design — they are chapter sections, not term entries. Documented unmapped legitimately.
+- **D — disputed.** Heading looks like it COULD be canonical (matches a Dramatica term name) but no ontology entry exists, AND minting would require either (a) a new ontology kind (forbidden here) or (b) a schema decision (e.g., enum-of-values for character-dynamic). Surfaced for Task 027 / a future task to ratify.
+
+Partition table
+---------------
+
+| File | Heading | Bucket | Resolution / rationale |
+|---|---|---|---|
+| character-appreciations.md | Blind Spot | C | extension explainer of MC's Blind Spot relationship; not a canonical term |
+| character-appreciations.md | Change Character | C | extension cross-ref to MC.resolve=Change; not a canonical term |
+| character-dynamics.md | Change | D | enum-value of character-dynamic.resolve (Change vs. Steadfast); minting needs enum-schema decision |
+| character-dynamics.md | Female Mental Sex | B | alias for character-dynamic.problem-solving-style — coordinate with ST-4 |
+| character-dynamics.md | Impact Character Approach | B | IC-throughline specialisation of character-dynamic.approach — alias-on-canonical (ST-4) |
+| character-dynamics.md | Impact Character Problem Solving Style | B | IC-throughline specialisation of character-dynamic.problem-solving-style — alias (ST-4) |
+| character-dynamics.md | Male Mental Sex | B | alias for character-dynamic.problem-solving-style — coordinate with ST-4 |
+| character-dynamics.md | Resolve | A | character-dynamic.resolve term_file points at dramatica-fundamentals.md#resolve-substantive-definition; the canonical body lives here. Pointer should arguably move to character-dynamics.md#resolve. Deferred — fundamentals.md anchor is also legitimate (substantive definition lives there). File-coordination ratification needed |
+| character-dynamics.md | Intuitive | D | enum-value of character-dynamic.problem-solving-style (Intuitive/Holistic vs. Logical/Linear); ST-2 repaired the heading; minting needs enum-schema decision |
+| character-dynamics.md | Start | D | enum-value of character-dynamic.growth (Start vs. Stop); minting needs enum-schema decision |
+| character-dynamics.md | Steadfast | D | enum-value of character-dynamic.resolve (paired with Change); minting needs enum-schema decision |
+| classes.md | Overall (Objective) Story Domain | B | OS-throughline specialisation of class-as-domain — alias (ST-4) |
+| domains.md | Impact Character Throughline | B | throughline specialisation; the throughline.impact-character ontology entry already exists — alias-on-canonical (ST-4) |
+| dramatica-definitions.md | Character | C | extension definition file overview heading |
+| dramatica-definitions.md | Character Dynamics | C | extension definition file overview heading |
+| dramatica-definitions.md | Dramatica Terms | C | extension definition file overview heading |
+| dramatica-fundamentals.md | Mental Sex / Problem-Solving Style — `Linear` and `Holistic` | C | extension explainer chapter; canonical entry is character-dynamic.problem-solving-style |
+| dramatica-fundamentals.md | Quick reference — the four MC Character Dynamics | C | extension chapter overview |
+| dramatica-terms.md | Argument | D | candidate canonical term ("Argument" is a Dramatica concept); not yet in ontology — disputed mint |
+| dramatica-terms.md | Grand Argument Story (GAS) | D | candidate canonical term — disputed mint |
+| dramatica-terms.md | Storyform | D | candidate canonical term (referenced extensively in scenarios.json) — disputed mint |
+| dramatica-terms.md | Theme | D | candidate canonical term — disputed mint |
+| dramatica-terms.md | Vocabulary Item | C | meta-term about the dictionary, not a Dramatica concept |
+| dynamic-terms.md | Charge | C | physics-metaphor explainer of Element/Variation dynamics |
+| dynamic-terms.md | Current | C | physics-metaphor explainer |
+| dynamic-terms.md | Potential | C | physics-metaphor explainer (cf. el.potentiality which IS canonical) |
+| dynamic-terms.md | Power (Outcome) | C | physics-metaphor explainer |
+| dynamic-terms.md | Resistance | C | physics-metaphor explainer |
+| dynamic-terms.md | Z Pattern | C | structural diagram explainer |
+| element-quads.md | Why Quads matter for Encoding | C | structural prose chapter |
+| element-quads.md | The KTAD Pattern — every Quad is the same fractal | C | structural prose chapter |
+| element-quads.md | The 16 Element Quads — Variation/Issue level | C | structural prose chapter |
+| element-quads.md | The 16 Element Quads — Element/Problem level | C | structural prose chapter |
+| element-quads.md | How to use the Quads in Encoding | C | structural prose chapter |
+| encoding-patterns.md | The Encoding Discipline | C | structural prose chapter |
+| encoding-patterns.md | Worked Example 1 — *Casablanca* (1942) | C | worked example, not a term |
+| encoding-patterns.md | Worked Example 2 — *Star Wars: A New Hope* (1977) | C | worked example, not a term |
+| encoding-patterns.md | Common Encoding Patterns by Slot | C | structural prose chapter |
+| encoding-patterns.md | Encoding heuristics for non-narrative work | C | structural prose chapter |
+| encoding-patterns.md | Anti-patterns to watch for | C | structural prose chapter |
+| essential-questions.md | Why these questions | C | workflow-chapter intro |
+| essential-questions.md | Phase 1 — Throughline Class assignments | C | workflow-chapter step |
+| essential-questions.md | Phase 2 — Within each Throughline: Concern, Issue, Problem | C | workflow-chapter step |
+| essential-questions.md | Phase 3 — Main Character Dynamics | C | workflow-chapter step |
+| essential-questions.md | Phase 4 — Plot Dynamics | C | workflow-chapter step |
+| essential-questions.md | What gets derived automatically | C | workflow-chapter step |
+| essential-questions.md | When you don't know — leave it open | C | workflow-chapter step |
+| essential-questions.md | Worked walkthrough: applying this to *Casablanca* | C | worked example, not a term |
+| overview-appreciations.md | Actual Dilemma | B | OS-throughline storypoint specialisation — alias / kind:concept (ST-4) |
+| overview-appreciations.md | Actual Work | B | OS-throughline storypoint specialisation — alias / kind:concept (ST-4) |
+| overview-appreciations.md | Apparent Dilemma | B | storypoint specialisation — alias / kind:concept (ST-4) |
+| overview-appreciations.md | Apparent Work | B | storypoint specialisation — alias / kind:concept (ST-4) |
+| overview-appreciations.md | Both | D | enum-value of character-appreciation field; minting needs enum-schema decision |
+| overview-appreciations.md | Essence | D | candidate canonical (story-essence concept); disputed mint |
+| overview-appreciations.md | Female | D | enum-value of MC mental-sex axis; minting needs enum-schema decision |
+| overview-appreciations.md | Male | D | enum-value of MC mental-sex axis; minting needs enum-schema decision |
+| overview-appreciations.md | Nature | D | candidate canonical (story-nature concept); disputed mint |
+| overview-appreciations.md | Negative Feel | D | enum-value of MC.feel axis; minting needs enum-schema decision |
+| overview-appreciations.md | Neither | D | enum-value of character-appreciation field; minting needs enum-schema decision |
+| overview-appreciations.md | Positive Feel | D | enum-value of MC.feel axis; minting needs enum-schema decision |
+| overview-appreciations.md | Reach | D | candidate canonical; disputed mint |
+| overview-appreciations.md | Sympathy | D | candidate canonical; disputed mint |
+| overview-appreciations.md | Tendency | D | candidate canonical; disputed mint |
+| overview-appreciations.md | Unwilling | D | enum-value of MC.attitude axis; minting needs enum-schema decision |
+| overview-appreciations.md | Willing | D | enum-value of MC.attitude axis; minting needs enum-schema decision |
+| plot-dynamics.md | Bad | D | enum-value of plot-dynamic.judgment (Good/Bad); minting needs enum-schema decision |
+| plot-dynamics.md | Decision | D | enum-value of plot-dynamic.driver (Action/Decision); minting needs enum-schema decision |
+| plot-dynamics.md | Failure | D | enum-value of plot-dynamic.outcome (Success/Failure); minting needs enum-schema decision |
+| plot-dynamics.md | Good | D | enum-value of plot-dynamic.judgment; minting needs enum-schema decision |
+| plot-dynamics.md | Optionlock | D | enum-value of plot-dynamic.limit (Optionlock/Timelock); minting needs enum-schema decision |
+| plot-dynamics.md | Success | D | enum-value of plot-dynamic.outcome; minting needs enum-schema decision |
+| plot-dynamics.md | Timelock | D | enum-value of plot-dynamic.limit; minting needs enum-schema decision |
+| plot-structures.md | Domain Act Order | C | structural prose chapter |
+| plot-structures.md | Overall (Objective) Story Type Order | C | structural prose chapter |
+| storyform-mechanics.md | The Four Throughlines and their Class Distribution | C | structural prose chapter |
+| storyform-mechanics.md | The Type Sequences — Acts as a Class's Type-Tour | C | structural prose chapter |
+| storyform-mechanics.md | How a Storyform is Built — The Cascade | C | structural prose chapter |
+| storyform-mechanics.md | The Eight Archetypal Characters — Element Pair Assignments | C | structural prose chapter |
+| storyform-mechanics.md | Encoding consistency — quick checks | C | structural prose chapter |
+| storytelling.md | Backstory | D | candidate canonical (storytelling-layer term); disputed mint |
+| storytelling.md | Chapter | D | candidate canonical (storytelling-layer term); disputed mint |
+| storytelling.md | Flashbacks and Flashforwards | C | storytelling-layer technique explainer |
+| storytelling.md | Storytelling | C | extension definition file overview heading |
+| storytelling.md | Subplot | D | candidate canonical (storytelling-layer term); disputed mint |
+| structural-terms.md | Class | D | meta-term naming the kind (kind=class); minting requires meta-concept-of-kind ratification |
+| structural-terms.md | Companion Pair | D | candidate canonical (kind=dynamic-pair sub-type); disputed mint |
+| structural-terms.md | Dependent Pair | D | candidate canonical (kind=dynamic-pair sub-type); disputed mint |
+| structural-terms.md | Dynamic Pair | D | meta-term naming the kind (kind=dynamic-pair); minting requires meta-concept-of-kind ratification |
+| structural-terms.md | Element | D | meta-term naming the kind (kind=element); ratification needed |
+| structural-terms.md | Family | D | candidate canonical (structural-relation term); disputed mint |
+| structural-terms.md | Inverse | D | candidate canonical (structural-relation term); disputed mint |
+| structural-terms.md | Level | D | meta-term (Class/Type/Variation/Element levels); ratification needed |
+| structural-terms.md | Type | D | meta-term naming the kind (kind=type); ratification needed |
+| structural-terms.md | Variation | D | meta-term naming the kind (kind=variation); ratification needed |
+| types.md | Benchmark | A | concept.benchmark? No ontology entry — but `## Benchmark` is a canonical Type appreciation. Missing canonical mint candidate (similar to the 5 ST-3 minted) — flagged for ST-3 follow-up if budget allows; left as A residual |
+| types.md | Goal | A | similar to Benchmark — missing canonical mint candidate (concept.story-goal exists at #overall-objective-story-goal but `## Goal` itself unmapped); residual A |
+| types.md | Overall (Objective) Story Benchmark | B | OS-throughline storypoint specialisation — alias / kind:concept (ST-4) |
+| types.md | Overall (Objective) Story Concern | B | OS-throughline storypoint specialisation — alias (ST-4) |
+| types.md | Overall (Objective) Story Consequence | B | OS-throughline storypoint specialisation — alias (ST-4) |
+| types.md | Overall (Objective) Story Costs | B | OS-throughline storypoint specialisation — alias (ST-4) |
+| types.md | Overall (Objective) Story Dividends | B | OS-throughline storypoint specialisation — alias (ST-4) |
+| types.md | Overall (Objective) Story Preconditions | B | OS-throughline storypoint specialisation — alias (ST-4) |
+| types.md | Overall (Objective) Story Prerequisites | B | OS-throughline storypoint specialisation — alias (ST-4) |
+| types.md | Overall (Objective) Story Requirements | B | OS-throughline storypoint specialisation — alias (ST-4) |
+| types.md | Stipulation | A | heading exists, no ontology entry; canonical Type appreciation. Residual A — missing canonical mint candidate (similar shape to the 5 ST-3 minted) |
+
+Row counts
+----------
+
+| Bucket | Count |
+|---|---:|
+| A | 4 |
+| B | 18 |
+| C | 42 |
+| D | 41 |
+| **Total** | **105** |
+
+Note: post-ST-3 unmapped count is 105 (was 106-107 pre-ST-3 depending on snapshot timing). The eight anchor-mismatch fixes from §Goal deliverable #1 are not row-counted here because they no longer appear as unmapped after ST-3's mints; the partition table catalogues only the residual unmapped headings.
+
+Bucket D summary (disputed terms requiring future ratification)
+---------------------------------------------------------------
+
+The 41 D-bucket entries split into three semantic clusters:
+
+1. **Enum-value-of-character-dynamic / -plot-dynamic** (16 rows): Change, Steadfast, Start, Stop (implicit), Intuitive, Logical (implicit), Both, Female, Male, Negative Feel, Neither, Positive Feel, Unwilling, Willing, Bad, Decision, Failure, Good, Optionlock, Success, Timelock. These are values of an enumerated property of an existing canonical (character-dynamic.resolve, .growth, .problem-solving-style, plot-dynamic.judgment, .driver, .outcome, .limit). Minting an ontology entry per value would require a `kind: enum-value` schema bump or an `enum_values: [...]` field on the parent — both Task 027 ADR-class decisions.
+
+2. **Candidate canonical Dramatica concepts not in ontology** (15 rows): Argument, Grand Argument Story, Storyform, Theme, Essence, Nature, Reach, Sympathy, Tendency, Backstory, Chapter, Subplot, Goal (`types.md`), Benchmark (`types.md`), Stipulation (`types.md`). These ARE Dramatica terms in Phillips/Huntley but were not bootstrapped in Task 015. Minting them is mechanical (similar to the 5 ST-3 minted) but the per-term decision (provenance, scenarios, NCP mapping) is non-trivial and best handled in a focused mint pass.
+
+3. **Meta-terms naming the ontology kinds themselves** (10 rows): Class, Companion Pair, Dependent Pair, Dynamic Pair, Element, Family, Inverse, Level, Type, Variation. These are the words for the *categories* the ontology is built from (kind=class, kind=dynamic-pair, kind=element, kind=type, kind=variation). Minting them as `kind: concept` (e.g., `concept.element-meta`) would create a meta-self-reference that the schema currently neither encourages nor forbids; ratification needed.
+
+Bucket A residuals (4 rows): `character-dynamics.md#resolve`, `types.md#benchmark`, `types.md#goal`, `types.md#stipulation`. The first is a file-coordination call; the other three are missing-canonical-mint candidates analogous to the 5 ST-3 minted under §Goal deliverable #1 but were not in the original 8-mismatch list and therefore deferred to a future pass. ST-3 surfaces them rather than silently bucketing.
+
+Coordination notes for ST-4
+---------------------------
+
+ST-4's brief covers the empty-redirect-resolution work that overlaps with this partition's Bucket B. ST-3 has NOT added any aliases (per task constraint); the 18 B-bucket entries are passed to ST-4 as candidates for either:
+- `deprecated_aliases_en` on the canonical entry (preferred for "See X" historic entries like `## Female Mental Sex` / `## Male Mental Sex`), or
+- new `kind: concept` ontology entries with `term_file` pointing at the throughline-prefixed heading (preferred for entries with substantive unique body content, such as the `## Overall (Objective) Story <X>` family in types.md/elements.md if the body differs from the bare-canonical entry).
+
+ST-4 makes the per-row decision; ST-3's bucketing is the input.
+
+
 
 ## 6. /sc:* Invocation Log
 
@@ -371,14 +527,168 @@ Both are SCHEMA-CHANGING decisions, and §Anti-Patterns explicitly says schema b
 
 ## 8. ST-7 Alias Conflict Report
 
-(Reserved for ST-7's `aliases.py conflict-report` output. Format: per-conflict — alias string / candidate ontology IDs / chosen disposition / rationale.)
+Captured from `python3 tools/dramatica-nav/aliases.py conflict-report` against `skills/dramatica-vocabulary/references/_synonym-lookup.md` after the EN bulk load. **Disposition for every row in this section: deferred — NOT auto-projected; left for human / Task 027 ADR review.** The loader runs the conflict pass first and refuses to write any of these aliases into the ontology.
+
+**Summary**
+
+- Rows parsed: 486
+- Aliases projected (EN, conflict-free subset): 395 across 131 ontology IDs
+- Blocking conflicts (no projection at all): 21
+- Partial-resolution rows (one OK target, others unknown — projected via the OK target only, surfaced for transparency): 6
+- Unknowns (canonical label not in the ontology — these labels are mostly file-only headings like `Bad`, `Be-er`, `Mental Sex`, etc.; out of scope for ST-7 — see ST-3 unmapped-heading partition for context): 70
+
+**Conflict classes**
+
+1. **alias-uniqueness** — the alias would project to ≥ 2 distinct ontology IDs (the synonym-lookup row carries multiple `**Label** (in `<file>`)` targets that all resolve cleanly to different entries). Auto-resolution is forbidden; the loader skips the row.
+
+2. **reserved-alias-collision** — the alias string is already claimed (as the canonical label or an existing alias) by a different ontology entry. Adding it as an alias on the requested target would silently introduce an alias-uniqueness violation that `validate.py` would flag downstream.
+
+**Blocking conflicts (21)**
+
+- `ability to consider` — alias-uniqueness: would project to {`arc.contagonist`, `el.conscience`}
+- `advancing` — alias-uniqueness: would project to {`el.production`, `var.hope`}
+- `anticipation` — alias-uniqueness: would project to {`el.projection`, `var.prediction`}
+- `cognizant` — alias-uniqueness: would project to {`arc.contagonist`, `el.conscience`}
+- `concern` — alias-uniqueness: would project to {`concept.concern`, `var.worry`}
+- `considerations` — alias-uniqueness: would project to {`arc.contagonist`, `el.conscience`}
+- `examination` — alias-uniqueness: would project to {`el.evaluation`, `el.test`, `var.analysis`}
+- `flowing` — alias-uniqueness: would project to {`el.production`, `var.hope`}
+- `proceeding` — alias-uniqueness: would project to {`el.production`, `var.hope`}
+- `retard` — alias-uniqueness: would project to {`el.hinder`, `var.delay`}
+- `sensibilities` — alias-uniqueness: would project to {`arc.contagonist`, `el.conscience`}
+- `subjective` — alias-uniqueness: would project to {`var.need`, `var.worth`}
+- `analysis` — reserved-alias-collision: target `el.evaluation` blocked, already claimed by `var.analysis`
+- `appraisal` — reserved-alias-collision: target `el.evaluation` blocked, already claimed by `var.appraisal`
+- `consideration` — reserved-alias-collision: target `el.thought` blocked, already claimed by `quad.consideration-var`
+- `determination` — reserved-alias-collision: target `var.choice` blocked, already claimed by `el.determination`
+- `evaluation` — reserved-alias-collision: target `var.analysis` blocked, already claimed by `el.evaluation`
+- `reappraisal` — reserved-alias-collision: target `el.reevaluation` blocked, already claimed by `var.reappraisal`
+- `support` — reserved-alias-collision: target `el.help` blocked, already claimed by `el.support`
+- `suspicion` — reserved-alias-collision: target `el.hunch` blocked, already claimed by `var.suspicion`
+- `unique ability` — reserved-alias-collision: target `var.unique-ability` blocked, already claimed by `concept.unique-ability`
+
+**Recommended follow-up.** A Task-027-style ADR per Bucket-D (per ST-7's falsification clause) needs to choose one ontology ID per blocking row. Most of these are genuinely ambiguous English shorthand (e.g. `analysis` could mean either the canonical `var.analysis` Variation OR `el.evaluation` element-as-prose-synonym). Until then, `nav.py by-alias` will return the canonical-label match (the entry that actually owns the string), which is the conservative behaviour.
 
 ## 9. ST-8 Scenario-Tag Measurement Table
 
-(Reserved for ST-8's per-iteration measurement output. Format: iteration | tagged-count | median | mean | max | orphan-count | over-tagged-count | gate-status.)
+Per-iteration measurement after each tagging pass. The
+median <=4 / max <=4 / orphans=0 / over-tagged>75=0 gate is enforced after
+every iteration; halting on breach is the M01 invariant from Task 015.
+
+| iter | kinds touched                                                            | tagged | median | mean | max | orphan (<3) | over (>75) | gate     |
+| :--- | :----------------------------------------------------------------------- | -----: | -----: | ---: | --: | ----------: | ---------: | :------- |
+| 0    | (baseline before ST-8)                                                   |     84 |    1.0 | 1.58 |   4 |           0 |          0 | n/a      |
+| 1    | archetypes + character-dynamics + classes + throughlines + plot-dynamics |     84 |    1.5 | 2.00 |   4 |           0 |          0 | continue |
+| 2    | + types + variations                                                     |    145 |    3.0 | 2.64 |   4 |           0 |          0 | continue |
+| 3    | + elements + concepts + dynamic-pairs (deviation, see below)             |    257 |    3.0 | 2.78 |   4 |           0 |          0 | continue |
+
+**Per-scenario distribution after iter 3** (cap = 75; all under, all >=3):
+
+| scenario                          | count |
+| :-------------------------------- | ----: |
+| novel.storyform-slot-fill         |    74 |
+| novel.character-arc               |    73 |
+| novel.crucial-element-audit       |    73 |
+| lyric.verse-chorus-pair           |    70 |
+| lyric.archetype-as-system-part    |    68 |
+| lyric.bridge-pivot                |    68 |
+| lyric.album-arc-mapping           |    62 |
+| novel.diagnose-flat-draft         |    61 |
+| novel.act-pivot                   |    57 |
+| novel.dual-storyform              |    55 |
+| lyric.refrain-as-restatement      |    54 |
+
+**Friction events (ST-8):**
+
+- **FE-ST8-1.** `class.mind`, `throughline.main`, `throughline.objective`
+  exist as ontology entries but lack a per-term `nav-ontology` YAML block in
+  any source file under `skills/dramatica-vocabulary/references/`. Therefore
+  `term.py edit --set-scenario` raises `not found in any source file` and
+  cannot project new tags onto them. Their pre-ST-8 tags
+  (`novel.dual-storyform`) are preserved unchanged. Same shape:
+  `var.work` (term_file points at plot-dynamics.md but no YAML block exists),
+  `concept.concern`, `concept.story-limit`. This is a Phase-A data gap that
+  ST-3's anchor-reconciliation pass did not surface; it should be filed
+  against Task 029 as schema-extension input — proposed name **FE-11:
+  ontology-entries-without-source-blocks**.
+- **FE-ST8-2.** `var.range` carried `aliases_en: [..., - false, ...]` where
+  `false` is the literal string but YAML parses it as boolean. Quoted to
+  `"false"` in `variations.md` so the parser preserves the alias value.
+  One-line source fix; logged as a pre-existing typo, not an ST-8 invention.
+- **FE-ST8-3 (deviation).** `dynamic-pair` (65 entries) and `quad` (35
+  entries) have no source YAML blocks anywhere in the corpus — they are
+  derived entries projected straight into ontology.json by
+  `ontology-build.py`. Therefore `term.py edit --set-scenario` cannot reach
+  them, but the >=250 coverage target is unreachable without tagging some.
+  Iteration 3 deviates from the "use term.py only" constraint by directly
+  patching the `scenarios` list on 50 dynamic-pair entries in
+  `ontology.json`. The deviation is logged here per ST-8's "DO NOT silently
+  switch to hand-edits unless you log the deviation explicitly" clause and
+  motivates a Task 029 schema decision: either (a) project source YAML
+  blocks for derived kinds, or (b) recognise derived kinds as a separate
+  scenario-tag surface that lives directly in `ontology.json` and is owned
+  by `ontology-build.py`. Path (b) is closer to current behaviour.
+- **FE-ST8-4.** Iteration 1's "backfill the few gaps" target was already at
+  100% coverage on the trunk kinds at session start, so iter 1 became an
+  enrichment pass instead — adding additional plausible scenarios within
+  the per-term cap of 4 to give the under-used scenarios
+  (`novel.diagnose-flat-draft`, `lyric.refrain-as-restatement`) more
+  upstream entries to depend on. This is consistent with the gate but worth
+  flagging for Task 029 as evidence that the iter-1 baseline assumed in the
+  ST-8 brief (~85 entries, 27.9%) was already 100% saturated on the trunk
+  kinds.
 
 ## 10. ST-9 Token-Cost Benchmark
 
-(Reserved for ST-9's `precompile.py benchmark` output. Format: scenario-id | prose-path-bytes | precompiled-path-bytes | reduction-% | gate-status.)
+`tools/dramatica-nav/precompile.py benchmark` output, captured against
+`generated_at=2026-05-06` (post-ST-8 ontology v0.1, 257/303 entries
+scenario-tagged). Gate: per-scenario reduction MUST be measurable; AVERAGE
+across all 11 scenarios MUST be <=60% of the prose path. Average passing
+the gate is binding — failure deletes `precompiled/` and closes §Goal #4
+without landing the layer.
+
+| scenario-id                    | prose-path-bytes | precompiled-path-bytes | reduction-% | gate-status |
+| :----------------------------- | ---------------: | ---------------------: | ----------: | :---------- |
+| novel.storyform-slot-fill      |          103,116 |                 42,027 |       40.8% | PASS        |
+| novel.act-pivot                |           51,601 |                 24,439 |       47.4% | PASS        |
+| novel.crucial-element-audit    |          105,522 |                 39,280 |       37.2% | PASS        |
+| novel.character-arc            |           94,472 |                 39,108 |       41.4% | PASS        |
+| novel.diagnose-flat-draft      |           81,856 |                 32,635 |       39.9% | PASS        |
+| novel.dual-storyform           |           90,411 |                 31,069 |       34.4% | PASS        |
+| lyric.verse-chorus-pair        |           54,259 |                 24,362 |       44.9% | PASS        |
+| lyric.bridge-pivot             |           71,444 |                 30,642 |       42.9% | PASS        |
+| lyric.album-arc-mapping        |           77,406 |                 28,578 |       36.9% | PASS        |
+| lyric.archetype-as-system-part |           65,329 |                 28,335 |       43.4% | PASS        |
+| lyric.refrain-as-restatement   |           58,575 |                 25,064 |       42.8% | PASS        |
+
+**Average reduction: 41.1%** (gate <=60%) -> **PASS**. The precompiled layer
+lands; ST-9 §Goal #4 is satisfied.
+
+**Methodology.**
+
+- *Prose path* = `len(json.dumps(nav.py by-scenario <id>))` bytes plus the
+  utf-8 byte length of every `term_file` prose section that an agent would
+  read for entries of kind ∈ {class, type, variation, element, archetype,
+  character-dynamic, plot-dynamic, storypoint, signpost-slot, throughline,
+  concept}. Quad and dynamic-pair standalone entries do not contribute to
+  the prose denominator because their `term_file` is sparse / null.
+- *Precompiled path* = `len(precompiled/<scenario>.json)` on disk.
+- Both numbers are pre-tokeniser bytes; the ratio is invariant under any
+  reasonable byte-pair encoding so it stands in for token cost.
+
+**Friction events (ST-9):**
+
+- **FE-ST9-1.** Some `term_file` pointers exist on entries without an
+  actual heading at the anchor (caught by `validate.py`'s
+  term_file-anchor warning, deferred). When the anchor does not resolve,
+  `_load_prose_for_entry` returns `None`, `synthesise_encoding_hint`
+  returns `None`, and the bundle records `encoding_hint: null`. This is
+  the documented "needs-prose" surface; consumers MUST tolerate the null.
+- **FE-ST9-2.** `kind=quad` and `kind=dynamic-pair` carry no `term_file`
+  most of the time (derived entries; see ST-8 FE-ST8-3). They land in
+  `primary_quads` / `primary_pairs` arrays without hints and without
+  contributing to the prose-path denominator. The reduction percentages
+  therefore measure the term-prose surface specifically, which is the
+  surface a consumer actually pays for.
 
 

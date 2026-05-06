@@ -19,10 +19,14 @@ id: class.universe
 kind: class
 canonical_label: Universe
 provenance: extension-derived
-scenarios:
-- novel.dual-storyform
+aliases_de:
+- Universum
 aliases_en:
 - Situation
+scenarios:
+- novel.dual-storyform
+- novel.act-pivot
+- lyric.album-arc-mapping
 ```
 
 
@@ -93,8 +97,14 @@ id: character-dynamic.resolve
 kind: character-dynamic
 canonical_label: Resolve
 provenance: extension-derived
+aliases_de:
+- Entschlossenheit
+- Wandel-Entscheidung
 scenarios:
 - novel.character-arc
+- novel.crucial-element-audit
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 

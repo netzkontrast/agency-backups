@@ -4,15 +4,12 @@ Four-axis configuration of the Main Character — Resolve, Growth, Approach, Men
 
 ## Contents
 
-- [Approach](#approach) — The Main Character''s
+- [Approach](#approach) — The Main Character's
 - [Change](#change) — The Main Character
-- [Female Mental Sex](#female-mental-sex) — See Intuitive
 - [Impact Character Approach](#impact-character-approach) — By
 - [Impact Character Problem Solving Style](#impact-character-problem-solving-style) — Much of what we are as individuals is
-- [Male Mental Sex](#male-mental-sex) — See Logical
 - [Mental Sex](#mental-sex) — See Problem Solving
 - [Resolve](#resolve) — the degree to which the
-- [Sex)](#sex) — The Main Character
 - [Start](#start) — The audience wants
 - [Steadfast](#steadfast) — The Main Character
 
@@ -21,12 +18,24 @@ Four-axis configuration of the Main Character — Resolve, Growth, Approach, Men
 ## Approach
 <!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
 ```yaml
-id: character-dynamic.growth
+id: character-dynamic.approach
 kind: character-dynamic
-canonical_label: Growth
+canonical_label: Approach
 provenance: source-original
+aliases_de:
+- Herangehensweise
+- Vorgehensweise
+aliases_en:
+- approach
+- manner
+- manner of doing
+- method
+- procedure
+- style
 scenarios:
 - novel.character-arc
+- novel.diagnose-flat-draft
+- lyric.archetype-as-system-part
 ```
 
 
@@ -71,6 +80,30 @@ manner, manner of doing, one's own way
 
 ---
 
+## Growth
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: character-dynamic.growth
+kind: character-dynamic
+canonical_label: Growth
+provenance: source-original
+aliases_de:
+- Entwicklung
+- Wachstum
+scenarios:
+- novel.character-arc
+- novel.diagnose-flat-draft
+- novel.dual-storyform
+```
+
+
+*Type: Character Dynamic*
+
+<!-- truncated extract; consult original source -->
+<!-- Body content for Growth (Start vs. Stop) was not preserved in the source extraction. See ## Start and ## Steadfast headings later in this file for adjacent Main-Character-arc-direction prose. -->
+
+---
+
 ## Change
 
 *Type: Character Dynamic / Element / Element*
@@ -85,11 +118,6 @@ too close to home. Near the climax of the story, the
 Main Character must demonstrate whether he is going
 to stick with his original approach in the belief that it is
 the solution or jump to the opposite trait in the belief he
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-8.
-
 has been wrong. In "Leap of Faith" stories this will
 occur during a "moment of truth." In "Non-Leap of
 Faith" stories this will occur over the course of the story
@@ -135,17 +163,6 @@ changing their nature
 
 altering, altering force, modify,
 reshape, adjust, adapt
-
----
-
-## Female Mental Sex
-
-*Type: Character Dynamic*
-
-### Character Dynamic
-
-See Intuitive
-Problem Solving Style
 
 ---
 
@@ -244,11 +261,6 @@ Impact Character's Response
 
 An Impact
 Character can never be sure if what he believes to be
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-22.
-
 the source of his problem really is the source of his
 problem. Regardless, based on his way of seeing
 things, he will determine a potential solution or response by which he hopes to find the solution. The
@@ -288,17 +300,6 @@ problems without solving them.
 
 ---
 
-## Male Mental Sex
-
-*Type: Character Dynamic*
-
-### Character Dynamic
-
-See Logical
-Problem Solving Style
-
----
-
 ## Mental Sex
 <!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
 ```yaml
@@ -306,12 +307,18 @@ id: character-dynamic.problem-solving-style
 kind: character-dynamic
 canonical_label: Problem-solving Style
 provenance: source-original
-scenarios:
-- novel.character-arc
+aliases_de:
+- Problemlösungsstil
 aliases_en:
 - Mental Sex
 deprecated_aliases_en:
 - Male/Female problem-solving
+- Female Mental Sex
+- Male Mental Sex
+scenarios:
+- novel.character-arc
+- novel.crucial-element-audit
+- novel.dual-storyform
 ```
 
 
@@ -389,9 +396,11 @@ Element.
 
 ---
 
-## Sex)
+## Intuitive
 
 *Type: Character Dynamic*
+
+<!-- heading repaired from broken `## Sex)` orphan; body is about Intuitive Problem-Solving Style. See Task 030 ST-2 commit. -->
 
 ### Character Dynamic
 
@@ -419,11 +428,6 @@ the essential feelings that form the foundation of
 character. These feelings are so basic that a character
 is often not aware of what they truly are. When the
 Innermost Desires are involved, a character is moved
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-24.
-
 intuitive character. It is important to note that these
 techniques are applied both to others and to oneself.
 Either way, manipulating surplus and deficiency describes the approach. When selecting intuitive or

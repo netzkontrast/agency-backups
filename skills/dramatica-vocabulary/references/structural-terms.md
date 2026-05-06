@@ -29,6 +29,14 @@ id: concept.act
 kind: concept
 canonical_label: Act
 provenance: source-original
+aliases_de:
+- Akt
+aliases_en:
+- act
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -80,8 +88,6 @@ divided into four areas, and we call these areas the four
 ### Structural Term
 
 www.dramatica.com -- www.screenplay.com
-
-10.
 
 they create. Each pair in each quad will be focused in
 a slightly different place, creating a gradual shift in the
@@ -277,11 +283,6 @@ the dynamic forces that will act upon the dramatic
 potentials to change the relationship between characters, change the course of the plot and develop the
 theme as the story unfolds. In Dramatica, choices
 between alternative forces such as "Success or Failure" and "Change or Steadfast" determine the dynamics that will act upon a story.
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-16.
-
 Effect
 
 ### Element
@@ -345,6 +346,10 @@ id: concept.event
 kind: concept
 canonical_label: Event
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -399,6 +404,10 @@ id: concept.sequence
 kind: concept
 canonical_label: Sequence
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.character-arc
 ```
 
 
@@ -424,11 +433,6 @@ represent a more refined exploration of that point of
 view. In a sense, Types describe the basic categories
 of what can be seen from a given point of view. Just as
 Domain level appreciations create genre-like brush
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-48.
-
 strokes in the story structure, Type level appreciations
 determine the nature of the plot.
 
@@ -441,6 +445,12 @@ id: concept.scene
 kind: concept
 canonical_label: Scene
 provenance: source-original
+aliases_de:
+- Szene
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.character-arc
 ```
 
 

@@ -14,13 +14,13 @@ The 16 Types are the second-resolution layer beneath Class. Each Class contains 
 - [Consequence](#consequence) — The result of failing to achieve
 - [Cost](#cost) — the price that must be paid while meeting
 - [Dividend (Overall Story Throughline)](#dividend-overall-story-throughline) — the
-- [Doing](#doing) — >Doing
+- [Doing](#doing) — Doing
 - [Future](#future) — what is to come, what will be, prospect,
 - [Goal](#goal) — The central objective of a story
-- [Journey](#journey) — Sequential markers of a story''s
+- [Journey](#journey) — Sequential markers of a story's
 - [Learning](#learning) — cultivating experience, acquiring
 - [Memory](#memory) — remembering, recollections, reminiscence, recalling, retention
-- [Obtaining](#obtaining) — >Obtaining -achieving or possessing something
+- [Obtaining](#obtaining) — Obtaining -achieving or possessing something
 - [Overall (Objective) Story Benchmark](#overall-objective-story-benchmark) — The
 - [Overall (Objective) Story Concern](#overall-objective-story-concern) — The area
 - [Overall (Objective) Story Consequence](#overall-objective-story-consequence) — The
@@ -32,18 +32,18 @@ The 16 Types are the second-resolution layer beneath Class. Each Class contains 
 - [Overall (Objective) Story Prerequisites](#overall-objective-story-prerequisites) — The
 - [Overall (Objective) Story Requirements](#overall-objective-story-requirements) — The
 - [Past](#past) — history, what has happened, former times,
-- [Past (The Past)](#past-the-past) — >Past -what has already happened
+- [Past (The Past)](#past-the-past) — Past -what has already happened
 - [Preconditions](#preconditions) — Restrictions imposed on the
 - [Preconscious](#preconscious) — unthinking responses, immediate
 - [Prerequisites](#prerequisites) — The essential preliminaries that
 - [Present](#present) — how things stand, the here and now,
-- [Present (The Present)](#present-the-present) — >Present
+- [Present (The Present)](#present-the-present) — Present
 - [Progress](#progress) — flowing, advancing, proceeding,
 - [Requirements](#requirements) — The necessary precursors to
-- [Signpost](#signpost) — Sequential markers of a story''s
+- [Signpost](#signpost) — Sequential markers of a story's
 - [Stipulation](#stipulation) — See Benchmark
 - [Throughline](#throughline) — The area of concern
-- [Understanding](#understanding) — >Understanding
+- [Understanding](#understanding) — Understanding
 
 ---
 
@@ -54,9 +54,13 @@ id: type.becoming
 kind: type
 canonical_label: Becoming
 provenance: source-original
+aliases_de:
+- Werden
 class_id: class.psychology
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- novel.crucial-element-audit
 ```
 
 
@@ -75,9 +79,13 @@ id: type.being
 kind: type
 canonical_label: Being
 provenance: source-original
+aliases_de:
+- Sein
 class_id: class.psychology
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- novel.crucial-element-audit
 ```
 
 
@@ -115,6 +123,8 @@ provenance: source-original
 class_id: class.psychology
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- novel.crucial-element-audit
 ```
 
 
@@ -137,6 +147,8 @@ provenance: source-original
 class_id: class.psychology
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- novel.crucial-element-audit
 ```
 
 
@@ -155,6 +167,10 @@ id: concept.unique-ability
 kind: concept
 canonical_label: Unique Ability
 provenance: source-original
+scenarios:
+- novel.storyform-slot-fill
+- novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 
@@ -178,6 +194,8 @@ provenance: source-original
 class_id: class.mind
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- lyric.archetype-as-system-part
 ```
 
 
@@ -196,6 +214,10 @@ id: concept.consequences
 kind: concept
 canonical_label: Consequences
 provenance: source-original
+scenarios:
+- lyric.album-arc-mapping
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -227,6 +249,10 @@ id: concept.costs
 kind: concept
 canonical_label: Costs
 provenance: source-original
+scenarios:
+- lyric.album-arc-mapping
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -264,6 +290,10 @@ id: concept.dividends
 kind: concept
 canonical_label: Dividends
 provenance: source-original
+scenarios:
+- lyric.album-arc-mapping
+- novel.dual-storyform
+- novel.character-arc
 ```
 
 
@@ -299,9 +329,17 @@ id: type.doing
 kind: type
 canonical_label: Doing
 provenance: source-original
+aliases_de:
+- Handeln
+- Tun
+aliases_en:
+- executing
+- performing
 class_id: class.physics
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 
@@ -363,9 +401,13 @@ id: type.future
 kind: type
 canonical_label: Future
 provenance: source-original
+aliases_de:
+- Zukunft
 class_id: class.universe
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- lyric.album-arc-mapping
 ```
 
 
@@ -408,6 +450,14 @@ id: concept.journey
 kind: concept
 canonical_label: Journey
 provenance: source-original
+aliases_de:
+- Reise
+aliases_en:
+- journey
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.character-arc
 ```
 
 
@@ -431,6 +481,8 @@ provenance: source-original
 class_id: class.physics
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 
@@ -453,6 +505,8 @@ provenance: source-original
 class_id: class.mind
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- lyric.archetype-as-system-part
 ```
 
 
@@ -477,9 +531,13 @@ id: type.obtaining
 kind: type
 canonical_label: Obtaining
 provenance: source-original
+aliases_en:
+- controlling for
 class_id: class.physics
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 
@@ -578,6 +636,10 @@ id: concept.forewarnings
 kind: concept
 canonical_label: Forewarnings
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.diagnose-flat-draft
 ```
 
 
@@ -596,6 +658,9 @@ id: concept.story-goal
 kind: concept
 canonical_label: Story Goal
 provenance: source-original
+aliases_de:
+- Geschichtsziel
+- Story-Ziel
 scenarios:
 - lyric.album-arc-mapping
 ```
@@ -646,9 +711,13 @@ id: type.past
 kind: type
 canonical_label: Past
 provenance: source-original
+aliases_de:
+- Vergangenheit
 class_id: class.universe
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- lyric.album-arc-mapping
 ```
 
 
@@ -668,9 +737,11 @@ id: type.past
 kind: type
 canonical_label: Past
 provenance: source-original
-class_id: class.universe
+aliases_de:
+- Vergangenheit
 scenarios:
 - novel.act-pivot
+class_id: class.universe
 ```
 
 
@@ -698,6 +769,16 @@ id: concept.preconditions
 kind: concept
 canonical_label: Preconditions
 provenance: source-original
+aliases_en:
+- imposed
+- preconditions
+- prescribed specification
+- provision
+- unthinking responses
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -768,6 +849,8 @@ provenance: source-original
 class_id: class.mind
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- lyric.archetype-as-system-part
 ```
 
 
@@ -788,6 +871,15 @@ id: concept.prerequisites
 kind: concept
 canonical_label: Prerequisites
 provenance: source-original
+aliases_en:
+- compulsory stipulation
+- essential steps
+- necessary requisites
+- prerequisites
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -807,11 +899,6 @@ may be many prerequisites to achieving that requirement.
 
 preliminary steps that must be met -Prerequisites are the essential or necessary steps or
 accomplishments that must be achieved in order for
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-36.
-
 something to occur. If a goal has a single requirement,
 there may be many prerequisites to meeting that
 requirement.
@@ -835,9 +922,13 @@ id: type.present
 kind: type
 canonical_label: Present
 provenance: source-original
+aliases_de:
+- Gegenwart
 class_id: class.universe
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- lyric.album-arc-mapping
 ```
 
 
@@ -857,9 +948,11 @@ id: type.present
 kind: type
 canonical_label: Present
 provenance: source-original
-class_id: class.universe
+aliases_de:
+- Gegenwart
 scenarios:
 - novel.act-pivot
+class_id: class.universe
 ```
 
 
@@ -889,9 +982,13 @@ id: type.progress
 kind: type
 canonical_label: Progress
 provenance: source-original
+aliases_de:
+- Fortschritt
 class_id: class.universe
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- lyric.album-arc-mapping
 ```
 
 
@@ -912,6 +1009,10 @@ id: concept.requirements
 kind: concept
 canonical_label: Requirements
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -941,6 +1042,17 @@ id: concept.signpost
 kind: concept
 canonical_label: Signpost
 provenance: source-original
+aliases_de:
+- Wegweiser
+aliases_en:
+- a set of circumstances
+- a static situation
+- signpost
+- state of
+scenarios:
+- novel.act-pivot
+- novel.character-arc
+- lyric.album-arc-mapping
 ```
 
 
@@ -1005,11 +1117,6 @@ Story Point -- Story Points are items of dramatic meaning
 that are common to all stories. Meaning is created
 when an identifiable topic is seen from a particular
 point of view. This creates perspective which takes into
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-43.
-
 account both the observation and the observer. In
 complete stories, there are four principal viewpoints at
 work: Overall Story, Main Character, Impact Character,
@@ -1078,6 +1185,29 @@ story.
 
 ---
 
+## Subconscious
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.subconscious
+kind: type
+canonical_label: Subconscious
+provenance: source-original
+aliases_en:
+- Innermost Desires
+class_id: class.mind
+scenarios:
+- novel.act-pivot
+- novel.character-arc
+- lyric.archetype-as-system-part
+```
+
+
+*Type: Type*
+
+Mind-class Type paired with Preconscious in the dynamic pair Subconscious <--> Preconscious (cf. line 735 above). Source heading was missing from this file; the corresponding body fragment ("Innermost Desires (a.k.a. Subconscious)") survives mis-attached in character-dynamics.md per ST-2's truncation catalog and is flagged for re-extraction.
+
+---
+
 ## Throughline
 <!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
 ```yaml
@@ -1085,6 +1215,10 @@ id: concept.issue
 kind: concept
 canonical_label: Issue
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
+- novel.dual-storyform
 ```
 
 
@@ -1171,11 +1305,6 @@ of the Problem by replacing it. It may not be actually
 implemented, but if it were adopted in the relationship
 between the Main and Impact Characters, it would end
 the source of their conflict and change their relation-
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-29.
-
 ship.
 Main vs. Impact Symptom
 
@@ -1237,9 +1366,18 @@ id: type.understanding
 kind: type
 canonical_label: Understanding
 provenance: source-original
+aliases_de:
+- Verständnis
+aliases_en:
+- appreciating
+- comprehending
+- grasping
+- obtaining meaning
 class_id: class.physics
 scenarios:
 - novel.act-pivot
+- novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 
@@ -1313,8 +1451,6 @@ Worth •
 ### Variation
 
 www.dramatica.com -- www.screenplay.com
-
-54.
 
 ---
 

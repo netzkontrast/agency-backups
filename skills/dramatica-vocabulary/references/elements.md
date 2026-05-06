@@ -6,74 +6,96 @@ The 64 highest-resolution descriptions of approaches and attitudes — the atomi
 
 - [Acceptance](#acceptance) — dyn.pr. Non-acceptance<->Acceptance
 - [Accurate](#accurate) — dyn.pr. Non-accurate<-->Accurate
-- [Actuality](#actuality) — >Actuality -an objective reality
+- [Actuality](#actuality) — Actuality -an objective reality
 - [Avoid](#avoid) — evade, dodge, elude, escape, steer
-- [Aware](#aware) — >Self-Aware -being conscious of things outside oneself
-- [Cause](#cause) — >Cause
-- [Certainty](#certainty) — >Certainty
-- [Chaos](#chaos) — >Chaos
-- [Conscience](#conscience) — >Conscience
-- [Consider](#consider) — >Consider
-- [Control](#control) — >Control -a method based on organization and constraint
+- [Aware](#aware) — Self-Aware -being conscious of things outside oneself
+- [Cause](#cause) — Cause
+- [Certainty](#certainty) — Certainty
+- [Chaos](#chaos) — Chaos
+- [Conscience](#conscience) — Conscience
+- [Consider](#consider) — Consider
+- [Control](#control) — Control -a method based on organization and constraint
 - [Crucial Element](#crucial-element) — The single dramatic
-- [Deduction](#deduction) — >Deduction
+- [Deduction](#deduction) — Deduction
 - [Desire](#desire) — drive, motivational goal, unfulfillment,
 - [Determination](#determination) — dyn.pr. Expectation<->Determination
-- [Direction (Overall Story Throughline)](#direction-overall-story-throughline) — See
-- [Disbelief](#disbelief) — >Disbelief
+- [Direction (Overall Story Throughline)](#direction-overall-story-throughline) — Overall Story Throughline alias for Response Element
+- [Disbelief](#disbelief) — Disbelief
 - [Effect](#effect) — result, consequence, outcome,
-- [Ending](#ending) — >Ending -coming to a conclusion
-- [Equity](#equity) — >Equity
+- [Ending](#ending) — Ending -coming to a conclusion
+- [Equity](#equity) — Equity
 - [Evaluation](#evaluation) — dyn.pr. Re-evaluation<->Evaluation
 - [Expectation](#expectation) — dyn.pr. Determination<->Expectation
-- [Faith](#faith) — >Faith
-- [Feeling](#feeling) — >Feeling
-- [Focus](#focus) — See Symptom
-- [Help](#help) — > Help
-- [Hinder](#hinder) — >Help
-- [Hunch](#hunch) — >Hunch
-- [Inaction](#inaction) — >Inaction -taking no action as a means of response
-- [Induction](#induction) — >Induction -a means of determining possibility
-- [Inequity](#inequity) — >Inequity
-- [Inertia](#inertia) — >Inertia
+- [Faith](#faith) — Faith
+- [Feeling](#feeling) — Feeling
+- [Help](#help) — Help
+- [Hinder](#hinder) — Help
+- [Hunch](#hunch) — Hunch
+- [Inaction](#inaction) — Inaction -taking no action as a means of response
+- [Induction](#induction) — Induction -a means of determining possibility
+- [Inequity](#inequity) — Inequity
+- [Inertia](#inertia) — Inertia
 - [Knowledge](#knowledge) — learnedness, held truths,
-- [Logic](#logic) — >Logic
+- [Logic](#logic) — Logic
 - [Main Character Problem](#main-character-problem) — source of The
-- [Oppose](#oppose) — >Oppose
-- [Order](#order) — >Order
+- [Oppose](#oppose) — Oppose
+- [Order](#order) — Order
 - [Overall (Objective) Story Problem](#overall-objective-story-problem) — The
 - [Overall (Objective) Story Response](#overall-objective-story-response) — The
 - [Overall (Objective) Story Solution](#overall-objective-story-solution) — The
 - [Overall (Objective) Story Symptom](#overall-objective-story-symptom) — -Where attention is focused in the Overall story
-- [Perception](#perception) — >Perception
-- [Possibility](#possibility) — >Possibility
-- [Potentiality](#potentiality) — >Potentiality
-- [Proaction](#proaction) — >Proaction -taking initiative action to achieve one''s goals
-- [Probability](#probability) — >Probability
+- [Perception](#perception) — Perception
+- [Possibility](#possibility) — Possibility
+- [Potentiality](#potentiality) — Potentiality
+- [Proaction](#proaction) — Proaction -taking initiative action to achieve one's goals
+- [Probability](#probability) — Probability
 - [Problem](#problem) — The underlying cause of the
-- [Process](#process) — >Process
-- [Production](#production) — >Production
-- [Projection](#projection) — >Projection
-- [Protection](#protection) — >Protection -an effort to prevent one''s concerns from being vulnerable
-- [Proven](#proven) — >Proven
-- [Pursuit](#pursuit) — >Pursuit
-- [Reaction](#reaction) — >Reaction -actions made in response
-- [Reconsider](#reconsider) — >Reconsider
-- [Reduction](#reduction) — >Reduction
-- [Reevaluation](#reevaluation) — >Reevaluation
-- [Result](#result) — >Result
+- [Process](#process) — Process
+- [Production](#production) — Production
+- [Projection](#projection) — Projection
+- [Protection](#protection) — Protection -an effort to prevent one's concerns from being vulnerable
+- [Proven](#proven) — Proven
+- [Pursuit](#pursuit) — Pursuit
+- [Reaction](#reaction) — Reaction -actions made in response
+- [Reconsider](#reconsider) — Reconsider
+- [Reduction](#reduction) — Reduction
+- [Reevaluation](#reevaluation) — Reevaluation
+- [Result](#result) — Result
 - [Solution](#solution) — The specific element needed to
-- [Speculation](#speculation) — >Speculation
-- [Support](#support) — >Support
+- [Speculation](#speculation) — Speculation
+- [Support](#support) — Support
 - [Symptom Element](#symptom-element) — A Main vs. Impact
-- [Temptation](#temptation) — >Temptation
-- [Test](#test) — >Test
-- [Theory](#theory) — >Theory
-- [Thought](#thought) — >Thought -the process of consideration
-- [Trust](#trust) — >Trust
-- [Uncontrolled](#uncontrolled) — >Uncontrolled
-- [Unending](#unending) — >Unending
-- [Unproven](#unproven) — >Unproven
+- [Temptation](#temptation) — Temptation
+- [Test](#test) — Test
+- [Theory](#theory) — Theory
+- [Thought](#thought) — Thought -the process of consideration
+- [Trust](#trust) — Trust
+- [Uncontrolled](#uncontrolled) — Uncontrolled
+- [Unending](#unending) — Unending
+- [Unproven](#unproven) — Unproven
+
+---
+
+## Ability
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.ability
+kind: element
+canonical_label: Ability
+provenance: source-original
+aliases_de:
+- Fähigkeit
+scenarios:
+- novel.storyform-slot-fill
+dynamic_pair_id: el.desire
+quad_id: quad.knowledge-el
+ktad_position: A
+```
+
+
+*Type: Element*
+
+Knowledge-quad Element paired with Desire in the K/T/A/D fractal. Heading minted by ST-3 to satisfy the canonical entry recorded in `el.ability` (Task 015 §Plan Step 4 added the ontology entry; the source heading was never created).
 
 ---
 
@@ -84,9 +106,19 @@ id: el.acceptance
 kind: element
 canonical_label: Acceptance
 provenance: source-original
-quad_id: quad.acceptance-reaction-el
-ktad_position: K
+aliases_de:
+- Akzeptanz
+- Annahme
+aliases_en:
+- acquiescence
+- tolerance
 dynamic_pair_id: el.non-acceptance
+ktad_position: K
+quad_id: quad.acceptance-reaction-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.refrain-as-restatement
+- novel.diagnose-flat-draft
 ```
 
 
@@ -124,9 +156,18 @@ id: el.accurate
 kind: element
 canonical_label: Accurate
 provenance: source-original
-quad_id: quad.accurate-non-accurate-el
-ktad_position: K
+aliases_en:
+- acceptable
+- adequate
+- sufficient
+- within tolerance
 dynamic_pair_id: el.non-accurate
+ktad_position: K
+quad_id: quad.accurate-non-accurate-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
+- lyric.refrain-as-restatement
 ```
 
 
@@ -170,9 +211,13 @@ id: el.actuality
 kind: element
 canonical_label: Actuality
 provenance: source-original
+aliases_en:
+- the true state of things
+aliases_de:
+- Wirklichkeit
+dynamic_pair_id: el.perception
 quad_id: quad.actuality-el
 ktad_position: K
-dynamic_pair_id: el.perception
 ```
 
 
@@ -237,8 +282,14 @@ id: el.aware
 kind: element
 canonical_label: Aware
 provenance: source-original
-quad_id: quad.actuality-el
+aliases_en:
+- outward
 ktad_position: A
+quad_id: quad.actuality-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.refrain-as-restatement
+- lyric.archetype-as-system-part
 ```
 
 
@@ -269,13 +320,20 @@ id: el.cause
 kind: element
 canonical_label: Cause
 provenance: source-original
-quad_id: quad.effect-cause-el
-ktad_position: T
-dynamic_pair_id: el.effect
+aliases_en:
+- agent
+- effector
+- reason for
+- source
+aliases_de:
+- Ursache
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.effect
+quad_id: quad.effect-cause-el
+ktad_position: T
 ```
 
 
@@ -315,9 +373,19 @@ id: el.certainty
 kind: element
 canonical_label: Certainty
 provenance: source-original
-quad_id: quad.certainty-potentiality-el
-ktad_position: K
+aliases_de:
+- Gewissheit
+aliases_en:
+- definiteness
+- having no doubts
+- sureness
 dynamic_pair_id: el.potentiality
+ktad_position: K
+quad_id: quad.certainty-potentiality-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
+- lyric.bridge-pivot
 ```
 
 
@@ -348,6 +416,39 @@ unmist
 
 ---
 
+## Change
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.change
+kind: element
+canonical_label: Change
+provenance: source-original
+aliases_en:
+- adapt
+- adjust
+- altering
+- altering force
+- change
+- embodying
+- manifesting
+- modify
+- reshape
+dynamic_pair_id: el.inertia
+ktad_position: T
+quad_id: quad.inertia-change-el
+scenarios:
+- novel.character-arc
+- novel.diagnose-flat-draft
+- lyric.bridge-pivot
+```
+
+
+*Type: Element*
+
+Element paired with Inertia in the inertia/change quad. Heading minted by ST-3 to satisfy the canonical entry recorded in `el.change` (Task 015 §Plan Step 4 added the ontology entry; the source heading was never created).
+
+---
+
 ## Chaos
 <!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
 ```yaml
@@ -355,11 +456,19 @@ id: el.chaos
 kind: element
 canonical_label: Chaos
 provenance: source-original
-quad_id: quad.order-chaos-el
-ktad_position: T
-dynamic_pair_id: el.order
+aliases_en:
+- anarchy
+- disorder
+- formlessness
+- noncohesion
+- randomness
+aliases_de:
+- Chaos
 scenarios:
 - lyric.verse-chorus-pair
+dynamic_pair_id: el.order
+quad_id: quad.order-chaos-el
+ktad_position: T
 ```
 
 
@@ -381,8 +490,6 @@ the top
 ### Elements
 
 www.dramatica.com -- www.screenplay.com
-
-2.
 
 Story Points items:
 
@@ -442,8 +549,6 @@ author feels are appropriate t
 
 www.dramatica.com -- www.screenplay.com
 
-3.
-
 
 ---
 
@@ -477,12 +582,19 @@ id: el.conscience
 kind: element
 canonical_label: Conscience
 provenance: source-original
-quad_id: quad.conscience-temptation-el
-ktad_position: K
-dynamic_pair_id: el.temptation
+aliases_en:
+- abstinence
+- forbearance
+- forgo
+- forgoing for fear of consequences
+- restraining oneself
+- temperance
 scenarios:
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.temptation
+quad_id: quad.conscience-temptation-el
+ktad_position: K
 ```
 
 
@@ -493,11 +605,6 @@ scenarios:
 **Opposite**: Temptation <--> Conscience
 
 forgoing an immediate benefit because of
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-11.
-
 future consequences -- Conscience is the motivation
 that negative consequences are unavoidable if a
 present desire is acted upon. Conscience can serve a
@@ -542,7 +649,18 @@ id: el.consider
 kind: element
 canonical_label: Consider
 provenance: source-original
+aliases_de:
+- Erwägung
+aliases_en:
+- contemplate
+- deliberate
+- ponder
+- weigh in the mind
 dynamic_pair_id: el.reconsider
+scenarios:
+- novel.storyform-slot-fill
+- lyric.archetype-as-system-part
+- lyric.bridge-pivot
 ```
 
 
@@ -578,13 +696,23 @@ id: el.control
 kind: element
 canonical_label: Control
 provenance: source-original
-quad_id: quad.logic-feeling-el
-ktad_position: A
-dynamic_pair_id: el.uncontrolled
+aliases_en:
+- conduct
+- focused
+- guide
+- manipulate
+- organized management
+- regulate
+- steer
+aliases_de:
+- Kontrolle
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.uncontrolled
+quad_id: quad.logic-feeling-el
+ktad_position: A
 ```
 
 
@@ -644,9 +772,18 @@ id: el.deduction
 kind: element
 canonical_label: Deduction
 provenance: source-original
-quad_id: quad.certainty-potentiality-el
-ktad_position: A
+aliases_en:
+- demonstrative reasoning
+- drawing a conclusion
+- narrowing to a single point
+- process of elimination
 dynamic_pair_id: el.induction
+ktad_position: A
+quad_id: quad.certainty-potentiality-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
+- lyric.archetype-as-system-part
 ```
 
 
@@ -688,11 +825,14 @@ id: el.desire
 kind: element
 canonical_label: Desire
 provenance: source-original
-quad_id: quad.knowledge-el
-ktad_position: D
-dynamic_pair_id: el.ability
+aliases_de:
+- Begehren
+- Wunsch
 scenarios:
 - novel.storyform-slot-fill
+dynamic_pair_id: el.ability
+quad_id: quad.knowledge-el
+ktad_position: D
 ```
 
 
@@ -720,9 +860,20 @@ id: el.determination
 kind: element
 canonical_label: Determination
 provenance: source-original
-quad_id: quad.accurate-non-accurate-el
-ktad_position: D
+aliases_en:
+- ascertaining causes
+- discovering causes
+- envisioning
+- finding the reasons
+- imagining
+- visualizing
 dynamic_pair_id: el.expectation
+ktad_position: D
+quad_id: quad.accurate-non-accurate-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.character-arc
+- lyric.album-arc-mapping
 ```
 
 
@@ -801,13 +952,20 @@ id: el.disbelief
 kind: element
 canonical_label: Disbelief
 provenance: source-original
-quad_id: quad.faith-disbelief-el
-ktad_position: T
-dynamic_pair_id: el.faith
+aliases_en:
+- distrust
+- find
+- refusal to accept
+aliases_de:
+- Unglaube
+- Zweifel
 scenarios:
 - lyric.refrain-as-restatement
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
+dynamic_pair_id: el.faith
+quad_id: quad.faith-disbelief-el
+ktad_position: T
 ```
 
 
@@ -846,13 +1004,15 @@ id: el.effect
 kind: element
 canonical_label: Effect
 provenance: source-original
-quad_id: quad.effect-cause-el
-ktad_position: K
-dynamic_pair_id: el.cause
+aliases_de:
+- Wirkung
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.cause
+quad_id: quad.effect-cause-el
+ktad_position: K
 ```
 
 
@@ -861,8 +1021,6 @@ scenarios:
 ### Element
 
 www.dramatica.com -- www.screenplay.com
-
-51.
 
 culmination, the ensuing
 
@@ -875,9 +1033,16 @@ id: el.ending
 kind: element
 canonical_label: Ending
 provenance: source-original
-quad_id: quad.result-process-el
-ktad_position: A
+aliases_en:
+- conclusion
+- finish
 dynamic_pair_id: el.unending
+ktad_position: A
+quad_id: quad.result-process-el
+scenarios:
+- novel.character-arc
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -921,9 +1086,22 @@ id: el.equity
 kind: element
 canonical_label: Equity
 provenance: source-original
-quad_id: quad.order-chaos-el
-ktad_position: A
+aliases_de:
+- Gleichgewicht
+aliases_en:
+- balance
+- equilibrium
+- even
+- fairness
+- level
+- parity
 dynamic_pair_id: el.inequity
+ktad_position: A
+quad_id: quad.order-chaos-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.archetype-as-system-part
+- lyric.refrain-as-restatement
 ```
 
 
@@ -964,9 +1142,19 @@ id: el.evaluation
 kind: element
 canonical_label: Evaluation
 provenance: source-original
-quad_id: quad.evaluation-re-evaluation-el
-ktad_position: K
+aliases_de:
+- Bewertung
+- Evaluation
+aliases_en:
+- assessment
+- survey
 dynamic_pair_id: el.reevaluation
+ktad_position: K
+quad_id: quad.evaluation-re-evaluation-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.bridge-pivot
+- novel.dual-storyform
 ```
 
 
@@ -1005,9 +1193,15 @@ id: el.expectation
 kind: element
 canonical_label: Expectation
 provenance: source-original
-quad_id: quad.accurate-non-accurate-el
-ktad_position: A
+aliases_en:
+- anticipated results
 dynamic_pair_id: el.determination
+ktad_position: A
+quad_id: quad.accurate-non-accurate-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
+- lyric.album-arc-mapping
 ```
 
 
@@ -1044,13 +1238,17 @@ id: el.faith
 kind: element
 canonical_label: Faith
 provenance: source-original
-quad_id: quad.faith-disbelief-el
-ktad_position: K
-dynamic_pair_id: el.disbelief
+aliases_en:
+- acceptance without
+aliases_de:
+- Glaube
 scenarios:
 - lyric.refrain-as-restatement
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
+dynamic_pair_id: el.disbelief
+quad_id: quad.faith-disbelief-el
+ktad_position: K
 ```
 
 
@@ -1092,9 +1290,15 @@ id: el.feeling
 kind: element
 canonical_label: Feeling
 provenance: source-original
-quad_id: quad.logic-feeling-el
-ktad_position: T
+aliases_de:
+- Gefühl
+aliases_en:
+- affective outlook
+- emotional sensibility
+- empathy
 dynamic_pair_id: el.logic
+ktad_position: T
+quad_id: quad.logic-feeling-el
 scenarios:
 - lyric.archetype-as-system-part
 - lyric.verse-chorus-pair
@@ -1132,75 +1336,6 @@ affective outlook, sentiment, emotional assessment
 
 ---
 
-## Focus
-<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
-```yaml
-id: concept.focus
-kind: concept
-canonical_label: Focus
-provenance: source-original
-scenarios:
-- novel.crucial-element-audit
-- novel.diagnose-flat-draft
-```
-
-
-*Type: Element*
-
-### Element
-
-See Symptom
-Forewarnings (Overall Story Throughline)
-
-### Type
-
-Whether or not the Consequences ever
-befall the Main Character, there are Forewarnings that
-indicate their approach and help force the limit of the
-story and bring the Main Character to the moment
-where he can be assessed in terms of his Main Character Resolve. These Forewarnings could be a quick
-look at a growing crack in the dam which no-one sees,
-or it could be a mad scientist installing the final component in his doomsday device; however it is represented, its nature will be described by the storytelling of
-Forewarnings.
-Future (The Future)
-
-### Type
-
-A story focusing on the Future concerns itself
-with what will be. This does not require the story to be
-"set" in the Future -- only that the Future state of
-external and/or internal issues is the subject that is
-being addressed. A character centered on Future may
-be trying to discover what will be or may be trying a
-achieve a particular state of affairs down the line. In
-both the Story and Character sense, the end is more
-important than the present although it still may not
-justify the means
-
-**Synonyms**: what is to come, what will be
-
-### Type
-
-Gathering Information describes the process of acquiring
-knowledge. It is not the knowledge itself. When a
-
-portion of a story focuses on learning, it is the gathering
-of an education that is of concern, not the education
-that ultimately has been gathered. Gathering Information need not be an academic endeavor. One might
-learn to express one's feelings or learn about love.
-Gathering Information does not even require new
-information as sometimes one learns simply by looking
-through old information from a different perspective or
-with a new approach. It is not important if one is
-learning to arrive at a particular understanding or just to
-gather data. As long as the focus is on the process of
-gaining information or learning, Gathering Information
-is the operative word.
-
-**Synonyms**: cultivating experience
-
----
-
 ## Help
 <!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
 ```yaml
@@ -1208,9 +1343,16 @@ id: el.help
 kind: element
 canonical_label: Help
 provenance: source-original
-quad_id: quad.help-hinder-el
-ktad_position: A
+aliases_de:
+- Hilfe
+aliases_en:
+- abet
+- aid
+- assist
+- bolster
 dynamic_pair_id: el.hinder
+ktad_position: A
+quad_id: quad.help-hinder-el
 scenarios:
 - lyric.archetype-as-system-part
 - lyric.verse-chorus-pair
@@ -1253,9 +1395,13 @@ id: el.hinder
 kind: element
 canonical_label: Hinder
 provenance: source-original
-quad_id: quad.help-hinder-el
-ktad_position: D
+aliases_de:
+- Behinderung
+aliases_en:
+- obstruct
 dynamic_pair_id: el.help
+ktad_position: D
+quad_id: quad.help-hinder-el
 scenarios:
 - lyric.archetype-as-system-part
 - lyric.verse-chorus-pair
@@ -1297,9 +1443,17 @@ id: el.hunch
 kind: element
 canonical_label: Hunch
 provenance: source-original
-quad_id: quad.proven-unproven-el
-ktad_position: D
+aliases_en:
+- impression
+- intuition
+- premonition
 dynamic_pair_id: el.theory
+ktad_position: D
+quad_id: quad.proven-unproven-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.refrain-as-restatement
+- novel.diagnose-flat-draft
 ```
 
 
@@ -1311,11 +1465,6 @@ dynamic_pair_id: el.theory
 
 a
 conclusion based on intuition -- A Hunch is an understanding arrived at by circumstantial evidence. The
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-21.
-
 phrase "where there's smoke, there's fire" describes
 the concept. The advantage is that when evidence
 mounts, even without direct connections, one may
@@ -1343,8 +1492,15 @@ id: el.inaction
 kind: element
 canonical_label: Inaction
 provenance: source-original
-quad_id: quad.evaluation-re-evaluation-el
+aliases_en:
+- inactive response
+- passive reaction
 ktad_position: A
+quad_id: quad.evaluation-re-evaluation-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
+- lyric.bridge-pivot
 ```
 
 
@@ -1356,11 +1512,6 @@ Inaction
 does not mean simply sitting still. The Inactive characteristic might choose to allow a course of action by not
 interfering. Or it might refuse to move out of harm's
 way, thereby forming a resistance to the progress that
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-23.
-
 drives the harm. Both of these are efficient tools for
 altering the course of an interaction. However, the
 Inactive characteristic may also drag its feet in all areas
@@ -1387,9 +1538,17 @@ id: el.induction
 kind: element
 canonical_label: Induction
 provenance: source-original
-quad_id: quad.certainty-potentiality-el
-ktad_position: D
+aliases_en:
+- conjecture
+- postulate
+- predicate
 dynamic_pair_id: el.deduction
+ktad_position: D
+quad_id: quad.certainty-potentiality-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.bridge-pivot
+- lyric.archetype-as-system-part
 ```
 
 
@@ -1436,9 +1595,17 @@ id: el.inequity
 kind: element
 canonical_label: Inequity
 provenance: source-original
-quad_id: quad.order-chaos-el
-ktad_position: D
+aliases_de:
+- Ungleichgewicht
+aliases_en:
+- imbalance
 dynamic_pair_id: el.equity
+ktad_position: D
+quad_id: quad.order-chaos-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.archetype-as-system-part
+- lyric.refrain-as-restatement
 ```
 
 
@@ -1475,9 +1642,15 @@ id: el.inertia
 kind: element
 canonical_label: Inertia
 provenance: source-original
-quad_id: quad.inertia-change-el
-ktad_position: K
+aliases_en:
+- tendency
 dynamic_pair_id: el.change
+ktad_position: K
+quad_id: quad.inertia-change-el
+scenarios:
+- novel.character-arc
+- novel.diagnose-flat-draft
+- lyric.bridge-pivot
 ```
 
 
@@ -1515,10 +1688,12 @@ id: el.knowledge
 kind: element
 canonical_label: Knowledge
 provenance: source-original
-quad_id: quad.knowledge-el
-ktad_position: K
+aliases_de:
+- Wissen
 scenarios:
 - novel.storyform-slot-fill
+quad_id: quad.knowledge-el
+ktad_position: K
 ```
 
 
@@ -1545,9 +1720,16 @@ id: el.logic
 kind: element
 canonical_label: Logic
 provenance: source-original
-quad_id: quad.logic-feeling-el
-ktad_position: K
+aliases_de:
+- Logik
+aliases_en:
+- linear reasoning
+- rationality
+- structural sensibility
+- syllogistics
 dynamic_pair_id: el.feeling
+ktad_position: K
+quad_id: quad.logic-feeling-el
 scenarios:
 - lyric.archetype-as-system-part
 - lyric.verse-chorus-pair
@@ -1649,11 +1831,6 @@ perfume a character puts on. However it is illustrated,
 it needs to be there to give both the audience and the
 Main Character some way of judging how deep his
 concern is and how far along in the story he is.
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-27.
-
 Main Character's Concern
 
 ### Type
@@ -1794,11 +1971,6 @@ Main Character's Unique ability
 
 Just as a
 requirement defines the specific nature of things
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-28.
-
 needed to achieve a particular goal, Unique Ability
 defines the specific quality needed to meet the requirement. Unique Ability is another way in which the Main
 Character is identified as the intersecting point between
@@ -1814,6 +1986,54 @@ Unique Ability. In either approach, it is essential to
 
 ---
 
+## Non-acceptance
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.non-acceptance
+kind: element
+canonical_label: Non-acceptance
+provenance: source-original
+aliases_de:
+- Nicht-Akzeptanz
+dynamic_pair_id: el.acceptance
+ktad_position: T
+quad_id: quad.acceptance-reaction-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.refrain-as-restatement
+- novel.diagnose-flat-draft
+```
+
+
+*Type: Element*
+
+Element paired with Acceptance in the acceptance/reaction quad. Heading minted by ST-3 to satisfy the canonical entry recorded in `el.non-acceptance` (Task 015 §Plan Step 4 added the ontology entry; the source heading was never created).
+
+---
+
+## Non-accurate
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.non-accurate
+kind: element
+canonical_label: Non-accurate
+provenance: source-original
+dynamic_pair_id: el.accurate
+ktad_position: T
+quad_id: quad.accurate-non-accurate-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
+- lyric.refrain-as-restatement
+```
+
+
+*Type: Element*
+
+Element paired with Accurate in the accurate/non-accurate quad. Heading minted by ST-3 to satisfy the canonical entry recorded in `el.non-accurate` (Task 015 §Plan Step 4 added the ontology entry; the source heading was never created).
+
+---
+
 ## Oppose
 <!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
 ```yaml
@@ -1821,11 +2041,15 @@ id: el.oppose
 kind: element
 canonical_label: Oppose
 provenance: source-original
-quad_id: quad.help-hinder-el
-ktad_position: T
-dynamic_pair_id: el.support
+aliases_en:
+- object to
+aliases_de:
+- Widerstand
 scenarios:
 - lyric.refrain-as-restatement
+dynamic_pair_id: el.support
+quad_id: quad.help-hinder-el
+ktad_position: T
 ```
 
 
@@ -1864,11 +2088,17 @@ id: el.order
 kind: element
 canonical_label: Order
 provenance: source-original
-quad_id: quad.order-chaos-el
-ktad_position: K
-dynamic_pair_id: el.chaos
+aliases_en:
+- organization
+- patterned arrangement
+- structure
+aliases_de:
+- Ordnung
 scenarios:
 - lyric.verse-chorus-pair
+dynamic_pair_id: el.chaos
+quad_id: quad.order-chaos-el
+ktad_position: K
 ```
 
 
@@ -1929,6 +2159,10 @@ id: concept.os-response
 kind: concept
 canonical_label: Overall Story Response
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
+- novel.dual-storyform
 ```
 
 
@@ -1947,6 +2181,10 @@ id: concept.os-solution
 kind: concept
 canonical_label: Overall Story Solution
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
+- novel.dual-storyform
 ```
 
 
@@ -1965,6 +2203,10 @@ id: concept.os-symptom
 kind: concept
 canonical_label: Overall Story Symptom
 provenance: source-original
+scenarios:
+- novel.diagnose-flat-draft
+- novel.dual-storyform
+- novel.act-pivot
 ```
 
 
@@ -1996,9 +2238,16 @@ id: el.perception
 kind: element
 canonical_label: Perception
 provenance: source-original
-quad_id: quad.actuality-el
-ktad_position: T
+aliases_en:
+- appearance
+- how things seem to be
 dynamic_pair_id: el.actuality
+ktad_position: T
+quad_id: quad.actuality-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.verse-chorus-pair
+- novel.dual-storyform
 ```
 
 
@@ -2035,9 +2284,17 @@ id: el.possibility
 kind: element
 canonical_label: Possibility
 provenance: source-original
-quad_id: quad.production-reduction-el
-ktad_position: D
+aliases_de:
+- Möglichkeit
+aliases_en:
+- plausibility
 dynamic_pair_id: el.probability
+ktad_position: D
+quad_id: quad.production-reduction-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- lyric.album-arc-mapping
 ```
 
 
@@ -2075,9 +2332,19 @@ id: el.potentiality
 kind: element
 canonical_label: Potentiality
 provenance: source-original
-quad_id: quad.certainty-potentiality-el
-ktad_position: T
+aliases_de:
+- Potenzial
+aliases_en:
+- chance
+- focusing on the
+- precariousness
 dynamic_pair_id: el.certainty
+ktad_position: T
+quad_id: quad.certainty-potentiality-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- lyric.album-arc-mapping
 ```
 
 
@@ -2119,8 +2386,20 @@ id: el.proaction
 kind: element
 canonical_label: Proaction
 provenance: source-original
-quad_id: quad.acceptance-reaction-el
+aliases_de:
+- Vorausschauendes Handeln
+aliases_en:
+- commit
+- execute
+- implement
+- to initiate action
+- undertake
 ktad_position: A
+quad_id: quad.acceptance-reaction-el
+scenarios:
+- novel.character-arc
+- lyric.album-arc-mapping
+- lyric.bridge-pivot
 ```
 
 
@@ -2164,9 +2443,18 @@ id: el.probability
 kind: element
 canonical_label: Probability
 provenance: source-original
-quad_id: quad.production-reduction-el
-ktad_position: A
+aliases_en:
+- likelihood
+- predictable
+- promising
+- prospective
 dynamic_pair_id: el.possibility
+ktad_position: A
+quad_id: quad.production-reduction-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -2194,6 +2482,10 @@ id: concept.problem-slot
 kind: concept
 canonical_label: Problem
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
 ```
 
 
@@ -2237,9 +2529,16 @@ id: el.process
 kind: element
 canonical_label: Process
 provenance: source-original
-quad_id: quad.result-process-el
-ktad_position: T
+aliases_en:
+- chain of interactions
+- manner of procedure
 dynamic_pair_id: el.result
+ktad_position: T
+quad_id: quad.result-process-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- lyric.album-arc-mapping
 ```
 
 
@@ -2277,9 +2576,15 @@ id: el.production
 kind: element
 canonical_label: Production
 provenance: source-original
-quad_id: quad.production-reduction-el
-ktad_position: K
+aliases_en:
+- determining
 dynamic_pair_id: el.reduction
+ktad_position: K
+quad_id: quad.production-reduction-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- lyric.bridge-pivot
 ```
 
 
@@ -2331,9 +2636,16 @@ id: el.projection
 kind: element
 canonical_label: Projection
 provenance: source-original
-quad_id: quad.inertia-change-el
-ktad_position: A
+aliases_en:
+- how things will be
+- most likely
 dynamic_pair_id: el.speculation
+ktad_position: A
+quad_id: quad.inertia-change-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -2369,8 +2681,17 @@ id: el.protection
 kind: element
 canonical_label: Protection
 provenance: source-original
-quad_id: quad.evaluation-re-evaluation-el
+aliases_en:
+- defense
+- precaution
+- preservation
+- safeguard
 ktad_position: D
+quad_id: quad.evaluation-re-evaluation-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- lyric.archetype-as-system-part
 ```
 
 
@@ -2415,9 +2736,19 @@ id: el.proven
 kind: element
 canonical_label: Proven
 provenance: source-original
-quad_id: quad.proven-unproven-el
-ktad_position: K
+aliases_en:
+- confirmed
+- corroborated
+- thinking
+- verified
+- ways of thinking
 dynamic_pair_id: el.unproven
+ktad_position: K
+quad_id: quad.proven-unproven-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -2474,13 +2805,19 @@ id: el.pursuit
 kind: element
 canonical_label: Pursuit
 provenance: source-original
-quad_id: quad.pursuit-avoid-el
-ktad_position: K
-dynamic_pair_id: el.avoid
+aliases_en:
+- attempt to achieve
+- directed
+- go after
+- look for
+- seek
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.avoid
+quad_id: quad.pursuit-avoid-el
+ktad_position: K
 ```
 
 
@@ -2521,8 +2858,18 @@ id: el.reaction
 kind: element
 canonical_label: Reaction
 provenance: source-original
-quad_id: quad.acceptance-reaction-el
+aliases_de:
+- Reaktion
+aliases_en:
+- acting
+- reply
+- response
 ktad_position: D
+quad_id: quad.acceptance-reaction-el
+scenarios:
+- novel.character-arc
+- lyric.album-arc-mapping
+- lyric.bridge-pivot
 ```
 
 
@@ -2551,8 +2898,6 @@ interaction is created.
 
 www.dramatica.com -- www.screenplay.com
 
-53.
-
 Temptation
 
 ### Element
@@ -2569,9 +2914,18 @@ id: el.reconsider
 kind: element
 canonical_label: Reconsider
 provenance: source-original
-quad_id: quad.pursuit-avoid-el
-ktad_position: D
+aliases_de:
+- Neuerwägung
+aliases_en:
+- re-examining conclusions
+- rethinking
 dynamic_pair_id: el.consider
+ktad_position: D
+quad_id: quad.pursuit-avoid-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.archetype-as-system-part
+- lyric.bridge-pivot
 ```
 
 
@@ -2609,9 +2963,16 @@ id: el.reduction
 kind: element
 canonical_label: Reduction
 provenance: source-original
-quad_id: quad.production-reduction-el
-ktad_position: T
+aliases_en:
+- comparisons of potentiality
+- determining probability
 dynamic_pair_id: el.production
+ktad_position: T
+quad_id: quad.production-reduction-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- lyric.bridge-pivot
 ```
 
 
@@ -2628,11 +2989,6 @@ deduce the ultimate truth in a matter. However, there is
 enough information to narrow the field of possibilities.
 When all the possibilities are considered, each can be
 rated on its individual merits as to how much each has.
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-39.
-
 The potentialities are compared, arriving at the most
 likely conclusion. This allows the Reduction characteristic to act with a greater degree of confidence than if
 no "favorite" theory or explanation had emerged. Of
@@ -2666,7 +3022,16 @@ id: el.reevaluation
 kind: element
 canonical_label: Reevaluation
 provenance: source-original
+aliases_de:
+- Neubewertung
+aliases_en:
+- further assessment
+- subsequent analysis
 dynamic_pair_id: el.evaluation
+scenarios:
+- novel.storyform-slot-fill
+- lyric.bridge-pivot
+- novel.dual-storyform
 ```
 
 
@@ -2700,9 +3065,15 @@ id: el.result
 kind: element
 canonical_label: Result
 provenance: source-original
-quad_id: quad.result-process-el
-ktad_position: K
+aliases_en:
+- ramifications of an
 dynamic_pair_id: el.process
+ktad_position: K
+quad_id: quad.result-process-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -2776,6 +3147,10 @@ id: concept.solution-slot
 kind: concept
 canonical_label: Solution
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
 ```
 
 
@@ -2794,11 +3169,6 @@ problem, but works in conjunction with the Solution
 Element to create an imbalance between two traits that
 need to be balanced. The choice to present one as a
 negative trait defines it as the Problem Element and its
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-42.
-
 positive partner becomes the Solution Element. In
 Steadfast stories, the Solution Element represents the
 nature of the things that would resolve the Overall
@@ -2816,9 +3186,17 @@ id: el.speculation
 kind: element
 canonical_label: Speculation
 provenance: source-original
-quad_id: quad.inertia-change-el
-ktad_position: D
+aliases_en:
+- conjecturing
+- prognostication
+- surmising possibilities
 dynamic_pair_id: el.projection
+ktad_position: D
+quad_id: quad.inertia-change-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.refrain-as-restatement
+- lyric.album-arc-mapping
 ```
 
 
@@ -2856,11 +3234,20 @@ id: el.support
 kind: element
 canonical_label: Support
 provenance: source-original
-quad_id: quad.help-hinder-el
-ktad_position: K
-dynamic_pair_id: el.oppose
+aliases_en:
+- back
+- commend
+- compliment
+- endorse
+- extol
+- laud
+aliases_de:
+- Unterstützung
 scenarios:
 - lyric.refrain-as-restatement
+dynamic_pair_id: el.oppose
+quad_id: quad.help-hinder-el
+ktad_position: K
 ```
 
 
@@ -2900,6 +3287,8 @@ id: concept.symptom-element
 kind: concept
 canonical_label: Symptom Element
 provenance: source-original
+aliases_en:
+- Focus
 scenarios:
 - novel.crucial-element-audit
 - novel.diagnose-flat-draft
@@ -2923,12 +3312,15 @@ id: el.temptation
 kind: element
 canonical_label: Temptation
 provenance: source-original
-quad_id: quad.conscience-temptation-el
-ktad_position: T
-dynamic_pair_id: el.conscience
+aliases_en:
+- embracing
+- indulge
 scenarios:
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.conscience
+quad_id: quad.conscience-temptation-el
+ktad_position: T
 ```
 
 
@@ -2961,13 +3353,19 @@ id: el.test
 kind: element
 canonical_label: Test
 provenance: source-original
-quad_id: quad.effect-cause-el
-ktad_position: D
-dynamic_pair_id: el.trust
+aliases_en:
+- audit
+- trial of validity
+aliases_de:
+- Prüfung
+- Test
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.trust
+quad_id: quad.effect-cause-el
+ktad_position: D
 ```
 
 
@@ -3009,9 +3407,18 @@ id: el.theory
 kind: element
 canonical_label: Theory
 provenance: source-original
-quad_id: quad.proven-unproven-el
-ktad_position: A
+aliases_en:
+- concrete hypothesis
+- description of linear
+- structured explanation
+- systematized descriptive knowledge
 dynamic_pair_id: el.hunch
+ktad_position: A
+quad_id: quad.proven-unproven-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.refrain-as-restatement
+- novel.diagnose-flat-draft
 ```
 
 
@@ -3055,10 +3462,19 @@ id: el.thought
 kind: element
 canonical_label: Thought
 provenance: source-original
-quad_id: quad.knowledge-el
-ktad_position: T
+aliases_en:
+- contemplation
+- musing
+- ponderence
+- reflection
+- the process of consideration
+aliases_de:
+- Denken
+- Gedanke
 scenarios:
 - novel.storyform-slot-fill
+quad_id: quad.knowledge-el
+ktad_position: T
 ```
 
 
@@ -3071,11 +3487,6 @@ represents Thought, he illustrates the process of
 consideration. Unlike the logic element that is only
 concerned with arriving at a conclusion via reason,
 Thought deliberates both logical and emotional aspects
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-47.
-
 of a problem, not particularly to decide an issue so
 much as to examine it from all perspectives. This has
 the advantage of illuminating every side of an issue,
@@ -3126,13 +3537,19 @@ id: el.trust
 kind: element
 canonical_label: Trust
 provenance: source-original
-quad_id: quad.effect-cause-el
-ktad_position: A
-dynamic_pair_id: el.test
+aliases_en:
+- accept
+- untested belief in
+- untried acceptance
+aliases_de:
+- Vertrauen
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.test
+quad_id: quad.effect-cause-el
+ktad_position: A
 ```
 
 
@@ -3171,13 +3588,23 @@ id: el.uncontrolled
 kind: element
 canonical_label: Uncontrolled
 provenance: source-original
-quad_id: quad.logic-feeling-el
-ktad_position: D
-dynamic_pair_id: el.control
+aliases_en:
+- disorganized
+- frenzy
+- open
+- rampant
+- unfocused
+- unguided
+- unregulated
+aliases_de:
+- Unkontrolliert
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.control
+quad_id: quad.logic-feeling-el
+ktad_position: D
 ```
 
 
@@ -3215,9 +3642,17 @@ id: el.unending
 kind: element
 canonical_label: Unending
 provenance: source-original
-quad_id: quad.result-process-el
-ktad_position: D
+aliases_en:
+- continual
+- ongoing
+- perpetual
 dynamic_pair_id: el.ending
+ktad_position: D
+quad_id: quad.result-process-el
+scenarios:
+- novel.character-arc
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -3260,9 +3695,17 @@ id: el.unproven
 kind: element
 canonical_label: Unproven
 provenance: source-original
-quad_id: quad.proven-unproven-el
-ktad_position: T
+aliases_en:
+- unconfirmed
+- unestablished
+- unverified
 dynamic_pair_id: el.proven
+ktad_position: T
+quad_id: quad.proven-unproven-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 

@@ -38,8 +38,6 @@ As aids to structure, the Storyforming and Storyencoding stages of communication
 
 Having now set the stage, as it were, of how Storyweaving fits into the writing process, let's explore some of the tricks of the trade. 
 
-227. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**STORYWEAVING and STRUCTURE**_ 
@@ -60,8 +58,6 @@ Now, we have in front of us twenty-eight scenes.  Each one has a job to do, from
 
 It is at this point we can begin to Storyweave.  What we want to determine is the order in which those twenty-eight scenes will be played out for our audience.  A good rule of thumb for a straightforward story is that the scenes in each throughline ought to be kept in order.  So, Signpost 1 will be followed by Journey 1 which is in turn followed by Signpost 2 and Journey 2, etc. 
 
-228. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Now we run into a bit of a sticky wicket: because all four throughlines are actually happening simultaneously from a structural point of view, we would have to have all four Signposts 1 from all four throughlines occur at the same time!  Of course, this might be difficult unless we were making a movie and used a four-way split screen.  Still, some of our most sophisticated authors find ways use a single event to represent more than one dramatic point at a time.  This technique requires experience and inspiration. 
@@ -76,8 +72,6 @@ Using the technique described above, we could order all of the Signposts and Jou
 
 Before we move on to the next step of this introduction to building Storyweaving scenes, we can loosen up our constraints even a bit further.  We don't have to present all four Signposts and then all four Journeys.  Together, each Signpost and Journey pair moves a throughline from where it starts right up to the edge of the next act break. Each pair feels to an audience as if they belong in the first act for that throughline. Therefore, as long as the Signposts precede their corresponding Journeys, the order of exposition can stick with one throughline for both Signpost and Journey or jump from a Signpost to another throughline before returning to the corresponding Journey. 
 
-229. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Taking this more liberal approach, we might begin with Main Character Signpost 1 and Journey 1 (as illustrated below), then show Overall Story Signpost 1, then Impact Character Signpost 1, Overall Story Journey 1, Subjective Story Signpost 1 and Journey 1, and end with Impact Character Journey 1.  In this manner, the Signposts and Journeys in each throughline stay in order, but we have much more latitude in blending the four throughlines together. 
@@ -87,8 +81,6 @@ Taking this more liberal approach, we might begin with Main Character Signpost 1
 **----- Start of picture text -----**<br>
 MC Card #1 MC Card #2 OS Card #1 OC Card #1<br>Main Character Main Character Objective Story Obstacle Character<br>Signpost #1 Journey #1 Signpost #1 Signpost #1<br>OS Card #2 SS Card #1 SS Card #2 OC Card #2<br>Objective Story Subjective Story Subjective Story Obstacle Character<br>Journey #1 Signpost #1 Journey #1 Journey #1<br>**----- End of picture text -----**<br>
 
-
-230. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -105,8 +97,6 @@ So, let's take Goal.  We might spell out the Goal in the very first Storyweaving
 Another thing we might do with a Static Appreciation is hint at it, provide pieces of information about it, but never actually come out and say it.  In this manner, the audience enjoys the process of figuring things out for itself.  Since we are obligated to illustrate our structure, however, we better make sure that by the end of the story, the audience has enough pieces to get the point. 
 
 For each kind of Static Appreciation author's have created many original way in which they might be woven into a scene through action, dialogue, visuals, even changing the color of type in a book.  We suggest making a list of all your story points and then peppering them into your scenes in the most interesting and non-cliché manner you can.  Even if you aren't overly clever about some of them, at least the structure has been served. 
-
-231. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -125,8 +115,6 @@ Putting all this together, we have eight introductions, eight dismissals, and fo
 Now, you don't have to do this.  It's just one simple way of getting the whole job done.  In keeping with this kind of approach, you might choose to touch on theme in each of the scenes, and explore at least one aspect of a Static Appreciation in every scene as well.  This would certainly make sure the entire structure was related.  But it also runs the risk of creating a monotone feel to your story. 
 
 Loading up one scene with many story points, then clearing the boards to concentrate on only one, can liven up the party.  In addition, all of this has been based on an assumption of one Signpost or Journey per Storyweaving scene.  Although that is the simple way to Storyweave, there are many more ways to convey the structure of a story. Let's take a look at some of them. 
-
-232. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -150,8 +138,6 @@ Red herrings are designed to make something appear more or less important than i
 
 Reversals change context.  In other words, part of the meaning of anything we consider is due to its environment.  The phrase, _guilt by association_ , expresses this notion.  In Storyweaving, we can play upon audience empathy and sympathy by making it like or dislike something, only to have it find out it was mistaken.  There is an old Mickey Mouse cartoon called Mickey's Trailer which exemplifies this nicely.  The story opens with Mickey stepping from his house in the country with blue skies and white 
 
-233. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 clouds.  He yawns, stretches, then pushes a button on the house.  All at once, the lawn roll up, the fence folds in and the house becomes a trailer.  Then, the sky and clouds fold up revealing the trailer is actually parked in a junkyard.  Certainly a reversal from our original understanding. 
@@ -170,8 +156,6 @@ In this technique, things not only appear more or less important, but actually b
 
 There is often a difference between what an audience expects and what logically must happen.  A prime example occurs in the Laurel and Hardy film, The Music Box. Stan and Ollie are piano movers.  The setup is their efforts to get a piano up a quarter mile flight of stairs to a hillside house.  Every time they get to the top, one way or another it slides down to the bottom again.  Finally, they get it up there only to discover the address is on the second floor!  So, they rig a block and tackle and begin to hoist the piano up to the second floor window.  The winch strains, the rope frays, the piano sways.  And just when they get the piano up to the window, they push it inside without incident. 
 
-234. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 After the audience has been conditioned by the multiple efforts to get the piano up the stairs, pushing it in the window without mishap has the audience rolling in the aisles, as they say. 
@@ -188,8 +172,6 @@ There is a big difference between flashbacks where a character reminisces and fl
 
 In the motion picture and book of Interview With The Vampire, the story is a structural flashback, as we are really concerned with how Louis will react once he has finished relating these events from his past.  In contrast, in Remains Of The Day, the story is presented out of sequence for the purpose of comparing aspects of the characters lives in ways only the audience can appreciate.  Even Pulp Fiction employs that technique once the cat is out of the bag that things are not in order.  From that point forward, we are looking for part of the author's message to be _outside_ the structure, in the realm of storytelling. 
 
-235. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Technique Wrap-up** 
@@ -197,8 +179,6 @@ In the motion picture and book of Interview With The Vampire, the story is a str
 As long as the audience is able to discern the story's structure by the time it is over, the underlying argument will be clear.  Beyond that, there is no law that says if, when, or in what combinations these Storyweaving techniques can be brought into play.  That is part of the art of storytelling, and as such is best left to the muse. 
 
 The one area we have not yet explored is the impact medium and format have on Storyweaving techniques.  Not to leave a stone un-turned, Dramatica has a few tips for several of these. 
-
-236. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -219,8 +199,6 @@ In the case of a single-Class story, the argument appears one-sided, and indeed 
 ## **Ultra-Short Stories** 
 
 When writing VERY short stories, these two methods of "paring down" the information are often combined, resulting in a loss of perspective AND detail.  So how small can a story be and still be a story?  The minimal story consists of four dramatic units in a quad.  This is the tiniest story that can create an interference pattern between the flow of space and time, encoding both reason and emotion in a way than can be decoded by an audience.  However, ANY quad will do, which leads to a great number of minimal stories. 
-
-237. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -246,8 +224,6 @@ A solution to this growing inflexibility is to change the formula after a few "e
 
 To further break up the routine, occasional stories can focus on one of the Overall 
 
-238. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Story Characters as Protagonist and Main Character in his own story, without the other cast members.  For this episode only, a whole new ensemble is assembled as if it were a story independent of the series.  Obviously, too much of this weakens the mythic lore, so this technique should be used sparingly. 
@@ -266,8 +242,6 @@ Conventions have been established that often follow the order indicated above. E
 
 Some feel this kind of formula is a good pattern to establish because the audience becomes comfortable with the flow.  Sometimes this is true, but unless the Character, Theme, and Throughline of each episode varies the audience will wind up getting bored instead.  More interesting approaches vary which function of the Dramatic Circuit comes first and jumble up the order of the others as well.  Starting with an Outcome and showing how it builds to a Potential, then leaving that Potential open at the end of the story can make plots seem inspired.  Many a notable comedy series has its occasional bittersweet ending where all the pieces don't come together. 
 
-239. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Theme in Episodic Series** 
@@ -281,8 +255,6 @@ To involve the audience emotionally, the theme of each episode must be distinct,
 ## **Genre in Episodic Series** 
 
 Series can be comedies, action stories, love stories — whatever.  The key point to consider is that Dramatica Throughlines work in any Genre.  To keep a "high" concept from bottoming out, rotate through the Throughlines, using a different one each week. There are only four Throughlines:  a Situation, an Activity, a Manner of Thinking and a State of Mind.  A Situation Comedy (Situation) is quite different from a Comedy of Errors (a Manner of Thinking).  Whatever Genre the series is cast in, bouncing the episodes through the Throughlines keeps the Genre fresh.  In addition, jumping among genres from time to time can spice up the flavor of a series that has begun to seem like leftovers from the same meal, week to week. 
-
-240. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -308,8 +280,6 @@ Other than subplots, Multi-Story Series can contain several stories that are not
 
 Perhaps the most complex form of the Multi-Story Ensemble Series is when both 
 
-241. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 subplots and separate stories are employed.   Often, the subplots and the separate stories both use the principal story's characters as well as characters that do not come into play in the principal story. 
@@ -320,8 +290,6 @@ An over-abundance of storytelling becomes difficult to conclude within the limit
 
 Obviously, a lot of cross-dynamics can be going on here.  It is the author's job as storyteller to make sure the audience is aware at all times as to which story or subplot they are seeing and what the character's roles are in each context.  This is essential, since no internal storyform is controlling all of the independent stories.  They are held together here only by the connective tissue of storytelling. 
 
-242. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Tips for Novels**_ 
@@ -331,8 +299,6 @@ Novels, like all forms of prose, employ "stretchy time" where (unlike plays) ind
 More than most formats, the author can meander in a novel without losing his audience.  This is a wonderful opportunity to explore areas of personal interest, develop a particularly intriguing character, harp on a message or engage in a fantasy in public. 
 
 Of course, if you intend to tell an actual story in your novel, then the storyform has to be in there somewhere.  However, with stretchy time in effect, time is not of the essence and one can afford to stray from the path and play in the fields on the way to Grandmother's house. 
-
-243. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -355,8 +321,6 @@ Each of the characters must be introduced before the three interactions occur, a
 The introduction of characters is so well known that it is often forgotten by the author.  A character's intrinsic nature must be illustrated _before_ he interacts with any of the Overall Story Characters.  This is so basic that half the time it doesn't happen and the story suffers right from the start.  (Keep in mind that an author can use storytelling to "fool" his audience into believing a character has a given nature, only to find out it made assumptions based on too little information in the wrong context.) 
 
 Introductions can be on-camera or off.  They can be in conversation about a character, reading a letter that character wrote, seeing the way they decorate their apartment — anything that describes their natures. 
-
-244. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -382,8 +346,6 @@ As authors, how can we represent a character's point of view in a scene without 
 
 Other techniques might use an answering machine message, a letter, diary or video interview from the character in question that is examined in the course of a scene. Many current stories use a murder victim's videotaped will to include him in scenes involving his money-grubbing heirs.  More subtle but potentially even more effective is for one character to examine the apartment, studio, or other habitat of a missing charac- 
 
-245. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ter and draw conclusions based on the personality expressed in the furnishings and artifacts there.  Even the lingering effect of processes a character started before he left, or other characters' memories of the missing character can position him in the midst of intense dramatic interchanges without his actual attendance. 
@@ -404,8 +366,6 @@ When we employ the hand-off, we actually create two players to represent the sam
 
 Most often, one of the players will be a _major_ player and the other just a "plot device" player of convenience who appears for one scene and is never heard from again.  Such players just fill in the gaps.  Sometimes, both players prove intriguing to the author and each becomes a major player.  The difficulty then arises that at the climax of the story, both players might still be alive and kicking and therefore suddenly converge in an awkward moment.  No matter what you do, it's going to be klunky.  Still, if you must have both present, it's best to either make a statement in the story that they have the same characteristic(s), thereby binding them in the mind of the audience, or deal with them one after another. 
 
-246. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 A special case exists when (for whatever reason) an author decides to terminate a player from the story.  This can be a result of sending the player to its death, to the Moon or just having it leave at some point and not return.  Often, this technique is used to shock an audience or throw them a red herring.  Unless the functions represented by the discontinued player reappear in another player, however, part of the story's argument will disappear at the point the original drops out.  In the attempt to surprise an audience by killing off a major player, many an author has doomed an otherwise functional storyform. 
@@ -413,8 +373,6 @@ A special case exists when (for whatever reason) an author decides to terminate 
 There are two primary ways in which a discontinued player's functions can continue without him.  Certainly the easiest is to bring in a new player who is dramatically identical to the first, although its personal attributes are usually quite different.  Often the storytelling requirements of a plot deem one player more suited to part of a story and another player to be more in line with the rest.  By killing off the first player but continuing its dramatic function through a new player, both purposes can be served to the best storytelling effect without a loss of dramatic continuity.  The major caveat is that the audience must be made aware that this "dead hand-off" has occurred so it does not suddenly sense a vacuum in the story's argument.  This may require a fair amount of introduction to solidly place the new player in the old role. 
 
 The second technique for replacing a player yet continuing the character's functions is to divide the functions among several new players, each representing only a portion of what had previously been contained in one.  Naturally, these new players would be less complex than their predecessor, which may diminish nuance at certain levels of the story.  On the plus side, this method scatters the functions into new bodies, allowing for external conflicts between functions that were previously blended into a single individual.  Once again, informing the audience of who got what is essential to the smooth progression of this type of hand-off. 
-
-247. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -436,8 +394,6 @@ You are reading this book because you want to use the Dramatica theory and/or so
 
 A primary question then becomes: to whom do you intend to communicate?  You might simply wish to communicate to yourself.  You may be documenting transient feelings that you wish to recall vividly in the future.  Or you may want to capture the 
 
-248. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 temporal ramblings of your chain of thought and then stand back to see what pattern it makes.  Self-searching is often a primary objective of an author's endeavor. 
@@ -453,8 +409,6 @@ The audience can thus range from writing for yourself to writing for the world. 
 ## **Dramatica and Communication Theory** 
 
 Exploring all avenues of communication is far beyond the scope of this initial implementation of the Dramatica Theory.  To be sure, Dramatica (as a model of the mind) has much to offer in many diverse areas.  However, for the practical purposes of this software product, we cannot cover that much ground.  Rather, we will briefly touch on major perspectives in the author/audience relationship that can also serve as templates for translation of the Grand Argument Story perspective into valuable tools for other forms of communication.  In this manner, the usefulness of this specific software implementation can extend beyond its immediate purpose.  (What does this say about OUR intended audience?) 
-
-249. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -476,8 +430,6 @@ A wise woman once said, "Don't tell me what you'd do if you were me.  If you wer
 
 Another purpose in writing for oneself is simply to document what it was like to be in a particular state of mind.  In a sense, we jot down the settings of our minds so that we can tune ourselves back into that state as needed at a later date.  The images we use may have meaning for no one but ourselves, and therefore speak to us uniquely of all people.  The ability to capture a mood is extremely useful when later trying to communicate that mood to others.  To bring emotional realism to another requires being in the mood oneself.  What better intuitive tool than emotional snapshots one can count on to 
 
-250. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 regenerate just the feelings one wants to convey.  To make an argument, _accept_ the argument.  To create a feeling, _experience_ the feeling. 
@@ -491,8 +443,6 @@ In life, we assume one point of view at a time.  In stories, however, we can jux
 ## **My "Me" is Not Your "Me"** 
 
 When writing for others, if we _assume_ they share our point of view, it is likely that we will miss making half of our own point.  Far better are our chances of successful communication if we not only see things from our side but theirs as well. Overlaying the two views can define areas of potential misunderstanding before damage is done.  Still, "Call me when you get home" is usually a relatively low-risk communication and we suggest you just write the note without too much soul-searching. 
-
-251. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -518,8 +468,6 @@ What makes storytelling appropriate?  The fact that the symbols used to encode t
 
 Identifying with one's audience is not enough:  one must also _identify_ one's audience.  It is all well and good to feel part of the group.  But it can be a real danger to assume that identification with a group leads to clear communication in appropriate symbols or clear reception by all audience members. 
 
-252. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**A Quick Lesson in Propaganda**_ 
@@ -539,8 +487,6 @@ The human mind seeks to understand itself and the world around it.  It does this
 In its most basic form, propaganda is a way for authors to have an audience share their point of view.  Closed (or complete) stories allow authors to present their points of view in the form of an argument which the audience can then take or leave.  Open (or incomplete) stories require their audiences to supply the missing pieces in order to get meaning from the story.  Just creating an open story, however, does not create propaganda.  There must be a pattern to what is missing . 
 
 The amount and nature of the missing pieces have a tremendous effect on the story's propagandistic impact.  If you leave too much out of your story, an audience may not make the effort to "fill-in-the-blanks."  The story may then be interpreted by the audience as meaningless.  If, however, you selectively leave out specific pieces of the storyform, the audience may unknowingly fill in those holes with aspects of its personal 
-
-253. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -576,8 +522,6 @@ How you want to impact your audience?  Do you wish to play with your audience's:
 
 Pick only one as the area of primary impact.  This will become the area of the storyform that you purposefully omit when storytelling.  The remaining three areas will be used to support your intent by drawing attention away from the missing piece(s). 
 
-254. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **2. Area of Impact** 
@@ -606,8 +550,6 @@ The more general you make the propaganda, the less specific but all-pervasive it
 
 General propaganda is achieved by intentionally not encoding entire areas of the story's structure or dynamics.  For example, by leaving out almost all forms of the story's internal means of evaluation, Natural Born Killers forces its audience to focus on the methodologies involved and question its own (the members of the audience) means of evaluation. 
 
-255. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **4. Degree of Impact** 
@@ -626,8 +568,6 @@ _The Crying Game_ used a slightly different process to achieve a similar impact.
 
 Another method is to be up-front about the nature of the propaganda, letting your audience know what you are doing as you do it to them.  This impacts an audience at a Contemplation [Conscious] level where they must actively consider the pros and cons of 
 
-256. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 the issues.  The propaganda comes from controlling the givens on the issues being discussed, while the audience focuses on which side of the issues they believe in. 
@@ -643,8 +583,6 @@ The nature of the propaganda, however, is that the story lacks context, which mu
 In Conditioning propaganda, audience attention is directed to causal relationships like _When A also B_ (spatial), and _If C then D_ (temporal).  The mechanism of this propaganda is to leave out a part of the causal relationships in the story, such as _When A also B_ and _If ?? then D_ .  By leaving out one part, the objective contextual meaning is then supplied automatically by the audience.  The audience will replace _??_ with something from its own experience base, not consciously considering that a piece is missing because it will have emotionally arrived at the contradiction: _When A also B and then D._ 
 
 This type of propaganda is closest to the _traditional_ usage of the term with respect to stories, entertainment, and advertising.  For example, look at much of the tobacco and alcohol print advertising.  Frequently the Main Character (the type of person to whom the advertisement is supposed to appeal) is attractive, has someone attractive with them, and appears to be well situated in life.  The _inference_ is that when you smoke or drink, you are also cool, and if you are cool then you will be rich and attractive.  The connection between "cool" and "rich and attractive" is not really in the advertisement but an audience often makes that connection for itself.  In Conditioning propaganda, more than in the other three forms of propaganda, the degree of impact on your audience is extremely dependent on your audience's life experience outside the story experience . 
-
-257. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -662,8 +600,6 @@ Let's look at some dynamic pairs of partners that appear in a storyform.  The fo
 
 Motivation <–> Purpose Means of <–> Methodology Evaluation 
 
-258. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Should you wish to impact your audience's motivations, omit a particular motivation in the story .  The audience, then, focused on the purpose they can see will automatically supply a motivation that seems viable to them (e.g.: _Thelma and Louise_ ). 
@@ -679,8 +615,6 @@ Combining a _nature_ with a _perspective_ gives an author greater control over a
 Propaganda is powerful but using it involves risks.  It is like a virus or engaging in germ warfare.  Once an audience is exposed to a propagandistic message, the only way they can neutralize it is to balance it with an equal but opposite force.  Audiences frequently don't like to think they are being manipulated.  If the audience becomes aware of the nature of your propaganda, the equal but opposite force can take the form of a backlash against the author(s) and the propaganda itself.  Look at the strong reaction against advertisers who "target" their advertising to specific demographic groups (e.g. African Americans, women, Generation X, etc.), particularly if they are trying to sell liquor, tobacco products, or other items considered "vices" in America. 
 
 Once released, propaganda is difficult to control and frequently becomes subject to real world influences.  Sometimes propaganda can benefit from real world coincidences: The China Syndrome's mild propaganda about the dangers of nuclear power plants got a big boost in affecting its audience because of the Three Mile Island incident; the media coverage of the O.J. Simpson murder case may not have tainted potential jurors, but Natural Born Killers' propaganda against the media's sensationalization of violence got a little extra juice added to its punch.  Often real life or the passage of time can undermine the effectiveness of propaganda:  it is possible that Reefer Madness may have been effective when it first came out, but audiences today find its propaganda against drug use obvious, simplistic, risible and, more importantly, ineffective. 
-
-259. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -701,8 +635,6 @@ The answer lies with the media themselves.  Every medium has its own strengths a
 In each case, indirect means must be employed to accomplish what might be directly communicated in the other medium.  To successfully adapt a work, an author must determine what to add or remove in order to achieve the same effect as the original medium. 
 
 It would seem that adaptations will always fail to capture some aspect of the original, either in substance or essence.  That is true, but it does not have to be a fatal problem. An audience tends to regard certain aspects of a story as being essential.  As long as an adaptation retains and/or recreates those essential elements, the audience will find 
-
-260. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -726,8 +658,6 @@ A good example of this can be seen by comparing Romeo and Juliet to West Side St
 
 An example of a poor adaptation that failed at the storyforming level was the transla- 
 
-261. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 tion of A Christmas Carol into the motion picture Scrooged, starring Bill Murray. 
@@ -748,8 +678,6 @@ Encoding is the first stage that is open to authors' interpretation.  As such, i
 
 It is important to note that when delving into this much detail, it is easy to miss the forest for the trees.  For example, if we elected to change "stolen diamonds" to "stolen 
 
-262. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 gold" but still had our Main Character working for De Beers, we might have created a problem. 
@@ -768,8 +696,6 @@ Make sure you examine the manner in which the audience is let in on the secrets 
 
 Unless you strive to maintain the original's personality, much of the charm may be lost in the translation.  A recent example of this kind of mistake occurred in bringing The Beverly Hillbillies to the big screen.  In the original series, the storyweaving personality 
 
-263. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 was much like a British comedy of manners in which the cultured and proper are forced by circumstances to accommodate unsophisticated bumpkins.  Enter Politically Correct storyweaving.  Suddenly, the focus of comedy shifts from manners to physical comedy. 
@@ -787,8 +713,6 @@ In addition, there is really no such thing as an audience, except when defined a
 Part of the adapter's job is to identify the audience.  An equally important job is to identify _with_ the audience.  This puts a burden on the author of an adaptation that the author of an original work usually does not share. 
 
 When creating an original story, one often has the luxury of writing whatever one wants, and then hoping the finished piece finds its audience.  In contrast, the adept adapter must consider the full spectrum of the _new_ audience.  Usually, if a work is being 
-
-264. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -813,7 +737,5 @@ Adaptation is no simple task.  It requires familiarity with both the logistics a
 - **--  Story Reception:** Determine the prior knowledge and expectations of your audience. 
 
 In conclusion, and above all, to your new audience be true, for then how canst thee be false to the original? 
-
-265. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved

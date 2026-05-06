@@ -15,6 +15,28 @@ The eight quintessential character arrangements. Each Archetype carries a fixed 
 
 ---
 
+## Archetype (concept)
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.archetype
+kind: concept
+canonical_label: Archetype
+provenance: source-original
+aliases_en:
+- archetype
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
+- novel.dual-storyform
+```
+
+
+*Type: Concept*
+
+Meta-entry for the Archetype kind itself. The eight quintessential character arrangements (Antagonist, Contagonist, Emotion, Guardian, Protagonist, Reason, Sidekick, Skeptic) listed below each carry a fixed motivation Element pair. See ST-3 partition note: this heading reifies the `concept.archetype` ontology pointer that previously aimed at `#contents` (a TOC, not a term).
+
+---
+
 ## Antagonist
 <!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
 ```yaml
@@ -22,9 +44,14 @@ id: arc.antagonist
 kind: archetype
 canonical_label: Antagonist
 provenance: source-original
+aliases_de:
+- Antagonist
+aliases_en:
+- antagonist
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- novel.crucial-element-audit
 ```
 
 
@@ -48,9 +75,15 @@ id: arc.contagonist
 kind: archetype
 canonical_label: Contagonist
 provenance: source-original
+aliases_de:
+- Gegenmittel
+- Kontagonist
+aliases_en:
+- contagonist
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- lyric.refrain-as-restatement
 ```
 
 
@@ -99,9 +132,14 @@ id: arc.emotion
 kind: archetype
 canonical_label: Emotion
 provenance: source-original
+aliases_de:
+- Emotion
+aliases_en:
+- emotion
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- lyric.refrain-as-restatement
 ```
 
 
@@ -133,9 +171,15 @@ id: arc.guardian
 kind: archetype
 canonical_label: Guardian
 provenance: source-original
+aliases_de:
+- Beschützer
+- Hüter
+aliases_en:
+- guardian
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- lyric.refrain-as-restatement
 ```
 
 
@@ -166,20 +210,20 @@ id: arc.protagonist
 kind: archetype
 canonical_label: Protagonist
 provenance: source-original
+aliases_de:
+- Protagonist
+aliases_en:
+- protagonist
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- novel.crucial-element-audit
 ```
 
 
 *Type: Archetype*
 
 ### Archetype
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-37.
-
 An Overall Story Character charged with the responsibility of pursuing a solution to the story's Overall
 (Objective) problem. An Overall (Objective) problem
 does not mean it can't be personal. Rather, it means
@@ -214,9 +258,14 @@ id: arc.reason
 kind: archetype
 canonical_label: Reason
 provenance: source-original
+aliases_de:
+- Vernunft
+aliases_en:
+- reason
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- lyric.refrain-as-restatement
 ```
 
 
@@ -277,9 +326,15 @@ id: arc.sidekick
 kind: archetype
 canonical_label: Sidekick
 provenance: source-original
+aliases_de:
+- Begleiter
+- Gefährte
+aliases_en:
+- sidekick
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 
@@ -313,9 +368,15 @@ id: arc.skeptic
 kind: archetype
 canonical_label: Skeptic
 provenance: source-original
+aliases_de:
+- Skeptiker
+- Zweifler
+aliases_en:
+- skeptic
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 

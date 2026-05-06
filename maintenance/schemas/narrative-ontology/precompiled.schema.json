@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agency.local/schemas/narrative-ontology/precompiled.schema.json",
+  "title": "Narrative Ontology — Precompiled Persona-Scenario Bundle",
+  "description": "One denormalised JSON projection per persona scenario. Authored by tools/dramatica-nav/precompile.py from ontology.json + scenarios.json. Carries the entries tagged with the scenario, partitioned by ontology kind (terms / quads / pairs), with optional one-paragraph encoding hints synthesised from the prose section. Read by consumers (novel-architect, ncp-author) when answering scenario-keyed questions; emits a smaller token surface than calling nav.py by-scenario + extract.py.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "scenario_id",
+    "scenario_summary",
+    "persona",
+    "generated_from_ontology_version",
+    "generated_at",
+    "primary_terms",
+    "primary_quads",
+    "primary_pairs",
+    "consumer_hints"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Version of THIS schema (precompiled.schema.json), independent from ontology.schema.json. Bump on breaking changes."
+    },
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^(novel|lyric)\\.[a-z0-9][a-z0-9-]*$",
+      "description": "Persona-scenario identifier. Mirrors scenarios.json's id field."
+    },
+    "scenario_summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Copied verbatim from scenarios.json so consumers don't need to load that file."
+    },
+    "persona": {
+      "enum": ["novel", "lyric"],
+      "description": "Mirrors scenarios.json's persona field."
+    },
+    "generated_from_ontology_version": {
+      "type": "string",
+      "description": "Value of ontology.json's ontology_version at emission time. Lets consumers detect drift."
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "ISO-8601 date when this artefact was last emitted."
+    },
+    "primary_terms": {
+      "type": "array",
+      "description": "Element / Variation / Type / Concept / Archetype / Class / Throughline / Storypoint / Character-dynamic / Plot-dynamic / Signpost-slot entries tagged with this scenario. NOT quads or dynamic-pair standalone entries — those have their own arrays.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "canonical_label", "kind", "term_file"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z-]*\\.[a-z0-9][a-z0-9-]*$"
+          },
+          "canonical_label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "kind": {
+            "enum": [
+              "class", "type", "variation", "element", "archetype",
+              "character-dynamic", "plot-dynamic", "storypoint",
+              "signpost-slot", "throughline", "concept"
+            ]
+          },
+          "dynamic_pair_id": {
+            "type": ["string", "null"],
+            "pattern": "^[a-z][a-z-]*\\.[a-z0-9][a-z0-9-]*$"
+          },
+          "quad_id": {
+            "type": ["string", "null"],
+            "pattern": "^quad\\.[a-z0-9][a-z0-9-]*$"
+          },
+          "ktad_position": {
+            "enum": ["K", "T", "A", "D", null]
+          },
+          "encoding_hint": {
+            "type": ["string", "null"],
+            "maxLength": 600,
+            "description": "Optional synthesised encoding hint (<=2 sentences after the opening definition paragraph). null when extract returns nothing usable. MUST NOT quote >1 line of source prose verbatim."
+          },
+          "ncp_appreciation": {
+            "type": ["string", "null"],
+            "minLength": 1
+          },
+          "term_file": {
+            "type": "string",
+            "pattern": "^skills/(dramatica-vocabulary|dramatica-theory)/references/[a-z0-9_.-]+\\.md(#.+)?$"
+          }
+        }
+      }
+    },
+    "primary_quads": {
+      "type": "array",
+      "description": "Quad entries tagged with this scenario.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "canonical_label"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^quad\\.[a-z0-9][a-z0-9-]*$"
+          },
+          "canonical_label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "term_file": {
+            "type": ["string", "null"],
+            "pattern": "^skills/(dramatica-vocabulary|dramatica-theory)/references/[a-z0-9_.-]+\\.md(#.+)?$"
+          }
+        }
+      }
+    },
+    "primary_pairs": {
+      "type": "array",
+      "description": "Standalone dynamic-pair (kind=dynamic-pair) entries tagged with this scenario.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "canonical_label", "pair_member_a", "pair_member_b"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z-]*\\.[a-z0-9][a-z0-9-]*$"
+          },
+          "canonical_label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "pair_member_a": {
+            "type": "string",
+            "pattern": "^[a-z][a-z-]*\\.[a-z0-9][a-z0-9-]*$"
+          },
+          "pair_member_b": {
+            "type": "string",
+            "pattern": "^[a-z][a-z-]*\\.[a-z0-9][a-z0-9-]*$"
+          },
+          "term_file": {
+            "type": ["string", "null"],
+            "pattern": "^skills/(dramatica-vocabulary|dramatica-theory)/references/[a-z0-9_.-]+\\.md(#.+)?$"
+          }
+        }
+      }
+    },
+    "consumer_hints": {
+      "type": "object",
+      "description": "Per-consumer guidance keyed by skill name. Depth-1 only. Values are short prose strings (<=300 chars).",
+      "additionalProperties": false,
+      "properties": {
+        "novel-architect": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "ncp-author": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        }
+      },
+      "required": ["novel-architect", "ncp-author"]
+    }
+  }
+}

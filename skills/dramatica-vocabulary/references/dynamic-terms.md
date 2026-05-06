@@ -58,8 +58,6 @@ story in ways other than conflict.
 
 www.dramatica.com -- www.screenplay.com
 
-35.
-
 threatened, or anticipated dramatic interactions that
 shape the fabric of a story in ways other than conflict.
 
@@ -96,8 +94,6 @@ Potential, Resistance
 ### Dynamic Term
 
 www.dramatica.com -- www.screenplay.com
-
-50.
 
 Closure
 

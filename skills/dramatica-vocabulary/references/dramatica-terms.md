@@ -49,11 +49,6 @@ possible ways the story could be resolved from all the
 possible perspectives allowed; these are represented
 by the perspectives created by matching the four
 Throughlines with the four Classes—(the Overall Story,
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-20.
-
 Main vs. Impact Story, Main Character, and Impact
 Character Throughlines matched up with the Classes
 of Situation (Universe), Activities (Physics), Manipulation (Psychology), and Fixed Attitudes (Mind) to create
@@ -146,11 +141,6 @@ events, and scenarios— There are four stages in the
 process of communication from author to audience.
 They are: Storyforming, Storytelling, Storyweaving, and
 Story Reception. Storyforming establishes the underly-
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-44.
-
 ing dramatic structure of a story. Storytelling turns raw
 story points into specific scenarios, events, and dialog.
 Storyweaving determines how the illustrated story

@@ -59,8 +59,6 @@ Through Mental Relativity, insights are provided not only into story, but many o
 
 - -- Quantum Physics:  The mathematical equations and formulas by which the model operates hold meaning in regard to the Uncertainty 
 
-266. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Principle, Tendency Theory, Synchronicity, and the connection between packets of energy and particles of mass. 
@@ -72,8 +70,6 @@ Principle, Tendency Theory, Synchronicity, and the connection between packets of
 - -- Astrophysics:  Black holes and Quasars can be modeled in great detail using the same processes that describe the mental acceptance of givens in relationship to spontaneous creative thought. 
 
 Obviously many of these potential applications have not been fully developed.  Some are only the promise of a theory that describes the mind's pattern making process.  It is our hope that others more versed in these disciplines than ourselves will see the potential as implemented in Dramatica and apply it to their specific areas of interest. 
-
-267. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -97,8 +93,6 @@ As a starting point, Dramatica denotes a difference between a Tale and a Story. 
 
 To gain an audience's acceptance, an argument (Story) must appeal to both logic and feeling.  To make the logical part of this argument, all the _inappropriate_[1] ways a 
 
-268. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 problem might be approached need to be addressed and shown to fail.  Each one must be given its due and shown not to work, except the one touted by the author.  This is accomplished by looking at the characters and the plot objectively, much like a general on a hill watching a battle down below.  The big picture gives a clear view of  the scope of the battle and the ramifications of the individual soldiers' actions and decisions. 
@@ -119,8 +113,6 @@ The Overall Story problem is clearly shown to be caused by the relationship of O
 
 If Order is seen as the problem, then Chaos would be the solution.  This is vaguely alluded to in Jurassic Park when the Tyrannosaurus comes in unexpectedly and wipes 
 
-269. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 out the Raptors, unknowingly saving the humans.  Although the point is not strongly stated, it is _sort of_ there in the background.  We will come back to this point later to show how it should have been a much more dramatically integral event than it was. The important concept at the moment is that as far as it goes, the Overall Story is fairly close to what it should be, which is true of most action-oriented stories. 
@@ -138,8 +130,6 @@ Why is it so important to set up the nature of the problem so early?  Well, one 
 Just stating that Dr. Grant shares the same problem as the story is not enough.  The relationship between his view of the problem and the Overall Story view of the problem is what explores the concept, makes the argument, and allows the Main Character to grow.  Ultimately, it is the differential between the two views of the problem that brings a Changing (versus Steadfast) Main Character to suspect the error of his ways and make a positive leap of faith.  He sees the problem outside himself, then finds it inside himself. He changes the inside, and the outside is forced to follow suit. 
 
 What does this mean for Jurassic Park?  As it is, Doctor Grant's attitude toward John Hammond's ability to control the dinosaurs is one of skepticism, but not because of 
-
-270. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -196,8 +186,6 @@ I assure you, even a T-Rex re-
 spects 10,000 volts!
 ```
 
-271. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## `GRANT` 
@@ -236,8 +224,6 @@ As it stands, Dr. Grant simply learns to care about the children.  But what has 
 
 Perhaps the most disappointing aspect of the Subjective Storyline is the meaningless manner in which they escape in the end.  Grant and the kids are sealed in the 
 
-272. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 control room, but the Raptors are right outside.  The girl struggles to get the computer up so they can get the door locked.  This of course, merely delays the Raptors until the helpless humans can escape into another Raptor attack.  Then out of nowhere, T-Rex conveniently barges in, kills the Raptors and allows the humans to escape?  Why?  Why _then_ ?  Was T-Rex just waiting in the wings for his cue? 
@@ -254,8 +240,6 @@ Why would Grant do this?  His argument for Order was based on logic.  Over the c
 
 Now, how do we convey all Grant's considerations to the audience so that it will understand all of this?  Simple!  First we see briefly see the computer display showing the power going off around the various compounds, including that of our old friend, T- Rex.  Just as before, the Raptors break in, the humans escape onto the dino skeletons. NOW, when T-Rex charged in to save the day, it is solely because of Dr. Grant's deci- 
 
-273. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 sion to cut the power to the fence that was holding him in.  Indeed, Grant's invitation to Chaos has saved them. 
@@ -265,8 +249,6 @@ Having learned his lesson about the benefits of Chaos and the folly of Order, Gr
 Equilibrium is established on the island, Grant suddenly loves kids, he gets the girl, they escape with their lives, and all because the crucial element of Order connected both the Overall Story and Subjective throughlines. 
 
 Certainly, Dramatica has many more suggestions for Building a Better Dinosaur, but, leapin' lizards, that's enough for an introduction to the theory! 
-
-274. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -291,8 +273,6 @@ The types of items which will be noted in the Vocabulary references include:
 ## _**[Classes]**_ 
 
 The 4 basic areas a story can affect (Situation (Universe), Activity (Physics), Manipulation (Psychology), Mind). 
-
-275. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -330,8 +310,6 @@ Items relating to the thematic arenas to be emphasized in a particular Storyform
 
 A specific type of character reflecting one of eight quintessential arrangements of 64 Characteristics required to solve a story's problem. 
 
-276. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**[Dynamic Pairs]**_ 
@@ -358,8 +336,6 @@ Illustrating a storyform with the cultural signs and artistry that an author fee
 
 Combining the Storytelling of a story with its Storyform. 
 
-277. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**D r a m a t i c a  Vo c a b u l a r y**_ 
@@ -377,8 +353,6 @@ _[Element]_ -- _dyn.pr._ Desire<—>Ability -- being suited to handle a task; th
 - **Act --** [Structural Term] -- The largest sequential increments by which we can measure the progress of a story -- an Act is a noticeable division in the dramatic flow of a story which is created by the convergence of the elements of Character, Theme, and Plot.  This division has been noticed in studies of narrative dating back thousands of years, but never with the precision with which we see it in Dramatica.  A complete storyform contains all the thematic story points that will be explored in a story, the perspectives from which they will be explored, and the order in which they will be explored from those perspectives.  When a particular perspective has explored the nature of a Type by paying tribute to the Variations connected with it, that perspective has completed an act. Each perspective has its own throughline and there are four acts for every throughline, making up a complete storyform. 
 
 - **Action --** _[Plot Dynamic]_ -- in terms of the Overall Story plot, actions force decisions -- All stories have both Action and Decision, however one will take precedence over the other.  Typically, one defines an Action story as having more Action or more intense Action than a Decision 
-
-278. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -402,8 +376,6 @@ success.  When the Main Character's appraisal matches the reality of the situati
 
 - **Apparent Dilemma --** _[Overview Appreciation]_ -- The Main Character's decision to change results in failure -- Apparent Dilemma describes a story where the Main Character mistakenly believes he is on the wrong path. An Actual Dilemma story, by contrast, is one in which the Main Character's original path cannot lead to success.  If the Main Character Changes when only Remaining Steadfast 
 
-279. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 would have led to success, he is said to have been in an Apparent Dilemma. 
@@ -424,8 +396,6 @@ would have led to success, he is said to have been in an Apparent Dilemma.
 
 - **Attempt --** _[Variation]_ -- _dyn.pr._ Work<—>Attempt -- applying oneself to something not known to 
 
-280. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 be within one's ability -- When there is a question as to the match-up of one's abilities to the demands of a task, one may still elect to attempt to complete the task.  However, sometimes a character has lost sight of the purpose of the task or underestimated his progress and has actually done the work while continuing to try beyond the point originally aimed at.  Why does one beat a dead horse? Why does a billionaire struggle to earn one more million? -- _syn._ try, uncertain undertaking, speculative endeavor, dubious effort, endeavor, unlikely venture 
@@ -444,8 +414,6 @@ that the course of one, both or neither of them may be altered by the interactio
 
 - **Backstory --** _[Storytelling] --_ Although often embellished greatly in the storytelling, Backstory is nothing more than a description of how a Main Character's justification built up over time, leading him to intersect with the story's problem, or how a story problem developed over time, leading it to intersect with the Main Character.  Backstory outlines the sequence of events and the combination of forces that 
 
-281. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 make the Main Character the central connecting point between the subjective and Overall Story problem.  Backstory need not be presented to the audience as it is not essential to the story's argument about how to or how not to solve a problem.  However, inclusion of Backstory can offer the additional benefits of showing the audience how to avoid the problem before it becomes a problem.  Sometimes Backstory is presented at the beginning of storytelling, making it appear to be part of the story itself into which it can smoothly and seamlessly segue.  More often, Backstory is explored episodically in Flashbacks or through other forms of revelation.  Sometimes the focus of the storytelling is on the Backstory itself and the story is told episodically through flashforwards.  Even more complex implementations not only present Backstory episodically but also out of order, leaving it to the audience to ultimately put the pieces together and thereby solve a riddle necessary to solving the problem of the story itself. 
@@ -463,8 +431,6 @@ make the Main Character the central connecting point between the subjective and 
 - **Blind Spot --** _[Character Appreciation]_ -- The motivations of the Subjective Characters which they are unable to see about themselves -- Both the Main Character and the Impact Character (who stands in the Main Character's path) are driven by their particular motivations. In a story, each has a prime motivation that describes the one issue in each that they cannot see in themselves.  It is _because_ they cannot see it in themselves that it works below the level of their consciousness to motivate them.  Because they cannot see it, it is called a Blind Spot.  In a change character, the Blind Spot is the actual source of the problem common to both the Overall and Subjective stories.  In a steadfast character, the Blind Spot represents what drives him to become the agent of the common solution to both the Overall and Subjective stories.  In either case, although other characters may see it quite clearly in the Main and Impact Characters, neither Main nor Impact can see the Blind Spot in themselves. 
 
 - **Both --** _[Overview Appreciation]_ -- both women and men will tend to empathize with the main character in this story -- Although there is much common ground in a story that is appreciated equally by women and men, some dramatic messages speak to one group more profoundly than the other.  One particular area of difference is the relationship of female and male audience members to the Main Character.  In some stories an audience member will feel Empathy with the Main Character, as if he/she were standing in the Main Character's shoes. In other stories, an audience member will feel Sympathy, a less intense emotional attachment, for the Main Character as if the Main Character is a close acquaintance.  The dynamics that control this for women and men 
-
-282. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -488,8 +454,6 @@ are quite different.  "Both" indicates that, as a result of this storyform's dyn
 
 - **Changing One's Nature [Becoming] --** _[Type]_ -- _dyn.pr._ Playing A Role [Being]<—>Changing One's Nature [Becoming] -- transforming one's nature -- Changing One's Nature [Becoming] means achieving an identity with something. This is different from "being" which merely requires posing as something.  To become, one must do more than just pretend to be by mimicking all the traits of what one wants to become.  Rather, one must also lose all those parts of oneself that are inconsistent with what 
 
-283. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 one wants to become.  "Giving up" a part of oneself is always the hardest part of becoming and the reason so many characters spend a lot of time "being" without ever becoming -- _syn._ embodying, manifesting, personifying, incarnating, transforming 
@@ -505,8 +469,6 @@ in that they do double duty by having a special relationship with the audience a
 - **Choice --** _[Variation]_ -- _dyn.pr._ Delay<—>Choice - - making a decision -- Choice is simply a decision as to which is the best path toward resolving a problem.  A character will ponder all the information and factor in all his feelings and arrive at a decision.  Sometimes a character will choose before all the information is in.  This can lead him to take steps that may ultimately prove to be counter-productive or even selfdestructive.  On the other hand, such intuitive leaps can bypass a number of obstacles on the way to a story's conclusion.  Still, "snap judgments often lead to regrets for those whose only exercise is jumping to conclusions." — Dramatica fortune cookie -- _syn._ decision, selection, determination, pick 
 
 - **Circumstances --** _[Variation]_ -- _dyn.pr._ Situation<—>Circumstances -- the relationship of oneself to the environment -- Circumstances describes the way a character feels about his environment.  Whereas Situation is rated in terms of satisfaction, Circumstances are rated in terms of fulfillment.  Emotion, therefore, is the standard of measurement a character uses to evaluate his Circumstances.  Often a 
-
-284. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -528,8 +490,6 @@ _syn._ finishing, completion, resolution, recursive
 
 - **Conceiving An Idea --** _[Type]_ -- _dyn.pr._ Develop- 
 
-285. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ing A Plan [Conceptualizing]<—>Conceiving An Idea -- coming up with an idea -- Conceiving An Idea is the process of arriving at an idea.  If there were no artificial light in the world, one might conceive the need for some form of electric torch.  That would be conceiving.  But the design of an actual incandescent bulb versus a fluorescent one would require conceptualizing a specific implementation of the idea one has conceived. Conceiving An Idea need not come before conceptualizing.  For example, a common dramatic technique is to give a character a very clear mental image of an object or arrangement that holds the solution to the story's problem.  But the character does not know the solution lies in the conceptualization.  It is only when he finally conceives of the need for a particular kind of solution that he realizes he had the answer all along.  Simply put, Conceiving An Idea defines the question, Conceptualizing clarifies the answer -- _syn._ originating, inventing, devising, engendering, hatch ideas 
@@ -550,8 +510,6 @@ ing stories. -- _syn._ habituation, trained response, accustomed response, adapt
 
 - **Consequence (Overall Storyline) --** _[Type] --_ The area that best describes the result of failing to achieve the goal -- For every goal there is a consequence.  Consequence describes the results of failing to achieve the goal.  This predisposes the goal to be something desirable but this is not necessarily true.  Sometimes the difference between goal and consequence can be one of choosing the lesser of two evils. More optimistically put, goal and consequence might be measures of magnitude of two favorable outcomes.  Sometimes the Consequence will occur if the goal is not met, other 
 
-286. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 times the consequence already exists and can only be eliminated by meeting the goal.  So if they are close in their negative or positive value, it may be difficult to be sure which is the consequence and which is the goal.  An easy way to be certain is to see which one the Main Character hopes to achieve. 
@@ -570,8 +528,6 @@ relearn how to weigh an issue so his conclusions are less destructive to himself
 
 - **Critical Flaw --** _[Variation] --_ The Subjective Character trait that inhibits the  effectiveness of that Subjective Character's Unique Ability -- To balance the Main Character's extraordinary 
 
-287. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 status conveyed by his Unique Ability, he must also be shown to be especially vulnerable in one area as well.  This vulnerability is called his Critical Flaw.  The Main Character's Critical Flaw is his Achilles heel that prevents him from being too one-sided.  Just as with Unique Ability, the Critical Flaw can be quite mundane as long as it can threaten him with failure from an unprotectable direction.  The specific Critical Flaw must be unique to the Main Character in the story.  However, the more common the Critical Flaw is to the audience, the more it will identify with the Main Character's predicament. In Start stories, the Critical Flaw inhibits the Main Character from using his Unique Ability. In Stop stories, the Critical Flaw undoes the work done by the Unique Ability after the fact. Only when the Main Character learns to either Start or Stop as required by the story can the Critical Flaw be avoided, allowing his Unique Ability to solve the problem.  The Impact Character in any story also has a Unique Ability which makes him uniquely qualified to thwart the Main Character.  But in his character as well is a Critical Flaw which prevents him from just totally overwhelming the Main Character. This is again a trait which is unique to this particular character, but its effects are felt in a different area than the Main Character Critical Flaw because of the Impact Character's different purposes. 
@@ -587,8 +543,6 @@ ready motivation.  This is a useful tool for Authors since it allows for the sub
 - **Deduction --** _[Element]_ -- _dyn.pr._ Induction<— >Deduction -- a process of thought that determines certainty -- Deduction is the process of thought that arrives at a determination of what is by limiting out all that cannot be.  It has been said, "When you have ruled out the impossible, whatever is left, no matter how improbable, must be true."  The characteristic representing Deduction will arrive at conclusions by eliminating all competing theories that have holes until only one remains.  This is fine for cutting away the nonsense and discovering understanding, unless the competing theories were not all the available theories and the real answer was never even considered.  Also, Deduction often fails to look for situations in which alternative truths exist.  A famous story had a detective narrowing down murder suspects only to discover that they all did it! -- _syn._ drawing a conclusion, process of elimination, demonstrative reasoning, narrowing to a single point 
 
 - **Deficiency --** _[Variation]_ -- _dyn.pr._ Permission<— >Deficiency -- motivation based on lack -- When a character lacks something in the sense of having Deficiency, he may not even comprehend what he lacks.  But this lack drives him and fulfilling the lack would end the drive caused by the Deficiency.  Deficiency is closely related to Need, but where Needs are always defined by their context and the purpose which makes them seem necessary, Deficiency does not require a purpose.  When 
-
-288. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -608,8 +562,6 @@ _[Variation]_ -- _dyn.pr._ Ability<—>Desire -- the motivation to change one's 
 
 _[Element]_ -- dyn.pr _._ Ability<—>Desire -- the motivation to change one's situation or circumstances -- The Desire element is the essence of motivation.  A characteristic representing Desire is mindful of a future in which situation or circumstances are improved.  This does not mean that it is unhappy with what it has but rather that it can imagine something better.  On the plus side, Desire primes the characteristic to seek to better its environment or itself. On the minus side, Desire is not always coupled with an ability to achieve that which is Desired.  In this case, Desire may no longer be felt as a positive motivator but as a negative lack and may become a measurement of one's limitations and constraints -- _syn._ drive, motivational goal, unfulfillment, source of 
 
-289. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 discontent, essence of motivation -- 
@@ -627,8 +579,6 @@ house is.  A character that deals with conceptualizing would be well aware of th
 - **Dilemma --** The Main Character Changes -- A Dilemma story is one in which the Main Character believes his path cannot lead to success. In the end, when the Main Character Changes, he may or may not jump to the correct path so he may or may not succeed.  Either way, Dilemma describes a story where the Main Character Changes. 
 
 **Direction--** _[Character Dynamic]_ -- _See Growth_ **Direction (Overall Storyline)** -- _[Element]_ -- 
-
-290. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -656,8 +606,6 @@ tinue on an otherwise costly path
 
 - **Dream --** _[Variation]_ -- _dyn.pr._ Hope<—>Dream -- a desired future that requires unexpected developments -- Dream describes a character who speculates on a future that has not been ruled out, however unlikely.  Dreaming is full of "what ifs."  Cinderella Dreamed of her prince because it wasn't quite unimaginable.  One Dreams of winning the lottery even though one "hasn't got a hope."  Hope requires the expectation that something will happen if nothing goes wrong.  Dreaming has no such limitation. Nothing has to indicate that a Dream will come true, only that it's not impossible.  Dreaming can offer a positive future in the midst of 
 
-291. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 disaster.  It can also motivate one to try for things others scoff at.  Many revolutionary inventors have been labeled as Dreamers.  Still and all, to Dream takes away time from doing, and unless one strikes a balance and does the groundwork, one can Dream while hopes go out the window for lack of effort.  -- _syn._ aspire, desiring the unlikely, pulling for the doubtful, airy hope, glimmer, far fetched desire 
@@ -675,8 +623,6 @@ one puts all one's efforts into dealing with the Effect while ignoring the cause
 - **Element --** _[Structural Term]_ **--** There are 64 elements in each class.  The same 64 elements appear in every class, arranged differently by position.  Elements represent the most refined and highly detailed approaches and attitudes in the attempt to solve the story's problem.  Primarily, they are the building blocks of the characters.  To fully argue the thematic message, it must be addressed from all possible directions.  This is accomplished by making sure that all 64 elements are divided among a story's Overall Story characters.  If an element is not used it will leave a hole in the logic or emotion of the story.  If one is used more than once, it will obscure the point by showing it in two different incarnations.  The reason that elements are repeated from class to class is that they represent the heart of the problem.  When all else is stripped away, the problem must be evaluated by these same building blocks no matter where it was approached from.  The reason that the elements are arranged differently from class to class is that the way they are grouped depends upon the direction from which the story approaches them.  When the story is approached from a given class, it is like looking at the problem from a particular direction.  All the same elements are seen, but from a different point of view. 
 
 - **Emotion --** _[Archetype]_ **--** An Archetype who represents the motivations of Feeling and Uncontrolled -- The Emotional Archetypal Character reacts passionately to turns of events without considering the consequences or best course to achieve his purpose.  Frequently portrayed as a "screamer" or "big dumb ox" this character is really not stupid.  He actually represents feeling and frenzy.  So his nature is to feel deeply about issues but be unable to focus that heartfelt intensity in any useful direction.  Rather, he tends to go off the deep end and thrash out aimlessly, frequently to the detriment of himself and those around them.  Such a character can prove to be a Trojan horse by storytelling him into the 
-
-292. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -698,8 +644,6 @@ around.  By "robbing Peter to pay Paul" he might be moving resources back and fo
 
 - **Evidence --** _[Variation]_ -- _dyn.pr._ Suspicion<— >Evidence -- information supporting a belief -- Evidence is information one gathers to develop 
 
-293. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 an understanding about something.    When looking at Evidence, a character does not necessarily have to know exactly what he is looking for, just that the information pertains to the nature of what he is trying to learn about. As a result, he tends to examine the Evidence only in terms of whether or not it is something that falls into a pre-determined category. Therefore, errors can occur when the Evidence (although it pertains to the subject of interest) actually holds much more information in another area.  This can lead a character to "not see the forest for the trees" because he is looking at the small picture and ignoring the big one.  For example, in a mystery a detective may be looking for Evidence of who committed a murder, when in truth the victim died of natural causes which is clearly indicated if the detective had only thought to look for that -- _syn._ proof, indicator, supporting information, corroborating facts, grounds for belief, substantiation 
@@ -715,8 +659,6 @@ to social standing.  Expediency is as important an emotional motivation as Need 
 - **Fact --** _[Variation]_ -- _dyn.pr._ Fantasy<—>Fact -- belief in something real -- Fact is something that is truly real as opposed to just seeming to be real.  Of course, from a character's subjective view, when something seems to be real it is impossible to tell from actual fact.  No matter how strongly a belief, understanding, or knowledge of something is held, subjectively there is always the possibility some change in the situation or additional information will prove it to be unfactual.  Optical illusions are a good case in point.  The moment a character accepts something as fact is the moment a thematic conflict might begin to grow.  Nevertheless, Fact represents beliefs that turn out to be real. -- _syn._ belief in the genuine, ultimately real beliefs, truly real beliefs, authentic notion, authentic idea, correct knowledge, correct beliefs 
 
 **Failure --** _[Plot Dynamic]_ -- the original goal is not achieved -- Every overall story throughline in a Grand Argument Story has at its beginning a desired outcome to be sought after.  Ultimately, the characters will either achieve that outcome 
-
-294. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -736,8 +678,6 @@ ings that are not accurate.  Neither one can be consciously intentional or one w
 
 **Feeling --** _[Element]_ -- _dyn.pr._ Logic<—>Feeling - - an emotional sense of how things are going -- Feeling is the mental process of seeking the most fulfilling course or correct explanation based on emotion.  The Feeling characteristic believes "ya gotta have heart."  It cares not for what is efficient or even practical as long as it 
 
-295. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 is "feels" right.  This makes the Feeling characteristic very empathetic to the emotional atmosphere in a situation, yet apt to ignore or pay little attention to necessities -- _syn._ empathy, emotional sensibility, affective outlook, sentiment, emotional assessment 
@@ -751,8 +691,6 @@ what an audience expects to see which filters the message and dilutes the truth.
 - **Fixed Attitude (Mind) --** _[Class]_ -- _dyn.pr._ Situation (Universe)<—>Fixed Attitude (Mind) -- a fixed attitude -- The Fixed Attitude (Mind) Class describes a fixed attitude.  This can be a bias, prejudice, or even a "positive" opinion about anything at all.  The key is that the attitude is fixed, meaning it is accepted as a given and not re-evaluated.  Often the Fixed Attitude (Mind) Throughline is represented by a group of people who share a common bias for or against something. -- _syn._ attitude, fixation, position on an issue, fixed point of view, disposition 
 
 - **Flashbacks and Flashforwards** -- _[Storytelling] --_ Storytelling techniques for developing the story and the backstory simultaneously  -- Often the purpose of telling a story is not just to document the effort to solve a problem but to convey understanding as to how such a 
-
-296. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -772,8 +710,6 @@ and help force the limit of the story and bring the Main Character to the moment
 
 - **Good --** _[Plot Dynamic]_ -- If at the end of the story the Main Character is no longer nagged by his personal problems, the judgment of the story can be said to be Good --  The Main Character ultimately succeeds in resolving his personal problems -- Even though the effort to achieve the story's goal may result in success, this is not necessarily a good thing for the Main Character.  In fact, success might be obtained 
 
-297. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 in the Overall Story even though the Main Character fails to resolve his personal problems.  Similarly, the effort to achieve the story goal might end in failure yet the Main Character ends up overcoming his personal problems. Regardless of whether the Overall Story ends in Success or Failure, if the Main Character succeeds in resolving his personal problems the outcome is deemed Good. 
@@ -791,8 +727,6 @@ If the Main Character remains Steadfast, though, then the kinds of problems they
 - **Guardian --** _[Archetype] --_ An archetype that represents the motivations of Conscience and Help -- This Archetypal character acts as teacher/helper to the Protagonist.  As Conscience, he provides the audience with the story's assessment of what is good and bad in the world it describes.  In his Dynamic Pair relationship, the Guardian counterbalances the efforts of the Contagonist to hinder progress and tempt the Protagonist from the proper path.  Since, according to Archetypal convention, the Protagonist must ultimately face the Antagonist without assistance, both the Guardian and Contagonist must be dramatically nullified before the climax of the story so that they cannot interfere.  This often occurs as a separate confrontation between them, just prior to the Protagonist meeting the Antagonist, or it may occur concurrently, but concludes before the actual climax of the story is reached. 
 
 **Help --** _[Element]_ -- _dyn.pr._ Hinder<—> Help -- a direct assistance to another's effort to achieve their goal -- The Help characteristic assists another's efforts.  This can be a real boon to someone struggling to achieve.  Sometimes, however, someone doesn't want any help.  He either wants to do it on his own or what he is trying to do has been misread by the character representing the Help characteristic who is 
-
-298. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -814,8 +748,6 @@ suspicion.  The danger is acting upon it as if it were fact. -- _syn._ intuition
 
 - **Impact Character's Critical Flaw --** _[Variation] --_ The item that undermines the Impact Character's efforts -- The Impact Character's Critical Flaw undermines his effectiveness against the Main Character in general, but 
 
-299. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 especially in regards to his Unique Ability. The Impact Character in any story has a Unique Ability which makes him uniquely qualified to thwart the Main Character.  But in his character as well is a Critical Flaw which prevents him from just totally overwhelming the Main Character.  This is again a trait which is unique to this particular character. 
@@ -836,8 +768,6 @@ the Impact Character though, the inequity does not appear to be _between_ himsel
 
 - **Impact Character's Benchmark --** _[Type] --_ The standard against which the Impact Character's concern is measured -- The way of telling how much the Impact Character is dealing with the issues at stake for him in the story is by choosing an item in the story and using it as a measuring stick.  This can be subtle or obvious, illustrated perhaps by the number of empty beer cans next to an alcoholic's bed, the severity of a  facial tick, or the amount of 
 
-300. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 perfume a character puts on.  However it is illustrated, it needs to be there to give both the audience and the Impact Character some way of judging how deep his concern is and how far along in the story he is. 
@@ -857,8 +787,6 @@ perfume a character puts on.  However it is illustrated, it needs to be there to
 - **Inertia --** _[Element]_ -- _dyn.pr._ Change<—>Inertia - - a continuation of a state or process -- Inertia is a tendency to maintain the status quo.  That which is moving wants to keep moving.  That which is at rest wants to stay at rest.  An Inertia-oriented character concerns himself with keeping things on an even keel.  He tries to avoid or prevent anything that rocks the boat.  He also does not adapt well to change.  - - _syn._ tendency to continue, a change resistant pattern,  continuation, following an established direction 
 
 - **Innermost Desires [Subconscious] --** _[Type]_ -- 
-
-301. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -884,8 +812,6 @@ witness accounts frequently employ Interpretation (and its Dynamic Partner, Sens
 
 - **Judgment --** _[Plot Dynamic]_ -- The author's assessment of whether or not the Main Character has resolved his personal problem -- The notion that the good guys win and the bad guys lose is not always true.  In stories, as in life, we often see very bad people doing very well for 
 
-302. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 themselves (if not for others).  And even more often we see very good people striking out.  If we only judged things by success and failure, it wouldn't matter if the outcome was good or bad as long as it was accomplished.  The choice of Good or Bad places the author's moralistic judgment on the value of the Main Character's success or failure in resolving his personal problems.  It is an opportunity not only to address good guys that win and bad guys that fail, as well as good guys that fail and the bad guys that win, but to comment on the success or failure of their growth as human beings. 
@@ -900,8 +826,6 @@ _[Variation]_ -- dyn.pr _._ Thought<— >Knowledge -- that which one holds to be
 
 _[Element]_ -- _dyn.pr._ Thought<— >Knowledge -- that which one holds to be true - - The Knowledge characteristic urges a character to rely on what is held to be true.  The Character representing Knowledge will tap the resources of its information to find parallels and understanding that he can apply to the issue at hand.  The advantage of Knowledge is that one need not learn what is already known, thereby skipping non-essential re-evaluations and 
 
-303. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 getting a head start with solving a problem. The difficulty is that Knowledge can be wrong. Without re-evaluation dogma sets in — rigor mortis of thought, leading to inflexibility and closed minded-ness because the Character believes no re-consideration is needed since the subject is already "known."  -- _syn._ learnedness, held truths, authoritative certainty, generally agreed upon truths 
@@ -915,8 +839,6 @@ spective or with a new approach.  It is not important if one is learning to arri
 **Level** -- _[Structural Term] --_ The relationship between families (Elements, Variations, Types and Throughlines) of dramatic units is similar to turning up the power on a microscope: each has a different resolution with which to examine the story's problem.  Throughlines take the broadest view.  Types are more detailed. Variations are even more refined and Elements provide the greatest detail available in a story. Each of the families, therefore, represents a different level of resolution or simply a different Level. 
 
 - **Limit --** _[Plot Dynamic]_ -- The restricted amount of time or options that, by running out, forces the story to a climax -- The Limit is what forces the story to a close.  One of the functions of a story is to give the audience the value of experiences it has not had itself by living through the Main Character.  As such, the Main Character in the story Changes or Remains Steadfast and hopes for the best, and we learn from his accomplishments or disappointments.  Yet, even a Main Character would not jump into the void and commit to a course of action or decision unless forced into it.  To force the Main Character to decide, the story provides all the necessary information to make an educated guess while progressively closing in on the Main Character until he has no alternative but to choose.  This closing in can be accomplished in either of two ways:  either running out of places to look for the solution or running out of time to work one out.  Running out of options is accomplished by an Optionlock; a deadline is accomplished by a Timelock.  Both of these means of limiting the story and forcing the Main Character to decide are felt from early on in the story and get stronger until the climax.  Optionlocks need not be claustrophobic so much as they only provide limited pieces with which to solve the problem.  Timelocks need not be hurried so much as limiting the interval during which something can happen. 
-
-304. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -940,8 +862,6 @@ Once an established Limit is reached, however, the story must end and assessment
 
 - **Main Character's Focus --** _[Element] --_ where The Main Character believes the problem to be; where the Main Character's attention is focused -- When a Main Character is at odds with his surroundings, a problem exists be- 
 
-305. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 tween himself and his environment.  The actual nature of this gap between Main Character and environment is described by the Problem Element.  The nature of what is required to restore balance is described by the Solution Element.  This is the Overall Story view of the problem.  The Main Character, however, is not privy to that view and must work from the Subjective view instead.  From the Subjective view, the problem does not appear to be _between_ the Main Character and the Environment but wholly in one or the other.  Sometimes a Main Character is a "Do-er" type and will perceive and first try to solve the problem in the environment.  Other times a Main Character is a "Be-er" who will first try to solve the problem by adapting to the environment.  A "Do-er" focuses the problem in the environment; a "Be-er" focuses the problem in himself. The Focus Element describes the nature of how the problem appears to the Main Character when he places it wholly in one area or the other. 
@@ -958,8 +878,6 @@ tween himself and his environment.  The actual nature of this gap between Main C
 
 - **Main Character's Unique ability --** _[Variation] --_ the quality that makes The Main Character uniquely qualified to solve the story's problem/ achieve the goal -- Just as a requirement defines the specific nature of things needed to achieve a particular goal, Unique Ability defines the specific quality needed to meet the requirement.  Unique Ability is another way in which the Main Character is identified as the intersecting point between the Subjective and Objective stories as it is only he who ultimately has what it takes to meet the test of the requirement and thereby achieve the goal.  The Unique Ability need not be anything extraordinary but must be the one crucial quality required that is shared by no one else.  Frequently, the Unique Ability is in keeping with the Main Character's position or profession, however it can be much more interesting to assign an incongruous Unique Ability.  In either 
 
-306. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 approach, it is essential to illustrate the existence of the Unique Ability in the Main Character several times throughout the story, even if it is not employed until the climax.  In this way, it becomes integrated into the nature of the Main Character and does not seem conveniently tacked on when it is ultimately needed.  Also, the Unique Ability can be extremely mundane. The key is that the ability does not have to be unique by nature, but just possessed uniquely in that specific story by the Main Character. Clever storytelling may arrange the climax of the story so that some completely ordinary and insignificant Unique Ability makes the difference in the outcome of a cosmic struggle. 
@@ -973,8 +891,6 @@ an author writes a part for a man, he/she would intuitively create a male psyche
 - **Male --** _[Overview Appreciation]_ -- men will tend to empathize with the main character in this story; women will tend to sympathize -- Although there is much common ground in a story that is appreciated equally by women and men, some dramatic messages speak to one group more profoundly than the other.  One particular area of difference is the relationship of female and male audience members to the Main Character.  In some stories an audience member will feel Empathy with the Main Character, as if he/ she were standing in the Main Character's shoes.  In other stories, an audience member will feel Sympathy for the Main Character, as if the Main Character is a close acquaintance. The dynamics that control this for women and men are quite different.  "Male" indicates that as a result of this storyform's dynamics, male audience members will tend to empathize with the Main Character.  Female audience members will sympathize. 
 
 - **Manipulation (Psychology) --** _[Class]_ -- _dyn.pr._ Activity (Physics)<—>Manipulation (Psychology) -- a manner of thinking -- The Manipulation (Psychology) Class is where the evolution or change in an attitude is explored, unlike the Fixed Attitude (Mind) Class which describes the nature of a fixed state of mind.  This is a more deliberation-oriented class where the 
-
-307. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -994,8 +910,6 @@ focus is not on the attitude itself, but whether it is changing for better or fo
 
 - **Nature --** _[Overview Appreciation] --_ the primary dramatic mechanism of a story --  The nature of a story will be one of four possibilities: Actual Work Story, Actual Dilemma Story, Apparent Work Story, or Apparent Dilemma Story.  A story can be appreciated as a structure in which the beginning, middle, and end can all be seen at the same time.  From this point of view, the Objective and Subjective throughlines can be compared.  The Overall Story Throughline determines if the solution to the problem can be found in the environment or if the problem is actually caused by a character flaw of the Main Character himself.  The Subjective throughline determines if the Main Character will remain steadfast in the belief the problem can be solved in the environment or will change in the belief that he himself is the cause of the problem.  When the Main Character remains steadfast, he spends the entire story doing work to try and solve the problem. 
 
-308. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 This is called a Work Story.  If the Main Character is correct in believing the solution to the problem lies in the environment it is an Actual Work story.  If the steadfast Main Character is wrong and is the true cause of the problem, it is an Apparent Work story since he believes Work is all that is necessary and that is not the case.  When the Main Character changes, he has come to believe that he is the real cause of the problem.  This is called a Dilemma Story because the Main Character spends the story wrestling with an internal dilemma.  If the Main Character is correct in believing that he is the source of the problem, then it is an Actual Dilemma Story.  If he is incorrect and changes, even though the problem was truly in the environment, it is an Apparent Dilemma Story. Each of these four combinations creates a different mechanism in order to arrive at the climax with the appropriate match up between the true location of the problem and the Main Character's assessment of where to find the solution. 
@@ -1011,8 +925,6 @@ This is called a Work Story.  If the Main Character is correct in believing the 
 - **Non-Acceptance --** _[Element]_ -- _dyn.pr._ Acceptance<—>Non-Acceptance -- a decision to oppose -- The character containing the NonAcceptance characteristic will not compromise. He stands his ground regardless of how unimportant the issue may be.  Certainly, this characteristic nips attrition in the bud but also loses the benefits of give and take relationships. -- _syn._ run counter to, reject, decline, repudiate, resist, refusal to compromise 
 
 - **Non-Accurate** -- _[Element]_ -- dyn.pr _._ Accurate<— >Non-Accurate -- not within tolerances -- NonAccurate describes a concept that is not functional for the purpose at hand.  There may be some value in the concept in other areas, but for the intended use it is not at all correct. 
-
-309. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1033,8 +945,6 @@ come into conflict with new information, if he is open, he will not be biased or
 - **Oppose --** _[Element]_ -- _dyn.pr._ Support<— >Oppose -- an indirect detraction from another's effort -- The Oppose characteristic causes a character to speak out against any effort, although he does not actively engage in preventing it.  As in "the Loyal Opposition," an opposing view can be useful in seeing the negative side of an endeavor.  However it can also wear thin really fast with the constant nag, nag, nag. -- _syn._ object to, speak out against, argue against, protest, dispute, show disapproval of, detract from 
 
 - **Optionlock --** _[Plot Dynamic]_ -- the story climax occurs because all other options have been exhausted -- If not for the story being forced to a climax, it might continue forever.  When a story is brought to a conclusion because the characters run out of options, it is said to contain a Optionlock.  As an analogy, one might think of a story as the process of examining rooms in a mansion to find a solution to the story's problem.  Each room in the mansion will contain a clue to the actual location of the solution.  In an optionlock, the Overall Story Characters might be told they can examine any five rooms they want, but only five.  They must pick the five rooms ahead of time.  They can take as long as they like to search each one and go thoroughly examine four of the rooms. After getting through their fourth pick they are given a choice:  based on the clues they have found so far, do they wish to stick with their original fifth room or pick another room instead out of all that remain?   Either choice may lead to success or failure, but because running out of options forced the choice it is an Optionlock story.  This choice represents the Optionlock which brings the story to a close and forces such story points as Main Character Resolve (Change or Steadfast), Outcome (Success or 
-
-310. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1090,8 +1000,6 @@ direction of efforts in the Overall Story -- _see Direction._
 
 - **Overall Story Issue** -- _[Variation]_ --  The Overall 
 
-311. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Story's thematic focus -- _see Issue_ 
@@ -1118,8 +1026,6 @@ Story's thematic focus -- _see Issue_
 
 - **Permission --** _[Variation]_ -- _dyn.pr._ Deficiency<— >Permission -- one's ability based on what is allowed -- Permission means Ability limited by restrictions.  These constraints may be self 
 
-312. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 imposed or imposed by others.  When a Character considers what he can or cannot do, he is not assessing his ability but the limitations to his ability.  When one worries about the consequences born of disapproval or selfloathing, one halts for the lack of Permission. The frustration of a character suffering a vicegrip on his ability may eventually erupt in an explosive reaction if the noose gets too tight. -- _syn._ constrained ability, limited capability, restricted capacity, hindered performance, allowed limitations, restrained utility 
@@ -1136,8 +1042,6 @@ what it appears to be.  Stories often focus on someone who wants to "be" somethi
 
 - **Positive versus Negative --** Positive and Negative are not evaluations of the ultimate outcome of a story, but evaluations of how the story feels during its course toward the outcome.  Does the story feel like it is drawing closer to a satisfying and fulfilling conclusion or farther away from an unsatisfying, unfulfilling conclusion?  Then it is positive.  Does the story feel like it is drawing closer to an unsatisfying and unfulfilling conclusion or farther away from a satisfying, fulfilling conclusion?  Then it is negative.  Any given story will have either a positive or negative feel to it.  This is caused by a combination of two kinds of dynamics, one of which describes the Main Character, the other describes the Author.  Every Main Character's personal problem is either caused because he is doing something he needs to stop or because he is not doing something he ought to be.  In other words, his problem exists because he needs to remove or add a trait.  In a sense, the Main Character must either move toward something new or move away from something old.  That alone does not give a positive or 
 
-313. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 negative feel to a story, as what he is moving toward or away from could be good or bad. Every Author has feelings about which traits are good ones to have and which are bad. Just because a Main Character successfully solves his problem by removing or adding a trait does not mean he has become a better person for it.  The Author's message may be that failure in problem-solving is preferable to diminishing one's overall character.  So the Author's identity is exposed to the audience by passing a value judgment on whether removing or adding a trait (Start or Stop) was good or bad.  Taken together, Start and Stop, and a value judgment on what the Main Character is growing in relation to of _good_ or _bad_ create four combinations.  Two of these are positive and two of them are negative.  Start and _good_ means the Main Character is moving toward something good and that feels positive.  Stop and _bad_ means the Main Character is moving away from something bad and that also feels positive.   Start and _bad_ means the Main Character is moving toward something bad and that feels negative.  And Stop and _good_ means the Main Character is moving away from something good and that feels negative as well. 
@@ -1153,8 +1057,6 @@ plied.  Rather, until a Resistance interacts with a Potential, the Potential has
 - **Power (Outcome) --** _[Dynamic Term] --_ One way to measure the relationship of items in a quad is to classify him as Potential, Resistance, Current, and Power (or Outcome).  In this manner, we can see how dramatic components operate on each other over the course of the story.  Power simply means the effect of a process.  When a dramatic Power exists it does not necessarily create change.  Rather, until it is applied for the necessary period of time by Current, the Power will have not have the impact sufficient to affect change.  So in a quad, assigning one of the items as the Power does not mean it will alter the course of the story.  Instead, it might function to direct effort by providing a specific target.  This is a useful tool for Authors since it allows for the subtle relationship of unused, inferred, threatened, or anticipated dramatic interactions that shape the fabric of a story in ways other than conflict. 
 
 ## **Preconception --** _[Variation]_ -- _dyn.pr._ Precon- 
-
-314. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1177,8 +1079,6 @@ of fates.  Fates are experiences or conditions one must encounter along the way 
 - **Present** (The Present) **--** _[Type]_ -- _dyn.pr._ Past<— >Present -- the current situation and circumstances -- "Present" does not refer to the way things are going, but to the way things are.  It is a here and now judgment of the arrangement of a situation and the circumstances surrounding it.  A story that focuses on the Present is not concerned with how events led to the current situation nor where the current situation will lead, but defines the scenario that exists at the moment . -- _syn._ how things stand, the here and now, current situation, as of this moment 
 
 - **Proaction --** _[Element]_ -- _dyn.pr._ Reaction<— >Proaction -- taking initiative action to achieve one's goals -- The Proactive characteristic will urge a character to begin problem solving on his own.  This character will be a self-starter who is up and at it the moment he realizes a potential problem exists.  Sometimes, however, a potential problem may not actually material- 
-
-315. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1204,8 +1104,6 @@ ize and would have disappeared in short order by itself.   Proaction may actuall
 
 - **Protagonist --** _[Archetype]_ An archetype who represents the motivations of Pursuit and Consider -- An Overall Story Character charged with the responsibility of pursuing a solution to the story's objective problem.  An objective problem does not mean it can't be personal.  Rather, it means that all of the dramatically functioning characters in the story are concerned about the outcome.  The true Archetypal Protagonist pursues the solution against the Antagonist.  In other stories a close cousin of the Protagonist shares all the same elements except he tries to avoid the Antagonist's plan.  For the Pursuing Protagonist the goal is to cause something.  For the 
 
-316. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Avoiding "Protagonist" the goal is to prevent something. 
@@ -1228,8 +1126,6 @@ ing stories are told about characters who struggle to achieve a Purpose that rea
 
 - **Rationalization --** _[Variation]_ -- _dyn.pr._ Obligation<—>Rationalization -- a logical alternative used to mask the real reason -- Rationalization is the attempt to have your cake and eat it too. When a character expects that catering to his desires will bring about some cost or punishment, he tries to do what he'd like in a way he thinks will avoid retribution.  One way is to come up with an excuse.  Rationalization involves fabricating an artificial reason for one's attitude or actions that will excuse them.  The reason must make sense as being a possible 
 
-317. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 actual cause of the character's activities.  In fact, it might very well have been the reason, except that it wasn't, which is what makes it a Rationalization. -- _syn._ fabricated excuse, ulterior explanation, false justification, artificial reason 
@@ -1250,8 +1146,6 @@ character Proactive and another Reactive, a much more real and powerful interact
 
 - **Reduction --** _[Element]_ -- _dyn.pr._ Production<— >Reduction -- a process of thought that deter- 
 
-318. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 mines probability -- Reduction is a process of thought that compares the likelihood of several incomplete lines of deduction.  Sometimes there is not enough information to fully deduce the ultimate truth in a matter.  However, there is enough information to narrow the field of possibilities.  When all the possibilities are considered, each can be rated on its individual merits as to how much each has.  The potentialities are compared, arriving at the most likely conclusion.  This allows the Reduction characteristic to act with a greater degree of confidence than if no "favorite" theory or explanation had emerged.  Of course, dealing with incomplete data is a horse race where even the most unlikely explanation may surge ahead when the last piece is in place and prove to be the actual fact of the matter.  It is when the Reduction characteristic gives probability the weight of certainty or fails to reevaluate that problems can arise. -- _syn._ determining probability, comparisons of potentiality, measurement of likelihood, judging probabilities 
@@ -1270,8 +1164,6 @@ or that something unsavory lies behind.  This is the nature of Repulsion.  The w
 
 - **Resolve --** _[Character Dynamic] --_ the degree to which the Main Character feels compelled to remain on the quest -- There are two major ways in which an author can illustrate the best way to solve the problem explored in a story. 
 
-319. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 One is to show the proper way of going about solving the problem, the other is to show the wrong way to solve the problem. To illustrate the proper way,  your Main Character should hold on to his resolve and remain steadfast because he truly is on the right path.  To illustrate the improper way of dealing with a problem, your  Main Character must change for he is going about it the wrong way. 
@@ -1287,8 +1179,6 @@ One is to show the proper way of going about solving the problem, the other is t
 - **Self-Interest --** _[Variation]_ -- _dyn.pr._ Morality<— >Self-Interest -- doing or being based on what is best for oneself -- In its pure form, SelfInterest is defined as the quality of ALWAYS choosing what is best for oneself with NO consideration as to the effect on others.  This does not require ill intent toward others.  A character who is Self-Interested simply focuses on the personal ramifications of decisions.  In fact, in stories that show the evil nature of an oppressive society or regime, Self-Interest can be a very positive thing. -- _syn._ self-serving, self-centered, narcissistic, selfishness, selfabsorbed, egocentric 
 
 **Sense-Of-Self --** _[Variation]_ -- _dyn.pr._ State of Being<—>Sense of Self -- one's perception of oneself -- Simply put, Sense of Self is our own 
-
-320. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1307,8 +1197,6 @@ the Protagonist, the Sidekick is identified by what his qualities are, not by wh
 - **Situation --** _[Variation]_ -- _dyn.pr._ Circumstances<—>Situation -- the arrangement of one's environment -- Situation describes the ins, outs, and practical considerations of the environment in which a character finds himself. Throughout a story, the situation may evolve or may remain constant, depending upon the essence of the message and the nature of the plot.  Since it is limited to the practical, Situation can only be measured and/or interpreted though Reason. -- _syn._ how things stand rationally, a reasoned evaluation of environment, arranged context, environmental state, surroundings, predicament 
 
 **Skill --** _[Variation]_ -- _dyn.pr._ Experience<—>Skill -- practiced ability -- Skill is the innate potential to accomplish either that which is physical or mental.  It does not require the practical experience necessary to tap that potential, just that the latent capacity exists.  Skill might be seen as raw physical ability, talent, or intellectual or emotional aptitude which may or may not ever be developed. -- _syn._ proficiency, aptitude, competence, adeptness, degree of 
-
-321. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1332,8 +1220,6 @@ expertise, practiced ability, honed ability
 
 wants something in the story, which is directly connected to the Main Character, to desist -- 
 
-322. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Stop means something different in a story where the Main Character has a Resolve of Change than in a story where the Main Character has a Resolve of Steadfast.  If the Main Character Changes because he possesses a detrimental trait, then he Stops doing or being something he has been.  If the Main Character is Steadfast in holding out for something outside himself to be brought to a halt, he is hoping that it will Stop.  The term simply describes an aspect of the growth which happens in the Main Character. 
@@ -1351,8 +1237,6 @@ story is stripped of all its details and Storytelling, what is left are the stor
 - **Storyforming --** the process of creating the dramatics of a unique story by arranging structure and dynamics --  When an author thinks of the way he wants his story to unfold in terms of the point he wants it to make and how his characters will solve their problems, what that author is doing is Storyforming.  Before Dramatica, the tendency was to actually blend the two processes of Storyforming and Storytelling together so that authors thought of what they wanted to say and how they wanted to say it more or less simultaneously.  But these are really two distinct acts which can be done separately, especially with the help of Dramatica. 
 
 - **Story Points** --  Commonly shared dramatic concepts --  Story Points are items of dramatic meaning that are common to all stories.  When a person attempts to deal with troubles, certain considerations and perspectives are commonly adopted;  "goals," for example, "requirements," 
-
-323. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1376,8 +1260,6 @@ and "consequences."  Stories, which represent analogies to this problem solving 
 
 - **Subjective Story Focus --** _[Element] --_ the principal symptom of the difficulties between the Main Character and the Impact Character, where attention is focused in the subjective story --  When there is a problem in the relationship between the Main and Impact character, they look at it from their subjective point of view and cannot see its actual nature because it lies on the level of their motivations.  Instead they focus their attention on what they believe to be the source of their problems which is really an effect of the problem.  This area is called the Subjective Story Focus. 
 
-324. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 - **Subjective Story Problem --** _[Element] --_ the underlying cause of the difficulties between the Main Character and the Impact Character -- This is the actual source of the inequity between the Subjective Characters which lies at the level of their motivations.  Only by applying the Subjective Story Solution can the effects of this inequity finally be dealt with. 
@@ -1395,8 +1277,6 @@ will always slow the progress of the Subjective Story.  It works as the antidote
 - **Subplot** -- _[Storytelling] --_ An amplification of a branch or aspect of a storyform -- Subplots are often misunderstood to be secondary subordinate stories running in parallel to the main story.  Such secondary stories are a valid storytelling technique but they are not Subplots.  A Subplot in not a separate independent story but an amplification of a branch or aspect of the main story.  Each Subplot is, indeed, a story in its own right but it is connected to the main story through one of the objective characters.  This objective character does double duty as the Main Character (a subjective character) in the subplot.  As a result, it is inappropriate to hinge a subplot around either the Main or Impact Characters of the main story as the two story lines would become blurred and create confusion as to the message intended.  In order to keep Subplots from appearing to be the main story, it is important to draw them with less detail.  This does not mean they should be incomplete or sketchy, rather that the Subplot should be explored in less depth.  There can be as many Subplots as there are objective characters.  A large number of subplots will become unwieldy, however, and can needlessly complicate the telling of a story, blurring or diverting the audience's understanding of the main story.  Similar to the Main Character of the main story, the Main Characters of the subplots should be limited to one story each. Not all "multiple plot" stories consist of subplots attached to a main plot.  Frequently in serial programs such as soap operas, certain forms of episodic television, and some written serials such as comic strips, several complete stories run in parallel, connected only by their common setting or by using the same ensemble of characters.  In this form of storytelling, characters do double duty, playing multiple roles in a number of separate plots which really do not directly affect each other.  The point of note is that an author should be aware of the difference between subplot and multiple plot constructions so that the proper dramatic connections can be made to create the greatest impact. 
 
 - **Success --** _[Plot Dynamic]_ -- the original goal is achieved -- Every overall story throughline in a 
-
-325. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1416,8 +1296,6 @@ the intricacies in a story's storytelling and Overall Story elements rather than
 
 - **Tendency --** _[Overview Appreciation] --_ the degree to which the Main Character feels compelled to accept the quest -- Not all Main Characters are well suited to solve the problem in their story. They may possess the crucial element essential to the solution yet not possess experience in using the tools needed to bring it into play. Like most of us, Main Characters have a preference for how to go about solving problems.  Some prefer to immediately take action. We call these characters Do-ers.  Others prefer to deliberate first to determine if the problem might go away by itself or perhaps they can adapt to it.  We call these characters Be-ers. When a Do-er finds himself in a story driven by Action he is quite at home.  Similarly, when a Be-er finds himself in a Decision driven story, he is quite content.  Both of these combination lead to Main Characters who are more than Willing to accept the quest for a solution to the story's problem.  They are comfortable with the tools they will be required to use.  But if a Doer is placed in a Decision story or a Be-er is drawn into an Action story, the Main Character will be very Unwilling to participate in the quest at all for the tools he must use are not in his area of experience.  Willing Main Characters force the plot forward.  Unwilling Main Characters are dragged along by circumstances beyond their control. 
 
-326. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 **Test --** _[Element]_ -- _dyn.pr._ Trust<—>Test -- a trial to determine something's validity -- To test is to try out a supposition to determine if it is correct. "Run it up the flagpole and see if people salute it" is the concept here.  Any explanation that makes sense has the potential to be correct or incorrect once it is actually tried in "the real world."  The Test characteristic will always want to try things out  before using it.  This can weed out faulty items before they break down when one relies on them.  However, it can also waste time when it is of the essence or waste one of the three wishes just to see if it works. -- _syn._ trial of validity, examination, audit, inspection, scrutinization 
@@ -1436,8 +1314,6 @@ description of linear connections
 
 - **Throughline --** _[Dramatica  Term]_ -- The sequence of story points over a story that describe one of the four Perspectives in a story --  The Throughlines are really the four structural perspectives which each move toward facing its own problem as the story reaches a climax. The Overall Story, Subjective Story, Main 
 
-327. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Character, and Impact Character Throughlines all have their own distinct story points which have to be illustrated to create a Grand Argument Story, but Storytelling choices can be made to accentuate a particular throughline and emphasize it more than the others and create stories that have an unusual feel to them. 
@@ -1454,8 +1330,6 @@ Character, and Impact Character Throughlines all have their own distinct story p
 
 - **Trust --** _[Element]_ -- _dyn.pr._ Test<—>Trust -- an acceptance of knowledge as proven without first testing its validity -- To Trust is to accept without trial.  Whether a concept, relationship, person, or mechanism, it will be accepted by the character possessing the Trust characteristic without supportive evidence.  This helps him to get on with the job at hand in the most efficient manner, but opens him up to disastrous surprises when an assumption is proven 
 
-328. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 incorrect at a critical moment. -- _syn._ untried acceptance, untested belief in, accept implicitly, assumed dependability, unquestioned reliance on 
@@ -1471,8 +1345,6 @@ incorrect at a critical moment. -- _syn._ untried acceptance, untested belief in
 - **Understanding --** _[Type]_ -- _dyn.pr._ Learning<— >Understanding -- appreciating the meaning of something -- Understanding is different from knowledge.  From knowledge one gets awareness, from Understanding one gets meaning. To obtain meaning requires not only knowing the substance of its nature but the context of its essence.  In other words, one must not only define what something is but how it fits into the larger picture as well.  To this end, Reason describes the function and Emotion defines the purpose.  So Understanding is not just an intellectual pursuit but requires an empathy with the meaning as well.  It is useful to note that many Eastern and ancient philosophies define Understanding as "becoming one with" that which is being considered.  Until one joins his subject in unity, he cannot understand it. -- _syn._ comprehending, grasping, appreciating, obtaining meaning, acquiring meaning 
 
 - **Unique Ability --** _[Variation] --_ The item that makes the Main Character uniquely able to resolve the Overall Story Problem; the item that makes the Impact Character uniquely able to thwart the Main Character's efforts -- Just as a requirement defines the specific nature of things needed to achieve a particular goal, Unique Ability defines the specific quality needed to meet the requirement.  Unique Ability is another way in which the Main Character is identified as the intersecting point between the Subjective and Objective stories as it is only he who ultimately has what it takes to meet the test of the requirement and thereby achieve the goal.  The Unique Ability need not be anything extraordinary but must be the one crucial quality required that is shared by no one else.  Frequently, the Unique Ability is in 
-
-329. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1495,8 +1367,6 @@ to join the quest.  Once the Main Character is enticed or coerced into beginning
 - **Willing --** _[Overview Appreciation]_ -- The Main Character willingly participates in the effort to find a solution to the story problem -- Willing describes a Main Character who is selfmotivated to find a solution to the story's problem.  Even if the going is tough, he requires no outside encouragement or compulsion to keep up the effort. 
 
 - **Wisdom --** _[Variation]_ -- _dyn.pr._ Enlightenment<— >Wisdom -- understanding how to apply Knowledge -- Wisdom is the meaning of what is known.  A Character may be aware of facts 
-
-330. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1531,8 +1401,6 @@ matica, the patterns of a "Z" (either forward or backward, from top to bottom or
 - **Activity (Physics)** -- _[Class]_ -- an activity, an enterprise, an initiative, an endeavor, an operation 
 
 - **Actuality** -- _[Element]_ -- the true state of things, objective reality, factuality, demonstrable 
-
-331. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1605,8 +1473,6 @@ existence, demonstrable reality
 **Developing A Plan [Conceptualizing]** -- _[Type]_ -- visualizing, imagining, envisioning, visualizing implementation 
 
 **Disbelief** -- _[Element]_ -- refusal to accept, distrust, 
-
-332. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1684,8 +1550,6 @@ ity, affective outlook, sentiment, emotional assessment
 
 **Knowledge** -- _[Element]_ -- learnedness, held 
 
-333. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 truths, authoritative certainty, generally agreed upon truths 
@@ -1762,8 +1626,6 @@ performance, allowed limitations, restrained utility
 
 - **Rationalization** -- _[Variation]_ --  fabricated excuse, 
 
-334. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ulterior explanation, false justification, artificial reason 
@@ -1826,8 +1688,6 @@ impressions, perceptions
 
 **Trust** -- _[Element]_ -- untried acceptance, untested belief in, accept implicitly, assumed depend- 
 
-335. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ability, unquestioned reliance on 
@@ -1859,8 +1719,6 @@ that appear in the structural part of the Dramatic model.  The items have been s
 The following is an alphabetical list of the semantic items 
 
 Classes (Throughlines) 
-
-336. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1976,8 +1834,6 @@ Classes (Throughlines)
 
 44. Reappraisal 
 
-337. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 45. Repel 46. Resolution 47. Responsibility 48. Security 49. Self-Interest 50. Sense-of-Self 51. Senses 52. Situation 53. Skill 54. State-of-Being 
@@ -2066,8 +1922,6 @@ Classes (Throughlines)
 
 46. Protection 
 
-338. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 47. Proven 48. Pursuit 49. Re-evaluation 50. Reaction 51. Reconsideration 52. Reduction 53. Result 54. Self-Aware 55. Speculation 56. Support 57. Temptation 58. Test 59. Theory 60. Thought 61. Trust 62. Unending 63. Uncontrolled 64. Unproven 
@@ -2075,8 +1929,6 @@ Classes (Throughlines)
 ## **R EFERENCE P ART 3** 
 
 ## _**Structural Models**_ 
-
-339. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -2090,8 +1942,6 @@ Physics<br>Universe<br>Mind<br>SS<br>Psychology<br>**----- End of picture text -
 
 The Dramatica Structural Matrix is a framework for holding dramatic topics pertinent to Genre, Plot, Theme, and Character in relationships that describe their effect upon one another.  During the process of storyforming, these topics (called "themantics") are re-arranged much as a Rubik's cube might be scrambled, all in response to the author's 
 
-340. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 choices regarding the impact they wish to have on their audience.  As a story unfolds, the matrix unwinds, scene by scene and act by act until all dramatic potentials, both large and small have been completely explored and have fully interacted. 
@@ -2103,8 +1953,6 @@ choices regarding the impact they wish to have on their audience.  As a story un
 **----- Start of picture text -----**<br>
 Universe Physics<br>A Situation An Activity<br>Psychology Mind<br>A Manner of Thinking A State of Mind<br>**----- End of picture text -----**<br>
 
-
-341. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -2126,8 +1974,6 @@ Past Progress Understanding Doing<br>Future Present Obtaining Learning<br>Concep
 
 Situation (Universe) Activity (Physics) Variations Variations 
 
-342. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 **==> picture [347 x 346] intentionally omitted <==**
@@ -2139,7 +1985,5 @@ Fate Prediction Fact Security Instinct Senses Wisdom Skill<br>Interdiction Desti
 Manipulation (Psychology) Fixed Attitude (Mind) Variations Variations 
 
 ## _**6 4  E l e m e n t s**_ 
-
-343. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved

@@ -40,8 +40,6 @@ Looking toward motion pictures for examples, films such as Pulp Fiction or Remai
 
 A prime example of this kind of impact shift can be seen in the film and video versions of the movie, Once Upon a Time in America.  The story explores the changing 
 
-124. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 relationships of a group of friends from their days as poor children during the Depression to their ultimate stations in life as old men in today's society.  In its original theatrical release, episodes from several different periods in their long history together were jumbled up, so that the audience would see them as old men, then young boys, old men again, and then teenagers.  A large part of the enjoyment in watching this film was to try and sort out how one thing would eventually lead to another, and also to determine why some expected things didn't happen after all.  In a sense, viewing the movie was like assembling a jigsaw puzzle. 
@@ -60,8 +58,6 @@ As with the thematic perspectives we have already explored, plot thematics are a
 
 The story-wide effect of plot story points can be clearly seen in-so-far-as the Main 
 
-125. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Character, Impact Character, and Overall Story Characters will _all_ be caught up in the ripples caused by the quest for the Story Goal.  Even the Subjective Story Throughline will be impacted by the nature of the goal and the effort to achieve it. 
@@ -79,8 +75,6 @@ The Story Goal will share the same Type as the Overall Story  Concern.  What the
 ## **Story Requirements** 
 
 In order to achieve a particular Type of Story Goal, a necessary Type of Requirements must be met.  Requirements can come in two varieties.  One is a series of steps 
-
-126. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -102,8 +96,6 @@ Just as there are Driver and Passenger characters, there are Driver and Passenge
 
 During the effort to achieve the goal, certain benefits are enjoyed or accrued along the way.  These serve to add motivation for the characters to continue.  No one likes to 
 
-127. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 keep his nose to the grindstone for an extended duration in the hope of ultimately receiving a reward.  Similarly, if one is already suffering a Consequence, simply accepting that torment while working toward relief quickly becomes unbearable.  In a like manner, characters need to enjoy small rewards along the way - little perks that make the journey bearable and the effort tolerable. 
@@ -120,8 +112,6 @@ Any effort requires supplies, often called _essentials_ .  The effort to achieve
 
 In contrast to Prerequisites, Preconditions are like _riders_ that are tacked on to the ends of bills being voted on in Congress.  With such a bill, the Goal might be to help an endangered species.  One of the Requirements would be to pass a bill that gives the species legal status as being endangered.  One of the Prerequisites would be to get enough votes to pass the bill.  One of the Preconditions for getting a block of votes would be to add a rider on the bill that provides subsidies to the tobacco industry. Clearly the rider has nothing to do with the original bill, and might even be philosophi- 
 
-128. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 cally at odds with its intent.  But, to get the job done, concessions must be made. 
@@ -133,8 +123,6 @@ In the movie, The Karate Kid, the Protagonist is a young boy who wants to be a K
 ## **In Summary** 
 
 These eight Plot Story Points are the touch points between plot and Theme.  Without them, the plot would simply be a series of events that held no particular meaning.  With them, the plot supports the thematic argument, and through it touches the other Thematic Story Points including those such as the Main Character Problem, which lie at the heart of what drives a story's characters.  In this manner, Theme stands as a bridge connecting character to plot so that what characters do thematically impacts the progression of events, and events that occur thematically impact the way characters think. 
-
-129. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -152,8 +140,6 @@ Based on what he believes to be happening from his position, each of the referee
 
 In stories, each throughline is like one of these referees.  Each provides an angle on the events of the story as they unfold.  When something appears unfavorable from one of those points of view, the characters in that Throughline cry foul and invoke a penalty to alter the course of action.  Each of the throughlines is affected by the series of events that transpire, and conversely, each throughline can have an impact on the course of 
 
-130. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 future events.  This is how all four throughlines seem to have plots of their own, yet affect one another in a consistent manner.  And, just as the umpire must sometimes step in to settle disagreements, so the author steps in from time to time to side with one throughline or another and allow a penalty or revoke it. 
@@ -167,8 +153,6 @@ How then shall we know what must happen in a story's plot?  This we can learn by
 So just what _are_ Progressive Story Points?  Chances are, you are already familiar with them.  They are Acts, Sequences, Scenes, and Events.  The Progressive Story Points are not unlike the way we measure time in Days, Hours, Minutes, and Seconds. We can see that a Minute does not stand independently, but is _nested_ within an Hour, which is in turn nested within a Day.  Similarly, Scenes are story points that happen within an Act.  Events are nested in Scenes which are nested in Sequences which are nested in Acts. 
 
 No event stands alone, but will bear something of the flavor or identity of the larger units in which it resides and the smaller units it contains.  If this begins to sound like the thematic story points we have already explored, it is no accident.  Throughline, Concern, Issue, and Problem narrow the issue of the story when the story is seen as a state.  Act, Sequence, Scene, and Event narrow the issue of the story when the story is seen as a process.  The Static Story Points tell us what a story is about.  The Progressive Story Points tell us how a story unfolds.  Taken together, the Static and Progressive Story Points convey a story's meaning. 
-
-131. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -185,8 +169,6 @@ Another story might start with the characters Doing something.  Once they have D
 The Types in a Throughline can be explored in any order.  Each different order, however, will create a different meaning.  As an analogy to this, imagine two events: a slap in the face and a scream.  A slap followed by a scream might seem as if someone were crying out from having been hit.  A scream followed by a slap, however, might seem as if someone was hysterical and being brought to her senses.  The order in which events occur changes their Progressive meaning, even though their Static meaning might remain the same.  This same dynamic holds true for Acts as well, so that the order in which the Types are explored changes the Progressive meaning of that throughline's view of the plot at large. 
 
 Each Type in a throughline will be the subject matter of one of four Acts in that throughline.  The order in which the Types are explored determines the Progressive meaning of that throughline's evolution. 
-
-132. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -214,15 +196,11 @@ At the beginning of the road is the point of departure: City A.  At the end of t
 
 At each city is a signpost that gives its name.  The four signposts in a throughline's plot are the names of the Types.  The order in which they will occur in the plot determines where they fall along the road.  Between the four signposts are three journeys, each of which can be described as traveling from one signpost to the next. 
 
-133. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Returning to an earlier example, Signposts A, B, C, and D might be Learning, Understanding, Doing, and Obtaining.  The Three journeys in this plot would then be Learning -> Understanding, Understanding -> Doing, and Doing -> Obtaining.  With four signposts and three journeys, each throughline's plot actually has _seven_ different Progressive Story Points that are required for that perspective to be complete. 
 
 When Aristotle saw a beginning, middle and end, he was seeing Signpost A, all three journeys lumped together, and Signpost D.  When successive generations of writers evolved a three act structure, it became very difficult to determine, "What happens in Act 2?" as all three journeys and two of the signposts were simply blended into "the middle". By adopting a Four Act _structure_ which coincides with three _dynamic_ acts, the true nature of a throughline's plot is far easier to understand and construct. 
-
-134. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -245,8 +223,6 @@ Self<br>Approach<br> Interest<br>Morality Attitude<br>**----- End of picture tex
 If Morality is the Issue, then Self-Interest is the counter-point.  Theme is primarily derived from the balance between items.  When examining the quad of Variations containing the Issue, we can see that the Issue and counter-point make up only one pair out of those that might be created in that quad.  We have also seen this kind of balance explored in the chapter on Character where we talked about three different kinds of pairs that might be explored: Dynamic, Companion, and Dependent. 
 
 Just as with character quads, we can make two diagonal pairs, two horizontal pairs, and two vertical pairs from the Variations in the Issue quad.  For the Morality quad, these six pairs are Morality/Self-Interest, Morality/Attitude, Morality/Approach, SelfInterest/Attitude, Self-Interest/Approach, and Attitude/Approach.  Each of these pairs 
-
-135. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -278,8 +254,6 @@ Overall, which should carry more weight in regard to this issue?
 
 By answering each of these questions in a different thematic sequence, the _absolute_ value of Morality compared to Self-Interest will be argued by the impact of the six different _relative_ values. 
 
-136. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**How Sequences Relate To Acts**_ 
@@ -297,8 +271,6 @@ Beneath each Type is a quad of four Variations.  From a structural point of view
 Morality, Self-Interest, Attitude, and Approach.  The difference between this and the thematic sequences we have just explored is that Obtaining is judged by each Variation in the quad separately, rather than each Variation in the quad being compared with one another.  It is an upward looking evaluation, rather than a sideways looking evaluation. 
 
 In this manner, a thematic _statement_ can be made about the subject matter of concern in each of the four structural Acts.  The six Sequences constitute an _argument_ about the appropriateness of different value standards. 
-
-137. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -320,8 +292,6 @@ What then does a scene contain?  Scenes describe the _change_ in dynamics betwee
 
 Characters are made up of Motivations, Methodologies, Means of Evaluation, and Purposes.  These terms also describe the four major sets of Elements from which the characters are built.  The driving force of a character in a given scene can be determined, such as whether their argument is over someone's motivations or just the method they are employing. 
 
-138. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **6 Goes Into 24 Like Theme Goes Into Scenes** 
@@ -329,8 +299,6 @@ Characters are made up of Motivations, Methodologies, Means of Evaluation, and P
 We have spoken of the three and four act story points of story.  It was illustrated how both divisions are valid to specific tasks.  When dealing with scenes, we find that no scenes ever hang between two acts, half in one and half in the other, regardless of a three or four act appreciation.  This is because there are exactly 24 scenes created at the Element level:  six per act in a four act appreciation, eight per act in a three act appreciation.  In both cases, the scenes divide evenly into the acts, contributing to the "feel" of each act break being a major turning point in the progress of the story. 
 
 Sequences, on the other hand, exist as a six part partition of the story.  Therefore, they divide evenly into a three act appreciation but not into a four.  Since the four act view is objective, sequences — as they define Thematic movements —  are truly an experiential phenomenon in the subjective appreciation and lose much of their power objectively. 
-
-139. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -352,8 +320,6 @@ The "red herring" that obscures this temporal division is caused by changing loc
 
 This is all part of storytelling:  to bring emphasis to certain aspects of the argument or exploration and to diminish others.  Three Events may occur in one location, to be followed by the fourth in another.  Still, they have filled only one Scene. 
 
-140. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **The Elements of Structure: Genre** 
@@ -371,8 +337,6 @@ With all these different duties performed by the word Genre, how can we hope to 
 _Producer:  "Write me a war story!"_ 
 
 _Writer:  "O.K.  What do you want, something like M.A.S.H. or Platoon or The Great Escape?"_ 
-
-141. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -404,8 +368,6 @@ Next, we want to consider a new concept:  four _modes of expression_ through whi
 
 - -- Entertainment – focusing the audience on desire. 
 
-142. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 The Dramatica Classes describe what the audience will see.  The modes describe in what light they will see them.  When we match the two categories, we begin to control the feel our story will generate within the audience. 
@@ -433,8 +395,6 @@ The following "Grid of Dramatica Genres," shows the four Dramatica Classes along
 
 - **-Why it's important** – (Information/Manipulation (Psychology)) – an examination of value systems with an emphasis on providing context relevant to the audience's personal life (e.g. Persuasion, Propaganda). 
 
-143. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 - **-Exploration Drama** – (Drama/Situation (Universe)) – a serious exploration of how the "state of things" is unbalanced (e.g. Courtroom, Crime, and Classroom dramas). 
@@ -460,8 +420,6 @@ The following "Grid of Dramatica Genres," shows the four Dramatica Classes along
 - **-Entertaining Concept** – (Entertainment/Fixed Attitude (Mind)) – entertainment derived from new, unique, or interesting ideas (e.g. High Concept piece) 
 
 - **--   Entertainment through Twists** – (Entertainment/Manipulation (Psychology)) – entertainment derived from new, unique, or interesting forms of audience manipulation (e.g. Mysteries, Thrillers) 
-
-144. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -490,8 +448,6 @@ By positioning the audience's four points of view on the Class/modes of expressi
 
 
 
-145. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Suppose we wanted to write a Comedy with the Overall Story Throughline of Situation (Universe) and the Main Character Throughline of Activity (Physics).  We could assign all of the Throughlines to the grid in the Comedy mode of expression like above. 
@@ -509,8 +465,6 @@ The Overall Story (Situation (Universe)/Entertainment) would be set in some uniq
 This is the heart of Dramatica's approach to Genre.  At its most basic level it is a choice between four modes of expression.  At its most exciting and elegant, it concerns the sophisticated relationship and dynamics that are created when the four modes of expression, the four structural Classes, and the four Throughlines are brought together. The Class/modes of expressions grid allows authors to select Throughlines using their feelings and intuition.  By carefully setting these Dramatica relationships in a story, you can create a powerful Genre experience for your audience with exactly the impact you intended. 
 
 Finally, there is a greater depth to Dramatica theory that offers more information about what is really going on in Genre.  It may be more than you really need to consider for your style of writing and the kinds of stories you create.  If you'd like to explore this final aspect of The Elements of Structure, read on. 
-
-146. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -530,8 +484,6 @@ It should be noted that sometimes in the process of storytelling an author will 
 
 If you have closely examined the table, you may have wondered if the mode at the top (Information) could ever connect to the mode at the bottom (Entertainment) without 
 
-147. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 having to go through both Drama and Comedy first.  The answer to this question is, "Yes." 
@@ -539,7 +491,5 @@ having to go through both Drama and Comedy first.  The answer to this question i
 If you were to clip the Class/modes of expression table out of this book (not recommended!) you could bend it around from top to bottom to make a cylinder.  When presented in this form, it can be seen that Information is actually right next to Entertainment.  So, during the course of a story, a single Throughline might shift up or down or all around, as long as it stays within its Class column. 
 
 Taken together, all four Throughlines could shift from scene to scene into different relative positions, not unlike a combination lock, making the story all comedic at one time, serio-comic at another, and so on.  By the end of the story, the progressive shift of Throughlines provides the combination for the unique Genre of a story. 
-
-148. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved
