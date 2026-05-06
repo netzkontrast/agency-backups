@@ -42,5 +42,11 @@ def test_append_records_one_block(tmp_path):
     text = log.read_text(encoding="utf-8")
     assert "### Run 2026-05-06 — adr-synthesize" in text
     assert "ADR-0001, ADR-0002" in text
-    assert "fidelity: 0.9876" in text
-    assert "mode: rewrite" in text
+    assert "fidelity=0.9876" in text
+    # All coherence-check schema fields are present so lint-runlog.py passes.
+    for field in (
+        "agent", "start_commit", "end_commit", "baseline_commit",
+        "files_in_delta", "files_scanned", "t1_fixes", "t2_fixes",
+        "t3_tasks_created", "t4_skipped", "issues_skipped", "notes",
+    ):
+        assert f"- {field}:" in text, f"missing required field {field!r}"

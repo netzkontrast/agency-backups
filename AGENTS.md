@@ -338,7 +338,7 @@ The block below is rewritten by [`tools/adr/cli.py synthesize`](./tools/adr/cli.
 
 <!-- BEGIN AGENCY-ADR SYNTHESIS -->
 <!-- AGENT-WRITTEN. DO NOT EDIT BY HAND. Edits will be overwritten by tools/adr/cli.py synthesize. -->
-_(empty — `/decisions/` carries no Accepted ADRs yet; run `python3 tools/adr/cli.py synthesize` after the first Accepted ADR lands.)_
+
 <!-- END AGENCY-ADR SYNTHESIS -->
 
 ---

@@ -451,3 +451,4 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
     Friction logged as FL1 in
     `tasks/021-apply-fm-edit-to-deferred-coherence/friction-log.md`.
+
