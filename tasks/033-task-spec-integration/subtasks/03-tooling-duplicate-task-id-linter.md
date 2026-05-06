@@ -53,8 +53,6 @@ Small (~100 LOC + 80 LOC tests).
 ```text
 Implement tools/fm/check-duplicate-task-id.py.
 
-Repo root: /home/user/agency
-Branch: claude/integrate-repo-specs-cIWtI
 
 Read first: TASK.md §8.1, tasks/024-renumber-duplicate-task-ids-v2/task.md, tools/fm/_core.py.
 

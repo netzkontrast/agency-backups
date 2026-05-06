@@ -49,9 +49,8 @@ Small (~80 LOC + 60 LOC tests).
 
 ```text
 Implement tools/check-narrative-ontology-load.py for the netzkontrast/agency
-repo on branch claude/integrate-repo-specs-cIWtI.
+repo (current branch).
 
-Repo root: /home/user/agency
 Read first: AGENTS.md §NO.1–NO.6, tools/fm/_core.py, tools/check-governance.sh.
 
 Acceptance:

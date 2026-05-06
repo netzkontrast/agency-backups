@@ -53,8 +53,6 @@ Small (~80 LOC + 60 LOC tests).
 ```text
 Implement tools/check-assumption-log.py.
 
-Repo root: /home/user/agency
-Branch: claude/integrate-repo-specs-cIWtI
 
 Read first: FOLDERS.md §3, AGENTS.md §60-65, tools/fm/extract.py.
 

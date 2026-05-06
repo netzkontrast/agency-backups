@@ -96,7 +96,7 @@ Medium (~3 hours).
 
 ```text
 Run research-prompt-optimizer Phase 1–3 against the intent above. Repo root:
-/home/user/agency. Branch: claude/integrate-repo-specs-cIWtI.
+
 
 Skip Phase 1 askuser; intent is canonical.
 Render the research prompt to /research/spec-staleness-decision-formalization/research-prompt.md.

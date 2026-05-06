@@ -49,8 +49,6 @@ Medium (~120 LOC + 100 LOC tests).
 ```text
 Implement tools/check-prompt-self-containedness.py per ST-1 SPEC §3.
 
-Repo root: /home/user/agency
-Branch: claude/integrate-repo-specs-cIWtI
 
 Pre-flight: test -f research/prompt-engineering-principle-mechanizability/output/SPEC.md
 If absent, abort.

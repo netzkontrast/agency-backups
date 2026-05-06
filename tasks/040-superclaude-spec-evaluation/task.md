@@ -6,14 +6,15 @@ summary: "Evaluate the Gemini-authored 'SuperClaude Orchestration & Meta-Governa
 created: 2026-05-06
 updated: 2026-05-06
 task_id: "040"
-task_status: open
-task_owner: "unassigned"
+task_status: in_progress
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by: []
 task_affects_paths:
+  - tasks/040-superclaude-spec-evaluation/
   - tasks/032-agents-spec-integration/
   - tasks/033-task-spec-integration/
   - tasks/034-prompt-spec-integration/
@@ -88,11 +89,11 @@ Scenario: A new SC.CMD.* scenario lands without colliding with existing schemes
 
 ## Todo
 
-- [ ] 1. Phase 1 — read backend-architect + frontend-architect findings (filed under `evaluation-notes.md` at session-end).
-- [ ] 2. Phase 2 — produce §A classification matrix (per Gemini-spec §, one row).
-- [ ] 3. Phase 3 — produce §B anchor-scheme reconciliation decision.
-- [ ] 4. Phase 4 — produce §C MCP-server reality-check matrix.
-- [ ] 5. Phase 5 — author concrete patches against accepted-aspect host tasks.
+- [x] 1. Phase 1 — read backend-architect + frontend-architect findings (filed at `evaluation-notes.md` + `evaluation-notes-frontend.md`, commits 476ac6a + 8264a68).
+- [x] 2. Phase 2 — produce §A classification matrix (per Gemini-spec §, one row). Filed in `synthesis.md §A` (commit 9e3b59f).
+- [x] 3. Phase 3 — produce §B anchor-scheme reconciliation decision. Filed in `synthesis.md §B` (option ii — fold `SC.CMD.*` into host-spec namespaces; 10-row remap table).
+- [x] 4. Phase 4 — produce §C MCP-server reality-check matrix. Filed in `synthesis.md §C` (0 of 8 servers integrated).
+- [ ] 5. Phase 5 — author concrete patches against accepted-aspect host tasks. **Partially done** — three highest-leverage MERGE patches landed against Tasks 033/038/039 in commit 9e3b59f (per Loop 5 of /sc:improve). Remaining MERGE rows for Tasks 034 (§3.1 → 034) and 037 (§6 → 037) queued for the maintainer.
 - [ ] 6. Phase 6 — run `tools/check-governance.sh`; fix ERRORs.
 - [ ] 7. Update `tasks/readme.md` + `research/readme.md` for status transitions.
 - [ ] 8. Author `friction-log.md` with FL[0-3].

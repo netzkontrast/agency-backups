@@ -51,8 +51,6 @@ Medium (~150 LOC + 100 LOC tests; subject-extraction heuristic is the bulk).
 ```text
 Implement tools/check-rfc2119-polarity.py.
 
-Repo root: /home/user/agency
-Branch: claude/integrate-repo-specs-cIWtI
 
 Read first:
   - research/adr-assumption-audit/output/REPORT.md §1 ASM-001

@@ -72,7 +72,7 @@ category_signal: A  # adversarial extraction with explicit falsifiability
 
 ## Inputs
 
-- All 8 root specs at `/home/user/agency/{AGENTS,TASK,PROMPT,RESEARCH,FOLDERS,PRE_COMMIT,FRUSTRATED,MAINTENANCE}.md`.
+- All 8 root specs at the repo root (`AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `PRE_COMMIT.md`, `FRUSTRATED.md`, `MAINTENANCE.md`).
 - [`research/adr-assumption-audit/output/REPORT.md`](../../../research/adr-assumption-audit/output/REPORT.md) §2 (11 IADRs already enumerated).
 - [`research/adr-spec-research-synthesis/output/SPEC.md`](../../../research/adr-spec-research-synthesis/output/SPEC.md) (canonical ADR format).
 - [`tasks/028-adr-tooling-impl-plan/implementation-plan.md`](../../028-adr-tooling-impl-plan/implementation-plan.md) §B (PD↔OD cross-reference).
@@ -104,8 +104,6 @@ You are running Phase 1–3 of the research-prompt-optimizer pipeline against th
 following intent. Use the Phase 1 Intent block above verbatim as the
 intent_<slug>.yaml seed.
 
-Repo root: /home/user/agency
-Branch: claude/integrate-repo-specs-cIWtI
 
 Tasks:
 1. Confirm Phase 1 intent matches the YAML above (no new asks needed; user

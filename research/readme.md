@@ -4,7 +4,7 @@ status: active
 slug: research-root
 summary: "Root of /research/. Each subfolder is the workspace produced by executing a prompt of matching slug; /research/ does not house prompt drafts."
 created: 2026-05-02
-updated: 2026-05-05
+updated: 2026-05-06
 ---
 
 # Research Root

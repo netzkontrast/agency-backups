@@ -48,8 +48,6 @@ Small (~80 LOC + 80 LOC tests; the algorithm work is ST-2's job).
 ```text
 Implement tools/fm/check-task-lifecycle-classification.py.
 
-Repo root: /home/user/agency
-Branch: claude/integrate-repo-specs-cIWtI
 
 Pre-flight check:
   test -f research/spec-staleness-decision-formalization/output/SPEC.md

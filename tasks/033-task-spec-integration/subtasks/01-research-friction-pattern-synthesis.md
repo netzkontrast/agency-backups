@@ -95,7 +95,7 @@ Large (~5 hours; corpus aggregation + thematic coding).
 
 ```text
 Run the research-prompt-optimizer pipeline (Phase 1–3) against the intent
-block above. Repo root: /home/user/agency. Branch: claude/integrate-repo-specs-cIWtI.
+block above.
 
 Phase 1 intent is canonical (above) — skip the askuser loop.
 Phase 2: select M07 / M12 / M02 modules; author CBs from constraints.

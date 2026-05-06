@@ -100,5 +100,5 @@ When applying patches per §A's MERGE rows:
 
 ## §E. Phases 5 + 6 Status
 
-- **Phase 5** (concrete patches): two highest-leverage MERGE patches applied in this commit (see Loop 5 below + parent task.md). Remaining MERGE rows for Tasks 034, 037, 039 are queued for the maintainer.
+- **Phase 5** (concrete patches): **three** highest-leverage MERGE patches applied in commit `9e3b59f` (Loop 5 of `/sc:improve`) — Task 033 ST-5 (Planner/Tech-Lead vocabulary), Task 038 ST-3 (Reflexion pattern), Task 039 ST-6 (three-column toolchain table; strip MorphLLM citation). Remaining MERGE rows for **Tasks 034** (§3.1 brainstorm Socratic → PROMPT.md amendment cross-reference) and **Task 037** (§6 reflect-before-commit → PRE_COMMIT.md PC.B.REFL.1 scenario) are queued for the maintainer.
 - **Phase 6** (governance check + closure): runs after every Phase-5 patch lands. Final closure transitions Task 040 to `task_status: done` with friction-log.md.

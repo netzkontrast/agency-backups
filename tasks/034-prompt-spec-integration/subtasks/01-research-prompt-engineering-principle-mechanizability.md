@@ -93,7 +93,7 @@ Medium (~3 hours; corpus-scan + statistical FPR calc).
 
 ```text
 Run research-prompt-optimizer Phase 1–3 against the intent. Repo root:
-/home/user/agency. Branch: claude/integrate-repo-specs-cIWtI.
+
 
 Skip Phase 1 askuser. Render to /research/prompt-engineering-principle-mechanizability/research-prompt.md.
 Execute and produce /research/prompt-engineering-principle-mechanizability/output/SPEC.md.

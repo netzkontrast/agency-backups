@@ -96,8 +96,8 @@ Medium (~3 hours).
 ## Execution Brief
 
 ```text
-Run research-prompt-optimizer Phase 1–3. Repo root: /home/user/agency.
-Branch: claude/integrate-repo-specs-cIWtI.
+Run research-prompt-optimizer Phase 1–3. 
+
 
 Skip Phase 1 askuser; intent canonical.
 Render to /research/toolchain-flip-criteria/research-prompt.md.

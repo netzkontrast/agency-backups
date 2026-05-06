@@ -97,8 +97,8 @@ Large (~5 hours; protocol design + worked example + token measurement).
 ## Execution Brief
 
 ```text
-Run research-prompt-optimizer Phase 1–3. Repo root: /home/user/agency.
-Branch: claude/integrate-repo-specs-cIWtI.
+Run research-prompt-optimizer Phase 1–3. 
+
 
 Skip Phase 1 askuser; intent canonical.
 Render to /research/session-continuity-protocol-instantiation/research-prompt.md.
