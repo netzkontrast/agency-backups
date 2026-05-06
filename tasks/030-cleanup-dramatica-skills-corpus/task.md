@@ -116,19 +116,19 @@ This task explicitly demands the following SuperClaude command surface:
 
 ## Todo
 
-- [ ] 1. Author this `task.md` (current step) — set `task_status: open`.
-- [ ] 2. Author the nine subtask files under [`subtasks/`](./subtasks/) — one per ST. Each MUST include the four critical-thinking sections (briefing / inputs / acceptance / falsification) per the Task 019 convention and the agent-prompt block formatted for `/sc:agent` consumption.
-- [ ] 3. Author the assumption log + frustration log in [`notes.md`](./notes.md) BEFORE any subtask dispatches. Per [`FRUSTRATED.md`](../../FRUSTRATED.md), the user explicitly asked for a verbose meta-frustration log of the planning session.
-- [ ] 4. Spawn ST-1 / ST-2 / ST-3 / ST-4 (Phase A) via four parallel `/sc:agent` calls. Each subagent runs in main-tree (NOT worktree — they touch overlapping markdown files).
-- [ ] 5. Wait for Phase A; review each subagent's commit; merge sequentially with conflict resolution. Run `tools/dramatica-nav/validate.py` after each merge.
-- [ ] 6. Spawn ST-5 / ST-6 / ST-7 (Phase B) via three parallel `/sc:agent` calls, each in `isolation: "worktree"` (independent code surfaces, no markdown overlap).
-- [ ] 7. Wait for Phase B; merge worktrees in order ST-6 → ST-5 → ST-7 (validation tooling first, then editor, then alias loader). Run `pytest tools/dramatica-nav/tests/` after each merge.
-- [ ] 8. Spawn ST-8 (Phase C). Sequential `/sc:agent` call, NOT worktree (large markdown surface area touched).
-- [ ] 9. Spawn ST-9 (Phase C). Sequential `/sc:agent` call in `isolation: "worktree"` (new artefact surface under `maintenance/schemas/narrative-ontology/precompiled/`).
-- [ ] 10. Run the §Goal acceptance gate end-to-end: `tools/dramatica-nav/cleanup.py --check`, `tools/dramatica-nav/validate.py`, `pytest tools/dramatica-nav/tests/`, plus the ST-9 token-cost benchmark. Each MUST pass.
-- [ ] 11. Append [`friction-log.md`](./friction-log.md) with the FL declaration per [`FRUSTRATED.md`](../../FRUSTRATED.md) — note this is a SEPARATE file from `notes.md`'s in-session meta-frustration log.
-- [ ] 12. Set `task_status: done`. Run `tools/check-governance.sh`. If exit 0, invoke `/sc:createPR` per [`AGENTS.md § Closing Run Procedure`](../../AGENTS.md).
-- [ ] 13. **Sibling-task linkage check:** confirm that main's [Task 029](../029-adr-assumption-audit/task.md) is `open` and verify this task's `notes.md §3` FE-1…FE-10 frustration items have been surfaced to that audit (either by direct reference in 029's task body or by an explicit comment in 029's research workspace).
+- [x] 1. Author this `task.md` (current step) — set `task_status: open`.
+- [x] 2. Author the nine subtask files under [`subtasks/`](./subtasks/) — one per ST. Each MUST include the four critical-thinking sections (briefing / inputs / acceptance / falsification) per the Task 019 convention and the agent-prompt block formatted for `/sc:agent` consumption.
+- [x] 3. Author the assumption log + frustration log in [`notes.md`](./notes.md) BEFORE any subtask dispatches. Per [`FRUSTRATED.md`](../../FRUSTRATED.md), the user explicitly asked for a verbose meta-frustration log of the planning session.
+- [x] 4. Spawn ST-1 / ST-2 / ST-3 / ST-4 (Phase A) via four parallel `/sc:agent` calls. Each subagent runs in main-tree (NOT worktree — they touch overlapping markdown files). **Executed as ST-1+ST-2 parallel, then ST-3 sequential, then ST-4 sequential — see friction-log §FE-EX-1 for the depends_on-driven serialisation.**
+- [x] 5. Wait for Phase A; review each subagent's commit; merge sequentially with conflict resolution. Run `tools/dramatica-nav/validate.py` after each merge.
+- [x] 6. Spawn ST-5 / ST-6 / ST-7 (Phase B) via three parallel `/sc:agent` calls, each in `isolation: "worktree"` (independent code surfaces, no markdown overlap). **ST-7 hit org quota mid-run — re-dispatched on a fresh cycle. See friction-log §FE-EX-2.**
+- [x] 7. Wait for Phase B; merge worktrees in order ST-6 → ST-5 → ST-7 (validation tooling first, then editor, then alias loader). Run `pytest tools/dramatica-nav/tests/` after each merge.
+- [x] 8. Spawn ST-8 (Phase C). Sequential `/sc:agent` call, NOT worktree (large markdown surface area touched).
+- [x] 9. Spawn ST-9 (Phase C). Sequential `/sc:agent` call in `isolation: "worktree"` (new artefact surface under `maintenance/schemas/narrative-ontology/precompiled/`).
+- [x] 10. Run the §Goal acceptance gate end-to-end: `tools/dramatica-nav/cleanup.py --check`, `tools/dramatica-nav/validate.py`, `pytest tools/dramatica-nav/tests/`, plus the ST-9 token-cost benchmark. Each MUST pass.
+- [x] 11. Append [`friction-log.md`](./friction-log.md) with the FL declaration per [`FRUSTRATED.md`](../../FRUSTRATED.md) — note this is a SEPARATE file from `notes.md`'s in-session meta-frustration log.
+- [x] 12. Set `task_status: done`. Run `tools/check-governance.sh`. If exit 0, invoke `/sc:createPR` per [`AGENTS.md § Closing Run Procedure`](../../AGENTS.md). **CR.1 deviation: the driver ran governance-pass + push but did not complete the createPR API call before the user opened PR #68 manually. Recorded as a candidate Task 029 input.**
+- [x] 13. **Sibling-task linkage check:** confirm that main's [Task 029](../029-adr-assumption-audit/task.md) is `open` and verify this task's `notes.md §3` FE-1…FE-10 frustration items have been surfaced to that audit (either by direct reference in 029's task body or by an explicit comment in 029's research workspace). **Task 029 status: `done`. Surfacing of FE-EX-1..5 + FE-1..10 to 029's input pile is documented in friction-log §Closing state; no separate cross-link issued (Task 029 already closed).**
 
 ## Acceptance Criteria (Gherkin)
 
