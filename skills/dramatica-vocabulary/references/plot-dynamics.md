@@ -29,8 +29,10 @@ provenance: source-original
 aliases_de:
 - Antrieb
 scenarios:
-- lyric.album-arc-mapping
 - novel.act-pivot
+- lyric.album-arc-mapping
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -206,6 +208,8 @@ id: plot-dynamic.judgment
 kind: plot-dynamic
 canonical_label: Judgment
 provenance: source-original
+aliases_de:
+- Urteil
 aliases_en:
 - authoritative
 - held truth
@@ -213,10 +217,10 @@ aliases_en:
 - judgment
 - learnedness
 - maintained
-aliases_de:
-- Urteil
 scenarios:
 - lyric.album-arc-mapping
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -328,13 +332,15 @@ id: plot-dynamic.limit
 kind: plot-dynamic
 canonical_label: Limit
 provenance: source-original
-aliases_en:
-- limit
 aliases_de:
 - Begrenzung
 - Limit
+aliases_en:
+- limit
 scenarios:
 - lyric.album-arc-mapping
+- novel.act-pivot
+- novel.dual-storyform
 ```
 
 
@@ -408,13 +414,15 @@ id: plot-dynamic.outcome
 kind: plot-dynamic
 canonical_label: Outcome
 provenance: source-original
-aliases_en:
-- outcome
 aliases_de:
 - Ausgang
 - Ergebnis
+aliases_en:
+- outcome
 scenarios:
 - lyric.album-arc-mapping
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 

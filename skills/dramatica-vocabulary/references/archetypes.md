@@ -40,13 +40,14 @@ id: arc.antagonist
 kind: archetype
 canonical_label: Antagonist
 provenance: source-original
-aliases_en:
-- antagonist
 aliases_de:
 - Antagonist
+aliases_en:
+- antagonist
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- novel.crucial-element-audit
 ```
 
 
@@ -70,14 +71,15 @@ id: arc.contagonist
 kind: archetype
 canonical_label: Contagonist
 provenance: source-original
-aliases_en:
-- contagonist
 aliases_de:
 - Gegenmittel
 - Kontagonist
+aliases_en:
+- contagonist
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- lyric.refrain-as-restatement
 ```
 
 
@@ -126,13 +128,14 @@ id: arc.emotion
 kind: archetype
 canonical_label: Emotion
 provenance: source-original
-aliases_en:
-- emotion
 aliases_de:
 - Emotion
+aliases_en:
+- emotion
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- lyric.refrain-as-restatement
 ```
 
 
@@ -164,14 +167,15 @@ id: arc.guardian
 kind: archetype
 canonical_label: Guardian
 provenance: source-original
-aliases_en:
-- guardian
 aliases_de:
 - Beschützer
 - Hüter
+aliases_en:
+- guardian
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- lyric.refrain-as-restatement
 ```
 
 
@@ -202,13 +206,14 @@ id: arc.protagonist
 kind: archetype
 canonical_label: Protagonist
 provenance: source-original
-aliases_en:
-- protagonist
 aliases_de:
 - Protagonist
+aliases_en:
+- protagonist
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- novel.crucial-element-audit
 ```
 
 
@@ -249,13 +254,14 @@ id: arc.reason
 kind: archetype
 canonical_label: Reason
 provenance: source-original
-aliases_en:
-- reason
 aliases_de:
 - Vernunft
+aliases_en:
+- reason
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- lyric.refrain-as-restatement
 ```
 
 
@@ -316,14 +322,15 @@ id: arc.sidekick
 kind: archetype
 canonical_label: Sidekick
 provenance: source-original
-aliases_en:
-- sidekick
 aliases_de:
 - Begleiter
 - Gefährte
+aliases_en:
+- sidekick
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 
@@ -357,14 +364,15 @@ id: arc.skeptic
 kind: archetype
 canonical_label: Skeptic
 provenance: source-original
-aliases_en:
-- skeptic
 aliases_de:
 - Skeptiker
 - Zweifler
+aliases_en:
+- skeptic
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 

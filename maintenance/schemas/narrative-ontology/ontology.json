@@ -11,7 +11,8 @@
       "term_file": "skills/dramatica-vocabulary/references/archetypes.md#antagonist",
       "scenarios": [
         "lyric.archetype-as-system-part",
-        "novel.character-arc"
+        "novel.character-arc",
+        "novel.crucial-element-audit"
       ],
       "aliases_en": [
         "antagonist"
@@ -28,7 +29,8 @@
       "term_file": "skills/dramatica-vocabulary/references/archetypes.md#contagonist",
       "scenarios": [
         "lyric.archetype-as-system-part",
-        "novel.character-arc"
+        "novel.character-arc",
+        "lyric.refrain-as-restatement"
       ],
       "aliases_en": [
         "contagonist"
@@ -46,7 +48,8 @@
       "term_file": "skills/dramatica-vocabulary/references/archetypes.md#emotion",
       "scenarios": [
         "lyric.archetype-as-system-part",
-        "novel.character-arc"
+        "novel.character-arc",
+        "lyric.refrain-as-restatement"
       ],
       "aliases_en": [
         "emotion"
@@ -63,7 +66,8 @@
       "term_file": "skills/dramatica-vocabulary/references/archetypes.md#guardian",
       "scenarios": [
         "lyric.archetype-as-system-part",
-        "novel.character-arc"
+        "novel.character-arc",
+        "lyric.refrain-as-restatement"
       ],
       "aliases_en": [
         "guardian"
@@ -81,7 +85,8 @@
       "term_file": "skills/dramatica-vocabulary/references/archetypes.md#protagonist",
       "scenarios": [
         "lyric.archetype-as-system-part",
-        "novel.character-arc"
+        "novel.character-arc",
+        "novel.crucial-element-audit"
       ],
       "aliases_en": [
         "protagonist"
@@ -98,7 +103,8 @@
       "term_file": "skills/dramatica-vocabulary/references/archetypes.md#reason",
       "scenarios": [
         "lyric.archetype-as-system-part",
-        "novel.character-arc"
+        "novel.character-arc",
+        "lyric.refrain-as-restatement"
       ],
       "aliases_en": [
         "reason"
@@ -115,7 +121,8 @@
       "term_file": "skills/dramatica-vocabulary/references/archetypes.md#sidekick",
       "scenarios": [
         "lyric.archetype-as-system-part",
-        "novel.character-arc"
+        "novel.character-arc",
+        "novel.diagnose-flat-draft"
       ],
       "aliases_en": [
         "sidekick"
@@ -133,7 +140,8 @@
       "term_file": "skills/dramatica-vocabulary/references/archetypes.md#skeptic",
       "scenarios": [
         "lyric.archetype-as-system-part",
-        "novel.character-arc"
+        "novel.character-arc",
+        "novel.diagnose-flat-draft"
       ],
       "aliases_en": [
         "skeptic"
@@ -150,7 +158,9 @@
       "provenance": "source-original",
       "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#approach",
       "scenarios": [
-        "novel.character-arc"
+        "novel.character-arc",
+        "novel.diagnose-flat-draft",
+        "lyric.archetype-as-system-part"
       ],
       "aliases_en": [
         "approach",
@@ -172,7 +182,9 @@
       "provenance": "source-original",
       "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#growth",
       "scenarios": [
-        "novel.character-arc"
+        "novel.character-arc",
+        "novel.diagnose-flat-draft",
+        "novel.dual-storyform"
       ],
       "aliases_de": [
         "Entwicklung",
@@ -194,7 +206,9 @@
       ],
       "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#mental-sex",
       "scenarios": [
-        "novel.character-arc"
+        "novel.character-arc",
+        "novel.crucial-element-audit",
+        "novel.dual-storyform"
       ],
       "aliases_de": [
         "Problemlösungsstil"
@@ -207,7 +221,10 @@
       "provenance": "extension-derived",
       "term_file": "skills/dramatica-vocabulary/references/dramatica-fundamentals.md#resolve-substantive-definition",
       "scenarios": [
-        "novel.character-arc"
+        "novel.character-arc",
+        "novel.crucial-element-audit",
+        "novel.dual-storyform",
+        "novel.diagnose-flat-draft"
       ],
       "aliases_de": [
         "Entschlossenheit",
@@ -242,7 +259,9 @@
       ],
       "term_file": "skills/dramatica-vocabulary/references/classes.md#physics",
       "scenarios": [
-        "novel.dual-storyform"
+        "novel.dual-storyform",
+        "novel.act-pivot",
+        "lyric.album-arc-mapping"
       ],
       "aliases_de": [
         "Physik"
@@ -259,7 +278,9 @@
       ],
       "term_file": "skills/dramatica-vocabulary/references/classes.md#psychology",
       "scenarios": [
-        "novel.dual-storyform"
+        "novel.dual-storyform",
+        "novel.act-pivot",
+        "lyric.archetype-as-system-part"
       ],
       "aliases_de": [
         "Psychologie"
@@ -275,7 +296,9 @@
       ],
       "term_file": "skills/dramatica-vocabulary/references/dramatica-fundamentals.md#the-four-classes-complete-set",
       "scenarios": [
-        "novel.dual-storyform"
+        "novel.dual-storyform",
+        "novel.act-pivot",
+        "lyric.album-arc-mapping"
       ],
       "aliases_de": [
         "Universum"
@@ -2372,8 +2395,10 @@
       "provenance": "source-original",
       "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#action",
       "scenarios": [
+        "novel.act-pivot",
         "lyric.album-arc-mapping",
-        "novel.act-pivot"
+        "novel.dual-storyform",
+        "novel.diagnose-flat-draft"
       ],
       "aliases_de": [
         "Antrieb"
@@ -2386,7 +2411,9 @@
       "provenance": "source-original",
       "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#judgment",
       "scenarios": [
-        "lyric.album-arc-mapping"
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform",
+        "novel.diagnose-flat-draft"
       ],
       "aliases_en": [
         "authoritative",
@@ -2407,7 +2434,9 @@
       "provenance": "source-original",
       "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#limit",
       "scenarios": [
-        "lyric.album-arc-mapping"
+        "lyric.album-arc-mapping",
+        "novel.act-pivot",
+        "novel.dual-storyform"
       ],
       "aliases_en": [
         "limit"
@@ -2424,7 +2453,9 @@
       "provenance": "source-original",
       "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#outcome",
       "scenarios": [
-        "lyric.album-arc-mapping"
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform",
+        "novel.diagnose-flat-draft"
       ],
       "aliases_en": [
         "outcome"
@@ -2732,7 +2763,9 @@
       "ncp_appreciation_partial": false,
       "term_file": "skills/dramatica-vocabulary/references/main-vs-impact-character.md#impact-character",
       "scenarios": [
-        "novel.dual-storyform"
+        "novel.dual-storyform",
+        "novel.character-arc",
+        "lyric.archetype-as-system-part"
       ],
       "aliases_de": [
         "Einflussfigur",
@@ -2793,7 +2826,9 @@
       "ncp_appreciation_partial": false,
       "term_file": "skills/dramatica-vocabulary/references/domains.md#perspective",
       "scenarios": [
-        "novel.dual-storyform"
+        "novel.dual-storyform",
+        "novel.character-arc",
+        "lyric.refrain-as-restatement"
       ],
       "aliases_de": [
         "Beziehung",

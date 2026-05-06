@@ -98,17 +98,19 @@ id: throughline.relationship
 kind: throughline
 canonical_label: Relationship Story
 provenance: source-original
+aliases_de:
+- Beziehung
+- Beziehungs-Handlungsstrang
 aliases_en:
 - Subjective Story
 - RS
 - SS
-aliases_de:
-- Beziehung
-- Beziehungs-Handlungsstrang
-scenarios:
-- novel.dual-storyform
 ncp_appreciation: Relationship Story
 ncp_appreciation_partial: false
+scenarios:
+- novel.dual-storyform
+- novel.character-arc
+- lyric.refrain-as-restatement
 ```
 
 

@@ -22,6 +22,9 @@ id: character-dynamic.approach
 kind: character-dynamic
 canonical_label: Approach
 provenance: source-original
+aliases_de:
+- Herangehensweise
+- Vorgehensweise
 aliases_en:
 - approach
 - manner
@@ -29,11 +32,10 @@ aliases_en:
 - method
 - procedure
 - style
-aliases_de:
-- Herangehensweise
-- Vorgehensweise
 scenarios:
 - novel.character-arc
+- novel.diagnose-flat-draft
+- lyric.archetype-as-system-part
 ```
 
 
@@ -90,6 +92,8 @@ aliases_de:
 - Wachstum
 scenarios:
 - novel.character-arc
+- novel.diagnose-flat-draft
+- novel.dual-storyform
 ```
 
 
@@ -303,16 +307,18 @@ id: character-dynamic.problem-solving-style
 kind: character-dynamic
 canonical_label: Problem-solving Style
 provenance: source-original
-aliases_en:
-- Mental Sex
 aliases_de:
 - Problemlösungsstil
+aliases_en:
+- Mental Sex
 deprecated_aliases_en:
 - Male/Female problem-solving
 - Female Mental Sex
 - Male Mental Sex
 scenarios:
 - novel.character-arc
+- novel.crucial-element-audit
+- novel.dual-storyform
 ```
 
 
