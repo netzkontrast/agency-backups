@@ -26,6 +26,8 @@ id: plot-dynamic.driver
 kind: plot-dynamic
 canonical_label: Driver
 provenance: source-original
+aliases_de:
+- Antrieb
 scenarios:
 - lyric.album-arc-mapping
 - novel.act-pivot
@@ -204,6 +206,15 @@ id: plot-dynamic.judgment
 kind: plot-dynamic
 canonical_label: Judgment
 provenance: source-original
+aliases_en:
+- authoritative
+- held truth
+- held truths
+- judgment
+- learnedness
+- maintained
+aliases_de:
+- Urteil
 scenarios:
 - lyric.album-arc-mapping
 ```
@@ -317,6 +328,11 @@ id: plot-dynamic.limit
 kind: plot-dynamic
 canonical_label: Limit
 provenance: source-original
+aliases_en:
+- limit
+aliases_de:
+- Begrenzung
+- Limit
 scenarios:
 - lyric.album-arc-mapping
 ```
@@ -392,6 +408,11 @@ id: plot-dynamic.outcome
 kind: plot-dynamic
 canonical_label: Outcome
 provenance: source-original
+aliases_en:
+- outcome
+aliases_de:
+- Ausgang
+- Ergebnis
 scenarios:
 - lyric.album-arc-mapping
 ```

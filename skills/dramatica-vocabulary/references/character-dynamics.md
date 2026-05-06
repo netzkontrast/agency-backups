@@ -22,6 +22,16 @@ id: character-dynamic.approach
 kind: character-dynamic
 canonical_label: Approach
 provenance: source-original
+aliases_en:
+- approach
+- manner
+- manner of doing
+- method
+- procedure
+- style
+aliases_de:
+- Herangehensweise
+- Vorgehensweise
 scenarios:
 - novel.character-arc
 ```
@@ -75,6 +85,9 @@ id: character-dynamic.growth
 kind: character-dynamic
 canonical_label: Growth
 provenance: source-original
+aliases_de:
+- Entwicklung
+- Wachstum
 scenarios:
 - novel.character-arc
 ```
@@ -290,14 +303,16 @@ id: character-dynamic.problem-solving-style
 kind: character-dynamic
 canonical_label: Problem-solving Style
 provenance: source-original
-scenarios:
-- novel.character-arc
 aliases_en:
 - Mental Sex
+aliases_de:
+- Problemlösungsstil
 deprecated_aliases_en:
 - Male/Female problem-solving
 - Female Mental Sex
 - Male Mental Sex
+scenarios:
+- novel.character-arc
 ```
 
 

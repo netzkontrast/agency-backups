@@ -22,6 +22,8 @@ id: concept.archetype
 kind: concept
 canonical_label: Archetype
 provenance: source-original
+aliases_en:
+- archetype
 ```
 
 
@@ -38,6 +40,10 @@ id: arc.antagonist
 kind: archetype
 canonical_label: Antagonist
 provenance: source-original
+aliases_en:
+- antagonist
+aliases_de:
+- Antagonist
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
@@ -64,6 +70,11 @@ id: arc.contagonist
 kind: archetype
 canonical_label: Contagonist
 provenance: source-original
+aliases_en:
+- contagonist
+aliases_de:
+- Gegenmittel
+- Kontagonist
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
@@ -115,6 +126,10 @@ id: arc.emotion
 kind: archetype
 canonical_label: Emotion
 provenance: source-original
+aliases_en:
+- emotion
+aliases_de:
+- Emotion
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
@@ -149,6 +164,11 @@ id: arc.guardian
 kind: archetype
 canonical_label: Guardian
 provenance: source-original
+aliases_en:
+- guardian
+aliases_de:
+- Beschützer
+- Hüter
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
@@ -182,6 +202,10 @@ id: arc.protagonist
 kind: archetype
 canonical_label: Protagonist
 provenance: source-original
+aliases_en:
+- protagonist
+aliases_de:
+- Protagonist
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
@@ -225,6 +249,10 @@ id: arc.reason
 kind: archetype
 canonical_label: Reason
 provenance: source-original
+aliases_en:
+- reason
+aliases_de:
+- Vernunft
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
@@ -288,6 +316,11 @@ id: arc.sidekick
 kind: archetype
 canonical_label: Sidekick
 provenance: source-original
+aliases_en:
+- sidekick
+aliases_de:
+- Begleiter
+- Gefährte
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc
@@ -324,6 +357,11 @@ id: arc.skeptic
 kind: archetype
 canonical_label: Skeptic
 provenance: source-original
+aliases_en:
+- skeptic
+aliases_de:
+- Skeptiker
+- Zweifler
 scenarios:
 - lyric.archetype-as-system-part
 - novel.character-arc

@@ -29,6 +29,10 @@ id: concept.act
 kind: concept
 canonical_label: Act
 provenance: source-original
+aliases_en:
+- act
+aliases_de:
+- Akt
 ```
 
 
@@ -429,6 +433,8 @@ id: concept.scene
 kind: concept
 canonical_label: Scene
 provenance: source-original
+aliases_de:
+- Szene
 ```
 
 

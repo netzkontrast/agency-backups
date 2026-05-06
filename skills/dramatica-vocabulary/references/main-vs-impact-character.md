@@ -15,13 +15,17 @@ id: throughline.influence
 kind: throughline
 canonical_label: Influence Character
 provenance: source-original
-ncp_appreciation: Influence Character
-ncp_appreciation_partial: false
-scenarios:
-- novel.dual-storyform
 aliases_en:
 - Impact Character
 - IC
+aliases_de:
+- Einflussfigur
+- Einflussfigur-Handlungsstrang
+- Impact-Figur
+scenarios:
+- novel.dual-storyform
+ncp_appreciation: Influence Character
+ncp_appreciation_partial: false
 ```
 
 

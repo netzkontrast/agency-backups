@@ -19,10 +19,12 @@ id: class.universe
 kind: class
 canonical_label: Universe
 provenance: extension-derived
-scenarios:
-- novel.dual-storyform
 aliases_en:
 - Situation
+aliases_de:
+- Universum
+scenarios:
+- novel.dual-storyform
 ```
 
 
@@ -93,6 +95,9 @@ id: character-dynamic.resolve
 kind: character-dynamic
 canonical_label: Resolve
 provenance: extension-derived
+aliases_de:
+- Entschlossenheit
+- Wandel-Entscheidung
 scenarios:
 - novel.character-arc
 ```

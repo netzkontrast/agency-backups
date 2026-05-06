@@ -77,6 +77,13 @@ id: var.ability
 kind: variation
 canonical_label: Ability
 provenance: source-original
+aliases_en:
+- capability
+- capacity
+- faculty
+- innate capacity
+- knack
+- talent
 quad_id: quad.knowledge-el
 ktad_position: A
 ```
@@ -171,6 +178,8 @@ id: var.appraisal
 kind: variation
 canonical_label: Appraisal
 provenance: source-original
+aliases_en:
+- first impres
 dynamic_pair_id: var.reappraisal
 ```
 
@@ -217,6 +226,12 @@ id: var.attempt
 kind: variation
 canonical_label: Attempt
 provenance: source-original
+aliases_en:
+- dubious effort
+- endeavor
+- speculative endeavor
+- try
+- uncertain undertaking
 dynamic_pair_id: var.work
 ```
 
@@ -254,9 +269,12 @@ id: var.attitude
 kind: variation
 canonical_label: Attitude
 provenance: source-original
-type_id: type.obtaining
+aliases_en:
+- demeanor
+- manner of
 quad_id: quad.approach-var-physics
 ktad_position: T
+type_id: type.obtaining
 ```
 
 
@@ -293,6 +311,16 @@ id: var.attraction
 kind: variation
 canonical_label: Attraction
 provenance: source-original
+aliases_en:
+- allure
+- captivate
+- charm
+- dodge
+- elude
+- enticement
+- escape
+- evade
+- steer clear of
 dynamic_pair_id: var.repulsion
 ```
 
@@ -397,9 +425,13 @@ id: var.choice
 kind: variation
 canonical_label: Choice
 provenance: source-original
+aliases_en:
+- decision
+- pick
+- selection
+dynamic_pair_id: var.delay
 quad_id: quad.openness-var
 ktad_position: D
-dynamic_pair_id: var.delay
 ```
 
 
@@ -441,6 +473,10 @@ id: var.circumstances
 kind: variation
 canonical_label: Circumstances
 provenance: source-original
+aliases_en:
+- emotional evaluation of the environment
+- how things stand emotionally
+- value of existing
 dynamic_pair_id: var.situation
 ```
 
@@ -483,10 +519,15 @@ id: var.closure
 kind: variation
 canonical_label: Closure
 provenance: source-original
-type_id: type.subconscious
+aliases_en:
+- completion
+- finishing
+- recursive
+- resolution
+dynamic_pair_id: var.denial
 quad_id: quad.hope-var
 ktad_position: A
-dynamic_pair_id: var.denial
+type_id: type.subconscious
 ```
 
 
@@ -530,10 +571,12 @@ id: var.commitment
 kind: variation
 canonical_label: Commitment
 provenance: source-original
-type_id: type.conceiving
+aliases_en:
+- dedication
+dynamic_pair_id: var.responsibility
 quad_id: quad.rationalization-var
 ktad_position: T
-dynamic_pair_id: var.responsibility
+type_id: type.conceiving
 ```
 
 
@@ -575,10 +618,15 @@ id: var.conditioning
 kind: variation
 canonical_label: Conditioning
 provenance: source-original
-type_id: type.past
+aliases_en:
+- accustomed response
+- adaptive adjustments
+- habituation
+- trained response
+dynamic_pair_id: var.instinct
 quad_id: quad.senses-var
 ktad_position: A
-dynamic_pair_id: var.instinct
+type_id: type.past
 ```
 
 
@@ -618,9 +666,12 @@ id: var.confidence
 kind: variation
 canonical_label: Confidence
 provenance: source-original
-type_id: type.becoming
+aliases_en:
+- hopeful prospects
+- positive
 quad_id: quad.conscience-var
 ktad_position: D
+type_id: type.becoming
 ```
 
 
@@ -663,6 +714,12 @@ id: var.critical-flaw
 kind: variation
 canonical_label: Critical Flaw
 provenance: source-original
+aliases_en:
+- antagonist flaw
+- antagonist's flaw
+- character flaw
+- critical flaw
+- flaw
 ```
 
 
@@ -711,6 +768,8 @@ id: var.deficiency
 kind: variation
 canonical_label: Deficiency
 provenance: source-original
+aliases_en:
+- inadequacy
 dynamic_pair_id: var.permission
 ```
 
@@ -756,9 +815,13 @@ id: var.delay
 kind: variation
 canonical_label: Delay
 provenance: source-original
+aliases_en:
+- defer
+- postpone
+- put off
+dynamic_pair_id: var.choice
 quad_id: quad.openness-var
 ktad_position: A
-dynamic_pair_id: var.choice
 ```
 
 
@@ -805,10 +868,14 @@ id: var.denial
 kind: variation
 canonical_label: Denial
 provenance: source-original
-type_id: type.subconscious
+aliases_en:
+- not accepting
+- refusal to end
+- unwillingness to let go
+dynamic_pair_id: var.closure
 quad_id: quad.hope-var
 ktad_position: D
-dynamic_pair_id: var.closure
+type_id: type.subconscious
 ```
 
 
@@ -876,6 +943,9 @@ id: var.doubt
 kind: variation
 canonical_label: Doubt
 provenance: source-original
+aliases_en:
+- pessimism
+- uninformed
 dynamic_pair_id: var.investigation
 ```
 
@@ -905,10 +975,15 @@ id: var.dream
 kind: variation
 canonical_label: Dream
 provenance: source-original
-type_id: type.subconscious
+aliases_en:
+- airy
+- aspire
+- desiring the unlikely
+- pulling for the doubtful
+dynamic_pair_id: var.hope
 quad_id: quad.hope-var
 ktad_position: T
-dynamic_pair_id: var.hope
+type_id: type.subconscious
 ```
 
 
@@ -964,10 +1039,15 @@ id: var.enlightenment
 kind: variation
 canonical_label: Enlightenment
 provenance: source-original
-type_id: type.understanding
+aliases_en:
+- illumination
+- insight
+- intuitive discernment
+- transcendent
+dynamic_pair_id: var.wisdom
 quad_id: quad.wisdom-var
 ktad_position: D
-dynamic_pair_id: var.wisdom
+type_id: type.understanding
 ```
 
 
@@ -1007,10 +1087,12 @@ id: var.evidence
 kind: variation
 canonical_label: Evidence
 provenance: source-original
-type_id: type.memory
+aliases_en:
+- proof
+dynamic_pair_id: var.suspicion
 quad_id: quad.truth-var
 ktad_position: A
-dynamic_pair_id: var.suspicion
+type_id: type.memory
 ```
 
 
@@ -1055,6 +1137,10 @@ id: var.expediency
 kind: variation
 canonical_label: Expediency
 provenance: source-original
+aliases_en:
+- advisability
+- convenience
+- prudent
 dynamic_pair_id: var.need
 ```
 
@@ -1103,10 +1189,16 @@ id: var.experience
 kind: variation
 canonical_label: Experience
 provenance: source-original
-type_id: type.understanding
+aliases_en:
+- accumulated dealings with
+- accumulated feelings
+- familiarization
+- level of practice
+- seasoning
+dynamic_pair_id: var.skill
 quad_id: quad.wisdom-var
 ktad_position: A
-dynamic_pair_id: var.skill
+type_id: type.understanding
 ```
 
 
@@ -1142,6 +1234,10 @@ id: var.fact
 kind: variation
 canonical_label: Fact
 provenance: source-original
+aliases_en:
+- belief in the genuine
+- truly real
+- ultimately real beliefs
 dynamic_pair_id: var.fantasy
 ```
 
@@ -1184,10 +1280,14 @@ id: var.falsehood
 kind: variation
 canonical_label: Falsehood
 provenance: source-original
-type_id: type.memory
+aliases_en:
+- erroneous notion
+- erroneousness
+- untruth
+dynamic_pair_id: var.truth
 quad_id: quad.truth-var
 ktad_position: T
-dynamic_pair_id: var.truth
+type_id: type.memory
 ```
 
 
@@ -1229,6 +1329,8 @@ id: var.fantasy
 kind: variation
 canonical_label: Fantasy
 provenance: source-original
+aliases_en:
+- false belief
 dynamic_pair_id: var.fact
 ```
 
@@ -1266,9 +1368,12 @@ id: var.fate
 kind: variation
 canonical_label: Fate
 provenance: source-original
+aliases_en:
+- inevitable events
+- unpreventable
+dynamic_pair_id: var.destiny
 quad_id: quad.fate-var
 ktad_position: K
-dynamic_pair_id: var.destiny
 ```
 
 
@@ -1323,10 +1428,14 @@ id: var.hope
 kind: variation
 canonical_label: Hope
 provenance: source-original
-type_id: type.subconscious
+aliases_en:
+- desired expectation
+- moving forward
+- optimistic anticipation
+dynamic_pair_id: var.dream
 quad_id: quad.hope-var
 ktad_position: K
-dynamic_pair_id: var.dream
+type_id: type.subconscious
 ```
 
 
@@ -1388,10 +1497,13 @@ id: var.instinct
 kind: variation
 canonical_label: Instinct
 provenance: source-original
-type_id: type.past
+aliases_en:
+- innate
+- involuntary drive
+dynamic_pair_id: var.conditioning
 quad_id: quad.senses-var
 ktad_position: D
-dynamic_pair_id: var.conditioning
+type_id: type.past
 ```
 
 
@@ -1430,9 +1542,11 @@ id: var.interdiction
 kind: variation
 canonical_label: Interdiction
 provenance: source-original
+aliases_en:
+- altering the
+dynamic_pair_id: var.prediction
 quad_id: quad.fate-var
 ktad_position: D
-dynamic_pair_id: var.prediction
 ```
 
 
@@ -1470,10 +1584,15 @@ id: var.interpretation
 kind: variation
 canonical_label: Interpretation
 provenance: source-original
-type_id: type.past
+aliases_en:
+- construe
+- elucidate
+- rendering meaning
+- rendition
+dynamic_pair_id: var.senses
 quad_id: quad.senses-var
 ktad_position: T
-dynamic_pair_id: var.senses
+type_id: type.past
 ```
 
 
@@ -1509,6 +1628,11 @@ id: var.investigation
 kind: variation
 canonical_label: Investigation
 provenance: source-original
+aliases_en:
+- inquiry
+- probe
+- research
+- sleuthing
 dynamic_pair_id: var.doubt
 ```
 
@@ -1579,10 +1703,15 @@ id: var.morality
 kind: variation
 canonical_label: Morality
 provenance: source-original
-type_id: type.obtaining
+aliases_en:
+- altruism
+- benevolence
+- generosity
+- selflessness
+dynamic_pair_id: var.self-interest
 quad_id: quad.approach-var-physics
 ktad_position: D
-dynamic_pair_id: var.self-interest
+type_id: type.obtaining
 ```
 
 
@@ -1668,10 +1797,13 @@ id: var.obligation
 kind: variation
 canonical_label: Obligation
 provenance: source-original
-type_id: type.conceiving
+aliases_en:
+- agreement
+- pledge
+dynamic_pair_id: var.rationalization
 quad_id: quad.rationalization-var
 ktad_position: D
-dynamic_pair_id: var.rationalization
+type_id: type.conceiving
 ```
 
 
@@ -1715,9 +1847,11 @@ id: var.openness
 kind: variation
 canonical_label: Openness
 provenance: source-original
+aliases_en:
+- broad
+dynamic_pair_id: var.preconception
 quad_id: quad.openness-var
 ktad_position: K
-dynamic_pair_id: var.preconception
 ```
 
 
@@ -1825,6 +1959,10 @@ id: var.permission
 kind: variation
 canonical_label: Permission
 provenance: source-original
+aliases_en:
+- constrained ability
+- limited capability
+- restricted
 dynamic_pair_id: var.deficiency
 ```
 
@@ -1874,9 +2012,12 @@ id: var.preconception
 kind: variation
 canonical_label: Preconception
 provenance: source-original
+aliases_en:
+- closed
+- prejudice
+dynamic_pair_id: var.openness
 quad_id: quad.openness-var
 ktad_position: T
-dynamic_pair_id: var.openness
 ```
 
 
@@ -1922,9 +2063,12 @@ id: var.prediction
 kind: variation
 canonical_label: Prediction
 provenance: source-original
+aliases_en:
+- foreseeing
+- foresight
+dynamic_pair_id: var.interdiction
 quad_id: quad.fate-var
 ktad_position: A
-dynamic_pair_id: var.interdiction
 ```
 
 
@@ -1965,6 +2109,10 @@ id: var.range
 kind: variation
 canonical_label: Range
 provenance: source-original
+aliases_en:
+- fabricated excuse
+- 'false'
+- ulterior explanation
 ```
 
 
@@ -2027,6 +2175,12 @@ id: var.reappraisal
 kind: variation
 canonical_label: Reappraisal
 provenance: source-original
+aliases_en:
+- checking up
+- re-examining a conclusion
+- reassess
+- rechecking
+- reevaluating a
 dynamic_pair_id: var.appraisal
 ```
 
@@ -2060,6 +2214,10 @@ id: var.repulsion
 kind: variation
 canonical_label: Repulsion
 provenance: source-original
+aliases_en:
+- foreboding
+- repellent
+- unattractive
 dynamic_pair_id: var.attraction
 ```
 
@@ -2100,10 +2258,15 @@ id: var.responsibility
 kind: variation
 canonical_label: Responsibility
 provenance: source-original
-type_id: type.conceiving
+aliases_en:
+- accepted suitability
+- assumed propriety
+- believed appropriateness
+- self designated aptness
+dynamic_pair_id: var.commitment
 quad_id: quad.rationalization-var
 ktad_position: A
-dynamic_pair_id: var.commitment
+type_id: type.conceiving
 ```
 
 
@@ -2149,6 +2312,18 @@ id: var.security
 kind: variation
 canonical_label: Security
 provenance: source-original
+aliases_en:
+- conscious of
+- egocentric
+- evaluation of safety
+- measure of safeguards
+- narcissistic
+- perception of self
+- self-absorbed
+- self-centered
+- self-conscious
+- self-serving
+- selfishness
 dynamic_pair_id: var.threat
 ```
 
@@ -2299,10 +2474,14 @@ id: var.senses
 kind: variation
 canonical_label: Senses
 provenance: source-original
-type_id: type.past
+aliases_en:
+- perceptual data
+- raw sensations
+- sensory impressions
+dynamic_pair_id: var.interpretation
 quad_id: quad.senses-var
 ktad_position: K
-dynamic_pair_id: var.interpretation
+type_id: type.past
 ```
 
 
@@ -2340,6 +2519,8 @@ id: var.situation
 kind: variation
 canonical_label: Situation
 provenance: source-original
+aliases_en:
+- how things
 dynamic_pair_id: var.circumstances
 ```
 
@@ -2377,10 +2558,14 @@ id: var.skill
 kind: variation
 canonical_label: Skill
 provenance: source-original
-type_id: type.understanding
+aliases_en:
+- aptitude
+- competence
+- proficiency
+dynamic_pair_id: var.experience
 quad_id: quad.wisdom-var
 ktad_position: T
-dynamic_pair_id: var.experience
+type_id: type.understanding
 ```
 
 
@@ -2418,10 +2603,19 @@ id: var.strategy
 kind: variation
 canonical_label: Strategy
 provenance: source-original
-type_id: type.doing
+aliases_en:
+- basic drives
+- basic motivations
+- decided approach
+- libido
+- plan
+- ploy
+- scheme
+- tactic
+dynamic_pair_id: var.analysis
 quad_id: quad.strategy-var
 ktad_position: K
-dynamic_pair_id: var.analysis
+type_id: type.doing
 ```
 
 
@@ -2477,10 +2671,15 @@ id: var.suspicion
 kind: variation
 canonical_label: Suspicion
 provenance: source-original
-type_id: type.memory
+aliases_en:
+- doubt based on evidence
+- informed doubt
+- partially justified apprehensiveness
+- wary approach
+dynamic_pair_id: var.evidence
 quad_id: quad.truth-var
 ktad_position: D
-dynamic_pair_id: var.evidence
+type_id: type.memory
 ```
 
 
@@ -2517,6 +2716,8 @@ id: var.threat
 kind: variation
 canonical_label: Threat
 provenance: source-original
+aliases_en:
+- perceived
 dynamic_pair_id: var.security
 ```
 
@@ -2557,10 +2758,15 @@ id: var.truth
 kind: variation
 canonical_label: Truth
 provenance: source-original
-type_id: type.memory
+aliases_en:
+- correct information
+- correct notion
+- honesty
+- verity
+dynamic_pair_id: var.falsehood
 quad_id: quad.truth-var
 ktad_position: K
-dynamic_pair_id: var.falsehood
+type_id: type.memory
 ```
 
 
@@ -2645,10 +2851,14 @@ id: var.value
 kind: variation
 canonical_label: Value
 provenance: source-original
-type_id: type.conscious
+aliases_en:
+- general usefulness
+- objective appraisal
+- utility
+dynamic_pair_id: var.worth
 quad_id: quad.value-var
 ktad_position: K
-dynamic_pair_id: var.worth
+type_id: type.conscious
 ```
 
 
@@ -2687,10 +2897,12 @@ id: var.wisdom
 kind: variation
 canonical_label: Wisdom
 provenance: source-original
-type_id: type.understanding
+aliases_en:
+- mental mastery
+dynamic_pair_id: var.enlightenment
 quad_id: quad.wisdom-var
 ktad_position: K
-dynamic_pair_id: var.enlightenment
+type_id: type.understanding
 ```
 
 
@@ -2718,9 +2930,13 @@ id: var.worry
 kind: variation
 canonical_label: Worry
 provenance: source-original
-type_id: type.becoming
+aliases_en:
+- anxiety
+- apprehension
+- misgivings
 quad_id: quad.conscience-var
 ktad_position: A
+type_id: type.becoming
 ```
 
 

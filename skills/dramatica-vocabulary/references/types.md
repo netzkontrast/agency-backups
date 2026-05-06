@@ -54,9 +54,11 @@ id: type.becoming
 kind: type
 canonical_label: Becoming
 provenance: source-original
-class_id: class.psychology
+aliases_de:
+- Werden
 scenarios:
 - novel.act-pivot
+class_id: class.psychology
 ```
 
 
@@ -75,9 +77,11 @@ id: type.being
 kind: type
 canonical_label: Being
 provenance: source-original
-class_id: class.psychology
+aliases_de:
+- Sein
 scenarios:
 - novel.act-pivot
+class_id: class.psychology
 ```
 
 
@@ -299,9 +303,15 @@ id: type.doing
 kind: type
 canonical_label: Doing
 provenance: source-original
-class_id: class.physics
+aliases_en:
+- executing
+- performing
+aliases_de:
+- Handeln
+- Tun
 scenarios:
 - novel.act-pivot
+class_id: class.physics
 ```
 
 
@@ -363,9 +373,11 @@ id: type.future
 kind: type
 canonical_label: Future
 provenance: source-original
-class_id: class.universe
+aliases_de:
+- Zukunft
 scenarios:
 - novel.act-pivot
+class_id: class.universe
 ```
 
 
@@ -408,6 +420,10 @@ id: concept.journey
 kind: concept
 canonical_label: Journey
 provenance: source-original
+aliases_en:
+- journey
+aliases_de:
+- Reise
 ```
 
 
@@ -477,9 +493,11 @@ id: type.obtaining
 kind: type
 canonical_label: Obtaining
 provenance: source-original
-class_id: class.physics
+aliases_en:
+- controlling for
 scenarios:
 - novel.act-pivot
+class_id: class.physics
 ```
 
 
@@ -596,6 +614,9 @@ id: concept.story-goal
 kind: concept
 canonical_label: Story Goal
 provenance: source-original
+aliases_de:
+- Geschichtsziel
+- Story-Ziel
 scenarios:
 - lyric.album-arc-mapping
 ```
@@ -646,9 +667,11 @@ id: type.past
 kind: type
 canonical_label: Past
 provenance: source-original
-class_id: class.universe
+aliases_de:
+- Vergangenheit
 scenarios:
 - novel.act-pivot
+class_id: class.universe
 ```
 
 
@@ -668,9 +691,11 @@ id: type.past
 kind: type
 canonical_label: Past
 provenance: source-original
-class_id: class.universe
+aliases_de:
+- Vergangenheit
 scenarios:
 - novel.act-pivot
+class_id: class.universe
 ```
 
 
@@ -698,6 +723,12 @@ id: concept.preconditions
 kind: concept
 canonical_label: Preconditions
 provenance: source-original
+aliases_en:
+- imposed
+- preconditions
+- prescribed specification
+- provision
+- unthinking responses
 ```
 
 
@@ -788,6 +819,11 @@ id: concept.prerequisites
 kind: concept
 canonical_label: Prerequisites
 provenance: source-original
+aliases_en:
+- compulsory stipulation
+- essential steps
+- necessary requisites
+- prerequisites
 ```
 
 
@@ -830,9 +866,11 @@ id: type.present
 kind: type
 canonical_label: Present
 provenance: source-original
-class_id: class.universe
+aliases_de:
+- Gegenwart
 scenarios:
 - novel.act-pivot
+class_id: class.universe
 ```
 
 
@@ -852,9 +890,11 @@ id: type.present
 kind: type
 canonical_label: Present
 provenance: source-original
-class_id: class.universe
+aliases_de:
+- Gegenwart
 scenarios:
 - novel.act-pivot
+class_id: class.universe
 ```
 
 
@@ -884,9 +924,11 @@ id: type.progress
 kind: type
 canonical_label: Progress
 provenance: source-original
-class_id: class.universe
+aliases_de:
+- Fortschritt
 scenarios:
 - novel.act-pivot
+class_id: class.universe
 ```
 
 
@@ -936,6 +978,13 @@ id: concept.signpost
 kind: concept
 canonical_label: Signpost
 provenance: source-original
+aliases_en:
+- a set of circumstances
+- a static situation
+- signpost
+- state of
+aliases_de:
+- Wegweiser
 ```
 
 
@@ -1243,9 +1292,16 @@ id: type.understanding
 kind: type
 canonical_label: Understanding
 provenance: source-original
-class_id: class.physics
+aliases_en:
+- appreciating
+- comprehending
+- grasping
+- obtaining meaning
+aliases_de:
+- Verständnis
 scenarios:
 - novel.act-pivot
+class_id: class.physics
 ```
 
 

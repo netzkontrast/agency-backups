@@ -527,7 +527,47 @@ ST-4 makes the per-row decision; ST-3's bucketing is the input.
 
 ## 8. ST-7 Alias Conflict Report
 
-(Reserved for ST-7's `aliases.py conflict-report` output. Format: per-conflict — alias string / candidate ontology IDs / chosen disposition / rationale.)
+Captured from `python3 tools/dramatica-nav/aliases.py conflict-report` against `skills/dramatica-vocabulary/references/_synonym-lookup.md` after the EN bulk load. **Disposition for every row in this section: deferred — NOT auto-projected; left for human / Task 027 ADR review.** The loader runs the conflict pass first and refuses to write any of these aliases into the ontology.
+
+**Summary**
+
+- Rows parsed: 486
+- Aliases projected (EN, conflict-free subset): 395 across 131 ontology IDs
+- Blocking conflicts (no projection at all): 21
+- Partial-resolution rows (one OK target, others unknown — projected via the OK target only, surfaced for transparency): 6
+- Unknowns (canonical label not in the ontology — these labels are mostly file-only headings like `Bad`, `Be-er`, `Mental Sex`, etc.; out of scope for ST-7 — see ST-3 unmapped-heading partition for context): 70
+
+**Conflict classes**
+
+1. **alias-uniqueness** — the alias would project to ≥ 2 distinct ontology IDs (the synonym-lookup row carries multiple `**Label** (in `<file>`)` targets that all resolve cleanly to different entries). Auto-resolution is forbidden; the loader skips the row.
+
+2. **reserved-alias-collision** — the alias string is already claimed (as the canonical label or an existing alias) by a different ontology entry. Adding it as an alias on the requested target would silently introduce an alias-uniqueness violation that `validate.py` would flag downstream.
+
+**Blocking conflicts (21)**
+
+- `ability to consider` — alias-uniqueness: would project to {`arc.contagonist`, `el.conscience`}
+- `advancing` — alias-uniqueness: would project to {`el.production`, `var.hope`}
+- `anticipation` — alias-uniqueness: would project to {`el.projection`, `var.prediction`}
+- `cognizant` — alias-uniqueness: would project to {`arc.contagonist`, `el.conscience`}
+- `concern` — alias-uniqueness: would project to {`concept.concern`, `var.worry`}
+- `considerations` — alias-uniqueness: would project to {`arc.contagonist`, `el.conscience`}
+- `examination` — alias-uniqueness: would project to {`el.evaluation`, `el.test`, `var.analysis`}
+- `flowing` — alias-uniqueness: would project to {`el.production`, `var.hope`}
+- `proceeding` — alias-uniqueness: would project to {`el.production`, `var.hope`}
+- `retard` — alias-uniqueness: would project to {`el.hinder`, `var.delay`}
+- `sensibilities` — alias-uniqueness: would project to {`arc.contagonist`, `el.conscience`}
+- `subjective` — alias-uniqueness: would project to {`var.need`, `var.worth`}
+- `analysis` — reserved-alias-collision: target `el.evaluation` blocked, already claimed by `var.analysis`
+- `appraisal` — reserved-alias-collision: target `el.evaluation` blocked, already claimed by `var.appraisal`
+- `consideration` — reserved-alias-collision: target `el.thought` blocked, already claimed by `quad.consideration-var`
+- `determination` — reserved-alias-collision: target `var.choice` blocked, already claimed by `el.determination`
+- `evaluation` — reserved-alias-collision: target `var.analysis` blocked, already claimed by `el.evaluation`
+- `reappraisal` — reserved-alias-collision: target `el.reevaluation` blocked, already claimed by `var.reappraisal`
+- `support` — reserved-alias-collision: target `el.help` blocked, already claimed by `el.support`
+- `suspicion` — reserved-alias-collision: target `el.hunch` blocked, already claimed by `var.suspicion`
+- `unique ability` — reserved-alias-collision: target `var.unique-ability` blocked, already claimed by `concept.unique-ability`
+
+**Recommended follow-up.** A Task-027-style ADR per Bucket-D (per ST-7's falsification clause) needs to choose one ontology ID per blocking row. Most of these are genuinely ambiguous English shorthand (e.g. `analysis` could mean either the canonical `var.analysis` Variation OR `el.evaluation` element-as-prose-synonym). Until then, `nav.py by-alias` will return the canonical-label match (the entry that actually owns the string), which is the conservative behaviour.
 
 ## 9. ST-8 Scenario-Tag Measurement Table
 

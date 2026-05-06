@@ -83,11 +83,13 @@ id: el.ability
 kind: element
 canonical_label: Ability
 provenance: source-original
-quad_id: quad.knowledge-el
-ktad_position: A
-dynamic_pair_id: el.desire
+aliases_de:
+- Fähigkeit
 scenarios:
 - novel.storyform-slot-fill
+dynamic_pair_id: el.desire
+quad_id: quad.knowledge-el
+ktad_position: A
 ```
 
 
@@ -104,9 +106,15 @@ id: el.acceptance
 kind: element
 canonical_label: Acceptance
 provenance: source-original
+aliases_en:
+- acquiescence
+- tolerance
+aliases_de:
+- Akzeptanz
+- Annahme
+dynamic_pair_id: el.non-acceptance
 quad_id: quad.acceptance-reaction-el
 ktad_position: K
-dynamic_pair_id: el.non-acceptance
 ```
 
 
@@ -144,9 +152,14 @@ id: el.accurate
 kind: element
 canonical_label: Accurate
 provenance: source-original
+aliases_en:
+- acceptable
+- adequate
+- sufficient
+- within tolerance
+dynamic_pair_id: el.non-accurate
 quad_id: quad.accurate-non-accurate-el
 ktad_position: K
-dynamic_pair_id: el.non-accurate
 ```
 
 
@@ -190,9 +203,13 @@ id: el.actuality
 kind: element
 canonical_label: Actuality
 provenance: source-original
+aliases_en:
+- the true state of things
+aliases_de:
+- Wirklichkeit
+dynamic_pair_id: el.perception
 quad_id: quad.actuality-el
 ktad_position: K
-dynamic_pair_id: el.perception
 ```
 
 
@@ -257,6 +274,8 @@ id: el.aware
 kind: element
 canonical_label: Aware
 provenance: source-original
+aliases_en:
+- outward
 quad_id: quad.actuality-el
 ktad_position: A
 ```
@@ -289,13 +308,20 @@ id: el.cause
 kind: element
 canonical_label: Cause
 provenance: source-original
-quad_id: quad.effect-cause-el
-ktad_position: T
-dynamic_pair_id: el.effect
+aliases_en:
+- agent
+- effector
+- reason for
+- source
+aliases_de:
+- Ursache
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.effect
+quad_id: quad.effect-cause-el
+ktad_position: T
 ```
 
 
@@ -335,9 +361,15 @@ id: el.certainty
 kind: element
 canonical_label: Certainty
 provenance: source-original
+aliases_en:
+- definiteness
+- having no doubts
+- sureness
+aliases_de:
+- Gewissheit
+dynamic_pair_id: el.potentiality
 quad_id: quad.certainty-potentiality-el
 ktad_position: K
-dynamic_pair_id: el.potentiality
 ```
 
 
@@ -375,9 +407,19 @@ id: el.change
 kind: element
 canonical_label: Change
 provenance: source-original
+aliases_en:
+- adapt
+- adjust
+- altering
+- altering force
+- change
+- embodying
+- manifesting
+- modify
+- reshape
+dynamic_pair_id: el.inertia
 quad_id: quad.inertia-change-el
 ktad_position: T
-dynamic_pair_id: el.inertia
 ```
 
 
@@ -394,11 +436,19 @@ id: el.chaos
 kind: element
 canonical_label: Chaos
 provenance: source-original
-quad_id: quad.order-chaos-el
-ktad_position: T
-dynamic_pair_id: el.order
+aliases_en:
+- anarchy
+- disorder
+- formlessness
+- noncohesion
+- randomness
+aliases_de:
+- Chaos
 scenarios:
 - lyric.verse-chorus-pair
+dynamic_pair_id: el.order
+quad_id: quad.order-chaos-el
+ktad_position: T
 ```
 
 
@@ -512,12 +562,19 @@ id: el.conscience
 kind: element
 canonical_label: Conscience
 provenance: source-original
-quad_id: quad.conscience-temptation-el
-ktad_position: K
-dynamic_pair_id: el.temptation
+aliases_en:
+- abstinence
+- forbearance
+- forgo
+- forgoing for fear of consequences
+- restraining oneself
+- temperance
 scenarios:
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.temptation
+quad_id: quad.conscience-temptation-el
+ktad_position: K
 ```
 
 
@@ -572,6 +629,13 @@ id: el.consider
 kind: element
 canonical_label: Consider
 provenance: source-original
+aliases_en:
+- contemplate
+- deliberate
+- ponder
+- weigh in the mind
+aliases_de:
+- Erwägung
 dynamic_pair_id: el.reconsider
 ```
 
@@ -608,13 +672,23 @@ id: el.control
 kind: element
 canonical_label: Control
 provenance: source-original
-quad_id: quad.logic-feeling-el
-ktad_position: A
-dynamic_pair_id: el.uncontrolled
+aliases_en:
+- conduct
+- focused
+- guide
+- manipulate
+- organized management
+- regulate
+- steer
+aliases_de:
+- Kontrolle
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.uncontrolled
+quad_id: quad.logic-feeling-el
+ktad_position: A
 ```
 
 
@@ -674,9 +748,14 @@ id: el.deduction
 kind: element
 canonical_label: Deduction
 provenance: source-original
+aliases_en:
+- demonstrative reasoning
+- drawing a conclusion
+- narrowing to a single point
+- process of elimination
+dynamic_pair_id: el.induction
 quad_id: quad.certainty-potentiality-el
 ktad_position: A
-dynamic_pair_id: el.induction
 ```
 
 
@@ -718,11 +797,14 @@ id: el.desire
 kind: element
 canonical_label: Desire
 provenance: source-original
-quad_id: quad.knowledge-el
-ktad_position: D
-dynamic_pair_id: el.ability
+aliases_de:
+- Begehren
+- Wunsch
 scenarios:
 - novel.storyform-slot-fill
+dynamic_pair_id: el.ability
+quad_id: quad.knowledge-el
+ktad_position: D
 ```
 
 
@@ -750,9 +832,16 @@ id: el.determination
 kind: element
 canonical_label: Determination
 provenance: source-original
+aliases_en:
+- ascertaining causes
+- discovering causes
+- envisioning
+- finding the reasons
+- imagining
+- visualizing
+dynamic_pair_id: el.expectation
 quad_id: quad.accurate-non-accurate-el
 ktad_position: D
-dynamic_pair_id: el.expectation
 ```
 
 
@@ -831,13 +920,20 @@ id: el.disbelief
 kind: element
 canonical_label: Disbelief
 provenance: source-original
-quad_id: quad.faith-disbelief-el
-ktad_position: T
-dynamic_pair_id: el.faith
+aliases_en:
+- distrust
+- find
+- refusal to accept
+aliases_de:
+- Unglaube
+- Zweifel
 scenarios:
 - lyric.refrain-as-restatement
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
+dynamic_pair_id: el.faith
+quad_id: quad.faith-disbelief-el
+ktad_position: T
 ```
 
 
@@ -876,13 +972,15 @@ id: el.effect
 kind: element
 canonical_label: Effect
 provenance: source-original
-quad_id: quad.effect-cause-el
-ktad_position: K
-dynamic_pair_id: el.cause
+aliases_de:
+- Wirkung
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.cause
+quad_id: quad.effect-cause-el
+ktad_position: K
 ```
 
 
@@ -903,9 +1001,12 @@ id: el.ending
 kind: element
 canonical_label: Ending
 provenance: source-original
+aliases_en:
+- conclusion
+- finish
+dynamic_pair_id: el.unending
 quad_id: quad.result-process-el
 ktad_position: A
-dynamic_pair_id: el.unending
 ```
 
 
@@ -949,9 +1050,18 @@ id: el.equity
 kind: element
 canonical_label: Equity
 provenance: source-original
+aliases_en:
+- balance
+- equilibrium
+- even
+- fairness
+- level
+- parity
+aliases_de:
+- Gleichgewicht
+dynamic_pair_id: el.inequity
 quad_id: quad.order-chaos-el
 ktad_position: A
-dynamic_pair_id: el.inequity
 ```
 
 
@@ -992,9 +1102,15 @@ id: el.evaluation
 kind: element
 canonical_label: Evaluation
 provenance: source-original
+aliases_en:
+- assessment
+- survey
+aliases_de:
+- Bewertung
+- Evaluation
+dynamic_pair_id: el.reevaluation
 quad_id: quad.evaluation-re-evaluation-el
 ktad_position: K
-dynamic_pair_id: el.reevaluation
 ```
 
 
@@ -1033,9 +1149,11 @@ id: el.expectation
 kind: element
 canonical_label: Expectation
 provenance: source-original
+aliases_en:
+- anticipated results
+dynamic_pair_id: el.determination
 quad_id: quad.accurate-non-accurate-el
 ktad_position: A
-dynamic_pair_id: el.determination
 ```
 
 
@@ -1072,13 +1190,17 @@ id: el.faith
 kind: element
 canonical_label: Faith
 provenance: source-original
-quad_id: quad.faith-disbelief-el
-ktad_position: K
-dynamic_pair_id: el.disbelief
+aliases_en:
+- acceptance without
+aliases_de:
+- Glaube
 scenarios:
 - lyric.refrain-as-restatement
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
+dynamic_pair_id: el.disbelief
+quad_id: quad.faith-disbelief-el
+ktad_position: K
 ```
 
 
@@ -1120,14 +1242,20 @@ id: el.feeling
 kind: element
 canonical_label: Feeling
 provenance: source-original
-quad_id: quad.logic-feeling-el
-ktad_position: T
-dynamic_pair_id: el.logic
+aliases_en:
+- affective outlook
+- emotional sensibility
+- empathy
+aliases_de:
+- Gefühl
 scenarios:
 - lyric.archetype-as-system-part
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.logic
+quad_id: quad.logic-feeling-el
+ktad_position: T
 ```
 
 
@@ -1167,14 +1295,21 @@ id: el.help
 kind: element
 canonical_label: Help
 provenance: source-original
-quad_id: quad.help-hinder-el
-ktad_position: A
-dynamic_pair_id: el.hinder
+aliases_en:
+- abet
+- aid
+- assist
+- bolster
+aliases_de:
+- Hilfe
 scenarios:
 - lyric.archetype-as-system-part
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.hinder
+quad_id: quad.help-hinder-el
+ktad_position: A
 ```
 
 
@@ -1212,14 +1347,18 @@ id: el.hinder
 kind: element
 canonical_label: Hinder
 provenance: source-original
-quad_id: quad.help-hinder-el
-ktad_position: D
-dynamic_pair_id: el.help
+aliases_en:
+- obstruct
+aliases_de:
+- Behinderung
 scenarios:
 - lyric.archetype-as-system-part
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.help
+quad_id: quad.help-hinder-el
+ktad_position: D
 ```
 
 
@@ -1256,9 +1395,13 @@ id: el.hunch
 kind: element
 canonical_label: Hunch
 provenance: source-original
+aliases_en:
+- impression
+- intuition
+- premonition
+dynamic_pair_id: el.theory
 quad_id: quad.proven-unproven-el
 ktad_position: D
-dynamic_pair_id: el.theory
 ```
 
 
@@ -1297,6 +1440,9 @@ id: el.inaction
 kind: element
 canonical_label: Inaction
 provenance: source-original
+aliases_en:
+- inactive response
+- passive reaction
 quad_id: quad.evaluation-re-evaluation-el
 ktad_position: A
 ```
@@ -1336,9 +1482,13 @@ id: el.induction
 kind: element
 canonical_label: Induction
 provenance: source-original
+aliases_en:
+- conjecture
+- postulate
+- predicate
+dynamic_pair_id: el.deduction
 quad_id: quad.certainty-potentiality-el
 ktad_position: D
-dynamic_pair_id: el.deduction
 ```
 
 
@@ -1385,9 +1535,13 @@ id: el.inequity
 kind: element
 canonical_label: Inequity
 provenance: source-original
+aliases_en:
+- imbalance
+aliases_de:
+- Ungleichgewicht
+dynamic_pair_id: el.equity
 quad_id: quad.order-chaos-el
 ktad_position: D
-dynamic_pair_id: el.equity
 ```
 
 
@@ -1424,9 +1578,11 @@ id: el.inertia
 kind: element
 canonical_label: Inertia
 provenance: source-original
+aliases_en:
+- tendency
+dynamic_pair_id: el.change
 quad_id: quad.inertia-change-el
 ktad_position: K
-dynamic_pair_id: el.change
 ```
 
 
@@ -1464,10 +1620,12 @@ id: el.knowledge
 kind: element
 canonical_label: Knowledge
 provenance: source-original
-quad_id: quad.knowledge-el
-ktad_position: K
+aliases_de:
+- Wissen
 scenarios:
 - novel.storyform-slot-fill
+quad_id: quad.knowledge-el
+ktad_position: K
 ```
 
 
@@ -1494,14 +1652,21 @@ id: el.logic
 kind: element
 canonical_label: Logic
 provenance: source-original
-quad_id: quad.logic-feeling-el
-ktad_position: K
-dynamic_pair_id: el.feeling
+aliases_en:
+- linear reasoning
+- rationality
+- structural sensibility
+- syllogistics
+aliases_de:
+- Logik
 scenarios:
 - lyric.archetype-as-system-part
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.feeling
+quad_id: quad.logic-feeling-el
+ktad_position: K
 ```
 
 
@@ -1760,9 +1925,11 @@ id: el.non-acceptance
 kind: element
 canonical_label: Non-acceptance
 provenance: source-original
+aliases_de:
+- Nicht-Akzeptanz
+dynamic_pair_id: el.acceptance
 quad_id: quad.acceptance-reaction-el
 ktad_position: T
-dynamic_pair_id: el.acceptance
 ```
 
 
@@ -1798,11 +1965,15 @@ id: el.oppose
 kind: element
 canonical_label: Oppose
 provenance: source-original
-quad_id: quad.help-hinder-el
-ktad_position: T
-dynamic_pair_id: el.support
+aliases_en:
+- object to
+aliases_de:
+- Widerstand
 scenarios:
 - lyric.refrain-as-restatement
+dynamic_pair_id: el.support
+quad_id: quad.help-hinder-el
+ktad_position: T
 ```
 
 
@@ -1841,11 +2012,17 @@ id: el.order
 kind: element
 canonical_label: Order
 provenance: source-original
-quad_id: quad.order-chaos-el
-ktad_position: K
-dynamic_pair_id: el.chaos
+aliases_en:
+- organization
+- patterned arrangement
+- structure
+aliases_de:
+- Ordnung
 scenarios:
 - lyric.verse-chorus-pair
+dynamic_pair_id: el.chaos
+quad_id: quad.order-chaos-el
+ktad_position: K
 ```
 
 
@@ -1973,9 +2150,12 @@ id: el.perception
 kind: element
 canonical_label: Perception
 provenance: source-original
+aliases_en:
+- appearance
+- how things seem to be
+dynamic_pair_id: el.actuality
 quad_id: quad.actuality-el
 ktad_position: T
-dynamic_pair_id: el.actuality
 ```
 
 
@@ -2012,9 +2192,13 @@ id: el.possibility
 kind: element
 canonical_label: Possibility
 provenance: source-original
+aliases_en:
+- plausibility
+aliases_de:
+- Möglichkeit
+dynamic_pair_id: el.probability
 quad_id: quad.production-reduction-el
 ktad_position: D
-dynamic_pair_id: el.probability
 ```
 
 
@@ -2052,9 +2236,15 @@ id: el.potentiality
 kind: element
 canonical_label: Potentiality
 provenance: source-original
+aliases_en:
+- chance
+- focusing on the
+- precariousness
+aliases_de:
+- Potenzial
+dynamic_pair_id: el.certainty
 quad_id: quad.certainty-potentiality-el
 ktad_position: T
-dynamic_pair_id: el.certainty
 ```
 
 
@@ -2096,6 +2286,14 @@ id: el.proaction
 kind: element
 canonical_label: Proaction
 provenance: source-original
+aliases_en:
+- commit
+- execute
+- implement
+- to initiate action
+- undertake
+aliases_de:
+- Vorausschauendes Handeln
 quad_id: quad.acceptance-reaction-el
 ktad_position: A
 ```
@@ -2141,9 +2339,14 @@ id: el.probability
 kind: element
 canonical_label: Probability
 provenance: source-original
+aliases_en:
+- likelihood
+- predictable
+- promising
+- prospective
+dynamic_pair_id: el.possibility
 quad_id: quad.production-reduction-el
 ktad_position: A
-dynamic_pair_id: el.possibility
 ```
 
 
@@ -2214,9 +2417,12 @@ id: el.process
 kind: element
 canonical_label: Process
 provenance: source-original
+aliases_en:
+- chain of interactions
+- manner of procedure
+dynamic_pair_id: el.result
 quad_id: quad.result-process-el
 ktad_position: T
-dynamic_pair_id: el.result
 ```
 
 
@@ -2254,9 +2460,11 @@ id: el.production
 kind: element
 canonical_label: Production
 provenance: source-original
+aliases_en:
+- determining
+dynamic_pair_id: el.reduction
 quad_id: quad.production-reduction-el
 ktad_position: K
-dynamic_pair_id: el.reduction
 ```
 
 
@@ -2308,9 +2516,12 @@ id: el.projection
 kind: element
 canonical_label: Projection
 provenance: source-original
+aliases_en:
+- how things will be
+- most likely
+dynamic_pair_id: el.speculation
 quad_id: quad.inertia-change-el
 ktad_position: A
-dynamic_pair_id: el.speculation
 ```
 
 
@@ -2346,6 +2557,11 @@ id: el.protection
 kind: element
 canonical_label: Protection
 provenance: source-original
+aliases_en:
+- defense
+- precaution
+- preservation
+- safeguard
 quad_id: quad.evaluation-re-evaluation-el
 ktad_position: D
 ```
@@ -2392,9 +2608,15 @@ id: el.proven
 kind: element
 canonical_label: Proven
 provenance: source-original
+aliases_en:
+- confirmed
+- corroborated
+- thinking
+- verified
+- ways of thinking
+dynamic_pair_id: el.unproven
 quad_id: quad.proven-unproven-el
 ktad_position: K
-dynamic_pair_id: el.unproven
 ```
 
 
@@ -2451,13 +2673,19 @@ id: el.pursuit
 kind: element
 canonical_label: Pursuit
 provenance: source-original
-quad_id: quad.pursuit-avoid-el
-ktad_position: K
-dynamic_pair_id: el.avoid
+aliases_en:
+- attempt to achieve
+- directed
+- go after
+- look for
+- seek
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.avoid
+quad_id: quad.pursuit-avoid-el
+ktad_position: K
 ```
 
 
@@ -2498,6 +2726,12 @@ id: el.reaction
 kind: element
 canonical_label: Reaction
 provenance: source-original
+aliases_en:
+- acting
+- reply
+- response
+aliases_de:
+- Reaktion
 quad_id: quad.acceptance-reaction-el
 ktad_position: D
 ```
@@ -2544,9 +2778,14 @@ id: el.reconsider
 kind: element
 canonical_label: Reconsider
 provenance: source-original
+aliases_en:
+- re-examining conclusions
+- rethinking
+aliases_de:
+- Neuerwägung
+dynamic_pair_id: el.consider
 quad_id: quad.pursuit-avoid-el
 ktad_position: D
-dynamic_pair_id: el.consider
 ```
 
 
@@ -2584,9 +2823,12 @@ id: el.reduction
 kind: element
 canonical_label: Reduction
 provenance: source-original
+aliases_en:
+- comparisons of potentiality
+- determining probability
+dynamic_pair_id: el.production
 quad_id: quad.production-reduction-el
 ktad_position: T
-dynamic_pair_id: el.production
 ```
 
 
@@ -2636,6 +2878,11 @@ id: el.reevaluation
 kind: element
 canonical_label: Reevaluation
 provenance: source-original
+aliases_en:
+- further assessment
+- subsequent analysis
+aliases_de:
+- Neubewertung
 dynamic_pair_id: el.evaluation
 ```
 
@@ -2670,9 +2917,11 @@ id: el.result
 kind: element
 canonical_label: Result
 provenance: source-original
+aliases_en:
+- ramifications of an
+dynamic_pair_id: el.process
 quad_id: quad.result-process-el
 ktad_position: K
-dynamic_pair_id: el.process
 ```
 
 
@@ -2781,9 +3030,13 @@ id: el.speculation
 kind: element
 canonical_label: Speculation
 provenance: source-original
+aliases_en:
+- conjecturing
+- prognostication
+- surmising possibilities
+dynamic_pair_id: el.projection
 quad_id: quad.inertia-change-el
 ktad_position: D
-dynamic_pair_id: el.projection
 ```
 
 
@@ -2821,11 +3074,20 @@ id: el.support
 kind: element
 canonical_label: Support
 provenance: source-original
-quad_id: quad.help-hinder-el
-ktad_position: K
-dynamic_pair_id: el.oppose
+aliases_en:
+- back
+- commend
+- compliment
+- endorse
+- extol
+- laud
+aliases_de:
+- Unterstützung
 scenarios:
 - lyric.refrain-as-restatement
+dynamic_pair_id: el.oppose
+quad_id: quad.help-hinder-el
+ktad_position: K
 ```
 
 
@@ -2890,12 +3152,15 @@ id: el.temptation
 kind: element
 canonical_label: Temptation
 provenance: source-original
-quad_id: quad.conscience-temptation-el
-ktad_position: T
-dynamic_pair_id: el.conscience
+aliases_en:
+- embracing
+- indulge
 scenarios:
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.conscience
+quad_id: quad.conscience-temptation-el
+ktad_position: T
 ```
 
 
@@ -2928,13 +3193,19 @@ id: el.test
 kind: element
 canonical_label: Test
 provenance: source-original
-quad_id: quad.effect-cause-el
-ktad_position: D
-dynamic_pair_id: el.trust
+aliases_en:
+- audit
+- trial of validity
+aliases_de:
+- Prüfung
+- Test
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.trust
+quad_id: quad.effect-cause-el
+ktad_position: D
 ```
 
 
@@ -2976,9 +3247,14 @@ id: el.theory
 kind: element
 canonical_label: Theory
 provenance: source-original
+aliases_en:
+- concrete hypothesis
+- description of linear
+- structured explanation
+- systematized descriptive knowledge
+dynamic_pair_id: el.hunch
 quad_id: quad.proven-unproven-el
 ktad_position: A
-dynamic_pair_id: el.hunch
 ```
 
 
@@ -3022,10 +3298,19 @@ id: el.thought
 kind: element
 canonical_label: Thought
 provenance: source-original
-quad_id: quad.knowledge-el
-ktad_position: T
+aliases_en:
+- contemplation
+- musing
+- ponderence
+- reflection
+- the process of consideration
+aliases_de:
+- Denken
+- Gedanke
 scenarios:
 - novel.storyform-slot-fill
+quad_id: quad.knowledge-el
+ktad_position: T
 ```
 
 
@@ -3088,13 +3373,19 @@ id: el.trust
 kind: element
 canonical_label: Trust
 provenance: source-original
-quad_id: quad.effect-cause-el
-ktad_position: A
-dynamic_pair_id: el.test
+aliases_en:
+- accept
+- untested belief in
+- untried acceptance
+aliases_de:
+- Vertrauen
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.test
+quad_id: quad.effect-cause-el
+ktad_position: A
 ```
 
 
@@ -3133,13 +3424,23 @@ id: el.uncontrolled
 kind: element
 canonical_label: Uncontrolled
 provenance: source-original
-quad_id: quad.logic-feeling-el
-ktad_position: D
-dynamic_pair_id: el.control
+aliases_en:
+- disorganized
+- frenzy
+- open
+- rampant
+- unfocused
+- unguided
+- unregulated
+aliases_de:
+- Unkontrolliert
 scenarios:
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
+dynamic_pair_id: el.control
+quad_id: quad.logic-feeling-el
+ktad_position: D
 ```
 
 
@@ -3177,9 +3478,13 @@ id: el.unending
 kind: element
 canonical_label: Unending
 provenance: source-original
+aliases_en:
+- continual
+- ongoing
+- perpetual
+dynamic_pair_id: el.ending
 quad_id: quad.result-process-el
 ktad_position: D
-dynamic_pair_id: el.ending
 ```
 
 
@@ -3222,9 +3527,13 @@ id: el.unproven
 kind: element
 canonical_label: Unproven
 provenance: source-original
+aliases_en:
+- unconfirmed
+- unestablished
+- unverified
+dynamic_pair_id: el.proven
 quad_id: quad.proven-unproven-el
 ktad_position: T
-dynamic_pair_id: el.proven
 ```
 
 
