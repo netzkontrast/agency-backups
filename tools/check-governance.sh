@@ -30,7 +30,7 @@ export FM_LEGACY_QUIET="${FM_LEGACY_QUIET:-1}"
 echo "=== agency check-governance ==="
 
 echo ""
-echo "--- [1/3] Frontmatter linter ---"
+echo "--- [1/5] Frontmatter linter ---"
 if [ "$FM_TOOLCHAIN" = "1" ]; then
   if ! "$PYTHON" tools/fm/validate.py --type-check; then
     FAIL=1
@@ -47,18 +47,24 @@ else
 fi
 
 echo ""
-echo "--- [2/3] Directory-structure linter ---"
+echo "--- [2/5] Directory-structure linter ---"
 if ! "$PYTHON" tools/lint-structure.py; then
   FAIL=1
 fi
 
 echo ""
-echo "--- [3/3] Cross-reference linkage (folded into fm-validate --type-check) ---"
+echo "--- [3/5] Cross-reference linkage (folded into fm-validate --type-check) ---"
 echo "(legacy tools/lint-linkage.py is now a shim around fm-validate --type-check; checked above)"
 
 echo ""
-echo "--- [4/4] Run-log record validator ---"
+echo "--- [4/5] Run-log record validator ---"
 if ! "$PYTHON" tools/lint-runlog.py; then
+  FAIL=1
+fi
+
+echo ""
+echo "--- [5/5] ADR governance validator (Task 028) ---"
+if ! "$PYTHON" tools/adr/cli.py validate; then
   FAIL=1
 fi
 
@@ -75,7 +81,7 @@ fi
 
 if [ "$SKIP_TRUST" -eq 0 ]; then
   echo ""
-  echo "--- [5/5] Spec-J/K/L trust audit ---"
+  echo "--- [trust] Spec-J/K/L trust audit ---"
   if ! "$PYTHON" tools/check-trust.py; then
     FAIL=1
   fi
