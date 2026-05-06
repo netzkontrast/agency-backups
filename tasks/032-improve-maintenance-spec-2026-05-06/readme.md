@@ -10,3 +10,4 @@ updated: 2026-05-06
 # Task 032 — Index
 
 - [`task.md`](./task.md)
+- [`notes.md`](./notes.md) — PR #66 spec-conformance review (2026-05-06)
