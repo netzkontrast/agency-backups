@@ -21,9 +21,9 @@ Four-axis configuration of the Main Character — Resolve, Growth, Approach, Men
 ## Approach
 <!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
 ```yaml
-id: character-dynamic.growth
+id: character-dynamic.approach
 kind: character-dynamic
-canonical_label: Growth
+canonical_label: Approach
 provenance: source-original
 scenarios:
 - novel.character-arc
@@ -68,6 +68,25 @@ the problem and the determined solution
 
 method, procedure, style,
 manner, manner of doing, one's own way
+
+---
+
+## Growth
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: character-dynamic.growth
+kind: character-dynamic
+canonical_label: Growth
+provenance: source-original
+scenarios:
+- novel.character-arc
+```
+
+
+*Type: Character Dynamic*
+
+<!-- truncated extract; consult original source -->
+<!-- Body content for Growth (Start vs. Stop) was not preserved in the source extraction. See ## Start and ## Steadfast headings later in this file for adjacent Main-Character-arc-direction prose. -->
 
 ---
 
@@ -379,9 +398,11 @@ Element.
 
 ---
 
-## Sex)
+## Intuitive
 
 *Type: Character Dynamic*
+
+<!-- heading repaired from broken `## Sex)` orphan; body is about Intuitive Problem-Solving Style. See Task 030 ST-2 commit. -->
 
 ### Character Dynamic
 
