@@ -1,5 +1,5 @@
 ---
-type: skill
+type: spec
 status: active
 slug: REPLACE-WITH-KEBAB-CASE-SLUG
 summary: "REPLACE — one-line tl;dr the agent reads instead of opening the body."

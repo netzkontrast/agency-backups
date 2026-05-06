@@ -4,7 +4,7 @@ status: active
 slug: skills-spec
 summary: "Root specification governing the /skills/ capability directory, the skill-bootstrap protocol, and the cross-agent portability contract."
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-05-06
 ---
 
 # Skill Architecture Specification
@@ -43,7 +43,16 @@ The layer overview is canonically defined in [TASK.md §3](./TASK.md).
 
 ### 3.2 L1 — Vault Core
 
-The L1 Vault Core keys are identical across all root specifications.
+Every `SKILL.md` MUST carry these six L1 keys (full semantics in [TASK.md §3.2](./TASK.md)):
+
+| Key | Type | Constraint for SKILL.md |
+|---|---|---|
+| `type` | string | MUST be `spec`. (`skill` is not a valid L1 type value; valid values: `task \| prompt \| research \| spec \| readme \| note \| index`.) |
+| `status` | string | One of: `active`, `draft`, `deprecated`, `archived`. |
+| `slug` | string | Kebab-case; MUST match the parent folder name. |
+| `summary` | string | One-line description; MUST be ≤ 120 characters. |
+| `created` | date | ISO 8601 (`YYYY-MM-DD`). Set at creation; never changed. |
+| `updated` | date | ISO 8601 (`YYYY-MM-DD`). MUST be updated on every normative change. |
 
 ### 3.3 L2 — `skill_*` Namespace
 
@@ -63,6 +72,26 @@ The L1 Vault Core keys are identical across all root specifications.
 3. The agent implements the `SKILL.md` following the template.
 4. The agent commits and pushes the new skill.
 5. Other agents pull the new skill using the bootstrap protocol.
+
+### 4.1 Gherkin Scenarios
+
+```gherkin
+Feature: Skill Lifecycle
+
+  # anchor: LC.1.1
+  Scenario: Author creates a new skill
+    Given an agent identifies a reusable capability that requires version control
+    When the agent follows the bootstrap protocol and implements SKILL.md using `templates/skill.md`
+    Then the skill MUST be committed to `/skills/<slug>/SKILL.md` with `status: active`
+    And the skills manifest MUST be regenerated before the commit is finalised
+
+  # anchor: LC.2.1
+  Scenario: Maintainer deprecates an existing skill
+    Given a skill is superseded or no longer safe to use
+    When the maintainer sets `status: deprecated` in the skill's SKILL.md frontmatter
+    Then no agent MUST invoke that skill for new work
+    And the `updated` date MUST be set to the date of the deprecation commit
+```
 
 ## 5. SKILL.md Required Sections
 
@@ -119,6 +148,34 @@ Feature: Agent Bootstrap
     Given an agent is asked to load a skill
     When the agent starts the task
     Then the agent MUST execute the bootstrap protocol before opening any SKILL.md
+
+  # anchor: B.2.1
+  Scenario: Bootstrap clones into the canonical path
+    Given an agent starts the bootstrap protocol
+    When the bootstrap step completes
+    Then the skills directory MUST be accessible at the path stored in `$AGENCY_SKILLS_ROOT`
+    And `$AGENCY_SKILLS_ROOT` MUST reflect an up-to-date clone of `origin/main`
+
+  # anchor: B.3.1
+  Scenario: Bootstrap emits the skills manifest
+    Given an agent has completed the clone step
+    When the bootstrap finalises
+    Then `$AGENCY_SKILLS_ROOT/.skills-manifest.json` MUST exist and be valid JSON
+    And the manifest MUST list every skill slug and its `skill_kind` present in `/skills/`
+
+  # anchor: B.4.1
+  Scenario: Staleness gate blocks a stale workspace
+    Given the last bootstrap ran more than 24 hours ago
+    When an agent attempts to use a skill
+    Then the bootstrap MUST exit with a non-zero code
+    And the agent MAY override the gate by setting `AGENCY_SKILLS_ALLOW_STALE=1`
+
+  # anchor: B.5.1
+  Scenario: Agent consults manifest before opening SKILL.md body
+    Given an agent needs to locate or invoke a skill
+    When the agent starts its skill-lookup
+    Then the agent MUST query `.skills-manifest.json` and the frontmatter index first
+    And the agent MUST NOT open any `SKILL.md` body without first consulting the manifest
 ```
 
 ## 8. Cross-Agent Portability
