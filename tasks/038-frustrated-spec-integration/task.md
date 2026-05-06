@@ -21,7 +21,14 @@ task_affects_paths:
 
 ## Goal
 
-Make FRUSTRATED.md mechanically gating, harmonise it with PRE_COMMIT.md, and add Gherkin-anchored acceptance criteria. The Task is `done` when (a) the §28 readme-cadence wording is reconciled with PRE_COMMIT.md §2 (output of joint subtask with Task 037), (b) FL0–FL3 declarations are mechanically validated on commit by `tools/check-fl-declaration.py`, (c) §FL.0 carries a research-backed rationale for why FL0 entries are still mandatory, (d) ≥4 Gherkin scenarios cover the closing-run, FL.Special bloat trigger, FL.Log.1 (research) vs FL.Log.2 (standard) surfaces, and missing-log rejection.
+Make FRUSTRATED.md mechanically gating, harmonise it with PRE_COMMIT.md, and add Gherkin-anchored acceptance criteria. The Task is `done` when (a) the §28 readme-cadence wording is reconciled with PRE_COMMIT.md §2 (output of joint subtask with Task 037), (b) FL0–FL3 declarations are mechanically validated on commit by `tools/check-fl-declaration.py`, (c) §FL.0 carries a research-backed rationale for why FL0 entries are still mandatory, **and (d) each of the following anchors carries ≥1 Gherkin scenario in FRUSTRATED.md (total ≥4)**:
+
+- **FR.B.1 closing-run** — every closed task carries an FL declaration in the canonical format.
+- **FR.B.2 FL.Special bloat** — deeply nested folder structures or per-file readme spam → FL2.
+- **FR.B.3 FL.Log surface routing** — research runs use `/reflection/friction-log.md`; standard tasks use PR description (FL.Log.1 vs FL.Log.2).
+- **FR.B.4 missing-log rejection** — pre-commit MUST reject closure with `task_status: done` and no resolvable FL declaration.
+
+> **Cross-spec wording-convergence note (per spec-panel m1):** the §28 wording produced by subtask `03-spec-amendment-frustrated-md` MUST be byte-identical (modulo spec-name prefix) to the §2 wording produced by [Task 037 ST-4](../037-pre-commit-spec-integration/subtasks/readme.md). Both amendments land in a single coordinated commit.
 
 ## Context
 
@@ -34,11 +41,38 @@ FRUSTRATED.md governance debt:
 
 The §28 reconciliation is intentionally co-owned with Task 037 — both tasks must converge on the same wording. The shared subtask `01-research-fl0-value-justification` outputs a single research SPEC consumed by both.
 
+## Preconditions (satisfied at branch-time)
+
+- **Task 014/025** — maintenance-spec friction-aggregation findings; ST-1 reads from this corpus.
+- **Task 028/031** — diagnostic-format pattern (`<relpath>::ERROR:<code>:<message>`); ST-2 (FL declaration linter) emits in the same shape.
+
+## Build-On
+
+- **`tools/check-trust.py`** — existing trust-audit hook that already reads friction-log.md presence at task closure; ST-2 extends it with substance validation.
+- **`tools/fm/extract.py --section`** — used by ST-2 to extract the `## Frustration Log` section from PR descriptions / friction-log.md.
+- **`tools/adr/runlog.py`** — diagnostic-format prior art; ST-2 emits in the same shape so MAINTENANCE.md aggregation can ingest a uniform stream.
+
 ## Plan
 
 1. **Phase 1 — Research head.** Subtask `01-research-fl0-value-justification` analyses every closed-task `friction-log.md` for FL0 vs FL1+ distinguishing signal and produces a normative justification.
 2. **Phase 2 — Tooling.** Subtask `02-tooling-fl-declaration-linter` parses friction-log.md and PR descriptions for the canonical declaration line; rejects malformed/missing.
-3. **Phase 3 — Spec amendment.** Subtask `03-spec-amendment-frustrated-md`: §28 reconciled wording (jointly with Task 037's spec edit), FL0 rationale, §FL.Log enforcement reference, Gherkin scenarios.
+3. **Phase 3 — Spec amendment.** Subtask `03-spec-amendment-frustrated-md`: §28 reconciled wording (joint commit with Task 037 subtask 04), FL0 rationale, §FL.Log enforcement reference, one Gherkin per FR.B.1–FR.B.4 anchor.
+
+## Sample Gherkin (shape the maintainer authoring subtask 03 should produce)
+
+```gherkin
+# anchor: FR.B.4 — missing-log rejection
+Scenario: Task closure without FL declaration is blocked
+  Given a Task transitions `task_status: in_progress` → `task_status: done`
+  And the staged commit modifies `tasks/<NNN>-<slug>/task.md` accordingly
+  And neither `tasks/<NNN>-<slug>/friction-log.md` exists with a parseable
+        declaration line `Highest Frustration Level: FL[0-3]`
+        nor the PR description contains a `## Frustration Log` section with one
+  When `tools/check-fl-declaration.py` runs at pre-commit
+  Then the linter MUST exit 1 with diagnostic `FR.B.4:missing-fl-declaration`
+  And `tools/check-governance.sh` MUST exit non-zero
+  And the commit MUST be blocked until an FL declaration is added
+```
 
 ## Todo
 

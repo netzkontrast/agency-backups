@@ -9,6 +9,8 @@ updated: 2026-05-06
 
 # ST-1: Research — FL0 Value Justification
 
+**Executor:** main-agent
+
 ## Goal
 
 Produce `research/fl0-value-justification/output/SPEC.md` answering the question "what does an FL0 entry contribute upstream that an absent log does not". Inputs: every closed-task friction log. Outputs: (a) FL0-frequency stats, (b) qualitative analysis of FL0 entry content, (c) the upstream consumers that depend on FL0 presence (e.g., MAINTENANCE.md §3.2 friction aggregation), (d) verbatim §FL.0 rationale paragraph for FRUSTRATED.md.
@@ -38,6 +40,11 @@ success_criterion: >-
   Verdict supported by ≥3 distinct lines of evidence; §5 paragraph
   fits within existing §FL.0 line budget; recommendation is
   internally consistent with MAINTENANCE.md §3.2 aggregation.
+process_gates:
+  - "research_phase: complete on the produced workspace"
+  - "reflection/friction-log.md present with FL[0-3] declaration"
+  - "/research/readme.md updated to list the new entry per RESEARCH.md §4 Step 5"
+  - "tools/check-governance.sh exits 0 against the produced workspace"
 known_priors: >-
   TASK.md §306 reinforces FL0 mandate. MAINTENANCE.md §3.2 aggregates
   friction from logs. Task 029 closed at FL1; many other tasks at

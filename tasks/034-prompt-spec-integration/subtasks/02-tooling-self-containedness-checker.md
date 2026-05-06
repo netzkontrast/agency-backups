@@ -9,6 +9,9 @@ updated: 2026-05-06
 
 # ST-2: `check-prompt-self-containedness` — Mechanizes P.5.1
 
+**Executor:** main-agent
+**Insertion point:** `[opt]` WARN-tier — runs only on changed `/prompts/<slug>/prompt.md` files.
+
 ## Goal
 
 Ship `tools/check-prompt-self-containedness.py` that scans `/prompts/<slug>/prompt.md` files and detects self-containedness violations: external context references that the executor cannot resolve. Per the FPR taxonomy from Task 034 ST-1, focus on the highest-leverage signals (e.g., references to "this conversation", "the user mentioned", "as discussed", "see above").

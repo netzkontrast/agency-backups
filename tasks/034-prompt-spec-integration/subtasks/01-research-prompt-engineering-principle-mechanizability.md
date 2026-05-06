@@ -9,6 +9,8 @@ updated: 2026-05-06
 
 # ST-1: Research — Prompt-Engineering Principle Mechanizability
 
+**Executor:** main-agent
+
 ## Goal
 
 Produce `research/prompt-engineering-principle-mechanizability/output/SPEC.md` containing a per-principle assessment for PROMPT.md §5.1 (self-containedness), §5.2 (framework declaration), §5.3 (RFC 2119), §5.4 (deliverable lock), §5.5 (anti-ambiguity), §5.6 (constraint isolation), §5.7 (failure handling). For each: (a) is it mechanically expressible? (b) what tool/heuristic? (c) false-positive rate against existing `/prompts/<slug>/prompt.md` corpus, (d) recommended ERROR vs WARN vs human-only verdict.
@@ -38,6 +40,11 @@ success_criterion: >-
   All 7 principles assessed; ≥3 ranked enforceable with <20% FPR;
   ≥1 ranked unenforceable with rationale; ≥30 prompts in the corpus
   scanned as test data.
+process_gates:
+  - "research_phase: complete on the produced workspace"
+  - "reflection/friction-log.md present with FL[0-3] declaration"
+  - "/research/readme.md updated to list the new entry per RESEARCH.md §4 Step 5"
+  - "tools/check-governance.sh exits 0 against the produced workspace"
 known_priors: >-
   P.5.3 (RFC 2119) is already enforced via tools/validate-frontmatter.py
   keyword count. The research-prompt-optimizer skill embeds a Phase 4

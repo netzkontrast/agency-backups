@@ -9,6 +9,9 @@ updated: 2026-05-06
 
 # ST-3: `check-rfc2119-polarity` — ASM-001 Mitigation
 
+**Executor:** main-agent
+**Insertion point:** `[opt]` WARN-tier — runs after step `[5/5]` ADR validator; gates only on `--strict` invocation.
+
 ## Goal
 
 Ship `tools/check-rfc2119-polarity.py` that scans every root spec, every `research/<slug>/output/SPEC.md`, **AND every `decisions/<NNNN>-<slug>.md`** for adjacent `MUST` / `MUST NOT` clauses on the same subject, reporting candidates for human review. Mitigates the polarity-inversion blind spot identified in `research/adr-assumption-audit/output/REPORT.md §1 ASM-001`.

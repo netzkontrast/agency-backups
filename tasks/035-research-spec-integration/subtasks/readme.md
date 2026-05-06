@@ -18,6 +18,15 @@ updated: 2026-05-06
 | ST-3 | [`03-tooling-external-result-downstream-task-linter.md` (briefing pending — author before dispatch) | python-expert | S |
 | ST-4 | [`04-tooling-trust-audit-gate.md` (briefing pending — author before dispatch) | python-expert | M |
 
+> **Trust-audit partition (per spec-panel C3):** ST-4 here owns the **GATE** —
+> the pre-commit invocation point + the diagnostic-format contract. The
+> **AGGREGATOR** (cross-research roll-up that MAINTENANCE.md §3.2 consumes)
+> lives in [Task 039 ST-5](../../039-maintenance-spec-integration/subtasks/readme.md).
+> Both subtasks operationalize the same `agentic-eval-trust-improvement-spec`,
+> but they MUST NOT duplicate code: ST-4 ships the per-research-workspace
+> linter; Task 039 ST-5 imports ST-4's diagnostic schema and rolls findings
+> across all `research/<slug>/` workspaces into the maintenance run.
+
 ## Phase B — Sequential
 
 | ID | File | Depends on | Recommended agent | Effort |

@@ -9,6 +9,8 @@ updated: 2026-05-06
 
 # ST-1: Research — Friction Pattern Synthesis
 
+**Executor:** main-agent
+
 ## Goal
 
 Produce `research/friction-pattern-synthesis/output/SPEC.md` aggregating every `friction-log.md` in `/tasks/<NNN>-<slug>/` and `/research/<slug>/reflection/` into a structured synthesis: (a) FL distribution histogram, (b) recurring root-cause taxonomy (≥6 categories), (c) per-spec friction-attribution (which root spec generated which friction), (d) recommended TASK.md / FRUSTRATED.md amendments grounded in evidence.
@@ -38,6 +40,11 @@ success_criterion: >-
   ≥6 distinct root-cause categories identified; ≥3 spec-text amendments
   proposed with verbatim before/after wording; 100% of FL2/FL3 entries
   attributed to at least one root cause.
+process_gates:
+  - "research_phase: complete on the produced workspace"
+  - "reflection/friction-log.md present with FL[0-3] declaration"
+  - "/research/readme.md updated to list the new entry per RESEARCH.md §4 Step 5"
+  - "tools/check-governance.sh exits 0 against the produced workspace"
 known_priors: >-
   Tasks 014 and 025 distill 7 maintenance-spec findings (F1-F7).
   Task 030 notes.md §3 lists FE-1..FE-10. These are pre-classified

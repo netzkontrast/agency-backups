@@ -23,7 +23,14 @@ task_affects_paths:
 
 ## Goal
 
-Eliminate the load-bearing contradiction with FRUSTRATED.md, harden mechanical enforcement of PC.1.1 cleanliness, give the toolchain-precedence rule (§7.A) a normative matrix that now spans THREE toolchains (Legacy / Flexible / ADR), and refine the waiver protocol (§7.B) from per-file to per-rule granularity. The Task is `done` when (a) the readme-cadence rule is harmonised across PRE_COMMIT.md §2 and FRUSTRATED.md §28, (b) §7.A contains a Legacy↔Flexible↔ADR tool-mapping table that explicitly references the §7.C ADR Governance Validator (PRE_COMMIT.md:107) as step `[5/5]` of `tools/check-governance.sh`, (c) `tools/check-clean-working-directory.py` exists and is invoked by `tools/check-governance.sh` (and ignores `decisions/` per the §8 exemption), (d) `tools/.frontmatter-waivers` supports per-rule scoping (rule scopes include the new `ADR.A.*` codes from §7.C), (e) ≥4 Gherkin scenarios cover the §6 hand-off, §7 governance gate, §7.B waivers, and §7.C ADR validator interaction.
+Eliminate the load-bearing contradiction with FRUSTRATED.md, harden mechanical enforcement of PC.1.1 cleanliness, give the toolchain-precedence rule (§7.A) a normative matrix that now spans THREE toolchains (Legacy / Flexible / ADR), and refine the waiver protocol (§7.B) from per-file to per-rule granularity. The Task is `done` when (a) the readme-cadence rule is harmonised across PRE_COMMIT.md §2 and FRUSTRATED.md §28, (b) §7.A contains a Legacy↔Flexible↔ADR tool-mapping table that explicitly references the §7.C ADR Governance Validator (PRE_COMMIT.md:107) as step `[5/5]` of `tools/check-governance.sh`, (c) `tools/check-clean-working-directory.py` exists and is invoked by `tools/check-governance.sh` (and ignores `decisions/` per the §8 exemption), (d) `tools/.frontmatter-waivers` supports per-rule scoping (rule scopes include the new `ADR.A.*` codes from §7.C), **and (e) each of the following anchors carries ≥1 Gherkin scenario in PRE_COMMIT.md (total ≥4)**:
+
+- **PC.B.1 §6 hand-off** — context-specific delegation to TASK.md/PROMPT.md/RESEARCH.md.
+- **PC.B.2 §7 governance gate** — `tools/check-governance.sh` exit-0 contract.
+- **PC.B.3 §7.B per-rule waivers** — waiver scope including `ADR.A.*` codes.
+- **PC.B.4 §7.C ADR validator interaction** — what happens on a `decisions/**` edit (Task 031 contract).
+
+> **Cross-spec wording-convergence note (per spec-panel m1):** the §2 readme-cadence wording produced by subtask `04-spec-amendment-pre-commit-md` MUST be byte-identical (modulo spec-name prefix) to the §28 wording produced by [Task 038 ST-3](../038-frustrated-spec-integration/subtasks/readme.md). The two amendments land in a single coordinated commit; if they diverge, an authoring error occurred and one spec MUST be reverted to match the other before merge.
 
 ## Context
 
@@ -34,11 +41,37 @@ The audit identified one outright contradiction and three governance debts. Task
 - **PC.1.1 clean working directory (§5–6)** — "no .py / .sh script scratchpads" — relies on agent discipline. A `.py` left in `/research/<slug>/workspace/` will silently slip through. Tooling MUST also exempt `decisions/` per FOLDERS.md §8 (no `.py` files expected there, but the linter must not falsely flag the directory).
 - **PC.7.B waiver protocol (§69–79)** — per-file scope. A file with multiple violations gets all of them silenced. Per-rule scoping is acknowledged as a weakness in the spec ("A waiver disables the entire validator for the listed file") but no plan exists. Per-rule scoping must accommodate the new `ADR.A.<aspect>.<stmt>` diagnostic codes from §7.C (PRE_COMMIT.md:113).
 
+## Preconditions (satisfied at branch-time)
+
+- **Task 016/017** — flexible toolchain shipped (the "Flexible" column of the §7.A matrix).
+- **Task 031** — ADR validator shipped (the "ADR" column of the §7.A matrix; PRE_COMMIT.md §7.C source).
+
+## Build-On
+
+- **`tools/check-governance.sh`** — the one-stop entry point; subtask 02 + 03 extend it (no parallel script).
+- **`tools/.frontmatter-waivers`** — current per-file waiver mechanism; subtask 03 refactors in place rather than introducing a parallel file.
+- **`tools/adr/cli.py validate`** — the §7.C diagnostic-code emitter (`ADR.A.<aspect>.<stmt>`); subtask 03's per-rule waiver vocabulary MUST accept these codes verbatim.
+
 ## Plan
 
 1. **Phase 1 — Research head.** Subtask `01-research-pre-commit-readme-update-cadence` produces the canonical decision (immediate vs. batched-at-precommit) backed by token-cost analysis on the existing corpus.
 2. **Phase 2 — Tooling.** Subtask `02-tooling-clean-working-directory-linter` (PC.1.1). Subtask `03-tooling-per-rule-waiver-mechanism` (PC.7.B refactor).
-3. **Phase 3 — Spec amendment.** Subtask `04-spec-amendment-pre-commit-md`: harmonise §2 with FRUSTRATED.md §28, add §7.A precedence matrix, document new linters, document per-rule waivers, add Gherkin scenarios.
+3. **Phase 3 — Spec amendment.** Subtask `04-spec-amendment-pre-commit-md`: harmonise §2 with FRUSTRATED.md §28 (joint commit with [Task 038 ST-3](../038-frustrated-spec-integration/subtasks/readme.md)), add §7.A precedence matrix, document new linters, document per-rule waivers, add one Gherkin per PC.B.1–PC.B.4 anchor.
+
+## Sample Gherkin (shape the maintainer authoring subtask 04 should produce)
+
+```gherkin
+# anchor: PC.B.4 — §7.C ADR validator interaction
+Scenario: Edit to AGENTS.md guarded section triggers ADR validator
+  Given a commit modifies `AGENTS.md` between the markers
+        `<!-- BEGIN AGENCY-ADR SYNTHESIS -->` and `<!-- END AGENCY-ADR SYNTHESIS -->`
+  When `tools/check-governance.sh` runs step `[5/5]`
+  Then `tools/adr/cli.py validate` MUST exit 1 with diagnostic code `ADR.A.3.5`
+  And `tools/check-governance.sh` MUST exit non-zero
+  And the commit MUST be blocked until the markers are restored
+        OR the edit is moved outside the guarded section
+        OR the maintainer re-runs `tools/adr/cli.py synthesize` to refresh the section
+```
 
 ## Todo
 

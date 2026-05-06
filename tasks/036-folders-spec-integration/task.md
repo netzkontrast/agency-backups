@@ -22,7 +22,13 @@ task_affects_paths:
 
 ## Goal
 
-Close FOLDERS.md governance gaps with mechanical enforcement and clearer scope language. The Task is `done` when (a) FOLDERS.md §F.5 readme.md L1 frontmatter is checked by a linter, (b) F.1.1 explicitly states which `/research/<provider>/<slug>/` paths are exempt from the readme.md requirement, (c) F.6 has a tooling-backed consistency check that warns when a body-level Markdown link references a sibling folder *without* the corresponding frontmatter linkage being set, (d) ≥4 Gherkin scenarios cover the load-bearing F.1, F.2, F.4.1.1, F.6 rules, **and (e) the §8 exemption table — already extended by Task 031 to include `/decisions/` (FOLDERS.md:115) — gets a Gherkin acceptance scenario covering the `decisions/<NNNN>-<slug>.md` ⇄ `adr` type pattern shipped in `header-ontology.json:208`**.
+Close FOLDERS.md governance gaps with mechanical enforcement and clearer scope language. The Task is `done` when (a) FOLDERS.md §F.5 readme.md L1 frontmatter is checked by a linter, (b) F.1.1 explicitly states which `/research/<provider>/<slug>/` paths are exempt from the readme.md requirement, (c) F.6 has a tooling-backed consistency check that warns when a body-level Markdown link references a sibling folder *without* the corresponding frontmatter linkage being set, **and (d) each of the following anchors carries ≥1 Gherkin scenario in FOLDERS.md (total ≥5)**:
+
+- **F.B.1 readme presence** — every operational folder MUST have a readme.md (F.1).
+- **F.B.2 slug naming** — kebab-case, max 5 tokens, `<NNN>-<slug>` for tasks (F.2).
+- **F.B.3 prompt scaffold** — three-file mandatory scaffold for `/prompts/<slug>/` (F.4.1.1).
+- **F.B.4 audit-graph consistency** — body-link + frontmatter-link divergence WARN (F.6).
+- **F.B.5 §8 exemption coverage** — `/decisions/` exempt post-Task-031 (`decisions/<NNNN>-<slug>.md` ⇄ `adr` type pattern shipped in `header-ontology.json:208`).
 
 ## Context
 
@@ -35,10 +41,35 @@ FOLDERS.md governance debt (mostly mechanical):
 
 This task is purely additive (T2 per MAINTENANCE.md §1) and does not require new research.
 
+## Preconditions (satisfied at branch-time)
+
+- **Task 016/017** — flexible-frontmatter toolchain is the substrate for ST-1 (readme frontmatter validator).
+- **Task 031** — `/decisions/` folder live; FOLDERS.md:115 exemption already landed; this task adds the Gherkin scenario covering it.
+
+## Build-On
+
+- **`tools/lint-structure.py`** — existing readme-presence check; ST-1 extends it with frontmatter-substance validation.
+- **`tools/fm/extract.py --frontmatter`** — readme.md frontmatter access for ST-1 + ST-2.
+- **`tools/fm/query.py refers-to=` / `referenced-by=`** — frontmatter audit-graph access for ST-2 (compare body links against frontmatter linkage).
+
 ## Plan
 
 1. **Phase 1 — Tooling.** Subtask `01-tooling-readme-frontmatter-validator` (closes F.5 SHOULD→MUST). Subtask `02-tooling-audit-graph-consistency-checker` (warns on body-link/frontmatter divergence).
-2. **Phase 2 — Spec amendment.** Subtask `03-spec-amendment-folders-md`: F.1.1 provider-exemption clause, F.5 promotion to MUST, F.6 dual-surface guidance, Gherkin scenarios.
+2. **Phase 2 — Spec amendment.** Subtask `03-spec-amendment-folders-md`: F.1.1 provider+`/decisions/` exemption clause, F.5 promotion to MUST, F.6 dual-surface guidance, one Gherkin per F.B.1–F.B.5 anchor.
+
+## Sample Gherkin (shape the maintainer authoring subtask 03 should produce)
+
+```gherkin
+# anchor: F.B.5 — §8 exemption coverage for /decisions/
+Scenario: ADR file under /decisions/ exempt from prompt-scaffold rule
+  Given a new file `decisions/0042-storage-path.md` with frontmatter `type: adr`
+  And the file matches the pattern `decisions/[0-9][0-9][0-9][0-9]-*.md`
+        registered in `maintenance/schemas/header-ontology.json:208`
+  When `tools/lint-structure.py` runs at pre-commit
+  Then the linter MUST NOT flag the file for missing brief.md / prompt.md
+        (those are F.4.1.1 prompt-scaffold requirements, not ADR requirements)
+  And the linter MUST validate `adr_*` L2 keys per the type's required-key set
+```
 
 ## Todo
 

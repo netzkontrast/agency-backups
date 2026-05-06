@@ -9,6 +9,8 @@ updated: 2026-05-06
 
 # ST-2: Research — Staleness Decision Formalization
 
+**Executor:** main-agent
+
 ## Goal
 
 Produce `research/spec-staleness-decision-formalization/output/SPEC.md` containing a decision tree that converts observable git-history + repo-state signals into one of four staleness buckets without subjective judgment, plus the `MAINT_STALE_DAYS` declaration mechanism.
@@ -38,6 +40,11 @@ success_criterion: >-
   Two agents running the algorithm against the same Task at the same
   commit MUST produce the same bucket assignment. The algorithm cites
   ≤5 signals; signals are mechanically extractable.
+process_gates:
+  - "research_phase: complete on the produced workspace"
+  - "reflection/friction-log.md present with FL[0-3] declaration"
+  - "/research/readme.md updated to list the new entry per RESEARCH.md §4 Step 5"
+  - "tools/check-governance.sh exits 0 against the produced workspace"
 known_priors: >-
   TASK.md §4.7 enumerates 4 buckets. MAINTENANCE.md §3.4 defines the
   staleness window (default 7 days). MAINTENANCE.md §1 partitions

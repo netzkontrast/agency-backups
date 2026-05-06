@@ -50,12 +50,34 @@ ST-1 (ADR corpus extraction) becomes a **build-on**, not invent-from-scratch:
 - Use `tools/adr/synthesize.py --dry-run --token-limit 6000` to verify the candidate corpus would compress under the deployed budget.
 - Land the ratified subset as actual `decisions/<NNNN>-<slug>.md` files with `adr_status: Proposed`; the synthesizer then routes them into AGENTS.md via the guarded section, satisfying part (a) of the Goal mechanically.
 
+## Preconditions (satisfied at branch-time)
+
+- **Task 027** (`adr-spec-research-synthesis`, done) — produced `research/adr-spec-research-synthesis/output/SPEC.md`, the canonical ADR format consumed by ST-1.
+- **Task 028** (`adr-tooling-impl-plan`, done) — produced the build contract that Task 031 implemented.
+- **Task 029** (`adr-assumption-audit`, done) — produced `research/adr-assumption-audit/output/REPORT.md` whose ASMs/IADRs/PDs feed ST-1's curated corpus.
+- **Task 031** (`adr-tooling-impl`, in_progress on PR #67 → done on merge) — shipped `tools/adr/{extract,synthesize,validate}.py`, `decisions/`, the `<!-- BEGIN/END AGENCY-ADR SYNTHESIS -->` markers in AGENTS.md, and `types.adr` in `header-ontology.json`. ST-1 builds atop this; without it, ST-1 falls back to invent-from-scratch.
+
 ## Plan
 
 1. **Phase 1 — Research head.** Spawn the `adr-corpus-extraction-from-governance-specs` research run (subtask `01`) so the §0 cross-reference and ADR backbone in §3.3 land on a tested corpus, not a stub.
 2. **Phase 2 — Tooling.** Author three linters in parallel (subtasks `02`, `03`, `04`) that mechanically gate the new clauses.
 3. **Phase 3 — Spec amendment.** Apply the AGENTS.md edits (subtask `05`) referencing both the research output and the new tooling. Edits are T2-Additive per `MAINTENANCE.md §1`.
 4. **Phase 4 — README + index sync.** Update `README.md §10` if the new linters introduce a new pre-commit check (per `README.md §11.3 R.7`). Update `tasks/readme.md` per `TASK.md §4.8`.
+
+## Sample Gherkin (shape the maintainer authoring subtask 05 should produce)
+
+```gherkin
+# anchor: AG.NO5.1
+Scenario: Non-narrative agent loads narrative ontology — WARN
+  Given an agent runs a Task whose `task_affects_paths` does NOT include
+        any of `skills/dramatica-*`, `skills/ncp-*`, `skills/novel-*`
+  And the staged diff shows a read against `maintenance/schemas/narrative-ontology/ontology.json`
+  When `tools/check-narrative-ontology-load.py` runs at pre-commit
+  Then the linter MUST emit a WARN (exit 2) citing the offending file
+  And `tools/check-governance.sh` MUST NOT block the commit (advisory only)
+```
+
+This sample fixes the *shape* (Given/When/Then anchored to a stable identifier `AG.NO5.1`); subtask 05 then authors the remaining scenarios for §60–§65 assumption-log substance, §3.3 polarity-inversion footnote behaviour, and §6 skills-container-capabilities citations.
 
 ## Todo
 

@@ -9,6 +9,8 @@ updated: 2026-05-06
 
 # ST-1: Research — Session-Continuity Protocol Instantiation
 
+**Executor:** main-agent
+
 ## Goal
 
 Produce `research/session-continuity-protocol-instantiation/output/SPEC.md` containing a concrete, file-format-spec'd instantiation of the abstract Spec-I from `agentic-session-continuity-spec/output/SPEC.md`. Output: (a) `state.md` schema (frontmatter + sections), (b) checkpoint emission cadence (every N synthesis steps), (c) epistemic-delta encoding format, (d) restore procedure for a fresh-context successor agent, (e) integration points with RESEARCH.md §4.
@@ -39,6 +41,11 @@ success_criterion: >-
   state.md schema validates against fm-validate; restore procedure
   succeeds in a worked example (Task 027's research workspace as
   test bed); token overhead <10% on a synthesis run.
+process_gates:
+  - "research_phase: complete on the produced workspace"
+  - "reflection/friction-log.md present with FL[0-3] declaration"
+  - "/research/readme.md updated to list the new entry per RESEARCH.md §4 Step 5"
+  - "tools/check-governance.sh exits 0 against the produced workspace"
 known_priors: >-
   agentic-session-continuity-spec/output/SPEC.md proposes Spec-G
   (context pruning), Spec-H (memory state machine), Spec-I (cross-

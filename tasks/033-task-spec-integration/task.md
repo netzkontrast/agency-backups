@@ -35,13 +35,42 @@ Spec-audit findings (rank by blast-radius):
 - **`skill_*` namespace** is ratified in `research/skills-namespace-ontology/output/SPEC.md` but is absent from TASK.md §3.3 — agents authoring skill files cannot find the canonical L2 contract from the root spec.
 - **Friction-pattern synthesis** is a known coverage gap (no spec aggregates FL0–FL3 patterns across tasks); the head-of-chain research subtask produces the input for §4.6 closure-rule clarifications.
 
+## Preconditions (satisfied at branch-time)
+
+- **Task 016/017/019** — flexible-frontmatter toolchain shipped + repo migrated.
+- **Task 028/031** — ADR L2 namespace ratified and `types.adr` registered in `maintenance/schemas/header-ontology.json:208`. The §3.3 amendment (subtask 05) lifts the registration into the spec body.
+- **Task 014/025** — friction-log aggregation pattern; subtask 01 builds on this corpus.
+
+## Build-On
+
+- **`tools/fm/_core.py`** — frontmatter parser + `iter_operational_files()` for the duplicate-task_id scan in subtask 03.
+- **`tools/adr/ids.py`** — id allocation pattern (zero-padded sequence with collision detection); subtask 03 mirrors this approach for `task_id`.
+- **`maintenance/schemas/header-ontology.json`** — single source of truth for required L1+L2 keys; the §3.3 amendment cross-references this rather than duplicating the schema in TASK.md.
+
 ## Plan
 
 1. **Phase 1 — Research head.** Dispatch subtask `01-research-friction-pattern-synthesis` to produce a structured analysis of friction-log patterns across all closed tasks, feeding §4.6 closure-rule design.
 2. **Phase 1 — Research.** Dispatch subtask `02-research-spec-staleness-decision-formalization` (shared input with Task 039 MAINTENANCE) to formalize the §4.7 updated/abandoned boundary.
 3. **Phase 2 — Tooling.** Subtask `03-tooling-duplicate-task-id-linter` (closes T.8.1). Subtask `04-tooling-lifecycle-classifier` (helper for §4.7).
-4. **Phase 3 — Spec amendment.** Subtask `05-spec-amendment-task-md`: add §3.3 cross-reference, §3.3 skill_* subsection, §6 supersession-blocker Gherkin, §4.7 algorithm refinement, §8.1 enforcement note.
+4. **Phase 3 — Spec amendment.** Subtask `05-spec-amendment-task-md`: add §3.3 cross-reference, §3.3 skill_* subsection, §3.3 adr_* subsection (post-Task-031), §6 supersession-blocker Gherkin, §4.7 algorithm refinement, §8.1 enforcement note.
 5. **Phase 4 — README sync.** If §6 (linter table) gains the duplicate-task-id linter, update README.md §6 per R.7.
+
+## Sample Gherkin (shape the maintainer authoring subtask 05 should produce)
+
+```gherkin
+# anchor: T.B.SUP.1 — supersession-blocker inheritance
+Scenario: Blocker auto-redirect through `updated` lifecycle
+  Given Task X carries `task_blocked_by: ["Y"]`
+  And Task Y transitions to `task_status: updated` with `task_superseded_by: ["Z"]`
+  And Task Z carries `task_supersedes: ["Y"]`
+  And Task Z is `task_status: open` (not yet done)
+  When `tools/fm/check-blocker-satisfaction.py` validates Task X at pre-commit
+  Then the validator MUST treat Task X as still blocked
+  And the diagnostic MUST cite both Y (superseded) and Z (live successor)
+  And Task X MUST NOT transition open → in_progress until Z reaches `done`
+```
+
+Anchor namespace `T.B.<topic>.<n>` enables direct citation from TASK.md §6's existing scenario list.
 
 ## Todo
 

@@ -9,6 +9,8 @@ updated: 2026-05-06
 
 # ST-1: Research — Pre-Commit Readme-Update Cadence
 
+**Executor:** main-agent
+
 ## Goal
 
 Produce `research/pre-commit-readme-update-cadence/output/SPEC.md` that resolves the contradiction surfaced by the spec audit. Output: (a) a single normative rule on when readme.md is updated (immediate / batched-at-pre-commit / hybrid), (b) token-cost data backing the choice, (c) verbatim before/after wording for FRUSTRATED.md §28 and PRE_COMMIT.md §2.
@@ -39,6 +41,11 @@ success_criterion: >-
   One cadence chosen with quantitative justification; before/after
   wording fits within existing §28 / §2 line budgets without
   restructuring; recommendation is internally consistent.
+process_gates:
+  - "research_phase: complete on the produced workspace"
+  - "reflection/friction-log.md present with FL[0-3] declaration"
+  - "/research/readme.md updated to list the new entry per RESEARCH.md §4 Step 5"
+  - "tools/check-governance.sh exits 0 against the produced workspace"
 known_priors: >-
   Task 030 readme.md notes FE-3 "readme update fatigue".
   research/repo-maintenance-protocol-spec/output/SPEC.md §3.1 has

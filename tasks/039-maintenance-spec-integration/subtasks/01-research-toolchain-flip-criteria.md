@@ -9,6 +9,8 @@ updated: 2026-05-06
 
 # ST-1: Research — Toolchain Flip Criteria
 
+**Executor:** maintenance-agent
+
 ## Goal
 
 Produce `research/toolchain-flip-criteria/output/SPEC.md` containing the deterministic flip criteria + post-flip cleanup checklist for the MAINTENANCE.md §1.1.2 dual-toolchain transition. Includes: (a) quantifiable criteria (zero outstanding waivers, X% test coverage, all required Tasks done), (b) flip-day procedure (atomic commit shape), (c) post-flip cleanup (which legacy linters retire, which warning-mode rules graduate to ERROR), (d) rollback plan if the flip breaks production.
@@ -38,6 +40,11 @@ success_criterion: >-
   Criteria evaluable by `tools/check-governance.sh` extension or simple
   git grep; checklist has ≤7 items; flip procedure is atomic (single
   commit); rollback is one git revert.
+process_gates:
+  - "research_phase: complete on the produced workspace"
+  - "reflection/friction-log.md present with FL[0-3] declaration"
+  - "/research/readme.md updated to list the new entry per RESEARCH.md §4 Step 5"
+  - "tools/check-governance.sh exits 0 against the produced workspace"
 known_priors: >-
   MAINTENANCE.md §1.1.2 declares parallel operation. Tasks 016-019
   shipped the flexible toolchain. governance-specs-update-research/

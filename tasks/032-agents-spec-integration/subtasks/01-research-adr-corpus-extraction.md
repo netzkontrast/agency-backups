@@ -9,6 +9,8 @@ updated: 2026-05-06
 
 # ST-1: Research — ADR Corpus Extraction from Governance Specs
 
+**Executor:** main-agent
+
 ## Goal
 
 Produce `research/adr-corpus-extraction-from-governance-specs/output/SPEC.md` containing 15–30 implicit ADRs already in force across `AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `PRE_COMMIT.md`, `FRUSTRATED.md`, `MAINTENANCE.md`, formatted in the MADR shape mandated by `research/adr-spec-research-synthesis/output/SPEC.md`. Each implicit ADR includes (a) extracted decision, (b) source clause + line number, (c) supersession history if any, (d) rationale, (e) consequences, (f) recommended ADR ID.
@@ -39,6 +41,11 @@ success_criterion: >-
   (active / superseded-by / supersedes); zero ADRs duplicate the 11 IADRs
   in research/adr-assumption-audit/output/REPORT.md §2 without citing them
   as predecessors.
+process_gates:
+  - "research_phase: complete on the produced workspace"
+  - "reflection/friction-log.md present with FL[0-3] declaration"
+  - "/research/readme.md updated to list the new entry per RESEARCH.md §4 Step 5"
+  - "tools/check-governance.sh exits 0 against the produced workspace"
 known_priors: >-
   research/adr-assumption-audit/output/REPORT.md §2 already lists 11 IADRs
   (5 P1, 4 P2, 2 P3). research/adr-spec-research-synthesis/output/SPEC.md

@@ -19,6 +19,15 @@ updated: 2026-05-06
 | ST-4 | [`04-tooling-dynamic-readme-partition-linter.md` (briefing pending — author before dispatch) | python-expert | M |
 | ST-5 | [`05-tooling-trust-audit-integration.md` (briefing pending — author before dispatch) | python-expert | M |
 
+> **Trust-audit partition (per spec-panel C3):** ST-5 here owns the
+> **AGGREGATOR** — cross-research roll-up of the per-workspace findings
+> emitted by [Task 035 ST-4](../../035-research-spec-integration/subtasks/readme.md).
+> ST-5 MUST import (not duplicate) the diagnostic-schema and per-workspace
+> linter from Task 035 ST-4. Aggregator output is what MAINTENANCE.md §3.2
+> consumes during the nightly run; it surfaces FL[1-3]-equivalent trust
+> failures across all `research/<slug>/` workspaces and delegates them to
+> the Task pipeline per the existing friction-aggregation contract.
+
 ## Phase B — Sequential
 
 | ID | File | Depends on | Recommended agent | Effort |

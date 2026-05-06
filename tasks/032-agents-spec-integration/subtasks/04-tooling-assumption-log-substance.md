@@ -9,6 +9,9 @@ updated: 2026-05-06
 
 # ST-4: `check-assumption-log` — FOLDERS.md F.3 / AGENTS.md §60-65 Enforcement
 
+**Executor:** main-agent
+**Insertion point:** `[opt]` WARN-tier — invoked over operational `readme.md` files only; never gating.
+
 ## Goal
 
 Ship `tools/check-assumption-log.py` that scans every operational-folder `readme.md` for an `## Assumptions Log` section and validates: (a) section exists when the parent task involved a non-trivial decision, (b) entries are not stale (currency check via `updated:` frontmatter), (c) entries are non-empty (substance check).

@@ -9,6 +9,9 @@ updated: 2026-05-06
 
 # ST-4: `check-task-lifecycle-classification` — TASK.md §4.7 Helper
 
+**Executor:** main-agent
+**Insertion point:** (none) — manual helper invoked by maintenance agents only; not part of `tools/check-governance.sh`.
+
 ## Goal
 
 Ship `tools/fm/check-task-lifecycle-classification.py` that, given a Task path and a proposed `task_status` transition, evaluates the four conditions in TASK.md §4.7 (Goal still desirable / Plan-Todo drifted / successor exists / supersession reciprocity) and outputs PASS or FAIL with the missing condition(s). Built atop the algorithm SPEC produced by Task 033 ST-2.

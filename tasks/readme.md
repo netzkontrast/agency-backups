@@ -66,6 +66,17 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`038-frustrated-spec-integration/`](./038-frustrated-spec-integration/) — Justifies the FL0-mandatory rule with research-backed evidence, mechanically gates the FL declaration on commit, adds Gherkin acceptance criteria. Status: `open`. Co-owned with Task 037 on the §28 reconciliation. Subtasks: 1 research + 1 tooling + 1 spec amendment.
 - [`039-maintenance-spec-integration/`](./039-maintenance-spec-integration/) — Operationalizes three orphaned research outputs (agentic-eval-trust-improvement-spec, repo-maintenance-protocol-spec, governance-specs-update-research §2) into MAINTENANCE.md; closes §1.1.2 toolchain-flip-criteria (now Legacy/Flexible/ADR three-way), §3.4 staleness algorithm, §3.5 duplicate-task_id circular dependency. Status: `open`. Subtasks: 2 research + 3 tooling + 1 spec amendment.
 
+### Chain-Level Falsification (Tasks 032–039)
+
+The 8-task chain above is a single coordinated effort to integrate under-cited research and close governance debt across the root specs. **The chain is the wrong cut iff** any of the following hold after all 8 tasks land:
+
+1. The friction-pattern-synthesis re-run (Task 033 ST-1 re-executed post-merge) shows *more* governance friction than at branch-time, not less. (The chain claims net debt reduction; if friction grows, the cut was harmful.)
+2. `tools/check-governance.sh` runtime exceeds 2× its pre-chain duration on a representative commit. (New linters worth shipping must amortize their cost; a 2×+ slowdown means the architecture is wrong.)
+3. Two or more root specs end up with mutually contradictory normative clauses introduced by this chain. (The whole point is to *resolve* the FRUSTRATED.md §28 ↔ PRE_COMMIT.md §2 contradiction, not introduce new ones.)
+4. The number of "briefing pending" subtasks at chain-end is greater than at branch-time. (We commit to authoring; "pending" should be a falling number.)
+
+If any falsifier triggers post-merge, the chain MUST be partially rolled back (single offending task) or fully rolled back (if friction-pattern-synthesis fails) per `MAINTENANCE.md §1` rollback procedure.
+
 ## Workflow Assumptions
 
 - Tasks reference prompts via `task_uses_prompts`; prompts are NEVER inlined inside a `task.md`.
