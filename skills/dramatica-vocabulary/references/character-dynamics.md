@@ -4,7 +4,7 @@ Four-axis configuration of the Main Character — Resolve, Growth, Approach, Men
 
 ## Contents
 
-- [Approach](#approach) — The Main Character''s
+- [Approach](#approach) — The Main Character's
 - [Change](#change) — The Main Character
 - [Female Mental Sex](#female-mental-sex) — See Intuitive
 - [Impact Character Approach](#impact-character-approach) — By
@@ -85,11 +85,6 @@ too close to home. Near the climax of the story, the
 Main Character must demonstrate whether he is going
 to stick with his original approach in the belief that it is
 the solution or jump to the opposite trait in the belief he
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-8.
-
 has been wrong. In "Leap of Faith" stories this will
 occur during a "moment of truth." In "Non-Leap of
 Faith" stories this will occur over the course of the story
@@ -244,11 +239,6 @@ Impact Character's Response
 
 An Impact
 Character can never be sure if what he believes to be
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-22.
-
 the source of his problem really is the source of his
 problem. Regardless, based on his way of seeing
 things, he will determine a potential solution or response by which he hopes to find the solution. The
@@ -419,11 +409,6 @@ the essential feelings that form the foundation of
 character. These feelings are so basic that a character
 is often not aware of what they truly are. When the
 Innermost Desires are involved, a character is moved
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-24.
-
 intuitive character. It is important to note that these
 techniques are applied both to others and to oneself.
 Either way, manipulating surplus and deficiency describes the approach. When selecting intuitive or

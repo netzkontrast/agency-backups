@@ -6,74 +6,74 @@ The 64 highest-resolution descriptions of approaches and attitudes — the atomi
 
 - [Acceptance](#acceptance) — dyn.pr. Non-acceptance<->Acceptance
 - [Accurate](#accurate) — dyn.pr. Non-accurate<-->Accurate
-- [Actuality](#actuality) — >Actuality -an objective reality
+- [Actuality](#actuality) — Actuality -an objective reality
 - [Avoid](#avoid) — evade, dodge, elude, escape, steer
-- [Aware](#aware) — >Self-Aware -being conscious of things outside oneself
-- [Cause](#cause) — >Cause
-- [Certainty](#certainty) — >Certainty
-- [Chaos](#chaos) — >Chaos
-- [Conscience](#conscience) — >Conscience
-- [Consider](#consider) — >Consider
-- [Control](#control) — >Control -a method based on organization and constraint
+- [Aware](#aware) — Self-Aware -being conscious of things outside oneself
+- [Cause](#cause) — Cause
+- [Certainty](#certainty) — Certainty
+- [Chaos](#chaos) — Chaos
+- [Conscience](#conscience) — Conscience
+- [Consider](#consider) — Consider
+- [Control](#control) — Control -a method based on organization and constraint
 - [Crucial Element](#crucial-element) — The single dramatic
-- [Deduction](#deduction) — >Deduction
+- [Deduction](#deduction) — Deduction
 - [Desire](#desire) — drive, motivational goal, unfulfillment,
 - [Determination](#determination) — dyn.pr. Expectation<->Determination
 - [Direction (Overall Story Throughline)](#direction-overall-story-throughline) — See
-- [Disbelief](#disbelief) — >Disbelief
+- [Disbelief](#disbelief) — Disbelief
 - [Effect](#effect) — result, consequence, outcome,
-- [Ending](#ending) — >Ending -coming to a conclusion
-- [Equity](#equity) — >Equity
+- [Ending](#ending) — Ending -coming to a conclusion
+- [Equity](#equity) — Equity
 - [Evaluation](#evaluation) — dyn.pr. Re-evaluation<->Evaluation
 - [Expectation](#expectation) — dyn.pr. Determination<->Expectation
-- [Faith](#faith) — >Faith
-- [Feeling](#feeling) — >Feeling
+- [Faith](#faith) — Faith
+- [Feeling](#feeling) — Feeling
 - [Focus](#focus) — See Symptom
-- [Help](#help) — > Help
-- [Hinder](#hinder) — >Help
-- [Hunch](#hunch) — >Hunch
-- [Inaction](#inaction) — >Inaction -taking no action as a means of response
-- [Induction](#induction) — >Induction -a means of determining possibility
-- [Inequity](#inequity) — >Inequity
-- [Inertia](#inertia) — >Inertia
+- [Help](#help) — Help
+- [Hinder](#hinder) — Help
+- [Hunch](#hunch) — Hunch
+- [Inaction](#inaction) — Inaction -taking no action as a means of response
+- [Induction](#induction) — Induction -a means of determining possibility
+- [Inequity](#inequity) — Inequity
+- [Inertia](#inertia) — Inertia
 - [Knowledge](#knowledge) — learnedness, held truths,
-- [Logic](#logic) — >Logic
+- [Logic](#logic) — Logic
 - [Main Character Problem](#main-character-problem) — source of The
-- [Oppose](#oppose) — >Oppose
-- [Order](#order) — >Order
+- [Oppose](#oppose) — Oppose
+- [Order](#order) — Order
 - [Overall (Objective) Story Problem](#overall-objective-story-problem) — The
 - [Overall (Objective) Story Response](#overall-objective-story-response) — The
 - [Overall (Objective) Story Solution](#overall-objective-story-solution) — The
 - [Overall (Objective) Story Symptom](#overall-objective-story-symptom) — -Where attention is focused in the Overall story
-- [Perception](#perception) — >Perception
-- [Possibility](#possibility) — >Possibility
-- [Potentiality](#potentiality) — >Potentiality
-- [Proaction](#proaction) — >Proaction -taking initiative action to achieve one''s goals
-- [Probability](#probability) — >Probability
+- [Perception](#perception) — Perception
+- [Possibility](#possibility) — Possibility
+- [Potentiality](#potentiality) — Potentiality
+- [Proaction](#proaction) — Proaction -taking initiative action to achieve one's goals
+- [Probability](#probability) — Probability
 - [Problem](#problem) — The underlying cause of the
-- [Process](#process) — >Process
-- [Production](#production) — >Production
-- [Projection](#projection) — >Projection
-- [Protection](#protection) — >Protection -an effort to prevent one''s concerns from being vulnerable
-- [Proven](#proven) — >Proven
-- [Pursuit](#pursuit) — >Pursuit
-- [Reaction](#reaction) — >Reaction -actions made in response
-- [Reconsider](#reconsider) — >Reconsider
-- [Reduction](#reduction) — >Reduction
-- [Reevaluation](#reevaluation) — >Reevaluation
-- [Result](#result) — >Result
+- [Process](#process) — Process
+- [Production](#production) — Production
+- [Projection](#projection) — Projection
+- [Protection](#protection) — Protection -an effort to prevent one's concerns from being vulnerable
+- [Proven](#proven) — Proven
+- [Pursuit](#pursuit) — Pursuit
+- [Reaction](#reaction) — Reaction -actions made in response
+- [Reconsider](#reconsider) — Reconsider
+- [Reduction](#reduction) — Reduction
+- [Reevaluation](#reevaluation) — Reevaluation
+- [Result](#result) — Result
 - [Solution](#solution) — The specific element needed to
-- [Speculation](#speculation) — >Speculation
-- [Support](#support) — >Support
+- [Speculation](#speculation) — Speculation
+- [Support](#support) — Support
 - [Symptom Element](#symptom-element) — A Main vs. Impact
-- [Temptation](#temptation) — >Temptation
-- [Test](#test) — >Test
-- [Theory](#theory) — >Theory
-- [Thought](#thought) — >Thought -the process of consideration
-- [Trust](#trust) — >Trust
-- [Uncontrolled](#uncontrolled) — >Uncontrolled
-- [Unending](#unending) — >Unending
-- [Unproven](#unproven) — >Unproven
+- [Temptation](#temptation) — Temptation
+- [Test](#test) — Test
+- [Theory](#theory) — Theory
+- [Thought](#thought) — Thought -the process of consideration
+- [Trust](#trust) — Trust
+- [Uncontrolled](#uncontrolled) — Uncontrolled
+- [Unending](#unending) — Unending
+- [Unproven](#unproven) — Unproven
 
 ---
 
@@ -382,8 +382,6 @@ the top
 
 www.dramatica.com -- www.screenplay.com
 
-2.
-
 Story Points items:
 
 ### Overview Appreciations
@@ -442,8 +440,6 @@ author feels are appropriate t
 
 www.dramatica.com -- www.screenplay.com
 
-3.
-
 
 ---
 
@@ -493,11 +489,6 @@ scenarios:
 **Opposite**: Temptation <--> Conscience
 
 forgoing an immediate benefit because of
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-11.
-
 future consequences -- Conscience is the motivation
 that negative consequences are unavoidable if a
 present desire is acted upon. Conscience can serve a
@@ -861,8 +852,6 @@ scenarios:
 ### Element
 
 www.dramatica.com -- www.screenplay.com
-
-51.
 
 culmination, the ensuing
 
@@ -1311,11 +1300,6 @@ dynamic_pair_id: el.theory
 
 a
 conclusion based on intuition -- A Hunch is an understanding arrived at by circumstantial evidence. The
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-21.
-
 phrase "where there's smoke, there's fire" describes
 the concept. The advantage is that when evidence
 mounts, even without direct connections, one may
@@ -1356,11 +1340,6 @@ Inaction
 does not mean simply sitting still. The Inactive characteristic might choose to allow a course of action by not
 interfering. Or it might refuse to move out of harm's
 way, thereby forming a resistance to the progress that
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-23.
-
 drives the harm. Both of these are efficient tools for
 altering the course of an interaction. However, the
 Inactive characteristic may also drag its feet in all areas
@@ -1649,11 +1628,6 @@ perfume a character puts on. However it is illustrated,
 it needs to be there to give both the audience and the
 Main Character some way of judging how deep his
 concern is and how far along in the story he is.
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-27.
-
 Main Character's Concern
 
 ### Type
@@ -1794,11 +1768,6 @@ Main Character's Unique ability
 
 Just as a
 requirement defines the specific nature of things
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-28.
-
 needed to achieve a particular goal, Unique Ability
 defines the specific quality needed to meet the requirement. Unique Ability is another way in which the Main
 Character is identified as the intersecting point between
@@ -2551,8 +2520,6 @@ interaction is created.
 
 www.dramatica.com -- www.screenplay.com
 
-53.
-
 Temptation
 
 ### Element
@@ -2628,11 +2595,6 @@ deduce the ultimate truth in a matter. However, there is
 enough information to narrow the field of possibilities.
 When all the possibilities are considered, each can be
 rated on its individual merits as to how much each has.
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-39.
-
 The potentialities are compared, arriving at the most
 likely conclusion. This allows the Reduction characteristic to act with a greater degree of confidence than if
 no "favorite" theory or explanation had emerged. Of
@@ -2794,11 +2756,6 @@ problem, but works in conjunction with the Solution
 Element to create an imbalance between two traits that
 need to be balanced. The choice to present one as a
 negative trait defines it as the Problem Element and its
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-42.
-
 positive partner becomes the Solution Element. In
 Steadfast stories, the Solution Element represents the
 nature of the things that would resolve the Overall
@@ -3071,11 +3028,6 @@ represents Thought, he illustrates the process of
 consideration. Unlike the logic element that is only
 concerned with arriving at a conclusion via reason,
 Thought deliberates both logical and emotional aspects
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-47.
-
 of a problem, not particularly to decide an issue so
 much as to examine it from all perspectives. This has
 the advantage of illuminating every side of an issue,

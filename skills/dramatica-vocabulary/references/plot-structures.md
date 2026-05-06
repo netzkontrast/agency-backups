@@ -28,8 +28,6 @@ the solution to the story's problem is sought, act by act
 
 www.dramatica.com -- www.screenplay.com
 
-33.
-
 the kind of activity employed to arrive at a solution to
 the overall story's problem, act by act -- As the Overall
 Story progresses act by act, it covers the Overall Story

@@ -40,8 +40,6 @@ The value of separating the Main Character and Protagonist  into two different c
 
 Later on, we will explore many other ways in which the Main Character can be employed in much less archetypal terms than as a hero.  For now, the key point is that Dramatica identifies two different kinds of characters: those who represent an audience point of view, and those who fulfill a dramatic function. 
 
-26. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Overall Story and Subjective Characters** 
@@ -57,8 +55,6 @@ To summarize then, characters come in two varieties: Overall Story and Subjectiv
 In the next chapter we will begin an in-depth exploration of Overall Story Characters. Here we will meet the Protagonist, Antagonist, and several other archetypes.  Next we will dissect each archetype to see what essential dramatic elements it contains.  Finally, we will examine how those same elements can be combined in different, non-archetypal patterns to create more realistic and versatile _complex_ characters. 
 
 Then we will turn our attention to the Subjective Characters: Main and Impact.  We will examine how the audience point of view is shifted through the Main Character's growth.  We will also explore the forces that drive these two characters and forge the belief systems they posses. 
-
-27. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -81,8 +77,6 @@ In our earlier discussion of what sets the Subjective Characters apart from the 
 The concept of "player" is found throughout Dramatica and differs from what we mean by "character."  Dramatica defines a character as a set of dramatic functions that must be portrayed in order to make the complete argument of a story.  Several functions may be grouped together and assigned to a person, place, or thing who will represent them in the story.  The group of functions defines the nature of the character.  The personage representing the functions is a player. 
 
 In other words, a player is like a vessel into which a character (and therefore a set of character functions) is placed.  If more than one Overall Story Character is placed into a single player, the player will appear to have multiple personalities. This is clearly seen in the dual characters contained in player, Dr. Jekyll & Mr. Hyde,  or the many personalities of Sybil. 
-
-28. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -108,8 +102,6 @@ Just as the Protagonist is often "doubled up" with the function of the Main Char
 
 Just as the Antagonist opposes the Protagonist in the Overall Story, the Impact Character stands in the way of the Main Character in the Subjective Story.  Note we did 
 
-29. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 not say the Impact Character _opposes_ the Main Character, but rather _stands in the way_ . The Impact Character's function is to represent an alternative belief system or world view to the Main Character, forcing him to avoid the easy way out and to face his personal problem. 
@@ -134,8 +126,6 @@ It is important to note that as in real life, Reason is not inherently _better_ 
 
 Functionally, the Emotion Character has its heart on its sleeve; it is quick to anger, but also quick to empathize.  Because it is frenetic and disorganized, however, most of its energy is uncontrolled and gets wasted by lashing out in so many directions that it ends up running in circles and getting nowhere.  In contrast, the Reason Character seems to lack "humanity" and has apparently no ability to think from the heart.  As a 
 
-30. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 result, the Reason Character often fails to find support for its well-laid plans and ends up wasting its effort because it has unknowingly violated the personal concerns of others. 
@@ -154,8 +144,6 @@ The Sidekick is balanced by the Skeptic.  Where the Sidekick has faith, the Skep
 
 Finally we come to the remaining pair of Archetypal Characters.  The first of these archetypes is a common yet often loosely defined set of functions; the second archetype is unique to Dramatica.  The first of these characters is the Guardian.  The Guardian functions as a teacher/helper who represents the Conscience of the Story Mind. This is a protective character who eliminates obstacles and illuminates the path ahead. In this way, the Guardian helps the Protagonist stay on the proper path to achieve success.  Balancing the Guardian is a character representing Temptation in the Story Mind.  This character works to place obstacles in the path of the Protagonist, and to lure 
 
-31. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 it away from success.  Because this character works to hinder the progress of the Protagonist, we coined the name "Contagonist". 
@@ -169,8 +157,6 @@ As with the Sidekick, the Contagonist can be allied with either the Antagonist o
 ## **Archetypes — a Balanced Part of the Complete Argument** 
 
 As a group, the Archetypal Characters represent all the essential functions of a complete Story Mind, though they are grouped in simple patterns.  Because the Archetypes can be allied in different ways, however, a degree of versatility can be added to their relationships. 
-
-32. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -187,8 +173,6 @@ To create characters who more closely represent our own inconsistencies, we must
 A single story may have both Archetypal and Complex Characters.  The decision of how to group the functions is completely open to an author's storytelling desires. The problem is, until one is aware of exactly what these functions are and how they relate, it is impossible to make meaningful decisions about how to combine them.  These essential functions are at such a basic level that they form the elemental building blocks of Overall Story Characters.  Therefore, we refer to these functions as character _Elements_ . Listing them gives no feel for the end product, much as just listing the Periodic Chart of Elements in chemistry gives no feel for the natures of the compounds that might be engineered through combining them. 
 
 As a result, the best way to present the character Elements with meaning is to start with the Archetypal Characters (who by definition contain all the Elements) and break them down, step by step, level by level, until their elemental components are exposed. In this manner, understanding is carried down to the Elements, which may then be combined in non-archetypal ways to create Complex Characters. 
-
-33. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -208,8 +192,6 @@ We can easily see how these Archetypal pairs represent a broad analogy to a huma
 
 There is another useful grouping of the Archetypal Characters which helps uncover their essential Elements.  Four of the characters seem to be the prime movers of the story, and it is their interactions that determine the thrust of the effort to address the story's problem.  The other four are "back seat drivers" —  perhaps highly interested in the outcome, but rather than forcing the plot, they _influence_ those who do force the plot. Remember, these descriptions are only applicable in a general way but serve to make comparisons between similar traits of characters.  In Dramatica, we group four similar items that are interrelated into a simple table called a _quad_ .  So, we can create a quad of Driver Characters and a quad of Passenger Characters. 
 
-34. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Drivers**_ 
@@ -228,8 +210,6 @@ For example, if the Protagonist wants to build a shopping center, the Antagonist
 
 Remember, these Overall Story Characters are not judged by how THEY see the story, but how WE see them _affecting_ the story. 
 
-35. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Passengers**_ 
@@ -243,8 +223,6 @@ SIDEKICK REASON EMOTION SKEPTIC
 Unlike the first quad, these four Characters are not the prime movers of the story, but rather ride the coattails of the Driver Characters.  If not for the Drivers, the Passengers would not even be involved with the problem. Each represents an approach or attitude in the story: Sidekick is forever faithful while Skeptic is forever doubting; Reason acts on the basis of logic and Emotion responds from feelings.  Of course, each of these Characters also has its own motivations, but seen Objectively as part of the Story Mind they represent different approaches and attitudes toward solving the problem. 
 
 Before we sub-divide the Archetypal Characters into their basic Elements, let's get a better feel for them by examining the Drivers and Passengers in several well known stories. 
-
-36. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -275,8 +253,6 @@ _**SIDEKICK**_ - R2D2 + C3PO
 _**EMOTION**_ - CHEWBACCA _**REASON**_ - LEIA 
 
 _**SKEPTIC**_ - HAN 
-
-37. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -310,8 +286,6 @@ _**EMOTION**_ - TIN MAN _**REASON**_ - SCARECROW
 
 _**SKEPTIC**_ - LION 
 
-38. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Drivers and Passengers in Jaws**_ 
@@ -327,8 +301,6 @@ We still need a Guardian — someone to protect Brody as well as stress the prop
 There is no reason why a character must be a _person_ .  A boat can be a player as well as a person, as long as it can demonstrate its function to the audience.  Again, in Dramatica, the point of a story is to illustrate all aspects of the Story Mind dealing with a problem.  As long as each aspect is accounted for, the specific carrier of that Element is _structurally_ irrelevant and may only have storytelling ramifications. 
 
 So far we have not determined the Skeptic in _Jaws_ .  Who refuses to believe evidence of the shark problem or the need for taking action against it?  Clearly the Mayor embodies that characteristic well, and yet was previously identified as the Contagonist. Obviously some "doubling up" is going on here.  If we look at who is across from whom in quad form, we can see some of the basic dramatic Character conflicts in _Jaws_ . 
-
-39. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -349,8 +321,6 @@ _**EMOTION**_ - QUINT _**REASON**_ - HOOPER
 _**SKEPTIC**_ - MAYOR 
 
 From this breakdown, we see a good example in both the Mayor and Hooper of single players who actually portray two distinct Archetypal characters.  The Mayor functions as Contagonist and Skeptic, whereas Hooper portrays both Guardian and Reason. Some of these broad labels fit better than others, which is why there are actually some Complex Character arrangements in _Jaws_ as well, that do not quite fall into the strict Archetypal mold. 
-
-40. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -375,8 +345,6 @@ Now that we have become familiar with Archetypal characters and some of their li
 - **GUARDIAN** :  The Guardian is a teacher or helper who aids the Protagonist in its quest and offers a moral standard. 
 
 **CONTAGONIST** :  The Contagonist hinders and deludes the Protagonist, tempting it to take the wrong course or approach. 
-
-41. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -424,8 +392,6 @@ The Contagonist hinders the efforts to achieve the story goal.
 
 It represents temptation to take the wrong course or approach. 
 
-42. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **REASON ____________________________________________________________** 
@@ -468,8 +434,6 @@ _Decision Characteristic_ :
 
 It disbelieves everything, doubting courses of action, sincerity, truth — whatever. 
 
-43. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Split Archetypes in Quads** 
@@ -487,8 +451,6 @@ Having split them in two, we can see that each of the Archetypal Characters has 
 **SIDEKICK** Support-Faith **EMOTION REASON** Uncontrolled-Feeling Control-Logic **SKEPTIC** Oppose-Disbelief 
 
 In Dramatica, we refer to these 16 characteristics as the _Motivation_ Elements because they describe what drives the Archetypal Characters. 
-
-44. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -524,8 +486,6 @@ _**SKEPTIC**_ -HAN
 
 Oppose-Disbelief 
 
-45. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**The 16 Motivation Elements in The Wizard of Oz**_ 
@@ -552,8 +512,6 @@ When we look at the Scarecrow he appears to exemplify **logic** but his approach
 
 Apparently, the Scarecrow and the Tin Man have swapped characteristics:  logic goes with uncontrolled and feeling goes with control.  In a sense, both of these Characters now contain two Elements that are at odds with each other.  The Action Element does not reflect the Decision Element.  This creates two very interesting Characters who have an additional degree of depth to them: an internal friction, inconsistency, or conflict.  This is the kind of arrangement that begins to make characters more complex. 
 
-46. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Witch and Wizard Ways** 
@@ -565,8 +523,6 @@ But what about the Witch and the Wizard?  What is it that makes them diverge fro
 **Antagonist Contagonist** Decision Elements reconsideration temptation _Action Elements prevent (avoid) hinder_ 
 
 **Wizard of Oz Wizard Witch** Decision Elements reconsideration temptation Action Elements prevent (avoid) hinder 
-
-47. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -589,8 +545,6 @@ _**SIDEKICK**_ -TOTO Support-Faith TIN MAN SCARECROW Control-Feeling Uncontrolle
 _**SKEPTIC**_ -LION Oppose-Disbelief 
 
 Everyone still has two characteristics; however, the arrangements are not Archetypal for _all_ the Characters in The Wizard of Oz _._ As a result, the Archetypal role names have been removed where they do not apply. 
-
-48. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -620,8 +574,6 @@ QUINT HOOPER Control-Feeling Uncontrolled-Logic
 
 Oppose-Disbelief 
 
-49. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Grouping the 16 Motivation Elements**_ 
@@ -637,8 +589,6 @@ With 16 characteristics, we can create four quads of four characteristics each. 
 ## **Action Driver Quad Decision Driver Quad** 
 
 Pursue Consideration Help Hinder Conscience Temptation Prevent Reconsideration **Action Passenger Quad Decision Passenger Quad** Support Faith Uncontrolled Control Feeling Logic Oppose Disbelief 
-
-50. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -658,8 +608,6 @@ Like real people, characters are driven by Motivations, but they also aspire to 
 
 In the following sections we will explore two kinds of character complexity.  First we will look at ways to rearrange the Motivation Elements, and second, we will outline how to bring the other three character dimensions into play. 
 
-51. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Star Wars Characters in Four Motivation Quads**_ 
@@ -677,8 +625,6 @@ Once again, to enhance our "feel" for these relationships, let's add the names o
 R2D2/C3PO R2D2/C3PO _Support Faith_ Chewbacca Leia Chewbacca Leia _Uncontrolled Controlled Feeling Logic_ Han Han _Oppose Disbelief_ 
 
 As before, the amazingly pure Archetypal Characters of Star Wars translate into a completely symmetrical pattern.  Each Character has an Action Quad characteristic and a Decision Quad characteristic.  Each pair of Characters is in direct opposition, both internally and externally.  Further, Driver Archetypes are represented exclusively in the Driver Quads and Passenger Archetypes are found entirely within the Passenger Quads. 
-
-52. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -700,13 +646,9 @@ In looking at these patterns, the Passenger Characters in The Wizard of Oz seem 
 
 Looking at the Wizard and the Wicked Witch we see that the other kind of swapping of characteristics also creates much less stereotypical Characters.  Rather than a tempter, the Wicked Witch becomes a completely action-oriented pest not only trying to prevent Dorothy from achieving her goal, but hindering her every step on the way as 
 
-53. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 well. The Wizard becomes a purely decision-oriented tempter who represents taking the apparent easy way out while also (through his fearsome reputation, embodiment, and requests) urging Dorothy and her friends to reconsider their decisions.  This lack of action characteristics may help explain why the Wizard is so obviously absent during most of the story, although his influence is felt throughout.  Obviously, the nature of the combinations of characteristics has a great impact on which decisions and actions the audience will expect and accept from a Character. 
-
-54. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -729,8 +671,6 @@ Wife Wife _Support Faith_ Hooper Quint Quint Hooper _Uncontrolled Controlled Fee
 Clearly, the Driver Character characteristics in Jaws are as simple as those in Star Wars.  In fact, they are identical in terms of which characteristics are combined into a single Character.  However, when we look at the Passenger Character characteristics, we see a new phenomenon:  some of those Elements are present in the Driver Characters, two of whom are doing multiple duty. 
 
 The Mayor represents Temptation and Hinder as a Driver Character but also represents the Passenger characteristics of Disbelief and Oppose.  Hooper, a Driver in Conscience and Help, also represents Logic and Uncontrolled, putting him in conflict with Quint.  It is clear that these "multi-characteristic" Characters are much more complex in their make-up and therefore in their interactions than Archetypes.  For this reason we refer to them as Complex Characters. 
-
-55. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -756,15 +696,11 @@ In truth, there are many valid reasons for combining opposing characteristics in
 
 Dramatica sees a player as a shopper filling a grocery sack full of characteristics. You can select whatever you want, as long as you don't put in both Elements of a Dynamic Pair.  You can also carry as many bags as you can handle. 
 
-56. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 But wouldn't a fixed grouping of characteristics prevent a Character from growing? For the answer, look back at what these characteristics really are.  They are the problem-solving processes within the Story Mind _seen Objectively_ .  They are Overall Story Characters.  Objectively, characters remain the same; it is _Subjectively_ that they grow as points of view change.  In a sense, the Overall Story nature of characters describes their innate disposition, in which no changes can be made.  The Subjective nature of characters describes their learned behavior, which is what can be evolve in the course of a story. 
 
 What does all this mean in a practical sense to us as Authors?  First, Dramatica tells us there are only 16 Motivations to spread among our players.  If we use the same characteristic twice, it clutters our story.  If we neglect to employ one, there will be a hole in our story's argument.  Finally, we have a great deal of flexibility to create unique and memorable characters while fulfilling all the requirements an audience will look for in a Story Mind. 
-
-57. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -792,8 +728,6 @@ There is little to disguise Ashley's effect as TEMPTATION upon Scarlett.  Just b
 
 Looking for Ashley's physical characteristic, although it is not strongly drawn, we find 
 
-58. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 him to be HINDER.  Now since his physical self is designed to be the source of Scarlett's temptation, Hinder has been down-played to make him more attractive.  Nevertheless, he repeatedly jeopardizes Scarlett's situation.  Temptation and Hinder make Ashley a Contagonist. 
@@ -809,8 +743,6 @@ Scarlett's screaming sister Suellen plays nicely as FEELING and UNCONTROLLED, ma
 Finally, we reach a most telling pair.  First, we perceive Scarlett's father Gerald O'Hara has FAITH.  He believes that a war will never happen, then believes the South will win.  Even when they have already lost he won't give up his faith.  He goes into a fantasy world rather than admit his faith is in error.  On the flip side, he constantly OPPOSES Scarlett's wishes.  In the opening scene, Scarlett wants love but her father is pushing real estate.  After the fall, he keeps jumping in with inane comments about the way Scarlett is handling the house.  Consistently (albeit gently) he opposes her. 
 
 Prissy, on the other hand, has no faith at all.  She is absolutely convinced that no matter what the situation, the worst will happen.  She is a DISBELIEVER pure and true. And yet, she SUPPORTS Scarlett in every self-serving endeavor she instigates.  As with other characters we have examined, Mr. O'Hara and Prissy have swapped characteristics, this time between the Skeptic and Sidekick.  They are a complementary pair.  This is a wonderful twist from a thematic standpoint, pairing and swapping characteristics between a rich white landholder and a poor black slave. 
-
-59. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -833,8 +765,6 @@ If we eliminate all the neighbors who do not interact, we pare our list down to 
 ## **Elements of the Top Five** 
 
 Who represents FAITH?  Unquestionably Jeffries.  He maintains his belief that a murder has been committed in the face of objections by each of the other characters. Lisa can't talk him out of it and neither can his Nurse.  Thorwald denies it by his actions and Doyle is not convinced until after the proof is irrefutable.  In fact, Doyle personifies DISBELIEF, even while HELPING Jeffries gain information to which he would not otherwise have access.  Lisa comes around to accepting the possibility and so does Nurse. Thorwald already _knows_ the truth, but Doyle is _never_ convinced until he sees the proof with his own eyes. 
-
-60. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -859,8 +789,6 @@ If we take a slightly different form, we can arrange the five Characters as colu
 
 
 
-61. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Rear Window Characters in the Motivation Set** 
@@ -872,8 +800,6 @@ Jeffries PURSUE Doyle Jeffries HELP CONSIDERATION Nurse Conscience Lisa HINDER T
 Using the grid above we can predict the principal conflicts of Rear Window simply by noting which characters are in Dynamic (diagonal) positions and the issues (Elements) over which each pair will diverge. 
 
 In summary, the set of sixteen Motivation Elements offers a valuable tool for under- 
-
-62. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -893,8 +819,6 @@ In Dramatica, we refer to Motivation as a Character Dimension.  Often it is said
 
 This might seem like enough dimensions.  After all, we have a beginning (motivation), a middle (methodology), and an end (purpose).  Still, there is one remaining dimension lacking: Evaluations.  Evaluations are the standards by which characters measure their progress. 
 
-63. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **All right, Buddy... Where's the conflict?!** 
@@ -902,8 +826,6 @@ This might seem like enough dimensions.  After all, we have a beginning (motivat
 As an example of the concept of Evaluation, imagine two business partners who share motivations, methodologies and purposes.  They might agree on what drives them (a motivation to be independent), what they want to achieve (a purpose of creating a thriving business), and how to achieve that (word-of-mouth advertising as a methodology).  Still, they might argue if sales are up but satisfaction is low because one evaluates based on gross sales and the other evaluates based on customer satisfaction. Their word-of-mouth methodology brings in more business because their prices are good, but repeat business is non-existent because of poor customer satisfaction.  As a result, the two partners argue all the time, even though they agree in all three dimensions of Motivation, Methodology, and Purpose. 
 
 Difficulties can arise between characters in any one of the four dimensions, even though they might agree completely in one or more of the other dimensions.  In short, characters are never fully developed unless they are represented in all four dimensions, and they may come into conflict over any combination of Motivations, Methodologies, Means of Evaluation, or Purposes. 
-
-64. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -924,8 +846,6 @@ Knowledge Ability Actuality Aware Proven Theory Effect Trust<br>Desire Thought S
 ## Motivation Set 
 
 ## Methodology Set 
-
-65. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -949,8 +869,6 @@ For example, Pursuit is the opposite of Avoid.  As a result, when we place the P
 Consider Logic Pursuit Control<br>Protagonist Reason Protagonist Reason<br>Feeling Reconsider Uncontrolled Avoid<br>Emotion Antagonist Emotion Antagonist<br>**----- End of picture text -----**<br>
 
 
-66. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Archetypal Methodologies**_ 
@@ -968,8 +886,6 @@ Consider Logic Pursuit Control Certainty Probability Proaction Inaction<br>Prota
 For example, a Protagonist who is Motivated by Pursuit employs a Methodology of Pro-action, and a Skeptic who is Motivated to Oppose employs a Methodology of NonAcceptance. 
 
 This Archetypal Pattern continues through all four character dimensions such that a Protagonist will be motivated by Pursuit, employ a Methodology of Pro-action, Evaluate its progress by the Effect it has, and strive toward achieving Actuality as its Purpose. Each of the Archetypal Characters follows the same pattern for both its External and Internal characteristics, resulting in an alignment of character Elements in four dimensions. 
-
-67. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -997,8 +913,6 @@ _**Dynamic Companion Dependent Components Pairs Pairs Pairs**_
 
 Dynamic Pairs describe Elements with the greatest opposition to one another. Whenever two opposing forces come together they will create either a positive or nega- 
 
-68. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 tive relationship.  They can form a _synthesis_ and create something greater than the sum of the parts or they can simply tear away at each other until nothing is left ( _destructive_ ). Within a quad, one of the Dynamic Pairs will indicate a positive relationship, the other a negative one.  Which is which depends upon other story dynamics. 
@@ -1017,8 +931,6 @@ By constructing characters with thought and foresight, an author can use the pos
 
 Altogether we have outlined four dimensions of characteristics, each fostering an aspect of the eight Archetypes.  Each of the Archetypes can be sub-divided into internal and external Elements resulting in a total of sixteen Elements in each dimension — a total of sixty-four characteristics from all four dimensions with which to build characters. Complex character can be created by stepping out of the archetypal patterns and relationships. 
 
-69. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Subjective Characters**_ 
@@ -1028,8 +940,6 @@ In The Elements of Structure: Foundations we described four throughlines in a st
 A good way to think of these four throughlines is as four different points of view through which the audience relates to the Story Mind — the same four points of view we all use in all of our relationships.  The Main Character represents the "I" point of view. The Impact Character represents the "you" perspective.  The Subjective Story Throughline covers the "we" perspective, and the Overall Story Throughline explores the "they" perspective.  Taken together, the four points of view range from the most personal to the most impersonal, and provide all of the angles we use to examine the nature of our problems and the relative value of alternative solutions. 
 
 We have previously looked at the Elements of Character from a purely objective perspective.  When we stand in the shoes of a character, however, we get an entirely different perspective.  Rather than seeing how the events of a story relate to one another, we become more concerned with how events effect us personally.  Providing this experience is the purpose of the Main Character. 
-
-70. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1046,8 +956,6 @@ A complete story successfully argues all possible sides of its message, thus it 
 Now before we go on, it is important to note that there can be many Main Characters in a completed work, but there will be only one Main Character in a completed story. This is because a _work_ is the finished product an author puts before an audience, and may contain a single story, several stories, or several partial and complete stories all woven together or at least nestled in the same fabric of storytelling.  This means that a book or a movie, a stage play or teleplay, may have no Main Character at all, or it may have many.  But for any single story in that work, there will be only one Main Character. 
 
 A Grand Argument Story does not allow the audience to stand in the shoes of every character, every Element, and see what the story looks like from there.  Such a work would simply be too big to handle.  Rather, the purpose of a Grand Argument Story is to determine if the Main Character is looking at the problem from the right place, or if he should change his bias and adopt another point of view instead. 
-
-71. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1067,8 +975,6 @@ Along the way, the Impact Character comes into the picture.  He tells the Main C
 
 As the story develops, the Impact Character makes his case.  Slowly, an alternative paradigm is built up that becomes rather convincing.  By the moment of truth, the longterm success of the old view is perfectly balanced by the larger, but as of yet untried, new view.  There is no clear winner, and that is why it is a leap of faith for the Main Character to choose one over the other. 
 
-72. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 **Main Character Resolve:** Does the Main Character ultimately Change or Remain Steadfast? 
@@ -1082,8 +988,6 @@ Main Character Resolve really describes the relationship between the Main Charac
 Some Examples: Star Wars: Main Character: Luke Skywalker (Change) Impact Character: Obi Wan Kenobi (Steadfast) The Story of Job: Main Character: Job (Steadfast) Impact Character: The Devil (Change) To Kill A Mockingbird:  Main Character: Scout (Change) Impact Character: Boo Radley (Steadfast) The Fugitive: Main Character: Dr. Richard Kimble (Steadfast) Impact Character: Agent Gerard (Change) 
 
 It should be noted that the Impact Character need not even know he is having that kind of effect on the Main Character.  He may know, but he may easily not even be 
-
-73. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1105,8 +1009,6 @@ Of course, this leads to a finished piece in which either the story's issues or 
 
 Now, if one of the two different problems were removed, it wouldn't leave a complete story, yet the remaining part would still feel like a complete _tale_ .  Dramatica differentiates between a "tale" and a "story".  If a story is an argument, a tale is a statement. 
 
-74. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Whereas a story explores an issue from all sides to determine what is better or worse overall, a tale explores an issue down a single path and shows how it turns out.  Most fairy tales are just that, tales. 
@@ -1122,8 +1024,6 @@ The point at which the Overall Story and the Main Character hinge is appropriate
 We can see that a Protagonist will only be a Main Character if the Crucial Element is one of the Elements that make up a Protagonist.  In other words, a Protagonist has eight different Elements, two from each dimension of character.  If one of them is the Crucial Element, then the player containing the Protagonist must also contain the Main Character.  This means that there are really eight different kinds of _heroes_ that can be created.  An action hero might have a Crucial Element of Pursue, while a thinking hero might have a Crucial Element of Consider.  Clearly, the opportunities to create meaningful Main Characters who are NOT Protagonists are also extensive. 
 
 The Impact Character has a special place in the Overall Story Character Elements as well.  We have already discussed Dynamic Pairs.  As it turns out, the point at which an Impact Character will have the greatest dramatic leverage to try and change the 
-
-75. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -1144,7 +1044,5 @@ To Kill A Mockingbird Crucial Element is INEQUITY
 Inequity is the problem which is causing all of the conflict around the town of Maycomb.  The trial of Tom Robinson brings all of the towns' people into squabbles about inequity in the treatment of different races, inequity among the  social classes of people, their levels of income, and their educations. 
 
 Scout, as the Main Character, is driven by her personal problem of inequity.  This is symbolized most clearly in her fear of Boo Radley.  Kept at the margins of the Overall Story dealings with the problem of inequity, Scout however comes to see her prejudice against Boo Radley as being every bit as wrong. 
-
-76. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved

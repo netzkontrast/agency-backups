@@ -4,69 +4,69 @@ Variations are the third-resolution layer (16 per Class, 64 total). Concerns and
 
 ## Contents
 
-- [Ability](#ability) — >Ability
-- [Analysis](#analysis) — >Analysis -evaluation of the situation and/or circumstances -Analysis
-- [Appraisal](#appraisal) — >Appraisal
-- [Attempt](#attempt) — >Attempt -applying oneself to something not known to be within
-- [Attitude](#attitude) — >Attitude -one''s demeanor while doing or being
-- [Attraction](#attraction) — >Attraction
+- [Ability](#ability) — Ability
+- [Analysis](#analysis) — Analysis -evaluation of the situation and/or circumstances -Analysis
+- [Appraisal](#appraisal) — Appraisal
+- [Attempt](#attempt) — Attempt -applying oneself to something not known to be within
+- [Attitude](#attitude) — Attitude -one's demeanor while doing or being
+- [Attraction](#attraction) — Attraction
 - [Catalyst](#catalyst) — The item whose presence always
-- [Choice](#choice) — >Choice
+- [Choice](#choice) — Choice
 - [Circumstances](#circumstances) — dyn.pr. Situation<->Circumstances
-- [Closure](#closure) — >Closure -bringing something to an end
+- [Closure](#closure) — Closure -bringing something to an end
 - [Commitment](#commitment) — dyn.pr. Responsibility<->Commitment
-- [Conditioning](#conditioning) — >Conditioning
-- [Confidence](#confidence) — >Confidence
+- [Conditioning](#conditioning) — Conditioning
+- [Confidence](#confidence) — Confidence
 - [Critical Flaw](#critical-flaw) — The Main vs. Impact Charac-
-- [Deficiency](#deficiency) — >Deficiency
-- [Delay](#delay) — >Delay
-- [Denial](#denial) — >Denial
+- [Deficiency](#deficiency) — Deficiency
+- [Delay](#delay) — Delay
+- [Denial](#denial) — Denial
 - [Destiny](#destiny) — inescapable path, predetermined
-- [Doubt](#doubt) — >Doubt -questioning validity without investigating to be sure
-- [Dream](#dream) — >Dream
-- [Enlightenment](#enlightenment) — >Enlightenment
-- [Evidence](#evidence) — >Evidence -information supporting a belief
-- [Expediency](#expediency) — >Expediency
-- [Experience](#experience) — >Experience -the gaining of familiarity
-- [Fact](#fact) — >Fact
-- [Falsehood](#falsehood) — >Falsehood -that which has been shown to be erroneous
-- [Fantasy](#fantasy) — >Fantasy
-- [Fate](#fate) — >Fantasy
-- [Hope](#hope) — >Hope
-- [Instinct](#instinct) — >Instinct -intrinsic unconditioned responses
-- [Interdiction](#interdiction) — >Interdiction
-- [Interpretation](#interpretation) — >Interpretation
-- [Investigation](#investigation) — >Investigation
+- [Doubt](#doubt) — Doubt -questioning validity without investigating to be sure
+- [Dream](#dream) — Dream
+- [Enlightenment](#enlightenment) — Enlightenment
+- [Evidence](#evidence) — Evidence -information supporting a belief
+- [Expediency](#expediency) — Expediency
+- [Experience](#experience) — Experience -the gaining of familiarity
+- [Fact](#fact) — Fact
+- [Falsehood](#falsehood) — Falsehood -that which has been shown to be erroneous
+- [Fantasy](#fantasy) — Fantasy
+- [Fate](#fate) — Fantasy
+- [Hope](#hope) — Hope
+- [Instinct](#instinct) — Instinct -intrinsic unconditioned responses
+- [Interdiction](#interdiction) — Interdiction
+- [Interpretation](#interpretation) — Interpretation
+- [Investigation](#investigation) — Investigation
 - [Issue](#issue) — The thematic focus or topic of the
-- [Morality](#morality) — >Morality -doing or being based on what is best for others
-- [Need](#need) — >Need
+- [Morality](#morality) — Morality -doing or being based on what is best for others
+- [Need](#need) — Need
 - [Obligation](#obligation) — dyn.pr. Rationalization<->Obligation
 - [Openness](#openness) — dyn.pr. Preconception<->Openness
 - [Overall (Objective) Story Catalyst](#overall-objective-story-catalyst) — The
 - [Overall (Objective) Story Inhibitor](#overall-objective-story-inhibitor) — The
 - [Overall (Objective) Story Issue](#overall-objective-story-issue) — The
-- [Permission](#permission) — >Permission
+- [Permission](#permission) — Permission
 - [Preconception](#preconception) — dyn.pr. Preconception<->Openness
-- [Prediction](#prediction) — >Prediction
+- [Prediction](#prediction) — Prediction
 - [Range](#range) — See Issue
 - [Rationalization](#rationalization) — fabricated excuse, ulterior
-- [Reappraisal](#reappraisal) — >Reappraisal
-- [Repulsion](#repulsion) — >Repulsion
+- [Reappraisal](#reappraisal) — Reappraisal
+- [Repulsion](#repulsion) — Repulsion
 - [Responsibility](#responsibility) — dyn.pr. Commitment<->Responsibility
-- [Security](#security) — >Security
+- [Security](#security) — Security
 - [Sense of Self](#sense-of-self) — perception of self, self
-- [Senses](#senses) — >Senses -sensory observations
+- [Senses](#senses) — Senses -sensory observations
 - [Situation](#situation) — dyn.pr. Circumstances<->Situation
-- [Skill](#skill) — >Skill
-- [Strategy](#strategy) — >Strategy
-- [Suspicion](#suspicion) — >Suspicion
-- [Threat](#threat) — >Threat
-- [Truth](#truth) — >Truth
+- [Skill](#skill) — Skill
+- [Strategy](#strategy) — Strategy
+- [Suspicion](#suspicion) — Suspicion
+- [Threat](#threat) — Threat
+- [Truth](#truth) — Truth
 - [Unique Ability](#unique-ability) — The item that makes the
-- [Value](#value) — >Value
-- [Wisdom](#wisdom) — >Wisdom
-- [Worry](#worry) — >Worry -concern for the future
-- [Worth](#worth) — >Worth
+- [Value](#value) — Value
+- [Wisdom](#wisdom) — Wisdom
+- [Worry](#worry) — Worry -concern for the future
+- [Worth](#worth) — Worth
 
 ---
 
@@ -322,11 +322,6 @@ carrot.
 
 Technically speaking, the
 moment of climax in a story is the intersecting point
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-6.
-
 where the nature of the Main Character crosses paths
 with the nature of the Overall (Objective) story. It is
 here that the course of one, both or neither of them
@@ -677,8 +672,6 @@ provenance: source-original
 
 www.dramatica.com -- www.screenplay.com
 
-12.
-
 ter trait that inhibits or undermines the effectiveness of
 that Main vs. Impact Character's Unique Ability -- To
 balance the Main Character's extraordinary status
@@ -789,11 +782,6 @@ unresolved, and unless it intrudes upon his thinking, it
 will never be thought of again. Yet deep within him, he
 will be influenced to avoid what created that problem or
 to take steps to protect against its recurrence. Until the
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-13.
-
 original problem is addressed and a choice of path is
 made, the character will not be free of the problem's
 influence.
@@ -1609,11 +1597,6 @@ of character that puts others before self. This is not,
 however, always a good thing. If a character is besieged by Self-Interested parties that grasp and take
 whatever they can, Morality (in this limited sense) is
 most inappropriate. Also, Morality does not always
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-30.
-
 require sacrifice. It simply means that a Moral character will consider the needs of others before his own. If
 the needs are compatible, it can create a win/win
 scenario where no one need suffer.
@@ -1879,8 +1862,6 @@ Reach, Apparent or Actual Dilemma stories, etc.
 
 www.dramatica.com -- www.screenplay.com
 
-52.
-
 capability, restricted capacity, hindered performance,
 allowed limitations, restrained utility
 
@@ -2137,11 +2118,6 @@ accomplish a task -- The instinct for survival is paramount under normal circums
 throw themselves into danger to help a human friend.
 The drive that overcomes self-interest is Responsibility.
 Responsibility exists when one cares more for others
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-40.
-
 than for oneself. The problem occurs when a character
 believes he knows what is best for someone and that
 someone doesn't agree. "It's for your own good," and
@@ -2244,11 +2220,6 @@ provide a warped feedback that creates a false Sense
 of Self in the character. This erroneous image may be
 far better, far worse, or simply different than his actual
 state of being. Other stories force a character to come
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-41.
-
 to grips with the fact that he is wrong about himself,
 and the opinions of others are accurate. In a Main
 Character, the differential between Sense of Self and

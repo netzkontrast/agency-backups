@@ -48,8 +48,6 @@ One of the unique concepts that sets Dramatica apart from all other theories is 
 
 To make his case, an author must examine all significant approaches to resolving the story's specific problem.  If a part of the argument is left out, the story will have holes.  If the argument is not made in an even-handed fashion, the story will have inconsistencies. 
 
-20. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Characters, Plot, Theme, and Genre are the different _families_ of considerations in the Story Mind made tangible, so audience members can see them at work and gain insight into their own methods of solving problems.  Characters represent the motivations of the Story Mind (which often work at cross purposes and come into conflict). Plot documents the problem solving methods employed by the Story Mind.  Theme examines the relative worth of the Story Mind's value standards.  Genre establishes the Story Mind's overall attitude, which casts a bias or background on all other considerations.  When a story is fully developed, the model of the Story Mind is complete. 
@@ -69,8 +67,6 @@ There are four different perspectives which must be explored as a story unfolds 
 The first perspective is from the Overall Story Throughline, so called because it is the most dispassionate look at the Story Mind. 
 
 Imagine the argument of a story as a battle between two armies.  The Overall Story view is like that of a general on a hill overlooking the battle.  The general focuses on unfolding strategies and, from this perspective, sees soldiers not by name but by their function on the field: foot soldier, grenadier, cavalryman, scout.  Though the general may care very much for the soldiers, he must concentrate on the events as they unfold. Because it emphasizes events, the **Overall Story Throughline** is often thought of as plot, but as we shall see later, plot is so much more. 
-
-21. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -96,8 +92,6 @@ As soon as the Main Character encounters his Impact, a skirmish ensues at a pers
 
 The Main Character shouts at his Impact to get out of the way.  The Impact Charac- 
 
-22. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ter stands fast, insisting that the Main Character change course and even pointing toward the fork in the road.  As they approach one another, the interchange becomes more heated until the two are engaged in heart-to-heart combat. 
@@ -116,8 +110,6 @@ Main Character Throughline:  The Main Character of Star Wars is Luke Skywalker. 
 
 Impact Character Throughline:  The Impact Character of Star Wars is Obi Wan Kenobi and this throughline describes his impact (especially  on Luke Skywalker) over the course of the story.  Obi Wan is a wizened old Jedi who sees everything as being under the mystic control of the Force.  He amazes people with his resiliency and ability, all of which he credits to the Force. 
 
-23. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Subjective Story Throughline:  The Subjective Story throughline of Star Wars describes the relationship between Luke and Obi Wan. Obi Wan needs Luke to help him and he knows Luke has incredible potential as a Jedi.  Luke, however, needs to be guided carefully because his desires are so strong and his abilities so new.  Obi Wan sets about the manipulations which will help Luke see the true nature of the Force and learn to trust himself. 
@@ -131,8 +123,6 @@ Main Character Throughline:  The Main Character of To Kill A Mockingbird is Scou
 Impact Character Throughline:  The Impact Character point of view in To Kill A Mockingbird is presented through Boo Radley, the reclusive and much talked about boy living next door to Scout.  The mystique surrounding this boy, fueled by the town's ignorance and fear, make everyone wonder what he is really like and if he's really as crazy as they say. 
 
 Subjective Story Throughline:  The Subjective Story view of To Kill A Mockingbird sees the relationship between Scout and Boo Radley.  This throughline explores what it's like for these two characters to live next door to each other and never get to know one another.  It seems any friendship they might have is doomed from the start because Boo will always be locked away in his father's house.  The real problem, however, turns out to be one of Scout's prejudice against Boo's mysterious life.  Boo has been constantly active in Scout's life, protecting her from the background.  When Scout finally realizes this she becomes a changed person who no longer judges people without first trying to stand in their shoes. 
-
-24. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -153,8 +143,6 @@ Only through the development of these four simultaneous throughlines can the Sto
 ## **Moving On** 
 
 Now that you've added Story Mind, Overall Story Throughline, Main Character Throughline, Impact Character Throughline, and Subjective Story Throughline to your writer's vocabulary, you have all the background you need to explore a whole new world of understanding: the Dramatica Theory of Story. 
-
-25. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 

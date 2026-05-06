@@ -14,13 +14,13 @@ The 16 Types are the second-resolution layer beneath Class. Each Class contains 
 - [Consequence](#consequence) — The result of failing to achieve
 - [Cost](#cost) — the price that must be paid while meeting
 - [Dividend (Overall Story Throughline)](#dividend-overall-story-throughline) — the
-- [Doing](#doing) — >Doing
+- [Doing](#doing) — Doing
 - [Future](#future) — what is to come, what will be, prospect,
 - [Goal](#goal) — The central objective of a story
-- [Journey](#journey) — Sequential markers of a story''s
+- [Journey](#journey) — Sequential markers of a story's
 - [Learning](#learning) — cultivating experience, acquiring
 - [Memory](#memory) — remembering, recollections, reminiscence, recalling, retention
-- [Obtaining](#obtaining) — >Obtaining -achieving or possessing something
+- [Obtaining](#obtaining) — Obtaining -achieving or possessing something
 - [Overall (Objective) Story Benchmark](#overall-objective-story-benchmark) — The
 - [Overall (Objective) Story Concern](#overall-objective-story-concern) — The area
 - [Overall (Objective) Story Consequence](#overall-objective-story-consequence) — The
@@ -32,18 +32,18 @@ The 16 Types are the second-resolution layer beneath Class. Each Class contains 
 - [Overall (Objective) Story Prerequisites](#overall-objective-story-prerequisites) — The
 - [Overall (Objective) Story Requirements](#overall-objective-story-requirements) — The
 - [Past](#past) — history, what has happened, former times,
-- [Past (The Past)](#past-the-past) — >Past -what has already happened
+- [Past (The Past)](#past-the-past) — Past -what has already happened
 - [Preconditions](#preconditions) — Restrictions imposed on the
 - [Preconscious](#preconscious) — unthinking responses, immediate
 - [Prerequisites](#prerequisites) — The essential preliminaries that
 - [Present](#present) — how things stand, the here and now,
-- [Present (The Present)](#present-the-present) — >Present
+- [Present (The Present)](#present-the-present) — Present
 - [Progress](#progress) — flowing, advancing, proceeding,
 - [Requirements](#requirements) — The necessary precursors to
-- [Signpost](#signpost) — Sequential markers of a story''s
+- [Signpost](#signpost) — Sequential markers of a story's
 - [Stipulation](#stipulation) — See Benchmark
 - [Throughline](#throughline) — The area of concern
-- [Understanding](#understanding) — >Understanding
+- [Understanding](#understanding) — Understanding
 
 ---
 
@@ -807,11 +807,6 @@ may be many prerequisites to achieving that requirement.
 
 preliminary steps that must be met -Prerequisites are the essential or necessary steps or
 accomplishments that must be achieved in order for
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-36.
-
 something to occur. If a goal has a single requirement,
 there may be many prerequisites to meeting that
 requirement.
@@ -1005,11 +1000,6 @@ Story Point -- Story Points are items of dramatic meaning
 that are common to all stories. Meaning is created
 when an identifiable topic is seen from a particular
 point of view. This creates perspective which takes into
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-43.
-
 account both the observation and the observer. In
 complete stories, there are four principal viewpoints at
 work: Overall Story, Main Character, Impact Character,
@@ -1171,11 +1161,6 @@ of the Problem by replacing it. It may not be actually
 implemented, but if it were adopted in the relationship
 between the Main and Impact Characters, it would end
 the source of their conflict and change their relation-
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-29.
-
 ship.
 Main vs. Impact Symptom
 
@@ -1313,8 +1298,6 @@ Worth •
 ### Variation
 
 www.dramatica.com -- www.screenplay.com
-
-54.
 
 ---
 

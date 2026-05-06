@@ -41,8 +41,6 @@ Clearly, each appreciation might be encoded in any number of ways.  Which way yo
 
 Once the concept of encoding is understood, another issue often comes up:  "Storyforming and then Storyencoding doesn't seem like a very organic way to go about creating a story."  Well, we can't argue with that.  You see, most authors are attracted to a story not by the underlying structure, but by some element of storytelling.  It could be a setting or a character or a bit of action — anything that stimulates the imagination.  In fact, _most_ authors don't even think about a message at this stage.  What gets them 
 
-194. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 started is some intriguing concept, and the remainder of their effort in developing that concept is to try and build a story around it. 
@@ -59,15 +57,11 @@ In the case above, many of the story points predicted by the Story Engine may no
 
 Finally, if you are not using the Dramatica software, you will have selected your story points by feel or topic.  Some may have been chosen as appropriate to specific ideas you are working with, but the rest just seemed appropriate to the story you have in your mind and/or in your heart.  We're back to intuition again here.  And once again, you will need to examine those story points which do not yet have specific encoding in your story and ask your muse to suggest something. 
 
-195. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 In the end, even if the storytelling may be atrocious it will at least make sense if it is built on a sound storyform. 
 
 The remainder of this section presents hints and tips for encoding all four aspects of story: Character, Theme, Plot, and Genre.  By far, Character is the most complex of these for it requires the greatest subtlety and nuance to fashion believable people who still manage to fulfill their dramatic functions.  As a result, you will find the character section the longest of the lot, and also, due to its importance, the first one we address. 
-
-196. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -86,8 +80,6 @@ Even this simple message carries value for an audience since the audience member
 All the ways of considering each problem are represented by a story's characters. Because they represent parts of the argument, Overall Story Characters must be called in the proper order and combination to support each of the author's contentions.  This all sounds very complex and manipulative.  It is.  But as authors, when we are on a roll we don't stop to consider each aspect of what we are doing.  Rather, it all synthesizes together into the smooth flow of creativity that we "feel" through our writer's instincts.  If the complexity is not there beneath it all, however, there will be noticeable holes in our plot and inconsistent characters. 
 
 Dramatica identifies every point of view that is essential to the Overall Story argument.  It allows an author to divvy them up amongst his characters, then tracks the progress of the characters through the story.  In this way, an author can cut loose with creative fervor until the muse fails.  Then he can call on Dramatica to locate the end of the thread so he can begin to weave it again. 
-
-197. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -109,8 +101,6 @@ We want to write a simple story using Archetypal Characters.  We can create a PR
 
 Dramatica says we need an ANTAGONIST.  Antagonist by definition is the person who tries to prevent achievement of the goal.  So, who might be diametrically against the completion of the task Jane wants to accomplish?  The Religious Leader whose dogma is the source of inspiration that spawns the acts of terror?... The multinational 
 
-198. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 business cartel that stands to make billions if the terrorists succeed in their scheme?... Her former lover who leads the elite band of criminals?  We like THAT one!  Okay, we have our Protagonist (Jane) who wants to stop the terrorists who are led by her former lover (Johann). 
@@ -131,8 +121,6 @@ Let's bring in a CONTAGONIST:   the Seasoned Cop who says, "You have to play by 
 
 Keeping in mind the concept of Dynamic Pairs, we are going to want to balance the Computer Whiz with a GUARDIAN.  The Master of the Oriental martial arts who urges her to "go with the flow" ("Use The Force, Jane!")?...  The Ex-Con again who urges, 
 
-199. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 "Get back to basics"?... or perhaps the Seasoned Cop who paves the way through the undercover jungle?....   We like the Seasoned Cop.  Note how we could have used him as Contagonist, but elected to use him as Guardian instead.  It's totally up to us as authors which characteristics go into which players.  Jane wants to stop the terrorists, is pitted against the head of the band (her former lover Johann) who wants to stop her, is opposed by her father, the Senator, supported by her Supervisor, tempted by her friend Sheila the computer whiz, and protected by the Seasoned Cop. 
@@ -149,8 +137,6 @@ This is beginning to sound like a lot of many stories we've seen before.  Why ha
 
 When you keep in mind the Dramatica rules for mixing and matching characteristics to create Complex Characters, you have an astronomical number of possible people (or non-people) who might occupy your story.  Because of the structure of inter-relationships Dramatica provides, they will all fit together to the greatest potential and nothing will be duplicated or missed.  As a result, the Story Mind will be fully functional; the argument fully made. 
 
-200. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Complex Characters**_ 
@@ -164,8 +150,6 @@ Imagine building characters to be like playing Scrabble.  There are a given numb
 Archetypal Characters have their place, mind you.  If an author's focus is on Plot or Theme, he may want to create easily identifiable Archetypes as a shorthand to save space and time.  As soon as the edges of an Archetypal Character are sketched out, audiences (who have seen these Archetypes time and again) will fill in the rest, pending information to the contrary.  In this way, an author can free up time or pages for aspects of the story which may be much more interesting to him. 
 
 As a result, Complex Characters are often the first things torn down in an effort to conserve media real estate.  This leads to a glut of action-oriented stories populated by stick-figure people.  Whenever there is a glut in one place, you will find a deficiency somewhere else.  The imbalance between glut and deficiency creates demand.  Box office is directly proportional to demand.  No more need be said. 
-
-201. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -195,8 +179,6 @@ An author can create characters for any purpose, to be played like cards at part
 
 At first, this might seem desirable as it would create internal conflict.  But in the case of Overall Story Characters, they are seen from the outside.  We cannot perceive their internal deliberations.  Any internal conflict simple weakens their Overall Story function. 
 
-202. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Overall Story Throughline Characteristics** 
@@ -217,8 +199,6 @@ The Main and Impact characters do double-duty by carrying the Subjective Storyli
 
 The player containing the Impact Character also contains the Element diagonal to the crucial element: the other half of the dynamic pair.  In this way as a Main Character or Impact Character comes to eventually change or remain steadfast, the subjective 
 
-203. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 problem influences how that player will respond in regard to the Overall Story Element it also contains.  Like magnets with North and South poles, what happens on the Subjective side will influence the Overall Story stand, and when pressures force a change in the Overall Story stand, it will influence the Subjective point of view.  It is no surprise that this relationship between Overall Story and Subjective dynamics in characters has seemed so indefinably obscure for so long. 
@@ -236,8 +216,6 @@ Many authors are not aware that a Protagonist does not have to be the Main Chara
 There is nothing wrong with this combination.  In fact, as long as both characters are represented in the single player, such a blend is a fine Archetypal Character.  The point is:  there are other ways. 
 
 Subjective Characters range from the Main Character with whom we identify to all the "other soldiers in the trenches" around us as we experience the battle together. They are friends and foes, mentors and acolytes.  We see in them characteristics of Worry, Instinct, Experience and Doubt.  Rather than functioning as approaches the way the Overall Story Characters appear to do, the Subjective Characters function as attitudes. 
-
-204. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -259,8 +237,6 @@ This is a very spatial view of problem solving, as it sees all the parts that mu
 
 Women TEND to use holistic problem solving as their first method of choice.  In holistic problem solving, steps are not important and there may not even be a specific 
 
-205. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 goal to achieve but simply a new direction desired.  As a result, the RELATIONSHIPS BETWEEN things are what is measured and adjusted to create a change in the forces that determine that direction.  Unlike male problem solving, there is no causal relationship stating that THIS leads to THAT.  Instead, COMBINATIONS of changes in the way things are related alters the dynamics of the situation rather than the structure, and changes context rather than meaning. 
@@ -277,8 +253,6 @@ How can we illustrate this in a Main Character?  The following point by point co
 
 _Female:_ looks at motivations _Male:_ looks at purposes _Female:_ tries to see connections _Male:_ tries to gather evidence _Female:_ sets up conditions _Male:_ sets up requirements _Female:_ determines the leverage points _Male:_ breaks a job into steps that can restore balance _Female:_ seeks fulfillment _Male:_ seeks satisfaction _Female:_ concentrates on "Why" _Male:_ concentrates on "How" and "When" and "What" _Female:_ puts the issues in context _Male:_ argues the issues _Female:_ tries to hold it all together _Male:_ tries to pull it all together 
 
-206. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 As we can see, though both men and women will use both techniques depending on context, one kind comes first or takes priority.  Which one is the principal technique is determined by mental sex.  So, if you keep in mind that this all may be overshadowed by other learned techniques, you can illustrate male and female problem solving techniques as a TENDENCY to employ those listed above, all other things being equal. 
@@ -288,8 +262,6 @@ As we can see, though both men and women will use both techniques depending on c
 When an audience looks at the Overall Story Characters, they see the Story Mind from the outside in.  When an audience empathizes with the Main Character, they see the story from the inside out.  In order for the audience to be able to step into the shoes of the Main Character and look through his eyes, he must possess a complete mind for the audience to possess.  And that perhaps is the best way to look at it:  the audience takes possession of the Main Character's mind.  That's why you hear people in a movie yelling, "NO.... don't do that!!!" to a Main Character who is about to enter the shed where the slasher is waiting. 
 
 However, the question arises:  who is taking possession of whom?  As authors we direct our Main Character to take control of the audience's hearts and souls.  We make them feel what the Main Character feels, experience what he experiences.  It's a pretty sinister occupation we engage in.  But that is how a story stops being a spectacle and worms its way into the heart. 
-
-207. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -309,8 +281,6 @@ Clearly, the very first step in encoding thematic story points is to check the d
 
 Unlike other story points which really only need to show up once to be encoded into a story, thematic story points will need to show up several times.  A good rule of thumb is that each conflict should be explored at least once per act.  In this way, the balance between the two sides of the conflict can be examined in all contexts appropriate to story's message. 
 
-208. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 Further, it is heavy handed to encode the entire conflict.  It is much better to show one side of the conflict, then later show the other side in a similar situation.  In this manner, the relative value of each side of the thematic conflict is established without the two ever being directly compared.  In each act, then, what are some methods of encoding the two sides of the thematic conflict?  This depends on which throughline is in question. 
@@ -326,8 +296,6 @@ What thematic conflict is at work here?  The doctor's comments represent Closure
 What's more, in this example, it is clear by the way we presented the conflict, Closure is seen as a better standard of value that Denial.  It would be just as easy to have the doctor appear run-down by life and having no hope, while the patient is joyous.  In such a case, the message would have been the reverse.  The doctor, representing Closure, would be seen to be miserable, and the patient who lives in a dream world of Denial would have happiness. 
 
 Theme encoding is an effort of subtle balance.  Simply shifting a word or a reaction, even slightly, can completely tip a well balanced argument.  That is why many authors 
-
-209. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -347,8 +315,6 @@ The Main Character theme follows many of the same guidelines as the Overall Stor
 
 For the Main Character Throughline, only the Main Character will be aware of the thematic conflict in that Throughline.  It might still be illustrated by contrasts between incidental characters or in non-essential actions or events, but no one will notice but the Main Character.  For example, our Main Character in a motion picture might be sitting in 
 
-210. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 a diner and look out the window to see a hungry man sifting through a trash can for some food.  The focus shifts (as the Main Character ostensibly shifts his attention) to bring to clarity another man sitting in front of the window getting up to leave from his plate of half-eaten food.  No one else is in a position to see this except our Main Character (and through him, the audience). 
@@ -366,8 +332,6 @@ Impact Characters are looked at, not from.  As such, we want to evaluate the app
 Suppose we keep everything from our Main Character example in the diner the same, except we substitute the Impact Character instead.  All the events would transpire in the same order, but our point of view as an audience would have to shift.  The question for the audience would no longer be, "How am I going to respond in this situation?" but would become, "How is _he_ going to respond in this situation?" 
 
 The point of view shot through the window might no longer be appropriate.  Instead, we might shoot from over the shoulder of the Impact Character.  Further, we would want to make sure the audience does not get too drawn in toward the Impact point of view. So, we might have another customer observing the whole thing.  Or, we might simply choose camera positions outside the diner to show what happens, rather than staying in the whole time looking out as we did with the Main Character. 
-
-211. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -389,15 +353,11 @@ We all know stories involving newlyweds where the father of the bride argues tha
 
 In that example, father and mother may be Overall Story Characters arguing about the best way to look at the Subjective Story between the Main and Impact Characters (the daughter and son-in-law).  In the end, one way of seeing the kids' romance will prove to be the better way of evaluating the relationship. 
 
-212. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 The thematic resolution may be that the Subjective Story relationship appears terrible from one standard of evaluation and only poor from the other, in which case these people haven't got much of a relationship.  Or, a relationship may appear mundanely workable from one standard and thrilling from the other.  Or, one may see it as highly negative and the other sees it as highly positive.  These are all potential conflicting points of view about a relationship and these discrepancies give the Subjective Story theme its depth. 
 
 The important job of the writer is to balance the argument so there is a real question as to which way of seeing the relationship is using the best standard of evaluation. Then the audience is not just being sold a biased bill of goods, but is being presented a much more realistic tableau. 
-
-213. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -412,8 +372,6 @@ Interestingly, there are many ways to stretch an appreciation to fit preconceive
 Clearly, there are ways to bend a story concept to fit almost any appreciation.  And, in fact, that is the purpose of encoding - to create a symbol that represents an appreciation's particular bend.  So, going around the remaining Types, we might also have a Goal about discovering a president's Past, how much legislative Progress a president is able to make, the Future of the presidency, whether the president is able to address Present concerns, to Understand the president's vision, Doing what is necessary regardless of chances for reelection, Learning the President's hidden agenda, Developing A Plan [Conceptualizing]  a new order, Conceiving An Idea a new kind of political leverage, trying to evoke the Memory of a past president's greatness, responding with Impulsive Responses [Preconscious] should the president be attacked, trying to curb a president's subconscious drives until after the election, making the president Conscious of a problem only he can solve. 
 
 Each of the above encodings deals with the presidency, but in a completely different way.  This allows an author to stick with the subject matter that interested him in the first place, yet still make sure the Story Goal is accurately encoded.  And why even bother? Because the wrong perspective creates the wrong meaning.  Anything that is not properly encoded will work against the dramatics of your story, rather than with them, and your story's overall message and experience will be weakened. 
-
-214. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -442,8 +400,6 @@ If we have four Signposts, we can see three Journeys between them.  The Signpost
 Some writers have learned to create stories in a _Three Act Structure_ .  Others have worked in a _Four Act Structure_ .  In fact, _both_ are needed to map out the terrain _and_ involve the audience. 
 
 Now that we know the names of the Signposts in our Overall Story, it is time to describe the kinds of Journeys that will take place on the road between them. 
-
-215. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -485,8 +441,6 @@ _The more our characters Understand about the consortium, the more they are able
 
 _Our characters track down and infiltrate the consortium._ 
 
-216. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## Journey #3 
@@ -502,8 +456,6 @@ _Our characters get in tighter and tighter with the consortium until they are fi
 _Our characters retrieve the stolen diamonds._ 
 
 As you can see, the Signposts outline the direction events will take.  The Journeys help bring them to life. 
-
-217. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -537,8 +489,6 @@ _The Main Character investigates Past instances of Consortium influences in his 
 
 _The Main Character decides his agents are too weak to resist stealing money from the Consortium.  Therefore, he takes the case himself, going undercover and slowly snaking his way into the heart of the Consortium over a period of some months._ 
 
-218. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## Journey #2 
@@ -565,8 +515,6 @@ _The Main Character gives in to the needs of others, violating his own zero tole
 
 _Though he is in a better position than ever to break into the political scene and demand strict adherence to a code of ethics, his grand words about his Future are now just ashes in his mouth, as he sits miserably in his office pondering his shortcomings, drained of ambition._ 
 
-219. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Impact Character Throughline Plot Progression** 
@@ -576,8 +524,6 @@ The Impact Character in a story never stands alone, but is always evaluated in t
 For example, in our sample story, the Impact Character Throughline is in the Fixed Attitude (Mind) Class.  As a result, the Impact Character Throughline Types are Memory, Impulsive Responses [Preconscious], Contemplation [Conscious], and Subconscious. This means that the Impact Character will (in some order) force the Main Character to remember (Memory), to respond differently when there is no time for consideration (Impulsive Responses [Preconscious]), to become aware of something (Conscious), and to desire something (Subconscious). 
 
 Encode the Impact Character's Types by the impact the Impact Character has in that area of concern on the Main Character.  In this way, your Impact Character will _force_ your Main Character to grow to a point of potential Change.  That is the function and purpose of the Impact Character in a story. 
-
-220. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -607,8 +553,6 @@ _As the Main Character becomes more obsessed with infiltrating the Consortium an
 
 _The Impact Character carries the argument to the Main Character that no one is immune to temptation.  Going under cover in the Consortium will surely cause the Main Character to break if he does not learn to bend. Prophetically, the Impact Character makes the Main Character aware (Conscious) that there are some situations in which a fixed code of ethics creates a paradox where one must re-examine one's ideals._ 
 
-221. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## Journey #2 
@@ -635,8 +579,6 @@ _Unable to be in further contact with the Main Character who remains under cover
 
 _Now that the Main Character is back in the agency, the Impact Character passes judgment upon him.  He tells the Main Character to look to his heart - look to all the noble things the Main Character had hoped to do in the political realm.  The Impact Character asks the Main Character how he feels now, knowing that he has violated the very ideals he had intended to run on.  "What does your heart tell you now?" he asks of the Main Character, then walks out leaving the dejected Main Character alone._ 
 
-222. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## **Subjective Story Throughline Plot Progression** 
@@ -659,8 +601,6 @@ In this fictitious story example, the Subjective Story Throughline has been chos
 
 Developing A Plan [Conceptualizing] _means working out a plan, model, belief system, or paradigm.  In the Subjective Story, the Main and Impact Characters quickly come into conflict about how to look at the relationship between organized crime and law enforcement.  The Main Character argues that law enforcement is like a breakwater, holding back an ocean of anarchy.  The Impact Character sees the system more like an ecology, where each kind of activity has its place in an ever-changing environment._ 
 
-223. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## Journey #1 
@@ -680,8 +620,6 @@ Conceiving An Idea _means coming up with an idea or determining a need.  They fi
 ## **Type 2.** Conceiving An Idea  ———> **Type 3.** Playing A Role [Being] 
 
 _As the Main and Impact Character come up with more ideas to help him rise among the Consortium, they realize they are still not seeing eye to eye on how to run this operation.  The Main Character starts acting more and more impatient with the Impact Character, being more and more like the role he is playing to be in among the sting.  The Impact Character starts taking on a different role, that of the Main Character's nagging conscience_ . 
-
-224. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
@@ -703,8 +641,6 @@ _In their meetings, the Impact Character argues that if the Main Character is de
 
 Changing One's Nature [Becoming] _means truly transforming one's nature.  The Impact Character points out to the Main Character that The Main Character is no longer the self assured champion of righteousness he once was.  He points out that there was no escaping the change that the Main Character made in his personal code to be able to bring the Consortium to some measure of justice.  The Main Character responds that the angst he is suffering is a test of his moral fiber.  Those who stand against the pressure and survive Become stronger for it.  He throws the Impact Character out of his office yelling that they will never work together again, but it is clear that the Main Character has seen too much in himself and has become convinced that his moral ethics are no longer as powerful as they used to be._ 
 
-225. 
-
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved 
 
 ## _**Encoding Genre**_ 
@@ -724,7 +660,5 @@ Up to this point, we have explored the encoding process as if storyform and stor
 Stories in many media are recorded to play back directly to the audience.  Others are recorded as cues to performers and translated through them to the audience.  Still others are not recorded at all and simply told.  There can be as many media as there are means of conveying information. 
 
 Even within a single medium there may exist several formats.  For example, in television there are half-hour three-camera formats, half-hour single-camera formats, onehour and two-hour and mini-series formats.  Also, time is not the only quality that defines a format.  Soap operas, episodic series, and multi-throughline episodic series are but a few variations.  Each of these formats offers dramatic opportunities and each operates under constraints.  By exploring their demands and benefits, the process of encoding can be related to best advantage in each. 
-
-226. 
 
 **Dramatica, A New Theory of Story** -- Copyright (c) 1993 - 2001 Screenplay Systems Inc.  All Rights Reserved

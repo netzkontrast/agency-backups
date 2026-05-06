@@ -131,11 +131,6 @@ been doing or starting to do something new? This is
 determined by the author's value judgment of Good or
 Bad. When a Main Character Stops doing something
 Bad, that is positive. When a Main Character Starts
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-17.
-
 doing something Good, that also is positive. However,
 when a Main Character Starts doing something Bad or
 Stops doing something Good, these are negative.
@@ -181,11 +176,6 @@ prejudice, or even a "positive" opinion about anything
 at all. The key is that the attitude is fixed, meaning it is
 accepted as a given and not re-evaluated. Often the
 Fixed Attitude domain is represented by a group of
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-19.
-
 people who share a common bias for or against
 something.
 
@@ -344,11 +334,6 @@ character containing the Non-Acceptance characteristic
 will not compromise. He stands his ground regardless
 of how unimportant the issue may be. Certainly, this
 characteristic nips attrition in the bud but also loses the
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-31.
-
 benefits of give and take relationships.
 
 **Synonyms**: run
@@ -437,11 +422,6 @@ Reach of a story describes the relationship between
 the audience and the Main Character. An audience
 might Empathize with a Main Character in which case
 the audience identifies with the Main Character and
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-38.
-
 sees the story through his eyes. Alternatively, an
 audience might Sympathize with the Main Character in
 which case it stands next to the Main Character as if it
@@ -490,11 +470,6 @@ not privy to that view but must work from his personal
 view instead. From this view, the problem does not
 appear to be between the Main Character and the
 Environment, but wholly in one or the other. Some-
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-46.
-
 times a Main Character is a "Do-er" type and will
 perceive and first try to solve the problem in the
 environment. Other times a Main Character is a "Beer" who will first try to solve the problem by adapting to
@@ -548,11 +523,6 @@ neither the problem nor the search for a solution. As a
 result, some sort of leverage must be applied to "force"
 him to join the quest. Once the Main Character is
 enticed or coerced into beginning the journey toward a
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-49.
-
 solution, he requires outside encouragement or compulsion to keep up the effort.
 
 ---

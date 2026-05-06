@@ -30,8 +30,6 @@ Impact Characters and the Ov
 
 www.dramatica.com -- www.screenplay.com
 
-9.
-
 the story. Main Character Approach determines if the
 Main Character is a Do-er or Be-er by preference. And
 Main Character Problem Solving Style determines if the

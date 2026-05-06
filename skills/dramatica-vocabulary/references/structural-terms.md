@@ -81,8 +81,6 @@ divided into four areas, and we call these areas the four
 
 www.dramatica.com -- www.screenplay.com
 
-10.
-
 they create. Each pair in each quad will be focused in
 a slightly different place, creating a gradual shift in the
 model from one point of view to its opposite. In many
@@ -277,11 +275,6 @@ the dynamic forces that will act upon the dramatic
 potentials to change the relationship between characters, change the course of the plot and develop the
 theme as the story unfolds. In Dramatica, choices
 between alternative forces such as "Success or Failure" and "Change or Steadfast" determine the dynamics that will act upon a story.
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-16.
-
 Effect
 
 ### Element
@@ -424,11 +417,6 @@ represent a more refined exploration of that point of
 view. In a sense, Types describe the basic categories
 of what can be seen from a given point of view. Just as
 Domain level appreciations create genre-like brush
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-48.
-
 strokes in the story structure, Type level appreciations
 determine the nature of the plot.
 

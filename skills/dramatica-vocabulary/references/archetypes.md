@@ -175,11 +175,6 @@ scenarios:
 *Type: Archetype*
 
 ### Archetype
-
-Copyright (c) 2001 Screenplay Systems Inc. -- www.dramatica.com -- www.screenplay.com
-
-37.
-
 An Overall Story Character charged with the responsibility of pursuing a solution to the story's Overall
 (Objective) problem. An Overall (Objective) problem
 does not mean it can't be personal. Rather, it means
