@@ -332,6 +332,17 @@ Feature: Agent reads a file before acting
 
 ---
 
+## Synthesised ADR Constraints
+
+The block below is rewritten by [`tools/adr/cli.py synthesize`](./tools/adr/cli.py) from the [`/decisions/`](./decisions/) corpus. Manual edits inside the markers will be overwritten on the next synthesis run; author or supersede an ADR instead. The bounding markers are byte-exact and required (anchor `ADR.A.3.5`).
+
+<!-- BEGIN AGENCY-ADR SYNTHESIS -->
+<!-- AGENT-WRITTEN. DO NOT EDIT BY HAND. Edits will be overwritten by tools/adr/cli.py synthesize. -->
+
+<!-- END AGENCY-ADR SYNTHESIS -->
+
+---
+
 ## Current State
 
 - Output exists in `research/agent-prompt-specs-3-systems-sdd/output/SPEC.md`

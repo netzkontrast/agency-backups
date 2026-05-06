@@ -8,7 +8,7 @@
     "F.12.1", "F.12.2", "F.12.3", "F.12.4", "F.12.5", "F.12.6"
   ],
   "l1_required": ["type", "status", "slug", "summary", "created", "updated"],
-  "type_values": ["task", "prompt", "research", "spec", "readme", "note", "index", "skill"],
+  "type_values": ["task", "prompt", "research", "spec", "readme", "note", "index", "skill", "adr"],
   "status_values": ["draft", "active", "blocked", "completed", "archived"],
   "task_status_values": ["open", "in_progress", "blocked", "done", "updated", "abandoned"],
   "task_status_doc": "Lifecycle states for the L2 task_status field. 'updated' is closure-with-continuity (TASK.md §4.7): the Task is closed but a successor referenced via task_supersedes/task_superseded_by carries the intent forward.",
@@ -132,6 +132,60 @@
       "required_keys": ["type", "status", "slug", "summary", "created", "updated"],
       "required_headings": [],
       "body_schema": {}
+    },
+    "adr": {
+      "_doc": "Architectural Decision Records (Task 028 lineage). The repo-native ADR governance spec lives at research/adr-spec-research-synthesis/output/SPEC.md; the JSON-Schema below is the binding source for tools/adr/cli.py validate (anchor ADR.A.5.4). adr_status carries the lifecycle state (Proposed | Accepted | Superseded | Deprecated) — distinct from the L1 status field which uses the operational status_values vocabulary.",
+      "required_keys": [
+        "type", "status", "slug", "summary", "created", "updated",
+        "adr_id", "adr_status"
+      ],
+      "recommended_keys": ["adr_supersedes", "adr_superseded_by", "adr_owner", "adr_tags"],
+      "required_headings": [
+        "Context and Problem Statement",
+        "Decision Drivers",
+        "Considered Options",
+        "Decision Outcome",
+        "Consequences"
+      ],
+      "_required_headings_note": "MADR 4.0.0 section structure (anchor ADR.A.2.1). 'Pros and Cons of the Options' is OPTIONAL and not enforced as a required heading.",
+      "body_schema": {
+        "Decision Outcome": {
+          "shape": "paragraph",
+          "min_chars": 20,
+          "doc": "Single-sentence (or short paragraph) declaration of the chosen option (anchor ADR.A.2.3)."
+        },
+        "Consequences": {
+          "shape": "mixed",
+          "doc": "Enumerates positive, negative, and neutral impacts (anchor ADR.A.2.4)."
+        }
+      },
+      "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "title": "ADR L1 + adr_* L2 namespace",
+        "properties": {
+          "type":     { "const": "adr" },
+          "status":   { "type": "string", "enum": ["draft", "active", "archived"] },
+          "slug":     { "type": "string", "pattern": "^[0-9]{4}-[a-z0-9-]+$" },
+          "summary":  { "type": "string", "maxLength": 240 },
+          "created":  { "type": "string", "format": "date" },
+          "updated":  { "type": "string", "format": "date" },
+          "adr_id":         { "type": "string", "pattern": "^ADR-[0-9]{4}$" },
+          "adr_status":     { "type": "string", "enum": ["Proposed", "Accepted", "Superseded", "Deprecated"] },
+          "adr_supersedes": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^ADR-[0-9]{4}$" }
+          },
+          "adr_superseded_by": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^ADR-[0-9]{4}$" }
+          },
+          "adr_owner": { "type": "string" },
+          "adr_tags":  { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["type", "status", "slug", "summary", "created", "updated", "adr_id", "adr_status"],
+        "additionalProperties": true
+      }
     }
   },
   "reciprocity": {
@@ -151,6 +205,8 @@
       {"pattern": "research/*/output/SPEC.md", "type": "research", "alt_types": ["spec"]},
       {"pattern": "research/*/readme.md", "type": "research", "alt_types": ["index", "readme"]},
       {"pattern": "skills/*/SKILL.md", "type": "skill"},
+      {"pattern": "decisions/[0-9][0-9][0-9][0-9]-*.md", "type": "adr"},
+      {"pattern": "decisions/readme.md", "type": "index", "alt_types": ["readme"]},
       {"pattern": "tasks/readme.md", "type": "index", "alt_types": ["readme"]},
       {"pattern": "prompts/readme.md", "type": "index", "alt_types": ["readme"]},
       {"pattern": "research/readme.md", "type": "index", "alt_types": ["readme"]},

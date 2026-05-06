@@ -1,0 +1,71 @@
+---
+type: task
+status: active
+slug: research-spec-integration
+summary: "Add Gherkin acceptance scenarios to RESEARCH.md, integrate spec-chunking rule from spec-driven-research-agentic-workflows, integrate trust-audit gate from agentic-eval-trust-improvement-spec, integrate session-continuity protocol from agentic-session-continuity-spec, mechanically enforce R.4.4 workspace cleanup and R.6.5 external-result downstream-task creation, and resolve the R.4.3 prompt-snapshot mid-run ambiguity."
+created: 2026-05-06
+updated: 2026-05-06
+task_id: "035"
+task_status: open
+task_owner: "unassigned"
+task_priority: P1
+task_uses_prompts: []
+task_spawns_research: []
+task_spawns_prompts: []
+task_affects_paths:
+  - RESEARCH.md
+  - tools/check-workspace-cleanliness.py
+  - tools/check-external-result-downstream-task.py
+  - tools/check-trust-audit.py
+---
+
+# Task 035 — RESEARCH.md Spec Integration
+
+## Goal
+
+Lift three orphaned/under-utilized research outputs into RESEARCH.md normative scope, close two enforcement gaps, and add Gherkin acceptance scenarios. The Task is `done` when (a) RESEARCH.md §5 contains ≥6 Gherkin scenarios, (b) §2.2 mandates spec-chunking per `spec-driven-research-agentic-workflows/output/SPEC.md` for synthesis runs over 50k tokens, (c) §5.7 mandates a trust-audit gate per `agentic-eval-trust-improvement-spec/output/SPEC.md` before `research_phase: complete`, (d) §4 references `agentic-session-continuity-spec/output/SPEC.md` for multi-session continuity, (e) R.4.4 workspace cleanup is mechanically enforced, (f) R.6.5 external-result downstream-task creation is mechanically enforced, and (g) R.4.3 prompt-snapshot policy is unambiguous on mid-run prompt edits.
+
+## Context
+
+Three completed research outputs are entirely orphaned in RESEARCH.md:
+
+- **agentic-eval-trust-improvement-spec** — proposes a three-tier trust rubric (schema ≥80%, behavioral ≥90%, governance ≥95%) but is uncited in RESEARCH.md §5 or MAINTENANCE.md §2.3.
+- **spec-driven-research-agentic-workflows** — proposes spec-chunking heuristics (RFC-2119-aspect boundary preferred) and Gherkin behavioral-rule templates. Zero citations across the codebase.
+- **agentic-session-continuity-spec** — proposes Spec-G/H/I (context-pruning, memory state machine, cross-session protocol) for multi-session research runs. Zero citations.
+
+Two known enforcement gaps in RESEARCH.md:
+
+- **R.4.4** "Execution scripts (`.py`, `.sh`) MUST be deleted before final commit" — human-review only; no linter scans `/research/<slug>/workspace/` for stragglers.
+- **R.6.5** "Every `result.md` MUST have a corresponding open Task" — human-review only; external results can be ingested without a downstream Task.
+
+One ambiguity:
+
+- **R.4.3** "immutable run-start snapshot" — silent on what happens if `/prompts/<slug>/prompt.md` is edited mid-run. Does the researcher re-snapshot? Lock at start? Diverge?
+
+## Plan
+
+1. **Phase 1 — Research head.** Subtask `01-research-session-continuity-protocol-instantiation` translates Spec-I from `agentic-session-continuity-spec` into a concrete checkpoint/restore protocol that fits a `/research/<slug>/workspace/state.md` file.
+2. **Phase 2 — Tooling.** Subtask `02-tooling-workspace-cleanliness-linter` (R.4.4). Subtask `03-tooling-external-result-downstream-task-linter` (R.6.5). Subtask `04-tooling-trust-audit-gate` (§5.7 new).
+3. **Phase 3 — Spec amendment.** Subtask `05-spec-amendment-research-md` adds §2.2 chunking rule, §4 continuity reference, §5.7 trust-audit clause, R.4.3 snapshot disambiguation, and the Gherkin scenarios.
+
+## Todo
+
+- [ ] 1. Dispatch subtask `01-research-session-continuity-protocol-instantiation`.
+- [ ] 2. Dispatch subtask `02-tooling-workspace-cleanliness-linter` (Phase A).
+- [ ] 3. Dispatch subtask `03-tooling-external-result-downstream-task-linter` (Phase A).
+- [ ] 4. Dispatch subtask `04-tooling-trust-audit-gate` (Phase A).
+- [ ] 5. Dispatch subtask `05-spec-amendment-research-md` (Phase B).
+- [ ] 6. Run `tools/check-governance.sh`.
+- [ ] 7. Update `README.md §6` if linter table changes.
+- [ ] 8. Update `tasks/readme.md`.
+- [ ] 9. Author `friction-log.md`.
+- [ ] 10. Set `task_status: done`.
+
+## Links
+
+- Subtask index: [`subtasks/readme.md`](./subtasks/readme.md)
+- Source research (orphaned, to be operationalized):
+  - [`research/agentic-eval-trust-improvement-spec/output/SPEC.md`](../../research/agentic-eval-trust-improvement-spec/output/SPEC.md)
+  - [`research/spec-driven-research-agentic-workflows/output/SPEC.md`](../../research/spec-driven-research-agentic-workflows/output/SPEC.md)
+  - [`research/agentic-session-continuity-spec/output/SPEC.md`](../../research/agentic-session-continuity-spec/output/SPEC.md)
+- Governing specs: [`RESEARCH.md`](../../RESEARCH.md), [`PROMPT.md`](../../PROMPT.md), [`MAINTENANCE.md`](../../MAINTENANCE.md), [`README.md`](../../README.md) §11.3

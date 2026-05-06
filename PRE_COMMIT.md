@@ -104,6 +104,36 @@ git config core.hooksPath .githooks
 
 Diagnostics at `ERROR` level MUST be addressed by fixing the file (preferred) or by documenting a waiver in `tools/.frontmatter-waivers` with a rationale comment. `WARN`-level diagnostics are advisory only.
 
+### 7.C ADR Governance Validator (Task 028)
+
+Composed inside [`tools/check-governance.sh`](./tools/check-governance.sh) as step `[5/5]`. The validator [`tools/adr/cli.py validate`](./tools/adr/cli.py) is read-only and:
+
+- triggers when the commit modifies `decisions/**`, `AGENTS.md`, or `tools/adr/**`;
+- exits 0 if `decisions/` is absent or empty (graceful no-op);
+- exits 1 on any ERROR diagnostic; the message format is `<relpath>::ERROR:<code>:<message>` where `<code>` is the `ADR.A.<aspect>.<stmt>` anchor from [`research/adr-spec-research-synthesis/output/SPEC.md`](./research/adr-spec-research-synthesis/output/SPEC.md).
+
+Diagnostic codes the validator can emit and their author remedies:
+
+| Code | Cause | Author remedy |
+|---|---|---|
+| `ADR.A.2.1` | Required MADR heading missing in body. | Add the heading. |
+| `ADR.A.2.2` | Frontmatter fails JSON-Schema. | Fix the listed key/value. |
+| `ADR.A.2.3` | "Decision Outcome" body is empty. | Declare the chosen option in one sentence. |
+| `ADR.A.2.4` | "Consequences" body is empty. | Enumerate positive / negative / neutral impacts. |
+| `ADR.A.2.7` | Filename and frontmatter `adr_id`/`slug` disagree. | Rename file or amend frontmatter. |
+| `ADR.A.3.3` | Synthesis would exceed `--token-limit`. | Deprecate older ADRs or raise the limit (justify in PR). |
+| `ADR.A.3.4` | Fidelity score below floor. | Investigate; usually a paraphrasing error in a recent ADR. |
+| `ADR.A.3.5` | `<!-- BEGIN/END AGENCY-ADR SYNTHESIS -->` markers missing in `AGENTS.md`. | Restore the markers. |
+| `ADR.A.4.5` | Cyclic supersession edge. | Break the cycle; the diagnostic lists the cycle nodes. |
+| `ADR.A.4.6` | Missing reciprocal `adr_supersedes` / `adr_superseded_by`. | Add the reciprocal entry. |
+| `ADR.A.5.4` | Required ADR frontmatter key missing. | Add the missing key. |
+| `ADR.A.5.6` | Duplicate `adr_id`. | Renumber the later-created ADR. |
+| `ADR.A.5.7` | `adr_supersedes` references an absent ADR. | Restore the file or fix the reference. |
+
+Hook granularity:
+
+- The hook runs `agency-adr validate` (read-only). It does NOT auto-run `agency-adr synthesize`, since synthesis mutates `AGENTS.md` and surprising the author with a cross-file diff in the middle of a commit is unsafe. Synthesis is the author's explicit step before commit; the [`adr-validate`](./.github/workflows/adr-validate.yml) GitHub Actions workflow then verifies that the committed guarded-section bytes match what `synthesize --dry-run` would emit.
+
 ## 8. Trust Audit (Spec-J/K/L)
 
 Before closing a Task (`task_status: done`), the agent MUST run the trust audit:
