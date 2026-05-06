@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-readme-frontmatter-validator-brief
 summary: "Brief for prompt tooling-readme-frontmatter-validator — extracted from tasks/036-folders-spec-integration/subtasks/01-tooling-readme-frontmatter-validator.md per Task 041 (PR #70 review C.3 audit-graph repair)."

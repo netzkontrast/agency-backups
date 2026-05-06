@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: folders-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-2: `check-audit-graph-consistency` — F.6 Dual-Surface Drift — Task-Spec Prompt
@@ -33,13 +32,15 @@ You are the **main-agent** dispatched to execute subtask ST-2 of [Task folders-s
 
 ## S — Steps
 
-1. Satisfy acceptance criterion: **Surface.** `python3 tools/check-audit-graph-consistency.py [<paths>]`.
-2. Satisfy acceptance criterion: **Heuristic.** Parse body Markdown links; for each operational-folder target, verify reciprocal frontmatter key.
-3. Satisfy acceptance criterion: **Diagnostic format.** `<relpath>::WARN:F.6:body-link-without-frontmatter:<target>`.
-4. Satisfy acceptance criterion: **Tests.** `tests/test_audit_graph_consistency.py` covers: link+frontmatter both present (pass), link only (warn), frontmatter only (no warn — body links are encouraged but not required).
-5. Satisfy acceptance criterion: **Integration.** WARN-tier `[opt]` in `tools/check-governance.sh`.
-6. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-7. Author or update `tasks/036-folders-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
+1. The agent MUST produce the artefact required by acceptance criterion: **Surface.** `python3 tools/check-audit-graph-consistency.py [<paths>]`.
+2. The agent MUST produce the artefact required by acceptance criterion: **Heuristic.** Parse body Markdown links; for each operational-folder target, verify reciprocal frontmatter key.
+3. The agent MUST produce the artefact required by acceptance criterion: **Diagnostic format.** `<relpath>::WARN:F.6:body-link-without-frontmatter:<target>`.
+4. The agent MUST produce the artefact required by acceptance criterion: **Tests.** `tests/test_audit_graph_consistency.py` covers: link+frontmatter both present (pass), link only (warn), frontmatter only (no warn — body links are encouraged but not required).
+5. The agent MUST produce the artefact required by acceptance criterion: **Integration.** WARN-tier `[opt]` in `tools/check-governance.sh`.
+6. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+7. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+8. The agent SHOULD author or update `tasks/036-folders-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+9. The agent MUST commit with a message that names `Task 036 ST-2` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

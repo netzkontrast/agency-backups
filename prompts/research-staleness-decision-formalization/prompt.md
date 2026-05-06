@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: maintenance-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-2: Research — Staleness Decision Formalization (cross-link) — Task-Spec Prompt
@@ -31,9 +30,10 @@ You are the **main-agent** dispatched to execute subtask ST-2 of [Task maintenan
 
 ## S — Steps
 
-1. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-2. Author or update `tasks/039-maintenance-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
-3. Verify all parent-task `Acceptance Criteria` referenced by this subtask still hold.
+1. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+2. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+3. The agent SHOULD author or update `tasks/039-maintenance-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+4. The agent MUST commit with a message that names `Task 039 ST-2` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: research-session-continuity-protocol-instantiation-brief
 summary: "Brief for prompt research-session-continuity-protocol-instantiation — extracted from tasks/035-research-spec-integration/subtasks/01-research-session-continuity-protocol-instantiation.md per Task 041 (PR #70 review C.3 audit-graph repair)."

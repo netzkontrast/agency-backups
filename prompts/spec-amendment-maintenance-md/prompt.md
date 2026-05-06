@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: maintenance-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-6: Spec Amendment — MAINTENANCE.md — Task-Spec Prompt
@@ -38,17 +37,19 @@ You are the **main-agent** dispatched to execute subtask ST-6 of [Task maintenan
 
 ## S — Steps
 
-1. Satisfy acceptance criterion: MAINTENANCE.md §1.1.2 has a three-way table with flip criteria from ST-1. **The table is exactly three columns (Legacy / Flexible / ADR) per Task 040 §C — no fourth column for MCP servers.** A footnote MAY mention MorphLLM-Fast-Apply as a future option, but no SHOULD/MUST mandate (per Task 040 §C: not configured today).
-2. Satisfy acceptance criterion: MAINTENANCE.md §2.3 mandates trust-audit gate (cites Task 035 ST-4 GATE + this Task's ST-5 AGGREGATOR).
-3. Satisfy acceptance criterion: MAINTENANCE.md §3.2 cites ST-4 partition linter.
-4. Satisfy acceptance criterion: MAINTENANCE.md §3.4 has deterministic algorithm cross-referencing ST-2 + ST-3.
-5. Satisfy acceptance criterion: MAINTENANCE.md §3.5 references Task 033 ST-3 dup-id linter as the resolution to the circular dependency.
-6. Satisfy acceptance criterion: MAINTENANCE.md §1 documents ADR T4-immutability.
-7. Satisfy acceptance criterion: ≥7 Gherkin scenarios anchored M.B.1-M.B.7.
-8. Satisfy acceptance criterion: **NEW (per Task 040 §A row §8 MERGE):** §1.1.2 prose lifts the *nightly maintenance* framing from the Gemini spec — vocabulary aligns; the citation MUST be to the Gemini source (informational only) and MUST NOT cite Tavily / Playwright / Morphllm / Chrome DevTools (per Task 040 §C). Cite Task 040 §A row §8 in the commit message.
-9. Satisfy acceptance criterion: `tools/check-governance.sh` exits 0.
-10. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-11. Author or update `tasks/039-maintenance-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
+1. The agent MUST produce the artefact required by acceptance criterion: MAINTENANCE.md §1.1.2 has a three-way table with flip criteria from ST-1. **The table is exactly three columns (Legacy / Flexible / ADR) per Task 040 §C — no fourth column for MCP servers.** A footnote MAY mention MorphLLM-Fast-Apply as a future option, but no SHOULD/MUST mandate (per Task 040 §C: not configured today).
+2. The agent MUST produce the artefact required by acceptance criterion: MAINTENANCE.md §2.3 mandates trust-audit gate (cites Task 035 ST-4 GATE + this Task's ST-5 AGGREGATOR).
+3. The agent MUST produce the artefact required by acceptance criterion: MAINTENANCE.md §3.2 cites ST-4 partition linter.
+4. The agent MUST produce the artefact required by acceptance criterion: MAINTENANCE.md §3.4 has deterministic algorithm cross-referencing ST-2 + ST-3.
+5. The agent MUST produce the artefact required by acceptance criterion: MAINTENANCE.md §3.5 references Task 033 ST-3 dup-id linter as the resolution to the circular dependency.
+6. The agent MUST produce the artefact required by acceptance criterion: MAINTENANCE.md §1 documents ADR T4-immutability.
+7. The agent MUST produce the artefact required by acceptance criterion: ≥7 Gherkin scenarios anchored M.B.1-M.B.7.
+8. The agent MUST produce the artefact required by acceptance criterion: **NEW (per Task 040 §A row §8 MERGE):** §1.1.2 prose lifts the *nightly maintenance* framing from the Gemini spec — vocabulary aligns; the citation MUST be to the Gemini source (informational only) and MUST NOT cite Tavily / Playwright / Morphllm / Chrome DevTools (per Task 040 §C). Cite Task 040 §A row §8 in the commit message.
+9. The agent MUST produce the artefact required by acceptance criterion: `tools/check-governance.sh` exits 0.
+10. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+11. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+12. The agent SHOULD author or update `tasks/039-maintenance-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+13. The agent MUST commit with a message that names `Task 039 ST-6` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

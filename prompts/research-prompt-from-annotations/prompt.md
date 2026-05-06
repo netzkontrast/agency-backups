@@ -9,7 +9,6 @@ prompt_kind: tool-instruction
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "any"
 prompt_relates_to_task: ""
-prompt_spawned_from_research: ""
 ---
 
 # Research Prompt Generator from Annotation Scan

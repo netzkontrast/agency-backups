@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: task-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-5: Spec Amendment — TASK.md — Task-Spec Prompt
@@ -36,15 +35,17 @@ You are the **main-agent** dispatched to execute subtask ST-5 of [Task task-spec
 
 ## S — Steps
 
-1. Satisfy acceptance criterion: TASK.md §3.3 cross-references the flexible-frontmatter-toolchain SPEC + header-ontology.json with explicit version anchor.
-2. Satisfy acceptance criterion: TASK.md §3.3 has new subsections enumerating `skill_*` (per skills-namespace-ontology) and `adr_*` (per types.adr registration).
-3. Satisfy acceptance criterion: TASK.md §6 has the supersession-blocker scenario from task.md "Sample Gherkin" anchored `T.B.SUP.1`.
-4. Satisfy acceptance criterion: TASK.md §4.7 algorithm is refined per ST-2's deterministic decision tree.
-5. Satisfy acceptance criterion: TASK.md §8.1 enforcement note now states the rule is gated by ST-3's linter.
-6. Satisfy acceptance criterion: **NEW (per Task 040 §A row §2.1+§2.2 MERGE):** TASK.md §1 prose lifts the *Planner / Tech-Lead* framing — a Task is the Planner-layer artefact (it decomposes work and coordinates dependencies); a Prompt is the Tech-Lead-layer artefact (it instructs the executor). One paragraph; no RFC-2119 mandates; no `/sc:spawn` / `/sc:task` skill citations (those are operator surface, not normative). Anchor any new Gherkin `T.B.SPAWN.1` or `T.B.DELEG.1` per Task 040 §B remap table.
-7. Satisfy acceptance criterion: `tools/check-governance.sh` exits 0.
-8. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-9. Author or update `tasks/033-task-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
+1. The agent MUST produce the artefact required by acceptance criterion: TASK.md §3.3 cross-references the flexible-frontmatter-toolchain SPEC + header-ontology.json with explicit version anchor.
+2. The agent MUST produce the artefact required by acceptance criterion: TASK.md §3.3 has new subsections enumerating `skill_*` (per skills-namespace-ontology) and `adr_*` (per types.adr registration).
+3. The agent MUST produce the artefact required by acceptance criterion: TASK.md §6 has the supersession-blocker scenario from task.md "Sample Gherkin" anchored `T.B.SUP.1`.
+4. The agent MUST produce the artefact required by acceptance criterion: TASK.md §4.7 algorithm is refined per ST-2's deterministic decision tree.
+5. The agent MUST produce the artefact required by acceptance criterion: TASK.md §8.1 enforcement note now states the rule is gated by ST-3's linter.
+6. The agent MUST produce the artefact required by acceptance criterion: **NEW (per Task 040 §A row §2.1+§2.2 MERGE):** TASK.md §1 prose lifts the *Planner / Tech-Lead* framing — a Task is the Planner-layer artefact (it decomposes work and coordinates dependencies); a Prompt is the Tech-Lead-layer artefact (it instructs the executor). One paragraph; no RFC-2119 mandates; no `/sc:spawn` / `/sc:task` skill citations (those are operator surface, not normative). Anchor any new Gherkin `T.B.SPAWN.1` or `T.B.DELEG.1` per Task 040 §B remap table.
+7. The agent MUST produce the artefact required by acceptance criterion: `tools/check-governance.sh` exits 0.
+8. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+9. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+10. The agent SHOULD author or update `tasks/033-task-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+11. The agent MUST commit with a message that names `Task 033 ST-5` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: agents-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-5: Spec Amendment — AGENTS.md — Task-Spec Prompt
@@ -35,15 +34,17 @@ You are the **main-agent** dispatched to execute subtask ST-5 of [Task agents-sp
 
 ## S — Steps
 
-1. Satisfy acceptance criterion: AGENTS.md gains a `§0 Theoretical Foundations` cross-reference to `research/gemini/agency-adr-governance-spec/`.
-2. Satisfy acceptance criterion: AGENTS.md §3.3 carries the polarity-inversion footnote citing REPORT.md §1 ASM-001.
-3. Satisfy acceptance criterion: AGENTS.md §6 cites U1/U2 operational constraints (no git, no filesystem persistence).
-4. Satisfy acceptance criterion: AGENTS.md §6 cites the citation-reproducibility protocol from ncp-novel-co-authoring-spec.
-5. Satisfy acceptance criterion: The Gherkin sample anchored `AG.NO5.1` (from task.md "Sample Gherkin") lands as one of ≥4 new scenarios at AGENTS.md §6 acceptance section.
-6. Satisfy acceptance criterion: `tools/adr/cli.py validate AGENTS.md` exits 0 (markers intact; no ADR.A.3.5).
-7. Satisfy acceptance criterion: `tools/check-governance.sh` exits 0.
-8. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-9. Author or update `tasks/032-agents-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
+1. The agent MUST produce the artefact required by acceptance criterion: AGENTS.md gains a `§0 Theoretical Foundations` cross-reference to `research/gemini/agency-adr-governance-spec/`.
+2. The agent MUST produce the artefact required by acceptance criterion: AGENTS.md §3.3 carries the polarity-inversion footnote citing REPORT.md §1 ASM-001.
+3. The agent MUST produce the artefact required by acceptance criterion: AGENTS.md §6 cites U1/U2 operational constraints (no git, no filesystem persistence).
+4. The agent MUST produce the artefact required by acceptance criterion: AGENTS.md §6 cites the citation-reproducibility protocol from ncp-novel-co-authoring-spec.
+5. The agent MUST produce the artefact required by acceptance criterion: The Gherkin sample anchored `AG.NO5.1` (from task.md "Sample Gherkin") lands as one of ≥4 new scenarios at AGENTS.md §6 acceptance section.
+6. The agent MUST produce the artefact required by acceptance criterion: `tools/adr/cli.py validate AGENTS.md` exits 0 (markers intact; no ADR.A.3.5).
+7. The agent MUST produce the artefact required by acceptance criterion: `tools/check-governance.sh` exits 0.
+8. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+9. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+10. The agent SHOULD author or update `tasks/032-agents-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+11. The agent MUST commit with a message that names `Task 032 ST-5` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

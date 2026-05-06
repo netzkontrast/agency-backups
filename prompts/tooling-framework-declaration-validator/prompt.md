@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: prompt-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-3: `check-prompt-framework-declaration` — Mechanizes P.5.2 — Task-Spec Prompt
@@ -35,12 +34,14 @@ You are the **main-agent** dispatched to execute subtask ST-3 of [Task prompt-sp
 
 ## S — Steps
 
-1. Satisfy acceptance criterion: **Surface.** `python3 tools/check-prompt-framework-declaration.py <prompt.md>` exits 0 (pass) or 2 (WARN).
-2. Satisfy acceptance criterion: **Checks.** Frontmatter+body framework declaration consistency per ST-1 SPEC §3.
-3. Satisfy acceptance criterion: **Tests.** `tests/test_prompt_framework_declaration.py` covers: missing frontmatter, missing section, mismatch between frontmatter and section, valid declaration.
-4. Satisfy acceptance criterion: **Integration.** `tools/check-governance.sh` runs WARN-tier on changed `/prompts/<slug>/prompt.md`.
-5. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-6. Author or update `tasks/034-prompt-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
+1. The agent MUST produce the artefact required by acceptance criterion: **Surface.** `python3 tools/check-prompt-framework-declaration.py <prompt.md>` exits 0 (pass) or 2 (WARN).
+2. The agent MUST produce the artefact required by acceptance criterion: **Checks.** Frontmatter+body framework declaration consistency per ST-1 SPEC §3.
+3. The agent MUST produce the artefact required by acceptance criterion: **Tests.** `tests/test_prompt_framework_declaration.py` covers: missing frontmatter, missing section, mismatch between frontmatter and section, valid declaration.
+4. The agent MUST produce the artefact required by acceptance criterion: **Integration.** `tools/check-governance.sh` runs WARN-tier on changed `/prompts/<slug>/prompt.md`.
+5. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+6. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+7. The agent SHOULD author or update `tasks/034-prompt-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+8. The agent MUST commit with a message that names `Task 034 ST-3` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

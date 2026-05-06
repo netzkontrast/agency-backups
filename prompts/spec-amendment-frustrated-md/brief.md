@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: spec-amendment-frustrated-md-brief
 summary: "Brief for prompt spec-amendment-frustrated-md — extracted from tasks/038-frustrated-spec-integration/subtasks/03-spec-amendment-frustrated-md.md per Task 041 (PR #70 review C.3 audit-graph repair)."

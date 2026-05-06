@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: research-prompt-engineering-principle-mechanizability-brief
 summary: "Brief for prompt research-prompt-engineering-principle-mechanizability — extracted from tasks/034-prompt-spec-integration/subtasks/01-research-prompt-engineering-principle-mechanizability.md per Task 041 (PR #70 review C.3 audit-graph repair)."

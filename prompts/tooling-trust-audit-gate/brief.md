@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-trust-audit-gate-brief
 summary: "Brief for prompt tooling-trust-audit-gate — extracted from tasks/035-research-spec-integration/subtasks/04-tooling-trust-audit-gate.md per Task 041 (PR #70 review C.3 audit-graph repair)."

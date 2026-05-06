@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-narrative-ontology-load-discipline-brief
 summary: "Brief for prompt tooling-narrative-ontology-load-discipline — extracted from tasks/032-agents-spec-integration/subtasks/02-tooling-narrative-ontology-load-discipline.md per Task 041 (PR #70 review C.3 audit-graph repair)."

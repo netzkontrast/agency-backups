@@ -11,7 +11,7 @@ updated: 2026-05-06
 
 ## FL Declaration (FRUSTRATED.md FL[0-3])
 
-**FL: 1** — Minor frictions encountered (small scope mismatches between Task 041's stated scope and the actual subtask corpus shape) but no blocker; the task closed with `tools/check-governance.sh` exiting 0 across 370 files.
+**FL: 2** — Initial closure shipped with four reviewer-flagged defects (PR #72 review F-A through F-D) that survived governance because of validator blind spots (no `path_classification` rule for `prompts/*/brief.md`; OPTIONAL-field empty-string handling not strict). All four findings remediated in the same branch before merge. Final state: `tools/check-governance.sh --no-trust` exits 0 across 372 files; reciprocity holds across all 8 parent tasks × 35 child prompts plus the new self-link Task 041 ↔ `extract-subtask-prompts` prompt.
 
 ## Frictions
 
@@ -46,6 +46,41 @@ updated: 2026-05-06
 **Why it didn't block.** `tools/fm/validate.py --type-check` accepted both forms (0 diagnostics either way). The diff noise was cosmetic.
 
 **Resolution.** The script was refactored to do a line-based frontmatter edit that preserves all original lines verbatim and only mutates `task_uses_prompts` (replaced with the new list) and `updated` (bumped to today's date). The first-pass output was reverted and the script re-run, producing a minimal diff against the original task.md frontmatter blocks.
+
+### F5 — PR #72 review F-A: `type: brief` not in the closed L1 type enum (45 files)
+
+**What.** First-pass extraction set `type: brief` on every `brief.md` file. The L1 Vault Core type enum (`maintenance/schemas/header-ontology.json` → `type_values`; AGENTS.md §Frontmatter Ontology) is a closed set of nine values: `task | prompt | research | spec | readme | note | index | skill | adr`. `brief` is not in that set.
+
+**Why the linter was silent.** `tools/fm/validate.py --type-check` enforces `type_values` only for files matching `path_classification.rules`. The `prompts/*/brief.md` glob has no rule, so `Classification(expected_type=None)` is returned and the type-value check is skipped. The 0-diagnostic pass cited in PR #72's test plan was correct but did not certify the 45 affected files.
+
+**Resolution.** All 45 `brief.md` files (40 from this Task + 5 pre-existing under `prompts/adr-*` and `prompts/agency-adr-governance-spec/`) flipped to `type: note` — the closest valid type for contextual orientation documents that don't fit `task`/`prompt`/`research`. The extraction script's `build_brief_md` function was updated at source so future re-runs emit `type: note` by default.
+
+**Follow-up Task candidate.** A successor Task could file a spec amendment adding `brief` as a first-class type to the closed enum + `path_classification` rules, if `brief.md` warrants its own type identity. Out of scope for Task 041's remediation pass.
+
+### F6 — PR #72 review F-B: empty `prompt_spawned_from_research: ""` propagated from template (45 files)
+
+**What.** First-pass extraction copied `prompt_spawned_from_research: ""` from `templates/prompt.md` into every new prompt's frontmatter. PROMPT.md §3 declares this field OPTIONAL; the spec's intent for non-applicable optional fields is **omission**, not an empty-string sentinel. Linkage tooling traversing the research-spawn lineage graph would silently enumerate these prompts as having an unresolvable parent rather than no parent.
+
+**Resolution.** Removed the line from every affected `prompt.md` (35 newly authored + 9 pre-existing) and from `templates/prompt.md`. The extraction script's `build_prompt_md` function was updated at source to omit the field rather than emit it as `""`.
+
+### F7 — PR #72 review F-C: shallow RISEN+ReAct migration in `## S — Steps`
+
+**What.** First-pass `## S — Steps` for the 35 extracted prompts wrapped the original Execution Brief verbatim inside a single fenced `text` block, prefixed by `1. Execute the following instruction block faithfully — ...`. PROMPT.md §5 (Self-Containedness, RFC 2119 Normativity, Deliverable Lock, Failure Handling) requires steps to be discrete, RFC-2119-normative deliverables — not a pass-through wrapper.
+
+**Resolution.** The extraction script's step generator was rewritten:
+- Multi-line aware `numbered_items` parser preserves continuation lines from the original brief.
+- `ensure_rfc2119` helper detects existing RFC-2119 keywords and otherwise prepends `The agent MUST ` (or rewrites `Do NOT X` / `Don't X` to `MUST NOT X`); a small lowercaseable-verb table avoids ungrammatical capitalisation after `MUST`; non-verb labels (`Phase 2: ...`) are wrapped as `MUST execute the following instruction: ...`.
+- A trailing block of four uniform verification + closure steps is appended to every prompt (verify acceptance, run governance, author friction-log, commit with task-id trailer).
+
+The 35 prompts re-emitted produce 9-13 normative steps each (depending on subtask complexity), each carrying ≥1 RFC-2119 keyword. The verbatim opacity flagged by the reviewer is gone.
+
+### F8 — PR #72 review F-D: `task_owner` unset and self-`task_uses_prompts` empty on Task 041
+
+**What.** Task 041 closed with `task_owner: "unassigned"` (TASK.md §6 Gherkin "Agent picks up an open Task" requires the agent to claim ownership) and `task_uses_prompts: []` (an irony given Task 041's purpose is to populate that field on Tasks 032–039).
+
+**Resolution.**
+- `task_owner` set to `claude-code` to match the agent identity that ran `scripts/extract.py` and authored commits `ecb1919` + this remediation commit.
+- `prompts/extract-subtask-prompts/{brief.md, prompt.md, readme.md}` authored retroactively as the registered task-spec for Task 041 itself; Task 041's `task_uses_prompts` now lists `extract-subtask-prompts` and the new prompt's `prompt_relates_to_task: extract-subtask-prompts` reciprocally binds back. Reciprocity check: `tools/fm/validate.py --type-check` exits 0 — the new edge is validated.
 
 ## Validation
 

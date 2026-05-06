@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-duplicate-task-id-linter-brief
 summary: "Brief for prompt tooling-duplicate-task-id-linter — extracted from tasks/033-task-spec-integration/subtasks/03-tooling-duplicate-task-id-linter.md per Task 041 (PR #70 review C.3 audit-graph repair)."

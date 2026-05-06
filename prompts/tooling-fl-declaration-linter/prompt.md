@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: frustrated-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-2: `check-fl-declaration` — Mechanical FL-Declaration Gate — Task-Spec Prompt
@@ -35,13 +34,15 @@ You are the **main-agent** dispatched to execute subtask ST-2 of [Task frustrate
 
 ## S — Steps
 
-1. Satisfy acceptance criterion: **Surface.** `python3 tools/check-fl-declaration.py <task-folder-or-pr-body>` exits 0/1.
-2. Satisfy acceptance criterion: **Heuristic.** Parse `friction-log.md` first; fall back to PR-description `## Frustration Log` section; reject only if neither surface has a parseable declaration.
-3. Satisfy acceptance criterion: **Diagnostic format.** `<relpath>::ERROR:FR.B.4:<missing|malformed>:<details>`.
-4. Satisfy acceptance criterion: **Tests.** `tests/test_fl_declaration.py` covers: clean FL0, clean FL2, missing log, malformed value, both surfaces present (no warn).
-5. Satisfy acceptance criterion: **Integration.** Hooked into `tools/check-trust.py` for tasks transitioning to `done`.
-6. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-7. Author or update `tasks/038-frustrated-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
+1. The agent MUST produce the artefact required by acceptance criterion: **Surface.** `python3 tools/check-fl-declaration.py <task-folder-or-pr-body>` exits 0/1.
+2. The agent MUST produce the artefact required by acceptance criterion: **Heuristic.** Parse `friction-log.md` first; fall back to PR-description `## Frustration Log` section; reject only if neither surface has a parseable declaration.
+3. The agent MUST produce the artefact required by acceptance criterion: **Diagnostic format.** `<relpath>::ERROR:FR.B.4:<missing|malformed>:<details>`.
+4. The agent MUST produce the artefact required by acceptance criterion: **Tests.** `tests/test_fl_declaration.py` covers: clean FL0, clean FL2, missing log, malformed value, both surfaces present (no warn).
+5. The agent MUST produce the artefact required by acceptance criterion: **Integration.** Hooked into `tools/check-trust.py` for tasks transitioning to `done`.
+6. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+7. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+8. The agent SHOULD author or update `tasks/038-frustrated-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+9. The agent MUST commit with a message that names `Task 038 ST-2` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

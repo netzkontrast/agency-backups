@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: spec-amendment-folders-md-brief
 summary: "Brief for prompt spec-amendment-folders-md — extracted from tasks/036-folders-spec-integration/subtasks/03-spec-amendment-folders-md.md per Task 041 (PR #70 review C.3 audit-graph repair)."

@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-per-rule-waiver-mechanism-brief
 summary: "Brief for prompt tooling-per-rule-waiver-mechanism — extracted from tasks/037-pre-commit-spec-integration/subtasks/03-tooling-per-rule-waiver-mechanism.md per Task 041 (PR #70 review C.3 audit-graph repair)."

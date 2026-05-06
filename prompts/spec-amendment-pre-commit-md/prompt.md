@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: pre-commit-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-4: Spec Amendment — PRE_COMMIT.md (Joint with Task 038 ST-3) — Task-Spec Prompt
@@ -35,13 +34,15 @@ You are the **main-agent** dispatched to execute subtask ST-4 of [Task pre-commi
 
 ## S — Steps
 
-1. Satisfy acceptance criterion: PRE_COMMIT.md §2 wording = FRUSTRATED.md §28 wording (modulo spec-name prefix); verified by `diff`.
-2. Satisfy acceptance criterion: PRE_COMMIT.md §7.A is a three-column Legacy/Flexible/ADR table covering ≥10 tools/checks.
-3. Satisfy acceptance criterion: ST-2 + ST-3 linters documented in §6.
-4. Satisfy acceptance criterion: ≥4 Gherkin scenarios anchored PC.B.1-PC.B.4 land in a new acceptance section.
-5. Satisfy acceptance criterion: `tools/check-governance.sh` exits 0.
-6. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-7. Author or update `tasks/037-pre-commit-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
+1. The agent MUST produce the artefact required by acceptance criterion: PRE_COMMIT.md §2 wording = FRUSTRATED.md §28 wording (modulo spec-name prefix); verified by `diff`.
+2. The agent MUST produce the artefact required by acceptance criterion: PRE_COMMIT.md §7.A is a three-column Legacy/Flexible/ADR table covering ≥10 tools/checks.
+3. The agent MUST produce the artefact required by acceptance criterion: ST-2 + ST-3 linters documented in §6.
+4. The agent MUST produce the artefact required by acceptance criterion: ≥4 Gherkin scenarios anchored PC.B.1-PC.B.4 land in a new acceptance section.
+5. The agent MUST produce the artefact required by acceptance criterion: `tools/check-governance.sh` exits 0.
+6. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+7. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+8. The agent SHOULD author or update `tasks/037-pre-commit-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+9. The agent MUST commit with a message that names `Task 037 ST-4` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

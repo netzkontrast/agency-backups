@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: task-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-1: Research — Friction Pattern Synthesis — Task-Spec Prompt
@@ -34,25 +33,11 @@ You are the **main-agent** dispatched to execute subtask ST-1 of [Task task-spec
 
 ## S — Steps
 
-1. Execute the following instruction block faithfully — it is the verbatim Execution Brief from the parent subtask file:
-
-```text
-Run the research-prompt-optimizer pipeline (Phase 1–3) against the intent
-block above.
-
-Phase 1 intent is canonical (above) — skip the askuser loop.
-Phase 2: select M07 / M12 / M02 modules; author CBs from constraints.
-Phase 3: render to /research/friction-pattern-synthesis/research-prompt.md.
-Then EXECUTE: produce /research/friction-pattern-synthesis/output/SPEC.md
-meeting the acceptance criteria; author the reflection friction-log.md;
-update /research/readme.md.
-
-Run tools/check-governance.sh and fix every ERROR.
-Commit "research(friction-pattern-synthesis): cross-task friction taxonomy (Task 033 ST-1)".
-Do NOT push.
-```
-2. Verify every Acceptance Criterion in [`brief.md`](./brief.md) is satisfied by the produced artefacts.
-3. Run `tools/check-governance.sh` and resolve every ERROR before committing.
+1. The agent MUST treat the following preamble as authoritative orientation before executing any subsequent step: Run the research-prompt-optimizer pipeline (Phase 1–3) against the intent block above. Phase 1 intent is canonical (above) — skip the askuser loop. Phase 2: select M07 / M12 / M02 modules; author CBs from constraints. Phase 3: render to /research/friction-pattern-synthesis/research-prompt.md. Then EXECUTE: produce /research/friction-pattern-synthesis/output/SPEC.md meeting the acceptance criteria; author the reflection friction-log.md; update /research/readme.md. Run tools/check-governance.sh and fix every ERROR. Commit "research(friction-pattern-synthesis): cross-task friction taxonomy (Task 033 ST-1)". Do NOT push.
+2. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+3. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+4. The agent SHOULD author or update `tasks/033-task-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+5. The agent MUST commit with a message that names `Task 033 ST-1` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

@@ -9,7 +9,6 @@ prompt_kind: research-proposal
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "any"
 prompt_relates_to_task: skills-navigation-bootstrap
-prompt_spawned_from_research: ""
 ---
 
 # Skills Navigation and Bootstrap Research

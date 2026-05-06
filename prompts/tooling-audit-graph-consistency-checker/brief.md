@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-audit-graph-consistency-checker-brief
 summary: "Brief for prompt tooling-audit-graph-consistency-checker — extracted from tasks/036-folders-spec-integration/subtasks/02-tooling-audit-graph-consistency-checker.md per Task 041 (PR #70 review C.3 audit-graph repair)."

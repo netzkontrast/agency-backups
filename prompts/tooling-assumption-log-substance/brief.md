@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-assumption-log-substance-brief
 summary: "Brief for prompt tooling-assumption-log-substance — extracted from tasks/032-agents-spec-integration/subtasks/04-tooling-assumption-log-substance.md per Task 041 (PR #70 review C.3 audit-graph repair)."

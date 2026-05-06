@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-fl-declaration-linter-brief
 summary: "Brief for prompt tooling-fl-declaration-linter — extracted from tasks/038-frustrated-spec-integration/subtasks/02-tooling-fl-declaration-linter.md per Task 041 (PR #70 review C.3 audit-graph repair)."

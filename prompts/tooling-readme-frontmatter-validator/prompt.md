@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: folders-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-1: `check-readme-frontmatter` — F.5 SHOULD → MUST — Task-Spec Prompt
@@ -33,12 +32,14 @@ You are the **main-agent** dispatched to execute subtask ST-1 of [Task folders-s
 
 ## S — Steps
 
-1. Satisfy acceptance criterion: **Surface.** `python3 tools/check-readme-frontmatter.py [<paths>]`.
-2. Satisfy acceptance criterion: **Checks.** L1 Vault Core key presence + slug-vs-folder agreement.
-3. Satisfy acceptance criterion: **Tests.** `tests/test_readme_frontmatter.py` covers: clean, missing-key, slug-mismatch, exempt provider folder.
-4. Satisfy acceptance criterion: **Integration.** ERROR-tier in step `[2/5]` of `tools/check-governance.sh`.
-5. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-6. Author or update `tasks/036-folders-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
+1. The agent MUST produce the artefact required by acceptance criterion: **Surface.** `python3 tools/check-readme-frontmatter.py [<paths>]`.
+2. The agent MUST produce the artefact required by acceptance criterion: **Checks.** L1 Vault Core key presence + slug-vs-folder agreement.
+3. The agent MUST produce the artefact required by acceptance criterion: **Tests.** `tests/test_readme_frontmatter.py` covers: clean, missing-key, slug-mismatch, exempt provider folder.
+4. The agent MUST produce the artefact required by acceptance criterion: **Integration.** ERROR-tier in step `[2/5]` of `tools/check-governance.sh`.
+5. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+6. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+7. The agent SHOULD author or update `tasks/036-folders-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+8. The agent MUST commit with a message that names `Task 036 ST-1` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

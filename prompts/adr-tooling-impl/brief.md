@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: adr-tooling-impl-brief
 summary: "User request — capture the implementation work that landed in PR #67 as a proper follow-up Task with a registered task-spec prompt, addressing PR #67 review findings G.1 (Task entry) and G.2 (prompt boundary violation)."

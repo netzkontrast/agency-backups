@@ -7,9 +7,10 @@ created: 2026-05-06
 updated: 2026-05-06
 task_id: "041"
 task_status: done
-task_owner: "unassigned"
+task_owner: "claude-code"
 task_priority: P1
-task_uses_prompts: []
+task_uses_prompts:
+  - extract-subtask-prompts
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by: []

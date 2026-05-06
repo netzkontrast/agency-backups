@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: agents-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-2: `check-narrative-ontology-load` — NO.5 Enforcement — Task-Spec Prompt
@@ -34,34 +33,16 @@ You are the **main-agent** dispatched to execute subtask ST-2 of [Task agents-sp
 
 ## S — Steps
 
-1. Execute the following instruction block faithfully — it is the verbatim Execution Brief from the parent subtask file:
-
-```text
-Implement tools/check-narrative-ontology-load.py for the netzkontrast/agency
-repo (current branch).
-
-Read first: AGENTS.md §NO.1–NO.6, tools/fm/_core.py, tools/check-governance.sh.
-
-Acceptance:
-  1. CLI as documented.
-  2. Heuristic uses task_affects_paths + git diff --cached.
-  3. Tests in tests/test_narrative_ontology_load.py.
-  4. Integration into tools/check-governance.sh.
-  5. Cookbook note in tools/readme.md.
-
-Constraints:
-  - Python 3.11 stdlib only.
-  - No git binary dependency beyond `git diff --cached --name-only`.
-  - Do not gate (exit 1) — WARN-tier (exit 2) only.
-
-When done:
-  python3 -m unittest discover -s tests
-  python3 tools/check-governance.sh
-  Commit "feat(tools): NO.5 narrative-ontology load discipline linter (Task 032 ST-2)".
-  Do NOT push.
-```
-2. Verify every Acceptance Criterion in [`brief.md`](./brief.md) is satisfied by the produced artefacts.
-3. Run `tools/check-governance.sh` and resolve every ERROR before committing.
+1. The agent MUST treat the following preamble as authoritative orientation before executing any subsequent step: Implement tools/check-narrative-ontology-load.py for the netzkontrast/agency repo (current branch). Read first: AGENTS.md §NO.1–NO.6, tools/fm/_core.py, tools/check-governance.sh. Acceptance:
+2. The agent MUST execute the following instruction: CLI as documented.
+3. The agent MUST execute the following instruction: Heuristic uses task_affects_paths + git diff --cached.
+4. The agent MUST execute the following instruction: Tests in tests/test_narrative_ontology_load.py.
+5. The agent MUST execute the following instruction: Integration into tools/check-governance.sh.
+6. The agent MUST execute the following instruction: Cookbook note in tools/readme.md.
+7. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+8. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+9. The agent SHOULD author or update `tasks/032-agents-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+10. The agent MUST commit with a message that names `Task 032 ST-2` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

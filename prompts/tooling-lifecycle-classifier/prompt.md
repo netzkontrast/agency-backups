@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: task-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-4: `check-task-lifecycle-classification` — TASK.md §4.7 Helper — Task-Spec Prompt
@@ -33,28 +32,11 @@ You are the **main-agent** dispatched to execute subtask ST-4 of [Task task-spec
 
 ## S — Steps
 
-1. Execute the following instruction block faithfully — it is the verbatim Execution Brief from the parent subtask file:
-
-```text
-Implement tools/fm/check-task-lifecycle-classification.py.
-
-
-Pre-flight check:
-  test -f research/spec-staleness-decision-formalization/output/SPEC.md
-If absent, abort with message "ST-2 not landed; rerun after Task 033 ST-2 completes."
-
-Read first: research/spec-staleness-decision-formalization/output/SPEC.md §1+§3,
-TASK.md §4.7, tools/fm/_core.py.
-
-Acceptance: as documented above.
-
-When done:
-  python3 -m unittest discover -s tests/fm
-  Commit "feat(tools/fm): task-lifecycle classifier (Task 033 ST-4)".
-  Do NOT push.
-```
-2. Verify every Acceptance Criterion in [`brief.md`](./brief.md) is satisfied by the produced artefacts.
-3. Run `tools/check-governance.sh` and resolve every ERROR before committing.
+1. The agent MUST treat the following preamble as authoritative orientation before executing any subsequent step: Implement tools/fm/check-task-lifecycle-classification.py. Pre-flight check: test -f research/spec-staleness-decision-formalization/output/SPEC.md If absent, abort with message "ST-2 not landed; rerun after Task 033 ST-2 completes." Read first: research/spec-staleness-decision-formalization/output/SPEC.md §1+§3, TASK.md §4.7, tools/fm/_core.py. Acceptance: as documented above. When done: python3 -m unittest discover -s tests/fm Commit "feat(tools/fm): task-lifecycle classifier (Task 033 ST-4)". Do NOT push.
+2. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+3. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+4. The agent SHOULD author or update `tasks/033-task-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+5. The agent MUST commit with a message that names `Task 033 ST-4` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

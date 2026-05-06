@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-clean-working-directory-linter-brief
 summary: "Brief for prompt tooling-clean-working-directory-linter — extracted from tasks/037-pre-commit-spec-integration/subtasks/02-tooling-clean-working-directory-linter.md per Task 041 (PR #70 review C.3 audit-graph repair)."

@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: task-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-3: `check-duplicate-task-id` — Closes TASK.md §8.1 Enforcement Gap — Task-Spec Prompt
@@ -34,33 +33,16 @@ You are the **main-agent** dispatched to execute subtask ST-3 of [Task task-spec
 
 ## S — Steps
 
-1. Execute the following instruction block faithfully — it is the verbatim Execution Brief from the parent subtask file:
-
-```text
-Implement tools/fm/check-duplicate-task-id.py.
-
-
-Read first: TASK.md §8.1, tasks/024-renumber-duplicate-task-ids-v2/task.md, tools/fm/_core.py.
-
-Acceptance: as documented above.
-
-Note: When you run the linter against the current repo, you SHOULD see
-two ERRORs (006/006 and 009/009). Do NOT fix those; this subtask only
-ships the linter. Task 024 fixes the underlying collisions.
-
-When done:
-  python3 -m unittest discover -s tests/fm
-  python3 tools/fm/check-duplicate-task-id.py tasks/   # expect 2 ERRORs
-  Commit "feat(tools/fm): duplicate task_id linter (Task 033 ST-3, closes TASK.md §8.1 gap)".
-  Do NOT push.
-```
-2. Verify every Acceptance Criterion in [`brief.md`](./brief.md) is satisfied by the produced artefacts.
-3. Run `tools/check-governance.sh` and resolve every ERROR before committing.
+1. The agent MUST treat the following preamble as authoritative orientation before executing any subsequent step: Implement tools/fm/check-duplicate-task-id.py. Read first: TASK.md §8.1, tasks/024-renumber-duplicate-task-ids-v2/task.md, tools/fm/_core.py. Acceptance: as documented above. Note: When you run the linter against the current repo, you SHOULD see two ERRORs (006/006 and 009/009). Do NOT fix those; this subtask only ships the linter. Task 024 fixes the underlying collisions. When done: python3 -m unittest discover -s tests/fm python3 tools/fm/check-duplicate-task-id.py tasks/ # expect 2 ERRORs Commit "feat(tools/fm): duplicate task_id linter (Task 033 ST-3, closes TASK.md §8.1 gap)". Do NOT push.
+2. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+3. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+4. The agent SHOULD author or update `tasks/033-task-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+5. The agent MUST commit with a message that names `Task 033 ST-3` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 
 - **Surface.** `python3 tools/fm/check-duplicate-task-id.py [<paths>]` (defaults to scanning `tasks/`).
-- **Algorithm.**
+- **Algorithm.** - Build `{task_id: [paths]}` map across active tasks. - For each id with `len(paths) > 1`, check whether the supersession reciprocity (predecessor.task_superseded_by ↔ successor.task_supersedes) explains it. - Unexplained duplicates → ERROR exit 1; explained → INFO exit 0.
 - **Tests.** `tests/fm/test_duplicate_task_id.py` covers: clean repo (pass), 006/006 collision (fail), 009/009 collision (fail), supersession-explained duplicate (pass).
 - **Integration.** Add to `tools/check-governance.sh` as ERROR-tier when `FM_TOOLCHAIN=1`; default-off in legacy mode (until the migration window closes per Task 039 ST-1).
 - **Documentation.** Cite TASK.md §8.1 in the script docstring.

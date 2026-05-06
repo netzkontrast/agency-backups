@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: research-spec-staleness-decision-formalization-brief
 summary: "Brief for prompt research-spec-staleness-decision-formalization — extracted from tasks/033-task-spec-integration/subtasks/02-research-spec-staleness-decision-formalization.md per Task 041 (PR #70 review C.3 audit-graph repair)."

@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-dynamic-readme-partition-linter-brief
 summary: "Brief for prompt tooling-dynamic-readme-partition-linter — extracted from tasks/039-maintenance-spec-integration/subtasks/04-tooling-dynamic-readme-partition-linter.md per Task 041 (PR #70 review C.3 audit-graph repair)."

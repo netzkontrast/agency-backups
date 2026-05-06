@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: research-friction-pattern-synthesis-brief
 summary: "Brief for prompt research-friction-pattern-synthesis — extracted from tasks/033-task-spec-integration/subtasks/01-research-friction-pattern-synthesis.md per Task 041 (PR #70 review C.3 audit-graph repair)."

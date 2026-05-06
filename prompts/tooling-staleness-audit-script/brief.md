@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-staleness-audit-script-brief
 summary: "Brief for prompt tooling-staleness-audit-script — extracted from tasks/039-maintenance-spec-integration/subtasks/03-tooling-staleness-audit-script.md per Task 041 (PR #70 review C.3 audit-graph repair)."

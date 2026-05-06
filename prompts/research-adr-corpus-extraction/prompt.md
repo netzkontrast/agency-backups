@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: agents-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-1: Research — ADR Corpus Extraction from Governance Specs — Task-Spec Prompt
@@ -36,29 +35,19 @@ You are the **main-agent** dispatched to execute subtask ST-1 of [Task agents-sp
 
 ## S — Steps
 
-1. Execute the following instruction block faithfully — it is the verbatim Execution Brief from the parent subtask file:
-
-```text
-You are running Phase 1–3 of the research-prompt-optimizer pipeline against the
-following intent. Use the Phase 1 Intent block above verbatim as the
-intent_<slug>.yaml seed.
-
-
-Tasks:
-1. Confirm Phase 1 intent matches the YAML above (no new asks needed; user
-   already produced canonical priors). Skip Phase 1 askuser loop.
-2. Phase 2: select modules per the catalog hints above (M01, M06, M07, M13);
-   author Constraint Blocks CB0–CB4 from the known_constraints field.
-3. Phase 3: render the research-prompt to /research/adr-corpus-extraction-from-governance-specs/research-prompt.md.
-4. Execute the research yourself (you are also the executor); produce
-   /research/adr-corpus-extraction-from-governance-specs/output/SPEC.md per the acceptance criteria above.
-5. Author /research/adr-corpus-extraction-from-governance-specs/reflection/friction-log.md with FL declaration.
-6. Run `tools/check-governance.sh`; fix every ERROR.
-7. Update /research/readme.md to add the new entry per RESEARCH.md §4 Step 5.
-8. Do NOT push. Commit with message "research(adr-corpus-extraction): bootstrap ADR-0001..N extraction (Task 032 ST-1)".
-```
-2. Verify every Acceptance Criterion in [`brief.md`](./brief.md) is satisfied by the produced artefacts.
-3. Run `tools/check-governance.sh` and resolve every ERROR before committing.
+1. The agent MUST treat the following preamble as authoritative orientation before executing any subsequent step: You are running Phase 1–3 of the research-prompt-optimizer pipeline against the following intent. Use the Phase 1 Intent block above verbatim as the intent_<slug>.yaml seed. Tasks:
+2. The agent MUST confirm Phase 1 intent matches the YAML above (no new asks needed; user already produced canonical priors). Skip Phase 1 askuser loop.
+3. The agent MUST execute the following instruction: Phase 2: select modules per the catalog hints above (M01, M06, M07, M13); author Constraint Blocks CB0–CB4 from the known_constraints field.
+4. The agent MUST execute the following instruction: Phase 3: render the research-prompt to /research/adr-corpus-extraction-from-governance-specs/research-prompt.md.
+5. The agent MUST execute the research yourself (you are also the executor); produce /research/adr-corpus-extraction-from-governance-specs/output/SPEC.md per the acceptance criteria above.
+6. The agent MUST author /research/adr-corpus-extraction-from-governance-specs/reflection/friction-log.md with FL declaration.
+7. The agent MUST run `tools/check-governance.sh`; fix every ERROR.
+8. The agent MUST update /research/readme.md to add the new entry per RESEARCH.md §4 Step 5.
+9. The agent MUST NOT push. Commit with message "research(adr-corpus-extraction): bootstrap ADR-0001..N extraction (Task 032 ST-1)".
+10. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+11. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+12. The agent SHOULD author or update `tasks/032-agents-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+13. The agent MUST commit with a message that names `Task 032 ST-1` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

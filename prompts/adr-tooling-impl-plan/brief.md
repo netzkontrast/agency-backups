@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: adr-tooling-impl-plan-brief
 summary: "User request to create a task that plans and defines the implementation of the agency-adr CLI tooling specified in the ADR governance spec."

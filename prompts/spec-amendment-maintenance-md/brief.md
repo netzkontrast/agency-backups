@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: spec-amendment-maintenance-md-brief
 summary: "Brief for prompt spec-amendment-maintenance-md — extracted from tasks/039-maintenance-spec-integration/subtasks/06-spec-amendment-maintenance-md.md per Task 041 (PR #70 review C.3 audit-graph repair)."

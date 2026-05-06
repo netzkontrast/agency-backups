@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-rfc2119-polarity-audit-brief
 summary: "Brief for prompt tooling-rfc2119-polarity-audit — extracted from tasks/032-agents-spec-integration/subtasks/03-tooling-rfc2119-polarity-audit.md per Task 041 (PR #70 review C.3 audit-graph repair)."

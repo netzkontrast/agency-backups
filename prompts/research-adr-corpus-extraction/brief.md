@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: research-adr-corpus-extraction-brief
 summary: "Brief for prompt research-adr-corpus-extraction — extracted from tasks/032-agents-spec-integration/subtasks/01-research-adr-corpus-extraction.md per Task 041 (PR #70 review C.3 audit-graph repair)."

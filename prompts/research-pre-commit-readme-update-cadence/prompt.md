@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: pre-commit-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-1: Research — Pre-Commit Readme-Update Cadence — Task-Spec Prompt
@@ -35,22 +34,11 @@ You are the **main-agent** dispatched to execute subtask ST-1 of [Task pre-commi
 
 ## S — Steps
 
-1. Execute the following instruction block faithfully — it is the verbatim Execution Brief from the parent subtask file:
-
-```text
-Run research-prompt-optimizer Phase 1–3. 
-
-
-Skip Phase 1 askuser; intent canonical.
-Render to /research/pre-commit-readme-update-cadence/research-prompt.md.
-Execute and produce /research/pre-commit-readme-update-cadence/output/SPEC.md.
-Author reflection/friction-log.md.
-Run tools/check-governance.sh.
-Commit "research(readme-cadence): reconcile FRUSTRATED.md §28 with PRE_COMMIT.md §2 (Task 037 ST-1)".
-Do NOT push.
-```
-2. Verify every Acceptance Criterion in [`brief.md`](./brief.md) is satisfied by the produced artefacts.
-3. Run `tools/check-governance.sh` and resolve every ERROR before committing.
+1. The agent MUST treat the following preamble as authoritative orientation before executing any subsequent step: Run research-prompt-optimizer Phase 1–3. Skip Phase 1 askuser; intent canonical. Render to /research/pre-commit-readme-update-cadence/research-prompt.md. Execute and produce /research/pre-commit-readme-update-cadence/output/SPEC.md. Author reflection/friction-log.md. Run tools/check-governance.sh. Commit "research(readme-cadence): reconcile FRUSTRATED.md §28 with PRE_COMMIT.md §2 (Task 037 ST-1)". Do NOT push.
+2. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+3. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+4. The agent SHOULD author or update `tasks/037-pre-commit-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+5. The agent MUST commit with a message that names `Task 037 ST-1` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

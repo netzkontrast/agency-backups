@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-framework-declaration-validator-brief
 summary: "Brief for prompt tooling-framework-declaration-validator — extracted from tasks/034-prompt-spec-integration/subtasks/03-tooling-framework-declaration-validator.md per Task 041 (PR #70 review C.3 audit-graph repair)."

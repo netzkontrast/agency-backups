@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: adr-assumption-audit-brief
 summary: "User request to create a task using subagents and critical thinking from the Research Prompt Optimizer to surface hidden assumptions, identify active ADRs, and enumerate pending decisions."

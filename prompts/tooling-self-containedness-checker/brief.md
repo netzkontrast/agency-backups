@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-self-containedness-checker-brief
 summary: "Brief for prompt tooling-self-containedness-checker — extracted from tasks/034-prompt-spec-integration/subtasks/02-tooling-self-containedness-checker.md per Task 041 (PR #70 review C.3 audit-graph repair)."

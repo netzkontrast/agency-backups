@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: folders-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-3: Spec Amendment — FOLDERS.md — Task-Spec Prompt
@@ -34,13 +33,15 @@ You are the **main-agent** dispatched to execute subtask ST-3 of [Task folders-s
 
 ## S — Steps
 
-1. Satisfy acceptance criterion: FOLDERS.md F.1.1 explicitly enumerates `/research/<provider>/<slug>/` + `/decisions/` as exempt.
-2. Satisfy acceptance criterion: FOLDERS.md F.5 is MUST (not SHOULD) and cites the ST-1 linter.
-3. Satisfy acceptance criterion: FOLDERS.md F.6 documents dual-surface; cites ST-2 as the consistency check.
-4. Satisfy acceptance criterion: ≥5 Gherkin scenarios anchored F.B.1-F.B.5 land in a new "## Acceptance Criteria" section.
-5. Satisfy acceptance criterion: `tools/check-governance.sh` exits 0 (including ST-1 / ST-2).
-6. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-7. Author or update `tasks/036-folders-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
+1. The agent MUST produce the artefact required by acceptance criterion: FOLDERS.md F.1.1 explicitly enumerates `/research/<provider>/<slug>/` + `/decisions/` as exempt.
+2. The agent MUST produce the artefact required by acceptance criterion: FOLDERS.md F.5 is MUST (not SHOULD) and cites the ST-1 linter.
+3. The agent MUST produce the artefact required by acceptance criterion: FOLDERS.md F.6 documents dual-surface; cites ST-2 as the consistency check.
+4. The agent MUST produce the artefact required by acceptance criterion: ≥5 Gherkin scenarios anchored F.B.1-F.B.5 land in a new "## Acceptance Criteria" section.
+5. The agent MUST produce the artefact required by acceptance criterion: `tools/check-governance.sh` exits 0 (including ST-1 / ST-2).
+6. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+7. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+8. The agent SHOULD author or update `tasks/036-folders-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+9. The agent MUST commit with a message that names `Task 036 ST-3` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

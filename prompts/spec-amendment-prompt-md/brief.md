@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: spec-amendment-prompt-md-brief
 summary: "Brief for prompt spec-amendment-prompt-md — extracted from tasks/034-prompt-spec-integration/subtasks/04-spec-amendment-prompt-md.md per Task 041 (PR #70 review C.3 audit-graph repair)."

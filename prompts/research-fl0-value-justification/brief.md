@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: research-fl0-value-justification-brief
 summary: "Brief for prompt research-fl0-value-justification — extracted from tasks/038-frustrated-spec-integration/subtasks/01-research-fl0-value-justification.md per Task 041 (PR #70 review C.3 audit-graph repair)."

@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: prompt-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-2: `check-prompt-self-containedness` — Mechanizes P.5.1 — Task-Spec Prompt
@@ -34,23 +33,11 @@ You are the **main-agent** dispatched to execute subtask ST-2 of [Task prompt-sp
 
 ## S — Steps
 
-1. Execute the following instruction block faithfully — it is the verbatim Execution Brief from the parent subtask file:
-
-```text
-Implement tools/check-prompt-self-containedness.py per ST-1 SPEC §3.
-
-
-Pre-flight: test -f research/prompt-engineering-principle-mechanizability/output/SPEC.md
-If absent, abort.
-
-When done:
-  python3 -m unittest discover -s tests
-  python3 tools/check-prompt-self-containedness.py prompts/*/prompt.md
-  Commit "feat(tools): prompt self-containedness checker (Task 034 ST-2, mechanizes P.5.1)".
-  Do NOT push.
-```
-2. Verify every Acceptance Criterion in [`brief.md`](./brief.md) is satisfied by the produced artefacts.
-3. Run `tools/check-governance.sh` and resolve every ERROR before committing.
+1. The agent MUST treat the following preamble as authoritative orientation before executing any subsequent step: Implement tools/check-prompt-self-containedness.py per ST-1 SPEC §3. Pre-flight: test -f research/prompt-engineering-principle-mechanizability/output/SPEC.md If absent, abort. When done: python3 -m unittest discover -s tests python3 tools/check-prompt-self-containedness.py prompts/*/prompt.md Commit "feat(tools): prompt self-containedness checker (Task 034 ST-2, mechanizes P.5.1)". Do NOT push.
+2. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+3. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+4. The agent SHOULD author or update `tasks/034-prompt-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+5. The agent MUST commit with a message that names `Task 034 ST-2` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

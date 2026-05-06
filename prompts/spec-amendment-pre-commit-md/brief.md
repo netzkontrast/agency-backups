@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: spec-amendment-pre-commit-md-brief
 summary: "Brief for prompt spec-amendment-pre-commit-md — extracted from tasks/037-pre-commit-spec-integration/subtasks/04-spec-amendment-pre-commit-md.md per Task 041 (PR #70 review C.3 audit-graph repair)."

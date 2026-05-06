@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: research-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-5: Spec Amendment — RESEARCH.md — Task-Spec Prompt
@@ -35,14 +34,16 @@ You are the **main-agent** dispatched to execute subtask ST-5 of [Task research-
 
 ## S — Steps
 
-1. Satisfy acceptance criterion: RESEARCH.md §2.2 mandates spec-chunking for synthesis runs >50k tokens.
-2. Satisfy acceptance criterion: RESEARCH.md §4 references session-continuity protocol per ST-1 output.
-3. Satisfy acceptance criterion: RESEARCH.md §5.7 mandates trust-audit GATE invocation at `research_phase: complete`.
-4. Satisfy acceptance criterion: RESEARCH.md R.4.3 disambiguates mid-run prompt-snapshot policy (lock-at-start preferred).
-5. Satisfy acceptance criterion: RESEARCH.md §5 has ≥6 Gherkin scenarios per R.B.1-R.B.6 anchors.
-6. Satisfy acceptance criterion: `tools/check-governance.sh` exits 0.
-7. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-8. Author or update `tasks/035-research-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
+1. The agent MUST produce the artefact required by acceptance criterion: RESEARCH.md §2.2 mandates spec-chunking for synthesis runs >50k tokens.
+2. The agent MUST produce the artefact required by acceptance criterion: RESEARCH.md §4 references session-continuity protocol per ST-1 output.
+3. The agent MUST produce the artefact required by acceptance criterion: RESEARCH.md §5.7 mandates trust-audit GATE invocation at `research_phase: complete`.
+4. The agent MUST produce the artefact required by acceptance criterion: RESEARCH.md R.4.3 disambiguates mid-run prompt-snapshot policy (lock-at-start preferred).
+5. The agent MUST produce the artefact required by acceptance criterion: RESEARCH.md §5 has ≥6 Gherkin scenarios per R.B.1-R.B.6 anchors.
+6. The agent MUST produce the artefact required by acceptance criterion: `tools/check-governance.sh` exits 0.
+7. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+8. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+9. The agent SHOULD author or update `tasks/035-research-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+10. The agent MUST commit with a message that names `Task 035 ST-5` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: maintenance-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-4: `dynamic-readme-partition` — Operationalizes repo-maintenance-protocol-spec §3.1 — Task-Spec Prompt
@@ -33,13 +32,15 @@ You are the **maintenance-agent** dispatched to execute subtask ST-4 of [Task ma
 
 ## S — Steps
 
-1. Satisfy acceptance criterion: **Surface.** `python3 tools/maintenance/dynamic-readme-partition.py [<paths>]`.
-2. Satisfy acceptance criterion: **Heuristic.** Detect `<!-- BEGIN DYNAMIC -->` / `<!-- END DYNAMIC -->` marker pair; verify section-name allocation per the static/dynamic taxonomy.
-3. Satisfy acceptance criterion: **Diagnostic format.** `<relpath>::WARN:M.B.6:<missing-marker|misplaced-section>:<details>`.
-4. Satisfy acceptance criterion: **Tests.** `tests/maintenance/test_dynamic_readme_partition.py` covers: partitioned readme (pass), no-markers (advisory warn), section-in-wrong-half (warn).
-5. Satisfy acceptance criterion: **Integration.** WARN-tier `[opt]` in `tools/check-governance.sh`.
-6. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-7. Author or update `tasks/039-maintenance-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
+1. The agent MUST produce the artefact required by acceptance criterion: **Surface.** `python3 tools/maintenance/dynamic-readme-partition.py [<paths>]`.
+2. The agent MUST produce the artefact required by acceptance criterion: **Heuristic.** Detect `<!-- BEGIN DYNAMIC -->` / `<!-- END DYNAMIC -->` marker pair; verify section-name allocation per the static/dynamic taxonomy.
+3. The agent MUST produce the artefact required by acceptance criterion: **Diagnostic format.** `<relpath>::WARN:M.B.6:<missing-marker|misplaced-section>:<details>`.
+4. The agent MUST produce the artefact required by acceptance criterion: **Tests.** `tests/maintenance/test_dynamic_readme_partition.py` covers: partitioned readme (pass), no-markers (advisory warn), section-in-wrong-half (warn).
+5. The agent MUST produce the artefact required by acceptance criterion: **Integration.** WARN-tier `[opt]` in `tools/check-governance.sh`.
+6. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+7. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+8. The agent SHOULD author or update `tasks/039-maintenance-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+9. The agent MUST commit with a message that names `Task 039 ST-4` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

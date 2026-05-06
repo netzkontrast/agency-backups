@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: adr-spec-research-synthesis-brief
 summary: "User request to analyze root specs and tooling, brainstorm integration with the Gemini ADR governance draft, and execute a research run producing the repo-native ADR governance specification."

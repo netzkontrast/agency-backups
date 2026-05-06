@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: prompt-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-1: Research — Prompt-Engineering Principle Mechanizability — Task-Spec Prompt
@@ -34,22 +33,11 @@ You are the **main-agent** dispatched to execute subtask ST-1 of [Task prompt-sp
 
 ## S — Steps
 
-1. Execute the following instruction block faithfully — it is the verbatim Execution Brief from the parent subtask file:
-
-```text
-Run research-prompt-optimizer Phase 1–3 against the intent. Repo root:
-
-
-Skip Phase 1 askuser. Render to /research/prompt-engineering-principle-mechanizability/research-prompt.md.
-Execute and produce /research/prompt-engineering-principle-mechanizability/output/SPEC.md.
-Scan all /prompts/<slug>/prompt.md files; report exact corpus size.
-Author reflection/friction-log.md.
-Run tools/check-governance.sh.
-Commit "research(prompt-principle-mechanizability): per-principle FPR assessment (Task 034 ST-1)".
-Do NOT push.
-```
-2. Verify every Acceptance Criterion in [`brief.md`](./brief.md) is satisfied by the produced artefacts.
-3. Run `tools/check-governance.sh` and resolve every ERROR before committing.
+1. The agent MUST treat the following preamble as authoritative orientation before executing any subsequent step: Run research-prompt-optimizer Phase 1–3 against the intent. Repo root: Skip Phase 1 askuser. Render to /research/prompt-engineering-principle-mechanizability/research-prompt.md. Execute and produce /research/prompt-engineering-principle-mechanizability/output/SPEC.md. Scan all /prompts/<slug>/prompt.md files; report exact corpus size. Author reflection/friction-log.md. Run tools/check-governance.sh. Commit "research(prompt-principle-mechanizability): per-principle FPR assessment (Task 034 ST-1)". Do NOT push.
+2. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+3. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+4. The agent SHOULD author or update `tasks/034-prompt-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+5. The agent MUST commit with a message that names `Task 034 ST-1` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

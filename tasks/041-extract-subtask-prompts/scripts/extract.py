@@ -197,12 +197,75 @@ def lines_starting_with_dash(s: str) -> list[str]:
 
 
 def numbered_items(s: str) -> list[str]:
-    out = []
+    """Extract numbered list items, preserving multi-line continuations.
+    A continuation line is any indented (≥2-space) non-numbered line, or any
+    further line of the current item before the next `<n>. ` marker."""
+    out: list[str] = []
+    cur: list[str] | None = None
     for ln in s.splitlines():
         m = re.match(r"^\s*\d+\.\s+(.*)$", ln)
         if m:
-            out.append(m.group(1).rstrip())
+            if cur is not None:
+                out.append(" ".join(cur).strip())
+            cur = [m.group(1).rstrip()]
+            continue
+        if cur is not None:
+            stripped = ln.strip()
+            if not stripped:
+                # blank line ends the item only if followed by a non-continuation
+                continue
+            if re.match(r"^\s+\S", ln):  # indented continuation
+                cur.append(stripped)
+                continue
+            # non-indented non-numbered line ends the list
+            out.append(" ".join(cur).strip())
+            cur = None
+    if cur is not None:
+        out.append(" ".join(cur).strip())
     return out
+
+
+_RFC2119_RE = re.compile(r"\b(MUST(?:\s+NOT)?|SHOULD(?:\s+NOT)?|MAY|REQUIRED|SHALL(?:\s+NOT)?)\b")
+
+
+_VERB_LOWERCASEABLE = {
+    "Author", "Build", "Check", "Commit", "Confirm", "Create", "Define",
+    "Delete", "Document", "Edit", "Emit", "Enforce", "Ensure", "Execute",
+    "File", "Fix", "Generate", "Implement", "Insert", "Land", "Migrate",
+    "Open", "Patch", "Produce", "Push", "Read", "Remove", "Rename", "Render",
+    "Replace", "Run", "Scaffold", "Select", "Set", "Ship", "Skip", "Stage",
+    "Submit", "Sync", "Update", "Use", "Validate", "Verify", "Write",
+}
+
+
+def ensure_rfc2119(item: str) -> str:
+    """Return the item verbatim if it already carries an RFC-2119 keyword,
+    otherwise prepend `The agent MUST ` (or convert leading negative
+    imperatives to `MUST NOT`). Preserves the item's substantive content
+    without lossy case normalisation of proper-noun labels."""
+    cleaned = item.strip()
+    cleaned = re.sub(r"^[Ss]atisfy\s+acceptance\s+criterion:\s*", "", cleaned)
+    cleaned = re.sub(r"^[Tt]he\s+agent\s+", "", cleaned)
+    if not cleaned:
+        return "The agent MUST execute the parent subtask's instructions verbatim."
+    if _RFC2119_RE.search(cleaned):
+        return cleaned
+
+    # Negative imperatives: "Do NOT X" / "DO NOT X" / "Don't X" → "MUST NOT X".
+    m = re.match(r"^(?:do\s+not|don'?t)\s+(.*)$", cleaned, flags=re.IGNORECASE)
+    if m:
+        return f"The agent MUST NOT {m.group(1).rstrip('.').strip()}."
+
+    # Leading common imperative verb in title case → lowercase first letter.
+    first_word_match = re.match(r"^(\w+)(\b.*)$", cleaned, flags=re.S)
+    if first_word_match and first_word_match.group(1) in _VERB_LOWERCASEABLE:
+        verb = first_word_match.group(1).lower()
+        rest = first_word_match.group(2)
+        return f"The agent MUST {verb}{rest}"
+
+    # Otherwise: prefix with "MUST execute the following instruction:" so the
+    # original (often a label like 'Phase 2: …') reads as the object of MUST.
+    return f"The agent MUST execute the following instruction: {cleaned}"
 
 
 def to_unordered_list(items: list[str]) -> str:
@@ -268,7 +331,7 @@ def build_brief_md(
     today: str,
 ) -> str:
     fm = {
-        "type": "brief",
+        "type": "note",
         "status": "active",
         "slug": f"{prompt_slug}-brief",
         "summary": f'"Brief for prompt {prompt_slug} — extracted from tasks/{parent_dir_name}/subtasks/{subtask_filename} per Task 041 (PR #70 review C.3 audit-graph repair)."',
@@ -367,7 +430,6 @@ def build_prompt_md(
         "prompt_framework": "RISEN+ReAct",
         "prompt_target_agent": '"Claude Code"',
         "prompt_relates_to_task": parent_slug,
-        "prompt_spawned_from_research": '""',
     }
     fm_text = serialise_frontmatter(fm)
 
@@ -385,33 +447,50 @@ def build_prompt_md(
         input_items = [f"`tasks/{parent_dir_name}/subtasks/{subtask_filename}` — the parent subtask file (lifted verbatim into this prompt's `brief.md`)."]
     input_items.append(f"`tasks/{parent_dir_name}/task.md` — parent task chain-level context.")
 
-    # Steps: ordered list with ≥3 items. Prefer Execution Brief content if present;
-    # otherwise synthesise from Acceptance Criteria.
-    steps: list[str] = []
+    # Steps: RISEN-native ordered list. Each step carries an RFC-2119 keyword and
+    # a discrete deliverable; per PROMPT.md §5 (Self-Containedness, RFC 2119
+    # Normativity, Deliverable Lock, Failure Handling). Two phases:
+    #   (a) Implementation steps — derived from the Execution Brief's own
+    #       numbered items (if present) or from Acceptance Criteria when there
+    #       is no explicit brief. Multi-line continuations are preserved.
+    #   (b) Verification + closure steps — uniform across every prompt, citing
+    #       the Acceptance Criteria authoritatively from `brief.md`.
+    impl_steps: list[str] = []
     if eb_text:
-        # The Execution Brief is meant to be executed verbatim and may contain
-        # multi-line numbered items, fenced shell blocks, or interleaved prose.
-        # Preserve byte-fidelity by wrapping it as a single instruction block
-        # rather than re-parsing into per-step bullets (which loses continuation
-        # lines and embedded fences).
-        steps = [
-            "Execute the following instruction block faithfully — it is the verbatim Execution Brief from the parent subtask file:\n\n```text\n" + eb_text + "\n```",
-            "Verify every Acceptance Criterion in [`brief.md`](./brief.md) is satisfied by the produced artefacts.",
-            "Run `tools/check-governance.sh` and resolve every ERROR before committing.",
-        ]
-    else:
-        # No Execution Brief — synthesise from Acceptance Criteria.
-        ac_items = numbered_items(accept) or lines_starting_with_dash(accept)
-        if not ac_items:
-            ac_items = [accept] if accept else []
-        steps = []
-        for item in ac_items:
-            steps.append(f"Satisfy acceptance criterion: {item}")
-        # Pad to ≥3.
-        steps.append("Run `tools/check-governance.sh` and resolve every ERROR before committing.")
-        steps.append(f"Author or update `tasks/{parent_dir_name}/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.")
-        if len(steps) < 3:
-            steps.append("Verify all parent-task `Acceptance Criteria` referenced by this subtask still hold.")
+        eb_items = numbered_items(eb_text)
+        # Pull a leading prose preamble (if any) before the first numbered item.
+        first_marker = re.search(r"^\s*\d+\.\s+", eb_text, flags=re.M)
+        preamble = ""
+        if first_marker:
+            preamble = eb_text[: first_marker.start()].strip()
+        elif eb_text.strip():
+            preamble = eb_text.strip()
+        if preamble:
+            impl_steps.append(
+                "The agent MUST treat the following preamble as authoritative orientation before executing any subsequent step: "
+                + re.sub(r"\s+", " ", preamble).strip()
+            )
+        for it in eb_items:
+            impl_steps.append(ensure_rfc2119(it))
+    if not impl_steps:
+        ac_items_for_impl = numbered_items(accept) or lines_starting_with_dash(accept)
+        for it in ac_items_for_impl:
+            impl_steps.append(
+                "The agent MUST produce the artefact required by acceptance criterion: " + it
+            )
+
+    verification_steps: list[str] = [
+        f"The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.",
+        f"The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.",
+        f"The agent SHOULD author or update `tasks/{parent_dir_name}/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.",
+        f"The agent MUST commit with a message that names `Task {parent_dir_name.split('-', 1)[0]} {st_label}` in its trailer; the agent MUST NOT push (the maintainer pushes after review).",
+    ]
+
+    steps = impl_steps + verification_steps
+    if len(steps) < 3:
+        steps.append(
+            "The agent MUST confirm the parent task's `task_uses_prompts` list still names this prompt's slug after commit (reciprocity invariant)."
+        )
 
     # Expectations: unordered list of acceptance items + commit/lint expectations.
     exp_items = numbered_items(accept) or lines_starting_with_dash(accept)

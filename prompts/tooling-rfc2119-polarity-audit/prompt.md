@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: agents-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-3: `check-rfc2119-polarity` — ASM-001 Mitigation — Task-Spec Prompt
@@ -33,30 +32,11 @@ You are the **main-agent** dispatched to execute subtask ST-3 of [Task agents-sp
 
 ## S — Steps
 
-1. Execute the following instruction block faithfully — it is the verbatim Execution Brief from the parent subtask file:
-
-```text
-Implement tools/check-rfc2119-polarity.py.
-
-
-Read first:
-  - research/adr-assumption-audit/output/REPORT.md §1 ASM-001
-  - maintenance/language-spec.md
-  - tools/check-governance.sh
-
-Acceptance: see file. Use Python 3.11 stdlib only. No NLP dependency
-beyond regex + simple noun-phrase heuristic. False-positive rate ≤ 30%
-on the 8 root specs.
-
-When done:
-  python3 -m unittest discover -s tests
-  python3 tools/check-rfc2119-polarity.py AGENTS.md TASK.md PROMPT.md \
-    RESEARCH.md FOLDERS.md PRE_COMMIT.md FRUSTRATED.md MAINTENANCE.md
-  Commit "feat(tools): RFC-2119 polarity audit (Task 032 ST-3, ASM-001 mitigation)".
-  Do NOT push.
-```
-2. Verify every Acceptance Criterion in [`brief.md`](./brief.md) is satisfied by the produced artefacts.
-3. Run `tools/check-governance.sh` and resolve every ERROR before committing.
+1. The agent MUST treat the following preamble as authoritative orientation before executing any subsequent step: Implement tools/check-rfc2119-polarity.py. Read first: - research/adr-assumption-audit/output/REPORT.md §1 ASM-001 - maintenance/language-spec.md - tools/check-governance.sh Acceptance: see file. Use Python 3.11 stdlib only. No NLP dependency beyond regex + simple noun-phrase heuristic. False-positive rate ≤ 30% on the 8 root specs. When done: python3 -m unittest discover -s tests python3 tools/check-rfc2119-polarity.py AGENTS.md TASK.md PROMPT.md \ RESEARCH.md FOLDERS.md PRE_COMMIT.md FRUSTRATED.md MAINTENANCE.md Commit "feat(tools): RFC-2119 polarity audit (Task 032 ST-3, ASM-001 mitigation)". Do NOT push.
+2. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+3. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+4. The agent SHOULD author or update `tasks/032-agents-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+5. The agent MUST commit with a message that names `Task 032 ST-3` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

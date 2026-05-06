@@ -9,7 +9,6 @@ prompt_kind: task-spec
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
 prompt_relates_to_task: frustrated-spec-integration
-prompt_spawned_from_research: ""
 ---
 
 # ST-3: Spec Amendment — FRUSTRATED.md (Joint with Task 037 ST-4) — Task-Spec Prompt
@@ -34,14 +33,16 @@ You are the **main-agent** dispatched to execute subtask ST-3 of [Task frustrate
 
 ## S — Steps
 
-1. Satisfy acceptance criterion: FRUSTRATED.md §28 wording = PRE_COMMIT.md §2 wording (verified by `diff`).
-2. Satisfy acceptance criterion: §FL.0 carries the research-backed rationale paragraph (≤10 lines per ST-1 SPEC §5 budget).
-3. Satisfy acceptance criterion: §FL.Log.1 / §FL.Log.2 reference the ST-2 linter as enforcement.
-4. Satisfy acceptance criterion: ≥4 Gherkin scenarios anchored FR.B.1-FR.B.4 land.
-5. Satisfy acceptance criterion: **NEW (per Task 040 §A row §7 MERGE):** §FL.Log.1 prose lifts the *Reflexion pattern* concept from `research/gemini/superclaude-agency-orchestration-spec/superclaude-agency-orchestration-spec.md §7.1` — when an external integration fails (e.g., HTTP 429), the agent MUST log the failure mode in `friction-log.md` and synthesise the corrected approach into persistent memory to prevent re-occurrence. One paragraph; no `sc-document` skill citation (per Task 040 §A: skill conflation rejected); no `confidence-check` citation (skill does not exist locally). Anchor a new Gherkin `FR.B.REFLEX.1` per Task 040 §B remap table.
-6. Satisfy acceptance criterion: `tools/check-governance.sh` exits 0.
-7. Run `tools/check-governance.sh` and resolve every ERROR before committing.
-8. Author or update `tasks/038-frustrated-spec-integration/friction-log.md` (or note that none is required for this subtask) and commit per the parent task's commit-message convention.
+1. The agent MUST produce the artefact required by acceptance criterion: FRUSTRATED.md §28 wording = PRE_COMMIT.md §2 wording (verified by `diff`).
+2. The agent MUST produce the artefact required by acceptance criterion: §FL.0 carries the research-backed rationale paragraph (≤10 lines per ST-1 SPEC §5 budget).
+3. The agent MUST produce the artefact required by acceptance criterion: §FL.Log.1 / §FL.Log.2 reference the ST-2 linter as enforcement.
+4. The agent MUST produce the artefact required by acceptance criterion: ≥4 Gherkin scenarios anchored FR.B.1-FR.B.4 land.
+5. The agent MUST produce the artefact required by acceptance criterion: **NEW (per Task 040 §A row §7 MERGE):** §FL.Log.1 prose lifts the *Reflexion pattern* concept from `research/gemini/superclaude-agency-orchestration-spec/superclaude-agency-orchestration-spec.md §7.1` — when an external integration fails (e.g., HTTP 429), the agent MUST log the failure mode in `friction-log.md` and synthesise the corrected approach into persistent memory to prevent re-occurrence. One paragraph; no `sc-document` skill citation (per Task 040 §A: skill conflation rejected); no `confidence-check` citation (skill does not exist locally). Anchor a new Gherkin `FR.B.REFLEX.1` per Task 040 §B remap table.
+6. The agent MUST produce the artefact required by acceptance criterion: `tools/check-governance.sh` exits 0.
+7. The agent MUST verify every Acceptance Criterion enumerated in [`brief.md`](./brief.md) holds against the produced artefacts; on any failure the agent MUST iterate the relevant implementation step rather than weakening the criterion.
+8. The agent MUST run `tools/check-governance.sh` and resolve every ERROR before committing; a non-zero exit MUST block the commit.
+9. The agent SHOULD author or update `tasks/038-frustrated-spec-integration/friction-log.md` per FRUSTRATED.md FL[0-3] when frictions arise; absence of frictions MAY be recorded as `FL: 0`.
+10. The agent MUST commit with a message that names `Task 038 ST-3` in its trailer; the agent MUST NOT push (the maintainer pushes after review).
 
 ## E — Expectations
 

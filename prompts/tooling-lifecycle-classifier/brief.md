@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-lifecycle-classifier-brief
 summary: "Brief for prompt tooling-lifecycle-classifier — extracted from tasks/033-task-spec-integration/subtasks/04-tooling-lifecycle-classifier.md per Task 041 (PR #70 review C.3 audit-graph repair)."

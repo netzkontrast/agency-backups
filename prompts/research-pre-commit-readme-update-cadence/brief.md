@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: research-pre-commit-readme-update-cadence-brief
 summary: "Brief for prompt research-pre-commit-readme-update-cadence — extracted from tasks/037-pre-commit-spec-integration/subtasks/01-research-pre-commit-readme-update-cadence.md per Task 041 (PR #70 review C.3 audit-graph repair)."

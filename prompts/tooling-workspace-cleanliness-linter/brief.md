@@ -1,5 +1,5 @@
 ---
-type: brief
+type: note
 status: active
 slug: tooling-workspace-cleanliness-linter-brief
 summary: "Brief for prompt tooling-workspace-cleanliness-linter — extracted from tasks/035-research-spec-integration/subtasks/02-tooling-workspace-cleanliness-linter.md per Task 041 (PR #70 review C.3 audit-graph repair)."
