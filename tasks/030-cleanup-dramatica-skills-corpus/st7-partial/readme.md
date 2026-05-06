@@ -1,8 +1,8 @@
 ---
-type: note
-status: incomplete
+type: readme
+status: archived
 slug: task-030-st7-partial-salvage
-summary: "Salvaged in-progress aliases.py from ST-7's worktree. Org monthly usage limit was hit mid-implementation; tests, DE starter JSON, load-en run, conflict-report, and notes.md §8 update never landed. This file is recovery material for a future re-dispatch."
+summary: "Archived recovery material from ST-7's first dispatch (org monthly usage limit hit mid-run). The partial aliases.py was salvaged here so a re-dispatch could pick up where the first run stopped. Superseded by the landed ST-7 commit (6b85edd); kept for audit-trail."
 created: 2026-05-06
 updated: 2026-05-06
 ---
