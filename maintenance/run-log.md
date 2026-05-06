@@ -455,7 +455,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run 2026-05-06 — Repo Coherence Check
 - agent: claude-code (session claude/funny-curie-26tRF)
 - start_commit: 491444d
-- end_commit: PENDING
+- end_commit: 6aa15be
 - baseline_commit: d5fab39 (Task 021 closure; recovered cleanly via the awk fall-forward — Task 008's hardening held)
 - files_in_delta: 51
 - files_scanned: 12
