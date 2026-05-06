@@ -6,8 +6,8 @@ summary: "Clean up corrupted, empty, and PDF-artifact-bearing entries in dramati
 created: 2026-05-05
 updated: 2026-05-05
 task_id: "030"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude"
 task_priority: P1
 task_uses_prompts: []
 task_spawns_research: []

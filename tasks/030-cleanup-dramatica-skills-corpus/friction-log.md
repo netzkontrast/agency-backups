@@ -2,7 +2,7 @@
 type: friction-log
 status: active
 slug: task-030-friction-log
-summary: "Execution-time friction log for Task 030. Six commits landed across Phase A (ST-1..ST-4) and Phase B (ST-5, ST-6, partial ST-7). ST-7 hit the org monthly usage limit mid-run; ST-8 and ST-9 (Phase C) deferred for the same reason. Task remains task_status: open per the §Goal acceptance gates: gates 1, 2, 3 satisfied; gate 4 (precompiled persona payloads) blocked behind Phase C."
+summary: "Execution-time friction log for Task 030. All four §Goal gates now PASS after a re-dispatch on a fresh quota cycle landed ST-7 (aliases), ST-8 (scenario coverage), and ST-9 (precompile). Task is task_status: done. Five execution-time friction events recorded for Task 029 to absorb."
 created: 2026-05-06
 updated: 2026-05-06
 ---
@@ -26,17 +26,24 @@ This file records friction encountered while EXECUTING Task 030. The planning-ti
 | 6d5e2d2 | feat(dramatica-nav): cleanup.py — corpus cleanup linter (Task 030 ST-6) |
 | eb61adb | feat(dramatica-nav): term.py for create/edit/move/deprecate (Task 030 ST-5) |
 | d5e2cf6 | chore(task-030): update vocab block-count baseline + salvage ST-7 partial |
+| 1e95a1f | docs(task-030): friction-log capturing partial run state (later superseded by this final state) |
+| 14fbe8a | feat(dramatica-nav): aliases.py — bulk EN loader + DE starter set (Task 030 ST-7) |
+| 652ff81 | chore(task-030): fix st7-partial/readme.md frontmatter |
+| 3b16a88 | feat(dramatica-nav): scenario coverage iter 1/3 (Task 030 ST-8) |
+| f169a26 | feat(dramatica-nav): scenario coverage iter 2/3 (Task 030 ST-8) |
+| 489b5e8 | feat(dramatica-nav): scenario coverage iter 3/3 (Task 030 ST-8) |
+| (ST-9)  | feat(dramatica-nav): precompile persona-scenario encoding hints (Task 030 ST-9) |
 
-**Acceptance gate status (Task 030 §Goal):**
+**Acceptance gate status (Task 030 §Goal) — all four PASS:**
 
-- **Gate 1 — corpus is artefact-free.** PASS. `python3 tools/dramatica-nav/cleanup.py --check` reports `0 diagnostics`. ST-1 stripped 37 copyright footers, 336 page-number lines, 8 double-apostrophe escapes, and 100 leading-`>` Contents-list bullets. ST-2 + ST-4 cleared the corrupted-heading and empty-redirect classes.
+- **Gate 1 — corpus is artefact-free.** PASS. `tools/dramatica-nav/cleanup.py --check` reports `0 diagnostics`. ST-1 stripped 37 copyright footers, 336 page-number lines, 8 double-apostrophe escapes, and 100 leading-`>` Contents-list bullets. ST-2 + ST-4 cleared the corrupted-heading and empty-redirect classes.
 - **Gate 2 — anchors and frontmatter agree.** PASS for canonical kinds. `validate.py` reports `term_file-anchor-mismatch: 0`. The 17 partial-quad-membership warnings remain (deferred to Task 029 per A-2). The unmapped-heading count is 103, partitioned into Buckets A/B/C/D in `notes.md §5` (ST-3 deliverable).
-- **Gate 3 — tooling is mechanical.** PARTIAL. `term.py` (ST-5) and `cleanup.py` (ST-6) shipped with smoke tests and a check-governance.sh wire-in. **`aliases.py` did not ship.** ST-7 reached ~826 LOC of `aliases.py` before hitting the org monthly usage limit; the partial is salvaged under `st7-partial/` for re-dispatch. **`precompile.py` did not ship** (ST-9 not dispatched, see FE-EX-2).
-- **Gate 4 — consumer-side payloads exist.** **FAIL (deferred).** `maintenance/schemas/narrative-ontology/precompiled/` is empty. ST-9 was not dispatched.
+- **Gate 3 — tooling is mechanical.** PASS. All four scripts shipped with smoke tests: `term.py` (ST-5, 9 tests), `cleanup.py` (ST-6, 18 tests, wired into `check-governance.sh`), `aliases.py` (ST-7, 11 tests, projects 395 EN aliases + 102 DE aliases), `precompile.py` (ST-9, 7 tests).
+- **Gate 4 — consumer-side payloads exist.** PASS. 11 JSON files under `maintenance/schemas/narrative-ontology/precompiled/`. Token-cost benchmark: precompiled path consumes **41.1% of prose path on average** (gate ≤60%). Per-scenario range 34.4%–47.4%; novel.crucial-element-audit specifically lands at 37.2%.
 
-**Net:** 7 of the 9 subtasks landed (ST-1 / ST-2 / ST-3 / ST-4 / ST-5 / ST-6 + the housekeeping merge commit). ST-7 partial. ST-8 and ST-9 not started.
+**Net:** 9 of 9 subtasks landed plus housekeeping commits. Task is `task_status: done`.
 
-**Validator state at run end:** `quad-membership-partial: 17 / term_file-anchor-mismatch: 0 / unmapped-heading: 103 / schema: 0`. `pytest tools/dramatica-nav/tests/`: 69 passed. `tools/check-governance.sh`: PASS.
+**Validator state at run end:** `quad-membership-partial: 17 / term_file-anchor-mismatch: 0 / unmapped-heading: 103 / schema: 0 / alias-uniqueness: 0`. `pytest tools/dramatica-nav/tests/`: 87 passed. `tools/check-governance.sh`: PASS.
 
 ## Friction events
 
@@ -89,7 +96,17 @@ ST-1 reported the same observation from its side: a pre-existing uncommitted ST-
 
 **Suggested rule for Task 029 to ratify.** A pre-dispatch gate for "CLI X must exist" should be a runtime probe (`command -v X`), not a metadata read of an upstream task's `task_status`. The metadata gate stays as a coarse readiness hint; the runtime probe is the authoritative check.
 
-## /sc:* invocation log
+### FE-EX-5 (FL1, Minor) — Worktree-side artefact leaked into main checkout.
+
+**What happened.** ST-9 ran in a worktree (`agent-a93f60e99cd01431c`). During its run the main checkout developed an untracked `maintenance/schemas/narrative-ontology/precompiled.schema.json` file. Likely cause: the worktree shares `.git` with the main checkout but not the working tree, so file system events are isolated; the leak is more likely from the agent's smoke-test invocations probing relative paths and brushing the parent repo. The file was removed before cherry-picking the ST-9 commit.
+
+**Outcome.** No data loss; ST-9's commit applied cleanly after the stray file was removed.
+
+**Pattern this exposes.** Worktree isolation is git-tree-only, not filesystem-only. Agents that resolve repo paths via `Path.cwd()` or `os.getcwd()` can land artefacts outside their worktree if they accidentally walk up to the parent checkout.
+
+**Suggested rule for Task 029 to ratify.** Worktree-mode agent prompts should explicitly fence the agent to its worktree path; the harness could enforce this with a `--require-cwd-prefix` flag.
+
+## /sc:* invocation log (final)
 
 | When | Command | Notes |
 |---|---|---|
@@ -97,20 +114,20 @@ ST-1 reported the same observation from its side: a pre-existing uncommitted ST-
 | Phase A wave 2 | `/sc:agent` × 1 (ST-3) | Sequential, after ST-2 landed (depends_on contract). |
 | Phase A wave 3 | `/sc:agent` × 1 (ST-4) | Sequential, after ST-3 landed (overlap on ontology.json + elements.md). |
 | Phase B | `/sc:agent` × 3 (ST-5, ST-6, ST-7) | Parallel worktree dispatch in one message. ST-7 hit usage limit (FE-EX-2). |
-| Phase C | not invoked | Deferred per FE-EX-2. |
+| Phase B retry | `/sc:agent` × 1 (ST-7 restart) | Re-dispatched on a fresh quota cycle with the salvaged partial as a starting hint. Landed cleanly. |
+| Phase C-1 | `/sc:agent` × 1 (ST-8) | Main-tree, sequential. Three commits, one per iteration; M01 gate held throughout (median 3.0, max 4). |
+| Phase C-2 | `/sc:agent` × 1 (ST-9) | Worktree, sequential. Single commit; benchmark 41.1% avg (gate ≤60% PASS). |
 
-`/sc:improve --loop --iterations 3` (planned for ST-8): not invoked.
+`/sc:improve --loop --iterations 3` (planned for ST-8): the spirit was honoured — three iterations with per-iteration M01 gate — but the dispatcher used the harness `Agent` tool with a single brief that internally drove the three iterations, rather than three discrete `/sc:improve` invocations. Equivalent shape, fewer dispatch round-trips.
 `/sc:test`: invoked manually as `pytest tools/dramatica-nav/tests/` after each merge.
 `/sc:cleanup`: not invoked (planning-stage convention; not load-bearing).
-`/sc:createPR`: not invoked. Task is not yet `done`; per AGENTS.md § Closing Run Procedure, no PR until §Goal gates 3 (full) and 4 hold.
+`/sc:createPR`: NOT invoked by this driver. Per AGENTS.md § Closing Run Procedure, the user opens the PR. The task is `task_status: done`, governance passes, and the branch is pushed; the PR is the user's call.
 
 ## Closing state
 
-- Branch is on `claude/cleanup-dramatica-skills-tTTDq` with 7 commits ahead of `origin/main`.
-- All landed work passes `tools/check-governance.sh`.
-- Task remains `task_status: open` per the parent task's frontmatter — gates 3 (full) and 4 are still outstanding.
-- Re-dispatch checklist for next quota cycle:
-  1. ST-7: re-dispatch with `tasks/030-cleanup-dramatica-skills-corpus/st7-partial/aliases.py` as the starting draft. Subtask brief at `subtasks/07-bulk-alias-loader.md` is unchanged.
-  2. ST-8: dispatch per `subtasks/08-scenario-tag-coverage.md` (sequential, main-tree).
-  3. ST-9: dispatch per `subtasks/09-precompile-encoding-hints.md` (sequential, worktree).
-  4. After all three land, re-run §Goal acceptance gate end-to-end, set `task_status: done`, run `tools/check-governance.sh`, and only then invoke `/sc:createPR`.
+- Branch `claude/cleanup-dramatica-skills-tTTDq` carries 14 task-related commits ahead of `origin/main`.
+- All four §Goal gates PASS (see Run summary table above).
+- `tools/check-governance.sh`: PASS.
+- `pytest tools/dramatica-nav/tests/`: 87 passed.
+- `task.md` frontmatter: `task_status: done`.
+- Task 029 absorbs FE-EX-1 through FE-EX-5 as candidate inputs (parallel-dispatch race, quota-event partial-completion, baseline-count test drift, agency-adr metadata-vs-runtime gap, worktree filesystem leak).
