@@ -16,6 +16,8 @@ This folder coordinates the authoring of `SKILLS.md` at the repository root. Tod
 ## Linked Navigation
 
 - [`task.md`](./task.md) — Goal, Plan, Todo, Links.
+- [`friction-log.md`](./friction-log.md) — Friction log (FL0).
+- [`notes.md`](./notes.md) — Claude Code review of PR #73 (post-task governance review).
 - Executing prompt: [`/prompts/author-skills-root-spec/prompt.md`](../../prompts/author-skills-root-spec/prompt.md).
 - Sibling tasks: [`../010-skills-frontmatter-index-suite/`](../010-skills-frontmatter-index-suite/), [`../011-skills-frontmatter-schema-files/`](../011-skills-frontmatter-schema-files/).
 
