@@ -63,24 +63,29 @@ def compress(
     Raises ``TokenLimitExceeded`` when the rendered body exceeds
     ``token_limit`` tokens.
     """
-    grouped: "OrderedDict[str, list[tuple[str, str]]]" = OrderedDict()
-    seen: dict[str, str] = {}
+    grouped: "OrderedDict[str, list[tuple[str, list[str]]]]" = OrderedDict()
+    seen_keys: dict[str, tuple[str, list[str]]] = {}
     contributing: list[str] = []
     for n in normatives:
         sent = _normalise(n.sentence)
         key = _dedupe_key(sent)
-        if key in seen:
-            continue
-        seen[key] = n.adr_id
-        grouped.setdefault(n.keyword.upper(), []).append((sent, n.adr_id))
+        if key in seen_keys:
+            _existing_sent, ids = seen_keys[key]
+            if n.adr_id not in ids:
+                ids.append(n.adr_id)
+        else:
+            ids: list[str] = [n.adr_id]
+            seen_keys[key] = (sent, ids)
+            grouped.setdefault(n.keyword.upper(), []).append((sent, ids))
         if n.adr_id not in contributing:
             contributing.append(n.adr_id)
 
     lines: list[str] = []
     for kw, items in grouped.items():
         lines.append(f"### {kw}")
-        for sent, adr_id in items:
-            lines.append(f"- {sent} [{adr_id}]")
+        for sent, ids in items:
+            citation = ", ".join(ids)
+            lines.append(f"- {sent} [{citation}]")
         lines.append("")
 
     if contributing:

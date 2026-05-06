@@ -31,7 +31,11 @@ def test_adr_a_3_2_dedupes_identical_sentences():
     should_lines = [l for l in out.body.splitlines() if l.startswith("- ") and "SHOULD" in l]
     assert len(must_lines) == 1
     assert len(should_lines) == 1
+    # Both contributing ADRs cited on the dedup'd line.
+    assert "[ADR-0001, ADR-0002]" in must_lines[0]
     assert "Contributing ADRs" in out.body
+    # Both ADRs counted as contributing.
+    assert set(out.contributing_adr_ids) >= {"ADR-0001", "ADR-0002", "ADR-0003"}
 
 
 def test_adr_a_3_2_groups_by_keyword():

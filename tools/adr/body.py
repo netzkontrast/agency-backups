@@ -1,6 +1,7 @@
 """MADR body validation for ADR files.
 
 Spec anchors:
+  - ADR.A.1.4 — "Considered Options" MUST hold at least two options.
   - ADR.A.2.1 — required MADR headings.
   - ADR.A.2.3 — "Decision Outcome" must declare the chosen option.
   - ADR.A.2.4 — "Consequences" must enumerate impacts.
@@ -59,5 +60,16 @@ def validate_body(text: str, rel: str) -> list[Diagnostic]:
             "section '## Consequences' is empty; "
             "it MUST enumerate positive, negative, and neutral impacts",
         ))
+
+    options = _core.find_section_body(text, "Considered Options")
+    if options is not None:
+        items = _core._list_items(options)
+        if len(items) < 2:
+            diags.append(Diagnostic(
+                rel, None, "ERROR", "ADR.A.1.4",
+                "section '## Considered Options' lists "
+                f"{len(items)} option(s); exploration requires at least two "
+                "mutually exclusive options",
+            ))
 
     return diags
