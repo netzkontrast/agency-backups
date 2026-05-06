@@ -19,7 +19,7 @@ The 64 highest-resolution descriptions of approaches and attitudes — the atomi
 - [Deduction](#deduction) — Deduction
 - [Desire](#desire) — drive, motivational goal, unfulfillment,
 - [Determination](#determination) — dyn.pr. Expectation<->Determination
-- [Direction (Overall Story Throughline)](#direction-overall-story-throughline) — See
+- [Direction (Overall Story Throughline)](#direction-overall-story-throughline) — Overall Story Throughline alias for Response Element
 - [Disbelief](#disbelief) — Disbelief
 - [Effect](#effect) — result, consequence, outcome,
 - [Ending](#ending) — Ending -coming to a conclusion
@@ -28,7 +28,6 @@ The 64 highest-resolution descriptions of approaches and attitudes — the atomi
 - [Expectation](#expectation) — dyn.pr. Determination<->Expectation
 - [Faith](#faith) — Faith
 - [Feeling](#feeling) — Feeling
-- [Focus](#focus) — See Symptom
 - [Help](#help) — Help
 - [Hinder](#hinder) — Help
 - [Hunch](#hunch) — Hunch
@@ -1158,75 +1157,6 @@ sentiment, emotional assessment
 
 empathy, emotional sensibility,
 affective outlook, sentiment, emotional assessment
-
----
-
-## Focus
-<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
-```yaml
-id: concept.focus
-kind: concept
-canonical_label: Focus
-provenance: source-original
-scenarios:
-- novel.crucial-element-audit
-- novel.diagnose-flat-draft
-```
-
-
-*Type: Element*
-
-### Element
-
-See Symptom
-Forewarnings (Overall Story Throughline)
-
-### Type
-
-Whether or not the Consequences ever
-befall the Main Character, there are Forewarnings that
-indicate their approach and help force the limit of the
-story and bring the Main Character to the moment
-where he can be assessed in terms of his Main Character Resolve. These Forewarnings could be a quick
-look at a growing crack in the dam which no-one sees,
-or it could be a mad scientist installing the final component in his doomsday device; however it is represented, its nature will be described by the storytelling of
-Forewarnings.
-Future (The Future)
-
-### Type
-
-A story focusing on the Future concerns itself
-with what will be. This does not require the story to be
-"set" in the Future -- only that the Future state of
-external and/or internal issues is the subject that is
-being addressed. A character centered on Future may
-be trying to discover what will be or may be trying a
-achieve a particular state of affairs down the line. In
-both the Story and Character sense, the end is more
-important than the present although it still may not
-justify the means
-
-**Synonyms**: what is to come, what will be
-
-### Type
-
-Gathering Information describes the process of acquiring
-knowledge. It is not the knowledge itself. When a
-
-portion of a story focuses on learning, it is the gathering
-of an education that is of concern, not the education
-that ultimately has been gathered. Gathering Information need not be an academic endeavor. One might
-learn to express one's feelings or learn about love.
-Gathering Information does not even require new
-information as sometimes one learns simply by looking
-through old information from a different perspective or
-with a new approach. It is not important if one is
-learning to arrive at a particular understanding or just to
-gather data. As long as the focus is on the process of
-gaining information or learning, Gathering Information
-is the operative word.
-
-**Synonyms**: cultivating experience
 
 ---
 
@@ -2935,6 +2865,8 @@ id: concept.symptom-element
 kind: concept
 canonical_label: Symptom Element
 provenance: source-original
+aliases_en:
+- Focus
 scenarios:
 - novel.crucial-element-audit
 - novel.diagnose-flat-draft

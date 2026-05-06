@@ -120,7 +120,9 @@
         "Mental Sex"
       ],
       "deprecated_aliases_en": [
-        "Male/Female problem-solving"
+        "Male/Female problem-solving",
+        "Female Mental Sex",
+        "Male Mental Sex"
       ],
       "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#mental-sex",
       "scenarios": [
@@ -260,17 +262,6 @@
       "canonical_label": "Event",
       "provenance": "source-original",
       "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#item"
-    },
-    {
-      "id": "concept.focus",
-      "kind": "concept",
-      "canonical_label": "Focus",
-      "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#focus",
-      "scenarios": [
-        "novel.crucial-element-audit",
-        "novel.diagnose-flat-draft"
-      ]
     },
     {
       "id": "concept.forewarnings",
@@ -499,6 +490,9 @@
       "scenarios": [
         "novel.crucial-element-audit",
         "novel.diagnose-flat-draft"
+      ],
+      "aliases_en": [
+        "Focus"
       ]
     },
     {
@@ -1491,7 +1485,7 @@
     {
       "id": "el.non-acceptance",
       "kind": "element",
-      "canonical_label": "Non-Acceptance",
+      "canonical_label": "Non-acceptance",
       "provenance": "source-original",
       "term_file": "skills/dramatica-vocabulary/references/elements.md#non-acceptance",
       "quad_id": "quad.acceptance-reaction-el",
@@ -1501,7 +1495,7 @@
     {
       "id": "el.non-accurate",
       "kind": "element",
-      "canonical_label": "Non-Accurate",
+      "canonical_label": "Non-accurate",
       "provenance": "source-original",
       "term_file": "skills/dramatica-vocabulary/references/elements.md#non-accurate",
       "quad_id": "quad.accurate-non-accurate-el",
@@ -2371,6 +2365,9 @@
       "term_file": "skills/dramatica-vocabulary/references/types.md#subconscious",
       "scenarios": [
         "novel.act-pivot"
+      ],
+      "aliases_en": [
+        "Innermost Desires"
       ]
     },
     {

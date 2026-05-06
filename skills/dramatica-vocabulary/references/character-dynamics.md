@@ -6,13 +6,10 @@ Four-axis configuration of the Main Character — Resolve, Growth, Approach, Men
 
 - [Approach](#approach) — The Main Character's
 - [Change](#change) — The Main Character
-- [Female Mental Sex](#female-mental-sex) — See Intuitive
 - [Impact Character Approach](#impact-character-approach) — By
 - [Impact Character Problem Solving Style](#impact-character-problem-solving-style) — Much of what we are as individuals is
-- [Male Mental Sex](#male-mental-sex) — See Logical
 - [Mental Sex](#mental-sex) — See Problem Solving
 - [Resolve](#resolve) — the degree to which the
-- [Sex)](#sex) — The Main Character
 - [Start](#start) — The audience wants
 - [Steadfast](#steadfast) — The Main Character
 
@@ -152,17 +149,6 @@ reshape, adjust, adapt
 
 ---
 
-## Female Mental Sex
-
-*Type: Character Dynamic*
-
-### Character Dynamic
-
-See Intuitive
-Problem Solving Style
-
----
-
 ## Impact Character Approach
 
 *Type: Character Dynamic*
@@ -297,17 +283,6 @@ problems without solving them.
 
 ---
 
-## Male Mental Sex
-
-*Type: Character Dynamic*
-
-### Character Dynamic
-
-See Logical
-Problem Solving Style
-
----
-
 ## Mental Sex
 <!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
 ```yaml
@@ -321,6 +296,8 @@ aliases_en:
 - Mental Sex
 deprecated_aliases_en:
 - Male/Female problem-solving
+- Female Mental Sex
+- Male Mental Sex
 ```
 
 
