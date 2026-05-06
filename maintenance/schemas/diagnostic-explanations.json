@@ -62,6 +62,90 @@
       "what": "A reciprocal pairing (e.g. task_uses_prompts vs prompt_relates_to_task) is asymmetric — one side names the other but the other does not name back.",
       "why": "Reciprocity is the integrity invariant for the slug graph. Asymmetry means a reverse query returns wrong results.",
       "fix": "Decide which side is correct and fix the other to match. fm-edit --append-list or --remove-from-list applies the change atomically."
+    },
+    "ADR.A.1.4": {
+      "severity_hint": "ERROR",
+      "what": "An ADR's '## Considered Options' section lists fewer than two items.",
+      "why": "Exploration MUST compare at least two mutually exclusive options; a single-option ADR is a foregone conclusion masquerading as a decision (spec §3 Aspect 1 — Explore).",
+      "fix": "Add at least one alternative option in '## Considered Options' before re-validating."
+    },
+    "ADR.A.2.1": {
+      "severity_hint": "ERROR",
+      "what": "An ADR body is missing a MADR 4.0.0 required heading (Context and Problem Statement / Decision Drivers / Considered Options / Decision Outcome / Consequences).",
+      "why": "MADR is the lingua franca of ADR tooling. Missing headings break log4brains-style renderers and the agency-adr extractor.",
+      "fix": "Author the missing heading. Use templates/adr/ once it lands; in the meantime mirror the structure of an existing Accepted ADR."
+    },
+    "ADR.A.2.2": {
+      "severity_hint": "ERROR",
+      "what": "ADR frontmatter fails the JSON-Schema in maintenance/schemas/header-ontology.json under types.adr.json_schema.",
+      "why": "The schema is the binding contract for the adr_* L2 namespace; violations mean downstream tools cannot trust any field.",
+      "fix": "Inspect the diagnostic's location pointer; fix the listed key/value to match the schema (e.g. adr_id MUST match ^ADR-[0-9]{4}$)."
+    },
+    "ADR.A.2.3": {
+      "severity_hint": "ERROR",
+      "what": "An ADR's '## Decision Outcome' section is empty.",
+      "why": "The Decision Outcome MUST declare the chosen option in a single sentence; without it the synthesis pipeline has nothing to compress.",
+      "fix": "Add a one-sentence statement of the chosen option (optionally a Y-Statement for token-cheap rationale)."
+    },
+    "ADR.A.2.4": {
+      "severity_hint": "ERROR",
+      "what": "An ADR's '## Consequences' section is empty.",
+      "why": "Consequences MUST enumerate positive, negative, and neutral impacts so reviewers can audit trade-offs.",
+      "fix": "List bullets prefixed 'Positive:', 'Negative:', and (optionally) 'Neutral:' describing each impact."
+    },
+    "ADR.A.2.7": {
+      "severity_hint": "ERROR",
+      "what": "An ADR file's name disagrees with its frontmatter adr_id and/or slug.",
+      "why": "Filename ↔ frontmatter coupling catches rename-without-update drift; the same pattern guards tasks/<NNN>-slug/task.md.",
+      "fix": "Either rename the file to match the adr_id and slug, or amend the frontmatter to match the filename. Use fm-rename for slug renames so reciprocal references update atomically."
+    },
+    "ADR.A.3.3": {
+      "severity_hint": "ERROR",
+      "what": "Synthesis would emit more tokens than --token-limit (default 2000).",
+      "why": "The guarded section is read by every agent on every invocation; an unbounded section pollutes context and degrades downstream prompts.",
+      "fix": "Deprecate or supersede older ADRs that no longer carry weight, or raise --token-limit with a justification in the PR description (and document the new floor in OQ.3)."
+    },
+    "ADR.A.3.4": {
+      "severity_hint": "ERROR",
+      "what": "The fidelity score under the selected --fidelity-mode dropped below --fidelity-floor (default 0.95).",
+      "why": "Fidelity is the integrity check that the compressed body still represents every Accepted ADR's normatives; a low score means the synthesis silently dropped or paraphrased a rule.",
+      "fix": "Re-author the most-recently-added ADR's Decision Outcome / Consequences using verbatim BCP-14 sentences; rerun synthesize. If the floor is genuinely too aggressive, lower --fidelity-floor with a justification."
+    },
+    "ADR.A.3.5": {
+      "severity_hint": "ERROR",
+      "what": "AGENTS.md is missing the <!-- BEGIN AGENCY-ADR SYNTHESIS --> / <!-- END AGENCY-ADR SYNTHESIS --> markers.",
+      "why": "The synthesis pipeline refuses to write outside the markers; their absence would force a destructive overwrite, which the spec prohibits.",
+      "fix": "Restore both markers in AGENTS.md (the canonical placement is the '## Synthesised ADR Constraints' section near the bottom). The implementation Task seeds these markers; if AGENTS.md was rewritten by hand, copy them back from `git log AGENTS.md`."
+    },
+    "ADR.A.4.5": {
+      "severity_hint": "ERROR",
+      "what": "The supersession DAG contains a cycle (one ADR transitively supersedes itself).",
+      "why": "Cycles induce infinite recursion in the conflict-resolution traversal; they are the only correctness invariant the synthesis pipeline genuinely cannot recover from.",
+      "fix": "Inspect the cycle node list in the diagnostic; remove or invert the supersession edge that closes the loop. Typically this means setting one ADR's adr_status back to Accepted and clearing its adr_supersedes."
+    },
+    "ADR.A.4.6": {
+      "severity_hint": "ERROR",
+      "what": "A supersession edge is asymmetric — one ADR names another in adr_supersedes but the other's adr_superseded_by does not name back.",
+      "why": "Reciprocity guarantees the DAG is queryable from either direction; asymmetry means a reverse-supersession query returns wrong results.",
+      "fix": "Add the missing reciprocal entry. fm-edit --append-list adds an item to a list-valued frontmatter key atomically (locks + body-byte invariant)."
+    },
+    "ADR.A.5.4": {
+      "severity_hint": "ERROR",
+      "what": "An ADR's frontmatter is missing one of the required keys (type / adr_id / adr_status / …).",
+      "why": "These keys are the schema contract; missing them means corpus discovery, supersession traversal, or schema validation cannot run.",
+      "fix": "Add the listed keys with valid values. adr_id MUST be ADR-NNNN; adr_status MUST be one of Proposed | Accepted | Superseded | Deprecated."
+    },
+    "ADR.A.5.6": {
+      "severity_hint": "ERROR",
+      "what": "Two or more ADR files share the same adr_id.",
+      "why": "adr_id is the primary key for the corpus; duplicates collapse the DAG nodes and corrupt every supersession query.",
+      "fix": "Renumber the more-recently-created ADR to the next free ADR-NNNN slot; update its filename and slug to match."
+    },
+    "ADR.A.5.7": {
+      "severity_hint": "ERROR",
+      "what": "An ADR references another ADR (via adr_supersedes or adr_superseded_by) whose file does not exist in /decisions/.",
+      "why": "Orphaned references break the DAG and silently exclude the missing ADR from the synthesis filter.",
+      "fix": "Either restore the referenced file, fix the typo'd reference, or remove the entry if it was an accidental leftover from a draft."
     }
   }
 }
