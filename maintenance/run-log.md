@@ -452,3 +452,82 @@ The agent MUST append its own record **before** committing the run's repairs, so
     Friction logged as FL1 in
     `tasks/021-apply-fm-edit-to-deferred-coherence/friction-log.md`.
 
+### Run 2026-05-06 — Repo Coherence Check
+- agent: claude-code (session claude/funny-curie-26tRF)
+- start_commit: 491444d
+- end_commit: 6aa15be
+- baseline_commit: d5fab39 (Task 021 closure; recovered cleanly via the awk fall-forward — Task 008's hardening held)
+- files_in_delta: 51
+- files_scanned: 12
+- t1_fixes: 1
+- t2_fixes: 0
+- t3_tasks_created: 1
+- t4_skipped: 2
+- issues_skipped: 0
+- notes: >
+    Drove the run from `tools/check-governance.sh` output (Step 2.5
+    linter-first triage). All five linter steps exit clean against
+    the 263-file corpus once the optional `jsonschema` dependency is
+    present (see findings F8 below for the install-script gap).
+
+    Delta scope: the 51 changed files since d5fab39 are dominated by
+    the Task 027 / 028 / 029 ADR closure batches (research workspaces
+    research/adr-spec-research-synthesis/ and research/adr-assumption-audit/
+    plus the matching task folders). Both research workspaces are
+    research_phase: complete (T4); body skipped per spec. Their L1+L2
+    frontmatter is conformant; the SPEC.md and REPORT.md outputs carry
+    the canonical research namespace.
+
+    T1 fix:
+      - tasks/readme.md: bumped `updated:` 2026-05-05 → 2026-05-06 via
+        tools/fm/edit.py --bump-updated (per TASK.md §4.8 freshness rule,
+        the index changed in this run because it gained the Task-031 bullet).
+
+    T3 Task created:
+      - tasks/031-sync-tasks-index-status-drift/ — captures a population
+        of 10 stale `Status:` bullets in tasks/readme.md that disagree
+        with each Task's task.md task_status frontmatter (Tasks 007, 008,
+        012, 015, 016, 017, 018, 019, 020, 021). Per TASK.md §7.11 this
+        was supposed to be linter-gated by Task 019, but the
+        `tools/fm/query.py status,supersession --diff tasks/readme.md`
+        check was not implemented; Task 031 picks it up alongside the
+        textual cleanup of the 10 bullets. Classified T3 because the fix
+        spans 10 closed-Task bullets plus a new linter implementation,
+        beyond a single-file T1/T2 mutation.
+
+    T4 skipped:
+      - research/adr-spec-research-synthesis/output/SPEC.md (research_phase: complete)
+      - research/adr-assumption-audit/output/REPORT.md (research_phase: complete)
+
+    Surprises / findings carried into the maintenance-spec improvement Task
+    (see Task 032 filed at the close of this session per the operator's
+    standing instruction to distil session insights into a follow-up Task):
+      - F8: `tools/check-governance.sh` reports FAIL when `jsonschema` is
+        absent from the environment — but jsonschema is only used by the
+        OPTIONAL narrative-ontology validator. The FAIL is misleading: a
+        fresh contributor running `tools/check-governance.sh` on a clean
+        clone will see the script claim governance failure for an
+        optional-dependency reason. Either install.sh should pin jsonschema,
+        or the optional validator should degrade to a WARN.
+      - F9: Run-log baseline lookup is robust now (Task 008 fall-forward
+        works), but the run-log mixes coherence runs with task-implementation
+        records (Tasks 016/017/018/019/020/021 each appended a record).
+        That dilutes the "what was the last coherence baseline" signal —
+        the awk loop happens to walk past task-implementation entries
+        because they declare end_commit, but their `t1_fixes/t2_fixes/
+        t3_tasks_created` counters relate to the task implementation,
+        not to a coherence sweep. MAINTENANCE.md §2.3 hints at this dual
+        purpose; it should explicitly distinguish the two record types
+        (e.g. a `routine-type:` enum in the record header).
+      - F10: Step 2.5 of the coherence prompt (Task 014 finding F3, landed
+        post-Task-017) tells the agent to run fm-validate first — which
+        works. But the prompt does NOT instruct the agent to also re-run
+        the linter AFTER the repairs+task-creation step, before the commit.
+        The current prompt's Step 5 just says "commit". Task 014 finding
+        F7 / Task 025 §Plan-4 calls this out, but Task 025 is still open
+        (no longer blocked by Task 019 — that closed). Worth flagging.
+      - F11: TASK.md §7.11 promises a tasks-index linter ("via Task 019").
+        Task 019 closed without delivering it. The coherence run had no
+        mechanical surface to detect the 10-bullet drift; it surfaced only
+        because the agent ran a hand-rolled awk loop. The §7.11 promise
+        should be retargeted at Task 031 (now filed).
