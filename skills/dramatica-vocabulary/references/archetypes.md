@@ -15,6 +15,22 @@ The eight quintessential character arrangements. Each Archetype carries a fixed 
 
 ---
 
+## Archetype (concept)
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: concept.archetype
+kind: concept
+canonical_label: Archetype
+provenance: source-original
+```
+
+
+*Type: Concept*
+
+Meta-entry for the Archetype kind itself. The eight quintessential character arrangements (Antagonist, Contagonist, Emotion, Guardian, Protagonist, Reason, Sidekick, Skeptic) listed below each carry a fixed motivation Element pair. See ST-3 partition note: this heading reifies the `concept.archetype` ontology pointer that previously aimed at `#contents` (a TOC, not a term).
+
+---
+
 ## Antagonist
 <!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
 ```yaml

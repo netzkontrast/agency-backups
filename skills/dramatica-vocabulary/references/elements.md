@@ -77,6 +77,27 @@ The 64 highest-resolution descriptions of approaches and attitudes — the atomi
 
 ---
 
+## Ability
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.ability
+kind: element
+canonical_label: Ability
+provenance: source-original
+quad_id: quad.knowledge-el
+ktad_position: A
+dynamic_pair_id: el.desire
+scenarios:
+- novel.storyform-slot-fill
+```
+
+
+*Type: Element*
+
+Knowledge-quad Element paired with Desire in the K/T/A/D fractal. Heading minted by ST-3 to satisfy the canonical entry recorded in `el.ability` (Task 015 §Plan Step 4 added the ontology entry; the source heading was never created).
+
+---
+
 ## Acceptance
 <!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
 ```yaml
@@ -345,6 +366,25 @@ late.
 sureness, definiteness, having no
 doubts, total reliability, indisputability, irrefutability,
 unmist
+
+---
+
+## Change
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.change
+kind: element
+canonical_label: Change
+provenance: source-original
+quad_id: quad.inertia-change-el
+ktad_position: T
+dynamic_pair_id: el.inertia
+```
+
+
+*Type: Element*
+
+Element paired with Inertia in the inertia/change quad. Heading minted by ST-3 to satisfy the canonical entry recorded in `el.change` (Task 015 §Plan Step 4 added the ontology entry; the source heading was never created).
 
 ---
 
@@ -1780,6 +1820,44 @@ quality required that is shared by no one else. Frequently, the Unique Ability i
 Character's position or profession, however it can be
 much more interesting to assign an incongruous
 Unique Ability. In either approach, it is essential to
+
+---
+
+## Non-acceptance
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.non-acceptance
+kind: element
+canonical_label: Non-acceptance
+provenance: source-original
+quad_id: quad.acceptance-reaction-el
+ktad_position: T
+dynamic_pair_id: el.acceptance
+```
+
+
+*Type: Element*
+
+Element paired with Acceptance in the acceptance/reaction quad. Heading minted by ST-3 to satisfy the canonical entry recorded in `el.non-acceptance` (Task 015 §Plan Step 4 added the ontology entry; the source heading was never created).
+
+---
+
+## Non-accurate
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: el.non-accurate
+kind: element
+canonical_label: Non-accurate
+provenance: source-original
+quad_id: quad.accurate-non-accurate-el
+ktad_position: T
+dynamic_pair_id: el.accurate
+```
+
+
+*Type: Element*
+
+Element paired with Accurate in the accurate/non-accurate quad. Heading minted by ST-3 to satisfy the canonical entry recorded in `el.non-accurate` (Task 015 §Plan Step 4 added the ontology entry; the source heading was never created).
 
 ---
 

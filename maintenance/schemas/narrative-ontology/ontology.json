@@ -106,7 +106,7 @@
       "kind": "character-dynamic",
       "canonical_label": "Growth",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#approach",
+      "term_file": "skills/dramatica-vocabulary/references/character-dynamics.md#growth",
       "scenarios": [
         "novel.character-arc"
       ]
@@ -201,7 +201,7 @@
       "kind": "concept",
       "canonical_label": "Archetype",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#contents"
+      "term_file": "skills/dramatica-vocabulary/references/archetypes.md#archetype-concept"
     },
     {
       "id": "concept.concern",
@@ -2951,7 +2951,7 @@
       "kind": "variation",
       "canonical_label": "Work",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/variations.md#work",
+      "term_file": "skills/dramatica-vocabulary/references/plot-dynamics.md#work",
       "dynamic_pair_id": "var.attempt",
       "quad_id": "quad.attraction-repulsion-el",
       "ktad_position": "A"

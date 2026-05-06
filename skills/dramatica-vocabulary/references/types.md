@@ -1068,6 +1068,27 @@ story.
 
 ---
 
+## Subconscious
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: type.subconscious
+kind: type
+canonical_label: Subconscious
+provenance: source-original
+class_id: class.mind
+aliases_en:
+- Innermost Desires
+scenarios:
+- novel.act-pivot
+```
+
+
+*Type: Type*
+
+Mind-class Type paired with Preconscious in the dynamic pair Subconscious <--> Preconscious (cf. line 735 above). Source heading was missing from this file; the corresponding body fragment ("Innermost Desires (a.k.a. Subconscious)") survives mis-attached in character-dynamics.md per ST-2's truncation catalog and is flagged for re-extraction.
+
+---
+
 ## Throughline
 <!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
 ```yaml

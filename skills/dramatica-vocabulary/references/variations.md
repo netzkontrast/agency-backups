@@ -2175,6 +2175,28 @@ dangers, Security may actually become a danger itself.
 
 **Synonyms**: evaluation of safety, measure of safeguards
 
+---
+
+## Self-Interest
+<!-- nav-ontology (auto-managed; see maintenance/schemas/narrative-ontology/) -->
+```yaml
+id: var.self-interest
+kind: variation
+canonical_label: Self-Interest
+provenance: source-original
+type_id: type.obtaining
+quad_id: quad.approach-var-physics
+ktad_position: A
+dynamic_pair_id: var.morality
+```
+
+
+*Type: Variation*
+
+Variation paired with Morality in the approach/physics quad. Heading minted by ST-3 to reify the canonical `var.self-interest` ontology entry; the truncated body fragment ("doing or being based on what is best for oneself") survives mid-document below in the broken Security/Self-Awareness sequence and is flagged for re-extraction.
+
+---
+
 ### Element
 
 When a
