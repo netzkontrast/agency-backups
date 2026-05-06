@@ -17,4 +17,12 @@ updated: 2026-05-06
 
 ## Why this task exists
 
-Task 030's introspection retrospective flagged five items beyond the §Goal acceptance gates. Two were mechanical dead-code removals and were folded into Task 030's closure commit. Three were judgment calls — wire-in, audit, schema decision — that warrant their own task surface so the trade-offs are explicit and not buried in a closure commit.
+Task 030 closed all four §Goal gates. The post-closure `/sc:reflect` plus the PR #68 independent review surfaced ten items that belong in a follow-up rather than 030's closure commit. Three of them came from the introspection retrospective (precompile wire-in, term/aliases over-engineering audit, Bucket C structural-prose decision). Four came from subtask friction reports that 030 deliberately scoped out (alias conflicts, six entries without source YAML blocks, derived-kind schema decision, `## Mental Sex` body misattribution). Three came from PR #68 review (Bucket D triage, AGENTS.md §NO.5 amendment for precompiled, hardcoded test-count drift).
+
+Each item carries an explicit decision point and acceptance — closure means either "shipped" or "filed as ADR input / superseded / deferred with rationale", never silent age-out.
+
+## Phasing
+
+1. **Phase 1 (mechanical, ship now):** Items 1, 2, 9, 10.
+2. **Phase 2 (decisions, sequential):** Items 3, 4, 6, 7.
+3. **Phase 3 (schema-touching, may file ADR inputs):** Items 5, 8.
