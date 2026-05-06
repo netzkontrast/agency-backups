@@ -5,7 +5,7 @@ slug: dramatica-nav-followups
 summary: "Three Task-030 follow-up items surfaced during /sc:improve --introspection: (1) wire precompile.py validate into check-governance.sh; (2) audit term.py + aliases.py for over-engineered surface relative to subtask briefs; (3) decide on the 103 unmapped-heading 'Bucket C structural prose' handling — suppress at validator, formalise as kind: prose-section, or accept as permanent noise."
 created: 2026-05-06
 updated: 2026-05-06
-task_id: "031"
+task_id: "042"
 task_status: open
 task_owner: "claude"
 task_priority: P3
@@ -19,10 +19,10 @@ task_affects_paths:
   - tools/dramatica-nav/
   - tools/check-governance.sh
   - maintenance/schemas/narrative-ontology/
-  - tasks/031-dramatica-nav-followups/
+  - tasks/042-dramatica-nav-followups/
 ---
 
-# Task 031 — Dramatica-Nav Follow-Ups (Post-Task-030)
+# Task 042 — Dramatica-Nav Follow-Ups (Post-Task-030)
 
 ## Goal
 

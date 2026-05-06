@@ -2,12 +2,12 @@
 type: readme
 status: active
 slug: dramatica-nav-followups
-summary: "Index for Task 031 — three Task-030 follow-up items (precompile governance wire-in, term.py/aliases.py over-engineering audit, Bucket C structural-prose decision)."
+summary: "Index for Task 042 — three Task-030 follow-up items (precompile governance wire-in, term.py/aliases.py over-engineering audit, Bucket C structural-prose decision)."
 created: 2026-05-06
 updated: 2026-05-06
 ---
 
-# Task 031 — Dramatica-Nav Follow-Ups
+# Task 042 — Dramatica-Nav Follow-Ups
 
 ## Linked Navigation
 
