@@ -22,4 +22,4 @@ updated: 2026-05-06
 
 | ID | File | Depends on | Recommended agent | Effort |
 |---|---|---|---|---|
-| ST-5 | [`05-spec-amendment-task-md.md` (briefing pending — author before dispatch) | ST-1, ST-2, ST-3 | technical-writer | M |
+| ST-5 | [`05-spec-amendment-task-md.md`](./05-spec-amendment-task-md.md) | ST-1, ST-2, ST-3 | technical-writer | M |

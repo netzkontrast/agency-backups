@@ -24,4 +24,4 @@ Each subtask file is self-contained per the Task 019 convention (briefing + inpu
 
 | ID | File | Depends on | Recommended agent | Effort |
 |---|---|---|---|---|
-| ST-5 | [`05-spec-amendment-agents-md.md` (briefing pending — author before dispatch) | ST-1, ST-2, ST-3, ST-4 | technical-writer | S |
+| ST-5 | [`05-spec-amendment-agents-md.md`](./05-spec-amendment-agents-md.md) | ST-1, ST-2, ST-3, ST-4 | technical-writer | S |

@@ -14,9 +14,9 @@ updated: 2026-05-06
 | ID | File | Recommended agent | Effort |
 |---|---|---|---|
 | ST-1 | [`01-research-session-continuity-protocol-instantiation.md`](./01-research-session-continuity-protocol-instantiation.md) | research-prompt-optimizer + deep-research | L |
-| ST-2 | [`02-tooling-workspace-cleanliness-linter.md` (briefing pending — author before dispatch) | python-expert | S |
-| ST-3 | [`03-tooling-external-result-downstream-task-linter.md` (briefing pending — author before dispatch) | python-expert | S |
-| ST-4 | [`04-tooling-trust-audit-gate.md` (briefing pending — author before dispatch) | python-expert | M |
+| ST-2 | [`02-tooling-workspace-cleanliness-linter.md`](./02-tooling-workspace-cleanliness-linter.md) | python-expert | S |
+| ST-3 | [`03-tooling-external-result-downstream-task-linter.md`](./03-tooling-external-result-downstream-task-linter.md) | python-expert | S |
+| ST-4 | [`04-tooling-trust-audit-gate.md`](./04-tooling-trust-audit-gate.md) | python-expert | M |
 
 > **Trust-audit partition (per spec-panel C3):** ST-4 here owns the **GATE** —
 > the pre-commit invocation point + the diagnostic-format contract. The
@@ -31,4 +31,4 @@ updated: 2026-05-06
 
 | ID | File | Depends on | Recommended agent | Effort |
 |---|---|---|---|---|
-| ST-5 | [`05-spec-amendment-research-md.md` (briefing pending — author before dispatch) | ST-1, ST-2, ST-3, ST-4 | technical-writer | M |
+| ST-5 | [`05-spec-amendment-research-md.md`](./05-spec-amendment-research-md.md) | ST-1, ST-2, ST-3, ST-4 | technical-writer | M |

@@ -15,9 +15,9 @@ updated: 2026-05-06
 |---|---|---|---|
 | ST-1 | [`01-research-toolchain-flip-criteria.md`](./01-research-toolchain-flip-criteria.md) | research-prompt-optimizer + deep-research | M |
 | ST-2 | [`02-research-staleness-decision-formalization.md`](./02-research-staleness-decision-formalization.md) | research-prompt-optimizer + deep-research | M |
-| ST-3 | [`03-tooling-staleness-audit-script.md` (briefing pending — author before dispatch) | python-expert | M |
-| ST-4 | [`04-tooling-dynamic-readme-partition-linter.md` (briefing pending — author before dispatch) | python-expert | M |
-| ST-5 | [`05-tooling-trust-audit-integration.md` (briefing pending — author before dispatch) | python-expert | M |
+| ST-3 | [`03-tooling-staleness-audit-script.md`](./03-tooling-staleness-audit-script.md) | python-expert | M |
+| ST-4 | [`04-tooling-dynamic-readme-partition-linter.md`](./04-tooling-dynamic-readme-partition-linter.md) | python-expert | M |
+| ST-5 | [`05-tooling-trust-audit-integration.md`](./05-tooling-trust-audit-integration.md) | python-expert | M |
 
 > **Trust-audit partition (per spec-panel C3):** ST-5 here owns the
 > **AGGREGATOR** — cross-research roll-up of the per-workspace findings
@@ -32,4 +32,4 @@ updated: 2026-05-06
 
 | ID | File | Depends on | Recommended agent | Effort |
 |---|---|---|---|---|
-| ST-6 | [`06-spec-amendment-maintenance-md.md` (briefing pending — author before dispatch) | ST-1, ST-2, ST-3, ST-4, ST-5 | technical-writer | L |
+| ST-6 | [`06-spec-amendment-maintenance-md.md`](./06-spec-amendment-maintenance-md.md) | ST-1, ST-2, ST-3, ST-4, ST-5 | technical-writer | L |
