@@ -4,7 +4,7 @@ status: active
 slug: tasks-root
 summary: "Root of /tasks/. Each subfolder is one orchestrated unit of work linking prompts, research, and code via frontmatter."
 created: 2026-05-04
-updated: 2026-05-05
+updated: 2026-05-06
 ---
 
 # Tasks Root
@@ -56,6 +56,7 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`028-adr-tooling-impl-plan/`](./028-adr-tooling-impl-plan/) — From the spec produced by Task 027, design the concrete implementation plan for the `agency-adr` CLI tool suite (validate, synthesize/MDL, DAG cycle-detection, JSON-Schema linter, CI integration). Status: `done`. Output: [`implementation-plan.md`](./028-adr-tooling-impl-plan/implementation-plan.md) — §1–§7 build contract; ≈ 3–5 working weeks of implementation effort estimated.
 - [`029-adr-assumption-audit/`](./029-adr-assumption-audit/) — Multi-subagent critical-thinking audit (M13, M07, M06+M08) that surfaces hidden assumptions in the ADR governance spec, catalogues implicit ADRs already in force in this repo, and enumerates pending decisions blocking the Task 028 implementation. Status: `done`. Output: [`research/adr-assumption-audit/output/REPORT.md`](../research/adr-assumption-audit/output/REPORT.md) — 9 ASMs (4 high-blast), 11 IADRs (5 P1), 7 PDs (2 novel: PD-006 review loop, PD-007 stale-Proposed lifecycle), 5 Recommended Actions. PD↔OD cross-reference appended as [Task 028 plan §B](./028-adr-tooling-impl-plan/implementation-plan.md).
 - [`030-cleanup-dramatica-skills-corpus/`](./030-cleanup-dramatica-skills-corpus/) — Phase-0 follow-up to [Task 015](./015-integrate-dramatica-ncp-skills/). Strip PDF artefacts from the dramatica corpus, fix corrupted headings + anchor mismatches, ship `term.py` / `cleanup.py` / `aliases.py` / `precompile.py` under `tools/dramatica-nav/`, and emit pre-compiled persona-scenario JSONs. Nine subtasks dispatch via `/sc:agent`. The FE-1…FE-10 frustration items in its `notes.md §3` are candidate inputs for [Task 029](./029-adr-assumption-audit/)'s assumption audit. Status: `open`.
+- [`031-sync-tasks-index-status-drift/`](./031-sync-tasks-index-status-drift/) — Found by coherence run 2026-05-06. Sync 10 stale `Status:` bullets in `tasks/readme.md` against each Task's `task_status` frontmatter and land the §7.11 mechanical check (`fm.py index-diff` or `fm-query --diff tasks/readme.md`) that Task 019 deferred. Status: `open`.
 
 ## Workflow Assumptions
 
