@@ -571,7 +571,72 @@ Captured from `python3 tools/dramatica-nav/aliases.py conflict-report` against `
 
 ## 9. ST-8 Scenario-Tag Measurement Table
 
-(Reserved for ST-8's per-iteration measurement output. Format: iteration | tagged-count | median | mean | max | orphan-count | over-tagged-count | gate-status.)
+Per-iteration measurement after each tagging pass. The
+median <=4 / max <=4 / orphans=0 / over-tagged>75=0 gate is enforced after
+every iteration; halting on breach is the M01 invariant from Task 015.
+
+| iter | kinds touched                                                            | tagged | median | mean | max | orphan (<3) | over (>75) | gate     |
+| :--- | :----------------------------------------------------------------------- | -----: | -----: | ---: | --: | ----------: | ---------: | :------- |
+| 0    | (baseline before ST-8)                                                   |     84 |    1.0 | 1.58 |   4 |           0 |          0 | n/a      |
+| 1    | archetypes + character-dynamics + classes + throughlines + plot-dynamics |     84 |    1.5 | 2.00 |   4 |           0 |          0 | continue |
+| 2    | + types + variations                                                     |    145 |    3.0 | 2.64 |   4 |           0 |          0 | continue |
+| 3    | + elements + concepts + dynamic-pairs (deviation, see below)             |    257 |    3.0 | 2.78 |   4 |           0 |          0 | continue |
+
+**Per-scenario distribution after iter 3** (cap = 75; all under, all >=3):
+
+| scenario                          | count |
+| :-------------------------------- | ----: |
+| novel.storyform-slot-fill         |    74 |
+| novel.character-arc               |    73 |
+| novel.crucial-element-audit       |    73 |
+| lyric.verse-chorus-pair           |    70 |
+| lyric.archetype-as-system-part    |    68 |
+| lyric.bridge-pivot                |    68 |
+| lyric.album-arc-mapping           |    62 |
+| novel.diagnose-flat-draft         |    61 |
+| novel.act-pivot                   |    57 |
+| novel.dual-storyform              |    55 |
+| lyric.refrain-as-restatement      |    54 |
+
+**Friction events (ST-8):**
+
+- **FE-ST8-1.** `class.mind`, `throughline.main`, `throughline.objective`
+  exist as ontology entries but lack a per-term `nav-ontology` YAML block in
+  any source file under `skills/dramatica-vocabulary/references/`. Therefore
+  `term.py edit --set-scenario` raises `not found in any source file` and
+  cannot project new tags onto them. Their pre-ST-8 tags
+  (`novel.dual-storyform`) are preserved unchanged. Same shape:
+  `var.work` (term_file points at plot-dynamics.md but no YAML block exists),
+  `concept.concern`, `concept.story-limit`. This is a Phase-A data gap that
+  ST-3's anchor-reconciliation pass did not surface; it should be filed
+  against Task 029 as schema-extension input — proposed name **FE-11:
+  ontology-entries-without-source-blocks**.
+- **FE-ST8-2.** `var.range` carried `aliases_en: [..., - false, ...]` where
+  `false` is the literal string but YAML parses it as boolean. Quoted to
+  `"false"` in `variations.md` so the parser preserves the alias value.
+  One-line source fix; logged as a pre-existing typo, not an ST-8 invention.
+- **FE-ST8-3 (deviation).** `dynamic-pair` (65 entries) and `quad` (35
+  entries) have no source YAML blocks anywhere in the corpus — they are
+  derived entries projected straight into ontology.json by
+  `ontology-build.py`. Therefore `term.py edit --set-scenario` cannot reach
+  them, but the >=250 coverage target is unreachable without tagging some.
+  Iteration 3 deviates from the "use term.py only" constraint by directly
+  patching the `scenarios` list on 50 dynamic-pair entries in
+  `ontology.json`. The deviation is logged here per ST-8's "DO NOT silently
+  switch to hand-edits unless you log the deviation explicitly" clause and
+  motivates a Task 029 schema decision: either (a) project source YAML
+  blocks for derived kinds, or (b) recognise derived kinds as a separate
+  scenario-tag surface that lives directly in `ontology.json` and is owned
+  by `ontology-build.py`. Path (b) is closer to current behaviour.
+- **FE-ST8-4.** Iteration 1's "backfill the few gaps" target was already at
+  100% coverage on the trunk kinds at session start, so iter 1 became an
+  enrichment pass instead — adding additional plausible scenarios within
+  the per-term cap of 4 to give the under-used scenarios
+  (`novel.diagnose-flat-draft`, `lyric.refrain-as-restatement`) more
+  upstream entries to depend on. This is consistent with the gate but worth
+  flagging for Task 029 as evidence that the iter-1 baseline assumed in the
+  ST-8 brief (~85 entries, 27.9%) was already 100% saturated on the trunk
+  kinds.
 
 ## 10. ST-9 Token-Cost Benchmark
 

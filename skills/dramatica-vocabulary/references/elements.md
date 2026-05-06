@@ -106,15 +106,19 @@ id: el.acceptance
 kind: element
 canonical_label: Acceptance
 provenance: source-original
-aliases_en:
-- acquiescence
-- tolerance
 aliases_de:
 - Akzeptanz
 - Annahme
+aliases_en:
+- acquiescence
+- tolerance
 dynamic_pair_id: el.non-acceptance
-quad_id: quad.acceptance-reaction-el
 ktad_position: K
+quad_id: quad.acceptance-reaction-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.refrain-as-restatement
+- novel.diagnose-flat-draft
 ```
 
 
@@ -158,8 +162,12 @@ aliases_en:
 - sufficient
 - within tolerance
 dynamic_pair_id: el.non-accurate
-quad_id: quad.accurate-non-accurate-el
 ktad_position: K
+quad_id: quad.accurate-non-accurate-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
+- lyric.refrain-as-restatement
 ```
 
 
@@ -276,8 +284,12 @@ canonical_label: Aware
 provenance: source-original
 aliases_en:
 - outward
-quad_id: quad.actuality-el
 ktad_position: A
+quad_id: quad.actuality-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.refrain-as-restatement
+- lyric.archetype-as-system-part
 ```
 
 
@@ -361,15 +373,19 @@ id: el.certainty
 kind: element
 canonical_label: Certainty
 provenance: source-original
+aliases_de:
+- Gewissheit
 aliases_en:
 - definiteness
 - having no doubts
 - sureness
-aliases_de:
-- Gewissheit
 dynamic_pair_id: el.potentiality
-quad_id: quad.certainty-potentiality-el
 ktad_position: K
+quad_id: quad.certainty-potentiality-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
+- lyric.bridge-pivot
 ```
 
 
@@ -418,8 +434,12 @@ aliases_en:
 - modify
 - reshape
 dynamic_pair_id: el.inertia
-quad_id: quad.inertia-change-el
 ktad_position: T
+quad_id: quad.inertia-change-el
+scenarios:
+- novel.character-arc
+- novel.diagnose-flat-draft
+- lyric.bridge-pivot
 ```
 
 
@@ -629,14 +649,18 @@ id: el.consider
 kind: element
 canonical_label: Consider
 provenance: source-original
+aliases_de:
+- Erwägung
 aliases_en:
 - contemplate
 - deliberate
 - ponder
 - weigh in the mind
-aliases_de:
-- Erwägung
 dynamic_pair_id: el.reconsider
+scenarios:
+- novel.storyform-slot-fill
+- lyric.archetype-as-system-part
+- lyric.bridge-pivot
 ```
 
 
@@ -754,8 +778,12 @@ aliases_en:
 - narrowing to a single point
 - process of elimination
 dynamic_pair_id: el.induction
-quad_id: quad.certainty-potentiality-el
 ktad_position: A
+quad_id: quad.certainty-potentiality-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
+- lyric.archetype-as-system-part
 ```
 
 
@@ -840,8 +868,12 @@ aliases_en:
 - imagining
 - visualizing
 dynamic_pair_id: el.expectation
-quad_id: quad.accurate-non-accurate-el
 ktad_position: D
+quad_id: quad.accurate-non-accurate-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.character-arc
+- lyric.album-arc-mapping
 ```
 
 
@@ -1005,8 +1037,12 @@ aliases_en:
 - conclusion
 - finish
 dynamic_pair_id: el.unending
-quad_id: quad.result-process-el
 ktad_position: A
+quad_id: quad.result-process-el
+scenarios:
+- novel.character-arc
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -1050,6 +1086,8 @@ id: el.equity
 kind: element
 canonical_label: Equity
 provenance: source-original
+aliases_de:
+- Gleichgewicht
 aliases_en:
 - balance
 - equilibrium
@@ -1057,11 +1095,13 @@ aliases_en:
 - fairness
 - level
 - parity
-aliases_de:
-- Gleichgewicht
 dynamic_pair_id: el.inequity
-quad_id: quad.order-chaos-el
 ktad_position: A
+quad_id: quad.order-chaos-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.archetype-as-system-part
+- lyric.refrain-as-restatement
 ```
 
 
@@ -1102,15 +1142,19 @@ id: el.evaluation
 kind: element
 canonical_label: Evaluation
 provenance: source-original
-aliases_en:
-- assessment
-- survey
 aliases_de:
 - Bewertung
 - Evaluation
+aliases_en:
+- assessment
+- survey
 dynamic_pair_id: el.reevaluation
-quad_id: quad.evaluation-re-evaluation-el
 ktad_position: K
+quad_id: quad.evaluation-re-evaluation-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.bridge-pivot
+- novel.dual-storyform
 ```
 
 
@@ -1152,8 +1196,12 @@ provenance: source-original
 aliases_en:
 - anticipated results
 dynamic_pair_id: el.determination
-quad_id: quad.accurate-non-accurate-el
 ktad_position: A
+quad_id: quad.accurate-non-accurate-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
+- lyric.album-arc-mapping
 ```
 
 
@@ -1242,20 +1290,20 @@ id: el.feeling
 kind: element
 canonical_label: Feeling
 provenance: source-original
+aliases_de:
+- Gefühl
 aliases_en:
 - affective outlook
 - emotional sensibility
 - empathy
-aliases_de:
-- Gefühl
+dynamic_pair_id: el.logic
+ktad_position: T
+quad_id: quad.logic-feeling-el
 scenarios:
 - lyric.archetype-as-system-part
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
-dynamic_pair_id: el.logic
-quad_id: quad.logic-feeling-el
-ktad_position: T
 ```
 
 
@@ -1295,21 +1343,21 @@ id: el.help
 kind: element
 canonical_label: Help
 provenance: source-original
+aliases_de:
+- Hilfe
 aliases_en:
 - abet
 - aid
 - assist
 - bolster
-aliases_de:
-- Hilfe
+dynamic_pair_id: el.hinder
+ktad_position: A
+quad_id: quad.help-hinder-el
 scenarios:
 - lyric.archetype-as-system-part
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
-dynamic_pair_id: el.hinder
-quad_id: quad.help-hinder-el
-ktad_position: A
 ```
 
 
@@ -1347,18 +1395,18 @@ id: el.hinder
 kind: element
 canonical_label: Hinder
 provenance: source-original
-aliases_en:
-- obstruct
 aliases_de:
 - Behinderung
+aliases_en:
+- obstruct
+dynamic_pair_id: el.help
+ktad_position: D
+quad_id: quad.help-hinder-el
 scenarios:
 - lyric.archetype-as-system-part
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
-dynamic_pair_id: el.help
-quad_id: quad.help-hinder-el
-ktad_position: D
 ```
 
 
@@ -1400,8 +1448,12 @@ aliases_en:
 - intuition
 - premonition
 dynamic_pair_id: el.theory
-quad_id: quad.proven-unproven-el
 ktad_position: D
+quad_id: quad.proven-unproven-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.refrain-as-restatement
+- novel.diagnose-flat-draft
 ```
 
 
@@ -1443,8 +1495,12 @@ provenance: source-original
 aliases_en:
 - inactive response
 - passive reaction
-quad_id: quad.evaluation-re-evaluation-el
 ktad_position: A
+quad_id: quad.evaluation-re-evaluation-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
+- lyric.bridge-pivot
 ```
 
 
@@ -1487,8 +1543,12 @@ aliases_en:
 - postulate
 - predicate
 dynamic_pair_id: el.deduction
-quad_id: quad.certainty-potentiality-el
 ktad_position: D
+quad_id: quad.certainty-potentiality-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.bridge-pivot
+- lyric.archetype-as-system-part
 ```
 
 
@@ -1535,13 +1595,17 @@ id: el.inequity
 kind: element
 canonical_label: Inequity
 provenance: source-original
-aliases_en:
-- imbalance
 aliases_de:
 - Ungleichgewicht
+aliases_en:
+- imbalance
 dynamic_pair_id: el.equity
-quad_id: quad.order-chaos-el
 ktad_position: D
+quad_id: quad.order-chaos-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.archetype-as-system-part
+- lyric.refrain-as-restatement
 ```
 
 
@@ -1581,8 +1645,12 @@ provenance: source-original
 aliases_en:
 - tendency
 dynamic_pair_id: el.change
-quad_id: quad.inertia-change-el
 ktad_position: K
+quad_id: quad.inertia-change-el
+scenarios:
+- novel.character-arc
+- novel.diagnose-flat-draft
+- lyric.bridge-pivot
 ```
 
 
@@ -1652,21 +1720,21 @@ id: el.logic
 kind: element
 canonical_label: Logic
 provenance: source-original
+aliases_de:
+- Logik
 aliases_en:
 - linear reasoning
 - rationality
 - structural sensibility
 - syllogistics
-aliases_de:
-- Logik
+dynamic_pair_id: el.feeling
+ktad_position: K
+quad_id: quad.logic-feeling-el
 scenarios:
 - lyric.archetype-as-system-part
 - lyric.verse-chorus-pair
 - novel.crucial-element-audit
 - novel.storyform-slot-fill
-dynamic_pair_id: el.feeling
-quad_id: quad.logic-feeling-el
-ktad_position: K
 ```
 
 
@@ -1928,8 +1996,12 @@ provenance: source-original
 aliases_de:
 - Nicht-Akzeptanz
 dynamic_pair_id: el.acceptance
-quad_id: quad.acceptance-reaction-el
 ktad_position: T
+quad_id: quad.acceptance-reaction-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.refrain-as-restatement
+- novel.diagnose-flat-draft
 ```
 
 
@@ -1946,9 +2018,13 @@ id: el.non-accurate
 kind: element
 canonical_label: Non-accurate
 provenance: source-original
-quad_id: quad.accurate-non-accurate-el
-ktad_position: T
 dynamic_pair_id: el.accurate
+ktad_position: T
+quad_id: quad.accurate-non-accurate-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
+- lyric.refrain-as-restatement
 ```
 
 
@@ -2083,6 +2159,10 @@ id: concept.os-response
 kind: concept
 canonical_label: Overall Story Response
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
+- novel.dual-storyform
 ```
 
 
@@ -2101,6 +2181,10 @@ id: concept.os-solution
 kind: concept
 canonical_label: Overall Story Solution
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
+- novel.dual-storyform
 ```
 
 
@@ -2119,6 +2203,10 @@ id: concept.os-symptom
 kind: concept
 canonical_label: Overall Story Symptom
 provenance: source-original
+scenarios:
+- novel.diagnose-flat-draft
+- novel.dual-storyform
+- novel.act-pivot
 ```
 
 
@@ -2154,8 +2242,12 @@ aliases_en:
 - appearance
 - how things seem to be
 dynamic_pair_id: el.actuality
-quad_id: quad.actuality-el
 ktad_position: T
+quad_id: quad.actuality-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.verse-chorus-pair
+- novel.dual-storyform
 ```
 
 
@@ -2192,13 +2284,17 @@ id: el.possibility
 kind: element
 canonical_label: Possibility
 provenance: source-original
-aliases_en:
-- plausibility
 aliases_de:
 - Möglichkeit
+aliases_en:
+- plausibility
 dynamic_pair_id: el.probability
-quad_id: quad.production-reduction-el
 ktad_position: D
+quad_id: quad.production-reduction-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- lyric.album-arc-mapping
 ```
 
 
@@ -2236,15 +2332,19 @@ id: el.potentiality
 kind: element
 canonical_label: Potentiality
 provenance: source-original
+aliases_de:
+- Potenzial
 aliases_en:
 - chance
 - focusing on the
 - precariousness
-aliases_de:
-- Potenzial
 dynamic_pair_id: el.certainty
-quad_id: quad.certainty-potentiality-el
 ktad_position: T
+quad_id: quad.certainty-potentiality-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- lyric.album-arc-mapping
 ```
 
 
@@ -2286,16 +2386,20 @@ id: el.proaction
 kind: element
 canonical_label: Proaction
 provenance: source-original
+aliases_de:
+- Vorausschauendes Handeln
 aliases_en:
 - commit
 - execute
 - implement
 - to initiate action
 - undertake
-aliases_de:
-- Vorausschauendes Handeln
-quad_id: quad.acceptance-reaction-el
 ktad_position: A
+quad_id: quad.acceptance-reaction-el
+scenarios:
+- novel.character-arc
+- lyric.album-arc-mapping
+- lyric.bridge-pivot
 ```
 
 
@@ -2345,8 +2449,12 @@ aliases_en:
 - promising
 - prospective
 dynamic_pair_id: el.possibility
-quad_id: quad.production-reduction-el
 ktad_position: A
+quad_id: quad.production-reduction-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -2374,6 +2482,10 @@ id: concept.problem-slot
 kind: concept
 canonical_label: Problem
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
 ```
 
 
@@ -2421,8 +2533,12 @@ aliases_en:
 - chain of interactions
 - manner of procedure
 dynamic_pair_id: el.result
-quad_id: quad.result-process-el
 ktad_position: T
+quad_id: quad.result-process-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- lyric.album-arc-mapping
 ```
 
 
@@ -2463,8 +2579,12 @@ provenance: source-original
 aliases_en:
 - determining
 dynamic_pair_id: el.reduction
-quad_id: quad.production-reduction-el
 ktad_position: K
+quad_id: quad.production-reduction-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- lyric.bridge-pivot
 ```
 
 
@@ -2520,8 +2640,12 @@ aliases_en:
 - how things will be
 - most likely
 dynamic_pair_id: el.speculation
-quad_id: quad.inertia-change-el
 ktad_position: A
+quad_id: quad.inertia-change-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -2562,8 +2686,12 @@ aliases_en:
 - precaution
 - preservation
 - safeguard
-quad_id: quad.evaluation-re-evaluation-el
 ktad_position: D
+quad_id: quad.evaluation-re-evaluation-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- lyric.archetype-as-system-part
 ```
 
 
@@ -2615,8 +2743,12 @@ aliases_en:
 - verified
 - ways of thinking
 dynamic_pair_id: el.unproven
-quad_id: quad.proven-unproven-el
 ktad_position: K
+quad_id: quad.proven-unproven-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -2726,14 +2858,18 @@ id: el.reaction
 kind: element
 canonical_label: Reaction
 provenance: source-original
+aliases_de:
+- Reaktion
 aliases_en:
 - acting
 - reply
 - response
-aliases_de:
-- Reaktion
-quad_id: quad.acceptance-reaction-el
 ktad_position: D
+quad_id: quad.acceptance-reaction-el
+scenarios:
+- novel.character-arc
+- lyric.album-arc-mapping
+- lyric.bridge-pivot
 ```
 
 
@@ -2778,14 +2914,18 @@ id: el.reconsider
 kind: element
 canonical_label: Reconsider
 provenance: source-original
+aliases_de:
+- Neuerwägung
 aliases_en:
 - re-examining conclusions
 - rethinking
-aliases_de:
-- Neuerwägung
 dynamic_pair_id: el.consider
-quad_id: quad.pursuit-avoid-el
 ktad_position: D
+quad_id: quad.pursuit-avoid-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.archetype-as-system-part
+- lyric.bridge-pivot
 ```
 
 
@@ -2827,8 +2967,12 @@ aliases_en:
 - comparisons of potentiality
 - determining probability
 dynamic_pair_id: el.production
-quad_id: quad.production-reduction-el
 ktad_position: T
+quad_id: quad.production-reduction-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- lyric.bridge-pivot
 ```
 
 
@@ -2878,12 +3022,16 @@ id: el.reevaluation
 kind: element
 canonical_label: Reevaluation
 provenance: source-original
+aliases_de:
+- Neubewertung
 aliases_en:
 - further assessment
 - subsequent analysis
-aliases_de:
-- Neubewertung
 dynamic_pair_id: el.evaluation
+scenarios:
+- novel.storyform-slot-fill
+- lyric.bridge-pivot
+- novel.dual-storyform
 ```
 
 
@@ -2920,8 +3068,12 @@ provenance: source-original
 aliases_en:
 - ramifications of an
 dynamic_pair_id: el.process
-quad_id: quad.result-process-el
 ktad_position: K
+quad_id: quad.result-process-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -2995,6 +3147,10 @@ id: concept.solution-slot
 kind: concept
 canonical_label: Solution
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.storyform-slot-fill
+- novel.diagnose-flat-draft
 ```
 
 
@@ -3035,8 +3191,12 @@ aliases_en:
 - prognostication
 - surmising possibilities
 dynamic_pair_id: el.projection
-quad_id: quad.inertia-change-el
 ktad_position: D
+quad_id: quad.inertia-change-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.refrain-as-restatement
+- lyric.album-arc-mapping
 ```
 
 
@@ -3253,8 +3413,12 @@ aliases_en:
 - structured explanation
 - systematized descriptive knowledge
 dynamic_pair_id: el.hunch
-quad_id: quad.proven-unproven-el
 ktad_position: A
+quad_id: quad.proven-unproven-el
+scenarios:
+- novel.storyform-slot-fill
+- lyric.refrain-as-restatement
+- novel.diagnose-flat-draft
 ```
 
 
@@ -3483,8 +3647,12 @@ aliases_en:
 - ongoing
 - perpetual
 dynamic_pair_id: el.ending
-quad_id: quad.result-process-el
 ktad_position: D
+quad_id: quad.result-process-el
+scenarios:
+- novel.character-arc
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -3532,8 +3700,12 @@ aliases_en:
 - unestablished
 - unverified
 dynamic_pair_id: el.proven
-quad_id: quad.proven-unproven-el
 ktad_position: T
+quad_id: quad.proven-unproven-el
+scenarios:
+- novel.storyform-slot-fill
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 

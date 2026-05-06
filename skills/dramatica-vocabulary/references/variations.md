@@ -2044,6 +2044,10 @@ id: concept.os-catalyst
 kind: concept
 canonical_label: Overall (Objective) Story Catalyst
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- novel.diagnose-flat-draft
+- novel.dual-storyform
 ```
 
 
@@ -2069,6 +2073,10 @@ id: concept.os-inhibitor
 kind: concept
 canonical_label: Overall (Objective) Story Inhibitor
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- novel.diagnose-flat-draft
+- novel.dual-storyform
 ```
 
 
@@ -2093,6 +2101,10 @@ id: concept.os-issue
 kind: concept
 canonical_label: Overall (Objective) Story Issue
 provenance: source-original
+scenarios:
+- novel.diagnose-flat-draft
+- novel.dual-storyform
+- novel.character-arc
 ```
 
 

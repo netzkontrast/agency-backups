@@ -167,6 +167,10 @@ id: concept.unique-ability
 kind: concept
 canonical_label: Unique Ability
 provenance: source-original
+scenarios:
+- novel.storyform-slot-fill
+- novel.character-arc
+- novel.diagnose-flat-draft
 ```
 
 
@@ -210,6 +214,10 @@ id: concept.consequences
 kind: concept
 canonical_label: Consequences
 provenance: source-original
+scenarios:
+- lyric.album-arc-mapping
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -241,6 +249,10 @@ id: concept.costs
 kind: concept
 canonical_label: Costs
 provenance: source-original
+scenarios:
+- lyric.album-arc-mapping
+- novel.dual-storyform
+- novel.diagnose-flat-draft
 ```
 
 
@@ -278,6 +290,10 @@ id: concept.dividends
 kind: concept
 canonical_label: Dividends
 provenance: source-original
+scenarios:
+- lyric.album-arc-mapping
+- novel.dual-storyform
+- novel.character-arc
 ```
 
 
@@ -434,10 +450,14 @@ id: concept.journey
 kind: concept
 canonical_label: Journey
 provenance: source-original
-aliases_en:
-- journey
 aliases_de:
 - Reise
+aliases_en:
+- journey
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.character-arc
 ```
 
 
@@ -616,6 +636,10 @@ id: concept.forewarnings
 kind: concept
 canonical_label: Forewarnings
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.diagnose-flat-draft
 ```
 
 
@@ -751,6 +775,10 @@ aliases_en:
 - prescribed specification
 - provision
 - unthinking responses
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -848,6 +876,10 @@ aliases_en:
 - essential steps
 - necessary requisites
 - prerequisites
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -977,6 +1009,10 @@ id: concept.requirements
 kind: concept
 canonical_label: Requirements
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -1006,13 +1042,17 @@ id: concept.signpost
 kind: concept
 canonical_label: Signpost
 provenance: source-original
+aliases_de:
+- Wegweiser
 aliases_en:
 - a set of circumstances
 - a static situation
 - signpost
 - state of
-aliases_de:
-- Wegweiser
+scenarios:
+- novel.act-pivot
+- novel.character-arc
+- lyric.album-arc-mapping
 ```
 
 
@@ -1175,6 +1215,10 @@ id: concept.issue
 kind: concept
 canonical_label: Issue
 provenance: source-original
+scenarios:
+- novel.crucial-element-audit
+- novel.diagnose-flat-draft
+- novel.dual-storyform
 ```
 
 

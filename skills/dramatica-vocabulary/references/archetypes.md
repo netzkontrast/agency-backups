@@ -24,6 +24,10 @@ canonical_label: Archetype
 provenance: source-original
 aliases_en:
 - archetype
+scenarios:
+- lyric.archetype-as-system-part
+- novel.character-arc
+- novel.dual-storyform
 ```
 
 

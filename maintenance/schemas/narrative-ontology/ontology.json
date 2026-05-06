@@ -315,6 +315,11 @@
       ],
       "aliases_de": [
         "Akt"
+      ],
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -325,6 +330,11 @@
       "term_file": "skills/dramatica-vocabulary/references/archetypes.md#archetype-concept",
       "aliases_en": [
         "archetype"
+      ],
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "novel.character-arc",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -339,14 +349,24 @@
       "kind": "concept",
       "canonical_label": "Consequences",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#consequence"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#consequence",
+      "scenarios": [
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "concept.costs",
       "kind": "concept",
       "canonical_label": "Costs",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#cost"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#cost",
+      "scenarios": [
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "concept.crucial-element",
@@ -376,28 +396,48 @@
       "kind": "concept",
       "canonical_label": "Dividends",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#dividend-overall-story-throughline"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#dividend-overall-story-throughline",
+      "scenarios": [
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform",
+        "novel.character-arc"
+      ]
     },
     {
       "id": "concept.event",
       "kind": "concept",
       "canonical_label": "Event",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#item"
+      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#item",
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "concept.forewarnings",
       "kind": "concept",
       "canonical_label": "Forewarnings",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#overall-objective-story-forewarnings"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#overall-objective-story-forewarnings",
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.album-arc-mapping",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "concept.issue",
       "kind": "concept",
       "canonical_label": "Issue",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#throughline"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#throughline",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft",
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "concept.journey",
@@ -410,6 +450,11 @@
       ],
       "aliases_de": [
         "Reise"
+      ],
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.album-arc-mapping",
+        "novel.character-arc"
       ]
     },
     {
@@ -427,21 +472,36 @@
       "kind": "concept",
       "canonical_label": "Overall (Objective) Story Catalyst",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/variations.md#overall-story-catalyst"
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#overall-story-catalyst",
+      "scenarios": [
+        "novel.act-pivot",
+        "novel.diagnose-flat-draft",
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "concept.os-inhibitor",
       "kind": "concept",
       "canonical_label": "Overall (Objective) Story Inhibitor",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/variations.md#overall-story-inhibitor"
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#overall-story-inhibitor",
+      "scenarios": [
+        "novel.act-pivot",
+        "novel.diagnose-flat-draft",
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "concept.os-issue",
       "kind": "concept",
       "canonical_label": "Overall (Objective) Story Issue",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/variations.md#overall-story-issue"
+      "term_file": "skills/dramatica-vocabulary/references/variations.md#overall-story-issue",
+      "scenarios": [
+        "novel.diagnose-flat-draft",
+        "novel.dual-storyform",
+        "novel.character-arc"
+      ]
     },
     {
       "id": "concept.os-problem",
@@ -458,21 +518,36 @@
       "kind": "concept",
       "canonical_label": "Overall Story Response",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#overall-objective-story-response"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#overall-objective-story-response",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft",
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "concept.os-solution",
       "kind": "concept",
       "canonical_label": "Overall Story Solution",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#overall-objective-story-solution"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#overall-objective-story-solution",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.diagnose-flat-draft",
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "concept.os-symptom",
       "kind": "concept",
       "canonical_label": "Overall Story Symptom",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#overall-objective-story-symptom"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#overall-objective-story-symptom",
+      "scenarios": [
+        "novel.diagnose-flat-draft",
+        "novel.dual-storyform",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "concept.preconditions",
@@ -486,6 +561,11 @@
         "prescribed specification",
         "provision",
         "unthinking responses"
+      ],
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -499,6 +579,11 @@
         "essential steps",
         "necessary requisites",
         "prerequisites"
+      ],
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -520,7 +605,12 @@
       "kind": "concept",
       "canonical_label": "Problem",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#problem"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#problem",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "concept.quad-structure",
@@ -537,7 +627,12 @@
       "kind": "concept",
       "canonical_label": "Requirements",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#requirements"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#requirements",
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform"
+      ]
     },
     {
       "id": "concept.scene",
@@ -547,6 +642,11 @@
       "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#unit",
       "aliases_de": [
         "Szene"
+      ],
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.album-arc-mapping",
+        "novel.character-arc"
       ]
     },
     {
@@ -554,7 +654,12 @@
       "kind": "concept",
       "canonical_label": "Sequence",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#set"
+      "term_file": "skills/dramatica-vocabulary/references/structural-terms.md#set",
+      "scenarios": [
+        "novel.act-pivot",
+        "lyric.album-arc-mapping",
+        "novel.character-arc"
+      ]
     },
     {
       "id": "concept.signpost",
@@ -570,6 +675,11 @@
       ],
       "aliases_de": [
         "Wegweiser"
+      ],
+      "scenarios": [
+        "novel.act-pivot",
+        "novel.character-arc",
+        "lyric.album-arc-mapping"
       ]
     },
     {
@@ -591,7 +701,12 @@
       "kind": "concept",
       "canonical_label": "Solution",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/elements.md#solution"
+      "term_file": "skills/dramatica-vocabulary/references/elements.md#solution",
+      "scenarios": [
+        "novel.crucial-element-audit",
+        "novel.storyform-slot-fill",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "concept.story-driver",
@@ -677,7 +792,12 @@
       "kind": "concept",
       "canonical_label": "Unique Ability",
       "provenance": "source-original",
-      "term_file": "skills/dramatica-vocabulary/references/types.md#concern"
+      "term_file": "skills/dramatica-vocabulary/references/types.md#concern",
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.character-arc",
+        "novel.diagnose-flat-draft"
+      ]
     },
     {
       "id": "dp.ability-desire",
@@ -686,7 +806,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.ability",
       "pair_member_b": "el.desire",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.acceptance-non-acceptance",
@@ -695,7 +820,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.acceptance",
       "pair_member_b": "el.non-acceptance",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.accurate-non-accurate",
@@ -704,7 +834,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.accurate",
       "pair_member_b": "el.non-accurate",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.actuality-perception",
@@ -713,7 +848,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.actuality",
       "pair_member_b": "el.perception",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.analysis-strategy",
@@ -722,7 +862,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.analysis",
       "pair_member_b": "var.strategy",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.appraisal-reappraisal",
@@ -731,7 +876,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.appraisal",
       "pair_member_b": "var.reappraisal",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.attempt-work",
@@ -740,7 +890,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.attempt",
       "pair_member_b": "var.work",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.attraction-repulsion",
@@ -749,7 +904,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.attraction",
       "pair_member_b": "var.repulsion",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.avoid-pursuit",
@@ -758,7 +918,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.avoid",
       "pair_member_b": "el.pursuit",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.becoming-being",
@@ -767,7 +932,12 @@
       "provenance": "source-original",
       "pair_member_a": "type.becoming",
       "pair_member_b": "type.being",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.cause-effect",
@@ -776,7 +946,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.cause",
       "pair_member_b": "el.effect",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.certainty-potentiality",
@@ -785,7 +960,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.certainty",
       "pair_member_b": "el.potentiality",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.change-inertia",
@@ -794,7 +974,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.inertia",
       "pair_member_b": "el.change",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.chaos-order",
@@ -803,7 +988,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.chaos",
       "pair_member_b": "el.order",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.choice-delay",
@@ -812,7 +1002,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.choice",
       "pair_member_b": "var.delay",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.circumstances-situation",
@@ -821,7 +1016,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.circumstances",
       "pair_member_b": "var.situation",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.closure-denial",
@@ -830,7 +1030,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.closure",
       "pair_member_b": "var.denial",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.commitment-responsibility",
@@ -839,7 +1044,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.commitment",
       "pair_member_b": "var.responsibility",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.conceiving-conceptualizing",
@@ -848,7 +1058,12 @@
       "provenance": "source-original",
       "pair_member_a": "type.conceiving",
       "pair_member_b": "type.conceptualizing",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.conditioning-instinct",
@@ -857,7 +1072,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.conditioning",
       "pair_member_b": "var.instinct",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.verse-chorus-pair",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
+      ]
     },
     {
       "id": "dp.conscience-temptation",
@@ -866,7 +1086,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.conscience",
       "pair_member_b": "el.temptation",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.conscious-memory",
@@ -875,7 +1100,12 @@
       "provenance": "source-original",
       "pair_member_a": "type.conscious",
       "pair_member_b": "type.memory",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.consider-reconsider",
@@ -884,7 +1114,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.consider",
       "pair_member_b": "el.reconsider",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.control-uncontrolled",
@@ -893,7 +1128,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.control",
       "pair_member_b": "el.uncontrolled",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.deduction-induction",
@@ -902,7 +1142,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.deduction",
       "pair_member_b": "el.induction",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.deficiency-permission",
@@ -911,7 +1156,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.deficiency",
       "pair_member_b": "var.permission",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.destiny-fate",
@@ -920,7 +1170,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.destiny",
       "pair_member_b": "var.fate",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.determination-expectation",
@@ -929,7 +1184,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.determination",
       "pair_member_b": "el.expectation",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.disbelief-faith",
@@ -938,7 +1198,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.disbelief",
       "pair_member_b": "el.faith",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.doing-obtaining",
@@ -947,7 +1212,12 @@
       "provenance": "source-original",
       "pair_member_a": "type.doing",
       "pair_member_b": "type.obtaining",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.doubt-investigation",
@@ -956,7 +1226,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.doubt",
       "pair_member_b": "var.investigation",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.dream-hope",
@@ -965,7 +1240,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.dream",
       "pair_member_b": "var.hope",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.ending-unending",
@@ -974,7 +1254,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.ending",
       "pair_member_b": "el.unending",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.enlightenment-wisdom",
@@ -983,7 +1268,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.enlightenment",
       "pair_member_b": "var.wisdom",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.equity-inequity",
@@ -992,7 +1282,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.equity",
       "pair_member_b": "el.inequity",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.bridge-pivot",
+        "lyric.album-arc-mapping",
+        "lyric.verse-chorus-pair"
+      ]
     },
     {
       "id": "dp.evaluation-re-evaluation",
@@ -1001,7 +1296,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.evaluation",
       "pair_member_b": "el.reevaluation",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.evidence-suspicion",
@@ -1010,7 +1310,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.evidence",
       "pair_member_b": "var.suspicion",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.expediency-need",
@@ -1019,7 +1324,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.expediency",
       "pair_member_b": "var.need",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.experience-skill",
@@ -1028,7 +1338,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.experience",
       "pair_member_b": "var.skill",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.fact-fantasy",
@@ -1037,7 +1352,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.fact",
       "pair_member_b": "var.fantasy",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.falsehood-truth",
@@ -1046,7 +1366,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.falsehood",
       "pair_member_b": "var.truth",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.feeling-logic",
@@ -1055,7 +1380,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.feeling",
       "pair_member_b": "el.logic",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.future-progress",
@@ -1064,7 +1394,12 @@
       "provenance": "source-original",
       "pair_member_a": "type.future",
       "pair_member_b": "type.progress",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.help-hinder",
@@ -1073,7 +1408,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.help",
       "pair_member_b": "el.hinder",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.hunch-theory",
@@ -1082,7 +1422,12 @@
       "provenance": "source-original",
       "pair_member_a": "el.hunch",
       "pair_member_b": "el.theory",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.interdiction-prediction",
@@ -1091,7 +1436,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.interdiction",
       "pair_member_b": "var.prediction",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.interpretation-senses",
@@ -1100,7 +1450,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.interpretation",
       "pair_member_b": "var.senses",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.learning-understanding",
@@ -1109,7 +1464,12 @@
       "provenance": "source-original",
       "pair_member_a": "type.learning",
       "pair_member_b": "type.understanding",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.mind-universe",
@@ -1118,7 +1478,12 @@
       "provenance": "source-original",
       "pair_member_a": "class.mind",
       "pair_member_b": "class.universe",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.morality-self-interest",
@@ -1127,7 +1492,12 @@
       "provenance": "source-original",
       "pair_member_a": "var.morality",
       "pair_member_b": "var.self-interest",
-      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md"
+      "term_file": "skills/dramatica-vocabulary/references/dynamic-pairs-index.md",
+      "scenarios": [
+        "lyric.archetype-as-system-part",
+        "lyric.verse-chorus-pair",
+        "novel.act-pivot"
+      ]
     },
     {
       "id": "dp.obligation-rationalization",
@@ -1296,6 +1666,11 @@
       "aliases_de": [
         "Akzeptanz",
         "Annahme"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.refrain-as-restatement",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -1312,6 +1687,11 @@
         "adequate",
         "sufficient",
         "within tolerance"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.diagnose-flat-draft",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -1355,6 +1735,11 @@
       "ktad_position": "A",
       "aliases_en": [
         "outward"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.refrain-as-restatement",
+        "lyric.archetype-as-system-part"
       ]
     },
     {
@@ -1397,6 +1782,11 @@
       ],
       "aliases_de": [
         "Gewissheit"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.diagnose-flat-draft",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -1418,6 +1808,11 @@
         "manifesting",
         "modify",
         "reshape"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.diagnose-flat-draft",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -1480,6 +1875,11 @@
       ],
       "aliases_de": [
         "Erwägung"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.archetype-as-system-part",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -1523,6 +1923,11 @@
         "drawing a conclusion",
         "narrowing to a single point",
         "process of elimination"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.diagnose-flat-draft",
+        "lyric.archetype-as-system-part"
       ]
     },
     {
@@ -1558,6 +1963,11 @@
         "finding the reasons",
         "imagining",
         "visualizing"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.character-arc",
+        "lyric.album-arc-mapping"
       ]
     },
     {
@@ -1614,6 +2024,11 @@
       "aliases_en": [
         "conclusion",
         "finish"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -1635,6 +2050,11 @@
       ],
       "aliases_de": [
         "Gleichgewicht"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.archetype-as-system-part",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -1653,6 +2073,11 @@
       "aliases_de": [
         "Bewertung",
         "Evaluation"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.bridge-pivot",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -1666,6 +2091,11 @@
       "dynamic_pair_id": "el.determination",
       "aliases_en": [
         "anticipated results"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.diagnose-flat-draft",
+        "lyric.album-arc-mapping"
       ]
     },
     {
@@ -1773,6 +2203,11 @@
         "impression",
         "intuition",
         "premonition"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.refrain-as-restatement",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -1786,6 +2221,11 @@
       "aliases_en": [
         "inactive response",
         "passive reaction"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.diagnose-flat-draft",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -1801,6 +2241,11 @@
         "conjecture",
         "postulate",
         "predicate"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.bridge-pivot",
+        "lyric.archetype-as-system-part"
       ]
     },
     {
@@ -1817,6 +2262,11 @@
       ],
       "aliases_de": [
         "Ungleichgewicht"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.archetype-as-system-part",
+        "lyric.refrain-as-restatement"
       ]
     },
     {
@@ -1830,6 +2280,11 @@
       "dynamic_pair_id": "el.change",
       "aliases_en": [
         "tendency"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "novel.diagnose-flat-draft",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -1883,6 +2338,11 @@
       "dynamic_pair_id": "el.acceptance",
       "aliases_de": [
         "Nicht-Akzeptanz"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.refrain-as-restatement",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -1893,7 +2353,12 @@
       "term_file": "skills/dramatica-vocabulary/references/elements.md#non-accurate",
       "quad_id": "quad.accurate-non-accurate-el",
       "ktad_position": "T",
-      "dynamic_pair_id": "el.accurate"
+      "dynamic_pair_id": "el.accurate",
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.diagnose-flat-draft",
+        "lyric.refrain-as-restatement"
+      ]
     },
     {
       "id": "el.oppose",
@@ -1947,6 +2412,11 @@
       "aliases_en": [
         "appearance",
         "how things seem to be"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.verse-chorus-pair",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -1963,6 +2433,11 @@
       ],
       "aliases_de": [
         "Möglichkeit"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.dual-storyform",
+        "lyric.album-arc-mapping"
       ]
     },
     {
@@ -1981,6 +2456,11 @@
       ],
       "aliases_de": [
         "Potenzial"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.dual-storyform",
+        "lyric.album-arc-mapping"
       ]
     },
     {
@@ -2000,6 +2480,11 @@
       ],
       "aliases_de": [
         "Vorausschauendes Handeln"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.album-arc-mapping",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -2016,6 +2501,11 @@
         "predictable",
         "promising",
         "prospective"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.dual-storyform",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -2030,6 +2520,11 @@
       "aliases_en": [
         "chain of interactions",
         "manner of procedure"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.dual-storyform",
+        "lyric.album-arc-mapping"
       ]
     },
     {
@@ -2043,6 +2538,11 @@
       "dynamic_pair_id": "el.reduction",
       "aliases_en": [
         "determining"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.dual-storyform",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -2057,6 +2557,11 @@
       "aliases_en": [
         "how things will be",
         "most likely"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.dual-storyform",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -2072,6 +2577,11 @@
         "precaution",
         "preservation",
         "safeguard"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.dual-storyform",
+        "lyric.archetype-as-system-part"
       ]
     },
     {
@@ -2089,6 +2599,11 @@
         "thinking",
         "verified",
         "ways of thinking"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.dual-storyform",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -2128,6 +2643,11 @@
       ],
       "aliases_de": [
         "Reaktion"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.album-arc-mapping",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -2145,6 +2665,11 @@
       ],
       "aliases_de": [
         "Neuerwägung"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.archetype-as-system-part",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -2159,6 +2684,11 @@
       "aliases_en": [
         "comparisons of potentiality",
         "determining probability"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.dual-storyform",
+        "lyric.bridge-pivot"
       ]
     },
     {
@@ -2174,6 +2704,11 @@
       ],
       "aliases_de": [
         "Neubewertung"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.bridge-pivot",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -2187,6 +2722,11 @@
       "dynamic_pair_id": "el.process",
       "aliases_en": [
         "ramifications of an"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -2202,6 +2742,11 @@
         "conjecturing",
         "prognostication",
         "surmising possibilities"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.refrain-as-restatement",
+        "lyric.album-arc-mapping"
       ]
     },
     {
@@ -2283,6 +2828,11 @@
         "description of linear",
         "structured explanation",
         "systematized descriptive knowledge"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "lyric.refrain-as-restatement",
+        "novel.diagnose-flat-draft"
       ]
     },
     {
@@ -2371,6 +2921,11 @@
         "continual",
         "ongoing",
         "perpetual"
+      ],
+      "scenarios": [
+        "novel.character-arc",
+        "lyric.album-arc-mapping",
+        "novel.dual-storyform"
       ]
     },
     {
@@ -2386,6 +2941,11 @@
         "unconfirmed",
         "unestablished",
         "unverified"
+      ],
+      "scenarios": [
+        "novel.storyform-slot-fill",
+        "novel.dual-storyform",
+        "novel.diagnose-flat-draft"
       ]
     },
     {

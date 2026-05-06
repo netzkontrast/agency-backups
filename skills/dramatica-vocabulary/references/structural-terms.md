@@ -29,10 +29,14 @@ id: concept.act
 kind: concept
 canonical_label: Act
 provenance: source-original
-aliases_en:
-- act
 aliases_de:
 - Akt
+aliases_en:
+- act
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -342,6 +346,10 @@ id: concept.event
 kind: concept
 canonical_label: Event
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.dual-storyform
 ```
 
 
@@ -396,6 +404,10 @@ id: concept.sequence
 kind: concept
 canonical_label: Sequence
 provenance: source-original
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.character-arc
 ```
 
 
@@ -435,6 +447,10 @@ canonical_label: Scene
 provenance: source-original
 aliases_de:
 - Szene
+scenarios:
+- novel.act-pivot
+- lyric.album-arc-mapping
+- novel.character-arc
 ```
 
 
