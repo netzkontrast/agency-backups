@@ -2,30 +2,22 @@
 type: note
 status: active
 slug: 031-adr-tooling-impl-friction-log
-summary: "In-progress friction log for Task 031 (TASK.md §7.7). Captures the three notable frictions encountered while implementing the agency-adr CLI suite. Will be promoted to a closure log once PR #67 merges and task_status flips to done."
+summary: "Closure friction log for Task 031 (TASK.md §7.7). Records the FL declaration and the three notable frictions encountered while implementing the agency-adr CLI suite. Finalised on PR #67 merge (commit bf90826)."
 created: 2026-05-06
 updated: 2026-05-06
 ---
 
 # Task 031 Friction Log
 
-**Status:** in-progress (Task 031 is `task_status: in_progress`; PR [#67](https://github.com/netzkontrast/agency/pull/67) is open and pending CI + review). This log will be finalised when the PR merges.
+**Highest Frustration Level: FL2**
 
-**Highest Frustration Level (so far): FL2**
+## Outcome
 
-## Progress So Far
+`agency-adr` is in force on `main`. PR [#67](https://github.com/netzkontrast/agency/pull/67) merged as commit `bf90826`. Validate + synthesize sub-commands ship; 49 ADR-specific tests pass alongside the 153 pre-existing tests; `tools/check-governance.sh` PASSes 5/5 numbered steps plus the trust audit; `.github/workflows/adr-validate.yml` runs the same gate plus a dry-run diff against the committed `AGENTS.md` guarded section. The PR carried five commits: `97719e7` (initial implementation), `1643110` (compress-citation aggregation + ADR.A.1.4 enforcement + diagnostic-explanations registration), `01c8a96` (CI fix: AGENTS.md alignment + run-log schema), `6a30991` (PR #67 review findings T.1–T.4), and `81f5ee4` (this Task entry + the [adr-tooling-impl prompt](../../prompts/adr-tooling-impl/prompt.md), closing PR #67 review findings G.1 and G.2).
 
-`agency-adr` is implemented locally and pushed. Validate + synthesize sub-commands ship; 49 ADR-specific tests pass alongside the 153 pre-existing tests; `tools/check-governance.sh` PASSes 5/5 numbered steps plus the trust audit; `.github/workflows/adr-validate.yml` runs the same gate plus a dry-run diff against the committed `AGENTS.md` guarded section. PR [#67](https://github.com/netzkontrast/agency/pull/67) carries commits `97719e7` (initial implementation), `1643110` (compress-citation aggregation + ADR.A.1.4 enforcement + diagnostic-explanations registration), `01c8a96` (CI fix: AGENTS.md alignment + run-log schema), and `6a30991` (PR #67 review findings T.1–T.4).
+## FL Declaration
 
-The Task remains `in_progress` because:
-
-1. CI on the head commit has not yet reported green.
-2. The PR has not yet merged to `main`.
-3. The owner-authored review at [`../028-adr-tooling-impl-plan/pr67-review.md`](../028-adr-tooling-impl-plan/pr67-review.md) flagged G.1 (this Task entry) and G.2 (the [adr-tooling-impl prompt](../../prompts/adr-tooling-impl/prompt.md)); both are landing in the same commit as this log but the merge gate is the closure signal, not the local push.
-
-## FL Declaration (provisional, finalised on merge)
-
-Three FL1–FL2 frictions encountered during implementation. The aggregate FL is set to **FL2** for the dual-imports diagnosis (Entry 1) — if no further friction surfaces between now and merge, this remains the closing FL.
+Three FL1–FL2 frictions encountered during implementation. The aggregate FL is **FL2** for the dual-imports diagnosis (Entry 1); no additional friction surfaced between local push and merge.
 
 ### Entry 1 — `tools/` is not a Python package; relative imports are forbidden (FL2)
 
@@ -75,7 +67,5 @@ The relative-import branch (`from ..fm import _core`) failed in pytest with `Imp
 
 ## Outstanding Items
 
-- PR #67 `adr-validate` CI must report green on the head commit before merge.
-- PR #67 must merge to `main`. On merge, the implementing agent (or the operator) MUST flip `task_status: in_progress → done` in [`./task.md`](./task.md) and remove the "in-progress" qualifier from the heading of this log.
-- PR #67 governance findings G.1 (Task entry) and G.2 (prompt artifact) are addressed by **this** Task and the sibling [`prompts/adr-tooling-impl/prompt.md`](../../prompts/adr-tooling-impl/prompt.md). Technical findings T.1–T.4 are addressed in commit `6a30991`. No items deferred to a successor Task.
+- All PR #67 review findings are closed: G.1 (Task entry) and G.2 (prompt artifact) by this Task and the sibling [`prompts/adr-tooling-impl/prompt.md`](../../prompts/adr-tooling-impl/prompt.md); T.1–T.4 by commit `6a30991`. No items deferred to a successor Task.
 - The first batch of authored ADRs (PD-005 in [`research/adr-assumption-audit/output/REPORT.md`](../../research/adr-assumption-audit/output/REPORT.md) §3) remains a separate Task — `agency-adr` is the *tooling*; the corpus seed is the next Task in the lineage.
