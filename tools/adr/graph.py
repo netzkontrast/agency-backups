@@ -99,6 +99,11 @@ def detect_cycles(g: AdrGraph) -> list[list[str]]:
             if node in index:
                 cycle = path[index[node]:]
                 cycles.append(cycle + [node])
+                # Mark the entire cycle path as seen so the outer loop
+                # does not rediscover the same cycle from a different
+                # starting node (review T.4).
+                for n in cycle:
+                    seen.add(n)
                 return True
             if node not in residual or node in seen:
                 return False

@@ -62,6 +62,10 @@ def _validate_corpus(
 
 
 def _emit(diags: list[Diagnostic], fmt: str, *, checked: int, stream=sys.stderr) -> None:
+    # Output split is intentional: --format=json emits a single machine-
+    # readable payload to stdout (so CI pipelines can `| jq …`), while
+    # text mode writes per-diagnostic lines to stderr and a one-line
+    # summary to stdout. Mirrors tools/fm/validate.py's convention.
     error_count = sum(1 for d in diags if d.severity == "ERROR")
     warn_count = sum(1 for d in diags if d.severity == "WARN")
     if fmt == "json":

@@ -63,7 +63,7 @@ def _render_block(section: CompressedSection) -> str:
 def synthesize(
     *,
     agents_md: Path,
-    decisions_root: Path = Path("decisions"),
+    decisions_root: Path | None = None,
     token_limit: int = 2000,
     fidelity_floor: float = 0.95,
     fidelity_mode: str = "bcp14-keyword",
@@ -74,6 +74,8 @@ def synthesize(
     repo = repo_root or _core.repo_root_from_cwd()
     if not agents_md.is_absolute():
         agents_md = repo / agents_md
+    if decisions_root is None:
+        decisions_root = repo / "decisions"
     diags: list[Diagnostic] = []
 
     corpus = load_corpus(decisions_root, repo_root=repo)

@@ -29,9 +29,15 @@ class CompressedSection:
 def count_tokens(text: str) -> int:
     """Whitespace-split heuristic token count.
 
-    Per ``implementation-plan.md §6 OD.7``, this initial heuristic is
-    sufficient; a precise tokeniser can be slotted in later without
-    altering the public ``count_tokens`` signature.
+    Per ``implementation-plan.md §6 OD.7`` this initial heuristic is
+    sufficient for v0; a precise tokeniser can be slotted in later
+    without altering the public ``count_tokens`` signature. Calibration
+    note: BPE token counts (what an LLM actually consumes) for prose
+    typically run **1.2–1.5× higher** than this whitespace count, so a
+    block that measures 2000 tokens here may be 2400–3000 BPE tokens
+    in practice. When the synthesis approaches ``--token-limit``,
+    operators SHOULD treat the heuristic as a soft ceiling and
+    re-measure with a real tokeniser before raising the limit.
     """
     return len(text.split())
 
