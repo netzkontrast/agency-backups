@@ -226,5 +226,12 @@ Feature: Task 030 follow-up items resolve
 
 - Predecessor (closed): [`/tasks/030-cleanup-dramatica-skills-corpus/`](../030-cleanup-dramatica-skills-corpus/) — ships the four scripts under audit, the precompiled artefacts, and the ST-3 partition table.
 - PR feedback: [PR #68 review comment](https://github.com/netzkontrast/agency/pull/68#issuecomment-4389689106) — sources Items 1, 2, 5, 4, plus the P-2 todo-marking fix already landed.
-- Sibling-process input: [`/tasks/029-adr-assumption-audit/`](../029-adr-assumption-audit/) — the FE-EX-1..FE-EX-5 process patterns from Task 030's friction-log feed there; this task does NOT re-surface them.
+- Sibling-process inputs (correction): Task 029 is `done` and did NOT absorb Task 030's friction patterns. The actual routing (per Task 030's friction-log §Pattern routing post-mortem):
+  - [`/tasks/040-superclaude-spec-evaluation/`](../040-superclaude-spec-evaluation/) — FE-2, FE-6, FE-EX-1, FE-EX-2, FE-EX-4, FE-EX-5 (the `/sc:*` and parallel-dispatch surface).
+  - [`/tasks/033-task-spec-integration/`](../033-task-spec-integration/) — FE-1, FE-5, FE-8, FE-9 (subtask format + task↔prompt edges).
+  - [`/tasks/032-agents-spec-integration/`](../032-agents-spec-integration/) — FE-10 (AGENTS.md §NO.5 preview lifecycle).
+  - [`/tasks/034-prompt-spec-integration/`](../034-prompt-spec-integration/) — FE-4 (renderer YAML).
+  - [`/tasks/038-frustrated-spec-integration/`](../038-frustrated-spec-integration/) — FE-7 (verbose-by-design).
+  - [`/tasks/039-maintenance-spec-integration/`](../039-maintenance-spec-integration/) — FE-3 (frontmatter↔readme drift).
+  - This task does NOT re-surface the patterns; it consumes the work the spec-integration chain produces.
 - Affected tooling: `tools/dramatica-nav/{term,aliases,precompile,validate}.py`, `tools/dramatica-nav/tests/`, `tools/check-governance.sh`, `PRE_COMMIT.md §7`, `AGENTS.md §NO.5`, `maintenance/schemas/narrative-ontology/`, `skills/dramatica-vocabulary/references/character-dynamics.md`.

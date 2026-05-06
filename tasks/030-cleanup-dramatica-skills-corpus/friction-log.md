@@ -130,4 +130,29 @@ ST-1 reported the same observation from its side: a pre-existing uncommitted ST-
 - `tools/check-governance.sh`: PASS.
 - `pytest tools/dramatica-nav/tests/`: 87 passed.
 - `task.md` frontmatter: `task_status: done`.
-- Task 029 absorbs FE-EX-1 through FE-EX-5 as candidate inputs (parallel-dispatch race, quota-event partial-completion, baseline-count test drift, agency-adr metadata-vs-runtime gap, worktree filesystem leak).
+
+## Pattern routing (post-mortem correction)
+
+An earlier draft of this section claimed Task 029 absorbs FE-EX-1..5 as candidate inputs. **That was wrong.** Task 029 (`adr-assumption-audit`) was scoped specifically to the ADR-governance-spec audit and shipped its REPORT.md (9 ASMs / 11 IADRs / 7 PDs) before Task 030's friction patterns existed. Task 029 is `task_status: done`; it cannot retroactively absorb anything.
+
+The patterns DO have homes — on main's open spec-integration chain (Tasks 032–040). The actual routing:
+
+| Pattern | Natural home (open task on main) | Why |
+|---|---|---|
+| FE-1 — no canonical subtask file template | 033 task-spec-integration | T.4.* subtask format ratification. Partly resolved by 041 `prompt_kind: task-spec`. |
+| FE-2 — `/sc:agent` contract undocumented | 040 superclaude-spec-evaluation | the `/sc:*` command surface is exactly its scope. |
+| FE-3 — `task_status` drift readme vs frontmatter | 039 maintenance-spec-integration | drift-detection / repair tier. |
+| FE-4 — renderer-emitted depth-2 YAML breaks rule | 034 prompt-spec-integration | prompt structure + frontmatter contract. |
+| FE-5 — task spawns prompt that another task uses | 033 task-spec-integration | task↔prompt edge cardinality. Partly resolved by 041. |
+| FE-6 — no `/sc:` command lifecycle spec | 040 superclaude-spec-evaluation | command-set documentation is in scope. |
+| FE-7 — verbose-by-design vs anti-bloat tension | 038 frustrated-spec-integration | FRUSTRATED.md §28 + special-triggers home. |
+| FE-8 — provisional-conventions pattern | 033 task-spec-integration | declaration mechanism for not-yet-ratified rules. |
+| FE-9 — `task_spawns_prompts` cardinality unclear | 033 task-spec-integration | TASK.md §3.3 definition. |
+| FE-10 — preview lifecycle for ontology artefacts | 032 agents-spec-integration | AGENTS.md §NO.5 amendment is its work surface. |
+| FE-EX-1 — parallel-dispatch race | 040 superclaude-spec-evaluation | `/sc:agent` + `subtask_depends_on` interaction. |
+| FE-EX-2 — org quota partial-completion | 040 superclaude-spec-evaluation | per-phase milestones for multi-phase tasks. |
+| FE-EX-3 — hardcoded test-count drift | (none — Task 042 Item 10) | local fix; no downstream rule needed. |
+| FE-EX-4 — `agency-adr` metadata-vs-runtime gap | 040 superclaude-spec-evaluation | pre-dispatch gate semantics. |
+| FE-EX-5 — worktree filesystem leak | 040 superclaude-spec-evaluation | worktree contract for `/sc:agent`. |
+
+This is documentation only. Filing each pattern as an explicit input on the destination task is **not** done from this branch — the destination tasks live on main, and editing them from a feature branch would be invasive. A future driver picking up Task 040 (or any of 032/033/034/037/038/039) is expected to discover this routing table when it audits Task 030's friction-log per the FRUSTRATED.md cross-referencing convention.
