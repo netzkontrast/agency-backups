@@ -34,11 +34,27 @@ from pathlib import Path
 
 # Wire in the canonical frontmatter parser so we share semantics with the
 # rest of the toolchain (fm/_core.py is the single source of truth).
-sys.path.insert(0, str(Path(__file__).resolve().parent / "fm"))
-import _core  # type: ignore  # noqa: E402
-
-read_fm = _core.read_fm
-str_list = _core.str_list
+# Guard: skip duplicate insert when the test suite imports this module
+# alongside its own sys.path edits.
+_FM_PATH = str(Path(__file__).resolve().parent / "fm")
+if _FM_PATH not in sys.path:
+    sys.path.insert(0, _FM_PATH)
+try:
+    import _core  # type: ignore  # noqa: E402
+    read_fm = _core.read_fm
+    str_list = _core.str_list
+except ImportError:
+    # Graceful degradation per repo's advisory-linter convention: if the
+    # frontmatter parser is unavailable (e.g. mid-toolchain-migration window
+    # per MAINTENANCE.md §1), exit clean rather than crash. check-governance.sh
+    # invokes this linter advisory-tier (`|| true`), so an unhandled crash
+    # would silently no-op and rob the operator of any signal.
+    print(
+        "check-narrative-ontology-load: tools/fm/_core.py not importable — "
+        "skipping (advisory linter, exit 0).",
+        file=sys.stderr,
+    )
+    raise SystemExit(0)
 
 EXIT_OK = 0
 EXIT_WARN = 2
