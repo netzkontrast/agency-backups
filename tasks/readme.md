@@ -72,6 +72,7 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`042-dramatica-nav-followups/`](./042-dramatica-nav-followups/) — Phase-1 follow-ups for the dramatica-nav corpus (Task 030 successor): consolidate 10 outstanding items across encoding-hints, cleanup linter, alias loader, and persona-scenario emitter. Status: `open`.
 - [`043-renumber-duplicate-task-ids-v3/`](./043-renumber-duplicate-task-ids-v3/) — Found by coherence run 2026-05-07. Resolve the duplicate `task_id` collisions on slots 031 and 032 (each shared by two folders) per [TASK.md §8.1](../TASK.md). Successor pattern to [Task 013](./013-renumber-duplicate-task-ids/) and [Task 024](./024-renumber-duplicate-task-ids-v2/). Status: `open`.
 - [`044-improve-maintenance-spec-may-07-2026/`](./044-improve-maintenance-spec-may-07-2026/) — Findings F14–F17 distilled from the 2026-05-07 coherence run: FL declaration canonical form, cross-branch task_id mechanical gate, tasks/readme.md membership drift, /sc: skill fit for coherence runs. Companion (not successor) to [Task 025](./025-maintenance-spec-remaining-findings/) and [Task 032](./032-improve-maintenance-spec-may-2026/). Status: `open`.
+- [`047-cross-spec-contradiction-baseline/`](./047-cross-spec-contradiction-baseline/) — Pre-chain contradiction baseline: catalogs 16 inter-spec normative conflicts across the 8 root specs before the 032–039 amendment chain. 5 High-severity (CONTR-001,004,005,006,014); §4 provides amendment-safety notes per task 032–039. Status: `done`. Output: [`research/research-cross-spec-contradiction-baseline/output/REPORT.md`](../research/research-cross-spec-contradiction-baseline/output/REPORT.md). (Note: `task_id: "047"` accounts for tasks 043–046 reserved in a parallel branch landing before this one.)
 
 ### Chain-Level Falsification (Tasks 032–039)
 
@@ -79,7 +80,7 @@ The 8-task chain above is a single coordinated effort to integrate under-cited r
 
 1. The friction-pattern-synthesis re-run (Task 033 ST-1 re-executed post-merge) shows *more* governance friction than at branch-time, not less. (The chain claims net debt reduction; if friction grows, the cut was harmful.)
 2. `tools/check-governance.sh` runtime exceeds 2× its pre-chain duration on a representative commit. (New linters worth shipping must amortize their cost; a 2×+ slowdown means the architecture is wrong.)
-3. Two or more root specs end up with mutually contradictory normative clauses introduced by this chain. (The whole point is to *resolve* the FRUSTRATED.md §28 ↔ PRE_COMMIT.md §2 contradiction, not introduce new ones.)
+3. Two or more root specs end up with mutually contradictory normative clauses introduced by this chain. (The whole point is to *resolve* the FRUSTRATED.md §28 ↔ PRE_COMMIT.md §2 contradiction, not introduce new ones.) **Pre-chain baseline: [Task 047](./047-cross-spec-contradiction-baseline/) catalogs 16 existing contradictions (CONTR-001–016); the post-chain count MUST NOT exceed 16 except where resolved.**
 4. The number of "briefing pending" subtasks at chain-end is greater than at branch-time. (We commit to authoring; "pending" should be a falling number.)
 
 If any falsifier triggers post-merge, the chain MUST be partially rolled back (single offending task) or fully rolled back (if friction-pattern-synthesis fails) per `MAINTENANCE.md §1` rollback procedure.

@@ -4,7 +4,7 @@ status: active
 slug: research-root
 summary: "Root of /research/. Each subfolder is the workspace produced by executing a prompt of matching slug; /research/ does not house prompt drafts."
 created: 2026-05-02
-updated: 2026-05-06
+updated: 2026-05-07
 ---
 
 # Research Root
@@ -32,6 +32,7 @@ All work here MUST conform to [`RESEARCH.md`](../RESEARCH.md). Frontmatter and c
 - [`skills-namespace-ontology/`](./skills-namespace-ontology/) — Ratified `skill_*` L2 namespace: five kind values, three tier values, 14-skill mapping, two-case reciprocity rule, migration plan. Unblocks Tasks 009 and 011.
 - [`spec-driven-research-agentic-workflows/`](./spec-driven-research-agentic-workflows/) — Spec-driven research workflow patterns.
 - [`governance-specs-update-research/`](./governance-specs-update-research/) — Execution workspace assessing the tooling and spec drift to create an update plan for Task 026.
+- [`research-cross-spec-contradiction-baseline/`](./research-cross-spec-contradiction-baseline/) — Pre-chain contradiction baseline: 16 inter-spec normative conflicts cataloged across the 8 root governance specs before the 032–039 amendment chain. Output: [`output/REPORT.md`](./research-cross-spec-contradiction-baseline/output/REPORT.md) — 5 High-severity (CONTR-001,004,005,006,014), 15 newly discovered. Feeds chain falsification criterion #3 and provides per-task amendment-safety notes for Tasks 032–039.
 
 ### External Research Results (Third-Party Sources)
 

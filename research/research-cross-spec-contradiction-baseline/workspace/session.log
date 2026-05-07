@@ -1,0 +1,50 @@
+---
+type: note
+status: active
+slug: research-cross-spec-contradiction-baseline-session-log
+summary: "Chronological session log for the cross-spec contradiction baseline research run."
+created: 2026-05-07
+updated: 2026-05-07
+---
+
+# Session Log — Cross-Spec Normative Contradiction Baseline
+
+## 2026-05-07
+
+**[Session Start]**
+- Brainstorm identified gap: no pre-chain contradiction baseline exists for tasks 032–039 falsification criterion #3.
+- Proposed slug: `research-cross-spec-contradiction-baseline`.
+- Verified slug does not exist in /prompts/ or /research/.
+
+**[Prompt Authoring]**
+- Created `/prompts/research-cross-spec-contradiction-baseline/prompt.md` (RISEN+ReAct, prompt_kind: research-proposal).
+- Created `/prompts/research-cross-spec-contradiction-baseline/brief.md` (goal, inputs, acceptance criteria, falsification clause).
+- Created `/prompts/research-cross-spec-contradiction-baseline/readme.md`.
+
+**[Workspace Initialization]**
+- Created research workspace scaffold: readme.md, prompt.md (snapshot), workspace/, synthesis/, reflection/, output/ with readmes.
+- Initial commit: `research(cross-spec-contradiction-baseline): scaffold new research proposal and workspace`.
+- Pushed to `origin/claude/busy-cori-9v8wp`.
+
+**[Research Execution]**
+- Deep-research agent dispatched to read all 8 root specs and produce contradiction catalog.
+- Agent completed: found 16 contradictions (CONTR-001 through CONTR-016).
+  - 1 previously known (CONTR-001 = FRUSTRATED §28 ↔ PRE_COMMIT §2) — validation anchor confirmed.
+  - 15 newly discovered.
+  - 5 High severity, 7 Medium, 4 Low.
+  - Type distribution: 3 Direct, 3 Indirect, 7 Scope-overlap, 3 Lifecycle.
+
+**[Synthesis]**
+- Populated output/REPORT.md (§1 Methodology, §2 Catalog CONTR-001–016, §3 Per-Spec Risk Table, §4 Amendment Safety, §5 Summary Statistics).
+- Populated synthesis/methodology.md, synthesis/tracks.md, synthesis/post-synthesis-log.md, synthesis/state.md.
+- All state.md checklist items checked off.
+
+**[Reflection]**
+- Written reflection/friction-log.md (FL0 — no friction).
+- Written reflection/M07-contradiction-log.md (primary method summary).
+
+**[Pre-commit checks]**
+- tools/check-governance.sh to be run before final commit.
+
+**[Session End]**
+- Delivered: output/REPORT.md with 16 contradictions, per-spec risk table, amendment-safety notes per task 032–039.
