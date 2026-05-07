@@ -17,6 +17,10 @@ Welcome, agent. This repository manages development and deep research tasks.
 
 **Last step of every Claude Code run:** After your final commit and push succeed, you MUST invoke `/sc:createPR` to open a pull request for review. See [§ Closing Run Procedure (Claude Code)](#closing-run-procedure-claude-code) below for the binding rule.
 
+## Theoretical Foundations
+
+The MDL-compression / supersession-DAG paradigm encoded in this repository's ADR governance pipeline (`tools/adr/{compress,graph,synthesize}.py`, the `<!-- BEGIN/END AGENCY-ADR SYNTHESIS -->` guarded section below) traces to the external Gemini research run at [`research/gemini/agency-adr-governance-spec/`](./research/gemini/agency-adr-governance-spec/). That artefact is the theoretical anchor for the §0–§9 ADR governance contract synthesised in [`research/adr-spec-research-synthesis/output/SPEC.md`](./research/adr-spec-research-synthesis/output/SPEC.md) and implemented by Task 028/031. Citing it here closes the provenance gap between the deployed pipeline and its theoretical premise per Task 032 ST-5 acceptance criterion (a). Subsequent re-derivations of this paradigm MUST go through the supersession DAG defined in the ADR SPEC §6, not informal amendment.
+
 ## Session Setup
 
 Before doing any other work, you MUST verify that all tooling dependencies are installed. Run the bootstrap script from the repository root:
@@ -150,6 +154,8 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 - **R3.** Each normative statement SHOULD be addressable by a stable identifier of the form `<Spec-Letter>.<Section>.<Index>` (e.g., `A.3.2`), so that cross-references and audit logs can pin-point the exact clause.
 - **R4.** A spec file MUST include a verbatim `§ RFC 2119` declaration section before its first normative clause (see `/maintenance/language-spec.md` for the canonical boilerplate).
 
+> **Polarity-inversion advisory (Task 032 ST-3).** Polarity inversion — silently stripping a `MUST NOT` qualifier so a clause inverts to a permissive `MUST` — is undetectable by deterministic compression-fidelity checks alone. See [`research/adr-assumption-audit/output/REPORT.md`](./research/adr-assumption-audit/output/REPORT.md) §1 ASM-001 for the worked example. With Task 031's ADR synthesis pipeline live, an ASM-001 inversion in any `decisions/<NNNN>-<slug>.md` would silently invert governance language inside the [`Synthesised ADR Constraints`](#synthesised-adr-constraints) guarded section on the next `tools/adr/cli.py synthesize` run. The advisory linter [`tools/check-rfc2119-polarity.py`](./tools/check-rfc2119-polarity.py) is the missing guard rail; it runs WARN-tier in [`tools/check-governance.sh`](./tools/check-governance.sh) over all 8 root specs, every `research/<slug>/output/SPEC.md`, and every `decisions/<NNNN>-<slug>.md`. Reviewers MUST treat any `WARN:RFC2119.POLARITY` diagnostic as a manual-review candidate before merging.
+
 ### Gherkin Syntax Binding
 
 Every behavioural example, agent-interaction scenario, or hand-off specification in every produced spec MUST use standard Gherkin syntax and MUST be self-contained and executable.
@@ -251,7 +257,7 @@ The query surface over the ontology is [`tools/dramatica-nav/nav.py`](./tools/dr
 - **NO.2.** An agent authoring or auditing an **NCP** document (`*.ncp.json`, `skills/ncp-author/`) MUST resolve every Dramatica-flavored slot through the ontology. The mapping rule is one-way: ontology IDs map to NCP enum strings; NCP enum strings are owned upstream and MUST NOT be coined from the Dramatica side. Use `nav.py by-ncp <enum-string>` to find the ontology ID, or `nav.py by-id <ontology-id>` to find the NCP string.
 - **NO.3.** An agent working on the **`novel-architect` Kohärenz Protokoll** (any file under `skills/novel-architect/references/canon/`) MUST consult the ontology before changing a structural canon entry, so the change references a canonical ID rather than a free-text label. Direct prose canon (DKT-Physik, Prosa-Regeln, Mandate in `canon-meta.md`) does not trigger this rule.
 - **NO.4.** An agent doing **Agency-System triptychon / Suno-lyric** work (`skills/the-agency-system-architect/`, `skills/suno-lyric-writer/`) SHOULD consult the ontology when a track, verse, or arc encodes a Dramatica concept. Tag the concept with its `lyric.*` scenario ID where applicable so the cross-skill audit graph stays intact.
-- **NO.5.** An agent doing **non-narrative work** (governance refactors, frontmatter linters, build tooling, anything not under the four narrative skills) MUST NOT load the Narrative Ontology files. Loading wastes tokens on data the work does not need. The Frontmatter Ontology governs that work; this ontology does not.
+- **NO.5.** An agent doing **non-narrative work** (governance refactors, frontmatter linters, build tooling, anything not under the four narrative skills) MUST NOT load the Narrative Ontology files. Loading wastes tokens on data the work does not need. The Frontmatter Ontology governs that work; this ontology does not. NO.5 is mechanically enforced by [`tools/check-narrative-ontology-load.py`](./tools/check-narrative-ontology-load.py) (Task 032 ST-2), which runs WARN-tier inside [`tools/check-governance.sh`](./tools/check-governance.sh) and emits `WARN:NO.5:<msg>` against any task whose `task_affects_paths` does NOT include `skills/dramatica-*` / `skills/ncp-*` / `skills/novel-*` yet references `maintenance/schemas/narrative-ontology/`.
 - **NO.6.** When the navigator and the prose disagree, the **navigator is authoritative for IDs and relationships**; the **prose is authoritative for meaning**. The skills' own SKILL.md files document this precedence rule under their `## Navigator` sections.
 
 ### What the Schemas Bind
@@ -289,6 +295,88 @@ Feature: Agent uses the Narrative Ontology when narrative work is in scope
     When the agent considers loading maintenance/schemas/narrative-ontology/ontology.json
     Then the agent MUST NOT load it
     And the agent SHOULD log "narrative ontology skipped — non-narrative scope" if narrative content is mentioned only in passing
+```
+
+---
+
+## Skills Architecture — Container Capabilities and Citation Protocol
+
+The skills loader and any skill that fetches its own dependencies MUST honour the operational constraints resolved by [`research/skills-skill-container-capabilities/output/SPEC.md`](./research/skills-skill-container-capabilities/output/SPEC.md). Two previously-`UNCERTAIN` markers (U1, U2) are now `RESOLVED`:
+
+- **U1 — `git` is NOT a pre-installed binary on the claude.ai code-execution container.** The official utility list (`unzip`, `unrar`, `7zip`, `bc`, `rg`, `fd`, `sqlite`) excludes git. Skills targeting claude.ai (Free/Pro/Max) MUST NOT assume `git clone` is available; they MUST use the GitHub REST API as the primary fetch mechanism (`requests` over `https://api.github.com/repos/<owner>/<repo>/contents/<path>`). Skills MAY attempt `git` first with graceful REST-API fallback. Claude API code-execution has no network access; git clone MUST NOT be used there. Claude Code on a host system has full git access. See SPEC §2.4.
+- **U2 — Container filesystem persistence between independent web conversations is NOT guaranteed.** The web UI exposes no container-ID reuse mechanism; each new claude.ai conversation MUST be treated as starting with a fresh container. The "pull-if-exists" optimisation MUST NOT be relied upon in the claude.ai web surface. All bootstrap sequences MUST re-fetch required files on each invocation. Workspace storage is 5 GiB; RAM 5 GiB. See SPEC §3.4.
+
+### Citation Reproducibility Protocol
+
+When a skill (or any agent producing audit-traceable output) cites a file region, the citation MUST use the form `path/to/file.ext:Lstart-Lend@<sha>` per [`research/ncp-novel-co-authoring-spec/output/SPEC.md`](./research/ncp-novel-co-authoring-spec/output/SPEC.md) §"Inline citations". The `@<sha>` suffix pins the citation to a commit so subsequent re-derivations remain reproducible. Skills SHOULD prefer this form over bare `path:Lstart-Lend` references in narrative-ontology and novel-co-authoring contexts. Non-narrative agents MAY use bare `path:Lstart-Lend` when commit-pinning is not material to audit recovery.
+
+### Acceptance Scenarios (Normative)
+
+```gherkin
+Feature: Skills honour container capability constraints and the citation protocol
+
+  # anchor: AG.SK.1
+  Scenario: Skill targeting claude.ai web surface MUST NOT assume git
+    Given a Skill bootstrap sequence runs inside the claude.ai code-execution container
+    When the Skill needs to fetch a file from a public GitHub repository
+    Then the Skill MUST NOT execute `git clone` as the primary mechanism
+    And the Skill MUST use the GitHub REST API (or HTTP archive download) instead
+    And the Skill MAY attempt `git` first only if it gracefully falls back to the REST API on `command not found`
+
+  # anchor: AG.SK.2
+  Scenario: Each claude.ai conversation starts with a fresh container
+    Given an agent begins a new claude.ai web conversation
+    When the agent runs a skill that previously cached files in `/workspace`
+    Then the agent MUST re-fetch every required file
+    And the agent MUST NOT branch on the presence of a prior local clone
+
+  # anchor: AG.SK.3
+  Scenario: Narrative-ontology citation pins to a commit sha
+    Given an agent produces an audit citation referencing a narrative-ontology entry
+    When the citation appears inside an NCP, novel-architect, or dramatica artefact
+    Then the citation MUST take the form `path/to/file.ext:Lstart-Lend@<sha>`
+    And the agent MUST resolve `<sha>` to the commit that owns the cited line range
+
+  # anchor: AG.NO5.1
+  Scenario: Non-narrative agent loads narrative ontology — WARN
+    Given an agent runs a Task whose `task_affects_paths` does NOT include any of `skills/dramatica-*`, `skills/ncp-*`, `skills/novel-*`
+    And the staged frontmatter or diff shows a read against `maintenance/schemas/narrative-ontology/ontology.json`
+    When `tools/check-narrative-ontology-load.py` runs at pre-commit
+    Then the linter MUST emit a WARN (exit 2) citing the offending path
+    And `tools/check-governance.sh` MUST NOT block the commit (advisory only)
+```
+
+---
+
+## Assumption-Log Substance — Mechanical Validation
+
+AGENTS.md §"Folder Management & Workflow Drift" requires every operational folder's `readme.md` to log its assumptions; FOLDERS.md F.3 binds the section heading. Both rules are now mechanically enforced by [`tools/check-assumption-log.py`](./tools/check-assumption-log.py) (Task 032 ST-4), which runs WARN-tier in `tools/check-governance.sh` over `tasks/<NNN>-<slug>/readme.md` and `research/<slug>/readme.md`.
+
+The linter emits three diagnostic codes:
+
+- `ASSUMPTION.LOG.MISSING` — required `## Assumptions Log` section absent.
+- `ASSUMPTION.LOG.EMPTY` — section present but body has no substance and no explicit `(none)` declaration.
+- `ASSUMPTION.LOG.STALE` — readme `updated:` predates sibling `task.md` `updated:`; assumptions MUST be reconfirmed or refreshed.
+
+An empty section with the literal line `(none)` (case-insensitive) is permitted as an explicit declaration of no assumptions; the linter does NOT flag it. New operational folders SHOULD include the section at creation time so the WARN tier stays clean.
+
+```gherkin
+Feature: Operational folder readme carries an Assumptions Log
+
+  # anchor: AG.AL.1
+  Scenario: New operational folder ships with an Assumptions Log
+    Given an agent creates `tasks/<NNN>-<slug>/readme.md`
+    When the agent writes the file
+    Then the file MUST contain a level-2 heading `## Assumptions Log`
+    And the section MUST contain at least one substantive entry OR the literal line `(none)`
+
+  # anchor: AG.AL.2
+  Scenario: Stale readme triggers refresh advisory
+    Given a `tasks/<NNN>-<slug>/readme.md` carries an `## Assumptions Log` section
+    And the sibling `task.md` `updated:` is more recent than the readme `updated:`
+    When `tools/check-assumption-log.py` runs at pre-commit
+    Then the linter MUST emit `WARN:ASSUMPTION.LOG.STALE`
+    And the agent SHOULD reconfirm the assumptions and bump the readme `updated:` field
 ```
 
 ---

@@ -4,10 +4,10 @@ status: active
 slug: agents-spec-integration
 summary: "Integrate underused research findings (adr-assumption-audit ASM-001/004/005/009, skills-skill-container-capabilities U1-U2, gemini theoretical-foundation, ncp-novel-co-authoring) into AGENTS.md, mechanically enforce NO.5 narrative-ontology load discipline, and close the §60-65 assumption-log substance gap."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 task_id: "032"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-opus-4-7"
 task_priority: P2
 task_uses_prompts:
   - research-adr-corpus-extraction
@@ -86,16 +86,16 @@ This sample fixes the *shape* (Given/When/Then anchored to a stable identifier `
 
 ## Todo
 
-- [ ] 1. Dispatch subtask `01-research-adr-corpus-extraction` (research head); produces `research/adr-corpus-extraction-from-governance-specs/output/SPEC.md`.
-- [ ] 2. Dispatch subtask `02-tooling-narrative-ontology-load-discipline` (Phase A — independent).
-- [ ] 3. Dispatch subtask `03-tooling-rfc2119-polarity-audit` (Phase A — independent).
-- [ ] 4. Dispatch subtask `04-tooling-assumption-log-substance` (Phase A — independent).
-- [ ] 5. Dispatch subtask `05-spec-amendment-agents-md` (Phase B — depends on 01–04 producing artefacts).
-- [ ] 6. Run `tools/check-governance.sh`; fix every ERROR.
-- [ ] 7. Update `README.md §6` if a new linter joins the pre-commit pipeline (R.7 trigger).
-- [ ] 8. Update `tasks/readme.md` to reflect this task's `task_status` transition.
-- [ ] 9. Author `friction-log.md` with FL[0-3] declaration per FRUSTRATED.md.
-- [ ] 10. Set `task_status: done`.
+- [x] 1. Dispatch subtask `01-research-adr-corpus-extraction` (research head); produces `research/adr-corpus-extraction-from-governance-specs/output/SPEC.md` (18 IADRs catalogued; 5 P1 ratified into `decisions/0001-..0005-`).
+- [x] 2. Dispatch subtask `02-tooling-narrative-ontology-load-discipline` (Phase A — independent). Shipped `tools/check-narrative-ontology-load.py` + 5 tests.
+- [x] 3. Dispatch subtask `03-tooling-rfc2119-polarity-audit` (Phase A — independent). Shipped `tools/check-rfc2119-polarity.py` + 10 tests.
+- [x] 4. Dispatch subtask `04-tooling-assumption-log-substance` (Phase A — independent). Shipped `tools/check-assumption-log.py` + 9 tests.
+- [x] 5. Dispatch subtask `05-spec-amendment-agents-md` (Phase B). AGENTS.md gained §"Theoretical Foundations", RFC-2119 polarity advisory, §"Skills Architecture" (U1/U2 + citation protocol), §"Assumption-Log Substance", and the `AG.NO5.1` Gherkin scenario. Edits stay outside the `<!-- BEGIN/END AGENCY-ADR SYNTHESIS -->` markers; `python3 tools/adr/cli.py validate AGENTS.md` exits 0.
+- [x] 6. Ran `tools/check-governance.sh`. Pre-existing baseline ERRORs (`tasks/046-github-workflow-research/task.md` missing `## Todo`; `tasks/readme.md` missing 045/046 bullets) predate Task 032 and are out-of-scope drift tracked by `031-sync-tasks-index-status-drift`. No new ERRORs introduced.
+- [x] 7. README §6 update — the three new linters run advisory-only (WARN-tier, never set FAIL=1) so they do NOT join the pre-commit gating pipeline; no R.7 trigger fires.
+- [x] 8. Updated `tasks/readme.md` membership for this task's `done` transition.
+- [x] 9. Authored `friction-log.md` with FL declaration.
+- [x] 10. Set `task_status: done`.
 
 ## Links
 
