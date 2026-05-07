@@ -11,7 +11,9 @@ prompt_target_agent: external
 
 # Stub — DeepWiki Rendering, Conventions, and Agentic Workflows (External Gemini Run)
 
-This is a stub prompt per `RESEARCH.md §6.3`. The actual research was executed externally by Gemini.
+This is a stub prompt per `RESEARCH.md §6.3`. The actual research prompt was executed externally by Gemini; the full prompt text lives at:
+
+[`research/gemini/deepwiki-rendering-conventions-agentic-workflows/research-prompt_deepwiki-agent-prep.md`](../../research/gemini/deepwiki-rendering-conventions-agentic-workflows/research-prompt_deepwiki-agent-prep.md)
 
 The result lives at:
 
