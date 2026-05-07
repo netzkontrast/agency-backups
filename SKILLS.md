@@ -4,7 +4,7 @@ status: active
 slug: skills-spec
 summary: "Root specification governing the /skills/ capability directory, the skill-bootstrap protocol, and the cross-agent portability contract."
 created: 2026-05-05
-updated: 2026-05-06
+updated: 2026-05-07
 ---
 
 # Skill Architecture Specification
@@ -39,7 +39,14 @@ Every Skill MUST live in a dedicated subfolder under `/skills/`. The folder name
 
 ### 3.1 Layer Overview
 
-The layer overview is canonically defined in [TASK.md §3](./TASK.md).
+| Layer | Scope | Mandate |
+|---|---|---|
+| **L0** — Obsidian Reserved | `tags`, `aliases`, `cssclasses` | Optional; preserved if present. |
+| **L1** — Vault Core | `type`, `status`, `slug`, `summary`, `created`, `updated` | MUST be present on all operational files. |
+| **L2** — Domain Namespace | `skill_*` keys | MUST be present inside `/skills/`. |
+| **L3** — Agent-Only | Vector embeddings, graph scores, token matrices | MUST NOT appear in YAML. Lives in `/.agent_cache/<file>.meta.json`. |
+
+Full semantics: [TASK.md §3](./TASK.md).
 
 ### 3.2 L1 — Vault Core
 
@@ -67,6 +74,16 @@ Every `SKILL.md` MUST carry these six L1 keys (full semantics in [TASK.md §3.2]
 
 ## 4. Workflow (Skill Lifecycle)
 
+The lifecycle states are: `draft` → `active` → `deprecated` → `archived`.
+
+- A skill MAY be created directly as `active` if it is immediately ready for use; `draft` is OPTIONAL for specs still under review.
+- `active` means: in force; agents MAY invoke the skill freely.
+- `deprecated` means: agents MUST NOT invoke the skill for new work; the skill is preserved for historical reference and read-only consumption.
+- `archived` means: historical record only; agents SHOULD NOT open the body without an explicit reason. `archived` is a terminal state.
+- Valid transitions: `draft → active`, `active → deprecated`, `deprecated → archived`. Direct `active → archived` is permitted only when the skill was never invoked in production.
+
+The normative authoring flow is:
+
 1. A task determines that a new capability is needed.
 2. The agent executes research or writes a prompt to design the capability.
 3. The agent implements the `SKILL.md` following the template.
@@ -89,7 +106,7 @@ Feature: Skill Lifecycle
   Scenario: Maintainer deprecates an existing skill
     Given a skill is superseded or no longer safe to use
     When the maintainer sets `status: deprecated` in the skill's SKILL.md frontmatter
-    Then no agent MUST invoke that skill for new work
+    Then agents MUST NOT invoke that skill for new work
     And the `updated` date MUST be set to the date of the deprecation commit
 ```
 
@@ -121,6 +138,20 @@ Feature: Skill-to-Skill Linkage
     When the author defines the linkage
     Then "the-agency-system-architect/SKILL.md" MUST contain "suno-lyric-writer" in its "skill_references_skills" list
 
+  # anchor: X.2.1
+  Scenario: Broken skill reference fails pre-commit
+    Given a skill "the-agency-system-architect/SKILL.md" lists "nonexistent-skill" in "skill_references_skills"
+    When the agent runs tools/lint-linkage.py
+    Then the linter MUST exit with a non-zero code
+    And the agent MUST NOT commit until the broken reference is removed or the referenced skill exists
+
+  # anchor: X.3.1
+  Scenario: Linter computes reciprocity without author involvement
+    Given skill A lists skill B in "skill_references_skills"
+    When the linter generates the skills manifest
+    Then the manifest MUST include B's reverse-reference to A under a computed "skill_referenced_by" field
+    And the author of skill A MUST NOT manually write "skill_referenced_by" in any SKILL.md frontmatter
+
   # anchor: X.4.1
   Scenario: Skill composition
     Given a skill "dramatica-vocabulary" composes "dramatica-theory"
@@ -132,7 +163,9 @@ Feature: Skill-to-Skill Linkage
 
 This section ratifies preliminary research from `research/skills-skill-architecture/output/SPEC.md` (§2 R1, §8 R7).
 
-- **B.1** Mandatory bootstrap-before-skill-use for every agent. Every agent (Claude Code, Jules, Gemini) MUST run the bootstrap before touching `/skills/` or executing a skill.
+The canonical shell implementation of this protocol is [`skills/skills-skill-bootstrap/sync.sh`](./skills/skills-skill-bootstrap/sync.sh). New agents SHOULD read this implementation before authoring their own bootstrap logic.
+
+- **B.1** Mandatory bootstrap-before-skill-use for every agent. Every agent (`claude-code`, `jules`, `gemini-cli`, `claude-ai`) MUST run the bootstrap before touching `/skills/` or executing a skill. (`claude-ai` host-routing semantics are deferred to §10 U3.)
 - **B.2** Canonical clone path `$AGENCY_SKILLS_ROOT`. The bootstrap MUST clone or fast-forward `origin/main` into the active workspace at a known path; the path is stored in environment variable `AGENCY_SKILLS_ROOT`.
 - **B.3** Manifest emission to `$AGENCY_SKILLS_ROOT/.skills-manifest.json`. The bootstrap MUST emit a manifest of all skill slugs and their `skill_kind` to this path so that downstream tools can route without re-walking the tree.
 - **B.4** Staleness gate. The bootstrap MUST surface a non-zero exit on staleness > 24h to force a sync at the cost of a per-day prompt to the human; the agent MAY override with `AGENCY_SKILLS_ALLOW_STALE=1` for offline work.
