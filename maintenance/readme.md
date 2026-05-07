@@ -22,6 +22,7 @@ updated: 2026-05-04
 
 - [language-spec.md](./language-spec.md) — **Canonical** RFC 2119 keyword definitions, Gherkin syntax binding, and the complete Frontmatter Ontology (L0–L3). Every agent MUST conform to this document. All other specs summarise from here.
 - [run-log.md](./run-log.md) — Chronological log of every Repo Coherence Check and Nightly Maintenance run. **The agent MUST read the last `end_commit` entry before beginning any coherence-check run.**
+- [pr-83-review.md](./pr-83-review.md) — Code review for PR #83 (Task 052 DeepWiki integration artifact). Two critical, three moderate, two minor findings.
 
 ---
 
