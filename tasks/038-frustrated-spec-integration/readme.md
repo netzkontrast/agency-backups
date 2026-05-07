@@ -4,21 +4,31 @@ status: active
 slug: task-038-folder
 summary: "Folder index for Task 038 — FRUSTRATED.md spec integration. Justifies the FL0-mandatory rule with research-backed evidence, mechanically gates the FL declaration on commit, and adds Gherkin acceptance criteria."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 ---
 
 # Task 038 Folder
 
 ## What
 
-Operational folder for Task 038, reciprocal to Task 037 on the §28-vs-§2 reconciliation.
+Operational folder for Task 038. **Status: `task_status: updated`** (revised from `done` in response to PR #87 review D1 — see [`review-claude-brave-darwin.md`](./review-claude-brave-darwin.md)). Successor: [Task 062](../062-frustrated-spec-followup-ac1-ac5/task.md), which carries the deferred AC-1 (§28/§2 byte-identicality), AC-5 (Reflexion-pattern lift), and the eventual `FM_FL_DECLARATION_STRICT=1` flip.
 
 ## Files
 
-- [`task.md`](./task.md)
-- [`subtasks/`](./subtasks/) — 1 research, 1 tooling, 1 spec amendment.
+- [`task.md`](./task.md) — closure spec; all 8 Todo items checked off.
+- [`friction-log.md`](./friction-log.md) — FL1; documents the §28 deferral, the `set -e` unblock fix, and the two historical malformed logs.
+- [`subtasks/`](./subtasks/) — 1 research, 1 tooling, 1 spec amendment (subtask pointers; deliverables landed under `/research/`, `/tools/`, and `/FRUSTRATED.md`).
+
+## Deliverables Landed
+
+- [`research/fl0-value-justification/output/SPEC.md`](../../research/fl0-value-justification/output/SPEC.md) — 60-log empirical study; 38% FL0 / 50% FL1 / 10% FL2 / 2% FL3; verdict MANDATE-FL0; drop-in §FL.0 paragraph.
+- [`tools/check-fl-declaration.py`](../../tools/check-fl-declaration.py) + [`tools/tests/test_fl_declaration.py`](../../tools/tests/test_fl_declaration.py) — 28 tests; 14 variant forms accepted; advisory-tier in `tools/check-governance.sh`; promote with `FM_FL_DECLARATION_STRICT=1`.
+- [`FRUSTRATED.md`](../../FRUSTRATED.md) — §"Why FL0 is mandatory", §"Mechanical Enforcement", 4 Gherkin scenarios anchored FR.B.1–FR.B.4, plus an example §"Frustration Log" so the spec self-tests.
 
 ## Assumptions Log
 
-- The FL0 justification subtask analyses *every* closed-task `friction-log.md` in the repo — no sampling.
-- The FL declaration linter (subtask 02) parses BOTH `/research/<slug>/reflection/friction-log.md` AND PR-description `## Frustration Log` sections so it can run in either surface per FRUSTRATED.md §FL.Log.1/2.
+- The FL0 justification subtask analyses *every* `friction-log.md` in the repo (40 task closures + 20 research-reflection runs = 60) — no sampling. Empirical signal: 23 FL0 / 30 FL1 / 6 FL2 / 1 FL3.
+- The FL declaration linter parses BOTH `/research/<slug>/reflection/friction-log.md` AND task-folder `friction-log.md`, with PR-description `## Frustration Log` section as a fallback per FRUSTRATED.md §FL.Log.1 / §FL.Log.2.
+- The §28-vs-PRE_COMMIT.md-§2 byte-identicality clause is owned by Task 037 ST-4. No §28 edit was made in this Task; Task 037 will lift the existing prose verbatim.
+- The two historical malformed logs (tasks 030, 033) are intentionally NOT remediated in this PR — that work will accompany the eventual `FM_FL_DECLARATION_STRICT=1` flip.
+- The Task 040 §A row §7 "Reflexion pattern" merge is not lifted — the cited source (`research/gemini/superclaude-agency-orchestration-spec/superclaude-agency-orchestration-spec.md`) is not present in this branch; lifting a non-existent source would invent content.
