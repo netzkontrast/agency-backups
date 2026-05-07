@@ -7,7 +7,7 @@ created: 2026-05-07
 updated: 2026-05-07
 task_id: "052"
 task_status: open
-task_owner: "claude"
+task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts:
   - deepwiki-rendering-conventions-agentic-workflows
@@ -20,7 +20,6 @@ task_blocked_by:
 task_affects_paths:
   - .devin/wiki.json
   - tasks/052-deepwiki-integration-artifact/
-  - research/gemini/deepwiki-rendering-conventions-agentic-workflows/result.md
 ---
 
 # Task 052 — DeepWiki Integration Artifact
@@ -39,7 +38,7 @@ context.
 
 ---
 
-## Two-Phase Execution Plan
+## Plan
 
 ### Phase 1 — Reflection (input: Task 051 analysis + Gemini result)
 
@@ -165,7 +164,7 @@ The `repo_notes` array should carry five notes, in priority order:
 
 ---
 
-## Acceptance Criteria
+## Todo
 
 - [ ] `tasks/052-deepwiki-integration-artifact/reflection.md` exists and answers all five reflection questions with file-path citations.
 - [ ] `.devin/wiki.json` exists at repo root and is valid JSON.
@@ -175,3 +174,10 @@ The `repo_notes` array should carry five notes, in priority order:
 - [ ] The Machine · Actor · Space table appears verbatim in `repo_notes[0].content`.
 - [ ] `reflection.md` traces each `repo_notes` entry and each `pages` entry to a finding or mitigation.
 - [ ] `tasks/readme.md` updated to include Task 052.
+
+## Links
+
+- Input: [`research/gemini/deepwiki-rendering-conventions-agentic-workflows/result.md`](../../research/gemini/deepwiki-rendering-conventions-agentic-workflows/result.md) — Gemini external research result (completed; read-only input).
+- Input: [`research/gemini/deepwiki-rendering-conventions-agentic-workflows/research-prompt_deepwiki-agent-prep.md`](../../research/gemini/deepwiki-rendering-conventions-agentic-workflows/research-prompt_deepwiki-agent-prep.md) — Originating prompt (schema_version 3.1, RISEN+ReAct, Category B Extraction).
+- Stub prompt: [`prompts/deepwiki-rendering-conventions-agentic-workflows/prompt.md`](../../prompts/deepwiki-rendering-conventions-agentic-workflows/prompt.md)
+- Blocked-by task: [`tasks/051-deepwiki-rendering-conventions-agentic-workflows/task.md`](../051-deepwiki-rendering-conventions-agentic-workflows/task.md)

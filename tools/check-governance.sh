@@ -134,6 +134,39 @@ echo "--- [opt] Assumption-log substance linter (Task 032 ST-4 — advisory) ---
 # AGENTS.md §60-65 / FOLDERS.md F.3 enforcement. WARN-tier only — never gates.
 "$PYTHON" tools/check-assumption-log.py tasks/ research/ || true
 
+echo ""
+echo ""
+echo "--- [opt] Prompt self-containedness linter (Task 034 ST-2, PROMPT.md §6.4 — advisory) ---"
+# PROMPT.md §5.1 / P.B.6 anchor. WARN-tier — emits to stderr, never gates.
+PROMPT_FILES=$(find prompts -maxdepth 2 -name prompt.md 2>/dev/null)
+if [ -n "$PROMPT_FILES" ]; then
+  "$PYTHON" tools/check-prompt-self-containedness.py $PROMPT_FILES || true
+fi
+
+echo ""
+echo "--- [opt] Prompt framework-declaration linter (Task 034 ST-3, PROMPT.md §6.4.b — advisory) ---"
+# PROMPT.md §5.2 / P.B.4 anchor. WARN-tier — emits to stderr, never gates.
+if [ -n "$PROMPT_FILES" ]; then
+  "$PYTHON" tools/check-prompt-framework-declaration.py $PROMPT_FILES || true
+fi
+
+echo ""
+echo "--- [opt] Duplicate task_id linter (Task 033 ST-3 — TASK.md §8.1) ---"
+# Closes the agent-responsibility-only enforcement window acknowledged in
+# TASK.md §8.1. Advisory by default during the migration window
+# (Task 043 renumbers the existing 006/006, 009/009, 031/031, 032/032
+# collisions). Set FM_DUPLICATE_TASK_ID_STRICT=1 to gate the suite once
+# Task 043 lands and the collisions are resolved.
+DUPLICATE_TASK_ID_OUT="$(mktemp)"
+"$PYTHON" tools/fm/check-duplicate-task-id.py tasks/ \
+  > "$DUPLICATE_TASK_ID_OUT" 2>&1
+DUPLICATE_TASK_ID_RC=$?
+cat "$DUPLICATE_TASK_ID_OUT"
+rm -f "$DUPLICATE_TASK_ID_OUT"
+if [ "${FM_DUPLICATE_TASK_ID_STRICT:-0}" = "1" ] && [ "$DUPLICATE_TASK_ID_RC" -ne 0 ]; then
+  FAIL=1
+fi
+
 # Optional WARN-tier: narrative-ontology load discipline (AGENTS.md NO.5,
 # Task 032 ST-2). Advisory only — never sets FAIL=1. Targets the most
 # recently-touched task.md when one exists; otherwise no-ops on `tasks/`.

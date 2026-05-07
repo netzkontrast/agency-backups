@@ -1,10 +1,10 @@
 ---
 type: note
-status: draft
+status: completed
 slug: task-034-st2-tooling-self-containedness-checker
 summary: "Subtask ST-2: ship tools/check-prompt-self-containedness.py — a structural linter that checks PROMPT.md §5.1 self-containedness via heuristics derived from the research-prompt-optimizer Phase 4 reader-test prior art."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 ---
 
 # ST-2: `check-prompt-self-containedness` — Mechanizes P.5.1

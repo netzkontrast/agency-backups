@@ -1,10 +1,10 @@
 ---
 type: index
-status: active
+status: completed
 slug: task-034-subtasks-index
 summary: "Subtask index for Task 034 — PROMPT.md spec integration. Phase A: 1 research head + 2 tooling. Phase B: 1 spec amendment."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 ---
 
 # Task 034 — Subtask Index

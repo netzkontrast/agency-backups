@@ -4,7 +4,7 @@ status: active
 slug: prompt-spec
 summary: "Root specification for /prompts/. Prompts are the only place where executable instruction sets live; research proposals and follow-up questions are deposited here, never in /research/ or /tasks/."
 created: 2026-05-02
-updated: 2026-05-04
+updated: 2026-05-07
 ---
 
 # Prompt Task Specification
@@ -64,12 +64,53 @@ YAML MUST NOT nest deeper than one level. Lists MUST contain only scalars.
 
 1. **Initialize Directory** — Create `/prompts/<slug>/` immediately. Derive the slug from the brief's core intent (kebab-case, max 5 tokens).
 2. **Store Brief** — Save the unedited user request and contextual metadata into `brief.md`. This is the immutable record of what was asked.
-3. **Select Framework** — Choose a prompt engineering framework based on task type:
-   - `RISEN + ReAct` — multi-step research and extraction tasks where the agent must iterate.
-   - `RISE-DX` — for the agentic-spine prompts that demand reflection-driven execution.
-   - `RISEN` — structured one-shot output tasks (spec generation, code scaffolding).
-   - `Chain-of-Thought` — open-ended reasoning, analysis, or evaluation.
-   Declare the framework in the frontmatter (`prompt_framework`) AND at the top of the body.
+3. **Select Framework** — Choose a prompt engineering framework via the decision tree below. The frontmatter `prompt_framework` value MUST be the canonical token (one of `RISEN`, `RISE-DX`, `ReAct`, `RISEN+ReAct`, `CoT`); the body `## Framework` section MUST name the same canonical token plus a one-sentence rationale. The mechanical gate for this clause is `tools/check-prompt-framework-declaration.py` (§6.0).
+
+   **§4.3 Framework-Selection Decision Tree**
+
+   ```text
+   START
+     │
+     ├── Q1. Does the prompt drive iterative tool-using execution
+     │       (read → act → observe → re-plan)?
+     │     ├── Yes → Q2.
+     │     └── No  → Q4.
+     │
+     ├── Q2. (asked only when Q1 = Yes.) Does the agent ALSO need to
+     │       declare the structured artefacts (`R`ole, `I`nput, `S`teps,
+     │       `E`xpectations, `N`otes/Constraints) up front?
+     │     ├── Yes → Q3.
+     │     └── No  → choose `ReAct`. Use only for short tool-loops where
+     │              the upstream contract is implicit (rare in this repo).
+     │
+     ├── Q3. (asked only when Q1 = Yes and Q2 = Yes.) Does the prompt
+     │       belong to the agentic-spine (specs that drive reflection-
+     │       driven self-improvement, e.g. AGENTS.md / MAINTENANCE.md
+     │       mechanizations)?
+     │     ├── Yes → choose `RISE-DX`. Adds an explicit `D`iagnostic +
+     │     │        e`X`ecution loop on top of RISE. Used by ~3% of the
+     │     │        corpus (2/72 at 2026-05-07).
+     │     └── No  → choose `RISEN+ReAct`. Default for research-proposal
+     │              and task-spec prompts. Used by 76% of the existing
+     │              prompt corpus (55/72 at 2026-05-07).
+     │
+     └── Q4. (asked only when Q1 = No.) Does the prompt produce a
+             single structured artefact in one shot (spec, table, code
+             module) without iterative tool use?
+           ├── Yes → choose `RISEN`. Default for one-shot generation
+           │        prompts. Used by 19% of the corpus (14/72).
+           └── No  → choose `CoT` (Chain-of-Thought). Use ONLY for open-
+                    ended reasoning, analysis, or evaluation prompts.
+                    Fewer than 2% of corpus prompts qualify (1/72).
+   ```
+
+   The five framework leaves and the path that reaches each: `RISE-DX`
+   ⟵ Q1=Yes, Q2=Yes, Q3=Yes; `RISEN+ReAct` ⟵ Q1=Yes, Q2=Yes, Q3=No;
+   `ReAct` ⟵ Q1=Yes, Q2=No; `RISEN` ⟵ Q1=No, Q4=Yes; `CoT` ⟵ Q1=No,
+   Q4=No. Every branch terminates at a canonical framework, and every
+   canonical framework is reachable.
+
+   The set above is closed: `prompt_framework` MUST be exactly one of `RISEN`, `RISE-DX`, `ReAct`, `RISEN+ReAct`, `CoT`. New frameworks SHALL NOT be introduced without an ADR amending this clause. The body `## Framework` section MUST repeat the same token verbatim and supply ≥1 sentence of rationale (the `framework-no-rationale` rule in §6.0 enforces a 10-word floor).
 4. **Draft the Prompt** — Write `prompt.md` per the Engineering Principles (§5).
 5. **Link Backward** — If the prompt was spawned by an open question from a prior research run, set `prompt_spawned_from_research: <research-slug>`. This forms the audit trail.
 6. **Pre-Commit** — Run the checks in §6.
@@ -97,8 +138,9 @@ The agent MUST run `tools/check-governance.sh` before committing any change to `
 | §6.1 Brief Integrity | [`tools/lint-structure.py`](./tools/lint-structure.py) | Missing `brief.md` in prompt folder |
 | §6.2 Frontmatter Integrity | [`tools/validate-frontmatter.py`](./tools/validate-frontmatter.py) | Missing L1/L2 keys, YAML depth > 1, non-kebab slug |
 | §6.3 Prompt Non-Empty | [`tools/lint-structure.py`](./tools/lint-structure.py) | Missing `prompt.md` in prompt folder |
-| §6.4 Self-Containedness Test | human review | No mechanical check — human responsibility |
-| §6.5 Backward Link Resolves | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `prompt_spawned_from_research` doesn't resolve |
+| §6.4 Self-Containedness Test | [`tools/check-prompt-self-containedness.py`](./tools/check-prompt-self-containedness.py) (WARN-tier) + human review | Closed-set phrase from `{this conversation, as discussed above, the user mentioned, see the previous message, as we discussed, in our previous, you mentioned, earlier you said}` appears in body |
+| §6.4.b Framework Declaration | [`tools/check-prompt-framework-declaration.py`](./tools/check-prompt-framework-declaration.py) (WARN-tier) | `prompt_framework` missing/non-canonical, `## Framework` section missing, frontmatter↔section mismatch, or rationale < 10 words |
+| §6.5 Backward Link Resolves | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `prompt_spawned_from_research` doesn't resolve to either `/research/<slug>/` or `/research/<provider>/<slug>/` |
 | §6.6 Forward Link Reciprocity | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `prompt_relates_to_task` set but task does not list this prompt |
 | §6.7 Readme Audit | [`tools/lint-structure.py`](./tools/lint-structure.py) | Missing `readme.md` in prompt folder |
 | §6.8 Friction Log | human review (commit message) | No mechanical check at commit time |
@@ -113,6 +155,88 @@ Before committing the deliverables of a Prompt Task, the agent MUST verify:
 6. **Forward Link Reciprocity** — `prompt_relates_to_task` encodes a *uses* relationship, not a "spawned by" relationship. If set, the named Task MUST list this prompt's slug in `task_uses_prompts`. Follow-up prompts not yet adopted by any Task MUST omit this field; their lineage is preserved via `prompt_spawned_from_research`.
 7. **Readme Audit** — `/prompts/<slug>/readme.md` exists and links to `brief.md` and `prompt.md` per `FOLDERS.md`.
 8. **Friction Log** — A `## Frustration Log` section in the PR/commit message (or a `friction-log.md` adjacent for standalone runs), per `FRUSTRATED.md`. FL0 declarations are still mandatory.
+
+### 6.9 Acceptance Scenarios (Gherkin)
+
+Each scenario below anchors a single pre-commit check (P.B.1..P.B.6) using the same RFC 2119 + Gherkin contract documented in [`research/agent-prompt-specs-3-systems-sdd/output/SPEC.md`](./research/agent-prompt-specs-3-systems-sdd/output/SPEC.md) §A.2 and mirrored in AGENTS.md §"Spec Language". Each `Scenario` carries an `# anchor: <id>` comment per AGENTS.md G5.
+
+```gherkin
+Feature: Pre-commit gates for /prompts/<slug>/
+
+  # anchor: P.B.1
+  Scenario: Brief sibling exists for every prompt
+    Given a folder "/prompts/<slug>/" containing "prompt.md"
+    When `tools/check-governance.sh` runs at pre-commit
+    Then `tools/lint-structure.py` MUST emit ERROR if "brief.md" is absent
+    And the commit MUST be rejected until the brief is added
+
+  # anchor: P.B.2
+  Scenario: Forward-link reciprocity between prompt and task
+    Given a file "/prompts/<slug>/prompt.md" with frontmatter `prompt_relates_to_task: <task-slug>`
+    And the task at "/tasks/<NNN>-<task-slug>/task.md" does not list `<slug>` in `task_uses_prompts`
+    When `tools/check-governance.sh` runs at pre-commit
+    Then `tools/lint-linkage.py` MUST emit ERROR citing the asymmetric edge
+    And the commit MUST be rejected until either side is corrected
+
+  # anchor: P.B.3
+  Scenario: Follow-up question becomes a new prompt, not a research amendment
+    Given a research run at "/research/<slug>/" closed with `research_phase: complete`
+    And the run surfaced an open question
+    When the agent files the follow-up
+    Then a new file "/prompts/<followup-slug>/prompt.md" MUST be created with frontmatter `prompt_kind: follow-up` and `prompt_spawned_from_research: <slug>`
+    And the agent MUST NOT amend the closed research output to track the follow-up
+
+  # anchor: P.B.4
+  Scenario: Framework declaration is canonical and consistent
+    Given a file "/prompts/<slug>/prompt.md"
+    And the frontmatter sets `prompt_framework` to one of `{RISEN, RISE-DX, ReAct, RISEN+ReAct, CoT}`
+    And the body contains a `## Framework` section that names the same canonical token plus ≥10 words of rationale
+    When `tools/check-prompt-framework-declaration.py` runs at pre-commit
+    Then the linter MUST exit 0
+    And no WARN diagnostic MUST be emitted to stderr
+
+  # anchor: P.B.4.fail
+  Scenario: Framework token mismatch fails the linter
+    Given a file "/prompts/<slug>/prompt.md" with frontmatter `prompt_framework: CoT`
+    And the body `## Framework` section spells the framework only as "Chain-of-Thought"
+    When `tools/check-prompt-framework-declaration.py` runs at pre-commit
+    Then the linter MUST exit 2
+    And the linter MUST emit `WARN: framework-mismatch` citing the path and the heading line
+
+  # anchor: P.B.5
+  Scenario: RFC-2119 keyword count obeyed (one normative keyword per sentence)
+    Given a file "/prompts/<slug>/prompt.md" body
+    When the maintainer reviews each normative sentence in §Steps and §Constraints
+    Then exactly one of `{MUST, MUST NOT, SHOULD, SHOULD NOT, MAY, REQUIRED, SHALL, RECOMMENDED}` MUST appear in uppercase per normative sentence
+    And `tools/check-rfc2119-polarity.py` MUST emit no WARN against the file (advisory linter; manual review confirms the count)
+
+  # anchor: P.B.6
+  Scenario: Self-containedness — prompt references conversation context (fail)
+    Given a file "/prompts/<slug>/prompt.md" with frontmatter `prompt_kind: research-proposal`
+    And the body contains a phrase from the closed set `{this conversation, as discussed above, the user mentioned, see the previous message, as we discussed, in our previous, you mentioned, earlier you said}`
+    When `tools/check-prompt-self-containedness.py` runs at pre-commit
+    Then the linter MUST exit 2
+    And the linter MUST emit `WARN: self-containedness:<phrase>` citing the path and the line of the offending phrase
+    And the message SHOULD suggest the rewrite pattern from `skills/research-prompt-optimizer/phases/phase4-reader-test.md`
+
+  # anchor: P.B.6.pass
+  Scenario: Self-containedness — prompt body has no closed-set phrase (pass)
+    Given a file "/prompts/<slug>/prompt.md" body
+    And the body contains zero phrases from the §6.4 closed set
+    When `tools/check-prompt-self-containedness.py` runs at pre-commit
+    Then the linter MUST exit 0
+    And no WARN diagnostic MUST be emitted to stderr
+
+  # anchor: P.B.6.5.provider
+  Scenario: Backward link resolves through a provider folder
+    Given a file "/prompts/<slug>/prompt.md" with frontmatter `prompt_spawned_from_research: superclaude-agency-orchestration-spec`
+    And the source research lives at "/research/gemini/superclaude-agency-orchestration-spec/" (RESEARCH.md §6.1 path-namespaced resolution)
+    When `tools/check-governance.sh` runs at pre-commit
+    Then `tools/lint-linkage.py` MUST resolve the link successfully
+    And the commit MUST proceed without an unresolved-link ERROR
+```
+
+The anchor namespace is two-tier: `P.B.1..P.B.6` cover the six P (`P`rompt) `B` (`B`uild) gates listed in this Task's task.md (brief↔prompt, task reciprocity, follow-up filing, framework declaration, RFC-2119 keyword usage, self-containedness — note this does NOT one-to-one mirror PROMPT.md §6.1..§6.7 numbering). Variant suffixes `*.fail`, `*.pass`, and the §6-subsection form `*.<§6.N>.<variant>` (as in `P.B.6.5.provider`, anchored at §6.5 Backward-Link Resolves) extend the namespace where a single principle has multiple mechanical paths to test.
 
 ## 7. Anti-Patterns
 

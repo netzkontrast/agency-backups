@@ -1,10 +1,10 @@
 ---
 type: note
-status: draft
+status: completed
 slug: task-034-st4-spec-amendment-prompt-md
 summary: "Subtask ST-4 (Phase B): apply the PROMPT.md edits — Gherkin scenarios per P.B.1-P.B.6 anchors, §4.3 framework-selection decision tree, §6.5 provider-folder clarification."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 ---
 
 # ST-4: Spec Amendment — PROMPT.md

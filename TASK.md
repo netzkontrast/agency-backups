@@ -22,7 +22,7 @@ The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY in this document are to
 - **Research** — An executed knowledge-gathering workspace stored in `/research/<slug>/`. Research is the *output* of running a research-flavored Prompt; it is never the source of an instruction.
 - **Artifact** — Any file produced by executing a Task (code, spec, doc, research output).
 
-A Task is **distinct from** a Prompt: creating a Task is an internal coordination action, not an externally-facing instruction set.
+A Task is **distinct from** a Prompt: creating a Task is an internal coordination action, not an externally-facing instruction set. **Planner / Tech-Lead framing.** A Task is the *Planner-layer* artefact — it decomposes work, sequences subtasks, and coordinates dependencies across the prompt, research, and code surfaces. A Prompt is the *Tech-Lead-layer* artefact — it instructs the executor that performs one slice of the plan. The two layers are deliberately separate so a single Task may delegate to multiple Prompts (and vice-versa), and so plan-level changes do not require rewriting executable instructions.
 
 ## 2. Directory Structure
 
@@ -68,6 +68,8 @@ This repository adopts the **Layered Schema with Namespacing** model from `resea
 
 Convention: `<domain>_<key>`. Keys MUST be flat (no nested objects). Lists are permitted but MUST contain scalars or short strings only.
 
+**Authoritative L2-namespace source.** The full required-key matrix and the per-type body schema for every operational namespace (`task_*`, `prompt_*`, `research_*`, `skill_*`, `adr_*`) live in [`research/flexible-frontmatter-toolchain/output/SPEC.md`](./research/flexible-frontmatter-toolchain/output/SPEC.md) §3–§4 (and its §12 body-schema appendix), encoded mechanically in [`maintenance/schemas/header-ontology.json`](./maintenance/schemas/header-ontology.json) — including the `types.adr` registration at `header-ontology.json:208` (pattern `decisions/[0-9][0-9][0-9][0-9]-*.md`). The tables below are the human-readable mirror; the JSON is the source for `tools/fm/validate.py`. Each namespace inline lists ≤ 3 quickref keys; for the full set, follow the link.
+
 **Task namespace** (mandatory in `/tasks/<NNN>-<slug>/task.md`):
 
 | Key | Type | Purpose |
@@ -101,6 +103,26 @@ Convention: `<domain>_<key>`. Keys MUST be flat (no nested objects). Lists are p
 | `research_phase` | string | One of: `kickoff`, `synthesis`, `reflection`, `complete`. |
 | `research_executes_prompt` | string | Slug of the prompt that triggered this run. |
 | `research_friction_level` | string | One of: `FL0`, `FL1`, `FL2`, `FL3`. |
+
+**Skill namespace** (mandatory in `/skills/<slug>/SKILL.md`; ratified by [`research/skills-namespace-ontology/output/SPEC.md`](./research/skills-namespace-ontology/output/SPEC.md)):
+
+| Key | Type | Purpose |
+|---|---|---|
+| `skill_kind` | string | Closed vocabulary: one of `meta`, `domain`, `tool`, `bootstrap`, `adapter`. Determines activation precedence and host routing. |
+| `skill_tier` | string | Closed vocabulary: one of `T1` (always-on, pre-loaded), `T2` (on-trigger, default), `T3` (reference-heavy, lazy-loaded sections). Drives manifest behaviour. |
+| `skill_uses` | list | Slugs of skills this one operationally depends on. Broken target = ERROR (linter blocks commit per the §4 reciprocity rule of the ratifying SPEC). |
+
+The full matrix (`skill_complements`, `skill_triggers`, `skill_supersedes`, the 14-skill mapping table, the two-case reciprocity rule, and the `metadata.*` deprecation map) lives in `research/skills-namespace-ontology/output/SPEC.md`. SKILLS.md and `tools/skills-index.py` consume that SPEC directly; `task.md` files do NOT inline `skill_*` keys.
+
+**ADR namespace** (mandatory in `/decisions/<NNNN>-<slug>.md`; registered in [`maintenance/schemas/header-ontology.json:208`](./maintenance/schemas/header-ontology.json) as the fourth operational L2 namespace alongside `task_*` / `prompt_*` / `research_*` / `skill_*`):
+
+| Key | Type | Purpose |
+|---|---|---|
+| `adr_id` | string | Pattern `ADR-NNNN` (zero-padded four-digit sequence). Distinct from L1 `slug`. |
+| `adr_status` | string | Closed vocabulary: one of `Proposed`, `Accepted`, `Superseded`, `Deprecated`. Distinct from L1 `status` (which uses the operational vocabulary `draft`/`active`/etc). |
+| `adr_supersedes` / `adr_superseded_by` | list | Reciprocal pair pointing to predecessor / successor `adr_id` values. Linter enforces both directions. |
+
+The full ADR governance spec lives at [`research/adr-spec-research-synthesis/output/SPEC.md`](./research/adr-spec-research-synthesis/output/SPEC.md); `tools/adr/cli.py validate` is the binding linter (Task 028 / Task 031).
 
 ### 3.4 L3 — Agent-Only (sidecar, not in markdown)
 
@@ -163,6 +185,8 @@ Closing as `updated` MUST produce a `friction-log.md` in the predecessor folder 
 
 The `updated` state is **not** an excuse to skip work. If the Task's intent is no longer relevant, use `abandoned` (§8.3) instead. If the Task's plan executed cleanly to completion, use `done` (§4.6) instead. The `updated` state is reserved for *re-framing*, not *cancellation* and not *completion-by-drift*.
 
+**Mechanical decision helper.** Before flipping `task_status` to `updated` or `abandoned`, the agent SHOULD invoke `tools/fm/check-task-lifecycle-classification.py --task <path> --target-status {updated,abandoned}` (Task 033 ST-4). The helper mechanically evaluates the four conditions above (resolves successor references, checks supersession reciprocity, and inspects Todo-completion state) and reports PASS/FAIL with the specific failing condition cited. Conditions 1 ("Goal still desirable") and 2 ("Plan/Todo drifted") remain agent-attestation predicates passed as CLI flags — the helper enforces that *both* flags are present and the mechanical conditions pass before reporting PASS. The `abandoned` branch enforces TASK.md §8.3 (notes.md exists with an abandonment rationale). The five-signal decision tree that mechanises every condition (including the two attestation predicates) is ratified in [`research/spec-staleness-decision-formalization/output/SPEC.md`](./research/spec-staleness-decision-formalization/output/SPEC.md) §1 (Task 033 ST-2 / Task 039 ST-2); a follow-up Task migrates the helper from the four-condition fallback to the SPEC's `classify_task` algorithm. The helper is a manual maintenance tool; it is NOT wired into `tools/check-governance.sh`.
+
 ### 4.8 Mandatory Tasks-Index Update (`tasks/readme.md`)
 
 Every change that affects the membership or `task_status` of any Task — namely:
@@ -195,6 +219,8 @@ Every `task.md` MUST contain, in order:
 6. `## Links` — Relative Markdown links to: linked prompts (`/prompts/<slug>/prompt.md`), spawned research (`/research/<slug>/`), and any other key artifacts.
 
 ## 6. Gherkin Scenarios (Normative)
+
+> **Aspirational-scenario note.** A subset of the scenarios below — specifically the "Task with an unmet blocker MUST NOT start" scenario in this section, the `T.B.SUP.1` supersession-blocker scenario at the foot of this section, and the three §8.7 blocker-acceptance scenarios — assert behaviour that the current `tools/fm/validate.py --type-check` does NOT implement. As of this writing the validator implements `F.T.1` (dangling reference) and `F.T.2` (reciprocity) only; the blocker-satisfaction family (§7.0 row §7.9) is pending a future Task-049-class implementation. These scenarios document the desired behaviour and remain normative for the implementing Task; treating them as "currently executable" is the wrong reading. The `T.B.SUP.1` scenario carries an inline `(aspirational — implementing-task: pending …)` label as the canonical convention; the older scenarios pre-date the convention but share its status.
 
 ```gherkin
 Feature: Task pickup and linkage
@@ -277,6 +303,21 @@ Feature: Task pickup and linkage
     Then "tasks/readme.md" MUST contain a bullet for the new folder in the same commit
     And the linter MUST emit an ERROR if the index lacks a bullet for any tasks/<NNN>-<slug>/ on disk
     And the linter MUST emit an ERROR if the index contains a bullet whose tasks/<NNN>-<slug>/ folder does not exist
+
+  # anchor: T.B.SUP.1 (aspirational — implementing-task: pending Task 049-class blocker-satisfaction follow-up)
+  # supersession-blocker inheritance — sibling of the §8.7 "Blocker chain through 'updated'" scenario.
+  # The current `tools/fm/validate.py --type-check` implements F.T.1 (dangling) and F.T.2
+  # (reciprocity) only; the blocker-satisfaction family (§7.0 row §7.9) remains aspirational.
+  # This scenario documents the desired behaviour for the future implementation.
+  Scenario: Blocker auto-redirect through `updated` lifecycle
+    Given Task X carries `task_blocked_by: ["Y"]`
+    And Task Y transitions to `task_status: updated` with `task_superseded_by: ["Z"]`
+    And Task Z carries `task_supersedes: ["Y"]`
+    And Task Z is `task_status: open` (not yet done)
+    When `tools/fm/validate.py --type-check` validates Task X at pre-commit
+    Then the validator MUST treat Task X as still blocked
+    And the diagnostic MUST cite both Y (superseded) and Z (live successor)
+    And Task X MUST NOT transition open → in_progress until Z reaches `done`
 ```
 
 ## 7. Mandatory Pre-Commit Checks for Task Tasks
@@ -300,6 +341,7 @@ The legacy column lists the historical linter set; the flexible-toolchain column
 | §7.9 Blocker Satisfaction | — (new) | `tools/fm/validate.py --type-check` (Task 019) | `task_status: in_progress` while any `task_blocked_by` entry resolves to a Task whose `task_status` ≠ `done` |
 | §7.10 Supersession Reciprocity | — (new) | `tools/fm/validate.py --type-check` (Task 019) | `task_supersedes` / `task_superseded_by` are not reciprocal across the two referenced Task folders |
 | §7.11 Tasks-Index Freshness | — (new) | `tools/fm/index_diff.py` (a.k.a. `python3 tools/fm/fm.py index-diff`) — see [Task 031](./tasks/031-sync-tasks-index-status-drift/) | `tasks/readme.md` does not list every `tasks/<NNN>-<slug>/` folder, omits its current `task_status`, or fails to mark `updated`/`done`/`abandoned` rows with their supersession pointer |
+| §8.1 Duplicate `task_id` | — (new) | [`tools/fm/check-duplicate-task-id.py`](./tools/fm/check-duplicate-task-id.py) (Task 033 ST-3) | Two active tasks share the same `task_id` without supersession reciprocity. Advisory by default during the migration window; set `FM_DUPLICATE_TASK_ID_STRICT=1` to gate. |
 
 Before committing a Task that is being closed, the agent MUST verify:
 
@@ -328,7 +370,7 @@ Two agents may simultaneously claim the next sequence number. The agent MUST res
 2. If the chosen `<NNN>` already exists on disk or on the target branch, the agent MUST renumber to the next free `<NNN>` and update `task_id` accordingly.
 3. The Task slug MUST remain stable across renumbering; only `<NNN>` changes.
 
-**Enforcement status — agent responsibility, not linter-gated.** Duplicate `task_id` prevention is a spec-bearing rule (this section) but is **not** mechanically enforced by any current linter: `tools/check-governance.sh` will *not* block a commit that introduces a second Task with an already-used `task_id`. The collisions tracked by Tasks 013 and 024 prove this — they entered the repo and required dedicated cleanup Tasks rather than being caught at commit time. Until a linter check is added (a Task 019-class follow-up against `tools/fm/validate.py --type-check`), the **agent** carries the obligation:
+**Enforcement status — wired via `tools/fm/check-duplicate-task-id.py` (Task 033 ST-3).** Duplicate `task_id` detection is now mechanically performed by [`tools/fm/check-duplicate-task-id.py`](./tools/fm/check-duplicate-task-id.py). It scans every `tasks/<NNN>-<slug>/task.md`, builds a `{task_id: [paths]}` map across active tasks (`task_status` ∈ {open, in_progress, blocked, done, updated}), and flags every collision *except* those explained by reciprocal supersession (predecessor.task_superseded_by ↔ successor.task_supersedes per §3.3, §4.7, §7.10). It is wired into `tools/check-governance.sh` advisory-by-default during the migration window — set `FM_DUPLICATE_TASK_ID_STRICT=1` to gate the suite once Task 043 lands and the existing 006/006, 009/009, 031/031, 032/032 collisions are resolved. The agent obligations below remain in force (the linter is a backstop, not a substitute for the pre-creation check):
 
 1. Before creating a new `tasks/<NNN>-<slug>/` folder, run `ls tasks/ | sort` and visually confirm the chosen `<NNN>` is unused on disk.
 2. Run `git fetch origin main && git ls-tree -r --name-only origin/main tasks/ | grep '^tasks/<NNN>-' || true` to confirm the slot is unused on the target branch as well — a folder may have been merged on `main` after the agent started its branch.

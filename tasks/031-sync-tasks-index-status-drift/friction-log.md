@@ -11,7 +11,7 @@ updated: 2026-05-07
 
 ## FL Declaration (FRUSTRATED.md FL[0-3])
 
-**FL: 1** — Execution was straightforward; the only friction was that the §Snapshot block in `task.md` (10 mismatches at coherence run 2026-05-06) had drifted further by the time this Task ran (13 mismatches at HEAD = `8fc223d`, 2026-05-07). Per §Plan-1's "any new mismatch since 2026-05-06 SHOULD be folded in" instruction, the three additional mismatches were folded into the textual fix without spec amendment.
+**FL1** — Execution was straightforward; the only friction was that the §Snapshot block in `task.md` (10 mismatches at coherence run 2026-05-06) had drifted further by the time this Task ran (13 mismatches at HEAD = `8fc223d`, 2026-05-07). Per §Plan-1's "any new mismatch since 2026-05-06 SHOULD be folded in" instruction, the three additional mismatches were folded into the textual fix without spec amendment.
 
 ## Frictions
 
