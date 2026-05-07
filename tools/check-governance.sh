@@ -168,6 +168,64 @@ if [ "${FM_DUPLICATE_TASK_ID_STRICT:-0}" = "1" ] && [ "$DUPLICATE_TASK_ID_RC" -n
 fi
 
 echo ""
+echo "--- [opt] Workspace cleanliness linter (Task 035 ST-2 — RESEARCH.md R.4.4) ---"
+# Closes the §5.3 enforcement gap. WARN-tier by default during the
+# migration window (existing closed workspaces may carry historical
+# stragglers); set FM_WORKSPACE_CLEANLINESS_STRICT=1 to gate.
+WS_CLEAN_OUT="$(mktemp)"
+WS_CLEAN_RC=0
+"$PYTHON" tools/check-workspace-cleanliness.py \
+  > "$WS_CLEAN_OUT" 2>&1 || WS_CLEAN_RC=$?
+cat "$WS_CLEAN_OUT"
+rm -f "$WS_CLEAN_OUT"
+if [ "${FM_WORKSPACE_CLEANLINESS_STRICT:-0}" = "1" ] && [ "$WS_CLEAN_RC" -ne 0 ]; then
+  FAIL=1
+fi
+
+echo ""
+echo "--- [opt] External-result downstream-Task linter (Task 035 ST-3 — RESEARCH.md R.6.5) ---"
+# Closes the §6.5 enforcement gap: every research/<provider>/<slug>/result.md
+# MUST have a back-linked Task. Advisory by default; set
+# FM_EXTERNAL_RESULT_STRICT=1 to gate once historical results are linked.
+EXT_RES_OUT="$(mktemp)"
+EXT_RES_RC=0
+"$PYTHON" tools/check-external-result-downstream-task.py \
+  > "$EXT_RES_OUT" 2>&1 || EXT_RES_RC=$?
+cat "$EXT_RES_OUT"
+rm -f "$EXT_RES_OUT"
+if [ "${FM_EXTERNAL_RESULT_STRICT:-0}" = "1" ] && [ "$EXT_RES_RC" -ne 0 ]; then
+  FAIL=1
+fi
+
+echo ""
+echo "--- [opt] Trust-audit GATE (Task 035 ST-4 — RESEARCH.md §5.7, Spec-J/K/L) ---"
+# Per-workspace trust-audit gate. Runs over every research/<slug>/ workspace
+# whose readme.md declares research_phase: complete. Advisory by default; set
+# FM_TRUST_AUDIT_STRICT=1 to gate. Cross-workspace aggregation is owned by
+# Task 039 (MAINTENANCE.md AGGREGATOR), per the C3 partition.
+TRUST_OUT="$(mktemp)"
+TRUST_RC=0
+for ws in research/*/; do
+  ws="${ws%/}"
+  base="$(basename "$ws")"
+  case "$base" in
+    gemini|gpt|human|other) continue ;;
+  esac
+  readme="$ws/readme.md"
+  [ -f "$readme" ] || continue
+  if grep -q "^research_phase: complete" "$readme" 2>/dev/null; then
+    if ! "$PYTHON" tools/check-trust-audit.py "$ws" >> "$TRUST_OUT" 2>&1; then
+      TRUST_RC=1
+    fi
+  fi
+done
+cat "$TRUST_OUT"
+rm -f "$TRUST_OUT"
+if [ "${FM_TRUST_AUDIT_STRICT:-0}" = "1" ] && [ "$TRUST_RC" -ne 0 ]; then
+  FAIL=1
+fi
+
+echo ""
 echo "--- [opt] FL declaration linter (Task 038 ST-2 — FRUSTRATED.md FR.B.4) ---"
 # Per FRUSTRATED.md §FL.Log enforcement. Advisory by default; set
 # FM_FL_DECLARATION_STRICT=1 to gate. Targets every closed Task's

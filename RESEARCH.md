@@ -4,7 +4,7 @@ status: active
 slug: research-spec
 summary: "Root specification for /research/. Research is execution-only: it consumes a prompt and produces a workspace of evidence, synthesis, reflection, and a final output. Prompt-craft and follow-up question generation are out of scope and live in /prompts/."
 created: 2026-05-02
-updated: 2026-05-04
+updated: 2026-05-07
 ---
 
 # Research Task Specification
@@ -77,17 +77,24 @@ research_friction_level: FL0 | FL1 | FL2 | FL3
 
 YAML MUST NOT nest beyond one level.
 
+### 2.2 Spec-Chunking for Long Synthesis Runs
+
+A synthesis run that produces an `output/SPEC.md` larger than approximately **50,000 tokens** MUST be chunked along RFC-2119 aspect boundaries (one aspect per file, one anchor per scenario), per `research/spec-driven-research-agentic-workflows/output/SPEC.md`. Chunking by paragraph count or character length is NOT acceptable — the canonical boundary is the §-aspect that owns a coherent set of normative clauses. Below the 50k threshold the agent MAY emit a single SPEC.md.
+
+Rationale: synthesis-time agent context exhaustion is the dominant FL2+ friction surface on long-horizon spec runs. Aspect-boundary chunking gives every downstream consumer (linters, ADR synthesizer, human reviewers) a stable anchor surface that survives subsequent edits.
+
 ## 4. Workflow Requirements
 
 1. **Resolve the Prompt** — Confirm `/prompts/<slug>/prompt.md` exists. If it does not, the agent MUST stop and create one per `PROMPT.md`. Research MUST NOT fabricate its own instruction set.
 2. **Initialize Directory** — Create the `<slug>` folder and the four subfolders (`workspace/`, `synthesis/`, `reflection/`, `output/`).
-3. **Snapshot the Prompt** — Copy the prompt body into `/research/<slug>/prompt.md` (this is the immutable run-start snapshot, not a re-author).
-4. **Work in Workspace** — Save planning scripts, search logs, downloaded pages, and tracking files into `/workspace`. Do not pollute the root directory. Execution scripts (`.py`, `.sh`) MUST be deleted before final commit.
+3. **Snapshot the Prompt** — Copy the prompt body into `/research/<slug>/prompt.md` (this is the immutable run-start snapshot, not a re-author). The snapshot is **lock-at-start**: if `/prompts/<slug>/prompt.md` is edited mid-run (by another session or by a maintenance pass), the executing agent MUST NOT re-snapshot the workspace copy. The mid-run divergence MUST be recorded in `workspace/session.log` and surfaced as an open question per §4.9; if the divergence materially changes the run's instructions, the agent MUST stop the run, set `research_phase: archived`, and file a fresh prompt for a new run rather than continue against a stale snapshot.
+4. **Work in Workspace** — Save planning scripts, search logs, downloaded pages, and tracking files into `/workspace`. Do not pollute the root directory. Execution scripts (`.py`, `.sh`) MUST be deleted before final commit. This rule is mechanically enforced by [`tools/check-workspace-cleanliness.py`](./tools/check-workspace-cleanliness.py) at commit time per [§5.0](#50-mechanical-enforcement-mapping).
 5. **Log the Session** — Append to `/workspace/session.log` chronologically. This is the terminal-level audit trail.
 6. **Synthesize Structurally** — Populate `/synthesis/` flat (per `FOLDERS.md`) unless 4+ files of the same type accumulate.
 7. **Reflect** — Apply the critical-thinking methods named in the executing prompt; one flat file per method in `/reflection/`. Log friction in `friction-log.md`.
 8. **Deliver** — Move the final completed artifact (`SPEC.md`, `REPORT.md`, etc.) into `/output/`.
 9. **Surface Open Questions Outward** — For every unresolved question discovered during the run, the agent MUST file a new prompt under `/prompts/` with `prompt_kind: follow-up` and `prompt_spawned_from_research: <this-slug>`. List those new prompt slugs in this research's `readme.md` under an "Open Questions Surfaced" heading. The agent MUST NOT amend the research output post-closure to track follow-ups.
+10. **Pause-and-Resume (cross-session continuity)** — A research run that pauses across sessions MUST drop a `state.md` file at `/research/<slug>/workspace/state.md` per [`research/session-continuity-protocol-instantiation/output/SPEC.md`](./research/session-continuity-protocol-instantiation/output/SPEC.md). The file is OPTIONAL for runs that complete in one continuous session. On resume, the agent MUST execute the §3 resume protocol (staleness probes + step replay) defined in that SPEC and MUST NOT issue any tool call until every probe matches. A probe mismatch MUST trigger explicit reconciliation logged in `workspace/session.log`.
 
 ## 5. Mandatory Pre-Commit Checks for Research Tasks
 
@@ -99,33 +106,107 @@ The agent MUST run `tools/check-governance.sh` before committing any change to `
 |---|---|---|
 | §5.1 Prompt Snapshot Integrity | human review | No mechanical check — content equality |
 | §5.2 Prompt Linkage | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | `research_executes_prompt` doesn't resolve |
-| §5.3 Workspace Cleanliness | human review | No mechanical check — file content |
+| §5.3 Workspace Cleanliness | [`tools/check-workspace-cleanliness.py`](./tools/check-workspace-cleanliness.py) | `.py`/`.sh`/`.log` straggler under `/research/<slug>/workspace/` (R.4.4) |
 | §5.4 No Empty Files | human review | No mechanical check |
 | §5.5 Batch Readme Audit | [`tools/lint-structure.py`](./tools/lint-structure.py) | Missing `readme.md` in research folder |
 | §5.6 Session Logging | human review | No mechanical check |
-| §5.7 Synthesis Verification | human review | No mechanical check |
+| §5.7 Trust-Audit GATE | [`tools/check-trust-audit.py`](./tools/check-trust-audit.py) | Schema-conformance < 80%, behavioral < 90%, or governance < 95% at `research_phase: complete` (Spec-J/K/L) |
 | §5.8 Output Verification | [`tools/validate-frontmatter.py`](./tools/validate-frontmatter.py) | Missing L1/L2 keys in `output/SPEC.md` |
-| §5.9 Friction Reflection | human review (currently); [`tools/check-trust.py`](./tools/check-trust.py) when wrapped by a Task | Missing `friction-log.md` |
-| §5.10 Open-Questions Outward Routing | [`tools/lint-linkage.py`](./tools/lint-linkage.py) | External `result.md` without downstream task |
+| §5.9 Friction Reflection | [`tools/check-fl-declaration.py`](./tools/check-fl-declaration.py) | Missing `friction-log.md` or no parseable FL[0-3] declaration |
+| §5.10 Open-Questions Outward Routing | [`tools/check-external-result-downstream-task.py`](./tools/check-external-result-downstream-task.py) | External `result.md` without back-linked Task (R.6.5) |
 
 Before committing, the agent MUST satisfy:
 
 1. **Prompt Snapshot Integrity** — `prompt.md` exists and matches the prompt body at run-start.
 2. **Prompt Linkage** — `research_executes_prompt` resolves to `/prompts/<slug>/`.
-3. **Workspace Cleanliness** — No execution scripts (`.py`, `.sh`) remain in `/workspace`. Only raw notes, dumps, and `session.log` may stay.
+3. **Workspace Cleanliness** — No execution scripts (`.py`, `.sh`) and no stray trace logs (`.log` other than `session.log`) remain in `/workspace`. Only raw notes, dumps, and `session.log` may stay. Mechanically enforced by [`tools/check-workspace-cleanliness.py`](./tools/check-workspace-cleanliness.py); a workspace MAY carry a `.cleanignore` listing legitimate long-lived `.py`/`.sh` files (each line a glob relative to the workspace root).
 4. **No Empty Files** — No required file (`session.log`, `post-synthesis-log.md`, `state.md`, `readme.md`) is 0 bytes.
 5. **Batch Readme Audit** — Every touched folder has an updated `readme.md` per `FOLDERS.md`.
 6. **Session Logging** — `/workspace/session.log` is populated and chronological.
-7. **Synthesis Verification**
-   - `/synthesis/` is structured and flattened.
-   - `/synthesis/readme.md` contains hard results.
-   - `/synthesis/post-synthesis-log.md` traces the merge sequence.
-   - `/synthesis/state.md` shows every step `[x]`.
+7. **Trust-Audit GATE** — On any commit that transitions `research_phase` to `complete`, [`tools/check-trust-audit.py <workspace>`](./tools/check-trust-audit.py) MUST exit 0. The gate enforces three thresholds drawn from [`research/agentic-eval-trust-improvement-spec/output/SPEC.md`](./research/agentic-eval-trust-improvement-spec/output/SPEC.md): schema-conformance ≥ 80%, behavioral ≥ 90%, governance ≥ 95%. Diagnostics MUST follow the `<relpath>::ERROR:TRUST.<code>:<message>` format. The GATE is per-workspace; cross-workspace aggregation belongs to MAINTENANCE.md and is out of scope here.
 8. **Output Verification** — `/output/` contains the final deliverable with required frontmatter.
-9. **Friction Reflection** — `/reflection/friction-log.md` exists and declares the highest FL experienced (FL0–FL3) at the top, per `FRUSTRATED.md`. Mandatory even at FL0.
-10. **Open-Questions Outward Routing** — For every unresolved question, a corresponding `/prompts/<slug>/` exists with `prompt_kind: follow-up`.
+9. **Friction Reflection** — `/reflection/friction-log.md` exists and declares the highest FL experienced (FL0–FL3) at the top, per `FRUSTRATED.md`. Mandatory even at FL0. Mechanically enforced by [`tools/check-fl-declaration.py`](./tools/check-fl-declaration.py).
+10. **Open-Questions Outward Routing** — For every unresolved question, a corresponding `/prompts/<slug>/` exists with `prompt_kind: follow-up`. For every external `/research/<provider>/<slug>/result.md`, a back-linked Task MUST exist per §6.5; mechanically enforced by [`tools/check-external-result-downstream-task.py`](./tools/check-external-result-downstream-task.py).
 
 All steps in `/synthesis/state.md` MUST be checked off before this pre-commit can pass.
+
+### 5.11 Acceptance Scenarios
+
+The following Gherkin scenarios bind the section's normative anchors. Each `# anchor:` is stable across edits; linters reference them via the diagnostic codes (`R.4.4`, `R.6.5`, `TRUST.*`).
+
+```gherkin
+# anchor: R.B.1 — prompt resolution
+Feature: Prompt resolves before research workspace is created
+  Scenario: Researcher attempts to create /research/<slug>/ without an executing prompt
+    Given the agent intends to start a research run named "<slug>"
+    And `/prompts/<slug>/prompt.md` does not exist
+    When the agent attempts to create `/research/<slug>/`
+    Then the agent MUST stop and create the prompt under `/prompts/<slug>/` first
+    And the agent MUST NOT fabricate the executing prompt inside the research workspace
+```
+
+```gherkin
+# anchor: R.B.2 — workspace cleanliness
+Feature: Workspace is free of execution-script stragglers at commit
+  Scenario: Pre-commit scan finds a leftover .py file in workspace
+    Given a research workspace at `/research/<slug>/workspace/`
+    And the workspace contains a file `scratch.py`
+    When `tools/check-workspace-cleanliness.py` runs as part of pre-commit
+    Then the linter MUST emit `<path>::WARN:R.4.4:execution-script-not-cleaned`
+    And the agent MUST either delete the file or list it in `.cleanignore` with rationale
+```
+
+```gherkin
+# anchor: R.B.3 — follow-up filing
+Feature: Follow-up questions go to /prompts/, not amended into closed research
+  Scenario: An open question surfaces after research_phase: complete
+    Given a research workspace with `research_phase: complete`
+    When the agent discovers a follow-up question
+    Then the agent MUST create a new prompt under `/prompts/<new-slug>/`
+    And the new prompt MUST set `prompt_kind: follow-up`
+    And the new prompt MUST set `prompt_spawned_from_research: <this-slug>`
+    And the agent MUST NOT amend the closed research workspace to record the question
+```
+
+```gherkin
+# anchor: R.B.4 — external ingestion
+Feature: External result triggers a downstream Task in the same commit
+  Scenario: Pre-commit verifies result.md is paired with a back-linked Task
+    Given a staged file at `/research/<provider>/<slug>/result.md`
+    When `tools/check-external-result-downstream-task.py` runs as part of pre-commit
+    Then the linter MUST locate a Task whose frontmatter back-links to the result
+        (via `task_affects_paths`, `task_uses_prompts`, `task_spawns_research`,
+         or `task_spawns_prompts`)
+    And on missing back-link the linter MUST emit `<path>::ERROR:R.6.5:no-downstream-task`
+    And the commit MUST be blocked
+```
+
+```gherkin
+# anchor: R.B.5 — trust-audit gate
+Feature: Research closure is blocked on trust-audit failure
+  Scenario: Researcher attempts to set research_phase: complete on a workspace with insufficient governance score
+    Given a research workspace at `/research/<slug>/` with `research_phase: synthesis`
+    And `output/SPEC.md` exists
+    When the agent stages a frontmatter edit setting `research_phase: complete`
+    Then `tools/check-trust-audit.py <workspace>` MUST run as part of pre-commit
+    And the commit MUST be blocked if any of the three thresholds fail
+        (schema-conformance ≥ 80%, behavioral ≥ 90%, governance ≥ 95%)
+    And the diagnostic format MUST match `<relpath>::ERROR:TRUST.<code>:<message>`
+```
+
+```gherkin
+# anchor: R.B.6 — session continuity
+Feature: Multi-session resume validates staleness before executing
+  Scenario: Agent resumes a paused research run
+    Given a research workspace whose `workspace/state.md` records the prior checkpoint
+    When the resuming agent loads `state.md`
+    Then the agent MUST run the §3 resume protocol from
+         `research/session-continuity-protocol-instantiation/output/SPEC.md`
+    And the agent MUST verify every staleness probe (git-head, session-log-mtime,
+        readme-updated, parent-task-status) before issuing any tool call
+    And on any probe mismatch the agent MUST log a reconciliation entry in `session.log`
+        and obtain explicit human acknowledgement before continuing
+```
 
 ## 6. External Research Ingestion (Third-Party Sources)
 

@@ -4,10 +4,10 @@ status: active
 slug: research-spec-integration
 summary: "Add Gherkin acceptance scenarios to RESEARCH.md, integrate spec-chunking rule from spec-driven-research-agentic-workflows, integrate trust-audit gate from agentic-eval-trust-improvement-spec, integrate session-continuity protocol from agentic-session-continuity-spec, mechanically enforce R.4.4 workspace cleanup and R.6.5 external-result downstream-task creation, and resolve the R.4.3 prompt-snapshot mid-run ambiguity."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 task_id: "035"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-opus-4-7 (session claude/complete-tasks-32-39-uSMVT)"
 task_priority: P1
 task_uses_prompts:
   - research-session-continuity-protocol-instantiation
@@ -94,16 +94,16 @@ Scenario: Research closure blocked on trust-audit failure
 
 ## Todo
 
-- [ ] 1. Dispatch subtask `01-research-session-continuity-protocol-instantiation`.
-- [ ] 2. Dispatch subtask `02-tooling-workspace-cleanliness-linter` (Phase A).
-- [ ] 3. Dispatch subtask `03-tooling-external-result-downstream-task-linter` (Phase A).
-- [ ] 4. Dispatch subtask `04-tooling-trust-audit-gate` (Phase A).
-- [ ] 5. Dispatch subtask `05-spec-amendment-research-md` (Phase B).
-- [ ] 6. Run `tools/check-governance.sh`.
-- [ ] 7. Update `README.md §6` if linter table changes.
-- [ ] 8. Update `tasks/readme.md`.
-- [ ] 9. Author `friction-log.md`.
-- [ ] 10. Set `task_status: done`.
+- [x] 1. Dispatch subtask `01-research-session-continuity-protocol-instantiation`.
+- [x] 2. Dispatch subtask `02-tooling-workspace-cleanliness-linter` (Phase A).
+- [x] 3. Dispatch subtask `03-tooling-external-result-downstream-task-linter` (Phase A).
+- [x] 4. Dispatch subtask `04-tooling-trust-audit-gate` (Phase A).
+- [x] 5. Dispatch subtask `05-spec-amendment-research-md` (Phase B).
+- [x] 6. Run `tools/check-governance.sh`.
+- [x] 7. Update `README.md §6` if linter table changes.
+- [x] 8. Update `tasks/readme.md`.
+- [x] 9. Author `friction-log.md`.
+- [x] 10. Set `task_status: done`.
 
 ## Links
 
