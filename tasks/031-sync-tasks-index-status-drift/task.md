@@ -4,10 +4,10 @@ status: active
 slug: sync-tasks-index-status-drift
 summary: "Sync the 10 stale Status: bullets in tasks/readme.md to match each Task's task_status frontmatter, and add a tasks-index-sync linter check that fulfils TASK.md §7.11 (deferred from Task 019)."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 task_id: "031"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
@@ -59,14 +59,14 @@ Bring [`tasks/readme.md`](../readme.md) into byte-level agreement with every `ta
 
 ## Todo
 
-- [ ] 1. Confirm the mismatch population by running the §Plan-1 detector against current HEAD.
-- [ ] 2. Apply the 10 textual `Status:` fixes in `tasks/readme.md`.
-- [ ] 3. Bump `tasks/readme.md`'s `updated:` field.
-- [ ] 4. Implement `--diff tasks/readme.md` (or `fm index-diff`) per §Plan-4.
-- [ ] 5. Add unit tests in `tests/fm/test_index_diff.py` covering: in-sync (0 errors), single status drift, orphan bullet, missing bullet, supersession-suffix mismatch.
-- [ ] 6. Wire the new check into `tools/check-governance.sh` and verify CI exits 0 on a clean tree.
-- [ ] 7. Amend `TASK.md §7.0` row §7.11 with the concrete linter invocation.
-- [ ] 8. Produce `friction-log.md` with an `FL[0-3]` declaration.
+- [x] 1. Confirm the mismatch population by running the §Plan-1 detector against current HEAD.
+- [x] 2. Apply the 10 textual `Status:` fixes in `tasks/readme.md`.
+- [x] 3. Bump `tasks/readme.md`'s `updated:` field.
+- [x] 4. Implement `--diff tasks/readme.md` (or `fm index-diff`) per §Plan-4.
+- [x] 5. Add unit tests in `tests/fm/test_index_diff.py` covering: in-sync (0 errors), single status drift, orphan bullet, missing bullet, supersession-suffix mismatch.
+- [x] 6. Wire the new check into `tools/check-governance.sh` and verify CI exits 0 on a clean tree.
+- [x] 7. Amend `TASK.md §7.0` row §7.11 with the concrete linter invocation.
+- [x] 8. Produce `friction-log.md` with an `FL[0-3]` declaration.
 
 ## Snapshot — drift observed at coherence run 2026-05-06
 
