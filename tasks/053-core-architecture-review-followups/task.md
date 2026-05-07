@@ -51,16 +51,16 @@ This Task does **not** itself implement the fixes. Per [`MAINTENANCE.md §3`](..
 
 - [x] Land `task.md` (this file) + `readme.md` + `review-report.md` + `tasks/readme.md` membership entry on branch `claude/review-core-architecture-bMU9X`.
 - [ ] Author `triage.md` with one row per B.1–B.10 finding (Plan step 2).
-- [ ] Open new Task for B.1 residual: flip `FM_TOOLCHAIN` default + retire `tools/check-governance.sh:33` legacy branch.
-- [ ] Open new Task for B.2: relocate `AGENTS.md` `LOOP_LOG` runtime state + ship `tools/check-spec-runtime-state.py` WARN-tier linter.
-- [ ] Open new Task for B.5: ADR-class evaluation of narrative-skills extraction (`skills/novel-architect/`, `skills/the-agency-system-architect/`, `skills/suno-lyric-writer/`, Dramatica corpus).
-- [ ] Open new Task for B.6: ADR-class evaluation of root-spec consolidation (`PRE_COMMIT.md` → `AGENTS.md`; `FRUSTRATED.md` → `MAINTENANCE.md`).
-- [ ] Open new Task for B.7: emit WARN `Diag` from `tools/fm/_core.py read_fm` when `strict=False` parse of non-empty file yields `{}`.
-- [ ] Open new Task for B.8: amend `MAINTENANCE.md` T4 rule to permit T1/T2 repairs on closed research while preserving T3/T4 content immutability.
-- [ ] Open new Task for B.9: platform-agnostic closing-run procedure in `AGENTS.md`; `/sc:createPR` becomes one implementation.
-- [ ] Open new Task for B.10: scaffold `tests/integration/test_governance_e2e.py` covering Task → Prompt → Research → check-governance.sh.
+- [x] Open new Task for B.1 residual: flip `FM_TOOLCHAIN` default + retire `tools/check-governance.sh:33` legacy branch. → [Task 054](../054-flip-fm-toolchain-default/).
+- [x] Open new Task for B.2: relocate `AGENTS.md` `LOOP_LOG` runtime state + ship `tools/check-spec-runtime-state.py` WARN-tier linter. → [Task 055](../055-relocate-agents-loop-log/).
+- [x] Open new Task for B.5: ADR-class evaluation of narrative-skills extraction (`skills/novel-architect/`, `skills/the-agency-system-architect/`, `skills/suno-lyric-writer/`, Dramatica corpus). → [Task 056](../056-narrative-skills-extraction-adr/).
+- [x] Open new Task for B.6: ADR-class evaluation of root-spec consolidation (`PRE_COMMIT.md` → `AGENTS.md`; `FRUSTRATED.md` → `MAINTENANCE.md`). → [Task 057](../057-root-spec-consolidation-adr/).
+- [x] Open new Task for B.7: emit WARN `Diag` from `tools/fm/_core.py read_fm` when `strict=False` parse of non-empty file yields `{}`. → [Task 058](../058-read-fm-warn-diagnostic/).
+- [x] Open new Task for B.8: amend `MAINTENANCE.md` T4 rule to permit T1/T2 repairs on closed research while preserving T3/T4 content immutability. → [Task 059](../059-closed-research-repair-allowance/).
+- [x] Open new Task for B.9: platform-agnostic closing-run procedure in `AGENTS.md`; `/sc:createPR` becomes one implementation. → [Task 060](../060-platform-agnostic-closing-procedure/).
+- [x] Open new Task for B.10: scaffold `tests/integration/test_governance_e2e.py` covering Task → Prompt → Research → check-governance.sh. → [Task 061](../061-governance-integration-test-scaffold/).
 - [ ] Cite Tasks 017, 019, 033, 043, 046 in `triage.md` for findings B.1, B.3, B.4 respectively (no new Tasks for those rows).
-- [ ] Re-sync `tasks/readme.md` (membership + statuses + lineage) on each new-Task commit per §4.8 / §7.11.
+- [x] Re-sync `tasks/readme.md` (membership + statuses + lineage) on each new-Task commit per §4.8 / §7.11.
 - [ ] Write `friction-log.md` with FL[0–3] declaration on closure (mandatory per FRUSTRATED.md, FL0 acceptable).
 
 ## Links
