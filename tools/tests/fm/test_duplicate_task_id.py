@@ -166,5 +166,31 @@ class TestSupersessionExplained(unittest.TestCase):
             self.assertEqual(rc, 1, msg=err)
 
 
+class TestRealRepoIntegration(unittest.TestCase):
+    """Smoke test against the actual repo state — the brief notes the
+    linter is *expected* to fail on the current repo because Task 043
+    has not yet renumbered the 006/006, 009/009, 031/031, 032/032
+    collisions. This test pins that expected failure so a regression
+    (e.g. accidental supersession-reciprocity loosening) is caught."""
+
+    def test_repo_currently_has_known_collisions(self) -> None:
+        repo_tasks = REPO / "tasks"
+        if not repo_tasks.exists():
+            self.skipTest("repo tasks/ tree not present in this checkout")
+        rc, _, err = _capture([str(repo_tasks)])
+        # Until Task 043 lands, the linter MUST flag the four known
+        # collisions. After Task 043, this assertion flips to rc == 0
+        # and the test becomes a guard against re-introduction.
+        if rc == 0:
+            self.skipTest(
+                "repo has no duplicate-task_id collisions — Task 043 "
+                "appears to have landed; flip this assertion."
+            )
+        self.assertEqual(rc, 1)
+        for tid in ("006", "009", "031", "032"):
+            self.assertIn(f"task_id='{tid}'", err,
+                          msg=f"expected linter to flag the {tid}/{tid} collision")
+
+
 if __name__ == "__main__":
     unittest.main()
