@@ -1,12 +1,12 @@
 ---
 type: task
-status: active
+status: completed
 slug: deepwiki-integration-artifact
 summary: "Reflect on the Gemini DeepWiki research result; derive the Machine/Actor/Space isomorphic map for this repository; produce .devin/wiki.json that steers DeepWiki to generate human-readable documentation covering current state, how we got here, and what is next."
 created: 2026-05-07
 updated: 2026-05-07
 task_id: "052"
-task_status: open
+task_status: done
 task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts:
@@ -16,7 +16,7 @@ task_spawns_prompts: []
 task_supersedes: []
 task_superseded_by: []
 task_blocked_by:
-  - "051"
+  - 051
 task_affects_paths:
   - .devin/wiki.json
   - tasks/052-deepwiki-integration-artifact/

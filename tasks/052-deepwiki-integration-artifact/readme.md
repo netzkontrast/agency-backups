@@ -27,8 +27,12 @@ Produces two deliverables:
 
 - [`task.md`](./task.md) — Goal, Plan, Machine · Actor · Space map, proposed page
   structure, `repo_notes` injection strategy, Todo, Links.
-- `reflection.md` — *(to be created during execution)* Five-question reflection audit
-  tracing every `.devin/wiki.json` entry to a finding or mitigation.
+- [`reflection.md`](./reflection.md) — Five-question reflection audit tracing every
+  `.devin/wiki.json` entry (5 `repo_notes` + 16 `pages`) to a finding (Task 051
+  R-id) or a mitigation (M1 / M2 / M3). M·A·S map verified isomorphic on 9/10 rows;
+  page-budget validated at 47 % of the 30-page standard limit.
+
+The integration artifact itself ships at [`/.devin/wiki.json`](../../.devin/wiki.json) (repo root).
 
 ## Assumptions Log
 
