@@ -4,10 +4,10 @@ status: active
 slug: frustrated-spec-integration
 summary: "Resolve the FRUSTRATED.md §28 vs PRE_COMMIT.md §2 contradiction (reciprocal with Task 037), justify the FL0-mandatory rule, mechanically enforce the FL declaration at commit time, and add ≥4 Gherkin acceptance scenarios."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 task_id: "038"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code (session claude/complete-tasks-32-39-AJVfD)"
 task_priority: P2
 task_uses_prompts:
   - research-fl0-value-justification
@@ -79,14 +79,14 @@ Scenario: Task closure without FL declaration is blocked
 
 ## Todo
 
-- [ ] 1. Dispatch subtask `01-research-fl0-value-justification`.
-- [ ] 2. Dispatch subtask `02-tooling-fl-declaration-linter` (Phase A).
-- [ ] 3. Dispatch subtask `03-spec-amendment-frustrated-md` (Phase B; coordinated with Task 037 subtask 04).
-- [ ] 4. Run `tools/check-governance.sh`.
-- [ ] 5. Update `README.md §6` per R.7.
-- [ ] 6. Update `tasks/readme.md`.
-- [ ] 7. Author `friction-log.md`.
-- [ ] 8. Set `task_status: done`.
+- [x] 1. Dispatch subtask `01-research-fl0-value-justification`. → [`research/fl0-value-justification/output/SPEC.md`](../../research/fl0-value-justification/output/SPEC.md).
+- [x] 2. Dispatch subtask `02-tooling-fl-declaration-linter` (Phase A). → [`tools/check-fl-declaration.py`](../../tools/check-fl-declaration.py) + [`tools/tests/test_fl_declaration.py`](../../tools/tests/test_fl_declaration.py) (28 tests passing).
+- [x] 3. Dispatch subtask `03-spec-amendment-frustrated-md` (Phase B). FRUSTRATED.md gains §"Why FL0 is mandatory", §"Mechanical Enforcement", and 4 Gherkin scenarios anchored FR.B.1–FR.B.4. **The §28-vs-PRE_COMMIT.md-§2 byte-identical reconciliation is delegated to Task 037 ST-4 per the joint-commit clause** (see friction-log §1).
+- [x] 4. Run `tools/check-governance.sh`. → exits 0; the new linter runs WARN-tier and surfaces 2 historical malformed logs (tasks 030, 033) for downstream remediation.
+- [x] 5. Update `README.md §6` per R.7. → linter table row added.
+- [x] 6. Update `tasks/readme.md`. → status flipped to `done`.
+- [x] 7. Author `friction-log.md`.
+- [x] 8. Set `task_status: done`.
 
 ## Links
 

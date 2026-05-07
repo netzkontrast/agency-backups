@@ -167,6 +167,26 @@ if [ "${FM_DUPLICATE_TASK_ID_STRICT:-0}" = "1" ] && [ "$DUPLICATE_TASK_ID_RC" -n
   FAIL=1
 fi
 
+echo ""
+echo "--- [opt] FL declaration linter (Task 038 ST-2 — FRUSTRATED.md FR.B.4) ---"
+# Per FRUSTRATED.md §FL.Log enforcement. Advisory by default; set
+# FM_FL_DECLARATION_STRICT=1 to gate. Targets every closed Task's
+# friction-log.md and every research workspace reflection log.
+FL_DECL_OUT="$(mktemp)"
+FL_DECL_RC=0
+FL_DECL_TARGETS="$(find tasks -mindepth 2 -maxdepth 2 -name friction-log.md 2>/dev/null) \
+$(find research -mindepth 3 -maxdepth 3 -path '*/reflection/friction-log.md' 2>/dev/null)"
+if [ -n "$(echo "$FL_DECL_TARGETS" | tr -s ' \n' ' ' | sed 's/^ *//;s/ *$//')" ]; then
+  # shellcheck disable=SC2086
+  "$PYTHON" tools/check-fl-declaration.py $FL_DECL_TARGETS \
+    > "$FL_DECL_OUT" 2>&1 || FL_DECL_RC=$?
+  cat "$FL_DECL_OUT"
+fi
+rm -f "$FL_DECL_OUT"
+if [ "${FM_FL_DECLARATION_STRICT:-0}" = "1" ] && [ "$FL_DECL_RC" -ne 0 ]; then
+  FAIL=1
+fi
+
 # Optional WARN-tier: narrative-ontology load discipline (AGENTS.md NO.5,
 # Task 032 ST-2). Advisory only — never sets FAIL=1. Targets the most
 # recently-touched task.md when one exists; otherwise no-ops on `tasks/`.
