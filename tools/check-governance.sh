@@ -134,6 +134,23 @@ echo "--- [opt] Assumption-log substance linter (Task 032 ST-4 — advisory) ---
 # AGENTS.md §60-65 / FOLDERS.md F.3 enforcement. WARN-tier only — never gates.
 "$PYTHON" tools/check-assumption-log.py tasks/ research/ || true
 
+echo ""
+echo "--- [opt] Duplicate task_id linter (Task 033 ST-3 — TASK.md §8.1) ---"
+# Closes the agent-responsibility-only enforcement window acknowledged in
+# TASK.md §8.1. Advisory by default during the migration window
+# (Task 043 renumbers the existing 006/006, 009/009, 031/031, 032/032
+# collisions). Set FM_DUPLICATE_TASK_ID_STRICT=1 to gate the suite once
+# Task 043 lands and the collisions are resolved.
+DUPLICATE_TASK_ID_OUT="$(mktemp)"
+"$PYTHON" tools/fm/check-duplicate-task-id.py tasks/ \
+  > "$DUPLICATE_TASK_ID_OUT" 2>&1
+DUPLICATE_TASK_ID_RC=$?
+cat "$DUPLICATE_TASK_ID_OUT"
+rm -f "$DUPLICATE_TASK_ID_OUT"
+if [ "${FM_DUPLICATE_TASK_ID_STRICT:-0}" = "1" ] && [ "$DUPLICATE_TASK_ID_RC" -ne 0 ]; then
+  FAIL=1
+fi
+
 # Optional WARN-tier: narrative-ontology load discipline (AGENTS.md NO.5,
 # Task 032 ST-2). Advisory only — never sets FAIL=1. Targets the most
 # recently-touched task.md when one exists; otherwise no-ops on `tasks/`.

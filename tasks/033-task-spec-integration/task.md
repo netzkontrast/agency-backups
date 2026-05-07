@@ -4,10 +4,10 @@ status: active
 slug: task-spec-integration
 summary: "Close TASK.md governance-debt (T.8.1 unenforced duplicate task_id, T.4.7 updated/abandoned boundary, missing supersession-blocker-inheritance Gherkin), back-port skills-namespace-ontology skill_* L2 vocabulary, and cross-link §3.3 to flexible-frontmatter-toolchain SPEC."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 task_id: "033"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts:
   - research-friction-pattern-synthesis
@@ -15,12 +15,21 @@ task_uses_prompts:
   - tooling-duplicate-task-id-linter
   - tooling-lifecycle-classifier
   - spec-amendment-task-md
-task_spawns_research: []
+task_spawns_research:
+  - friction-pattern-synthesis
+  - spec-staleness-decision-formalization
 task_spawns_prompts: []
 task_affects_paths:
   - TASK.md
+  - README.md
+  - tasks/readme.md
   - tools/fm/check-duplicate-task-id.py
-  - tools/check-task-lifecycle-classification.py
+  - tools/fm/check-task-lifecycle-classification.py
+  - tools/tests/fm/test_duplicate_task_id.py
+  - tools/tests/fm/test_lifecycle_classification.py
+  - tools/check-governance.sh
+  - research/friction-pattern-synthesis/
+  - research/spec-staleness-decision-formalization/
 ---
 
 # Task 033 — TASK.md Spec Integration
@@ -79,16 +88,16 @@ Anchor namespace `T.B.<topic>.<n>` enables direct citation from TASK.md §6's ex
 
 ## Todo
 
-- [ ] 1. Dispatch subtask `01-research-friction-pattern-synthesis`.
-- [ ] 2. Dispatch subtask `02-research-spec-staleness-decision-formalization` (cross-Task input; shared with Task 039).
-- [ ] 3. Dispatch subtask `03-tooling-duplicate-task-id-linter` (Phase A).
-- [ ] 4. Dispatch subtask `04-tooling-lifecycle-classifier` (Phase A).
-- [ ] 5. Dispatch subtask `05-spec-amendment-task-md` (Phase B; consumes 01, 02, 03).
-- [ ] 6. Run `tools/check-governance.sh`; fix every ERROR.
-- [ ] 7. Update `README.md §6` if a new linter joins the pipeline.
-- [ ] 8. Update `tasks/readme.md`.
-- [ ] 9. Author `friction-log.md` with FL[0-3] declaration.
-- [ ] 10. Set `task_status: done`.
+- [x] 1. Dispatch subtask `01-research-friction-pattern-synthesis`.
+- [x] 2. Dispatch subtask `02-research-spec-staleness-decision-formalization` (cross-Task input; shared with Task 039).
+- [x] 3. Dispatch subtask `03-tooling-duplicate-task-id-linter` (Phase A).
+- [x] 4. Dispatch subtask `04-tooling-lifecycle-classifier` (Phase A).
+- [x] 5. Dispatch subtask `05-spec-amendment-task-md` (Phase B; consumes 01, 02, 03).
+- [x] 6. Run `tools/check-governance.sh`; fix every ERROR. (One pre-existing ERROR on Task 046 missing `## Todo` is documented in friction-log.md as scope-out.)
+- [x] 7. Update `README.md §6` (new linter `tools/fm/check-duplicate-task-id.py` joined the pipeline; per R.7).
+- [x] 8. Update `tasks/readme.md`.
+- [x] 9. Author `friction-log.md` with FL[0-3] declaration.
+- [x] 10. Set `task_status: done`.
 
 ## Links
 
