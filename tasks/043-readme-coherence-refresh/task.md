@@ -47,6 +47,10 @@ explicitly deferred. Wave A closed the inline-safe drift fixes; this Task
 covers everything that requires a Task per R.13 or that crosses the T3
 Structural threshold per R.14.
 
+The plan is executed via the SuperClaude command chain documented in
+**§ SuperClaude Command Chain** below. The numbered steps here describe
+*what* changes; the command chain describes *how* and in *what order*.
+
 1. **Audit pass.** Re-run `/sc:analyze` against README.md + FOLDERS.md + AGENTS.md to confirm
    the gap inventory (F1 reframe, F4 ADR backing, F7 narrative ontology, plus `/tests/` disposition).
    Output: an updated finding table referencing exact line numbers on this branch.
@@ -80,21 +84,46 @@ Structural threshold per R.14.
 9. **Closing run** per AGENTS.md CR.1: `git push` → `/sc:createPR`. The PR body MUST cite
    this Task slug and the FL declaration.
 
+## SuperClaude Command Chain
+
+Execute these in order. Each step's output feeds the next; do not parallelise.
+
+| # | Command | Purpose | Plan steps | Inputs | Outputs |
+|---|---|---|---|---|---|
+| 1 | [`/sc:analyze`](../../skills/sc-analyze/) `target=README.md,FOLDERS.md,AGENTS.md focus="reframe + ADR backing + narrative ontology" depth=deep` | Refresh the gap inventory against this branch's HEAD; pin findings to line numbers. | 1 | Branch HEAD; README §11 R.x rules; FOLDERS.md §1 + §8; AGENTS.md NO.1–NO.6. | Updated finding table; severity ratings; explicit cross-references for the reframe. |
+| 2 | [`/sc:workflow`](../../skills/sc-workflow/) `task=043 source=task.md format=structured` | Sequence plan steps 2–6 with dependencies + commit boundaries. | 2–6 | Step 1's finding table; this Task's plan. | Ordered workflow: §3 reframe ⇒ §12 add ⇒ R.21 (if any) ⇒ ADR 0001 ⇒ `/tests/` disposition. |
+| 3a | [`/sc:document`](../../skills/sc-document/) `target=README.md sections="strapline,§1,§3,§3.4,§12" style=spec-aligned` | Draft the four-concern reframe and the new §12 prose. | 2, 3 | Workflow from step 2; SKILLS.md §3.3 + §4; AGENTS.md NO.1–NO.6. | Candidate README diff; preserves R.1–R.20; appends R.21 if needed. |
+| 3b | [`/sc:document`](../../skills/sc-document/) `target=decisions/0001-agency-system-prototype-exemption.md style=madr-4.0.0` | Author ADR 0001 (and ADR 0002 if `/tests/` decision requires one). | 5, 6 | `decisions/readme.md`; `research/adr-spec-research-synthesis/output/SPEC.md`; FOLDERS.md §8. | `adr_status: Proposed` ADR(s) ready for `tools/adr/cli.py validate`. |
+| 4 | `python3 tools/adr/cli.py validate && python3 tools/adr/cli.py synthesize` | Validate the ADR(s); once `Accepted`, rewrite the AGENTS.md guarded block. | 5, 6 | Step 3b ADR(s). | Validated ADRs; rewritten `<!-- BEGIN AGENCY-ADR SYNTHESIS -->` block in AGENTS.md. |
+| 5 | [`/sc:spec-panel`](../../skills/sc-spec-panel/) `target=README.md,decisions/0001-*.md acceptance=README.md#115-acceptance-criteria` | Multi-expert review against R.1–R.20 and the §11.5 Gherkin scenarios (RM.1.1–RM.1.4). | 7 | Steps 3a/3b candidate diff + step 4 synthesis output. | Pass/fail per Gherkin scenario; required revisions. |
+| 6 | [`/sc:reflect`](../../skills/sc-reflect/) `scope=task-043 acceptance=goal-conditions` | Validate goal conditions 1–6; re-run `tools/check-governance.sh`. | 8 | Working tree after step 5 revisions. | Goal-condition checklist; final friction log entry (FL0–FL3). |
+| 7 | [`/sc:createPR`](../../skills/sc-createPR/) | Closing run per AGENTS.md CR.1. | 9 | All preceding outputs; clean working tree. | PR citing Task 043 slug + FL declaration; CR.1.1 satisfied. |
+
+**Branching note.** This Task currently lives on `claude/update-root-readme-Qufdr`
+alongside Wave A. The next session MAY split it onto its own branch
+(suggested: `claude/task-043-readme-coherence-refresh`) before step 1; the
+command chain is branch-agnostic.
+
+**Halt conditions.** If step 1's finding table contradicts this plan
+(e.g. the `/skills/` peer-elevation has been reverted upstream, or AGENTS.md
+NO.1–NO.6 has been removed), STOP and re-scope this Task before continuing.
+The chain is not robust to silent upstream drift; that's by design — R.20
+forbids the README from contradicting any root spec.
+
 ## Todo
 
-- [ ] 1. Refresh `/sc:analyze` finding table on this branch's HEAD; pin to line numbers.
-- [ ] 2. Reframe README §1 + §3 to the four-concern model (Capability = `/skills/`).
-- [ ] 3. Update the strapline and §2 to match the new framing.
-- [ ] 4. Remove the "pending reframe" callout added in Wave A.
-- [ ] 5. Add §12 Narrative Ontology (load-gated) per AGENTS.md NO.1–NO.6.
-- [ ] 6. Append R.21 (or similar) to §11.3 if a new trigger emerges; respect R.10.
-- [ ] 7. Draft `decisions/0001-agency-system-prototype-exemption.md` (`adr_status: Proposed`).
-- [ ] 8. Decide `/tests/` disposition; capture in ADR 0002 or move suites under `tools/tests/`.
-- [ ] 9. Run `python3 tools/adr/cli.py validate` then `synthesize` once ADRs are `Accepted`.
-- [ ] 10. Run `/sc:spec-panel` on the candidate diff.
-- [ ] 11. Run `/sc:reflect` for the final pass.
-- [ ] 12. `tools/check-governance.sh` MUST exit 0.
-- [ ] 13. Close with `/sc:createPR`; PR body cites this slug + FL declaration.
+- [ ] 1. **(Step 1)** Refresh `/sc:analyze` finding table on this branch's HEAD; pin to line numbers.
+- [ ] 2. **(Step 2)** Run `/sc:workflow` to sequence the §3 reframe + §12 add + ADR work with commit boundaries.
+- [ ] 3. **(Step 3a)** Draft README §1 + §3 four-concern reframe via `/sc:document`.
+- [ ] 4. **(Step 3a)** Add README §12 *Narrative Ontology (load-gated)* via `/sc:document`.
+- [ ] 5. **(Step 3a)** Update strapline + §2 to match the new framing; remove the Wave A "pending reframe" callout.
+- [ ] 6. **(Step 3a)** Append R.21 (or similar) to §11.3 if a new trigger emerges; respect R.10.
+- [ ] 7. **(Step 3b)** Draft `decisions/0001-agency-system-prototype-exemption.md` (`adr_status: Proposed`).
+- [ ] 8. **(Step 3b)** Decide `/tests/` disposition; capture in ADR 0002 *or* move suites under `tools/tests/`.
+- [ ] 9. **(Step 4)** Run `python3 tools/adr/cli.py validate`; flip ADR(s) to `Accepted`; run `synthesize`.
+- [ ] 10. **(Step 5)** Run `/sc:spec-panel` on the candidate diff against §11.5 Gherkin (RM.1.1–RM.1.4).
+- [ ] 11. **(Step 6)** Run `/sc:reflect`; verify goal conditions 1–6; `tools/check-governance.sh` MUST exit 0.
+- [ ] 12. **(Step 7)** Close with `/sc:createPR`; PR body cites this slug + FL declaration.
 
 ## Links
 
