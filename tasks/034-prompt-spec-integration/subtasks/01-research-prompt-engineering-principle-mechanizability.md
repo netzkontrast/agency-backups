@@ -1,10 +1,10 @@
 ---
 type: note
-status: draft
+status: completed
 slug: task-034-st1-research-prompt-engineering-principle-mechanizability
 summary: "Subtask ST-1 (research head): per-principle assessment of PROMPT.md §5.1–§5.7 mechanical enforceability; identify which principles can be linter-checked, the false-positive rate on the existing prompt corpus, and the tooling each requires."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 ---
 
 # ST-1: Research — Prompt-Engineering Principle Mechanizability
