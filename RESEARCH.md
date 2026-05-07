@@ -59,6 +59,8 @@ For every new research run, create a dedicated subfolder under `/research/`. The
 
 `/research/<slug>/output/SPEC.md` and `/research/<slug>/readme.md` MUST carry L1 Vault Core keys plus the L2 `research_*` namespace defined in `TASK.md` §3:
 
+> **Note:** Research that documents a skill MAY set `research_documents_skill: <slug>` once the schema is ratified (Task 011).
+
 ```yaml
 ---
 type: research

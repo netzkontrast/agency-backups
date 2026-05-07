@@ -20,6 +20,7 @@ To ensure navigation and traceability across the repository, agents MUST abide b
 | `/tasks/` | `TASK.md` | Orchestration: *what should be done*. | Task folders `<NNN>-<slug>/` with `task.md`. |
 | `/prompts/` | `PROMPT.md` | Instruction: *what the agent is told to do*. | Prompt folders `<slug>/` with `brief.md` and `prompt.md`. |
 | `/research/` | `RESEARCH.md` | Evidence: *what running a prompt produced*. | Research workspaces `<slug>/` with workspace, synthesis, reflection, output. |
+| `/skills/` | `SKILLS.md` | Capability: *what the agent knows how to do* | Skill folders `<slug>/` with `SKILL.md`. |
 
 **Hard rule on flow:** A Task references one or more Prompts (`task_uses_prompts`). A Prompt, when executed by an agent, produces a Research run whose slug equals the Prompt's slug. Research surfaces follow-up questions back into `/prompts/` (never inline). This forms the audit graph.
 
@@ -91,6 +92,9 @@ Linkage between Tasks, Prompts, and Research MUST flow exclusively through front
 - Prompt → Task: `prompt_relates_to_task: <slug>`
 - Prompt → Research (origin): `prompt_spawned_from_research: <slug>`
 - Research → Prompt: `research_executes_prompt: <slug>`
+- Skill → Skill: `skill_references_skills: [<slug>, ...]`
+- Skill → Research: `skill_references_research: [<slug>, ...]`
+- Skill → Prompt: `skill_references_prompts: [<slug>, ...]`
 
 Body-level Markdown links between folders are encouraged for human navigation, but the **frontmatter is the source of truth** for any future CLI/graph tooling.
 
