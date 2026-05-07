@@ -8,7 +8,7 @@ updated: 2026-05-07
 prompt_kind: research-proposal
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
-prompt_relates_to_task: ""
+prompt_relates_to_task: cross-spec-contradiction-baseline
 ---
 
 # Research — Cross-Spec Normative Contradiction Baseline — Prompt

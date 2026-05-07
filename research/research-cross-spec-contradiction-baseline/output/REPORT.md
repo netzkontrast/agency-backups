@@ -92,7 +92,7 @@ The known validation anchor — FRUSTRATED.md §28 ↔ PRE_COMMIT.md §2 — was
 ### CONTR-004
 
 **ID:** CONTR-004
-**Type:** Indirect
+**Type:** Direct
 **Spec A clause:** MAINTENANCE.md §1 (Repair Permission Tiers — T3)
 > "**T3 — Structural** … MUST NOT fix directly. Write a Task in `/tasks/` instead."
 
@@ -143,7 +143,7 @@ and §3.1 (Nightly Maintenance Run Scope — DON'T)
 ### CONTR-007
 
 **ID:** CONTR-007
-**Type:** Indirect
+**Type:** Scope-overlap
 **Spec A clause:** FRUSTRATED.md §When and How to Log, item 2
 > "**Standard Tasks:** You MUST include a section named `## Frustration Log` in your final PR description or **submit message**."
 
@@ -309,7 +309,7 @@ and TASK.md §2
 
 | Metric | Value |
 |---|---|
-| Contradictions involving this spec | 5 (CONTR-005, CONTR-009, CONTR-012, CONTR-015, CONTR-016†) |
+| Contradictions involving this spec | 4 (CONTR-005, CONTR-009, CONTR-012, CONTR-015) |
 | Riskiest clauses | SS.2 (MUST NOT proceed on non-zero exit — conflicts with MAINTENANCE.md §4.1 bypass); R4 (RFC 2119 section requirement — all other specs violate it); Frontmatter Ontology MUST (incomplete compared to TASK.md L2 requirement) |
 | Pending chain task | 032 — any amendment to SS.2 must address MAINTENANCE.md §4.1 bypass; any amendment to R4 scope must clarify whether it applies to root specs |
 
@@ -357,7 +357,7 @@ and TASK.md §2
 
 | Metric | Value |
 |---|---|
-| Contradictions involving this spec | 5 (CONTR-001, CONTR-002, CONTR-005†, CONTR-007, CONTR-016) |
+| Contradictions involving this spec | 4 (CONTR-001, CONTR-002, CONTR-007, CONTR-016) |
 | Riskiest clauses | §2 Global Readme Audit (MUST update every touched folder — conflicts with FRUSTRATED.md §28 FL2 trigger); §2 per-commit vs per-session ambiguity (conflicts with FOLDERS.md §3 batching intent); §3 "PR description or commit message" (wording divergence from FRUSTRATED.md §32) |
 | Pending chain task | 037 — must clarify the batching unit in §2; must add a note that MUST-mandated batch updates do not trigger FL2 under FRUSTRATED.md §28 |
 
@@ -432,8 +432,8 @@ and TASK.md §2
 
 | Type | Count | Entries |
 |---|---|---|
-| Direct | 3 | CONTR-001, CONTR-005, CONTR-011 |
-| Indirect | 3 | CONTR-004, CONTR-008, CONTR-012 |
+| Direct | 4 | CONTR-001, CONTR-004, CONTR-005, CONTR-011 |
+| Indirect | 2 | CONTR-008, CONTR-012 |
 | Scope-overlap | 7 | CONTR-002, CONTR-003, CONTR-007, CONTR-009, CONTR-013, CONTR-014, CONTR-015 |
 | Lifecycle | 3 | CONTR-006, CONTR-010, CONTR-016 |
 
@@ -456,14 +456,16 @@ and TASK.md §2
 
 | Spec | Contradictions Involving It |
 |---|---|
-| PRE_COMMIT.md | 5 (CONTR-001, CONTR-002, CONTR-005†, CONTR-007, CONTR-016) |
 | TASK.md | 5 (CONTR-006, CONTR-009, CONTR-010, CONTR-013, CONTR-014) |
-| AGENTS.md | 5 (CONTR-005, CONTR-009, CONTR-012, CONTR-015, CONTR-016†) |
+| PRE_COMMIT.md | 4 (CONTR-001, CONTR-002, CONTR-007, CONTR-016) |
+| AGENTS.md | 4 (CONTR-005, CONTR-009, CONTR-012, CONTR-015) |
 | FRUSTRATED.md | 4 (CONTR-001, CONTR-006, CONTR-007, CONTR-008) |
 | FOLDERS.md | 4 (CONTR-001†, CONTR-002, CONTR-003, CONTR-008) |
 | RESEARCH.md | 4 (CONTR-003, CONTR-010, CONTR-011, CONTR-016) |
 | MAINTENANCE.md | 3 (CONTR-004, CONTR-005, CONTR-012) |
 | PROMPT.md | 2 (CONTR-007, CONTR-014) |
+
+† CONTR-001 names FOLDERS.md §3 as an agreeing party: §3's "Update Trigger" prose is the direct source of the batching-unit conflict.
 
 ### High-Risk Cluster
 
