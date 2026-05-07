@@ -9,7 +9,7 @@ updated: 2026-05-07
 
 # Folder Interaction Specification
 
-> **Mechanical Enforcement Notice:** This spec is mechanically enforced by `tools/check-governance.sh`. Before editing any folder under `/tasks/`, `/prompts/`, or `/research/`, install the pre-commit hook once with `tools/install-hooks.sh`. The readme.md rule (§3) is enforced by [`tools/lint-structure.py`](./tools/lint-structure.py); the cross-directory linkage rule (§6) is enforced by [`tools/lint-linkage.py`](./tools/lint-linkage.py).
+> **Mechanical Enforcement Notice:** This spec is mechanically enforced by `tools/check-governance.sh`. Before editing any folder under `/tasks/`, `/prompts/`, or `/research/`, install the pre-commit hook once with `tools/install-hooks.sh`. The readme.md presence rule (§3) is enforced by [`tools/lint-structure.py`](./tools/lint-structure.py); the readme.md frontmatter rule (§5) is enforced by [`tools/check-readme-frontmatter.py`](./tools/check-readme-frontmatter.py) (ERROR-tier); the cross-directory frontmatter linkage rule (§6) is enforced by [`tools/lint-linkage.py`](./tools/lint-linkage.py); the body-link / frontmatter dual-surface drift rule (§6) is detected (WARN-tier) by [`tools/check-audit-graph-consistency.py`](./tools/check-audit-graph-consistency.py).
 
 To ensure navigation and traceability across the repository, agents MUST abide by the rules below.
 
@@ -105,11 +105,11 @@ Body-level Markdown links between folders are encouraged for human navigation, b
 
 **Enforcement:** [`tools/lint-linkage.py`](./tools/lint-linkage.py) walks every operational folder and emits an `ERROR` when any of the five frontmatter linkage keys above fails to resolve to its target file or folder. The pre-commit hook blocks the commit on any such error. Reciprocity (Prompt ↔ Task) is also checked.
 
-**Dual-surface drift (F.6 advisory).** The frontmatter and the prose are two surfaces of the same audit graph. When a body link cites a sibling operational folder (e.g. `task.md` body links `[the prompt](../../prompts/foo/prompt.md)`) but the corresponding frontmatter linkage key (`task_uses_prompts: [foo]`) is silent, the prose has drifted ahead of the source-of-truth. [`tools/check-audit-graph-consistency.py`](./tools/check-audit-graph-consistency.py) walks every `task.md` / `prompt.md` / `readme.md` in the operational roots and emits a `WARN` diagnostic for each drift. The reverse asymmetry (frontmatter present, body silent) is **not** flagged — body links remain encouraged, not required. The linter runs WARN-tier `[opt]` in `tools/check-governance.sh` and never gates the commit; agents resolve drift either by adding the missing frontmatter linkage or by rephrasing the body to remove the implied edge.
+**Dual-surface drift (F.6 advisory).** The frontmatter and the prose are two surfaces of the same audit graph. When a body link cites a sibling operational folder (e.g. `task.md` body links `[the prompt](../../prompts/foo/prompt.md)`) but the corresponding frontmatter linkage key (`task_uses_prompts: [foo]`) is silent, the prose has drifted ahead of the source-of-truth. [`tools/check-audit-graph-consistency.py`](./tools/check-audit-graph-consistency.py) walks every `task.md` / `prompt.md` / `readme.md` in the operational roots and emits a `WARN` diagnostic for each drift. The reverse asymmetry (frontmatter present, body silent) is **not** flagged — body links remain encouraged, not required. The linter runs WARN-tier `[opt]` in `tools/check-governance.sh` and never gates the commit; agents resolve drift either by adding the missing frontmatter linkage or by rephrasing the body to remove the implied edge. Set `FM_AUDIT_GRAPH_STRICT=1` to promote the WARN-tier diagnostics to gating (useful once the historical drift backlog is resolved by a triage Task).
 
-## 6.1 Acceptance Scenarios (Gherkin)
+## Acceptance Criteria
 
-The following scenarios are the executable acceptance contract for §1, §2, §4.1.1, §6, and §8. Each scenario is anchored with a stable identifier (`F.B.<n>`); the linters above are MAY-implement hooks for scenarios where mechanical enforcement is feasible.
+The following Gherkin scenarios are the executable acceptance contract for §1, §2, §4.1.1, §6, and §8. Each scenario is anchored with a stable identifier (`F.B.<n>`); the linters above are MAY-implement hooks for scenarios where mechanical enforcement is feasible. The section number `§6.1` is the stable downstream-tooling identifier (e.g. for Gherkin parsers); the heading text mirrors the wording of `prompts/spec-amendment-folders-md/brief.md` AC4.
 
 ```gherkin
 # anchor: F.B.1

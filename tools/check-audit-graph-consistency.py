@@ -264,28 +264,28 @@ def diagnostics_for(source: Path, source_type: str, repo_root: Path) -> list[str
 
 
 def _iter_sources(roots: list[Path], repo_root: Path) -> Iterable[tuple[Path, str]]:
+    # Globs are repo-relative (e.g. `tasks/*/task.md`) and resolved against
+    # repo_root, so each glob runs once across the whole repo. Per-root
+    # scoping is applied as a post-filter via _is_under.
     seen: set[Path] = set()
-    for root in roots:
-        for glob, src_type in SOURCE_GLOBS:
-            for path in repo_root.glob(glob):
-                if not path.is_file():
-                    continue
-                # Provider research folders excluded.
-                try:
-                    rel = path.resolve().relative_to(repo_root.resolve())
-                except ValueError:
-                    continue
-                parts = rel.parts
-                if len(parts) >= 2 and parts[0] == "research" and parts[1] in PROVIDER_NAMES:
-                    continue
-                # Honour scoping: skip files outside the requested roots.
-                if not any(_is_under(path, r) for r in roots):
-                    continue
-                resolved = path.resolve()
-                if resolved in seen:
-                    continue
-                seen.add(resolved)
-                yield path, src_type
+    for glob, src_type in SOURCE_GLOBS:
+        for path in repo_root.glob(glob):
+            if not path.is_file():
+                continue
+            try:
+                rel = path.resolve().relative_to(repo_root.resolve())
+            except ValueError:
+                continue
+            parts = rel.parts
+            if len(parts) >= 2 and parts[0] == "research" and parts[1] in PROVIDER_NAMES:
+                continue
+            if not any(_is_under(path, r) for r in roots):
+                continue
+            resolved = path.resolve()
+            if resolved in seen:
+                continue
+            seen.add(resolved)
+            yield path, src_type
 
 
 def _is_under(path: Path, root: Path) -> bool:
