@@ -9,8 +9,10 @@ task_id: "053"
 task_status: open
 task_owner: "claude-code"
 task_priority: P2
-task_uses_prompts: []
-task_spawns_research: []
+task_uses_prompts:
+  - core-architecture-review-2026-05
+task_spawns_research:
+  - core-architecture-review-2026-05
 task_spawns_prompts: []
 task_blocked_by: []
 task_supersedes: []
@@ -18,6 +20,8 @@ task_superseded_by: []
 task_affects_paths:
   - tasks/053-core-architecture-review-followups/
   - tasks/readme.md
+  - prompts/core-architecture-review-2026-05/
+  - research/core-architecture-review-2026-05/
 ---
 
 # Task 053 — Core Architecture Review Follow-ups
@@ -30,7 +34,7 @@ This Task does **not** itself implement the fixes. Per [`MAINTENANCE.md §3`](..
 
 ## Plan
 
-1. **Land the review report.** Commit [`review-report.md`](./review-report.md) verbatim (with the original line-anchor citations into `README.md`, `AGENTS.md`, `MAINTENANCE.md`, `tools/fm/_core.py`, `tools/lint-linkage.py`, `tools/check-governance.sh`). The report is the artefact; the Plan steps below dispatch its findings.
+1. **Land the review report.** ~~Commit `review-report.md` verbatim into this Task folder.~~ **Superseded by [PR #86 review](./review-pr86-claude-brave-darwin.md) D1 disposition (a):** the verbatim review now lives at [`research/core-architecture-review-2026-05/output/REPORT.md`](../../research/core-architecture-review-2026-05/output/REPORT.md), Actor layer at [`prompts/core-architecture-review-2026-05/`](../../prompts/core-architecture-review-2026-05/). The report is the artefact (Space); the Plan steps below dispatch its findings (Machine).
 2. **Triage the ten findings against the live Task index.** For each "What's Bad" item B.1–B.10 in the report, append a row to [`triage.md`](./triage.md) (created in step 4) citing the owning Task, the gap, and the dispatch decision (`existing` / `open-new` / `wontfix-rationale`). Cross-references against [`tasks/readme.md`](../readme.md) state at branch-time:
    - **B.1 Dual-toolchain transition debt** → already addressed by [Task 017](../017-migrate-repo-to-flexible-toolchain/) (`done`) and [Task 019](../019-fm-toolchain-suite-integration/) (`done`); **residual gap**: [`tools/check-governance.sh:33`](../../tools/check-governance.sh) still gates on `FM_TOOLCHAIN=1` rather than defaulting to fm-as-primary. Open a thin successor Task to flip the default and retire the legacy branch.
    - **B.2 `LOOP_LOG` in `AGENTS.md`** → no existing Task; runtime session state living in a governance spec violates [`README.md §11.6 R.19`](../../README.md). Open a new Task to relocate `AGENTS.md` lines 340–403 into `maintenance/session-logs/` (or the friction-log of the originating Task) and add a `tools/check-spec-runtime-state.py` linter that flags any runtime-state section pattern in root specs.
@@ -50,7 +54,8 @@ This Task does **not** itself implement the fixes. Per [`MAINTENANCE.md §3`](..
 ## Todo
 
 - [x] Land `task.md` (this file) + `readme.md` + `review-report.md` + `tasks/readme.md` membership entry on branch `claude/review-core-architecture-bMU9X`.
-- [ ] Author `triage.md` with one row per B.1–B.10 finding (Plan step 2).
+- [x] Author `triage.md` with one row per B.1–B.10 finding (Plan step 2). → [`./triage.md`](./triage.md).
+- [x] Disposition for [PR #86 review](./review-pr86-claude-brave-darwin.md) D1 (option a): move `review-report.md` to [`research/core-architecture-review-2026-05/output/REPORT.md`](../../research/core-architecture-review-2026-05/output/REPORT.md); add the Actor layer at [`prompts/core-architecture-review-2026-05/`](../../prompts/core-architecture-review-2026-05/); update Task 053 frontmatter (`task_uses_prompts`, `task_spawns_research`).
 - [x] Open new Task for B.1 residual: flip `FM_TOOLCHAIN` default + retire `tools/check-governance.sh:33` legacy branch. → [Task 054](../054-flip-fm-toolchain-default/).
 - [x] Open new Task for B.2: relocate `AGENTS.md` `LOOP_LOG` runtime state + ship `tools/check-spec-runtime-state.py` WARN-tier linter. → [Task 055](../055-relocate-agents-loop-log/).
 - [x] Open new Task for B.5: ADR-class evaluation of narrative-skills extraction (`skills/novel-architect/`, `skills/the-agency-system-architect/`, `skills/suno-lyric-writer/`, Dramatica corpus). → [Task 056](../056-narrative-skills-extraction-adr/).
@@ -59,13 +64,16 @@ This Task does **not** itself implement the fixes. Per [`MAINTENANCE.md §3`](..
 - [x] Open new Task for B.8: amend `MAINTENANCE.md` T4 rule to permit T1/T2 repairs on closed research while preserving T3/T4 content immutability. → [Task 059](../059-closed-research-repair-allowance/).
 - [x] Open new Task for B.9: platform-agnostic closing-run procedure in `AGENTS.md`; `/sc:createPR` becomes one implementation. → [Task 060](../060-platform-agnostic-closing-procedure/).
 - [x] Open new Task for B.10: scaffold `tests/integration/test_governance_e2e.py` covering Task → Prompt → Research → check-governance.sh. → [Task 061](../061-governance-integration-test-scaffold/).
-- [ ] Cite Tasks 017, 019, 033, 043, 046 in `triage.md` for findings B.1, B.3, B.4 respectively (no new Tasks for those rows).
+- [x] Cite Tasks 017, 019, 033, 043, 046 in `triage.md` for findings B.1, B.3, B.4 respectively (no new Tasks for those rows). → [`./triage.md`](./triage.md) Matrix rows B.1, B.3, B.4.
 - [x] Re-sync `tasks/readme.md` (membership + statuses + lineage) on each new-Task commit per §4.8 / §7.11.
 - [ ] Write `friction-log.md` with FL[0–3] declaration on closure (mandatory per FRUSTRATED.md, FL0 acceptable).
 
 ## Links
 
-- [`./review-report.md`](./review-report.md) — verbatim architectural review with citations into `README.md`, `AGENTS.md`, `MAINTENANCE.md`, `tools/fm/_core.py`, `tools/lint-linkage.py`, `tools/check-governance.sh`, `tests/fm/test_falsification_attacks.py`.
+- [`../../prompts/core-architecture-review-2026-05/`](../../prompts/core-architecture-review-2026-05/) — Actor layer: the executable RISEN+ReAct prompt this Task ran. Authored retrospectively per [PR #86 review](./review-pr86-claude-brave-darwin.md) D3.
+- [`../../research/core-architecture-review-2026-05/output/REPORT.md`](../../research/core-architecture-review-2026-05/output/REPORT.md) — Space layer: the verbatim architectural review (citations into `README.md`, `AGENTS.md`, `MAINTENANCE.md`, `tools/fm/_core.py`, `tools/lint-linkage.py`, `tools/check-governance.sh`, `tests/fm/test_falsification_attacks.py`). Lifted from `tasks/053-…/review-report.md` per [PR #86 review](./review-pr86-claude-brave-darwin.md) D1 disposition (a).
+- [`./triage.md`](./triage.md) — 10-row matrix mapping each B-finding to its owning Task.
+- [`./review-pr86-claude-brave-darwin.md`](./review-pr86-claude-brave-darwin.md) — Reviewer findings that triggered the D1+D2+D3 disposition.
 - [`./readme.md`](./readme.md) — folder index per [`FOLDERS.md`](../../FOLDERS.md).
 - [`../../TASK.md`](../../TASK.md) — Task lifecycle, frontmatter ontology, blocker semantics.
 - [`../../MAINTENANCE.md`](../../MAINTENANCE.md) — friction-to-Task conversion rule (§3) and T1–T4 mutation classes (§1) cited above.

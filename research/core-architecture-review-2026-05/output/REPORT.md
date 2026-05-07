@@ -1,8 +1,8 @@
 ---
 type: note
 status: active
-slug: 053-architectural-review-report
-summary: "Verbatim architectural review of Agency's Machine/Actor/Space substrate, fm-toolchain, and governance pipeline. Captured 2026-05-07 against main@dbd996f. Findings B.1-B.10 are dispatched by Task 053 task.md Plan step 2-3."
+slug: core-architecture-review-2026-05-report
+summary: "Verbatim architectural review of Agency's Machine/Actor/Space substrate, fm-toolchain, and governance pipeline. Captured 2026-05-07 against main@dbd996f. Findings B.1-B.10 are dispatched by Task 053 via triage.md."
 created: 2026-05-07
 updated: 2026-05-07
 ---
