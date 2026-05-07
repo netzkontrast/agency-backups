@@ -638,3 +638,48 @@ The agent MUST append its own record **before** committing the run's repairs, so
         identify the one or two skills (e.g. /sc:reflect, /sc:cleanup)
         that *would* fit a coherence subgoal — to set author
         expectations for future agents reading the prompt.
+### Run 2026-05-07 — Task 031 sync-tasks-index status drift + §7.11 linter
+- agent: claude-code (session claude/run-close-next-task-qaGDq)
+- start_commit: 8fc223d
+- end_commit: pending
+- baseline_commit: 8fc223d (post PR #73 merge)
+- files_in_delta: 7 (tasks/readme.md, tasks/031-sync-tasks-index-status-drift/{task.md,readme.md,friction-log.md}, tools/fm/{fm.py,index_diff.py}, tools/check-governance.sh, tests/fm/test_index_diff.py, TASK.md)
+- files_scanned: 374
+- t1_fixes: 13 (status-drift bullets in tasks/readme.md: 007, 008, 012, 015, 016, 017, 018, 019, 020, 021, 030, 031-adr-tooling-impl + new 042 bullet)
+- t2_fixes: 0
+- t3_tasks_created: 0
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+    Task 031 closes the §7.11 deferred from Task 019 by shipping
+    `tools/fm/index_diff.py` (also dispatchable as
+    `python3 tools/fm/fm.py index-diff`) and wiring it as
+    `[6/6] Tasks-index freshness` in `tools/check-governance.sh`.
+
+    Drift population at HEAD=8fc223d was 13 mismatches, three more
+    than the 10 recorded in `task.md` §Snapshot at 2026-05-06; the
+    extras (030, 031-adr-tooling-impl flipped to `done`; 042 had no
+    bullet) were folded in per §Plan-1's "fold in new mismatches"
+    clause. Stale parentheticals dropped on 017 (was "gated on Task
+    016"), 021 (was "blocked by [017]"), and 031-adr-tooling-impl
+    (was "PR open; flips to done on merge").
+
+    The new linter scans `tasks/<NNN>-<slug>/task.md` frontmatter
+    and `tasks/readme.md` bullet text, emitting one diagnostic per:
+    status disagreement, orphan bullet, missing bullet, or
+    supersession-pointer mismatch (`updated` task_status without
+    matching `→ superseded by [NNN]` pointer). Format:
+    `tasks/readme.md::ERROR:T.7.11:<NNN>-<slug> <reason>`.
+    Runtime measured at 58ms cold-start on the 43-folder corpus,
+    well below §Plan-5's sub-second budget.
+
+    Test coverage: `tests/fm/test_index_diff.py` adds 8 cases
+    covering in-sync (zero diagnostics), single status drift,
+    orphan bullet, missing bullet, supersession-pointer required,
+    supersession-pointer mismatch, supersession-pointer correct
+    match, and a repo-self-check regression guard.
+
+    TASK.md §7.0 row §7.11 amended: cited tool retargeted from
+    "Task 019" placeholder to the concrete `tools/fm/index_diff.py`
+    invocation. Task 031 friction logged at FL1 in
+    `tasks/031-sync-tasks-index-status-drift/friction-log.md`.
