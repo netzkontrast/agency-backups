@@ -5,7 +5,7 @@ slug: research-cross-spec-contradiction-baseline
 summary: "Pre-chain contradiction baseline: catalogs all inter-spec normative conflicts across the 8 root governance specs before the 032–039 amendment chain, enabling falsification criterion #3 verification."
 created: 2026-05-07
 updated: 2026-05-07
-research_phase: kickoff
+research_phase: complete
 research_executes_prompt: research-cross-spec-contradiction-baseline
 research_friction_level: FL0
 ---
@@ -32,4 +32,4 @@ The tasks 032–039 chain has falsification criterion #3: "Root specs MUST NOT e
 
 ## Open Questions Surfaced
 
-_To be populated during research run._
+None. The REPORT.md §4 amendment-safety recommendations are directly consumable by the 8 chain tasks without further research. Any follow-up decisions (e.g. whether to upgrade FOLDERS.md §5 SHOULD to MUST for operational readme files) are deliberation tasks for the respective spec-amendment chain tasks, not new research prompts.

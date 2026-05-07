@@ -11,7 +11,7 @@ updated: 2026-05-06
 
 ## FL Declaration (FRUSTRATED.md FL[0-3])
 
-**FL: 2** — Initial closure shipped with four reviewer-flagged defects (PR #72 review F-A through F-D) that survived governance because of validator blind spots (no `path_classification` rule for `prompts/*/brief.md`; OPTIONAL-field empty-string handling not strict). All four findings remediated in the same branch before merge. Final state: `tools/check-governance.sh --no-trust` exits 0 across 372 files; reciprocity holds across all 8 parent tasks × 35 child prompts plus the new self-link Task 041 ↔ `extract-subtask-prompts` prompt.
+**FL2** — Initial closure shipped with four reviewer-flagged defects (PR #72 review F-A through F-D) that survived governance because of validator blind spots (no `path_classification` rule for `prompts/*/brief.md`; OPTIONAL-field empty-string handling not strict). All four findings remediated in the same branch before merge. Final state: `tools/check-governance.sh --no-trust` exits 0 across 372 files; reciprocity holds across all 8 parent tasks × 35 child prompts plus the new self-link Task 041 ↔ `extract-subtask-prompts` prompt.
 
 ## Frictions
 

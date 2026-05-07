@@ -1,5 +1,5 @@
 ---
-type: note
+type: index
 status: active
 slug: research-cross-spec-contradiction-baseline-workspace
 summary: "Workspace scratch area for the cross-spec contradiction baseline research run."

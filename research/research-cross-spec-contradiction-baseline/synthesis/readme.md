@@ -1,5 +1,5 @@
 ---
-type: note
+type: index
 status: active
 slug: research-cross-spec-contradiction-baseline-synthesis
 summary: "Synthesis artifacts for the cross-spec contradiction baseline research run."

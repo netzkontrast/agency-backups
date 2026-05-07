@@ -1,5 +1,5 @@
 ---
-type: note
+type: index
 status: active
 slug: research-cross-spec-contradiction-baseline-output
 summary: "Output directory for the cross-spec contradiction baseline research run."
