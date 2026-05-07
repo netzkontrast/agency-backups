@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-032-folder
+slug: task-032-agents-spec-integration
 summary: "Folder index for Task 032 — AGENTS.md spec integration. Lifts under-cited research (adr-assumption-audit ASM-001/004/005/009, skills-skill-container-capabilities U1-U2, gemini, ncp-novel-co-authoring) into AGENTS.md and closes two enforcement gaps (NO.5, §60-65)."
 created: 2026-05-06
 updated: 2026-05-07

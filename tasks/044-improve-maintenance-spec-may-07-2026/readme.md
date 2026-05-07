@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-044-readme
+slug: task-044-improve-maintenance-spec-may-07-2026
 summary: "Directory index for Task 044: F14–F17 maintenance-spec improvements distilled from the 2026-05-07 coherence run."
 created: 2026-05-07
 updated: 2026-05-07

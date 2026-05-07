@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-041-folder
+slug: task-041-extract-subtask-prompts
 summary: "Folder index for Task 041 — extract 35 inlined `## Execution Brief` blocks from tasks 032-039 subtasks to proper /prompts/<slug>/prompt.md files; populate task_uses_prompts on Tasks 032-040 to close the audit-graph debt surfaced by PR #70 review C.3."
 created: 2026-05-06
 updated: 2026-05-06

@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-049-folder
+slug: task-049-migrate-lifecycle-classifier-five-signal
 summary: "Folder index for Task 049 — migrate the Task 033 ST-4 lifecycle classifier from the four-condition fallback onto the ratified five-signal `classify_task` decision tree from research/spec-staleness-decision-formalization/output/SPEC.md §1."
 created: 2026-05-07
 updated: 2026-05-07

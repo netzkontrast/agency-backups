@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-038-folder
+slug: task-038-frustrated-spec-integration
 summary: "Folder index for Task 038 — FRUSTRATED.md spec integration. Justifies the FL0-mandatory rule with research-backed evidence, mechanically gates the FL declaration on commit, and adds Gherkin acceptance criteria."
 created: 2026-05-06
 updated: 2026-05-07

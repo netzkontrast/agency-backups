@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-048-folder
+slug: task-048-task-tooling-impl-spec
 summary: "Folder index for Task 048 — Task Tooling Implementation SPEC. Surveys /skills/ (especially research-prompt-optimizer and prompt-optimizer) for inspiration, inventories existing /tasks/ tooling and gaps, and produces an implementation-ready SPEC for the next generation of Task-orchestration tooling."
 created: 2026-05-07
 updated: 2026-05-07
