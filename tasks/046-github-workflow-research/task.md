@@ -84,6 +84,17 @@ authored before the ADR is `Accepted`.
 7. **Spec-panel review** (`/sc:spec-panel`) of the candidate diff.
 8. **Closing run** per AGENTS.md CR.1: `git push` → `/sc:createPR`.
 
+## Todo
+
+- [ ] 1. Inventory the gates per Plan §1.
+- [ ] 2. Inventory the trigger surfaces per Plan §2.
+- [ ] 3. Author `research/github-actions-strategy/output/SPEC.md` per Plan §3.
+- [ ] 4. Author the ADR (`decisions/<NNNN>-github-actions-strategy.md`) and flip to `Accepted` after review.
+- [ ] 5. Implement workflow(s) under `.github/workflows/` matching the ADR.
+- [ ] 6. Update `README.md` to mention the workflow set.
+- [ ] 7. Run `/sc:spec-panel` review of the candidate diff.
+- [ ] 8. Closing run per AGENTS.md CR.1: `git push` → `/sc:createPR`.
+
 ## Open Questions (for the ADR to answer)
 
 - **OQ-1.** Should the ADR-synthesis diff gate (the "AGENTS.md guarded section

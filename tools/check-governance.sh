@@ -158,9 +158,9 @@ echo "--- [opt] Duplicate task_id linter (Task 033 ST-3 — TASK.md §8.1) ---"
 # collisions). Set FM_DUPLICATE_TASK_ID_STRICT=1 to gate the suite once
 # Task 043 lands and the collisions are resolved.
 DUPLICATE_TASK_ID_OUT="$(mktemp)"
+DUPLICATE_TASK_ID_RC=0
 "$PYTHON" tools/fm/check-duplicate-task-id.py tasks/ \
-  > "$DUPLICATE_TASK_ID_OUT" 2>&1
-DUPLICATE_TASK_ID_RC=$?
+  > "$DUPLICATE_TASK_ID_OUT" 2>&1 || DUPLICATE_TASK_ID_RC=$?
 cat "$DUPLICATE_TASK_ID_OUT"
 rm -f "$DUPLICATE_TASK_ID_OUT"
 if [ "${FM_DUPLICATE_TASK_ID_STRICT:-0}" = "1" ] && [ "$DUPLICATE_TASK_ID_RC" -ne 0 ]; then
