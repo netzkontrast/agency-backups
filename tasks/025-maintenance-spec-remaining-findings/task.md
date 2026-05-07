@@ -4,7 +4,7 @@ status: active
 slug: maintenance-spec-remaining-findings
 summary: "Successor to Task 014. Carry forward only the F1–F7 findings that Task 008 did not already resolve. F2/F3/F4/F7 remain open; F1, F5, F6 are absorbed by Task 008 / Task 016 deliverables."
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-05-07
 task_id: "025"
 task_status: open
 task_owner: "unassigned"
@@ -14,9 +14,8 @@ task_uses_prompts:
 task_spawns_research: []
 task_spawns_prompts: []
 task_supersedes:
-  - "014"
-task_blocked_by:
-  - "019"
+  - 014
+task_blocked_by: []
 task_affects_paths:
   - MAINTENANCE.md
   - prompts/repo-coherence-check/prompt.md

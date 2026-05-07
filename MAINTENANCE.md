@@ -4,7 +4,7 @@ status: active
 slug: maintenance-spec
 summary: "Governs the Nightly Maintenance Run and the Repo Coherence Check routine. Defines scope, repair permissions, run-log protocol, and Task delegation rules for all automated maintenance agents."
 created: 2026-05-02
-updated: 2026-05-05
+updated: 2026-05-07
 ---
 
 # Repository Maintenance Protocol

@@ -4,7 +4,7 @@ status: active
 slug: repo-coherence-check
 summary: "Self-improvement routine: reads git delta since last run, applies T1/T2 repairs immediately, writes Tasks for T3 findings, logs the run in maintenance/run-log.md."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-07
 prompt_kind: tool-instruction
 prompt_framework: RISE-DX
 prompt_target_agent: "Claude Code"
@@ -252,6 +252,7 @@ Example record:
 ```
 ### Run 2026-05-04 — Repo Coherence Check
 - agent: claude-code
+- routine_type: coherence-check
 - start_commit: f620b6d
 - end_commit: a1b2c3d
 - baseline_commit: f620b6d
