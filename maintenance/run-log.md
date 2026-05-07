@@ -711,7 +711,7 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
 - agent: claude-code (session claude/close-maintenance-spec-task-Tx7bx)
 - routine_type: task-implementation
 - start_commit: 13226fa
-- end_commit: PENDING
+- end_commit: 0825eb8
 - baseline_commit: 13226fa (post Task 031 closure merge)
 - files_in_delta: 7 (MAINTENANCE.md, maintenance/run-log.md, prompts/repo-coherence-check/prompt.md, tools/dramatica-nav/validate.py, tasks/032-improve-maintenance-spec-may-2026/{task.md,readme.md,friction-log.md}, tasks/readme.md)
 - files_scanned: 391
