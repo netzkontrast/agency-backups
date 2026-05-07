@@ -302,7 +302,11 @@ Feature: Task pickup and linkage
     And the linter MUST emit an ERROR if the index lacks a bullet for any tasks/<NNN>-<slug>/ on disk
     And the linter MUST emit an ERROR if the index contains a bullet whose tasks/<NNN>-<slug>/ folder does not exist
 
-  # anchor: T.B.SUP.1 — supersession-blocker inheritance
+  # anchor: T.B.SUP.1 (aspirational — implementing-task: pending Task 049-class blocker-satisfaction follow-up)
+  # supersession-blocker inheritance — sibling of the §8.7 "Blocker chain through 'updated'" scenario.
+  # The current `tools/fm/validate.py --type-check` implements F.T.1 (dangling) and F.T.2
+  # (reciprocity) only; the blocker-satisfaction family (§7.0 row §7.9) remains aspirational.
+  # This scenario documents the desired behaviour for the future implementation.
   Scenario: Blocker auto-redirect through `updated` lifecycle
     Given Task X carries `task_blocked_by: ["Y"]`
     And Task Y transitions to `task_status: updated` with `task_superseded_by: ["Z"]`

@@ -3,7 +3,12 @@
 
 Scans `tasks/<NNN>-<slug>/task.md` files, extracts `task_id` from each
 frontmatter, and exits 1 if any value appears more than once across
-*active* tasks (`task_status` ∈ {open, in_progress, blocked, done}).
+*active* tasks (`task_status` ∈ {open, in_progress, blocked, done, updated}).
+
+`updated`-status predecessors are deliberately included in the scan so the
+supersession-reciprocity escape hatch can identify them; `abandoned` tasks
+are excluded (they did not produce a successor, so id-reuse there is a
+true collision).
 
 A duplicate is **explained** (INFO, not ERROR) when supersession reciprocity
 holds across the two folders:
