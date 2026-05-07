@@ -5,7 +5,7 @@ slug: deepwiki-rendering-conventions-agentic-workflows
 summary: "Analyze the Gemini external research result on DeepWiki rendering, .devin/wiki.json conventions, llms.txt/AGENTS.md standards, and agentic workflow economics; cross-reference with in-house research; extract actionable recommendations for this repository's AGENTS.md, llms.txt, and wiki-steering conventions."
 created: 2026-05-07
 updated: 2026-05-07
-task_id: "048"
+task_id: "051"
 task_status: open
 task_owner: "claude"
 task_priority: P1
@@ -19,7 +19,7 @@ task_blocked_by: []
 task_affects_paths:
   - research/gemini/deepwiki-rendering-conventions-agentic-workflows/result.md
   - prompts/deepwiki-rendering-conventions-agentic-workflows/
-  - tasks/048-deepwiki-rendering-conventions-agentic-workflows/
+  - tasks/051-deepwiki-rendering-conventions-agentic-workflows/
 ---
 
 # Task 048 — Analyze DeepWiki Rendering, Conventions, and Agentic Workflows (External Gemini Result)

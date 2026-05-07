@@ -19,4 +19,4 @@ The result lives at:
 
 [`research/gemini/deepwiki-rendering-conventions-agentic-workflows/result.md`](../../research/gemini/deepwiki-rendering-conventions-agentic-workflows/result.md)
 
-Downstream analysis task: [`tasks/048-deepwiki-rendering-conventions-agentic-workflows/`](../../tasks/048-deepwiki-rendering-conventions-agentic-workflows/)
+Downstream analysis task: [`tasks/051-deepwiki-rendering-conventions-agentic-workflows/`](../../tasks/051-deepwiki-rendering-conventions-agentic-workflows/)
