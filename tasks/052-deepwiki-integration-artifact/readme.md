@@ -31,6 +31,8 @@ Produces two deliverables:
   `.devin/wiki.json` entry (5 `repo_notes` + 16 `pages`) to a finding (Task 051
   R-id) or a mitigation (M1 / M2 / M3). M·A·S map verified isomorphic on 9/10 rows;
   page-budget validated at 47 % of the 30-page standard limit.
+- [`friction-log.md`](./friction-log.md) — Mandatory closure friction log per `TASK.md §4.6`. FL0.
+- [`review-claude-brave-darwin.md`](./review-claude-brave-darwin.md) — PR #85 review by `claude/brave-darwin-n3hZe` (commit `d6b8a0b`). D1 + D2 critical findings addressed in commit following the review.
 
 The integration artifact itself ships at [`/.devin/wiki.json`](../../.devin/wiki.json) (repo root).
 

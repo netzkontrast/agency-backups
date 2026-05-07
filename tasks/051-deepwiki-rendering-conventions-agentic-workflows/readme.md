@@ -22,6 +22,7 @@ recommendations for `.devin/wiki.json`, `llms.txt`, and `AGENTS.md` conventions.
 
 - [`task.md`](./task.md) — Goal, Scope, Plan, Todo, Deliverable, Links.
 - [`analysis.md`](./analysis.md) — Five-scope cross-reference and ten findings (R1–R10) with explicit `result.md:Lstart-Lend` citations into the Gemini research result. Hand-off table to Task 052 in §7.
+- [`friction-log.md`](./friction-log.md) — Mandatory closure friction log per `TASK.md §4.6`. FL0.
 
 ## Assumptions Log
 
