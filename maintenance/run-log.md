@@ -641,7 +641,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ### Run 2026-05-07 — Task 031 sync-tasks-index status drift + §7.11 linter
 - agent: claude-code (session claude/run-close-next-task-qaGDq)
 - start_commit: 8fc223d
-- end_commit: pending
+- end_commit: 2d6984b
 - baseline_commit: 8fc223d (post PR #73 merge)
 - files_in_delta: 7 (tasks/readme.md, tasks/031-sync-tasks-index-status-drift/{task.md,readme.md,friction-log.md}, tools/fm/{fm.py,index_diff.py}, tools/check-governance.sh, tests/fm/test_index_diff.py, TASK.md)
 - files_scanned: 374
