@@ -92,8 +92,17 @@ def _read_tasks(repo_root: Path) -> dict[str, TaskRow]:
     return out
 
 
-def _read_index_bullets(index_path: Path) -> dict[str, BulletRow]:
+def _read_index_bullets(
+    index_path: Path,
+) -> tuple[dict[str, BulletRow], list[tuple[str, int, int]]]:
+    """Return (first-bullet-per-folder, duplicate-rows).
+
+    Each duplicate-row is `(folder, first_line_no, dup_line_no)` so the caller
+    can emit one T.7.11 diagnostic per duplicated bullet. The first occurrence
+    populates the primary dict; later occurrences land in the duplicates list.
+    """
     out: dict[str, BulletRow] = {}
+    duplicates: list[tuple[str, int, int]] = []
     text = index_path.read_text(encoding="utf-8")
     for lineno, raw in enumerate(text.splitlines(), start=1):
         m = BULLET_RE.match(raw)
@@ -105,9 +114,8 @@ def _read_index_bullets(index_path: Path) -> dict[str, BulletRow]:
         status = sm.group("status") if sm else None
         sup = SUPERSEDED_RE.search(rest)
         sup_id = sup.group("id") if sup else None
-        # Only retain the FIRST bullet for a given folder; later duplicates
-        # become an additional diagnostic.
         if folder in out:
+            duplicates.append((folder, out[folder].line_no, lineno))
             continue
         out[folder] = BulletRow(
             folder=folder,
@@ -115,31 +123,36 @@ def _read_index_bullets(index_path: Path) -> dict[str, BulletRow]:
             status=status,
             superseded_by_id=sup_id,
         )
-    return out
+    return out, duplicates
 
 
-def _normalise_id(token: str) -> str:
-    """Accept either a 3-digit `task_id` or a `<NNN>-<slug>` folder name and
-    return the 3-digit prefix only. Empty input maps to ''."""
+def _normalise_id(token: str) -> str | None:
+    """Map a `task_superseded_by` token to its canonical 3-digit `task_id`.
+
+    Accepts either a bare 3-digit id (`"031"`) or a `<NNN>-<slug>` folder name
+    (`"031-foo-bar"`). Returns the 3-digit prefix on success, `None` for
+    malformed input (empty, slug-only without NNN prefix, non-numeric head).
+    The caller MUST treat `None` as a dedicated frontmatter-malformed signal.
+    """
     if not token:
-        return ""
-    if "-" in token:
-        head = token.split("-", 1)[0]
-    else:
-        head = token
+        return None
+    head = token.split("-", 1)[0] if "-" in token else token
     if head.isdigit() and len(head) == 3:
         return head
-    return token  # caller handles non-conforming values verbatim
+    return None
 
 
 def diff(repo_root: Path, index_path: Path) -> list[str]:
     """Return the list of diagnostic strings (no trailing newlines)."""
     diagnostics: list[str] = []
-    rel_index = index_path.resolve().relative_to(repo_root.resolve())
+    try:
+        rel_index = index_path.resolve().relative_to(repo_root.resolve())
+    except ValueError:
+        rel_index = index_path
     prefix = f"{rel_index}::ERROR:{CODE}"
 
     tasks = _read_tasks(repo_root)
-    bullets = _read_index_bullets(index_path)
+    bullets, duplicates = _read_index_bullets(index_path)
 
     # 1. Status disagreement + supersession-suffix check.
     for folder, task in tasks.items():
@@ -154,6 +167,10 @@ def diff(repo_root: Path, index_path: Path) -> list[str]:
                 f"{prefix}:{folder} bullet has no `Status:` token"
             )
         elif task.task_status and bullet.status != task.task_status:
+            # NOTE: when task_status is empty (unparseable frontmatter), the
+            # short-circuit above makes this branch silent on purpose — the
+            # F.3.1/F.3.2 frontmatter linter at check-governance step [1/6]
+            # is the canonical surface for that failure.
             diagnostics.append(
                 f"{prefix}:{folder} bullet status=`{bullet.status}` "
                 f"but task.md task_status=`{task.task_status}`"
@@ -161,8 +178,16 @@ def diff(repo_root: Path, index_path: Path) -> list[str]:
         # Supersession suffix: when task_status == "updated", the bullet MUST
         # carry a "→ superseded by [NNN]" pointer matching task_superseded_by.
         if task.task_status == "updated":
-            expected_ids = {_normalise_id(t) for t in task.superseded_by}
-            expected_ids.discard("")
+            normalised = [_normalise_id(t) for t in task.superseded_by]
+            if any(n is None for n, raw in zip(normalised, task.superseded_by)
+                   if raw):
+                bad = [raw for raw, n in zip(task.superseded_by, normalised)
+                       if raw and n is None]
+                diagnostics.append(
+                    f"{prefix}:{folder} task_superseded_by carries malformed "
+                    f"entries (no 3-digit `<NNN>` prefix): {bad}"
+                )
+            expected_ids = {n for n in normalised if n}
             if not expected_ids:
                 diagnostics.append(
                     f"{prefix}:{folder} task_status=`updated` but "
@@ -187,6 +212,13 @@ def diff(repo_root: Path, index_path: Path) -> list[str]:
                 f"{prefix}:{folder} bullet present at line {bullet.line_no} "
                 f"but no `tasks/{folder}/` folder on disk"
             )
+
+    # 3. Duplicate bullets in the index — silent fallback was a Task-008 hazard.
+    for folder, first_line, dup_line in duplicates:
+        diagnostics.append(
+            f"{prefix}:{folder} duplicate bullet at line {dup_line} "
+            f"(first at line {first_line})"
+        )
 
     diagnostics.sort()
     return diagnostics

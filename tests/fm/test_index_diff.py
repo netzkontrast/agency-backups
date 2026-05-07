@@ -204,6 +204,94 @@ class IndexDiffTests(unittest.TestCase):
             rc, out = sb.run()
             self.assertEqual(rc, 0, out)
 
+    def test_bullet_with_no_status_token(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            sb = _Sandbox(Path(tmp))
+            sb.write_task("100-alpha", _task_md("100", "alpha", task_status="open"))
+            sb.write_index(
+                _INDEX_HEAD
+                + "- [`100-alpha/`](./100-alpha/) — A. (no status token)\n"
+            )
+            rc, out = sb.run()
+            self.assertEqual(rc, 1)
+            self.assertIn("100-alpha", out)
+            self.assertIn("no `Status:` token", out)
+
+    def test_updated_with_empty_superseded_by(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            sb = _Sandbox(Path(tmp))
+            sb.write_task(
+                "100-old",
+                _task_md("100", "old", task_status="updated"),
+            )
+            sb.write_index(
+                _INDEX_HEAD
+                + "- [`100-old/`](./100-old/) — Old. Status: `updated`.\n"
+            )
+            rc, out = sb.run()
+            self.assertEqual(rc, 1)
+            self.assertIn("100-old", out)
+            self.assertIn("task_superseded_by is empty", out)
+
+    def test_malformed_superseded_by_value(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            sb = _Sandbox(Path(tmp))
+            sb.write_task(
+                "100-old",
+                _task_md("100", "old", task_status="updated",
+                        superseded_by=["foo-bar"]),
+            )
+            sb.write_index(
+                _INDEX_HEAD
+                + "- [`100-old/`](./100-old/) — Old. Status: `updated`.\n"
+            )
+            rc, out = sb.run()
+            self.assertEqual(rc, 1)
+            self.assertIn("malformed", out)
+            self.assertIn("foo-bar", out)
+
+    def test_duplicate_bullet_emits_diagnostic(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            sb = _Sandbox(Path(tmp))
+            sb.write_task("100-alpha", _task_md("100", "alpha", task_status="open"))
+            sb.write_index(
+                _INDEX_HEAD
+                + "- [`100-alpha/`](./100-alpha/) — First. Status: `open`.\n"
+                + "- [`100-alpha/`](./100-alpha/) — Second. Status: `open`.\n"
+            )
+            rc, out = sb.run()
+            self.assertEqual(rc, 1)
+            self.assertIn("100-alpha", out)
+            self.assertIn("duplicate bullet", out)
+
+    def test_json_output_shape(self) -> None:
+        import json
+        with tempfile.TemporaryDirectory() as tmp:
+            sb = _Sandbox(Path(tmp))
+            sb.write_task("100-alpha", _task_md("100", "alpha", task_status="done"))
+            sb.write_index(
+                _INDEX_HEAD
+                + "- [`100-alpha/`](./100-alpha/) — A. Status: `open`.\n"
+            )
+            rc, out = sb.run("--json")
+            self.assertEqual(rc, 1)
+            payload = json.loads(out)
+            self.assertIn("diagnostics", payload)
+            self.assertEqual(len(payload["diagnostics"]), 1)
+            self.assertIn("ERROR:T.7.11", payload["diagnostics"][0])
+
+    def test_invalid_index_path_exits_2(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            sb = _Sandbox(Path(tmp))
+            rc, out = sb.run("/path/that/does/not/exist.md")
+            self.assertEqual(rc, 2)
+            self.assertIn("not found", out)
+
+    @unittest.skipIf(
+        os.environ.get("FM_SKIP_REPO_CHECK") == "1",
+        "skipped when FM_SKIP_REPO_CHECK=1 (set during multi-commit refactors that "
+        "fix drift in a later commit; the [6/6] check-governance step still gates HEAD)",
+    )
     def test_repo_self_check_clean(self) -> None:
         """The repo's actual tasks/readme.md MUST be drift-free after the fixes
         applied in this Task. Acts as a regression guard."""

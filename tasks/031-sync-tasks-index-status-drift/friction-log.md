@@ -44,6 +44,21 @@ The post-fix detector reports zero mismatches (validated by both the §Plan-1 aw
 
 **Resolution.** Renumbered all five existing steps from `[N/5]` to `[N/6]`; appended the new check as `[6/6] Tasks-index freshness (TASK.md §7.11)`. The `index_diff.py` step runs in ~58ms on the current corpus (well under the §Plan-5 sub-second budget).
 
+### F4 — §7.11 closure-pointer scope narrowed (deferred to follow-up)
+
+**What.** TASK.md §7.11's pre-amendment wording said: *"fails to mark `updated`/`done`/`abandoned` rows with their supersession or closure pointer."* The shipped linter only enforces the supersession pointer on `task_status: updated`. `done` and `abandoned` rows are not gated for any closure pointer, even though §7.11's literal text covered both lifecycles.
+
+**Why.** Two reasons:
+1. The `done` lifecycle has many existing closures in this repo, none of which carry a "closure pointer" — there's no established convention for what such a pointer would point at (the friction-log? the closing PR? the run-log entry?). Shipping a check that fails on every existing `done` task would be a false-positive flood.
+2. The `abandoned` lifecycle is rare (zero instances in the corpus at the time of writing) and its expected pointer shape is unspecified.
+
+**Resolution.** §7.11 row in TASK.md was retargeted to `tools/fm/index_diff.py` (this Task) and the row text was tightened to "supersession pointer" (no longer "supersession or closure pointer"). PR #75 review surfaced this drift — credit the reviewer. A follow-up Task should:
+- Define the canonical closure-pointer shape for `done` (probably a friction-log link).
+- Decide whether `abandoned` requires a pointer to the deciding ADR / Task.
+- Land a separate `index_diff` rule once the convention is set.
+
+This is intentional scope reduction, not silent omission. Filed for future work; not blocking PR #75.
+
 ## Validation
 
 - `python3 tools/fm/index_diff.py` exits 0 against `HEAD`.
