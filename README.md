@@ -18,6 +18,8 @@ This repository is an opinionated answer to that drift. It treats agentic work a
 | **Actor** — the *Prompt* | *What is the agent told to do?* (executable instruction set) | [`/prompts/`](./prompts) |
 | **Space** — the *Research* | *What did running it produce?* (evidence, synthesis, output) | [`/research/`](./research) |
 
+> **Pending reframe.** [FOLDERS.md §1](./FOLDERS.md) and [AGENTS.md Task Type Routing](./AGENTS.md) now also list `/skills/` (Capability — *what the agent knows how to do*, governed by [SKILLS.md](./SKILLS.md)) as a peer concern. Reframing §1 and §3 of this README to a four-concern model is gated on R.13 / R.14 and is being done in [Task 045](./tasks/045-readme-coherence-refresh/). Until that Task lands, the operational guidance in `/skills/` is consulted via [SKILLS.md](./SKILLS.md) directly.
+
 The decoupling is enforced both socially (via specs) and mechanically (via linters and a pre-commit hook). A Task MUST NOT inline a prompt. Research MUST NOT author its own instructions. Follow-up questions MUST NOT be appended to a closed research workspace — they MUST be filed as new prompts. The audit graph that links the three is the source of truth.
 
 ```text
@@ -35,7 +37,7 @@ The decoupling is enforced both socially (via specs) and mechanically (via linte
 - **AI agents** (Claude Code, Gemini, Jules) who need a deterministic place to land when asked "do something useful here". The repo's root specs route every request to the correct directory before the agent writes a single byte.
 - **Researchers and prompt engineers** experimenting with long-horizon agency, frontmatter ontologies, friction logging, and spec-driven research workflows.
 
-You do not need to install or run anything to read this repository — most of the value is in the specs and the artifacts they govern. To *commit* changes you need Python 3 (for the linters) and a git pre-commit hook (`tools/install-hooks.sh`).
+You do not need to install or run anything to read this repository — most of the value is in the specs and the artifacts they govern. To *commit* changes you need Python 3 (with `PyYAML`, `jsonschema`, `pytest`) and the pre-commit hook installed; the canonical session bootstrap is `./install.sh` followed by `tools/check-governance.sh` (see [§9 Quick start](#9-quick-start-for-humans) and [AGENTS.md "Session Setup"](./AGENTS.md)).
 
 ---
 
@@ -76,20 +78,24 @@ agency/
 ├── PRE_COMMIT.md        # Mandatory pre-commit checklist for every agent.
 ├── FRUSTRATED.md        # FL0–FL3 friction logging spec (mandatory every session).
 ├── MAINTENANCE.md       # Nightly maintenance + Repo Coherence Check protocol.
+├── SKILLS.md            # Governs /skills/ — skill_* namespace, lifecycle, bootstrap protocol.
 ├── LICENSE
+├── install.sh           # Session bootstrap. Installs tools/requirements.txt; idempotent.
 │
 ├── tasks/               # Operational: Task orchestration folders <NNN>-<slug>/
 ├── prompts/             # Operational: Prompt instruction folders <slug>/
 ├── research/            # Operational: Research execution workspaces <slug>/
 │
-├── tools/               # Linters and the pre-commit shim (validate-frontmatter, lint-structure, lint-linkage, check-trust, check-governance).
+├── tools/               # Linters, ADR CLI, frontmatter toolchain, pre-commit shim.
 ├── templates/           # Frontmatter and folder skeletons agents copy when bootstrapping.
 ├── maintenance/         # Canonical language spec + structured run-log of every coherence check.
 ├── skills/              # Version-controlled mirror of Claude skills (SKILL.md + assets).
+├── decisions/           # Append-only ADR ledger (MADR 4.0.0) — the only mechanism for repo-architecture changes.
+├── Agency-System/       # Frontend prototype for the Agency System triptychon (HTML/JSX/SVG). See FOLDERS.md §8.
 └── .githooks/           # Pre-commit hook that invokes tools/check-governance.sh.
 ```
 
-The three **operational** directories (`/tasks/`, `/prompts/`, `/research/`) are the only places where coordination, instruction, and evidence may live. The four **non-operational** directories (`/tools/`, `/templates/`, `/maintenance/`, `/skills/`) are explicit exemptions enumerated in [FOLDERS.md §8](./FOLDERS.md). Adding a new top-level folder that is neither operational nor exempt is itself an anti-pattern.
+The three **operational** directories (`/tasks/`, `/prompts/`, `/research/`) are the only places where coordination, instruction, and evidence may live. The **non-operational** directories enumerated in [FOLDERS.md §8](./FOLDERS.md) (`/tools/`, `/templates/`, `/maintenance/`, `/skills/`, `/decisions/`, `/Agency-System/`) are explicit exemptions. Adding a new top-level folder that is neither operational nor exempt is itself an anti-pattern. The pytest suites for `/tools/adr/` and `/tools/fm/` live under [`/tools/tests/`](./tools/tests/) and are exempt-by-inheritance via the `/tools/` row in [FOLDERS.md §8](./FOLDERS.md).
 
 ---
 
@@ -99,7 +105,7 @@ Every governance file in this repository speaks the same formal dialect so human
 
 - **RFC 2119 keywords** (MUST, MUST NOT, SHOULD, SHOULD NOT, MAY, REQUIRED, RECOMMENDED, OPTIONAL) carry their normative meaning *only* when written in ALL CAPS. Lowercase prose is non-normative.
 - **Gherkin** (`Feature:`, `Scenario:`, `Given/When/Then`, `And/But`) is used for every behavioural example and acceptance criterion. Bullet-list assertions are not acceptance criteria.
-- **Frontmatter Ontology** is a Layered Schema with Namespacing — L0 (Obsidian reserved) + L1 (Vault Core: `type`, `status`, `slug`, `summary`, `created`, `updated`) + L2 (`task_*`, `prompt_*`, `research_*` namespaces) + L3 (sidecar agent metadata, never in YAML). YAML MUST NOT nest beyond one level.
+- **Frontmatter Ontology** is a Layered Schema with Namespacing — L0 (Obsidian reserved) + L1 (Vault Core: `type`, `status`, `slug`, `summary`, `created`, `updated`) + L2 domain namespaces (`task_*`, `prompt_*`, `research_*`, `skill_*`, `adr_*`) + L3 (sidecar agent metadata, never in YAML). YAML MUST NOT nest beyond one level. The `skill_*` namespace is defined in [SKILLS.md §3.3](./SKILLS.md); the `adr_*` namespace is defined in `research/adr-spec-research-synthesis/output/SPEC.md` and consumed by [`tools/adr/cli.py`](./tools/adr/cli.py).
 
 The `summary` field is the most important token-saving lever in the repo — agents are expected to read it before opening a file's body.
 
@@ -107,15 +113,19 @@ The `summary` field is the most important token-saving lever in the repo — age
 
 ## 6. The pre-commit gate (mechanical enforcement)
 
-The repository self-defends against drift via a pre-commit hook that runs three linters before any commit touching `/tasks/`, `/prompts/`, or `/research/`:
+The repository self-defends against drift via a pre-commit hook that runs the linters below before any commit touching `/tasks/`, `/prompts/`, `/research/`, or `/skills/`. The unified entry point is `tools/check-governance.sh`; the hook calls it directly.
 
 | Linter | Checks |
 |---|---|
 | [`tools/validate-frontmatter.py`](./tools/validate-frontmatter.py) | L1 + L2 keys present, YAML depth ≤ 1, slug is kebab-case, slug matches folder name. |
 | [`tools/lint-structure.py`](./tools/lint-structure.py) | Required files exist (`task.md`, `prompt.md`, `brief.md`, `readme.md` per folder). |
-| [`tools/lint-linkage.py`](./tools/lint-linkage.py) | Audit-graph edges resolve: `task_uses_prompts`, `task_spawns_research`, `prompt_relates_to_task`, `prompt_spawned_from_research`, `research_executes_prompt`. Reciprocity is enforced. |
+| [`tools/lint-linkage.py`](./tools/lint-linkage.py) | Audit-graph edges resolve: `task_uses_prompts`, `task_spawns_research`, `prompt_relates_to_task`, `prompt_spawned_from_research`, `research_executes_prompt`, `skill_references_*`. Reciprocity is enforced. |
+| [`tools/check-trust.py`](./tools/check-trust.py) | A friction log with a traceable FL declaration exists when a Task closes. |
+| [`tools/check-maintenance-bypass.py`](./tools/check-maintenance-bypass.py) | Nightly-maintenance commits cannot bypass the standard governance gates. |
+| [`tools/lint-runlog.py`](./tools/lint-runlog.py) | The maintenance run-log under `/maintenance/` carries valid structured entries. |
+| [`tools/adr/cli.py`](./tools/adr/cli.py) | ADR validation (`validate`) and AGENTS.md guarded-section synthesis (`synthesize`) for `/decisions/` per [§6.2 ADR change-control](#62-adr-change-control). |
 
-Closing a Task additionally runs [`tools/check-trust.py`](./tools/check-trust.py) to verify a friction log exists with a traceable FL declaration.
+A failing linter MUST be fixed (or waived in `tools/.frontmatter-waivers` with a documented rationale) before the commit can proceed.
 
 ### 6.1 Flexible toolchain (Task 016)
 
@@ -138,13 +148,17 @@ tools/install-hooks.sh
 git config core.hooksPath .githooks
 ```
 
-The unified entry point that the hook calls — and that you SHOULD run yourself before committing — is:
+### 6.2 ADR change-control (`/decisions/`)
 
-```bash
-tools/check-governance.sh
-```
+Repo-level architectural conventions (storage paths, frontmatter schemas, hook integration, branching) are changed *only* through Architectural Decision Records authored under [`/decisions/`](./decisions). Each ADR is a [MADR 4.0.0](https://adr.github.io/madr/) record (`<NNNN>-<slug>.md`) carrying `type: adr` plus the `adr_*` L2 namespace (`adr_id`, `adr_status`, `adr_supersedes`, …).
 
-A failing linter MUST be fixed (or waived in `tools/.frontmatter-waivers` with a documented rationale) before the commit can proceed.
+| Stage | What happens |
+|---|---|
+| **Author** | `decisions/<NNNN>-<slug>.md` written from the canonical MADR sections. `python3 tools/adr/cli.py validate` MUST pass before commit. |
+| **Lifecycle** | `Proposed → Accepted → Superseded`/`Deprecated`. An `Accepted` ADR is **T4-immutable** per [MAINTENANCE.md §1](./MAINTENANCE.md#1-repair-permission-tiers); changes land via a successor ADR that names the predecessor in `adr_supersedes`. |
+| **Synthesis** | When status flips to `Accepted`, `python3 tools/adr/cli.py synthesize` rewrites the byte-exact guarded block in [AGENTS.md](./AGENTS.md) (`<!-- BEGIN AGENCY-ADR SYNTHESIS -->` … `<!-- END AGENCY-ADR SYNTHESIS -->`). Manual edits inside that block MUST NOT be made — they are overwritten on the next synthesis run. |
+
+Authoring guidance lives in [`decisions/readme.md`](./decisions/readme.md). The governance contract lives in [`research/adr-spec-research-synthesis/output/SPEC.md`](./research/adr-spec-research-synthesis/output/SPEC.md).
 
 ---
 
@@ -160,17 +174,20 @@ The friction log is what feeds the **Nightly Maintenance Run** ([MAINTENANCE.md]
 
 Claude Code sessions MUST close with `/sc:createPR` after a successful `git push`. The PR body cites the closed Task slug(s) and the FL declaration. The rule is binding (see [AGENTS.md § Closing Run Procedure](./AGENTS.md#closing-run-procedure-claude-code)). Other agents (Jules, Gemini) follow their own platform conventions.
 
+`/sc:createPR` is provided by the SuperClaude Framework — its source lives at [`src/superclaude/commands/createPR.md`](https://github.com/netzkontrast/SuperClaude_Framework/blob/main/src/superclaude/commands/createPR.md) and is installed alongside the rest of the `/sc:*` command set. The skill re-runs `tools/check-governance.sh` before opening a PR; pre-commit failures gate PR creation.
+
 ---
 
 ## 9. Quick start for humans
 
-1. **Read first, write second.** Open [AGENTS.md](./AGENTS.md). It is the entry-point spec for every agent (and a fine briefing for humans). It routes every request to the correct directory.
-2. **Decide the layer.** Coordination → Task ([TASK.md](./TASK.md)). Instruction authoring → Prompt ([PROMPT.md](./PROMPT.md)). Evidence gathering → Research ([RESEARCH.md](./RESEARCH.md)).
-3. **Bootstrap from a template.** Copy the matching skeleton from [`/templates/`](./templates) (`task.md`, `prompt.md`, `research-readme.md`, `notes.md`, `readme.md`).
-4. **Install the hook once.** `tools/install-hooks.sh`.
-5. **Work in the right folder.** Operational artifacts live in `/tasks/`, `/prompts/`, `/research/`. Adjacent docs (`readme.md`) update at pre-commit time, not on every file change.
-6. **Run the gate before committing.** `tools/check-governance.sh`.
-7. **Log friction.** Always. FL0 inclusive.
+1. **Bootstrap the session.** From the repo root, run `./install.sh` (installs [`tools/requirements.txt`](./tools/requirements.txt) — `PyYAML`, `jsonschema`, `pytest`; idempotent), then `tools/check-governance.sh`. Both MUST exit 0 before any other action — see [AGENTS.md "Session Setup"](./AGENTS.md) (SS.1, SS.2).
+2. **Read first, write second.** Open [AGENTS.md](./AGENTS.md). It is the entry-point spec for every agent (and a fine briefing for humans). It routes every request to the correct directory.
+3. **Decide the layer.** Coordination → Task ([TASK.md](./TASK.md)). Instruction authoring → Prompt ([PROMPT.md](./PROMPT.md)). Evidence gathering → Research ([RESEARCH.md](./RESEARCH.md)). Reusable capability → Skill ([SKILLS.md](./SKILLS.md)). Architectural change → ADR ([`decisions/readme.md`](./decisions/readme.md)).
+4. **Bootstrap from a template.** Copy the matching skeleton from [`/templates/`](./templates) (`task.md`, `prompt.md`, `research-readme.md`, `notes.md`, `readme.md`, `skill.md`).
+5. **Install the hook once.** `tools/install-hooks.sh`.
+6. **Work in the right folder.** Operational artifacts live in `/tasks/`, `/prompts/`, `/research/`. Adjacent docs (`readme.md`) update at pre-commit time, not on every file change.
+7. **Run the gate before committing.** `tools/check-governance.sh`.
+8. **Log friction.** Always. FL0 inclusive.
 
 ---
 
@@ -186,6 +203,8 @@ Claude Code sessions MUST close with `/sc:createPR` after a successful `git push
 | [PRE_COMMIT.md](./PRE_COMMIT.md) | Mandatory pre-commit checklist. | …every commit. |
 | [FRUSTRATED.md](./FRUSTRATED.md) | FL0–FL3 friction logging. | …closing every session. |
 | [MAINTENANCE.md](./MAINTENANCE.md) | Nightly maintenance + Repo Coherence Check. | …running self-improvement passes. |
+| [SKILLS.md](./SKILLS.md) | `/skills/` — skill capability spec, `skill_*` namespace, lifecycle, bootstrap protocol. | …authoring or modifying any skill. |
+| [`decisions/readme.md`](./decisions/readme.md) | `/decisions/` — ADR ledger (MADR 4.0.0), `adr_*` namespace, T4-immutability, synthesis pipeline. | …changing any repo-architecture convention. |
 | [`maintenance/language-spec.md`](./maintenance/language-spec.md) | Canonical RFC 2119 + Gherkin + frontmatter ontology. | …writing any normative clause. |
 
 ---
@@ -200,6 +219,8 @@ type: spec
 status: active
 slug: readme-update-spec
 scope: README.md (repository root, this file only)
+created: 2026-05-04
+updated: 2026-05-07
 ---
 ```
 
@@ -210,7 +231,7 @@ The keywords **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT**, and **MAY** in 
 ### 11.2 Authority and scope
 
 - **R.1** This README is the **human-facing entry point** to the repository. It MUST remain readable by a non-agent reader who has never seen this repository before.
-- **R.2** This README MUST NOT duplicate the normative content of root specs (`AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `PRE_COMMIT.md`, `FRUSTRATED.md`, `MAINTENANCE.md`). It MUST link to them. When a normative clause changes in a root spec, this README MUST be updated to remain *consistent with* that spec, not to *re-state* it.
+- **R.2** This README MUST NOT duplicate the normative content of root specs (`AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `PRE_COMMIT.md`, `FRUSTRATED.md`, `MAINTENANCE.md`, `SKILLS.md`). It MUST link to them. When a normative clause changes in a root spec, this README MUST be updated to remain *consistent with* that spec, not to *re-state* it.
 - **R.3** The classification "Machine / Actor / Space" in §1 and §3 is the canonical human-readable framing of the three operational directories. If the framing is renamed, every reference to it in this README MUST be updated in the same commit.
 
 ### 11.3 Update triggers (when this README MUST change)
