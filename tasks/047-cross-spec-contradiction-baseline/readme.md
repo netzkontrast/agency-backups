@@ -12,6 +12,8 @@ updated: 2026-05-07
 ## Contents
 
 - [`task.md`](./task.md) — task definition, goal, findings summary, acceptance criteria.
+- [`friction-log.md`](./friction-log.md) — FL0 declaration (task closed as done).
+- [`review.md`](./review.md) — PR #77 code review by Claude Code; two critical §5 data-consistency errors and three soft findings.
 
 ## Downstream
 
