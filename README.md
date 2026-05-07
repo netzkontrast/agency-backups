@@ -76,6 +76,7 @@ agency/
 ├── PRE_COMMIT.md        # Mandatory pre-commit checklist for every agent.
 ├── FRUSTRATED.md        # FL0–FL3 friction logging spec (mandatory every session).
 ├── MAINTENANCE.md       # Nightly maintenance + Repo Coherence Check protocol.
+├── SKILLS.md            # Governs /skills/ — skill_* namespace, lifecycle, bootstrap protocol.
 ├── LICENSE
 │
 ├── tasks/               # Operational: Task orchestration folders <NNN>-<slug>/
@@ -186,6 +187,7 @@ Claude Code sessions MUST close with `/sc:createPR` after a successful `git push
 | [PRE_COMMIT.md](./PRE_COMMIT.md) | Mandatory pre-commit checklist. | …every commit. |
 | [FRUSTRATED.md](./FRUSTRATED.md) | FL0–FL3 friction logging. | …closing every session. |
 | [MAINTENANCE.md](./MAINTENANCE.md) | Nightly maintenance + Repo Coherence Check. | …running self-improvement passes. |
+| [SKILLS.md](./SKILLS.md) | `/skills/` — skill capability spec, `skill_*` namespace, lifecycle, bootstrap protocol. | …authoring or modifying any skill. |
 | [`maintenance/language-spec.md`](./maintenance/language-spec.md) | Canonical RFC 2119 + Gherkin + frontmatter ontology. | …writing any normative clause. |
 
 ---
