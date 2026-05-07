@@ -36,20 +36,22 @@ Not all fixes are equal. Before touching any file, the agent MUST classify the c
 
 **Mutation surface stability.** `tools/fm/edit.py` is the canonical T1/T2 mutator for frontmatter; coherence-check agents SHOULD prefer it over `sed`/`awk` because it preserves body bytes and quoting, takes a file lock, and rejects T3/T4 operations by construction (per [SPEC.md §7.2](./research/flexible-frontmatter-toolchain/output/SPEC.md)). Body-section mutations are deferred to `tools/fm/section.py` (Task 018).
 
-### 1.1 Toolchain Migration Context (Legacy ↔ Flexible)
+### 1.1 Toolchain Surface (Post-Migration)
 
-Two governance toolchains coexist while [Task 017](./tasks/017-migrate-repo-to-flexible-toolchain/) and [Task 019](./tasks/019-fm-toolchain-suite-integration/) execute the migration:
+The flexible-frontmatter toolchain is canonical and gating; the migration tracked by [Task 017](./tasks/017-migrate-repo-to-flexible-toolchain/) and [Task 019](./tasks/019-fm-toolchain-suite-integration/) is `done` (per Task 032 finding F12).
 
 | Toolchain | Entry point | Enforcement state | Owner |
 |---|---|---|---|
-| **Legacy** (default) | `tools/validate-frontmatter.py`, `tools/lint-structure.py`, `tools/lint-linkage.py` invoked by `tools/check-governance.sh` | Gating — non-zero exit blocks the pre-commit hook. | Task 001 lineage. |
-| **Flexible** (opt-in) | `tools/fm/validate.py` invoked by `FM_TOOLCHAIN=1 tools/check-governance.sh` | Advisory — runs alongside legacy; failures do not gate until Task 019 flips the default per [SPEC §12.6](./research/flexible-frontmatter-toolchain/output/SPEC.md). | Task 016. |
+| **Flexible** (default) | `tools/fm/validate.py --type-check` invoked by `tools/check-governance.sh` | **Gating** — non-zero exit blocks the pre-commit hook. | Tasks 016 / 017 / 019 lineage. |
+| **Legacy** (advisory shim, one release window) | `tools/legacy/{validate-frontmatter,lint-structure,lint-linkage}.py` | Advisory — runs alongside the gate; output silenced by `FM_LEGACY_QUIET=1` (the default in `tools/check-governance.sh`). | Task 001 lineage; scheduled for removal once the structural rules in `lint-structure.py` and `lint-linkage.py` are folded into `fm/validate.py` / a successor `fm-graph`. |
+
+`FM_TOOLCHAIN=0` is a documented escape hatch (it inverts which toolchain gates) but is NOT the supported configuration; it exists only to unblock a contested migration step and SHOULD NOT be used in CI.
 
 Maintenance agents MUST be aware that:
 
-1. T1/T2 mutations through `tools/fm/edit.py` are valid under both toolchains; the file lock and per-section preservation behave identically regardless of which validator gates the commit.
-2. The maintenance-bypass mode in `.githooks/pre-commit` (§4.1) reads its waiver list from `tools/.frontmatter-waivers`; that list is consumed by the **legacy** validator only. When `FM_TOOLCHAIN=1` becomes the default, waivers will need to be re-expressed against `tools/fm/validate.py` (tracked in Task 019).
-3. A coherence-check run that mixes the two toolchains (legacy gating + flexible advisory) is the supported transition state. An agent MUST NOT silently disable either; if a flexible-toolchain WARN points at a real defect, file a Task rather than papering over the warning.
+1. T1/T2 mutations through `tools/fm/edit.py` are the canonical mutator path. The file lock and per-section preservation behave identically regardless of `FM_TOOLCHAIN`.
+2. The maintenance-bypass mode in `.githooks/pre-commit` (§4.1) harvests `<path>::<level>:<code>:<msg>` diagnostics from `tools/fm/validate.py` and folds the legacy `lint-structure` / `lint-linkage` shims in for the gaps fm-validate does not yet cover (per Task 017 Batch 2c). There is no separate waiver file at `tools/.frontmatter-waivers`; waivers, when needed, are expressed inline against `tools/fm/validate.py`'s diagnostic codes (`F.3.x`, `F.4.x`, etc.) rather than a path list. An agent that finds a legitimately-bypassable error MUST file a Task with the diagnostic code and the rationale rather than introducing an out-of-band waiver mechanism.
+3. The coherence-check routine is wired to `tools/check-governance.sh` (Step 2.5 linter-first triage); it MUST NOT silently disable either toolchain. If the advisory legacy shim points at a real defect that fm-validate misses, file a Task to fold the rule into fm-validate rather than papering over the warning.
 
 ---
 
@@ -81,6 +83,17 @@ The prompt MUST be configured as a Claude Code SessionStart hook or invoked via 
 Every run MUST append one record to `maintenance/run-log.md` before the run's commit. The record format is defined in that file's header.
 The baseline is recorded as a *content-hash of the run-log entry* in addition to the commit hash.
 The agent MUST determine the baseline by reading the most recent reachable `end_commit` field (falling forward). If no recent `end_commit` is reachable, the agent MUST fail loudly and require a human-confirmed reseed (a tagged "coherence-reseed" annotation in `maintenance/run-log.md`). If the field is absent entirely (first run ever), the agent MUST use the repository's initial commit as the baseline.
+
+**Record types (per Task 032 finding F9).** Each record carries a `routine_type:` enum field with one of four values:
+
+| `routine_type` | Appended by | Counter semantics |
+|---|---|---|
+| `bootstrap` | The very first run-log seed. | All counters are zero by definition. |
+| `coherence-check` | A Repo Coherence Check sweep (this section's primary routine). | `t1/t2/t3_tasks_created` count repairs/Tasks produced over the delta since the previous baseline. |
+| `nightly-maintenance` | A Nightly Maintenance Run (§3). | Same counter semantics as `coherence-check` but over the audit's broader scope. |
+| `task-implementation` | The closing commit of a Task implementation; logged so subsequent agents see the new tools/files. | Counters describe Task-internal work, NOT a coherence sweep. Administrative closures of superseded Tasks also use this value. |
+
+The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on `end_commit:` regardless of `routine_type:`, so `task-implementation` records remain valid baselines (they advance HEAD). However, when computing aggregate metrics ("how many T3 Tasks were filed by coherence runs in May 2026?") an agent MUST filter on `routine_type: coherence-check` to avoid conflating Task-scope counters with sweep-scope counters.
 
 ---
 
@@ -138,6 +151,8 @@ The Coherence Check and the Nightly Maintenance Run MUST audit the freshness of 
 
 **Successor naming.** A successor Task uses the next free `<NNN>` and a slug that signals continuity with the predecessor (e.g. `<predecessor-slug>-v2` or a more specific re-framing such as `<predecessor-slug>-via-fm-edit`). The successor's `## Goal` MUST open with a one-line "Successor to Task NNN" pointer; the body re-frames the work against current repo state.
 
+**Mechanical cross-check.** The audit's `tasks/readme.md`-vs-`task_status` drift signal is also produced mechanically by [TASK.md §7.0 row §7.11](./TASK.md) (`tools/fm/index_diff.py`, landed by [Task 031](./tasks/031-sync-tasks-index-status-drift/task.md) per Task 032 finding F11). An agent SHOULD run `tools/check-governance.sh` first to surface drift; the §3.4 audit then handles the classification/lifecycle decision the linter cannot make on its own.
+
 **Drift-check inputs differentiate spec-bearing from review-bearing research.** When the staleness audit walks `task_spawns_research` to verify that the produced research workspace still matches the Task's premise, it MUST classify the workspace before flagging drift:
 
 - **Spec-bearing research** (`research/<slug>/output/SPEC.md` exists with `research_phase: complete`): the audit treats the SPEC as the canonical successor artefact and SHOULD trigger the **drifted (re-frame)** bucket only when the SPEC explicitly supersedes the Task's plan.
@@ -181,6 +196,8 @@ Before committing the results of any maintenance run, verify:
 
 The repository employs a **maintenance-bypass** mode in `.githooks/pre-commit`. By default, the pre-commit hook blocks any commit if a governance linter fails. However, if the repository has pre-existing errors, the hook will allow the commit **if and only if** every file causing an error has a corresponding `open` Task in `/tasks/` whose `task_affects_paths` array covers the offending file. If any error is not covered by an open Task, the commit MUST block.
 
+`tools/check-maintenance-bypass.py` (re-pointed by Task 017 Batch 2c) harvests `<path>::<level>:<code>:<msg>` diagnostics from `tools/fm/validate.py` as the canonical source of error-bearing paths and folds the legacy `tools/legacy/lint-structure.py` / `lint-linkage.py` outputs in to cover structural and cross-reference rules fm-validate does not yet replace. A path is considered "covered" when it appears in some open Task's `task_affects_paths`.
+
 ---
 
 ## 5. Maintenance Folder Reference
@@ -193,3 +210,9 @@ The `/maintenance/` folder is the governance support centre for this repository.
 | [`maintenance/run-log.md`](./maintenance/run-log.md) | Structured log of every Coherence Check and Nightly Maintenance run. The agent reads this to establish its starting-commit baseline. |
 
 The `/maintenance/` folder MUST NOT be used to store Task orchestration, prompt drafts, or research workspaces. Those belong in `/tasks/`, `/prompts/`, and `/research/` respectively.
+
+### 5.1 Tooling Prerequisites
+
+`tools/check-governance.sh` runs five mandatory steps (`fm-validate --type-check`, `lint-structure`, `lint-runlog`, `adr/cli.py validate`, `fm/index_diff`) plus a `[trust]` audit and an OPTIONAL narrative-ontology pair gated on `maintenance/schemas/narrative-ontology/ontology.json` existing on disk. The mandatory steps require only PyYAML; the optional narrative-ontology validator additionally requires `jsonschema>=4.18`. Per Task 032 finding F8, when `jsonschema` is absent, `tools/dramatica-nav/validate.py` emits a `WARN` and exits 0 so the suite-level exit code is not poisoned by a missing optional dependency.
+
+The supported install path is `./install.sh` (which pulls all of `tools/requirements.txt`); contributors who skip it MAY still invoke `tools/check-governance.sh` and will see the WARN above instead of a misleading FAIL.

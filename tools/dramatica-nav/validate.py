@@ -28,8 +28,17 @@ try:
     import jsonschema
     from jsonschema import Draft202012Validator
 except ImportError:  # pragma: no cover
-    print("ERROR: jsonschema is required. Install with: pip install jsonschema", file=sys.stderr)
-    sys.exit(2)
+    # Graceful degrade per Task 032 finding F8: jsonschema is an optional
+    # dependency for the narrative-ontology validator (gated on the ontology
+    # file existing in tools/check-governance.sh). A missing dependency must
+    # not poison the suite-level exit code; it must surface as a WARN and
+    # exit 0 so the rest of the governance suite is unaffected.
+    print(
+        "WARN: jsonschema not installed; narrative-ontology validator skipped. "
+        "Install via `pip install -r tools/requirements.txt` (or run `./install.sh`).",
+        file=sys.stderr,
+    )
+    sys.exit(0)
 
 # -------------------------------------------------------------------------
 # Type aliases

@@ -170,7 +170,18 @@ Beyond issues found during Step 3, actively check for these T3 patterns in the d
 
 #### Writing a Task for a T3 Finding
 
-Before creating a new Task, you MUST run `ls tasks/ | sort` and ensure the next free `<NNN>` is used (this is the duplicate-task_id guard).
+Before creating a new Task, you MUST pick a `<NNN>` that is free both locally AND on `origin/main`. The local check (`ls tasks/ | sort`) catches collisions on this branch; the cross-branch check catches collisions filed by parallel agents on other branches that have already merged. Per Task 032 finding F13 (and [TASK.md §8.1](../../TASK.md) bullet 2):
+
+```bash
+# Local free slot
+ls tasks/ | sort | tail
+
+# Cross-branch claimed slots — ALL prior bullet 2 of TASK.md §8.1
+git fetch origin main
+git ls-tree -r --name-only origin/main tasks/ | grep '^tasks/[0-9]\{3\}-' | head
+```
+
+The next free `<NNN>` is the smallest integer that does NOT appear as a folder prefix in either list. Skipping the cross-branch step is the recurring root cause of the duplicate-`task_id` collisions captured by Tasks 013 / 024 / 043.
 
 Each T3 Task MUST follow `TASK.md §5`. At minimum:
 
