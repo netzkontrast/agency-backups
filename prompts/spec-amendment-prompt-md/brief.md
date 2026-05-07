@@ -50,6 +50,10 @@ Wrong cut **iff** the framework decision tree adds >5 new framework names beyond
 4. PROMPT.md cites ST-2 + ST-3 linters in §6 (Pre-Commit Checks).
 5. `tools/check-governance.sh` exits 0.
 
+## Cross-Reference — Task 040 §A row §3.1
+
+Per [Task 040 synthesis §A row §3.1](../../tasks/040-superclaude-spec-evaluation/synthesis.md) (MERGE-INTO Task 034): the Gemini-spec `/sc:brainstorm` Socratic-discovery framing is already implemented as `skills/research-prompt-optimizer/` Phase 1. The §4.3 decision-tree authored by this subtask MUST cite that skill as the canonical prior art (one-line reference); MCP-server citations from the source spec (Tavily / Sequential / Context7) are stripped per Task 040 §C.
+
 ## Dependencies (from subtask)
 
 ST-1, ST-2, ST-3 MUST land first.

@@ -4,9 +4,9 @@ status: active
 slug: superclaude-spec-evaluation
 summary: "Evaluate the Gemini-authored 'SuperClaude Orchestration & Meta-Governance Specification' (research/gemini/superclaude-agency-orchestration-spec/) against repo reality, decide binding status (accept-as-is / amend / merge-into-tasks-032-039 / reject), and integrate accepted portions as concrete amendments to the existing 8-task chain."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 task_id: "040"
-task_status: in_progress
+task_status: done
 task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
@@ -23,6 +23,8 @@ task_affects_paths:
   - tasks/037-pre-commit-spec-integration/
   - tasks/038-frustrated-spec-integration/
   - tasks/039-maintenance-spec-integration/
+  - prompts/spec-amendment-prompt-md/
+  - prompts/spec-amendment-pre-commit-md/
   - research/gemini/superclaude-agency-orchestration-spec/
 ---
 
@@ -93,11 +95,11 @@ Scenario: A new SC.CMD.* scenario lands without colliding with existing schemes
 - [x] 2. Phase 2 — produce §A classification matrix (per Gemini-spec §, one row). Filed in `synthesis.md §A` (commit 9e3b59f).
 - [x] 3. Phase 3 — produce §B anchor-scheme reconciliation decision. Filed in `synthesis.md §B` (option ii — fold `SC.CMD.*` into host-spec namespaces; 10-row remap table).
 - [x] 4. Phase 4 — produce §C MCP-server reality-check matrix. Filed in `synthesis.md §C` (0 of 8 servers integrated).
-- [ ] 5. Phase 5 — author concrete patches against accepted-aspect host tasks. **Partially done** — three highest-leverage MERGE patches landed against Tasks 033/038/039 in commit 9e3b59f (per Loop 5 of /sc:improve). Remaining MERGE rows for Tasks 034 (§3.1 → 034) and 037 (§6 → 037) queued for the maintainer.
-- [ ] 6. Phase 6 — run `tools/check-governance.sh`; fix ERRORs.
-- [ ] 7. Update `tasks/readme.md` + `research/readme.md` for status transitions.
-- [ ] 8. Author `friction-log.md` with FL[0-3].
-- [ ] 9. Set `task_status: done`.
+- [x] 5. Phase 5 — author concrete patches against accepted-aspect host tasks. Three highest-leverage MERGE patches landed against Tasks 033/038/039 in commit 9e3b59f (per Loop 5 of /sc:improve). Remaining two MERGE rows landed at closure as cross-reference notes in `prompts/spec-amendment-prompt-md/brief.md` (§3.1 → Task 034 ST-4) and `prompts/spec-amendment-pre-commit-md/brief.md` (§6 → Task 037 ST-4 with new anchor `PC.B.REFL.1`).
+- [x] 6. Phase 6 — ran `tools/check-governance.sh`; surviving ERRORs are pre-existing (Task 046 missing `## Todo`, tasks/readme.md missing 045/046 bullets, Task 031 friction-log missing FL[0-3], optional `jsonschema` import) and out of scope for Task 040 per friction-log §FL2.
+- [x] 7. Updated `tasks/readme.md` Task 040 entry to reflect closure.
+- [x] 8. Authored `friction-log.md` with FL[0-3] (highest: FL2; 5 frictions recorded).
+- [x] 9. `task_status: done` set this commit.
 
 ## Links
 

@@ -50,6 +50,7 @@ Wrong cut **iff** the §2 / §28 reconciled wording diverges between the two spe
 3. ST-2 + ST-3 linters documented in §6.
 4. ≥4 Gherkin scenarios anchored PC.B.1-PC.B.4 land in a new acceptance section.
 5. `tools/check-governance.sh` exits 0.
+6. ≥1 Gherkin scenario anchored **`PC.B.REFL.1`** (reflect-before-commit) lands per [Task 040 §A row §6 + §B remap](../../tasks/040-superclaude-spec-evaluation/synthesis.md). The scenario MUST capture the `--readonly` diagnostic pattern (read-only reflection step before commit) without re-introducing a parallel pipeline that competes with `tools/check-governance.sh`. Drop all MCP-server citations from the Gemini source per Task 040 §C.
 
 ## Dependencies (from subtask)
 
