@@ -91,12 +91,11 @@ agency/
 ├── maintenance/         # Canonical language spec + structured run-log of every coherence check.
 ├── skills/              # Version-controlled mirror of Claude skills (SKILL.md + assets).
 ├── decisions/           # Append-only ADR ledger (MADR 4.0.0) — the only mechanism for repo-architecture changes.
-├── tests/               # Pytest suites for /tools/ (adr/, fm/).
 ├── Agency-System/       # Frontend prototype for the Agency System triptychon (HTML/JSX/SVG). See FOLDERS.md §8.
 └── .githooks/           # Pre-commit hook that invokes tools/check-governance.sh.
 ```
 
-The three **operational** directories (`/tasks/`, `/prompts/`, `/research/`) are the only places where coordination, instruction, and evidence may live. The **non-operational** directories enumerated in [FOLDERS.md §8](./FOLDERS.md) (`/tools/`, `/templates/`, `/maintenance/`, `/skills/`, `/decisions/`, `/Agency-System/`) are explicit exemptions. Adding a new top-level folder that is neither operational nor exempt is itself an anti-pattern. `/tests/` is currently unreconciled — it exists at root but is not yet enumerated in [FOLDERS.md §8](./FOLDERS.md); disposition is tracked by [Task 045](./tasks/045-readme-coherence-refresh/).
+The three **operational** directories (`/tasks/`, `/prompts/`, `/research/`) are the only places where coordination, instruction, and evidence may live. The **non-operational** directories enumerated in [FOLDERS.md §8](./FOLDERS.md) (`/tools/`, `/templates/`, `/maintenance/`, `/skills/`, `/decisions/`, `/Agency-System/`) are explicit exemptions. Adding a new top-level folder that is neither operational nor exempt is itself an anti-pattern. The pytest suites for `/tools/adr/` and `/tools/fm/` live under [`/tools/tests/`](./tools/tests/) and are exempt-by-inheritance via the `/tools/` row in [FOLDERS.md §8](./FOLDERS.md).
 
 ---
 

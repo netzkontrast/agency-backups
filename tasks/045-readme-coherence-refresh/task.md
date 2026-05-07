@@ -26,8 +26,15 @@ Reframe the README's mental-model from a three-concern model (Machine / Actor / 
 to a four-concern model that elevates `/skills/` to a peer **Capability** layer, in lockstep with
 [FOLDERS.md §1](../../FOLDERS.md) and [AGENTS.md Task Type Routing](../../AGENTS.md). Add a new
 top-level §12 *Narrative Ontology (load-gated)* that points at AGENTS.md NO.1–NO.6 + the schema
-directory under `maintenance/schemas/narrative-ontology/`. Open the backing ADRs that legitimise
-`/Agency-System/` and (if accepted) `/tests/` as exempt non-operational folders.
+directory under `maintenance/schemas/narrative-ontology/`. Open the backing ADR that legitimises
+`/Agency-System/` as an exempt non-operational folder.
+
+> **Update — `/tests/` resolved upstream.** The `/tests/` disposition originally bundled
+> here was resolved on the parent branch `claude/update-root-readme-Qufdr` by relocating
+> the suites under `/tools/tests/` (per PR #76 review F2, option b2). `/tools/tests/` is
+> exempt-by-inheritance through the `/tools/` row in FOLDERS.md §8; no ADR is required.
+> Steps 1.6 and Todo item 8 below are therefore complete; Task 046 picks up the related
+> CI/workflow question.
 
 The Task is `done` when:
 
@@ -74,10 +81,13 @@ The plan is executed via the SuperClaude command chain documented in
    - Records that `/Agency-System/` is a frontend-prototype storage folder consumed by
      `skills/the-agency-system-architect/` and exempt from §1 / §7 of FOLDERS.md.
    - Run `python3 tools/adr/cli.py validate` and then `synthesize`.
-6. **Disposition for `/tests/`.** Either (a) author ADR 0002 adding it to FOLDERS.md §8
-   (consistent with where the pytest suites for `tools/adr/` and `tools/fm/` live), or
-   (b) move the suites under `tools/tests/`. Decision is captured in the ADR; the README
-   topology note flagging `/tests/` as "unreconciled" is removed.
+6. ~~**Disposition for `/tests/`.**~~ **Resolved upstream** on
+   branch `claude/update-root-readme-Qufdr`: option (b) was chosen and the suites were
+   moved under `/tools/tests/`. No ADR was needed — `/tools/tests/` is exempt-by-
+   inheritance through the `/tools/` row in [FOLDERS.md §8](../../FOLDERS.md). The
+   README topology note flagging `/tests/` as "unreconciled" was removed in the same
+   commit. The CI/workflow question raised by the relocation moves to **Task 046**
+   ([github-workflow-research](../046-github-workflow-research/)).
 7. **Spec-panel review** (`/sc:spec-panel`) of the candidate diff against R.1–R.20 and the
    §11.5 Gherkin acceptance criteria.
 8. **Self-review** (`/sc:reflect`) before the closing run.
@@ -119,7 +129,7 @@ forbids the README from contradicting any root spec.
 - [ ] 5. **(Step 3a)** Update strapline + §2 to match the new framing; remove the Wave A "pending reframe" callout.
 - [ ] 6. **(Step 3a)** Append R.21 (or similar) to §11.3 if a new trigger emerges; respect R.10.
 - [ ] 7. **(Step 3b)** Draft `decisions/0001-agency-system-prototype-exemption.md` (`adr_status: Proposed`).
-- [ ] 8. **(Step 3b)** Decide `/tests/` disposition; capture in ADR 0002 *or* move suites under `tools/tests/`.
+- [x] 8. **(Step 3b)** ~~Decide `/tests/` disposition~~ — done upstream: suites moved to `/tools/tests/`; CI/workflow follow-up tracked by [Task 046](../046-github-workflow-research/).
 - [ ] 9. **(Step 4)** Run `python3 tools/adr/cli.py validate`; flip ADR(s) to `Accepted`; run `synthesize`.
 - [ ] 10. **(Step 5)** Run `/sc:spec-panel` on the candidate diff against §11.5 Gherkin (RM.1.1–RM.1.4).
 - [ ] 11. **(Step 6)** Run `/sc:reflect`; verify goal conditions 1–6; `tools/check-governance.sh` MUST exit 0.
