@@ -18,7 +18,7 @@ This repository is an opinionated answer to that drift. It treats agentic work a
 | **Actor** — the *Prompt* | *What is the agent told to do?* (executable instruction set) | [`/prompts/`](./prompts) |
 | **Space** — the *Research* | *What did running it produce?* (evidence, synthesis, output) | [`/research/`](./research) |
 
-> **Pending reframe.** [FOLDERS.md §1](./FOLDERS.md) and [AGENTS.md Task Type Routing](./AGENTS.md) now also list `/skills/` (Capability — *what the agent knows how to do*, governed by [SKILLS.md](./SKILLS.md)) as a peer concern. Reframing §1 and §3 of this README to a four-concern model is gated on R.13 / R.14 and is being done in [Task 043](./tasks/043-readme-coherence-refresh/). Until that Task lands, the operational guidance in `/skills/` is consulted via [SKILLS.md](./SKILLS.md) directly.
+> **Pending reframe.** [FOLDERS.md §1](./FOLDERS.md) and [AGENTS.md Task Type Routing](./AGENTS.md) now also list `/skills/` (Capability — *what the agent knows how to do*, governed by [SKILLS.md](./SKILLS.md)) as a peer concern. Reframing §1 and §3 of this README to a four-concern model is gated on R.13 / R.14 and is being done in [Task 045](./tasks/045-readme-coherence-refresh/). Until that Task lands, the operational guidance in `/skills/` is consulted via [SKILLS.md](./SKILLS.md) directly.
 
 The decoupling is enforced both socially (via specs) and mechanically (via linters and a pre-commit hook). A Task MUST NOT inline a prompt. Research MUST NOT author its own instructions. Follow-up questions MUST NOT be appended to a closed research workspace — they MUST be filed as new prompts. The audit graph that links the three is the source of truth.
 
@@ -96,7 +96,7 @@ agency/
 └── .githooks/           # Pre-commit hook that invokes tools/check-governance.sh.
 ```
 
-The three **operational** directories (`/tasks/`, `/prompts/`, `/research/`) are the only places where coordination, instruction, and evidence may live. The **non-operational** directories enumerated in [FOLDERS.md §8](./FOLDERS.md) (`/tools/`, `/templates/`, `/maintenance/`, `/skills/`, `/decisions/`, `/Agency-System/`) are explicit exemptions. Adding a new top-level folder that is neither operational nor exempt is itself an anti-pattern. `/tests/` is currently unreconciled — it exists at root but is not yet enumerated in [FOLDERS.md §8](./FOLDERS.md); disposition is tracked by [Task 043](./tasks/043-readme-coherence-refresh/).
+The three **operational** directories (`/tasks/`, `/prompts/`, `/research/`) are the only places where coordination, instruction, and evidence may live. The **non-operational** directories enumerated in [FOLDERS.md §8](./FOLDERS.md) (`/tools/`, `/templates/`, `/maintenance/`, `/skills/`, `/decisions/`, `/Agency-System/`) are explicit exemptions. Adding a new top-level folder that is neither operational nor exempt is itself an anti-pattern. `/tests/` is currently unreconciled — it exists at root but is not yet enumerated in [FOLDERS.md §8](./FOLDERS.md); disposition is tracked by [Task 045](./tasks/045-readme-coherence-refresh/).
 
 ---
 
