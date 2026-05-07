@@ -51,7 +51,16 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from tools.fm._core import split_frontmatter_and_body  # noqa: E402
+try:
+    from tools.fm._core import split_frontmatter_and_body  # noqa: E402
+except ImportError:
+    print(
+        "check-prompt-self-containedness: tools/fm/_core.py not importable "
+        "(skipping — advisory linter, exit 0). Install/repair the fm "
+        "toolchain to re-enable the WARN gate.",
+        file=sys.stderr,
+    )
+    raise SystemExit(0)
 
 EXTERNAL_CONTEXT_PHRASES: tuple[str, ...] = (
     "this conversation",

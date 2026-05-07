@@ -76,31 +76,39 @@ YAML MUST NOT nest deeper than one level. Lists MUST contain only scalars.
      │     ├── Yes → Q2.
      │     └── No  → Q4.
      │
-     ├── Q2. Does the agent ALSO need to declare the structured
-     │       artefacts (`R`ole, `I`nput, `S`teps, `E`xpectations,
-     │       `N`otes/Constraints) up front?
-     │     ├── Yes → choose `RISEN+ReAct`. Default for research-proposal
-     │     │        and task-spec prompts. Used by 76% of the existing
-     │     │        prompt corpus (55/72 at 2026-05-07).
+     ├── Q2. (asked only when Q1 = Yes.) Does the agent ALSO need to
+     │       declare the structured artefacts (`R`ole, `I`nput, `S`teps,
+     │       `E`xpectations, `N`otes/Constraints) up front?
+     │     ├── Yes → Q3.
      │     └── No  → choose `ReAct`. Use only for short tool-loops where
      │              the upstream contract is implicit (rare in this repo).
      │
-     ├── Q3. Does the prompt belong to the agentic-spine (specs that
-     │       drive reflection-driven self-improvement, e.g.
-     │       AGENTS.md / MAINTENANCE.md mechanizations)?
+     ├── Q3. (asked only when Q1 = Yes and Q2 = Yes.) Does the prompt
+     │       belong to the agentic-spine (specs that drive reflection-
+     │       driven self-improvement, e.g. AGENTS.md / MAINTENANCE.md
+     │       mechanizations)?
      │     ├── Yes → choose `RISE-DX`. Adds an explicit `D`iagnostic +
-     │     │        e`X`ecution loop on top of RISE.
-     │     └── No  → fall through to Q4.
+     │     │        e`X`ecution loop on top of RISE. Used by ~3% of the
+     │     │        corpus (2/72 at 2026-05-07).
+     │     └── No  → choose `RISEN+ReAct`. Default for research-proposal
+     │              and task-spec prompts. Used by 76% of the existing
+     │              prompt corpus (55/72 at 2026-05-07).
      │
-     └── Q4. Does the prompt produce a single structured artefact in
-             one shot (spec, table, code module) without iterative
-             tool use?
+     └── Q4. (asked only when Q1 = No.) Does the prompt produce a
+             single structured artefact in one shot (spec, table, code
+             module) without iterative tool use?
            ├── Yes → choose `RISEN`. Default for one-shot generation
            │        prompts. Used by 19% of the corpus (14/72).
            └── No  → choose `CoT` (Chain-of-Thought). Use ONLY for open-
                     ended reasoning, analysis, or evaluation prompts.
                     Fewer than 2% of corpus prompts qualify (1/72).
    ```
+
+   The five framework leaves and the path that reaches each: `RISE-DX`
+   ⟵ Q1=Yes, Q2=Yes, Q3=Yes; `RISEN+ReAct` ⟵ Q1=Yes, Q2=Yes, Q3=No;
+   `ReAct` ⟵ Q1=Yes, Q2=No; `RISEN` ⟵ Q1=No, Q4=Yes; `CoT` ⟵ Q1=No,
+   Q4=No. Every branch terminates at a canonical framework, and every
+   canonical framework is reachable.
 
    The set above is closed: `prompt_framework` MUST be exactly one of `RISEN`, `RISE-DX`, `ReAct`, `RISEN+ReAct`, `CoT`. New frameworks SHALL NOT be introduced without an ADR amending this clause. The body `## Framework` section MUST repeat the same token verbatim and supply ≥1 sentence of rationale (the `framework-no-rationale` rule in §6.0 enforces a 10-word floor).
 4. **Draft the Prompt** — Write `prompt.md` per the Engineering Principles (§5).
@@ -219,7 +227,7 @@ Feature: Pre-commit gates for /prompts/<slug>/
     Then the linter MUST exit 0
     And no WARN diagnostic MUST be emitted to stderr
 
-  # anchor: P.B.5.provider
+  # anchor: P.B.6.5.provider
   Scenario: Backward link resolves through a provider folder
     Given a file "/prompts/<slug>/prompt.md" with frontmatter `prompt_spawned_from_research: superclaude-agency-orchestration-spec`
     And the source research lives at "/research/gemini/superclaude-agency-orchestration-spec/" (RESEARCH.md §6.1 path-namespaced resolution)
@@ -228,7 +236,7 @@ Feature: Pre-commit gates for /prompts/<slug>/
     And the commit MUST proceed without an unresolved-link ERROR
 ```
 
-The anchors `P.B.1..P.B.6` mirror the §6 pre-commit-check namespace. Two extra `*.fail` / `*.pass` / `*.provider` scenarios are appended for the principles whose mechanical gate is a WARN-tier linter (§6.4, §6.4.b, §6.5) so both the green and red paths are captured.
+The anchor namespace is two-tier: `P.B.1..P.B.6` cover the six P (`P`rompt) `B` (`B`uild) gates listed in this Task's task.md (brief↔prompt, task reciprocity, follow-up filing, framework declaration, RFC-2119 keyword usage, self-containedness — note this does NOT one-to-one mirror PROMPT.md §6.1..§6.7 numbering). Variant suffixes `*.fail`, `*.pass`, and the §6-subsection form `*.<§6.N>.<variant>` (as in `P.B.6.5.provider`, anchored at §6.5 Backward-Link Resolves) extend the namespace where a single principle has multiple mechanical paths to test.
 
 ## 7. Anti-Patterns
 

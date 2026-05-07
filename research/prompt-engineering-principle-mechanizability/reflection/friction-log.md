@@ -11,7 +11,7 @@ updated: 2026-05-07
 
 ## FL Declaration
 
-**FL: 0** — No friction encountered during research execution.
+**FL0** — No friction encountered during research execution.
 
 ## Notes
 

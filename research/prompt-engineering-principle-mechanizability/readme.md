@@ -6,6 +6,7 @@ summary: "Research index for the per-principle empirical assessment of PROMPT.md
 created: 2026-05-06
 updated: 2026-05-07
 research_phase: complete
+research_executes_prompt: research-prompt-engineering-principle-mechanizability
 research_friction_level: FL0
 ---
 

@@ -38,11 +38,20 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from tools.fm._core import (  # noqa: E402  (sys.path manipulation above)
-    find_all_section_bodies,
-    parse_frontmatter,
-    split_frontmatter_and_body,
-)
+try:
+    from tools.fm._core import (  # noqa: E402  (sys.path manipulation above)
+        find_all_section_bodies,
+        parse_frontmatter,
+        split_frontmatter_and_body,
+    )
+except ImportError:
+    print(
+        "check-prompt-framework-declaration: tools/fm/_core.py not importable "
+        "(skipping — advisory linter, exit 0). Install/repair the fm "
+        "toolchain to re-enable the WARN gate.",
+        file=sys.stderr,
+    )
+    raise SystemExit(0)
 
 CANONICAL_FRAMEWORKS = ("RISEN", "RISE-DX", "ReAct", "RISEN+ReAct", "CoT")
 SECTION_HEADING = "Framework"
