@@ -19,7 +19,7 @@ task_affects_paths:
   - FRUSTRATED.md
   - tools/check-fl-declaration.py
 task_superseded_by:
-  - 053
+  - 062
 ---
 
 # Task 038 — FRUSTRATED.md Spec Integration
@@ -88,12 +88,12 @@ Scenario: Task closure without FL declaration is blocked
 - [x] 5. Update `README.md §6` per R.7. → linter table row added.
 - [x] 6. Update `tasks/readme.md`. → status flipped to `done`.
 - [x] 7. Author `friction-log.md`.
-- [x] 8. Set `task_status: updated` (revised from `done` in response to PR #87 review D1 — AC-1 and AC-5 are unverified at close, so `updated` with successor [Task 053](../053-frustrated-spec-followup-ac1-ac5/task.md) is the truthful frontmatter).
+- [x] 8. Set `task_status: updated` (revised from `done` in response to PR #87 review D1 — AC-1 and AC-5 are unverified at close, so `updated` with successor [Task 062](../062-frustrated-spec-followup-ac1-ac5/task.md) is the truthful frontmatter).
 
 ## Links
 
-- Successor (carries the deferred ACs): [`Task 053 — frustrated-spec-followup-ac1-ac5`](../053-frustrated-spec-followup-ac1-ac5/task.md). `task_supersedes: frustrated-spec-integration` reciprocity is set there; this Task's `task_superseded_by` points back.
+- Successor (carries the deferred ACs): [`Task 062 — frustrated-spec-followup-ac1-ac5`](../062-frustrated-spec-followup-ac1-ac5/task.md). `task_supersedes: frustrated-spec-integration` reciprocity is set there; this Task's `task_superseded_by` points back.
 - Subtask index: [`subtasks/readme.md`](./subtasks/readme.md)
-- Co-touched: [Task 037 — PRE_COMMIT.md spec integration](../037-pre-commit-spec-integration/task.md) (the §28 reconciliation is reciprocal; see Task 053 B-1).
+- Co-touched: [Task 037 — PRE_COMMIT.md spec integration](../037-pre-commit-spec-integration/task.md) (the §28 reconciliation is reciprocal; see Task 062 B-1).
 - Review-of-record: [`review-claude-brave-darwin.md`](./review-claude-brave-darwin.md) (PR #87 review; D1, D2, D3, D4).
 - Governing specs: [`FRUSTRATED.md`](../../FRUSTRATED.md), [`PRE_COMMIT.md`](../../PRE_COMMIT.md) §2, [`TASK.md`](../../TASK.md) §313, [`README.md`](../../README.md) §11.3

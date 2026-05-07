@@ -11,7 +11,7 @@ updated: 2026-05-07
 
 **Highest Frustration Level: FL2**
 
-> **Update 2026-05-07 (post-PR-#87 review):** Originally declared FL1. Promoted to FL2 after the PR #87 code-review (`claude/brave-darwin-iu6t1`) correctly identified that the close-as-`done` violated TASK.md §4 because two acceptance criteria (AC-1 §28/§2 byte-identicality, AC-5 Reflexion-pattern lift) were unverified. The promotion is the honest signal: this Task experienced significant frustration in the closing step, requiring backtrack to `task_status: updated` and the filing of [Task 053](../053-frustrated-spec-followup-ac1-ac5/task.md). Governance recommendation: the "deferred-AC → file-successor" pattern should be a checklist item in TASK.md §4 close-procedure, not an ad-hoc reaction to review feedback. See §6 below for the full review-response disposition.
+> **Update 2026-05-07 (post-PR-#87 review):** Originally declared FL1. Promoted to FL2 after the PR #87 code-review (`claude/brave-darwin-iu6t1`) correctly identified that the close-as-`done` violated TASK.md §4 because two acceptance criteria (AC-1 §28/§2 byte-identicality, AC-5 Reflexion-pattern lift) were unverified. The promotion is the honest signal: this Task experienced significant frustration in the closing step, requiring backtrack to `task_status: updated` and the filing of [Task 062](../062-frustrated-spec-followup-ac1-ac5/task.md). Governance recommendation: the "deferred-AC → file-successor" pattern should be a checklist item in TASK.md §4 close-procedure, not an ad-hoc reaction to review feedback. See §6 below for the full review-response disposition.
 
 ## §1. The §28 byte-identical-with-Task-037 reconciliation is deferred
 
@@ -55,9 +55,9 @@ Both already pass `tools/check-trust.py` (which only checks for any `FL[0-3]` to
 
 The PR #87 review (`tasks/038-frustrated-spec-integration/review-claude-brave-darwin.md`, commit `0bbb0a8`) returned four findings. Disposition:
 
-- **D1 (KRITISCH — premature `done`).** Accepted. `task_status: done` → `task_status: updated`; `task_superseded_by: [frustrated-spec-followup-ac1-ac5]`. New [Task 053](../053-frustrated-spec-followup-ac1-ac5/task.md) carries the deferred AC-1 and AC-5.
-- **D2 (KRITISCH — AC-5 untracked).** Accepted. Task 053 §B-2 carries the Reflexion-pattern lift with an explicit Halt-condition: do not lift content until `research/gemini/superclaude-agency-orchestration-spec/` exists on the branch.
-- **D3 (STRUCTURAL — FR.B.4 strict-mode honesty).** Accepted. `FRUSTRATED.md` FR.B.4 Gherkin rewritten to honestly document the WARN-default behaviour; new `FR.B.4.STRICT` scenario captures the gating-mode contract that Task 053 §B-3 will deliver.
+- **D1 (KRITISCH — premature `done`).** Accepted. `task_status: done` → `task_status: updated`; `task_superseded_by: [frustrated-spec-followup-ac1-ac5]`. New [Task 062](../062-frustrated-spec-followup-ac1-ac5/task.md) carries the deferred AC-1 and AC-5.
+- **D2 (KRITISCH — AC-5 untracked).** Accepted. Task 062 §B-2 carries the Reflexion-pattern lift with an explicit Halt-condition: do not lift content until `research/gemini/superclaude-agency-orchestration-spec/` exists on the branch.
+- **D3 (STRUCTURAL — FR.B.4 strict-mode honesty).** Accepted. `FRUSTRATED.md` FR.B.4 Gherkin rewritten to honestly document the WARN-default behaviour; new `FR.B.4.STRICT` scenario captures the gating-mode contract that Task 062 §B-3 will deliver.
 - **D4 (ADVISORY — verbatim drift).** Accepted. `FRUSTRATED.md` line 9 restored to "half the population" matching SPEC §5 verbatim.
 
 The review was substantive and correct. FL2 was the right post-review level.

@@ -11,7 +11,7 @@ updated: 2026-05-07
 
 ## What
 
-Operational folder for Task 038. **Status: `task_status: updated`** (revised from `done` in response to PR #87 review D1 — see [`review-claude-brave-darwin.md`](./review-claude-brave-darwin.md)). Successor: [Task 053](../053-frustrated-spec-followup-ac1-ac5/task.md), which carries the deferred AC-1 (§28/§2 byte-identicality), AC-5 (Reflexion-pattern lift), and the eventual `FM_FL_DECLARATION_STRICT=1` flip.
+Operational folder for Task 038. **Status: `task_status: updated`** (revised from `done` in response to PR #87 review D1 — see [`review-claude-brave-darwin.md`](./review-claude-brave-darwin.md)). Successor: [Task 062](../062-frustrated-spec-followup-ac1-ac5/task.md), which carries the deferred AC-1 (§28/§2 byte-identicality), AC-5 (Reflexion-pattern lift), and the eventual `FM_FL_DECLARATION_STRICT=1` flip.
 
 ## Files
 

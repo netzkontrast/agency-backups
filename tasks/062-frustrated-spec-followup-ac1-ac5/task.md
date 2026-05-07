@@ -5,7 +5,7 @@ slug: frustrated-spec-followup-ac1-ac5
 summary: "Successor to Task 038 (set `task_status: updated` on PR #87 review). Closes the two acceptance criteria deferred from 038: AC-1 (FRUSTRATED.md §28 / PRE_COMMIT.md §2 byte-identical reconciliation, joint with Task 037 ST-4) and AC-5 (Reflexion-pattern lift into §FL.Log.1, blocked on `research/gemini/superclaude-agency-orchestration-spec/` arriving on the branch). Also covers the eventual `FM_FL_DECLARATION_STRICT=1` flip after remediating historical malformed logs in tasks 030 + 033."
 created: 2026-05-07
 updated: 2026-05-07
-task_id: "053"
+task_id: "062"
 task_status: open
 task_owner: "unassigned"
 task_priority: P2
@@ -24,7 +24,7 @@ task_affects_paths:
   - tools/check-governance.sh
 ---
 
-# Task 053 — FRUSTRATED.md Spec Integration Follow-Up (AC-1 + AC-5 + Strict-Mode Flip)
+# Task 062 — FRUSTRATED.md Spec Integration Follow-Up (AC-1 + AC-5 + Strict-Mode Flip)
 
 ## Goal
 
@@ -65,7 +65,7 @@ Task 038 has been re-stated as `task_status: updated` and points at this Task as
 - [ ] B-2.2 — `FR.B.REFLEX.1` Gherkin scenario lands in FRUSTRATED.md.
 - [ ] B-3.1 — Tasks 030 + 033 friction-logs pass `tools/check-fl-declaration.py` under default mode.
 - [ ] B-3.2 — `tools/check-governance.sh` defaults `FM_FL_DECLARATION_STRICT=1`.
-- [ ] B-3.3 — README.md §6 table row says "Default-gate (Task 053)" instead of "Advisory".
+- [ ] B-3.3 — README.md §6 table row says "Default-gate (Task 062)" instead of "Advisory".
 - [ ] B-4 — FR.B.4 Gherkin scenarios in FRUSTRATED.md reflect post-flip semantics.
 - [ ] friction-log.md exists with FL declaration.
 - [ ] `tools/check-governance.sh` exits 0 on the closing commit.
@@ -93,6 +93,6 @@ Task 038 has been re-stated as `task_status: updated` and points at this Task as
 
 ## Assumptions Log
 
-- Task 053 is filed as the documented successor to Task 038; Task 038's `task_supersedes` reciprocity is set in the same commit that creates this Task.
+- Task 062 is filed as the documented successor to Task 038; Task 038's `task_supersedes` reciprocity is set in the same commit that creates this Task.
 - B-3 (strict-mode flip) is gated on B-2's resolution OR a documented decision to ship strict-mode without the Reflexion-pattern lift.
 - The `diff`-based byte-identicality test in B-1 strips the leading spec-name in the heading line only; body bytes must match exactly.

@@ -1,13 +1,13 @@
 ---
 type: index
 status: active
-slug: task-053-folder
-summary: "Folder index for Task 053 — successor to Task 038, carrying the AC-1 (§28/§2 byte-identicality), AC-5 (Reflexion-pattern lift), and FM_FL_DECLARATION_STRICT default-flip work that was deferred during the Task 038 close per PR #87 review."
+slug: task-062-folder
+summary: "Folder index for Task 062 — successor to Task 038, carrying the AC-1 (§28/§2 byte-identicality), AC-5 (Reflexion-pattern lift), and FM_FL_DECLARATION_STRICT default-flip work that was deferred during the Task 038 close per PR #87 review."
 created: 2026-05-07
 updated: 2026-05-07
 ---
 
-# Task 053 Folder
+# Task 062 Folder
 
 ## What
 
@@ -24,5 +24,5 @@ PR #87 review (`tasks/038-frustrated-spec-integration/review-claude-brave-darwin
 ## Assumptions Log
 
 - Filed in response to PR #87 review (`claude/brave-darwin-iu6t1`, 2026-05-07). Predates dispatch; assumes the dispatcher coordinates B-1 with whoever owns Task 037 ST-4.
-- Task 053 supersedes 038 only in the narrow sense of carrying its deferred ACs; the substantive ST-1 + ST-2 + partial ST-3 deliverables stand on Task 038 as landed in PR #87.
+- Task 062 supersedes 038 only in the narrow sense of carrying its deferred ACs; the substantive ST-1 + ST-2 + partial ST-3 deliverables stand on Task 038 as landed in PR #87.
 - B-2 has a Halt-condition: if `research/gemini/superclaude-agency-orchestration-spec/` is absent, file a precondition Task before lifting content.

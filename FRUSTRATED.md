@@ -108,7 +108,7 @@ Scenario: Strict-mode invocation blocks the commit
   And `tools/check-governance.sh` MUST exit non-zero
   And the commit MUST be blocked until an FL declaration is added
   And the strict-mode flip is gated on remediation of historical malformed logs
-        (tasks 030, 033 — see `tasks/053-frustrated-spec-followup-ac1-ac5/task.md`)
+        (tasks 030, 033 — see `tasks/062-frustrated-spec-followup-ac1-ac5/task.md`)
 ```
 
 ## Frustration Log
