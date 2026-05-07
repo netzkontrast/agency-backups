@@ -531,3 +531,110 @@ The agent MUST append its own record **before** committing the run's repairs, so
         mechanical surface to detect the 10-bullet drift; it surfaced only
         because the agent ran a hand-rolled awk loop. The §7.11 promise
         should be retargeted at Task 031 (now filed).
+
+### Run 2026-05-07 — Repo Coherence Check
+- agent: claude-code (session claude/funny-curie-rX7a4)
+- start_commit: 1a2a67a
+- end_commit: PENDING
+- baseline_commit: 6aa15be (2026-05-06 coherence-check end_commit; recovered cleanly via the awk fall-forward — Task 008's hardening still holds across the 297-file delta)
+- files_in_delta: 297
+- files_scanned: 8
+- t1_fixes: 2
+- t2_fixes: 0
+- t3_tasks_created: 1
+- t4_skipped: 2
+- issues_skipped: 1
+- notes: >
+    Drove the run from `tools/check-governance.sh` output (Step 2.5
+    linter-first triage). Of the 297 changed files since baseline, the
+    canonical linter surfaced exactly two diagnostics, reducing the
+    triage surface to a focused fix-list. Almost every changed file is
+    inside the Task 030 / 031 / 032–039 / 040 / 041 / 042 merge wave —
+    research workspaces (T4-skipped), 35 newly-extracted prompt triplets
+    (already conformant per Task 041 closure), and 8 spec-integration
+    Task chains (already conformant per the chain authoring).
+
+    T1 fixes:
+      - tasks/041-extract-subtask-prompts/friction-log.md: the FL
+        declaration `**FL: 2**` (with colon-space) did not match the
+        `\bFL[0-3]\b` regex in `tools/check-trust.py`. Rewrote to
+        `**FL2**`. Single-character mechanical conformance fix.
+      - tasks/041-extract-subtask-prompts/friction-log.md: bumped
+        `updated:` 2026-05-06 → 2026-05-07 via
+        `tools/fm/edit.py --bump-updated` (T1 mechanical, paired with
+        the format fix).
+
+    T3 Task created:
+      - tasks/043-renumber-duplicate-task-ids-v3/ — two new duplicate
+        `task_id` collisions surfaced after the merge wave: `task_id:
+        "031"` is shared by `031-adr-tooling-impl/` and
+        `031-sync-tasks-index-status-drift/`; `task_id: "032"` is
+        shared by `032-agents-spec-integration/` and
+        `032-improve-maintenance-spec-may-2026/`. Per
+        MAINTENANCE.md §3.5 this is T3 — the resolution rewrites
+        cross-references across multiple Task folders, the run-log,
+        and `tasks/readme.md`. Filed as a successor to the
+        Task 013 → Task 024 → Task 043 lineage.
+
+    T1 paired update:
+      - tasks/readme.md: added bullet for Task 043; annotated the four
+        colliding folders (031-adr-tooling-impl, 031-sync-..., 032-agents-...,
+        032-improve-...) with the standard "(Note: shares `task_id`
+        ... pending the renumber tracked by [Task 043](...))" suffix
+        used by Tasks 006/009 from the Task 024 lineage. Also added a
+        bullet for Task 042 (dramatica-nav-followups) which was missing
+        from the index. Bumped index `updated:` 2026-05-06 → 2026-05-07.
+
+    T4 skipped (research_phase: complete):
+      - research/adr-spec-research-synthesis/output/SPEC.md
+      - research/adr-assumption-audit/output/REPORT.md
+      (Same workspaces as the 2026-05-06 run; the merge wave didn't
+      mutate them.)
+
+    Issues skipped (1):
+      - The optional `jsonschema` dependency for the dramatica-nav
+        narrative-ontology validator is still missing in the default
+        environment; `tools/check-governance.sh` reports FAIL when
+        absent. This is the previous run's finding F8 — already
+        captured in [`Task 032 §F8`](../tasks/032-improve-maintenance-spec-may-2026/task.md).
+        Verified mechanically by installing jsonschema in this session
+        and re-running the script: PASS once the dependency is present.
+        No new Task; the existing one carries the disposition.
+
+    Surprises / findings carried into the maintenance-spec
+    improvement follow-up Task (per the operator's standing
+    instruction to distil session insights):
+      - F14: The friction-log FL declaration format is not canonicalised.
+        Author wrote `**FL: 2**` (with separator) which is humane but
+        fails the linter's `\bFL[0-3]\b` regex. The corpus prefers
+        `FL2` (no separator). FRUSTRATED.md and any friction-log
+        templates should call out the canonical no-separator form;
+        the linter's failure message could suggest the canonical
+        format on miss.
+      - F15: Duplicate `task_id` collisions recur every two-to-three
+        merge waves. Tasks 013, 024, 043 are all the same structural
+        finding (parallel branches each pick the locally-next-free
+        slot against their own branch state, with no pre-merge gate
+        against `origin/main`). The pattern is now stable enough that
+        the maintenance protocol should specify a CI-time mechanical
+        gate (or a pre-merge linter run) instead of relying on agent
+        obligation per TASK.md §8.1 + Task 032 finding F13.
+      - F16: The coherence routine has no built-in cross-check for
+        the most-recently-added Task folder appearing in
+        `tasks/readme.md`. Task 042 was missing from the index from
+        the moment it was filed; it surfaced only because the agent
+        manually scanned for the new bullets while adding Task 043's.
+        The TASK.md §7.11 / §4.8 promise is supposed to mechanise
+        this — Tasks 031 and 032 plan to land it. Worth flagging
+        that the maintenance-spec improvement Tasks (025, 032, 044)
+        are accumulating in parallel without a forcing function for
+        landing their diffs.
+      - F17: The /sc: skill family was not used during this run.
+        The coherence routine is intentionally mechanical
+        (linter-first → tier-classified repairs → Task creation),
+        which is a poor fit for /sc:* skills' design-and-implement
+        flavour. The maintenance spec could call out that
+        coherence runs intentionally bypass /sc: skills, or
+        identify the one or two skills (e.g. /sc:reflect, /sc:cleanup)
+        that *would* fit a coherence subgoal — to set author
+        expectations for future agents reading the prompt.
