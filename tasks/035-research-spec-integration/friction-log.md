@@ -39,3 +39,14 @@ Three of the new linters intentionally run advisory (`FM_*_STRICT=0`) for one re
 - Repair the `research/gemini/agency-adr-governance-spec/` ↔ Task 027 frontmatter back-link.
 - Author Task 039 ST-5 importing `DIAGNOSTIC_SCHEMA` from `tools/check-trust-audit.py`.
 - Once both above land, flip `FM_EXTERNAL_RESULT_STRICT=1` and `FM_TRUST_AUDIT_STRICT=1` in `tools/check-governance.sh`.
+
+## PR #88 review response (2026-05-07)
+
+Reviewer: `claude/brave-darwin-byPwb`. Review file: [`review-pr88-claude-brave-darwin.md`](./review-pr88-claude-brave-darwin.md). Four findings; resolution in commit `fix(pr-88)`:
+
+- **D1 (structural — was merge-blocker)** — Took Option B: lowered `DIAGNOSTIC_SCHEMA["thresholds"]["behavioral"]` from 0.90 to 0.80 in `tools/check-trust-audit.py`. Updates the corresponding sentence in RESEARCH.md §5.7 and the threshold-assertion test. The DIAGNOSTIC_SCHEMA carries an inline comment naming the migration-window: raise to 0.90 once Task 039 ST-5 (AGGREGATOR) lands AND `synthesis/methodology.md` is normatively required by RESEARCH.md §5.
+- **D3 (advisory)** — Added a `# migration-window:` annotation above the R.B.2 Gherkin scenario in RESEARCH.md §5.11 noting that WARN→ERROR promotion is gated on the strict-mode flip.
+- **D4 (advisory)** — Rephrased the R.B.5 `When`-clause from "stages a frontmatter edit setting `research_phase: complete`" to "any commit touches files under the workspace AND the workspace `readme.md` declares `research_phase: complete`" so the scenario matches the actual gate trigger in `tools/check-governance.sh`.
+- **D2 (advisory)** — Provider-list DRY violation deferred to a Task 039 follow-up per the reviewer's recommendation. Not addressed on this branch.
+
+The review session itself is FL0 friction (no re-plans); the closure FL stays at FL1.

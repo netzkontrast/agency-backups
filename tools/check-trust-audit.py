@@ -94,7 +94,14 @@ DIAGNOSTIC_SCHEMA: dict[str, object] = {
     "namespace": "TRUST",
     "thresholds": {
         "schema": 0.80,
-        "behavioral": 0.90,
+        # Behavioral threshold sits at 0.80 (not 0.90) so a single missing
+        # behavioral item (out of 5) does not flip the dimension to FAIL.
+        # Per PR #88 review D1 (claude/brave-darwin-byPwb): RESEARCH.md §5
+        # does not normatively require `synthesis/methodology.md`, so a
+        # 0.90 threshold would block conformant workspaces under strict
+        # mode. Raise back to 0.90 once Task 039 ST-5 (AGGREGATOR) lands
+        # AND RESEARCH.md §5 normatively requires methodology.md.
+        "behavioral": 0.80,
         "governance": 0.95,
     },
     "codes": {

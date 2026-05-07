@@ -129,9 +129,11 @@ def _fake_repo():
 
 class TrustAudit(unittest.TestCase):
     def test_diagnostic_schema_thresholds(self) -> None:
+        # Behavioral threshold is 0.80 (not 0.90) per PR #88 review D1 —
+        # see DIAGNOSTIC_SCHEMA comment for the migration-window rationale.
         self.assertEqual(
             cta.DIAGNOSTIC_SCHEMA["thresholds"],
-            {"schema": 0.80, "behavioral": 0.90, "governance": 0.95},
+            {"schema": 0.80, "behavioral": 0.80, "governance": 0.95},
         )
         self.assertEqual(cta.DIAGNOSTIC_SCHEMA["namespace"], "TRUST")
 

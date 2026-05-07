@@ -123,7 +123,7 @@ Before committing, the agent MUST satisfy:
 4. **No Empty Files** — No required file (`session.log`, `post-synthesis-log.md`, `state.md`, `readme.md`) is 0 bytes.
 5. **Batch Readme Audit** — Every touched folder has an updated `readme.md` per `FOLDERS.md`.
 6. **Session Logging** — `/workspace/session.log` is populated and chronological.
-7. **Trust-Audit GATE** — On any commit that transitions `research_phase` to `complete`, [`tools/check-trust-audit.py <workspace>`](./tools/check-trust-audit.py) MUST exit 0. The gate enforces three thresholds drawn from [`research/agentic-eval-trust-improvement-spec/output/SPEC.md`](./research/agentic-eval-trust-improvement-spec/output/SPEC.md): schema-conformance ≥ 80%, behavioral ≥ 90%, governance ≥ 95%. Diagnostics MUST follow the `<relpath>::ERROR:TRUST.<code>:<message>` format. The GATE is per-workspace; cross-workspace aggregation belongs to MAINTENANCE.md and is out of scope here.
+7. **Trust-Audit GATE** — On any commit touching files under a workspace whose `readme.md` declares `research_phase: complete`, [`tools/check-trust-audit.py <workspace>`](./tools/check-trust-audit.py) MUST exit 0. The gate enforces three thresholds drawn from [`research/agentic-eval-trust-improvement-spec/output/SPEC.md`](./research/agentic-eval-trust-improvement-spec/output/SPEC.md): schema-conformance ≥ 80%, behavioral ≥ 80%, governance ≥ 95%. Diagnostics MUST follow the `<relpath>::ERROR:TRUST.<code>:<message>` format. The GATE is per-workspace; cross-workspace aggregation belongs to MAINTENANCE.md and is out of scope here. The behavioral threshold sits at 80% (not 90%) during the migration window so a single missing behavioral item does not flip the dimension to FAIL — see PR #88 review D1; raise to 90% once Task 039 ST-5 (AGGREGATOR) lands AND `synthesis/methodology.md` is normatively required.
 8. **Output Verification** — `/output/` contains the final deliverable with required frontmatter.
 9. **Friction Reflection** — `/reflection/friction-log.md` exists and declares the highest FL experienced (FL0–FL3) at the top, per `FRUSTRATED.md`. Mandatory even at FL0. Mechanically enforced by [`tools/check-fl-declaration.py`](./tools/check-fl-declaration.py).
 10. **Open-Questions Outward Routing** — For every unresolved question, a corresponding `/prompts/<slug>/` exists with `prompt_kind: follow-up`. For every external `/research/<provider>/<slug>/result.md`, a back-linked Task MUST exist per §6.5; mechanically enforced by [`tools/check-external-result-downstream-task.py`](./tools/check-external-result-downstream-task.py).
@@ -147,6 +147,9 @@ Feature: Prompt resolves before research workspace is created
 
 ```gherkin
 # anchor: R.B.2 — workspace cleanliness
+# migration-window: tier is WARN during the Task 035→039 backfill window;
+# promote to ERROR once strict-mode (FM_WORKSPACE_CLEANLINESS_STRICT=1) is
+# the default. After the flip this scenario MUST be updated to ERROR:R.4.4.
 Feature: Workspace is free of execution-script stragglers at commit
   Scenario: Pre-commit scan finds a leftover .py file in workspace
     Given a research workspace at `/research/<slug>/workspace/`
@@ -184,13 +187,13 @@ Feature: External result triggers a downstream Task in the same commit
 ```gherkin
 # anchor: R.B.5 — trust-audit gate
 Feature: Research closure is blocked on trust-audit failure
-  Scenario: Researcher attempts to set research_phase: complete on a workspace with insufficient governance score
-    Given a research workspace at `/research/<slug>/` with `research_phase: synthesis`
-    And `output/SPEC.md` exists
-    When the agent stages a frontmatter edit setting `research_phase: complete`
+  Scenario: Commit touches a workspace already at research_phase: complete with insufficient governance score
+    Given a research workspace at `/research/<slug>/`
+    And the workspace `readme.md` declares `research_phase: complete`
+    When any commit touches files under the workspace
     Then `tools/check-trust-audit.py <workspace>` MUST run as part of pre-commit
     And the commit MUST be blocked if any of the three thresholds fail
-        (schema-conformance ≥ 80%, behavioral ≥ 90%, governance ≥ 95%)
+        (schema-conformance ≥ 80%, behavioral ≥ 80%, governance ≥ 95%)
     And the diagnostic format MUST match `<relpath>::ERROR:TRUST.<code>:<message>`
 ```
 
