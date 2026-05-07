@@ -39,18 +39,18 @@ Both collisions match the recurrent pattern that Tasks 013 → 024 already addre
 
 Every `task_id` value across `/tasks/*/task.md` MUST be unique. Specifically:
 
-- `tasks/031-sync-tasks-index-status-drift/` MUST be renumbered to the next free slot (proposed: `044` if `043` and `044` are unclaimed at staging time; pick the next free pair otherwise).
-- `tasks/032-improve-maintenance-spec-may-2026/` MUST be renumbered to the next free slot after the previous renumber (proposed: `045`).
+- `tasks/031-sync-tasks-index-status-drift/` MUST be renumbered to the next free slot (proposed: `045` if `045` and `046` are unclaimed at staging time; pick the next free pair otherwise). Slot `044` is already claimed by [Task 044](../044-improve-maintenance-spec-may-07-2026/task.md), filed in the same session as this Task — see PR #74 review R-1.
+- `tasks/032-improve-maintenance-spec-may-2026/` MUST be renumbered to the next free slot after the previous renumber (proposed: `046`).
 
 The slugs MUST remain stable across the renumber per TASK.md §8.1; only the folder prefix and the `task_id` field change.
 
 ## Plan
 
-1. **Lock current free slots.** Run `ls tasks/ | sort | tail` immediately before staging. If `044`/`045` are claimed (e.g. by another open coherence-run T3 Task), pick the next free pair and proceed.
+1. **Lock current free slots.** Run `ls tasks/ | sort | tail` immediately before staging. If `045`/`046` are claimed (e.g. by another open coherence-run T3 Task), pick the next free pair and proceed.
 2. **Rename folders.**
-   - `git mv tasks/031-sync-tasks-index-status-drift tasks/044-sync-tasks-index-status-drift`
-   - `git mv tasks/032-improve-maintenance-spec-may-2026 tasks/045-improve-maintenance-spec-may-2026`
-3. **Update `task_id` fields.** Use `python3 tools/fm/edit.py --set task_id="044" tasks/044-.../task.md` and the equivalent for 045; bump `updated:` on the same call.
+   - `git mv tasks/031-sync-tasks-index-status-drift tasks/045-sync-tasks-index-status-drift`
+   - `git mv tasks/032-improve-maintenance-spec-may-2026 tasks/046-improve-maintenance-spec-may-2026`
+3. **Update `task_id` fields.** Use `python3 tools/fm/edit.py --set task_id="045" tasks/045-.../task.md` and the equivalent for 046; bump `updated:` on the same call.
 4. **Sweep cross-references.** `grep -rn "031-sync-tasks-index-status-drift\|032-improve-maintenance-spec-may-2026"` across the tree and update every hit. Also sweep `task_supersedes`, `task_superseded_by`, `task_blocked_by` lists for any references by `task_id` value (`"031"` / `"032"`); disambiguate by surrounding context.
 5. **Update `tasks/readme.md`.** Move the bullets for the two renumbered Tasks to their new slot positions; bump `tasks/readme.md`'s `updated:` field; remove the duplicate-collision annotations added by the 2026-05-07 coherence run.
 6. **Re-run linters.** `python3 tools/fm/validate.py --type-check` and `tools/check-governance.sh` MUST both exit 0 against the post-renumber tree before commit.
@@ -59,9 +59,9 @@ The slugs MUST remain stable across the renumber per TASK.md §8.1; only the fol
 
 ## Todo
 
-- [ ] 1. Verify `044`/`045` (or next-free pair) are unclaimed at staging time.
-- [ ] 2. Rename `031-sync-tasks-index-status-drift` → `044-sync-tasks-index-status-drift`; update `task_id`.
-- [ ] 3. Rename `032-improve-maintenance-spec-may-2026` → `045-improve-maintenance-spec-may-2026`; update `task_id`.
+- [ ] 1. Verify `045`/`046` (or next-free pair) are unclaimed at staging time.
+- [ ] 2. Rename `031-sync-tasks-index-status-drift` → `045-sync-tasks-index-status-drift`; update `task_id`.
+- [ ] 3. Rename `032-improve-maintenance-spec-may-2026` → `046-improve-maintenance-spec-may-2026`; update `task_id`.
 - [ ] 4. Sweep cross-references (paths, `task_blocked_by`, `task_supersedes`, `task_superseded_by`, run-log entries, prompt back-links).
 - [ ] 5. Update `tasks/readme.md` bullets and bump `updated:`.
 - [ ] 6. Run `tools/check-governance.sh`; confirm 0 errors.

@@ -2,7 +2,7 @@
 type: task
 status: active
 slug: improve-maintenance-spec-may-07-2026
-summary: "Distil four findings (F14–F17) from the 2026-05-07 coherence run into concrete diffs against MAINTENANCE.md, FRUSTRATED.md, prompts/repo-coherence-check/prompt.md, tools/check-trust.py, and templates/. Companion to Task 025 (open) and Task 032 (open) which carry earlier findings."
+summary: "Distil six findings (F14–F19) from the 2026-05-07 coherence run and PR #74 review into concrete diffs against MAINTENANCE.md, FRUSTRATED.md, prompts/repo-coherence-check/prompt.md, tools/check-trust.py, maintenance/run-log.md, and templates/. Companion to Task 025 (open) and Task 032 (open) which carry earlier findings."
 created: 2026-05-07
 updated: 2026-05-07
 task_id: "044"
@@ -28,7 +28,7 @@ task_affects_paths:
 
 ## Goal
 
-Each of the four findings F14–F17 below MUST land as either (a) a concrete diff against [`MAINTENANCE.md`](../../MAINTENANCE.md), [`FRUSTRATED.md`](../../FRUSTRATED.md), [`TASK.md`](../../TASK.md), [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md), [`tools/check-trust.py`](../../tools/check-trust.py), or [`templates/`](../../templates/); OR (b) a documented `won't-fix` disposition in this Task's `friction-log.md` with rationale. The Task closes only when every finding has either a landed diff or a recorded disposition. Companion (NOT successor) to [Task 025](../025-maintenance-spec-remaining-findings/task.md) (F2/F3/F4/F7 from 2026-05-05) and [Task 032](../032-improve-maintenance-spec-may-2026/task.md) (F8–F13 from 2026-05-06).
+Each of the six findings F14–F19 below MUST land as either (a) a concrete diff against [`MAINTENANCE.md`](../../MAINTENANCE.md), [`FRUSTRATED.md`](../../FRUSTRATED.md), [`TASK.md`](../../TASK.md), [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md), [`tools/check-trust.py`](../../tools/check-trust.py), [`maintenance/run-log.md`](../../maintenance/run-log.md), or [`templates/`](../../templates/); OR (b) a documented `won't-fix` disposition in this Task's `friction-log.md` with rationale. The Task closes only when every finding has either a landed diff or a recorded disposition. Companion (NOT successor) to [Task 025](../025-maintenance-spec-remaining-findings/task.md) (F2/F3/F4/F7 from 2026-05-05) and [Task 032](../032-improve-maintenance-spec-may-2026/task.md) (F8–F13 from 2026-05-06). Findings F18 and F19 absorbed from PR #74 review (R-3 and G-1 respectively); see [`maintenance/pr-74-review.md`](../../maintenance/pr-74-review.md).
 
 ## Findings
 
@@ -86,6 +86,29 @@ The maintenance protocol is silent on this. The coherence prompt's Constraints s
 - [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md) Constraints section SHOULD add a constraint: "/sc: skills MAY be invoked as supplementary lenses but MUST NOT bypass the Step 2.5 linter-first triage."
 - (Won't-fix candidate) If the team prefers the spec stay silent on per-skill fit (skill catalogue evolves), record that disposition in this Task's friction-log with rationale.
 
+### F18 — Coherence prompt has no carve-out for operator-instructed post-run commits
+
+**Symptom.** Absorbed from [PR #74 review R-3](../../maintenance/pr-74-review.md). [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md) Step 5 mandates: *"All T1 and T2 repairs, any new Tasks, and the run-log entry (Step 6) MUST be committed together in a single atomic commit."* The 2026-05-07 PR (#74) ships two commits — one for the coherence-run output (`9172de7`) and one for the operator-instructed Task 044 distillation (`ad53c05`). The split is a reasonable operational distinction: Task 044 was filed in response to a separate operator instruction (*"After you Are Done, collect all Information about the current Session, that could Help to further Improve the Maintenance spec and submit a new Task"*), not as part of the coherence run's own T3 output.
+
+The protocol currently makes no provision for this category. Future agents and reviewers cannot distinguish a legitimate operator-instructed follow-up commit from a protocol violation without reading the PR body.
+
+**Concrete diffs:**
+
+- [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md) Step 5 SHOULD add: *"If the operator issues an additional instruction after the coherence commit (e.g. to distil session findings into a follow-up Task), that action MAY be committed separately with a `feat(task-NNN):` prefix commit message distinct from the `chore(coherence):` commit."*
+- [`MAINTENANCE.md §4`](../../MAINTENANCE.md) "Finalising Any Run" SHOULD mirror the carve-out so the spec and the prompt agree.
+
+### F19 — Run-log lacks distinction between confirmed-conformant and skipped-as-conformant files
+
+**Symptom.** Absorbed from [PR #74 review G-1](../../maintenance/pr-74-review.md). The 2026-05-07 run-log entry records `files_in_delta: 297`, `files_scanned: 8`, `t4_skipped: 2`. That leaves 287 files whose disposition is documented only in the prose `notes:` block as "already conformant per Task 041 closure" / "already conformant per the chain authoring". The prose is accurate but mechanically opaque: a future audit cannot verify that the 287 unscanned files were actually inspected and found clean, vs silently ignored.
+
+The current run-log schema treats "scanned" and "skipped" as the only two categories. The linter-first triage approach (Step 2.5) introduces a third category — files that the linter pre-cleared, which the agent counted but did not open. Without a field to capture this third category the run-log under-reports the agent's actual inspection coverage.
+
+**Concrete diffs:**
+
+- [`maintenance/run-log.md`](../../maintenance/run-log.md) record format SHOULD add a `files_linter_cleared:` field. Definition: count of files in the delta that the canonical linter (`tools/check-governance.sh`) reported clean and the agent therefore did not need to open. Adjust the implicit identity `files_scanned + files_linter_cleared + t4_skipped + non_markdown_skipped == files_in_delta`.
+- [`MAINTENANCE.md §2.3`](../../MAINTENANCE.md) Run-Log Protocol SHOULD list the new field alongside the existing schema.
+- Backfill the new field on existing records is OPTIONAL (the field is additive); only the record format header MUST be updated.
+
 ## Plan
 
 1. **Confirm Task 031 / Task 032 status.** Both Tasks are still open at file time. F15 (cross-branch task_id check) overlaps Task 032 finding F13; F16 (readme.md membership drift) overlaps Task 031 scope. Decide F15 / F16 ownership: this Task records `delegated to Task NNN` if the existing Task absorbs the work, or files an additive diff if it does not.
@@ -93,7 +116,9 @@ The maintenance protocol is silent on this. The coherence prompt's Constraints s
 3. **Land F15 (cross-branch duplicate-task_id mechanical gate).** Coordinate with Task 032 finding F13. Decide between CI workflow vs pre-commit `tools/fm/preflight.py`. Default to CI workflow if the team prefers reproducible enforcement; pre-commit if local-loop responsiveness matters.
 4. **Land F16 (readme.md membership drift).** Defer to Task 031 if its Plan already covers the membership axis. If not, amend Task 031's Plan to add the membership check; do NOT split the work.
 5. **Land F17 (/sc: skill fit subsection).** Amend MAINTENANCE.md §2 and the coherence prompt Constraints section. Be terse — the spec should not enumerate the full skill catalogue, only the high-level fit.
-6. **Append `friction-log.md`** with FL[0-3] declaration and per-finding disposition (`landed: <commit>` or `won't-fix: <reason>` or `delegated to Task NNN`). Use the canonical FL declaration form (per F14's outcome) regardless of whether F14 has landed by then.
+6. **Land F18 (operator-instructed commit carve-out).** Amend coherence prompt Step 5 and MAINTENANCE.md §4 to allow an operator-instructed follow-up commit with a `feat(task-NNN):` prefix distinct from the `chore(coherence):` commit.
+7. **Land F19 (run-log linter-cleared field).** Add `files_linter_cleared:` to the run-log record format; update MAINTENANCE.md §2.3.
+8. **Append `friction-log.md`** with FL[0-3] declaration and per-finding disposition (`landed: <commit>` or `won't-fix: <reason>` or `delegated to Task NNN`). Use the canonical FL declaration form (per F14's outcome) regardless of whether F14 has landed by then.
 
 ## Todo
 
@@ -102,11 +127,14 @@ The maintenance protocol is silent on this. The coherence prompt's Constraints s
 - [ ] 3. Land F15 (cross-branch task_id mechanical gate) OR record `delegated to Task 032 §F13`.
 - [ ] 4. Land F16 (readme.md membership check) OR record `delegated to Task 031`.
 - [ ] 5. Land F17 (MAINTENANCE.md §2 + coherence prompt Constraints "Skill Fit" amendment).
-- [ ] 6. Produce `friction-log.md` with FL[0-3] declaration (canonical form) and per-finding disposition.
+- [ ] 6. Land F18 (operator-instructed commit carve-out in coherence prompt Step 5 + MAINTENANCE.md §4).
+- [ ] 7. Land F19 (run-log `files_linter_cleared:` field + MAINTENANCE.md §2.3 schema doc).
+- [ ] 8. Produce `friction-log.md` with FL[0-3] declaration (canonical form) and per-finding disposition.
 
 ## Links
 
 - Found by: coherence-check run 2026-05-07 (see [`maintenance/run-log.md`](../../maintenance/run-log.md) entry).
+- F18 / F19 absorbed from: [PR #74 review](../../maintenance/pr-74-review.md) findings R-3 and G-1.
 - Sibling Tasks (independent, not predecessors):
   - [`Task 025`](../025-maintenance-spec-remaining-findings/task.md) (F2/F3/F4/F7 from 2026-05-05).
   - [`Task 032`](../032-improve-maintenance-spec-may-2026/task.md) (F8–F13 from 2026-05-06).
