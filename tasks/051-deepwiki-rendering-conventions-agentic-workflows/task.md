@@ -22,7 +22,7 @@ task_affects_paths:
   - tasks/051-deepwiki-rendering-conventions-agentic-workflows/
 ---
 
-# Task 048 — Analyze DeepWiki Rendering, Conventions, and Agentic Workflows (External Gemini Result)
+# Task 051 — Analyze DeepWiki Rendering, Conventions, and Agentic Workflows (External Gemini Result)
 
 ## Goal
 
