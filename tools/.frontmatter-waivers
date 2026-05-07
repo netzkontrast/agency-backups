@@ -1,0 +1,24 @@
+# tools/.frontmatter-waivers — per-rule waiver ledger (PRE_COMMIT.md §7.B).
+#
+# Format (TSV, four columns separated by a single TAB):
+#
+#   <path-glob>\t<rule-id>\t<rationale>\t<expires>
+#
+# - path-glob:  fnmatch glob, repo-relative (e.g. `tasks/030-*/notes.md`).
+# - rule-id:    diagnostic code emitted by tools/fm/validate.py or
+#               tools/adr/cli.py (e.g. `F.4.2`, `ADR.A.3.5`, `R.4.4`).
+#               Use `*` to silence every rule for the matching paths
+#               (legacy per-file semantics; permitted but discouraged).
+# - rationale:  short justification including the tracking Task slug
+#               (e.g. `Task 030 tracks repair`).
+# - expires:    ISO-8601 calendar date `YYYY-MM-DD`, or `-` for no expiry.
+#               PRE_COMMIT.md §7.B Burn-Down Protocol requires every
+#               waiver to carry an explicit expiry; `-` is permitted only
+#               for permanent architectural carve-outs (rare).
+#
+# Lines starting with `#` are comments. Blank lines are ignored. The
+# loader rejects mixed legacy (single-path) and new (TSV) formats; run
+# `python3 tools/scripts/migrate-waivers.py` to convert.
+#
+# Header row (optional):
+#path-glob	rule-id	rationale	expires

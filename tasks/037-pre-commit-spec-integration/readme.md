@@ -4,7 +4,7 @@ status: active
 slug: task-037-pre-commit-spec-integration
 summary: "Folder index for Task 037 — PRE_COMMIT.md spec integration. Reconciles §2 with FRUSTRATED.md §28, adds §7.A toolchain-precedence matrix, mechanizes PC.1.1, and refactors waivers from per-file to per-rule scope."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 ---
 
 # Task 037 Folder

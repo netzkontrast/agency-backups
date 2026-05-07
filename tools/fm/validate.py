@@ -482,6 +482,18 @@ def main(argv: list[str] | None = None) -> int:
             if (d.path, d.line, d.code, d.message) not in baseline_set
         ]
 
+    # PRE_COMMIT.md §7.B per-rule waivers (Task 037 ST-3).
+    try:
+        waivers = _core.load_waivers(repo_root)
+    except _core.Diag as exc:
+        print(f"fm-validate: waiver load failed: {exc}", file=sys.stderr)
+        return 1
+    if waivers:
+        import datetime as _dt
+        diags = _core.apply_waivers(
+            diags, waivers, today=_dt.date.today().isoformat(),
+        )
+
     error_count = sum(1 for d in diags if d.severity == "ERROR")
     warn_count = sum(1 for d in diags if d.severity == "WARN")
 

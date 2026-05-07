@@ -62,6 +62,17 @@ if ! "$PYTHON" tools/check-readme-frontmatter.py; then
 fi
 
 echo ""
+echo "--- [2c/6] Clean working directory linter (Task 037 ST-2 — PRE_COMMIT.md PC.1.1) ---"
+# Mechanises the PC.1.1 "no .py/.sh script scratchpads, no loose log dumps"
+# rule across the whole working tree. Exempts /tools/, /tests/, /skills/,
+# /templates/, /maintenance/, /decisions/, /Agency-System/, /.githooks/
+# per FOLDERS.md §8. session.log is always allowed (RESEARCH.md §4.5).
+# Per-repo carve-outs live in tools/.script-allowlist.
+if ! "$PYTHON" tools/check-clean-working-directory.py; then
+  FAIL=1
+fi
+
+echo ""
 echo "--- [3/6] Cross-reference linkage (folded into fm-validate --type-check) ---"
 echo "(legacy tools/lint-linkage.py is now a shim around fm-validate --type-check; checked above)"
 

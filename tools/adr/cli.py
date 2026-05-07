@@ -116,6 +116,19 @@ def run_validate(
         targets = {Path(p).resolve() for p in paths}
         corpus = [r for r in corpus if r.path.resolve() in targets]
     diags = _validate_corpus(corpus, ontology)
+    # PRE_COMMIT.md §7.B per-rule waivers (Task 037 ST-3) — accept
+    # ADR.A.* codes as rule-ids per the §7.C contract.
+    try:
+        waivers = _core.load_waivers(repo)
+    except _core.Diag as exc:
+        print(f"agency-adr validate: waiver load failed: {exc}",
+              file=sys.stderr)
+        return 1
+    if waivers:
+        import datetime as _dt
+        diags = _core.apply_waivers(
+            diags, waivers, today=_dt.date.today().isoformat(),
+        )
     _emit(diags, fmt, checked=len(corpus))
     return _exit_code(diags, strict)
 

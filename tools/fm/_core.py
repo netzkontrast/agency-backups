@@ -782,3 +782,142 @@ class FileLock:
         finally:
             self._fh.close()
             self._fh = None
+
+
+# ---- Per-rule frontmatter waivers (Task 037 ST-3) ---------------------------
+#
+# PRE_COMMIT.md §7.B refactor: the waiver mechanism moves from per-file
+# scope (legacy: one path per line) to per-rule scope (TSV with explicit
+# rule-id and expiry). Per-file scope silenced ALL rules for the listed
+# file — too coarse; a single legitimate exemption could mask new
+# regressions. Per-rule scope silences exactly one diagnostic code per
+# row.
+#
+# File:     tools/.frontmatter-waivers
+# Format:   <path-glob>\t<rule-id>\t<rationale>\t<expires-iso8601>
+# Header:   first non-comment, non-blank line MAY be the literal
+#           "path-glob\trule-id\trationale\texpires" header; the loader
+#           skips it. Comment lines start with `#`.
+# rule-id:  either an exact diagnostic code (e.g. `F.4.2`, `ADR.A.3.5`,
+#           `R.4.4`) or `*` for wildcard (silences every rule for the
+#           matching paths — same semantics as the legacy per-file row).
+# expires:  ISO-8601 calendar date `YYYY-MM-DD`. `-` means "no expiry"
+#           (reserved for permanent carve-outs; SHOULD be rare).
+#
+# Mixed legacy+new files are rejected: the loader raises Diag with a
+# pointer to tools/scripts/migrate-waivers.py.
+
+WAIVERS_FILE_REL = "tools/.frontmatter-waivers"
+
+
+@dataclass(frozen=True)
+class WaiverEntry:
+    path_glob: str
+    rule_id: str
+    rationale: str
+    expires: str  # ISO-8601 YYYY-MM-DD or "-" for none
+    line: int     # 1-based source line for diagnostics
+
+    def matches(self, diag_path: str, diag_code: str) -> bool:
+        if not fnmatch.fnmatch(diag_path, self.path_glob):
+            return False
+        if self.rule_id == "*":
+            return True
+        return diag_code == self.rule_id
+
+
+def _is_legacy_row(raw: str) -> bool:
+    """Legacy rows are a single path token (no tabs)."""
+    return "\t" not in raw.strip()
+
+
+def load_waivers(repo_root: Path) -> list[WaiverEntry]:
+    """Parse tools/.frontmatter-waivers; raise Diag on mixed legacy+new.
+
+    Returns an empty list when the file is absent (waivers are optional).
+    """
+    f = repo_root / WAIVERS_FILE_REL
+    if not f.exists():
+        return []
+    out: list[WaiverEntry] = []
+    saw_legacy = False
+    saw_new = False
+    for lineno, raw in enumerate(
+            f.read_text(encoding="utf-8").splitlines(), start=1):
+        stripped = raw.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        # Skip header row (only when it sits before any data row).
+        if stripped.lower().startswith("path-glob\t"):
+            continue
+        if _is_legacy_row(raw):
+            saw_legacy = True
+            continue
+        parts = raw.split("\t")
+        if len(parts) != 4:
+            raise Diag(
+                f"{WAIVERS_FILE_REL}:{lineno}: expected 4 tab-separated "
+                f"columns (path-glob, rule-id, rationale, expires); "
+                f"got {len(parts)}"
+            )
+        path_glob, rule_id, rationale, expires = (p.strip() for p in parts)
+        if not path_glob or not rule_id or not rationale or not expires:
+            raise Diag(
+                f"{WAIVERS_FILE_REL}:{lineno}: empty column "
+                f"(all four fields are required)"
+            )
+        if expires != "-" and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", expires):
+            raise Diag(
+                f"{WAIVERS_FILE_REL}:{lineno}: expires must be "
+                f"YYYY-MM-DD or '-'; got {expires!r}"
+            )
+        saw_new = True
+        out.append(WaiverEntry(
+            path_glob=path_glob,
+            rule_id=rule_id,
+            rationale=rationale,
+            expires=expires,
+            line=lineno,
+        ))
+    if saw_legacy and saw_new:
+        raise Diag(
+            f"{WAIVERS_FILE_REL}: mixed legacy (per-file) and new "
+            f"(per-rule TSV) rows. Migrate with "
+            f"`python3 tools/scripts/migrate-waivers.py` per Task 037 ST-3."
+        )
+    if saw_legacy and not saw_new:
+        raise Diag(
+            f"{WAIVERS_FILE_REL}: legacy per-file format detected. "
+            f"PRE_COMMIT.md §7.B was refactored to per-rule scope by "
+            f"Task 037 ST-3; run "
+            f"`python3 tools/scripts/migrate-waivers.py` to convert."
+        )
+    return out
+
+
+def apply_waivers(
+    diags: list[Diagnostic],
+    waivers: list[WaiverEntry],
+    *,
+    today: str | None = None,
+) -> list[Diagnostic]:
+    """Drop diagnostics matched by an unexpired waiver.
+
+    `today` is an ISO-8601 date string (YYYY-MM-DD). When omitted, the
+    waiver is treated as still active regardless of `expires` (callers
+    that need expiry semantics MUST pass an explicit `today`).
+    """
+    if not waivers:
+        return diags
+    survivors: list[Diagnostic] = []
+    for d in diags:
+        suppressed = False
+        for w in waivers:
+            if w.expires != "-" and today is not None and today > w.expires:
+                continue  # waiver has expired; no longer applies
+            if w.matches(d.path, d.code):
+                suppressed = True
+                break
+        if not suppressed:
+            survivors.append(d)
+    return survivors

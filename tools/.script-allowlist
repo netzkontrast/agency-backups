@@ -1,0 +1,12 @@
+# tools/.script-allowlist — PC.1.1 carve-outs for legitimate `.py` / `.sh` files
+# kept outside `tools/` for audit or bootstrap reasons.
+#
+# Format: one fnmatch glob per line, repo-relative. Comments start with `#`.
+# Used by tools/check-clean-working-directory.py (PRE_COMMIT.md PC.1.1).
+
+# Repo-root bootstrap shim.
+install.sh
+
+# Task 041 — extract.py is the audit-trail of the subtask-prompt extraction
+# step. Kept inside the task folder for traceability per FOLDERS.md §6.
+tasks/041-extract-subtask-prompts/scripts/*.py
