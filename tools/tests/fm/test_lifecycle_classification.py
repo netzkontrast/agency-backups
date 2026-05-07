@@ -195,5 +195,41 @@ class TestAbandoned(unittest.TestCase):
             self.assertIn("PASS", out)
 
 
+class TestRealRepoIntegration(unittest.TestCase):
+    """Smoke test against the actual repo. Locks in the helper's current
+    four-condition-fallback behaviour against a known-good real Task so
+    Task 049 (migration to the five-signal classify_task algorithm) has
+    a regression guard. Test self-skips if the fixture Task's status
+    changes — signalling the test needs re-pointing rather than a real
+    regression."""
+
+    def test_known_updated_task_with_live_successor_passes(self) -> None:
+        """tasks/010-skills-frontmatter-index-suite/ is task_status:
+        updated with task_superseded_by: ["022"]; the helper SHOULD
+        report PASS when both attestation flags are passed and the
+        successor (022) resolves on disk."""
+        repo_tasks = REPO / "tasks"
+        fixture = repo_tasks / "010-skills-frontmatter-index-suite" / "task.md"
+        if not fixture.exists():
+            self.skipTest("real-repo fixture not present in this checkout")
+        from fm._core import read_fm, str_val
+        fm = read_fm(fixture, strict=False)
+        if str_val(fm, "task_status") != "updated":
+            self.skipTest(
+                "fixture Task's status changed — re-point the test to "
+                "another `task_status: updated` task with a live successor"
+            )
+        rc, out, err = _capture([
+            "--task", str(fixture),
+            "--target-status", "updated",
+            "--goal-still-desirable", "--plan-drifted",
+        ])
+        # PASS expected: predecessor cites successor; successor exists
+        # and reciprocates. Heuristic WARN on all-checked Todos may also
+        # fire; that is acceptable.
+        self.assertEqual(rc, 0, msg=f"stdout={out!r} stderr={err!r}")
+        self.assertIn("PASS", out)
+
+
 if __name__ == "__main__":
     unittest.main()

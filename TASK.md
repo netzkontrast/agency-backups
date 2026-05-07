@@ -220,6 +220,8 @@ Every `task.md` MUST contain, in order:
 
 ## 6. Gherkin Scenarios (Normative)
 
+> **Aspirational-scenario note.** A subset of the scenarios below — specifically the "Task with an unmet blocker MUST NOT start" scenario in this section, the `T.B.SUP.1` supersession-blocker scenario at the foot of this section, and the three §8.7 blocker-acceptance scenarios — assert behaviour that the current `tools/fm/validate.py --type-check` does NOT implement. As of this writing the validator implements `F.T.1` (dangling reference) and `F.T.2` (reciprocity) only; the blocker-satisfaction family (§7.0 row §7.9) is pending a future Task-049-class implementation. These scenarios document the desired behaviour and remain normative for the implementing Task; treating them as "currently executable" is the wrong reading. The `T.B.SUP.1` scenario carries an inline `(aspirational — implementing-task: pending …)` label as the canonical convention; the older scenarios pre-date the convention but share its status.
+
 ```gherkin
 Feature: Task pickup and linkage
 
