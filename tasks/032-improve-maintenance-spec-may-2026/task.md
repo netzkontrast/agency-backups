@@ -4,10 +4,10 @@ status: active
 slug: improve-maintenance-spec-may-2026
 summary: "Distil six findings (F8–F13) from the 2026-05-06 coherence run into concrete diffs against MAINTENANCE.md, prompts/repo-coherence-check/prompt.md, install.sh, and TASK.md §7.11. Companion to Task 025 (open) which carries the older F2/F3/F4/F7 findings."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 task_id: "032"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code (session claude/close-maintenance-spec-task-Tx7bx)"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []

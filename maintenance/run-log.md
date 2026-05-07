@@ -27,6 +27,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 ```
 ### Run YYYY-MM-DD — <routine-type>
 - agent: <agent-identifier>
+- routine_type: <bootstrap | coherence-check | nightly-maintenance | task-implementation>
 - start_commit: <hash of HEAD when the run began>
 - end_commit: 4c5e7e4 628439e
 - baseline_commit: <the end_commit from the previous run — what was used as the delta base>
@@ -41,12 +42,22 @@ The agent MUST append its own record **before** committing the run's repairs, so
     Free-form. What was found, what was surprising, what was skipped and why.
 ```
 
+The `routine_type:` field (added by Task 032 finding F9) disambiguates record semantics:
+
+- `bootstrap` — the seed record establishing the first baseline.
+- `coherence-check` — a Repo Coherence Check sweep; `t1/t2/t3` counters describe a delta-scoped sweep.
+- `nightly-maintenance` — a broader Nightly Maintenance Run; counters describe the audit's outcomes.
+- `task-implementation` — a record appended at the end of a Task implementation (per `MAINTENANCE.md §2.3`); counters describe Task-internal work, not a coherence sweep. Administrative closures of superseded Tasks also use this value.
+
+The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on `end_commit:` regardless of `routine_type:`, so `task-implementation` records remain valid baselines (they advance HEAD) — but a reading agent SHOULD prefer the most recent `coherence-check` record when answering "what was the last coherence baseline" without conflating Task-scope counters with sweep-scope counters.
+
 ---
 
 ## Run Records
 
 ### Run 2026-05-04 — bootstrap
 - agent: claude-code (session claude/improve-agents-documentation-DyXZf)
+- routine_type: bootstrap
 - start_commit: f620b6d
 - end_commit: 4c5e7e4
 - baseline_commit: none (first run — log seeded from current HEAD)
@@ -65,6 +76,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
 ### Run 2026-05-04 — Repo Coherence Check
 - agent: jules
+- routine_type: coherence-check
 - start_commit: 325e5ff
 - end_commit: 4c5e7e4
 - baseline_commit: f620b6d (missing; fell back to 7 days log)
@@ -84,6 +96,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
 ### Run 2026-05-04 — Repo Coherence Check
 - agent: claude-code (session claude/funny-curie-zVZBH)
+- routine_type: coherence-check
 - start_commit: c76d62c
 - end_commit: 2ac93bd
 - baseline_commit: 4c5e7e4 (missing — squashed by PR #25 merge; fell back to 7 days log per gate R1)
@@ -124,6 +137,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
 ### Run 2026-05-05 — Repo Coherence Check
 - agent: claude-code (session claude/funny-curie-qTGQ1)
+- routine_type: coherence-check
 - start_commit: 473cad7
 - end_commit: PENDING
 - baseline_commit: 2ac93bd (recovered cleanly via the awk-fall-forward — Task 008's hardening held)
@@ -160,6 +174,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
 ### Run 2026-05-05 — Task 016 implementation
 - agent: claude-code (session claude/execute-task-16-ZrBJe)
+- routine_type: task-implementation
 - start_commit: 9850947
 - end_commit: 6b0480a
 - baseline_commit: 9850947 (no preceding coherence run since merge of PR #46)
@@ -186,6 +201,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
 ### Run 2026-05-05 — Task 017 migration
 - agent: claude-code (session claude/complete-frontmatter-toolchain-l5Q8E)
+- routine_type: task-implementation
 - start_commit: 94eb4b4
 - end_commit: ea3f260
 - baseline_commit: 6b0480a (Task 016 final commit)
@@ -256,6 +272,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
 ### Run 2026-05-05 — Task 018 implementation
 - agent: claude-code (session claude/complete-frontmatter-toolchain-l5Q8E)
+- routine_type: task-implementation
 - start_commit: 3feee02
 - end_commit: 2342889
 - baseline_commit: 3feee02 (Task 017 final commit)
@@ -296,6 +313,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
 ### Run 2026-05-05 — Task 019 fm toolchain suite integration
 - agent: claude-code (session claude/complete-frontmatter-toolchain-l5Q8E)
+- routine_type: task-implementation
 - start_commit: 3feee02
 - end_commit: 3e16a18
 - baseline_commit: 6c3329a (Task 018 final commit)
@@ -353,6 +371,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
 ### Run 2026-05-05 — Task 020 prompt RISEN+ReAct conformance migration
 - agent: claude-code (session claude/complete-frontmatter-toolchain-l5Q8E)
+- routine_type: task-implementation
 - start_commit: b73e615
 - end_commit: 3266fed
 - baseline_commit: b73e615 (Task 019 final commit)
@@ -406,6 +425,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
 ### Run 2026-05-05 — Task 021 administrative close (deferred-coherence residual = empty)
 - agent: claude-code (session claude/apply-fm-edit-deferred-QKgda)
+- routine_type: task-implementation
 - start_commit: 0669322
 - end_commit: d5fab39
 - baseline_commit: 3266fed (Task 020 closure)
@@ -454,6 +474,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
 ### Run 2026-05-06 — Repo Coherence Check
 - agent: claude-code (session claude/funny-curie-26tRF)
+- routine_type: coherence-check
 - start_commit: 491444d
 - end_commit: 6aa15be
 - baseline_commit: d5fab39 (Task 021 closure; recovered cleanly via the awk fall-forward — Task 008's hardening held)
@@ -534,6 +555,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
 
 ### Run 2026-05-07 — Repo Coherence Check
 - agent: claude-code (session claude/funny-curie-rX7a4)
+- routine_type: coherence-check
 - start_commit: 1a2a67a
 - end_commit: 9172de7
 - baseline_commit: 6aa15be (2026-05-06 coherence-check end_commit; recovered cleanly via the awk fall-forward — Task 008's hardening still holds across the 297-file delta)
@@ -640,6 +662,7 @@ The agent MUST append its own record **before** committing the run's repairs, so
         expectations for future agents reading the prompt.
 ### Run 2026-05-07 — Task 031 sync-tasks-index status drift + §7.11 linter
 - agent: claude-code (session claude/run-close-next-task-qaGDq)
+- routine_type: task-implementation
 - start_commit: 8fc223d
 - end_commit: 2d6984b
 - baseline_commit: 8fc223d (post PR #73 merge)
@@ -683,3 +706,76 @@ The agent MUST append its own record **before** committing the run's repairs, so
     "Task 019" placeholder to the concrete `tools/fm/index_diff.py`
     invocation. Task 031 friction logged at FL1 in
     `tasks/031-sync-tasks-index-status-drift/friction-log.md`.
+
+### Run 2026-05-07 — Task 032 improve-maintenance-spec-may-2026
+- agent: claude-code (session claude/close-maintenance-spec-task-Tx7bx)
+- routine_type: task-implementation
+- start_commit: 13226fa
+- end_commit: 0825eb8
+- baseline_commit: 13226fa (post Task 031 closure merge)
+- files_in_delta: 7 (MAINTENANCE.md, maintenance/run-log.md, prompts/repo-coherence-check/prompt.md, tools/dramatica-nav/validate.py, tasks/032-improve-maintenance-spec-may-2026/{task.md,readme.md,friction-log.md}, tasks/readme.md)
+- files_scanned: 391
+- t1_fixes: 0
+- t2_fixes: 0
+- t3_tasks_created: 0
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+    Task implementation record per MAINTENANCE.md §2.3, NOT a coherence
+    run. Closes Task 032 by landing the six findings F8–F13 from the
+    2026-05-06 coherence run, with one delegation and one already-shipped
+    finding documented in the friction-log.
+
+    F8 (jsonschema gate poisoning): `tools/dramatica-nav/validate.py`
+    now emits a `WARN: jsonschema not installed; narrative-ontology
+    validator skipped` and exits 0 instead of 2 when the optional
+    dependency is absent. Verified mechanically: with jsonschema
+    uninstalled, `tools/check-governance.sh` no longer reports FAIL
+    on the optional `[opt] Narrative-ontology validator` step.
+    `MAINTENANCE.md §5.1` added documenting jsonschema as a soft
+    prerequisite of the optional validator only.
+
+    F9 (run-log record-type ambiguity): `routine_type:` field added
+    to `maintenance/run-log.md`'s "Record Format" block with enum
+    `bootstrap | coherence-check | nightly-maintenance |
+    task-implementation`. Backfilled across all 13 prior records.
+    `MAINTENANCE.md §2.3` extended with a record-type table and
+    explicit awk-fall-forward semantics. The lint-runlog validator
+    needs no change because it does not require new fields.
+
+    F10 (post-repair linter gate): delegated to Task 025 §Plan-4 per
+    the Task 032 plan. Task 025 was previously blocked by Task 019;
+    Task 019 closed, so Task 025 is unblockable. Recorded in the
+    friction-log without duplicating the diff.
+
+    F11 (TASK.md §7.11 retarget): already landed by Task 031's
+    closure (TASK.md §7.0 row §7.11 cites `tools/fm/index_diff.py`
+    and Task 031). Added a one-line bidirectional cross-reference
+    in `MAINTENANCE.md §3.4` Stale-Task Audit pointing at the
+    §7.11 mechanical surface.
+
+    F12 (post-migration spec sweep): `MAINTENANCE.md §1.1` rewritten
+    for the post-Task-017/019 state — fm-validate canonical and
+    gating, legacy validators advisory shims at `tools/legacy/`
+    silenced by `FM_LEGACY_QUIET=1`, `FM_TOOLCHAIN=0` documented as
+    an escape hatch but not the supported configuration. The
+    `tools/.frontmatter-waivers` paragraph dropped: the file does
+    not exist on disk and Task 017 Batch 2c re-pointed
+    `tools/check-maintenance-bypass.py` at fm-validate's
+    `<path>::<level>:<code>:<msg>` diagnostic stream rather than a
+    path-list waiver mechanism. `MAINTENANCE.md §4.1` extended with
+    the post-Task-017 bypass-script behaviour.
+
+    F13 (cross-branch duplicate-task_id check): coherence prompt
+    Step 4 amended to require both the local `ls tasks/` check and
+    a cross-branch `git fetch origin main && git ls-tree origin/main
+    tasks/` check before staging a new Task folder, with a direct
+    cross-reference to `TASK.md §8.1` bullet 2 and the recurring
+    Tasks 013 / 024 / 043 lineage. Per F13 plan, this is the prompt
+    side of the agent obligation; the CI-side mechanical gate is
+    Task 044 finding F15's territory.
+
+    Friction logged as FL1 in
+    `tasks/032-improve-maintenance-spec-may-2026/friction-log.md`.
+    Note: this Task folder shares `task_id: "032"` with
+    `032-agents-spec-integration/`; renumber tracked by Task 043.
