@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-040-folder
+slug: task-040-superclaude-spec-evaluation
 summary: "Folder index for Task 040 — evaluate the Gemini SuperClaude Orchestration spec, decide binding status, integrate accepted portions into the 032-039 chain or as new amendments."
 created: 2026-05-06
 updated: 2026-05-06

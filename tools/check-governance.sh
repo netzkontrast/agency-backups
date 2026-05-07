@@ -53,6 +53,15 @@ if ! "$PYTHON" tools/lint-structure.py; then
 fi
 
 echo ""
+echo "--- [2b/6] Readme L1 frontmatter linter (Task 036 ST-1 — FOLDERS.md F.5) ---"
+# Promotes F.5 from SHOULD to MUST; checks L1 Vault Core key presence
+# and folder-slug containment for every operational readme.md. Provider
+# research sub-trees and /decisions/ are exempt per FOLDERS.md F.1.1 / §8.
+if ! "$PYTHON" tools/check-readme-frontmatter.py; then
+  FAIL=1
+fi
+
+echo ""
 echo "--- [3/6] Cross-reference linkage (folded into fm-validate --type-check) ---"
 echo "(legacy tools/lint-linkage.py is now a shim around fm-validate --type-check; checked above)"
 
@@ -127,6 +136,21 @@ if [ -f "$NARRATIVE_ONTOLOGY" ]; then
   if ! "$PYTHON" tools/dramatica-nav/cleanup.py --check; then
     FAIL=1
   fi
+fi
+
+echo ""
+echo "--- [opt] Audit-graph consistency linter (Task 036 ST-2 — FOLDERS.md F.6) ---"
+# Detects body-link-without-frontmatter dual-surface drift. WARN-tier;
+# never gates. Set FM_AUDIT_GRAPH_STRICT=1 to gate once corpus drift is
+# remediated.
+AG_OUT="$(mktemp)"
+AG_RC=0
+"$PYTHON" tools/check-audit-graph-consistency.py \
+  > "$AG_OUT" 2>&1 || AG_RC=$?
+cat "$AG_OUT"
+rm -f "$AG_OUT"
+if [ "${FM_AUDIT_GRAPH_STRICT:-0}" = "1" ] && [ "$AG_RC" -ne 0 ]; then
+  FAIL=1
 fi
 
 echo ""

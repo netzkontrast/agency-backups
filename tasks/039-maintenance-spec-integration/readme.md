@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-039-folder
+slug: task-039-maintenance-spec-integration
 summary: "Folder index for Task 039 — MAINTENANCE.md spec integration. Operationalizes three orphaned research outputs (agentic-eval-trust-improvement-spec, repo-maintenance-protocol-spec, governance-specs-update-research §2) and closes five governance debts in §1.1.2, §2.3, §3.2, §3.4, §3.5."
 created: 2026-05-06
 updated: 2026-05-06

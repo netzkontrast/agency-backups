@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-051-folder
+slug: task-051-deepwiki-rendering-conventions-agentic-workflows
 summary: "Folder index for Task 051 — downstream analysis of the Gemini DeepWiki rendering research result per RESEARCH.md §6.5."
 created: 2026-05-07
 updated: 2026-05-07

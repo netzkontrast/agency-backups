@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-062-folder
+slug: task-062-frustrated-spec-followup-ac1-ac5
 summary: "Folder index for Task 062 — successor to Task 038, carrying the AC-1 (§28/§2 byte-identicality), AC-5 (Reflexion-pattern lift), and FM_FL_DECLARATION_STRICT default-flip work that was deferred during the Task 038 close per PR #87 review."
 created: 2026-05-07
 updated: 2026-05-07

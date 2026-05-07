@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-033-folder
+slug: task-033-task-spec-integration
 summary: "Folder index for Task 033 — TASK.md spec integration. Closes T.8.1 duplicate-task_id enforcement gap, formalizes §4.7 updated/abandoned boundary, back-ports skill_* L2 from skills-namespace-ontology, and cross-links §3.3 to flexible-frontmatter-toolchain SPEC."
 created: 2026-05-06
 updated: 2026-05-06

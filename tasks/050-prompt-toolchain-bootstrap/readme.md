@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-050-folder
+slug: task-050-prompt-toolchain-bootstrap
 summary: "Folder index for Task 050 — prompt-toolchain bootstrap. Ports the prompt-optimizer skill primitives into stateless tools/prompt/ CLIs and adds an audit orchestrator combining the Task 034 ST-2 + ST-3 linters with RFC-2119 polarity and a 5-dimension quality score."
 created: 2026-05-07
 updated: 2026-05-07

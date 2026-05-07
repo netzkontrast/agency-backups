@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-043-readme
+slug: task-043-renumber-duplicate-task-ids-v3
 summary: "Directory index for Task 043: third renumber Task in the lineage 013 → 024 → 043, addressing the May 2026 duplicate-task_id collisions on slots 031 and 032."
 created: 2026-05-07
 updated: 2026-05-07

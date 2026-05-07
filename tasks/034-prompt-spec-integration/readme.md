@@ -1,7 +1,7 @@
 ---
 type: index
 status: completed
-slug: task-034-folder
+slug: task-034-prompt-spec-integration
 summary: "Folder index for Task 034 — PROMPT.md spec integration. Adds missing Gherkin acceptance scenarios, mechanizes the seven engineering principles where possible, ships a framework-selection decision tree, and clarifies external-research backward linkage."
 created: 2026-05-06
 updated: 2026-05-07

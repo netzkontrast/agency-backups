@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-036-folder
+slug: task-036-folders-spec-integration
 summary: "Folder index for Task 036 — FOLDERS.md spec integration. Promotes F.5 readme.md frontmatter from SHOULD to MUST with mechanical enforcement, clarifies F.1.1 provider-folder exemption, adds an F.6 audit-graph consistency check, and lands ≥4 Gherkin scenarios."
 created: 2026-05-06
 updated: 2026-05-06

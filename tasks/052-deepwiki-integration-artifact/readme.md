@@ -1,7 +1,7 @@
 ---
 type: index
 status: active
-slug: task-052-folder
+slug: task-052-deepwiki-integration-artifact
 summary: "Folder index for Task 052 — DeepWiki integration artifact: reflection pass + .devin/wiki.json with Machine/Actor/Space isomorphic map."
 created: 2026-05-07
 updated: 2026-05-07

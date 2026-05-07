@@ -9,7 +9,7 @@ updated: 2026-05-07
 
 # Folder Interaction Specification
 
-> **Mechanical Enforcement Notice:** This spec is mechanically enforced by `tools/check-governance.sh`. Before editing any folder under `/tasks/`, `/prompts/`, or `/research/`, install the pre-commit hook once with `tools/install-hooks.sh`. The readme.md rule (§3) is enforced by [`tools/lint-structure.py`](./tools/lint-structure.py); the cross-directory linkage rule (§6) is enforced by [`tools/lint-linkage.py`](./tools/lint-linkage.py).
+> **Mechanical Enforcement Notice:** This spec is mechanically enforced by `tools/check-governance.sh`. Before editing any folder under `/tasks/`, `/prompts/`, or `/research/`, install the pre-commit hook once with `tools/install-hooks.sh`. The readme.md presence rule (§3) is enforced by [`tools/lint-structure.py`](./tools/lint-structure.py); the readme.md frontmatter rule (§5) is enforced by [`tools/check-readme-frontmatter.py`](./tools/check-readme-frontmatter.py) (ERROR-tier); the cross-directory frontmatter linkage rule (§6) is enforced by [`tools/lint-linkage.py`](./tools/lint-linkage.py); the body-link / frontmatter dual-surface drift rule (§6) is detected (WARN-tier) by [`tools/check-audit-graph-consistency.py`](./tools/check-audit-graph-consistency.py).
 
 To ensure navigation and traceability across the repository, agents MUST abide by the rules below.
 
@@ -41,6 +41,7 @@ To ensure navigation and traceability across the repository, agents MUST abide b
 
 - **Rule:** EVERY folder MUST contain a `readme.md`.
 - **Enforcement:** [`tools/lint-structure.py`](./tools/lint-structure.py) emits an `ERROR` for every operational folder (`/tasks/<NNN>-<slug>/`, `/prompts/<slug>/`, non-provider `/research/<slug>/`) missing a `readme.md`. The pre-commit hook blocks the commit on any such error.
+- **Exemption (F.1.1):** Provider sub-trees `/research/<provider>/<slug>/` (where `<provider>` ∈ `gemini`, `gpt`, `human`, `other`) and the ADR ledger `/decisions/` are out of scope. They are external mirrors / governed-by-their-own-spec storage folders, not operational orchestration folders. The linters [`tools/lint-structure.py`](./tools/lint-structure.py), [`tools/check-readme-frontmatter.py`](./tools/check-readme-frontmatter.py), and [`tools/check-audit-graph-consistency.py`](./tools/check-audit-graph-consistency.py) MUST honour the exemption.
 - **Why:** Adjacent docs prevent doc-drift; the user can trust repository state without consulting a separate `/docs/` tree.
 - **Update Trigger:** Pre-commit batching. Agents update touched folders' `readme.md` as a single pre-commit step, not on every file change. This protects context window from administrative bloat.
 - **Required Content:**
@@ -70,7 +71,7 @@ When a follow-up prompt is generated mid-run (e.g. a research run produces an op
 
 ## 5. Frontmatter on Folder Indexes
 
-`readme.md` files in operational folders SHOULD carry L1 Vault Core frontmatter (per `TASK.md` §3) so the file system itself is queryable. Minimal example:
+`readme.md` files in operational folders MUST carry L1 Vault Core frontmatter (per `TASK.md` §3) so the file system itself is queryable. Minimal example:
 
 ```yaml
 ---
@@ -82,6 +83,10 @@ created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
 ```
+
+**Slug convention.** Vault-level slug uniqueness forces the readme to qualify itself so it does not collide with the sibling `task.md` / `prompt.md`. Convention: `task-<NNN>-<bare-slug>` for tasks, `<bare-slug>-readme` for prompts, `<bare-slug>-research-readme` for research workspaces. The linter ([`tools/check-readme-frontmatter.py`](./tools/check-readme-frontmatter.py)) requires the bare folder slug (with the `<NNN>-` prefix stripped for tasks) to appear as a substring of the readme `slug:`.
+
+**Enforcement:** [`tools/check-readme-frontmatter.py`](./tools/check-readme-frontmatter.py) emits an `ERROR` for any operational-folder `readme.md` missing an L1 Vault Core key or whose `slug:` fails the substring rule above. Step `[2/N]` of [`tools/check-governance.sh`](./tools/check-governance.sh) invokes the linter; the pre-commit hook blocks on any diagnostic. Provider research sub-trees (§F.1.1) and `/skills/<slug>/` (§8) are exempt; `/decisions/<NNNN>-<slug>.md` files use the `adr` type validated by [`tools/adr/cli.py validate`](./tools/adr/cli.py).
 
 ## 6. Cross-Directory Linking (Audit Graph)
 
@@ -99,6 +104,73 @@ Linkage between Tasks, Prompts, and Research MUST flow exclusively through front
 Body-level Markdown links between folders are encouraged for human navigation, but the **frontmatter is the source of truth** for any future CLI/graph tooling.
 
 **Enforcement:** [`tools/lint-linkage.py`](./tools/lint-linkage.py) walks every operational folder and emits an `ERROR` when any of the five frontmatter linkage keys above fails to resolve to its target file or folder. The pre-commit hook blocks the commit on any such error. Reciprocity (Prompt ↔ Task) is also checked.
+
+**Dual-surface drift (F.6 advisory).** The frontmatter and the prose are two surfaces of the same audit graph. When a body link cites a sibling operational folder (e.g. `task.md` body links `[the prompt](../../prompts/foo/prompt.md)`) but the corresponding frontmatter linkage key (`task_uses_prompts: [foo]`) is silent, the prose has drifted ahead of the source-of-truth. [`tools/check-audit-graph-consistency.py`](./tools/check-audit-graph-consistency.py) walks every `task.md` / `prompt.md` / `readme.md` in the operational roots and emits a `WARN` diagnostic for each drift. The reverse asymmetry (frontmatter present, body silent) is **not** flagged — body links remain encouraged, not required. The linter runs WARN-tier `[opt]` in `tools/check-governance.sh` and never gates the commit; agents resolve drift either by adding the missing frontmatter linkage or by rephrasing the body to remove the implied edge. Set `FM_AUDIT_GRAPH_STRICT=1` to promote the WARN-tier diagnostics to gating (useful once the historical drift backlog is resolved by a triage Task).
+
+## Acceptance Criteria
+
+The following Gherkin scenarios are the executable acceptance contract for §1, §2, §4.1.1, §6, and §8. Each scenario is anchored with a stable identifier (`F.B.<n>`); the linters above are MAY-implement hooks for scenarios where mechanical enforcement is feasible. The section number `§6.1` is the stable downstream-tooling identifier (e.g. for Gherkin parsers); the heading text mirrors the wording of `prompts/spec-amendment-folders-md/brief.md` AC4.
+
+```gherkin
+# anchor: F.B.1
+Feature: readme.md presence rule (F.1, F.3)
+Scenario: Operational folder missing readme.md — ERROR
+  Given a new folder `tasks/099-example/` containing only `task.md`
+  When `tools/lint-structure.py` runs at pre-commit
+  Then the linter MUST emit an ERROR identifying the missing readme.md
+  And `tools/check-governance.sh` MUST exit non-zero
+  And the commit MUST be blocked until the readme.md is added
+```
+
+```gherkin
+# anchor: F.B.2
+Feature: slug naming rule (F.2)
+Scenario: Task folder name does not match `<NNN>-<slug>` pattern — ERROR
+  Given a folder `tasks/example-without-prefix/` (no numeric prefix)
+  When `tools/lint-structure.py` runs at pre-commit
+  Then the linter MUST emit an ERROR citing the F.2 naming rule
+  And `tools/check-governance.sh` MUST exit non-zero
+```
+
+```gherkin
+# anchor: F.B.3
+Feature: prompt three-file scaffold (F.4.1.1)
+Scenario: New prompt folder missing brief.md — ERROR
+  Given a new folder `prompts/new-prompt/` containing only `prompt.md` and `readme.md`
+  When `tools/lint-structure.py` runs at pre-commit
+  Then the linter MUST emit an ERROR identifying the missing brief.md
+  And the diagnostic MUST cite F.4.1.1
+  And `tools/check-governance.sh` MUST exit non-zero
+```
+
+```gherkin
+# anchor: F.B.4
+Feature: audit-graph dual-surface consistency (F.6)
+Scenario: Body link cites a sibling prompt but `task_uses_prompts` is silent — WARN
+  Given a `tasks/<NNN>-<slug>/task.md` whose `task_uses_prompts` does NOT include `foo`
+  And the body of the same `task.md` contains the link `[the prompt](../../prompts/foo/prompt.md)`
+  When `tools/check-audit-graph-consistency.py` runs at pre-commit (`[opt]` tier)
+  Then the linter MUST emit a WARN diagnostic
+        `<relpath>::WARN:F.6:body-link-without-frontmatter:foo`
+  And `tools/check-governance.sh` MUST NOT block the commit (advisory only)
+  And the agent MAY resolve the drift either by adding `foo` to
+        `task_uses_prompts` or by rephrasing the body to remove the
+        implied edge
+```
+
+```gherkin
+# anchor: F.B.5
+Feature: §8 exemption coverage for `/decisions/`
+Scenario: ADR file under `/decisions/` exempt from prompt-scaffold rule
+  Given a new file `decisions/0042-storage-path.md` with frontmatter `type: adr`
+  And the file matches the pattern `decisions/[0-9][0-9][0-9][0-9]-*.md`
+        registered in `maintenance/schemas/header-ontology.json`
+  When `tools/lint-structure.py` runs at pre-commit
+  Then the linter MUST NOT flag the file for missing brief.md / prompt.md
+        (those are F.4.1.1 prompt-scaffold requirements, not ADR requirements)
+  And `tools/adr/cli.py validate` MUST validate the `adr_*` L2 keys
+        per the ADR JSON-Schema in `header-ontology.json`
+```
 
 ## 7. Anti-Patterns
 

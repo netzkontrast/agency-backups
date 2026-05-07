@@ -4,10 +4,10 @@ status: active
 slug: folders-spec-integration
 summary: "Add Gherkin acceptance scenarios to FOLDERS.md, clarify F.1.1 readme-required scope on /research/<provider>/<slug>/ external folders, mechanically enforce F.5 readme.md L1 frontmatter, and define a frontmatter-vs-body-link consistency check for the F.6 audit graph."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 task_id: "036"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-opus-4-7 (session claude/complete-tasks-32-39-7AZfU)"
 task_priority: P3
 task_uses_prompts:
   - tooling-readme-frontmatter-validator
@@ -76,14 +76,14 @@ Scenario: ADR file under /decisions/ exempt from prompt-scaffold rule
 
 ## Todo
 
-- [ ] 1. Dispatch subtask `01-tooling-readme-frontmatter-validator` (Phase A).
-- [ ] 2. Dispatch subtask `02-tooling-audit-graph-consistency-checker` (Phase A).
-- [ ] 3. Dispatch subtask `03-spec-amendment-folders-md` (Phase B).
-- [ ] 4. Run `tools/check-governance.sh`.
-- [ ] 5. Update `README.md §6` (linter table) per R.7.
-- [ ] 6. Update `tasks/readme.md`.
-- [ ] 7. Author `friction-log.md`.
-- [ ] 8. Set `task_status: done`.
+- [x] 1. Dispatch subtask `01-tooling-readme-frontmatter-validator` (Phase A). Shipped `tools/check-readme-frontmatter.py` + 12 tests; promoted F.5 SHOULD → MUST. ERROR-tier `[2b/6]` of `tools/check-governance.sh`.
+- [x] 2. Dispatch subtask `02-tooling-audit-graph-consistency-checker` (Phase A). Shipped `tools/check-audit-graph-consistency.py` + 8 tests. WARN-tier `[opt]`; surfaces 343 drift findings against the corpus for follow-up.
+- [x] 3. Dispatch subtask `03-spec-amendment-folders-md` (Phase B). FOLDERS.md F.1.1 enumerates `/research/<provider>/<slug>/` and `/decisions/` exemptions; F.5 promoted to MUST with the slug-containment rule documented; F.6 dual-surface drift clause added; new §6.1 carries Gherkin scenarios anchored F.B.1–F.B.5.
+- [x] 4. Ran `tools/check-governance.sh`. Exits 0; the new `[2b/6]` ERROR-tier check passes after T1 slug repairs (see friction-log F1).
+- [x] 5. Updated `README.md §6` linter table with rows for both new linters.
+- [x] 6. Updated `tasks/readme.md`.
+- [x] 7. Authored `friction-log.md`.
+- [x] 8. Set `task_status: done`.
 
 ## Links
 
