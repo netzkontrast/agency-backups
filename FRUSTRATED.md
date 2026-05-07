@@ -6,7 +6,7 @@ Agents MUST use the following **Frustration Levels (FL)** when logging their exp
 
 ## Why FL0 is mandatory (rationale)
 
-An FL0 entry is a *falsifiable null-baseline declaration* — "I executed this run and observed no friction". Absent that declaration, the maintenance run cannot distinguish "no friction occurred" from "the agent forgot to log", which destroys the denominator for every friction-frequency metric. Empirical evidence: 38% of the 60 friction logs in the repo at 2026-05-07 are FL0; if FL0 were optional, that share of the population would silently disappear from longitudinal analysis. FL0 entries also carry semantic content (e.g. the "plan obsolesced cleanly" supersession pattern, observed in 6 of 23 FL0 entries). Logging FL0 is *cheap* — one line — and it is the cheapness that makes the discipline sustainable. The friction the rule causes for agents is acknowledged; the friction the rule prevents (silent corpus drift) is larger. See [`research/fl0-value-justification/output/SPEC.md`](./research/fl0-value-justification/output/SPEC.md) §3 for the full upstream-consumer enumeration.
+An FL0 entry is a *falsifiable null-baseline declaration* — "I executed this run and observed no friction". Absent that declaration, the maintenance run cannot distinguish "no friction occurred" from "the agent forgot to log", which destroys the denominator for every friction-frequency metric. Empirical evidence: 38% of the 60 friction logs in the repo at 2026-05-07 are FL0; if FL0 were optional, half the population would silently disappear from longitudinal analysis. FL0 entries also carry semantic content (e.g. the "plan obsolesced cleanly" supersession pattern, observed in 6 of 23 FL0 entries). Logging FL0 is *cheap* — one line — and it is the cheapness that makes the discipline sustainable. The friction the rule causes for agents is acknowledged; the friction the rule prevents (silent corpus drift) is larger. See [`research/fl0-value-justification/output/SPEC.md`](./research/fl0-value-justification/output/SPEC.md) §3 for the full upstream-consumer enumeration.
 
 ## Frustration Levels Defined
 
@@ -83,18 +83,32 @@ Scenario Outline: Surface routing by run type
 ```
 
 ```gherkin
-# anchor: FR.B.4 — missing-log rejection
-Feature: Pre-commit blocks task closure without FL declaration
-Scenario: Task closure without FL declaration is blocked under strict mode
+# anchor: FR.B.4 — missing-log rejection (default WARN-tier)
+Feature: FL-declaration linter surfaces malformed/missing closures
+Scenario: Default invocation emits an advisory diagnostic, no commit block
   Given a Task transitions `task_status: in_progress` → `task_status: done`
   And the staged commit modifies `tasks/<NNN>-<slug>/task.md` accordingly
   And neither `tasks/<NNN>-<slug>/friction-log.md` carries a parseable declaration
         nor the PR description contains a `## Frustration Log` section with one
+  And the environment does NOT export `FM_FL_DECLARATION_STRICT=1`
+  When `tools/check-fl-declaration.py` runs as part of `tools/check-governance.sh`
+  Then the linter MUST emit `<relpath>::ERROR:FR.B.4:missing:<details>` to stderr
+  And `tools/check-governance.sh` MUST still exit 0 (the diagnostic is advisory)
+  And the maintainer MAY land the commit with the diagnostic visible
+```
+
+```gherkin
+# anchor: FR.B.4.STRICT — missing-log rejection (gating mode)
+Feature: Strict-mode promotes the FL declaration check to a gate
+Scenario: Strict-mode invocation blocks the commit
+  Given the same closing-run conditions as FR.B.4
   And the environment exports `FM_FL_DECLARATION_STRICT=1`
   When `tools/check-fl-declaration.py` runs as part of `tools/check-governance.sh`
   Then the linter MUST exit 1 with diagnostic `<relpath>::ERROR:FR.B.4:missing:<details>`
   And `tools/check-governance.sh` MUST exit non-zero
   And the commit MUST be blocked until an FL declaration is added
+  And the strict-mode flip is gated on remediation of historical malformed logs
+        (tasks 030, 033 — see `tasks/053-frustrated-spec-followup-ac1-ac5/task.md`)
 ```
 
 ## Frustration Log
