@@ -4,12 +4,14 @@ status: active
 slug: agents-spec
 summary: "Entry-point governance spec for all agents operating in this repository. Defines task routing, folder rules, spec language (RFC 2119 + Gherkin), and the Frontmatter Ontology every agent must apply."
 created: 2026-05-02
-updated: 2026-05-05
+updated: 2026-05-07
 ---
 
 # Agent Instructions
 
 Welcome, agent. This repository manages development and deep research tasks.
+
+**First action of every session:** Run `./install.sh` from the repo root *before* reading, editing, or validating any file. This installs the Python tooling (`PyYAML`, `jsonschema`, `pytest`) the rest of this spec assumes is present. See [§ Session Setup](#session-setup) below — rules **SS.1–SS.3** are binding.
 
 **Before committing any work:** You MUST review and abide by the checks defined in [PRE_COMMIT.md](./PRE_COMMIT.md).
 
