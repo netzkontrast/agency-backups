@@ -4,7 +4,7 @@ status: active
 slug: task-041-friction-log
 summary: "Friction log for Task 041 — audit-graph repair extracting 35 subtask briefs to /prompts/<slug>/. FL declaration + frictions encountered during execution."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 ---
 
 # Friction Log — Task 041

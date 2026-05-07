@@ -11,6 +11,7 @@ Subcommands:
     fm graph ...      delegate to tools.fm.graph.main
     fm new ...        delegate to tools.fm.new.main
     fm fix ...        delegate to tools.fm.fix.main
+    fm index-diff ... delegate to tools.fm.index_diff.main
 
 Each subcommand module is imported only when its name is invoked
 (lazy dispatch); per-invocation import latency stays scoped to the
@@ -40,6 +41,7 @@ _SUBCOMMANDS: dict[str, str] = {
     "graph": "graph",
     "new": "new",
     "fix": "fix",
+    "index-diff": "index_diff",
 }
 
 

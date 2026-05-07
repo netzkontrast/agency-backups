@@ -4,7 +4,7 @@ status: active
 slug: task-spec
 summary: "Root specification governing the /tasks/ orchestration directory, the Task lifecycle, and the Frontmatter Ontology that links Tasks to Prompts and Research."
 created: 2026-05-04
-updated: 2026-05-05
+updated: 2026-05-07
 ---
 
 # Task Orchestration Specification
@@ -299,7 +299,7 @@ The legacy column lists the historical linter set; the flexible-toolchain column
 | §7.8 Friction Log | [`tools/lint-linkage.py`](./tools/lint-linkage.py) + [`tools/check-trust.py`](./tools/check-trust.py) | `tools/fm/query.py status=done,missing-file=friction-log.md` (Task 019) | `task_status` ∈ {`done`, `updated`, `abandoned`} without `friction-log.md` containing an FL[0-3] declaration |
 | §7.9 Blocker Satisfaction | — (new) | `tools/fm/validate.py --type-check` (Task 019) | `task_status: in_progress` while any `task_blocked_by` entry resolves to a Task whose `task_status` ≠ `done` |
 | §7.10 Supersession Reciprocity | — (new) | `tools/fm/validate.py --type-check` (Task 019) | `task_supersedes` / `task_superseded_by` are not reciprocal across the two referenced Task folders |
-| §7.11 Tasks-Index Freshness | — (new) | `tools/fm/query.py status,supersession --diff tasks/readme.md` (Task 019) | `tasks/readme.md` does not list every `tasks/<NNN>-<slug>/` folder, omits its current `task_status`, or fails to mark `updated`/`done`/`abandoned` rows with their supersession or closure pointer |
+| §7.11 Tasks-Index Freshness | — (new) | `tools/fm/index_diff.py` (a.k.a. `python3 tools/fm/fm.py index-diff`) — see [Task 031](./tasks/031-sync-tasks-index-status-drift/) | `tasks/readme.md` does not list every `tasks/<NNN>-<slug>/` folder, omits its current `task_status`, or fails to mark `updated`/`done`/`abandoned` rows with their supersession pointer |
 
 Before committing a Task that is being closed, the agent MUST verify:
 

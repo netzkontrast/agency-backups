@@ -4,12 +4,14 @@ status: active
 slug: agents-spec
 summary: "Entry-point governance spec for all agents operating in this repository. Defines task routing, folder rules, spec language (RFC 2119 + Gherkin), and the Frontmatter Ontology every agent must apply."
 created: 2026-05-02
-updated: 2026-05-05
+updated: 2026-05-07
 ---
 
 # Agent Instructions
 
 Welcome, agent. This repository manages development and deep research tasks.
+
+**First action of every session:** Run `./install.sh` from the repo root *before* reading, editing, or validating any file. This installs the Python tooling (`PyYAML`, `jsonschema`, `pytest`) the rest of this spec assumes is present. See [§ Session Setup](#session-setup) below — rules **SS.1–SS.3** are binding.
 
 **Before committing any work:** You MUST review and abide by the checks defined in [PRE_COMMIT.md](./PRE_COMMIT.md).
 
@@ -117,6 +119,7 @@ Three top-level governance specs partition the work this repository performs. Pi
 | Coordination/orchestration with a goal, plan, and todo | [TASK.md](./TASK.md) | [/tasks/](./tasks/) |
 | Authoring an executable instruction set (research proposal, follow-up, tool instruction, task-spec) | [PROMPT.md](./PROMPT.md) | [/prompts/](./prompts/) |
 | Executing a prompt to produce evidence, synthesis, reflection, output | [RESEARCH.md](./RESEARCH.md) | [/research/](./research/) |
+| Authoring or modifying a skill | [SKILLS.md](./SKILLS.md) | [/skills/](./skills/) |
 
 **Separation of concerns is hard:** a Task MUST link to its prompt (never inline it); research MUST NOT contain prompt drafts; follow-up questions discovered during research MUST be filed as new prompts in `/prompts/`. The full audit-graph rules and Frontmatter Ontology (Layered Schema with Namespacing) live in [TASK.md §3](./TASK.md).
 
@@ -200,7 +203,7 @@ Every Markdown file in this repository SHOULD carry frontmatter. Files inside op
 |---|---|---|
 | **L0** — Obsidian Reserved | `tags`, `aliases`, `cssclasses` | Optional; preserved if present. |
 | **L1** — Vault Core | `type`, `status`, `slug`, `summary`, `created`, `updated` | MUST be present on all operational files. |
-| **L2** — Domain Namespace | `task_*`, `prompt_*`, `research_*` keys | MUST be present inside the directory that owns the namespace. |
+| **L2** — Domain Namespace | `task_*`, `prompt_*`, `research_*`, `skill_*` keys | MUST be present inside the directory that owns the namespace. |
 | **L3** — Agent-Only | Vector embeddings, graph scores, token matrices | MUST NOT appear in YAML. Lives in `/.agent_cache/<file>.meta.json`. |
 
 ### L1 Field Semantics

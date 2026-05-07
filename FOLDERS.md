@@ -4,7 +4,7 @@ status: active
 slug: folders-spec
 summary: "Repository folder topology, separation of concerns between /tasks/, /prompts/, /research/, and the mandatory readme.md rule."
 created: 2026-05-02
-updated: 2026-05-04
+updated: 2026-05-07
 ---
 
 # Folder Interaction Specification
@@ -20,6 +20,7 @@ To ensure navigation and traceability across the repository, agents MUST abide b
 | `/tasks/` | `TASK.md` | Orchestration: *what should be done*. | Task folders `<NNN>-<slug>/` with `task.md`. |
 | `/prompts/` | `PROMPT.md` | Instruction: *what the agent is told to do*. | Prompt folders `<slug>/` with `brief.md` and `prompt.md`. |
 | `/research/` | `RESEARCH.md` | Evidence: *what running a prompt produced*. | Research workspaces `<slug>/` with workspace, synthesis, reflection, output. |
+| `/skills/` | `SKILLS.md` | Capability: *what the agent knows how to do* | Skill folders `<slug>/` with `SKILL.md`. |
 
 **Hard rule on flow:** A Task references one or more Prompts (`task_uses_prompts`). A Prompt, when executed by an agent, produces a Research run whose slug equals the Prompt's slug. Research surfaces follow-up questions back into `/prompts/` (never inline). This forms the audit graph.
 
@@ -91,6 +92,9 @@ Linkage between Tasks, Prompts, and Research MUST flow exclusively through front
 - Prompt → Task: `prompt_relates_to_task: <slug>`
 - Prompt → Research (origin): `prompt_spawned_from_research: <slug>`
 - Research → Prompt: `research_executes_prompt: <slug>`
+- Skill → Skill: `skill_references_skills: [<slug>, ...]`
+- Skill → Research: `skill_references_research: [<slug>, ...]`
+- Skill → Prompt: `skill_references_prompts: [<slug>, ...]`
 
 Body-level Markdown links between folders are encouraged for human navigation, but the **frontmatter is the source of truth** for any future CLI/graph tooling.
 
@@ -98,7 +102,7 @@ Body-level Markdown links between folders are encouraged for human navigation, b
 
 ## 7. Anti-Patterns
 
-- **MUST NOT** create operational folders outside `/tasks/`, `/prompts/`, `/research/`. Top-level governance specs (`TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `FRUSTRATED.md`, `PRE_COMMIT.md`, `AGENTS.md`) live at the repo root. *Exemption:* the non-operational storage folders enumerated in §8 (`/skills/`, `/templates/`, `/tools/`, `/maintenance/`) are explicitly out of scope of this rule.
+- **MUST NOT** create operational folders outside `/tasks/`, `/prompts/`, `/research/`. Top-level governance specs (`TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `FRUSTRATED.md`, `PRE_COMMIT.md`, `AGENTS.md`) live at the repo root. *Exemption:* the non-operational storage folders enumerated in §8 (`/skills/`, `/templates/`, `/tools/`, `/maintenance/`, `/decisions/`, `/Agency-System/`) are explicitly out of scope of this rule.
 - **MUST NOT** mix kinds inside one folder (e.g., a prompt draft inside a research workspace).
 - **MUST NOT** rely on body-level Markdown links instead of frontmatter for cross-directory linkage that tooling will consume.
 
@@ -113,5 +117,6 @@ Some top-level folders hold content that is mirrored from, or destined for, an e
 | `/tools/` | Repository tooling (validator, lints, helpers). | The folder's own `readme.md` MUST carry L1 frontmatter; individual scripts do not. |
 | `/maintenance/` | Canonical language spec and maintenance run logs. | Treated as a governance annex; not in the audit graph. |
 | `/decisions/` | Architectural Decision Records (ADRs) — repo-native MADR 4.0.0 ledger governed by `research/adr-spec-research-synthesis/output/SPEC.md` and validated by `tools/adr/cli.py`. | Files use the `adr` type and `adr_*` L2 namespace; each `decisions/<NNNN>-<slug>.md` MUST carry L1 frontmatter. Once `adr_status: Accepted`, the file is T4-immutable per `MAINTENANCE.md` §1; the corpus synthesises into the guarded section of `AGENTS.md` via `tools/adr/cli.py synthesize`. |
+| `/Agency-System/` | Frontend prototype for the Agency System triptychon (HTML/JSX/SVG) — design-system source consumed by `skills/the-agency-system-architect/`. Not an operational orchestration folder. | Exempt from §1 / §7 and from the audit graph. The folder is opaque to `tools/validate-frontmatter.py` and `tools/lint-linkage.py`; assets are referenced from skills via plain Markdown links. The folder MUST contain a `readme.md` documenting the prototype's purpose and lifecycle (authoring ADR pending). |
 
 `tools/validate-frontmatter.py` enforces this partition mechanically: it walks `/tasks/`, `/prompts/`, `/research/`, `/templates/`, `/tools/` only. Adding a new top-level folder that is *not* on this list is itself an anti-pattern unless it is explicitly listed in the table above.
