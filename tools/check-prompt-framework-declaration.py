@@ -15,6 +15,7 @@ Usage::
 Exit codes:
     0 — every input file passes all four checks.
     2 — one or more files emitted at least one WARN finding.
+    1 — internal error (e.g., unreadable file).
 
 Diagnostic shape (one line per violation, on stderr)::
 
@@ -98,12 +99,14 @@ def _word_count(text: str) -> int:
 
 
 def check_file(path: Path) -> list[str]:
-    """Return a list of formatted WARN diagnostics for one prompt.md."""
+    """Return a list of formatted WARN diagnostics for one prompt.md.
+
+    Raises OSError if `path` is unreadable; the caller turns that into a
+    process-level exit code of 1 (internal error), matching the
+    ``check-prompt-self-containedness.py`` convention.
+    """
     findings: list[str] = []
-    try:
-        text = path.read_text(encoding="utf-8")
-    except OSError as exc:
-        return [f"{path}:1: WARN: framework-missing-frontmatter: cannot read file ({exc})"]
+    text = path.read_text(encoding="utf-8")
 
     fm = parse_frontmatter(text, strict=False)
     framework = fm.get("prompt_framework", "")
@@ -167,7 +170,12 @@ def main(argv: list[str]) -> int:
     any_violation = False
     for arg in argv:
         path = Path(arg)
-        for diag in check_file(path):
+        try:
+            diags = check_file(path)
+        except OSError as exc:
+            print(f"{path}:1: ERROR: cannot read file ({exc})", file=sys.stderr)
+            return 1
+        for diag in diags:
             print(diag, file=sys.stderr)
             any_violation = True
     return 2 if any_violation else 0

@@ -16,8 +16,8 @@ the eight canonical external-context phrases listed in
 
 False-positive suppression (SPEC §3.1.4):
   - Phrases inside the YAML frontmatter block are NOT diagnosed.
-  - Phrases inside fenced code blocks (``` ``` `` ... ``` ``` `` or
-    ``~~~`` ... ``~~~``) are NOT diagnosed.
+  - Phrases inside fenced code blocks (triple-backtick or triple-tilde
+    fences) are NOT diagnosed.
   - Lines whose stripped content begins with ``>`` (Markdown blockquote,
     typically used for quoting bad examples in anti-pattern tables) are
     skipped (MAY-suppression rule).

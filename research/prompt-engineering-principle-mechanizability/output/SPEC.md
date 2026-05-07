@@ -175,25 +175,31 @@ The tool MUST exit `0` on pass and `2` on WARN.
 
 #### §3.2.3 Validation Rules (Normative)
 
-For each input file the validator MUST verify all three of:
+For each input file the validator MUST verify all five rules. The rule
+identifiers below match the descriptive `<rule-id>` strings the shipped
+linter emits in §3.2.4 (the original `A` / `B` / `C` triplet split during
+implementation: rationale-length and frontmatter-↔-section consistency
+each became their own rule for diagnostic precision).
 
-- **Rule A (frontmatter):** The frontmatter key `prompt_framework` MUST be present and its value MUST be one of the five canonical values listed in §3.2.1.
-- **Rule B (body header):** The body MUST contain a top-level `## Framework` section header (Markdown ATX form, exactly two `#`).
-- **Rule C (rationale):** The `## Framework` section MUST contain ≥ 1 sentence of rationale, measured as ≥ 10 word tokens excluding the heading itself.
+- **`framework-missing-frontmatter`:** The frontmatter key `prompt_framework` MUST be present and non-empty.
+- **`framework-non-canonical`:** When present, `prompt_framework` MUST be one of the five canonical values listed in §3.2.1.
+- **`framework-missing-section`:** The body MUST contain a top-level `## Framework` section header (Markdown ATX form, exactly two `#`).
+- **`framework-mismatch`:** The first `## Framework` section's body MUST mention the same canonical token declared in `prompt_framework` (case-insensitive substring; the compound `RISEN+ReAct` accepts whitespace variants and the both-components-named pattern).
+- **`framework-no-rationale`:** The `## Framework` section MUST contain ≥ 10 word tokens (matching `\b[\w\-]+\b`) of rationale beyond the heading itself.
 
 #### §3.2.4 Output Format (Normative)
 
 For each diagnostic the tool MUST emit one line of the form:
 
 ```text
-<path>:<line>: WARN[framework-declaration:<rule-id>]: <human-readable explanation>
+<path>:<line>: WARN: <rule-id>: <human-readable explanation>
 ```
 
-where `<rule-id>` ∈ `{A, B, C}` matching §3.2.3.
+where `<rule-id>` is one of the five descriptive identifiers listed in §3.2.3.
 
 #### §3.2.5 Empirical Calibration
 
-At Task 034 execution time the validator's expected steady-state failure rate on the active corpus is **3 / 72 ≈ 4.2%**, all attributable to Rule C (short rationale) on prompts `governance-specs-update-research`, `skills-manifest-emission-tool`, and `skills-namespace-ontology`. ST-3 SHOULD treat these three as fixture cases for regression testing.
+At Task 034 execution time the shipped validator's measured failure rate on the active corpus is **1 / 72 ≈ 1.4%** — a single `framework-mismatch` on `prompts/pr27-governance-review/prompt.md` (frontmatter declares `CoT`; body spells the framework as the long form "Chain-of-Thought"). The three short-rationale candidates `governance-specs-update-research`, `skills-manifest-emission-tool`, and `skills-namespace-ontology` each carry both a legacy `## Framework: <name>` short heading and a canonical `## Framework` rationale section; the linter scans only the canonical (exact-match) section, which carries ≥ 10 words, so they pass. Aligning the linter to the broader `^##\s+Framework\b` regex (which would inspect the legacy short heading instead) would flip the failure rate to ≈ 4.2% (4 / 72) and is tracked as a follow-up. ST-3 SHOULD treat the four total candidates as fixture cases for regression testing.
 
 ## §4 Human-Review-Only Principles
 

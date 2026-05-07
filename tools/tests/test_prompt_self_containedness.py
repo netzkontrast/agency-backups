@@ -141,6 +141,21 @@ def test_phrase_in_fenced_code_block_is_suppressed(tmp_path: Path) -> None:
     assert result.stderr == ""
 
 
+def test_phrase_in_tilde_fenced_code_block_is_suppressed(tmp_path: Path) -> None:
+    """`~~~` fence variant MUST suppress phrases identically to triple-backtick."""
+    body = _CLEAN_BODY + textwrap.dedent("""
+        ## Example
+
+        ~~~text
+        the user mentioned this conversation earlier you said hi
+        ~~~
+        """)
+    p = _write(tmp_path, "prompt.md", body)
+    result = _run(p)
+    assert result.returncode == 0, result.stderr
+    assert result.stderr == ""
+
+
 def test_phrase_on_blockquote_line_is_suppressed(tmp_path: Path) -> None:
     body = _CLEAN_BODY + textwrap.dedent("""
         ## Anti-Pattern
