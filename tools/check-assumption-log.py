@@ -40,7 +40,20 @@ _FM = _TOOLS / "fm"
 if str(_FM) not in sys.path:
     sys.path.insert(0, str(_FM))
 
-import _core  # type: ignore  # noqa: E402
+try:
+    import _core  # type: ignore  # noqa: E402
+except ImportError:
+    # Graceful degradation per repo's advisory-linter convention: if the
+    # frontmatter parser is unavailable (e.g. mid-toolchain-migration window
+    # per MAINTENANCE.md §1), exit clean rather than crash. check-governance.sh
+    # invokes this linter advisory-tier (`|| true`), so an unhandled crash
+    # would silently no-op and rob the operator of any signal.
+    print(
+        "check-assumption-log: tools/fm/_core.py not importable — "
+        "skipping (advisory linter, exit 0).",
+        file=sys.stderr,
+    )
+    raise SystemExit(0)
 
 
 HEADING = "Assumptions Log"

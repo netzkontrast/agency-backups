@@ -4,7 +4,7 @@ status: active
 slug: decisions-root
 summary: "Architectural Decision Records (ADRs) — repo-native MADR 4.0.0 ledger validated by tools/adr/cli.py."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 ---
 
 # Decisions
@@ -31,4 +31,10 @@ updated: 2026-05-06
 
 ## Index
 
-_(empty — no ADRs authored yet. The first batch is sequenced by `tasks/029-adr-assumption-audit/` PD-005 and the implementation Task that succeeds Task 028.)_
+The first batch landed via [Task 032 ST-1](../tasks/032-agents-spec-integration/subtasks/01-research-adr-corpus-extraction.md) — the 5 P1 IADRs from [`research/adr-corpus-extraction-from-governance-specs/output/SPEC.md`](../research/adr-corpus-extraction-from-governance-specs/output/SPEC.md). All five are at `adr_status: Proposed` and are therefore excluded from the AGENTS.md synthesis block until a maintainer flips them to `Accepted`.
+
+- [`0001-mandatory-session-bootstrap.md`](./0001-mandatory-session-bootstrap.md) — Session bootstrap and governance gate (AGENTS.md `SS.1`–`SS.3`). `adr_status: Proposed`.
+- [`0002-operational-folder-topology.md`](./0002-operational-folder-topology.md) — Top-level folder partition and `/decisions/` exemption protocol (FOLDERS.md §1, §8). `adr_status: Proposed`.
+- [`0003-frontmatter-source-of-truth.md`](./0003-frontmatter-source-of-truth.md) — Frontmatter as the single source of truth for the audit graph (FOLDERS.md §3; TASK.md §3). `adr_status: Proposed`.
+- [`0004-yaml-depth-one-constraint.md`](./0004-yaml-depth-one-constraint.md) — YAML nesting depth ≤ 1 anti-hallucination rule (AGENTS.md §"YAML Depth Rule"; `tools/fm/_core.py`). `adr_status: Proposed`.
+- [`0005-repair-authority-tiers.md`](./0005-repair-authority-tiers.md) — Repair authority tiers and mutation surface boundaries (MAINTENANCE.md §1). `adr_status: Proposed`.

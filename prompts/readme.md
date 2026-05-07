@@ -4,7 +4,7 @@ status: active
 slug: prompts-root
 summary: "Root of /prompts/. Holds every executable instruction set: research proposals, follow-ups, tool instructions, task-specs."
 created: 2026-05-02
-updated: 2026-05-06
+updated: 2026-05-07
 # (also lists: author-skills-root-spec, skills-frontmatter-index-suite, skills-frontmatter-schema-files, flexible-frontmatter-toolchain, build-flexible-frontmatter-toolchain, migrate-repo-to-flexible-toolchain)
 ---
 
@@ -35,6 +35,7 @@ All work in this folder MUST conform to [`PROMPT.md`](../PROMPT.md). Frontmatter
 - [`build-flexible-frontmatter-toolchain/`](./build-flexible-frontmatter-toolchain/) — Task-spec prompt for Task 016 (build the four-tool CLI surface + header-ontology JSON).
 - [`migrate-repo-to-flexible-toolchain/`](./migrate-repo-to-flexible-toolchain/) — Task-spec prompt for Task 017 (three-batch migration; retires legacy linters; scope-narrows Task 010).
 - [`governance-specs-update-research/`](./governance-specs-update-research/) — Research proposal to assess and create an update plan for governance specs after Task 001.
+- [`tooling-adr-mirror-roundtrip-check/`](./tooling-adr-mirror-roundtrip-check/) — Task-spec prompt (unbound) that ships `tools/check-adr-mirror-roundtrip.py`, asserting parity between `research/adr-corpus-extraction-from-governance-specs/output/SPEC.md` mirror rows and the `decisions/<NNNN>-<slug>.md` bodies on `adr_id`, source citation, and slug. Filed to address PR #79 review R-5.
 
 ### Task 041 — Subtask Task-Specs (Tasks 032–039)
 
