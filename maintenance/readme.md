@@ -4,7 +4,7 @@ status: active
 slug: maintenance
 summary: "Central maintenance and governance support folder. Holds canonical definitions, the run log for the Repo Coherence Check routine, and references to the routines that keep this repo coherent."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-07
 ---
 
 # Maintenance
@@ -22,6 +22,12 @@ updated: 2026-05-04
 
 - [language-spec.md](./language-spec.md) — **Canonical** RFC 2119 keyword definitions, Gherkin syntax binding, and the complete Frontmatter Ontology (L0–L3). Every agent MUST conform to this document. All other specs summarise from here.
 - [run-log.md](./run-log.md) — Chronological log of every Repo Coherence Check and Nightly Maintenance run. **The agent MUST read the last `end_commit` entry before beginning any coherence-check run.**
+
+### Pull Request Reviews
+
+- [pr-74-review.md](./pr-74-review.md) — Code review for PR #74.
+- [pr-79-review.md](./pr-79-review.md) — Code review for PR #79 (Task 032 AGENTS.md spec integration + 3 enforcement linters). Two critical folder-index violations, two moderate tooling-consistency gaps, one minor provenance gap.
+- [pr-80-review.md](./pr-80-review.md) — Code review for PR #80 (Task 032 follow-up addressing PR #79 findings R-1..R-5). All five findings correctly resolved; three minor observations.
 
 ---
 
