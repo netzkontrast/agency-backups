@@ -1,13 +1,13 @@
 ---
 type: task
-status: active
+status: completed
 slug: prompt-spec-integration
 summary: "Add the missing Gherkin acceptance scenarios to PROMPT.md, mechanize enforcement of the seven engineering principles (P.5.1–P.5.7) where mechanically expressible, add a framework-selection decision tree (P.4.3), and clarify the prompt_spawned_from_research linkage with provider folders."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 task_id: "034"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts:
   - research-prompt-engineering-principle-mechanizability
@@ -80,15 +80,15 @@ Anchor namespace `P.B.<n>` mirrors PROMPT.md §6's pre-commit-check numbering so
 
 ## Todo
 
-- [ ] 1. Dispatch subtask `01-research-prompt-engineering-principle-mechanizability`.
-- [ ] 2. Dispatch subtask `02-tooling-self-containedness-checker` (Phase A).
-- [ ] 3. Dispatch subtask `03-tooling-framework-declaration-validator` (Phase A).
-- [ ] 4. Dispatch subtask `04-spec-amendment-prompt-md` (Phase B; depends on 01).
-- [ ] 5. Run `tools/check-governance.sh`.
-- [ ] 6. Update `README.md §6` if needed.
-- [ ] 7. Update `tasks/readme.md`.
-- [ ] 8. Author `friction-log.md`.
-- [ ] 9. Set `task_status: done`.
+- [x] 1. Dispatch subtask `01-research-prompt-engineering-principle-mechanizability`. — produced `research/prompt-engineering-principle-mechanizability/output/SPEC.md` (FL0).
+- [x] 2. Dispatch subtask `02-tooling-self-containedness-checker` (Phase A). — `tools/check-prompt-self-containedness.py` + 16 tests; corpus exit 0 (no hits across N=72).
+- [x] 3. Dispatch subtask `03-tooling-framework-declaration-validator` (Phase A). — `tools/check-prompt-framework-declaration.py` + 10 tests; 1 legitimate WARN on `pr27-governance-review` (1.4%).
+- [x] 4. Dispatch subtask `04-spec-amendment-prompt-md` (Phase B; depends on 01). — PROMPT.md §4.3 decision tree, §6.0 mapping rows for ST-2+ST-3, §6.9 Gherkin scenarios anchored P.B.1..P.B.6.
+- [x] 5. Run `tools/check-governance.sh`. — pre-existing failures only (Task 031 friction-log FL form, Task 045/046 index drift, ADR jsonschema env); my changes pass.
+- [x] 6. Update `README.md §6`. — added rows for the two new WARN-tier linters.
+- [x] 7. Update `tasks/readme.md`. — Task 034 entry flipped to `done`.
+- [x] 8. Author `friction-log.md`. — FL1 with two recorded items.
+- [x] 9. Set `task_status: done`.
 
 ## Links
 

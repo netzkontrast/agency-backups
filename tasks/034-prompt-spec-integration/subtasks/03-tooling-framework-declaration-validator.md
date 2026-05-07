@@ -1,10 +1,10 @@
 ---
 type: note
-status: draft
+status: completed
 slug: task-034-st3-tooling-framework-declaration-validator
 summary: "Subtask ST-3: ship tools/check-prompt-framework-declaration.py — verifies every /prompts/<slug>/prompt.md declares one of the canonical frameworks per PROMPT.md §4.3."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 ---
 
 # ST-3: `check-prompt-framework-declaration` — Mechanizes P.5.2

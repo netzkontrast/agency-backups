@@ -135,6 +135,22 @@ echo "--- [opt] Assumption-log substance linter (Task 032 ST-4 — advisory) ---
 "$PYTHON" tools/check-assumption-log.py tasks/ research/ || true
 
 echo ""
+echo ""
+echo "--- [opt] Prompt self-containedness linter (Task 034 ST-2, PROMPT.md §6.4 — advisory) ---"
+# PROMPT.md §5.1 / P.B.6 anchor. WARN-tier — emits to stderr, never gates.
+PROMPT_FILES=$(find prompts -maxdepth 2 -name prompt.md 2>/dev/null)
+if [ -n "$PROMPT_FILES" ]; then
+  "$PYTHON" tools/check-prompt-self-containedness.py $PROMPT_FILES || true
+fi
+
+echo ""
+echo "--- [opt] Prompt framework-declaration linter (Task 034 ST-3, PROMPT.md §6.4.b — advisory) ---"
+# PROMPT.md §5.2 / P.B.4 anchor. WARN-tier — emits to stderr, never gates.
+if [ -n "$PROMPT_FILES" ]; then
+  "$PYTHON" tools/check-prompt-framework-declaration.py $PROMPT_FILES || true
+fi
+
+echo ""
 echo "--- [opt] Duplicate task_id linter (Task 033 ST-3 — TASK.md §8.1) ---"
 # Closes the agent-responsibility-only enforcement window acknowledged in
 # TASK.md §8.1. Advisory by default during the migration window
