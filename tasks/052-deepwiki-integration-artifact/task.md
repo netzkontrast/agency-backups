@@ -1,12 +1,12 @@
 ---
 type: task
-status: active
+status: completed
 slug: deepwiki-integration-artifact
 summary: "Reflect on the Gemini DeepWiki research result; derive the Machine/Actor/Space isomorphic map for this repository; produce .devin/wiki.json that steers DeepWiki to generate human-readable documentation covering current state, how we got here, and what is next."
 created: 2026-05-07
 updated: 2026-05-07
 task_id: "052"
-task_status: open
+task_status: done
 task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts:
@@ -16,7 +16,7 @@ task_spawns_prompts: []
 task_supersedes: []
 task_superseded_by: []
 task_blocked_by:
-  - "051"
+  - 051
 task_affects_paths:
   - .devin/wiki.json
   - tasks/052-deepwiki-integration-artifact/
@@ -166,14 +166,14 @@ The `repo_notes` array should carry five notes, in priority order:
 
 ## Todo
 
-- [ ] `tasks/052-deepwiki-integration-artifact/reflection.md` exists and answers all five reflection questions with file-path citations.
-- [ ] `.devin/wiki.json` exists at repo root and is valid JSON.
-- [ ] `repo_notes` contains ≥ 5 entries, each ≤ 10 000 characters.
-- [ ] `pages` contains exactly 16 entries (within the 30-page standard limit).
-- [ ] Every `purpose` field in `pages` references at least one exact file path or directory name.
-- [ ] The Machine · Actor · Space table appears verbatim in `repo_notes[0].content`.
-- [ ] `reflection.md` traces each `repo_notes` entry and each `pages` entry to a finding or mitigation.
-- [ ] `tasks/readme.md` updated to include Task 052.
+- [x] `tasks/052-deepwiki-integration-artifact/reflection.md` exists and answers all five reflection questions with file-path citations.
+- [x] `.devin/wiki.json` exists at repo root and is valid JSON.
+- [x] `repo_notes` contains ≥ 5 entries, each ≤ 10 000 characters.
+- [x] `pages` contains exactly 16 entries (within the 30-page standard limit).
+- [x] Every `purpose` field in `pages` references at least one exact file path or directory name.
+- [x] The Machine · Actor · Space table appears verbatim in `repo_notes[0].content`.
+- [x] `reflection.md` traces each `repo_notes` entry and each `pages` entry to a finding or mitigation.
+- [x] `tasks/readme.md` updated to include Task 052.
 
 ## Links
 
