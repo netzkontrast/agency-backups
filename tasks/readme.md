@@ -4,7 +4,7 @@ status: active
 slug: tasks-root
 summary: "Root of /tasks/. Each subfolder is one orchestrated unit of work linking prompts, research, and code via frontmatter."
 created: 2026-05-04
-updated: 2026-05-06
+updated: 2026-05-07
 ---
 
 # Tasks Root
@@ -69,6 +69,8 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`039-maintenance-spec-integration/`](./039-maintenance-spec-integration/) — Operationalizes three orphaned research outputs (agentic-eval-trust-improvement-spec, repo-maintenance-protocol-spec, governance-specs-update-research §2) into MAINTENANCE.md; closes §1.1.2 toolchain-flip-criteria (now Legacy/Flexible/ADR three-way), §3.4 staleness algorithm, §3.5 duplicate-task_id circular dependency. Status: `open`. Subtasks: 2 research + 3 tooling + 1 spec amendment.
 - [`040-superclaude-spec-evaluation/`](./040-superclaude-spec-evaluation/) — Downstream evaluation Task per `RESEARCH.md §6.5` for the Gemini external research at [`research/gemini/superclaude-agency-orchestration-spec/`](../research/gemini/superclaude-agency-orchestration-spec/). The Gemini doc self-asserts "binding / IN-FORCE" governance over the SuperClaude framework; this Task decides whether to ACCEPT / AMEND / MERGE-INTO-032-039 / REJECT each §1–§8 aspect. Backend-architect + frontend-architect parallel evaluation lenses produce `evaluation-notes.md` + `evaluation-notes-frontend.md`. Status: `in_progress` (Phases 1–4 done; Phase 5 partial — three patches applied, two queued).
 - [`041-extract-subtask-prompts/`](./041-extract-subtask-prompts/) — Audit-graph repair: extracted the 35 subtask briefs under `tasks/03[2-9]*/subtasks/*.md` (14 with explicit `## Execution Brief` blocks, 21 with implicit prompt content) into 35 `/prompts/<slug>/{brief.md,prompt.md,readme.md}` triplets; populated `task_uses_prompts` on Tasks 032–039 to restore the `task → prompt` edge. Closes [PR #70 review C.3](https://github.com/netzkontrast/agency/pull/70#issuecomment-4390879904) per Option B of the maintainer's reply. Phase 1 manifest at [`./041-extract-subtask-prompts/slug-manifest.md`](./041-extract-subtask-prompts/slug-manifest.md); Phases 2/3 driver at [`./041-extract-subtask-prompts/scripts/extract.py`](./041-extract-subtask-prompts/scripts/extract.py). Status: `done`.
+- [`042-dramatica-nav-followups/`](./042-dramatica-nav-followups/) — Ten Task-030 follow-up items: precompile validate wire-in; term.py + aliases.py over-engineering audit; Bucket C structural-prose decision; Bucket D (41 disputed entries) triage; AGENTS.md §NO.5 amendment for precompiled/*.json; ST-7 alias conflict resolution (27 conflicts); six ontology entries without source YAML blocks; derived-kind scenario-tag schema decision; `## Mental Sex` body content correction; hardcoded test-count baseline drift. Status: `open`.
+- [`047-cross-spec-contradiction-baseline/`](./047-cross-spec-contradiction-baseline/) — Pre-chain contradiction baseline: catalogs 16 inter-spec normative conflicts across the 8 root specs before the 032–039 amendment chain. 5 High-severity (CONTR-001,004,005,006,014); §4 provides amendment-safety notes per task 032–039. Status: `done`. Output: [`research/research-cross-spec-contradiction-baseline/output/REPORT.md`](../research/research-cross-spec-contradiction-baseline/output/REPORT.md). (Note: `task_id: "047"` accounts for tasks 043–046 reserved in a parallel branch landing before this one.)
 
 ### Chain-Level Falsification (Tasks 032–039)
 
@@ -76,7 +78,7 @@ The 8-task chain above is a single coordinated effort to integrate under-cited r
 
 1. The friction-pattern-synthesis re-run (Task 033 ST-1 re-executed post-merge) shows *more* governance friction than at branch-time, not less. (The chain claims net debt reduction; if friction grows, the cut was harmful.)
 2. `tools/check-governance.sh` runtime exceeds 2× its pre-chain duration on a representative commit. (New linters worth shipping must amortize their cost; a 2×+ slowdown means the architecture is wrong.)
-3. Two or more root specs end up with mutually contradictory normative clauses introduced by this chain. (The whole point is to *resolve* the FRUSTRATED.md §28 ↔ PRE_COMMIT.md §2 contradiction, not introduce new ones.)
+3. Two or more root specs end up with mutually contradictory normative clauses introduced by this chain. (The whole point is to *resolve* the FRUSTRATED.md §28 ↔ PRE_COMMIT.md §2 contradiction, not introduce new ones.) **Pre-chain baseline: [Task 047](./047-cross-spec-contradiction-baseline/) catalogs 16 existing contradictions (CONTR-001–016); the post-chain count MUST NOT exceed 16 except where resolved.**
 4. The number of "briefing pending" subtasks at chain-end is greater than at branch-time. (We commit to authoring; "pending" should be a falling number.)
 
 If any falsifier triggers post-merge, the chain MUST be partially rolled back (single offending task) or fully rolled back (if friction-pattern-synthesis fails) per `MAINTENANCE.md §1` rollback procedure.
