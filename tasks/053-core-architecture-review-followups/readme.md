@@ -18,6 +18,10 @@ updated: 2026-05-07
 - `triage.md` — *(pending Plan step 2)* one-row-per-finding map of B.1–B.10 to owning Task (existing or newly opened).
 - `friction-log.md` — *(pending closure)* FL[0–3] declaration per [`FRUSTRATED.md`](../../FRUSTRATED.md), mandatory on `task_status` ∈ {`done`, `updated`, `abandoned`}.
 
+## Assumptions Log
+
+(none)
+
 ## Provenance
 
 The review-report.md content was authored on 2026-05-07 against the repository state at `main@dbd996f`. Citations in the report are line-anchored against that commit; readers consulting later commits SHOULD verify each citation's anchor still resolves before treating the line numbers as authoritative.

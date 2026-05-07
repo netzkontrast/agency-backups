@@ -17,6 +17,10 @@ updated: 2026-05-07
 - `notes.md` — *(pending)* footprint inventory + tradeoff matrix.
 - `friction-log.md` — *(pending closure)*
 
+## Assumptions Log
+
+(none)
+
 ## Provenance
 
 Dispatched from [Task 053](../053-core-architecture-review-followups/) finding B.5 (narrative-ontology scope creep into a governance substrate).

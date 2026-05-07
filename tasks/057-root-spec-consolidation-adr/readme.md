@@ -17,6 +17,10 @@ updated: 2026-05-07
 - `notes.md` — *(pending)* token-cost measurements + cross-reference audit + merged-section sketches.
 - `friction-log.md` — *(pending closure)*
 
+## Assumptions Log
+
+(none)
+
 ## Provenance
 
 Dispatched from [Task 053](../053-core-architecture-review-followups/) finding B.6 (root-spec proliferation; high session-boot token cost).

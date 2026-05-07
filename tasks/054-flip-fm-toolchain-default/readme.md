@@ -17,6 +17,10 @@ updated: 2026-05-07
 - `notes.md` — *(pending)* parity audit + verification fixtures.
 - `friction-log.md` — *(pending closure)* FL[0–3] declaration per [`FRUSTRATED.md`](../../FRUSTRATED.md).
 
+## Assumptions Log
+
+(none)
+
 ## Provenance
 
 Dispatched from [Task 053](../053-core-architecture-review-followups/) finding B.1 (residual dual-toolchain debt).

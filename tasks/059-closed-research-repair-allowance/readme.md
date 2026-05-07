@@ -17,6 +17,10 @@ updated: 2026-05-07
 - `notes.md` — *(pending)*
 - `friction-log.md` — *(pending closure)*
 
+## Assumptions Log
+
+(none)
+
 ## Provenance
 
 Dispatched from [Task 053](../053-core-architecture-review-followups/) finding B.8 (research-immutability is absolute, blocking even typo fixes on closed workspaces).
