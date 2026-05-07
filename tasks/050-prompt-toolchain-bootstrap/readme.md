@@ -1,17 +1,17 @@
 ---
 type: index
 status: active
-slug: task-049-folder
-summary: "Folder index for Task 049 — prompt-toolchain bootstrap. Ports the prompt-optimizer skill primitives into stateless tools/prompt/ CLIs and adds an audit orchestrator combining the Task 034 ST-2 + ST-3 linters with RFC-2119 polarity and a 5-dimension quality score."
+slug: task-050-folder
+summary: "Folder index for Task 050 — prompt-toolchain bootstrap. Ports the prompt-optimizer skill primitives into stateless tools/prompt/ CLIs and adds an audit orchestrator combining the Task 034 ST-2 + ST-3 linters with RFC-2119 polarity and a 5-dimension quality score."
 created: 2026-05-07
 updated: 2026-05-07
 ---
 
-# Task 049 Folder
+# Task 050 Folder
 
 ## What
 
-Operational folder for Task 049, which establishes a `tools/prompt/` toolchain mirroring `tools/fm/`. The first cut lifts two scripts from `skills/prompt-optimizer/scripts/` (`intent_classifier.py` → `select-framework.py`, `prompt_evaluator.py` → `evaluate.py`) and adds an `audit.py` orchestrator that composes the existing Task 034 ST-2 / ST-3 linters with the Task 032 RFC-2119 polarity advisory and the new evaluator. Renderer + query wrapper + companion skill are explicitly deferred to a successor task.
+Operational folder for Task 050, which establishes a `tools/prompt/` toolchain mirroring `tools/fm/`. The first cut lifts two scripts from `skills/prompt-optimizer/scripts/` (`intent_classifier.py` → `select-framework.py`, `prompt_evaluator.py` → `evaluate.py`) and adds an `audit.py` orchestrator that composes the existing Task 034 ST-2 / ST-3 linters with the Task 032 RFC-2119 polarity advisory and the new evaluator. Renderer + query wrapper + companion skill are explicitly deferred to a successor task.
 
 ## Files
 

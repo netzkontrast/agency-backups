@@ -126,6 +126,7 @@ The repository self-defends against drift via a pre-commit hook that runs the li
 | [`tools/adr/cli.py`](./tools/adr/cli.py) | ADR validation (`validate`) and AGENTS.md guarded-section synthesis (`synthesize`) for `/decisions/` per [§6.2 ADR change-control](#62-adr-change-control). |
 | [`tools/check-prompt-self-containedness.py`](./tools/check-prompt-self-containedness.py) | WARN-tier (Task 034 ST-2). Detects external-context phrases in `/prompts/<slug>/prompt.md` per [PROMPT.md §6.4](./PROMPT.md). |
 | [`tools/check-prompt-framework-declaration.py`](./tools/check-prompt-framework-declaration.py) | WARN-tier (Task 034 ST-3). Verifies `prompt_framework` ∈ canonical set + `## Framework` section consistency + ≥10-word rationale per [PROMPT.md §6.4.b](./PROMPT.md). |
+| [`tools/fm/check-duplicate-task-id.py`](./tools/fm/check-duplicate-task-id.py) | Detects two active Tasks sharing the same `task_id` without supersession reciprocity (closes [TASK.md §8.1](./TASK.md#81-concurrent-task-numbering) enforcement gap). Advisory in `check-governance.sh` during the migration window; set `FM_DUPLICATE_TASK_ID_STRICT=1` to gate. |
 
 A failing linter MUST be fixed (or waived in `tools/.frontmatter-waivers` with a documented rationale) before the commit can proceed.
 

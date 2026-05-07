@@ -5,7 +5,7 @@ slug: prompt-toolchain-bootstrap
 summary: "Port the prompt-optimizer skill primitives (intent classifier, 5-dim evaluator) into stateless tools/prompt/ CLIs and add an audit orchestrator that runs the Task 034 ST-2 + ST-3 linters together with RFC-2119 polarity. Mirrors the tools/fm/* pattern; foundation for a future prompts-author skill that pipelines /prompts/<slug>/ creation analogously to research-prompt-optimizer."
 created: 2026-05-07
 updated: 2026-05-07
-task_id: "049"
+task_id: "050"
 task_status: open
 task_owner: "unassigned"
 task_priority: P2
@@ -19,7 +19,7 @@ task_affects_paths:
   - PROMPT.md
 ---
 
-# Task 049 — Prompt Toolchain Bootstrap
+# Task 050 — Prompt Toolchain Bootstrap
 
 ## Goal
 
@@ -86,7 +86,7 @@ The following are intentionally OUT OF SCOPE for the first cut and SHOULD spawn 
 - [ ] 2. Phase B — dispatch ST-3 (audit-orchestrator) once Phase A lands.
 - [ ] 3. Phase C — sync README.md §6 + PROMPT.md §6.0 + author `tools/prompt/readme.md`.
 - [ ] 4. Phase D — author tests, run `tools/check-governance.sh`, friction-log, close.
-- [ ] 5. Update `tasks/readme.md` Task 049 entry to `done` with shipped artefact summary.
+- [ ] 5. Update `tasks/readme.md` Task 050 entry to `done` with shipped artefact summary.
 
 ## Links
 
