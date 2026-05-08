@@ -4,10 +4,10 @@ status: active
 slug: maintenance-spec-integration
 summary: "Operationalize three orphaned research outputs (agentic-eval-trust-improvement-spec, repo-maintenance-protocol-spec, governance-specs-update-research) by lifting them into MAINTENANCE.md normative scope; formalize §3.4 staleness algorithm, document the dual legacy/flexible toolchain transition, resolve the §3.5 duplicate-task_id circular dependency, and add ≥6 Gherkin scenarios."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-08
 task_id: "039"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code (session claude/run-close-task-39-9IqUT)"
 task_priority: P1
 task_uses_prompts:
   - research-toolchain-flip-criteria
@@ -89,17 +89,17 @@ Scenario: Coherence run refuses to mutate Accepted ADR
 
 ## Todo
 
-- [ ] 1. Dispatch subtask `01-research-toolchain-flip-criteria`.
-- [ ] 2. Dispatch subtask `02-research-staleness-decision-formalization` (cross-Task; shared input with Task 033).
-- [ ] 3. Dispatch subtask `03-tooling-staleness-audit-script` (Phase A).
-- [ ] 4. Dispatch subtask `04-tooling-dynamic-readme-partition-linter` (Phase A).
-- [ ] 5. Dispatch subtask `05-tooling-trust-audit-integration` (Phase A).
-- [ ] 6. Dispatch subtask `06-spec-amendment-maintenance-md` (Phase B).
-- [ ] 7. Run `tools/check-governance.sh`.
-- [ ] 8. Update `README.md §6` per R.7.
-- [ ] 9. Update `tasks/readme.md`.
-- [ ] 10. Author `friction-log.md`.
-- [ ] 11. Set `task_status: done`.
+- [x] 1. Dispatch subtask `01-research-toolchain-flip-criteria`.
+- [x] 2. Dispatch subtask `02-research-staleness-decision-formalization` (cross-Task; shared input with Task 033).
+- [x] 3. Dispatch subtask `03-tooling-staleness-audit-script` (Phase A).
+- [x] 4. Dispatch subtask `04-tooling-dynamic-readme-partition-linter` (Phase A).
+- [x] 5. Dispatch subtask `05-tooling-trust-audit-integration` (Phase A).
+- [x] 6. Dispatch subtask `06-spec-amendment-maintenance-md` (Phase B).
+- [x] 7. Run `tools/check-governance.sh`.
+- [x] 8. Update `README.md §6` per R.7.
+- [x] 9. Update `tasks/readme.md`.
+- [x] 10. Author `friction-log.md`.
+- [x] 11. Set `task_status: done`.
 
 ## Links
 
