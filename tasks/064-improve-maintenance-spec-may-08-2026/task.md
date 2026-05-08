@@ -65,7 +65,7 @@ In this run, Task 064 (this Task) is filed mid-session; the pre-commit gate will
 
 - [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md) Step 4 (Writing a Task for a T3 Finding) SHOULD add a final substep: "After staging the new Task folder, run `python3 tools/fm/index_diff.py` and stage any required `tasks/readme.md` bullet update in the same commit-stage."
 - [`MAINTENANCE.md §3.4`](../../MAINTENANCE.md) Stale-Task Audit SHOULD cross-reference [Task 031](../031-sync-tasks-index-status-drift/task.md)'s linter as the canonical mid-session check, not just the pre-commit gate.
-- (Optional) `tools/fm/index_diff.py` SHOULD support a `--quick` mode that exits 0 for in-sync state without printing anything, suitable for an in-session sanity check.
+- (Optional) `tools/fm/index_diff.py` SHOULD support a `--quick` flag (NOT a new subcommand — the existing dispatcher path `python3 tools/fm/fm.py index-diff --quick` MUST be the single surface) that exits 0 for in-sync state without printing anything, suitable for an in-session sanity check.
 
 ### F23 — `tools/check-governance.sh` output mixes gating and advisory errors visually
 
@@ -75,7 +75,7 @@ The gating-vs-advisory distinction is encoded in section headers (`--- [opt] ...
 
 **Concrete diffs:**
 
-- [`tools/check-governance.sh`](../../tools/check-governance.sh) SHOULD prepend `[advisory] ` to every diagnostic line emitted from an `[opt]` step (e.g. `tasks/...::ERROR:FR.B.4:malformed:...` becomes `[advisory] tasks/...::ERROR:FR.B.4:malformed:...`). Gating diagnostics retain their current format.
+- [`tools/check-governance.sh`](../../tools/check-governance.sh) SHOULD prepend `[advisory] ` to every diagnostic line emitted from an `[opt]` step (e.g. `tasks/...::ERROR:FR.B.4:malformed:...` becomes `[advisory] tasks/...::ERROR:FR.B.4:malformed:...`). Gating diagnostics retain their current format. Implementation note: the script currently aggregates only one final exit code; achieving the count summary requires capturing each step's exit code into per-step counters (e.g. `step_exit=$?` after each invocation, accumulated into `gating_errors` / `advisory_errors` shell variables) before the final summary line.
 - The final PASS / FAIL summary SHOULD include counts: e.g. `=== PASS: all gating checks passed (0 gating errors, 53 advisory errors). ===`.
 - [`MAINTENANCE.md §6` (new)](../../MAINTENANCE.md) (or §1.1) SHOULD document the gating-vs-advisory line-format convention so readers know what to grep for.
 
