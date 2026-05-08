@@ -1,6 +1,6 @@
 # agency
 
-**Decoupling Machine, Actor, and Space for Long-Horizon AI Agency.**
+**Decoupling Machine, Actor, Space, and Capability for Long-Horizon AI Agency.**
 
 `agency` is a governance and orchestration repository for long-horizon work performed by AI agents (Claude Code, Gemini, Jules, and humans). It is **not** an application. It is the *substrate* on which agentic work is planned, instructed, executed, audited, and continuously improved — engineered so that work done across many sessions, by many agents, in many contexts, stays coherent.
 
@@ -10,17 +10,16 @@
 
 LLM agents lose coherence over long horizons. They forget intent, drift from prior decisions, blur the line between *what should be done*, *what the agent was told to do*, and *what running it produced*. They re-author prompts mid-research, inline instructions inside tasks, append follow-up questions to closed deliverables, and silently re-interpret governance.
 
-This repository is an opinionated answer to that drift. It treats agentic work as a system with three intentionally **decoupled** concerns:
+This repository is an opinionated answer to that drift. It treats agentic work as a system with four intentionally **decoupled** concerns:
 
 | Concept | Question it answers | Lives in |
 |---|---|---|
 | **Machine** — the *Task* | *What should be done?* (orchestration, plan, todo, ownership) | [`/tasks/`](./tasks) |
 | **Actor** — the *Prompt* | *What is the agent told to do?* (executable instruction set) | [`/prompts/`](./prompts) |
 | **Space** — the *Research* | *What did running it produce?* (evidence, synthesis, output) | [`/research/`](./research) |
+| **Capability** — the *Skill* | *What does the agent know how to do?* (reusable, container-loaded competence) | [`/skills/`](./skills) |
 
-> **Pending reframe.** [FOLDERS.md §1](./FOLDERS.md) and [AGENTS.md Task Type Routing](./AGENTS.md) now also list `/skills/` (Capability — *what the agent knows how to do*, governed by [SKILLS.md](./SKILLS.md)) as a peer concern. Reframing §1 and §3 of this README to a four-concern model is gated on R.13 / R.14 and is being done in [Task 045](./tasks/045-readme-coherence-refresh/). Until that Task lands, the operational guidance in `/skills/` is consulted via [SKILLS.md](./SKILLS.md) directly.
-
-The decoupling is enforced both socially (via specs) and mechanically (via linters and a pre-commit hook). A Task MUST NOT inline a prompt. Research MUST NOT author its own instructions. Follow-up questions MUST NOT be appended to a closed research workspace — they MUST be filed as new prompts. The audit graph that links the three is the source of truth.
+The decoupling is enforced both socially (via specs) and mechanically (via linters and a pre-commit hook). A Task MUST NOT inline a prompt. Research MUST NOT author its own instructions. A Skill MUST declare its capability surface in [SKILLS.md](./SKILLS.md)'s `skill_*` namespace and MUST NOT be invoked from a Task or Prompt without an explicit `skill_references_*` link. Follow-up questions discovered during a run MUST NOT be appended to a closed research workspace — they MUST be filed as new prompts. The audit graph that links the four concerns is the source of truth.
 
 ```text
 /tasks/<NNN>-<slug>/task.md
@@ -41,9 +40,9 @@ You do not need to install or run anything to read this repository — most of t
 
 ---
 
-## 3. The mental model: Machine / Actor / Space
+## 3. The mental model: Machine / Actor / Space / Capability
 
-The slogan **"Decoupling Machine, Actor, and Space"** is a design constraint, not branding. Each layer has its own filesystem home, its own governance spec, its own frontmatter namespace, and its own pre-commit checks. Crossing the boundaries is an anti-pattern that the linters catch.
+The slogan **"Decoupling Machine, Actor, Space, and Capability"** is a design constraint, not branding. Each layer has its own filesystem home, its own governance spec, its own frontmatter namespace, and its own pre-commit checks. Crossing the boundaries is an anti-pattern that the linters catch.
 
 ### 3.1 Machine — `/tasks/` (orchestration)
 
@@ -62,6 +61,12 @@ A Prompt is *not* a Task. It does not coordinate; it instructs.
 A **Research workspace** is what running a Prompt produced. It contains a workspace folder for scratch work, a synthesis folder for structured outputs, a reflection folder for critical-thinking artifacts and the friction log, and an output folder for the final deliverable. Research is governed by [RESEARCH.md](./RESEARCH.md).
 
 A Research workspace is read-mostly once `research_phase: complete`. Open questions discovered during a run are routed *outward* into new prompts under `/prompts/`, never back into the closed workspace.
+
+### 3.4 Capability — `/skills/` (reusable competence)
+
+A **Skill** is a reusable, container-loaded capability — a thing the agent knows how to do, separate from any one Task or Prompt. Skills live in `/skills/<slug>/SKILL.md` (plus optional asset files) and are governed by [SKILLS.md](./SKILLS.md). The `skill_*` frontmatter namespace declares the capability surface, the bootstrap protocol (whether the skill self-loads via `skill_bootstrap_required: true`), and the references the skill consumes.
+
+A Skill is *not* a Prompt. A Prompt is a one-shot instruction set authored for a specific run; a Skill is the long-lived competence that a Prompt or Task may invoke. Cross-references flow through frontmatter only (`skill_references_*` on the Skill side; downstream consumers cite the skill slug in their own metadata where applicable). Loading discipline is enforced by `tools/check-narrative-ontology-load.py` (NO.5) for narrative skills, and by the SKILLS.md §9 linter mapping for the rest.
 
 ---
 
@@ -230,7 +235,7 @@ status: active
 slug: readme-update-spec
 scope: README.md (repository root, this file only)
 created: 2026-05-04
-updated: 2026-05-07
+updated: 2026-05-08
 ---
 ```
 
@@ -242,7 +247,7 @@ The keywords **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT**, and **MAY** in 
 
 - **R.1** This README is the **human-facing entry point** to the repository. It MUST remain readable by a non-agent reader who has never seen this repository before.
 - **R.2** This README MUST NOT duplicate the normative content of root specs (`AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `PRE_COMMIT.md`, `FRUSTRATED.md`, `MAINTENANCE.md`, `SKILLS.md`). It MUST link to them. When a normative clause changes in a root spec, this README MUST be updated to remain *consistent with* that spec, not to *re-state* it.
-- **R.3** The classification "Machine / Actor / Space" in §1 and §3 is the canonical human-readable framing of the three operational directories. If the framing is renamed, every reference to it in this README MUST be updated in the same commit.
+- **R.3** The classification "Machine / Actor / Space / Capability" in §1 and §3 is the canonical human-readable framing of the four decoupled concerns (the three operational directories `/tasks/`, `/prompts/`, `/research/`, plus `/skills/` as Capability). If the framing is renamed, every reference to it in this README MUST be updated in the same commit.
 
 ### 11.3 Update triggers (when this README MUST change)
 
@@ -261,7 +266,7 @@ This README MUST be updated in the same commit that introduces any of the follow
 - **R.11** Edits to this README that fall under R.4–R.10 above MUST be made in the **same commit** as the change that triggered them. A commit that introduces a new linter without updating §6, or a new root spec without updating §10, MUST be rejected at review.
 - **R.12** Edits that are purely cosmetic (typo fixes, prose clarity, link formatting) MAY be made in a standalone commit.
 - **R.13** A non-trivial restructure of this README (adding or removing a top-level numbered section) MUST be performed via a Task in `/tasks/<NNN>-<slug>/` per [TASK.md](./TASK.md). It MUST NOT be performed inline as a "drive-by" edit during another Task. The Task's `task_affects_paths` MUST list `README.md`.
-- **R.14** Edits that change the meaning of the Machine/Actor/Space framing (R.3) are **T3 Structural** changes per [MAINTENANCE.md §1](./MAINTENANCE.md#1-repair-permission-tiers). A maintenance agent MUST NOT make such edits directly; it MUST file a Task instead.
+- **R.14** Edits that change the meaning of the Machine/Actor/Space/Capability framing (R.3) are **T3 Structural** changes per [MAINTENANCE.md §1](./MAINTENANCE.md#1-repair-permission-tiers). A maintenance agent MUST NOT make such edits directly; it MUST file a Task instead.
 - **R.15** Every commit that modifies this README MUST update the `updated:` field of any frontmatter blocks contained in this section to today's ISO-8601 date. (At time of writing this section carries the inline frontmatter in §11 above.)
 - **R.16** This README does not require a `friction-log.md` of its own, but every session that edits it MUST still produce a session-level FL declaration per [FRUSTRATED.md](./FRUSTRATED.md).
 
@@ -308,6 +313,21 @@ Feature: README stays consistent with root specs
 - **R.18** This README MUST NOT contain prompt drafts, research notes, or task plans. Those live in `/prompts/`, `/research/`, and `/tasks/`.
 - **R.19** This README MUST NOT carry runtime state ("last updated", "current sprint", "recent work"). Dynamic state lives in folder-level `readme.md` files per [MAINTENANCE.md §3.2](./MAINTENANCE.md#32-dynamic-readme-updates).
 - **R.20** This README MUST NOT contradict any root spec. If a contradiction is detected during the Repo Coherence Check, the root spec wins and this README MUST be reconciled in the same coherence-check commit per [MAINTENANCE.md](./MAINTENANCE.md).
+- **R.21** A new schema corpus added under `maintenance/schemas/<name>/` MUST be mentioned in §12 in the same commit, with a one-paragraph load-discipline note that names which Tasks SHOULD load it and (per AGENTS.md NO.5) which MUST NOT.
+
+---
+
+## 12. Narrative Ontology (load-gated)
+
+The repository carries a **narrative ontology** under [`maintenance/schemas/narrative-ontology/`](./maintenance/schemas/narrative-ontology/) — a Dramatica × NCP × Novel-Architect bridge consumed by the narrative skills (`skills/novel-architect/`, `skills/the-agency-system-architect/`, `skills/suno-lyric-writer/`). This ontology is **separate from** the Frontmatter Ontology that governs `type:` / `task_*` / `prompt_*` / `research_*` / `skill_*` keys; it describes story-shape vocabulary (themes, character archetypes, signpost sequences, Mental Sex polarity, …) and is irrelevant to non-narrative work.
+
+**Load discipline.** [`AGENTS.md` Narrative Ontology section (NO.1–NO.6)](./AGENTS.md#narrative-ontology--dramatica--ncp--novel-architect-bridge) is the binding rule set:
+
+- **NO.1–NO.4** — what the ontology contains, where its schema lives, and how the precompiled JSON corpus relates to the source YAML.
+- **NO.5** — *non-narrative tasks MUST NOT load the ontology files.* This is mechanically WARN-enforced by [`tools/check-narrative-ontology-load.py`](./tools/check-narrative-ontology-load.py) at pre-commit time. The advisory linter scans the most recently-modified Task and emits a WARN if it loads `maintenance/schemas/narrative-ontology/` or `tools/dramatica-nav/` files without declaring narrative scope.
+- **NO.6** — narrative work SHOULD prefer [`tools/dramatica-nav/nav.py`](./tools/dramatica-nav/nav.py) over loading the JSON corpus directly; the navigator is token-cheap and indexes the precompiled bundle.
+
+**Why load-gated.** The ontology is large (≈40k tokens) and consuming it on a non-narrative session is the dominant FL2+ token-budget regression on this corpus. Keeping the load gate visible in this README, alongside a link to NO.5, prevents the gate from disappearing into a single spec section that non-narrative agents never read.
 
 ---
 

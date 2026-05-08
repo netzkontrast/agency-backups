@@ -4,7 +4,7 @@ status: active
 slug: folders-spec
 summary: "Repository folder topology, separation of concerns between /tasks/, /prompts/, /research/, and the mandatory readme.md rule."
 created: 2026-05-02
-updated: 2026-05-07
+updated: 2026-05-08
 ---
 
 # Folder Interaction Specification

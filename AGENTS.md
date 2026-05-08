@@ -4,7 +4,7 @@ status: active
 slug: agents-spec
 summary: "Entry-point governance spec for all agents operating in this repository. Defines task routing, folder rules, spec language (RFC 2119 + Gherkin), and the Frontmatter Ontology every agent must apply."
 created: 2026-05-02
-updated: 2026-05-07
+updated: 2026-05-08
 ---
 
 # Agent Instructions
@@ -429,7 +429,17 @@ The block below is rewritten by [`tools/adr/cli.py synthesize`](./tools/adr/cli.
 
 <!-- BEGIN AGENCY-ADR SYNTHESIS -->
 <!-- AGENT-WRITTEN. DO NOT EDIT BY HAND. Edits will be overwritten by tools/adr/cli.py synthesize. -->
+### MUST
+- The folder MUST carry a `readme. [ADR-0006]
+- Inbound references from `skills/the-agency-system-architect/` MUST travel as plain Markdown links inside `SKILL. [ADR-0006]
 
+### SHOULD
+- md §8 SHOULD drop the "authoring ADR pending" parenthetical via a follow-up T1 / T2 edit. [ADR-0006]
+
+### MUST NOT
+- ** The narrative skills (`skills/novel-architect/`, `skills/suno-lyric-writer/`) follow a parallel pattern — they ship large reference corpora that consumers MUST NOT autoload (NO. [ADR-0006]
+
+**Contributing ADRs:** ADR-0006.
 <!-- END AGENCY-ADR SYNTHESIS -->
 
 ---
