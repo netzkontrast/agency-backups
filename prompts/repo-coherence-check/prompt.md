@@ -45,11 +45,11 @@ You are **not** here to refactor, redesign, or improve content. You are here to 
 
 Read these files **before** executing any step. They define the standards you are enforcing and the state you are restoring:
 
-1. **`maintenance/run-log.md`** — read the last record to extract `end_commit` (your delta baseline). If no records exist, use the repo's initial commit.
-2. **`maintenance/language-spec.md`** — canonical RFC 2119 keyword rules, Gherkin validity rules (G1–G6), and the full Frontmatter Ontology (L0–L3 with all L2 namespace keys). This is the standard every file must meet.
-3. **`MAINTENANCE.md §1`** — the Repair Permission Tiers (T1–T4). You MUST NOT apply any repair beyond your tier without writing a Task first.
-4. **`TASK.md §3`** — the Frontmatter Ontology operative summary and worked examples. Cross-reference with `maintenance/language-spec.md §4` for the canonical version.
-5. **`FOLDERS.md §3`** — the readme.md rule. Every folder MUST have one.
+- **`maintenance/run-log.md`** — read the last record to extract `end_commit` (your delta baseline). If no records exist, use the repo's initial commit.
+- **`maintenance/language-spec.md`** — canonical RFC 2119 keyword rules, Gherkin validity rules (G1–G6), and the full Frontmatter Ontology (L0–L3 with all L2 namespace keys). This is the standard every file must meet.
+- **`MAINTENANCE.md §1`** — the Repair Permission Tiers (T1–T4). You MUST NOT apply any repair beyond your tier without writing a Task first.
+- **`TASK.md §3`** — the Frontmatter Ontology operative summary and worked examples. Cross-reference with `maintenance/language-spec.md §4` for the canonical version.
+- **`FOLDERS.md §3`** — the readme.md rule. Every folder MUST have one.
 
 Do not read any other file until Step 2 directs you to.
 
@@ -208,7 +208,7 @@ task_affects_paths: []
 <Exact description of what drift was found and what conformant state looks like.>
 
 ## Plan
-1. ...
+- ...
 
 ## Todo
 - [ ] ...
@@ -286,13 +286,13 @@ Example record:
 
 ## Constraints
 
-1. **Delta-only scope.** You MUST NOT scan files outside the git delta unless a missing-readme check requires inspecting a folder's contents. Do not re-scan the whole repository.
-2. **No T3/T4 direct edits.** You MUST NOT apply structural changes or touch complete research workspaces. Write Tasks instead.
-3. **No content rewriting.** You MUST NOT rewrite prose, change section headings, or alter the meaning of any document. Only mechanical, schema-conformance repairs are permitted.
-4. **No prompt fabrication.** If a T3 finding involves a missing prompt, the Task you write MUST reference a prompt that still needs to be created — do not create the prompt yourself during this routine.
-5. **Idempotency.** Running this routine twice on the same delta MUST produce the same result. T1/T2 repairs are idempotent by definition. Tasks MUST be deduplicated against existing open Tasks (Reflection gate R4).
-6. **Baseline integrity.** If `maintenance/run-log.md` is missing or corrupted, you MUST log this as a T1 issue, reconstruct it from the most recent commit that touched it (via `git log --follow`), and proceed with the last-known good baseline. If no baseline can be recovered, fall back to scanning files modified in the last 14 days.
-7. **One RFC 2119 keyword per sentence.** Every normative sentence in any Task you write MUST contain exactly one keyword, per `maintenance/language-spec.md §2.2 U1`.
+- **Delta-only scope.** You MUST NOT scan files outside the git delta unless a missing-readme check requires inspecting a folder's contents. Do not re-scan the whole repository.
+- **No T3/T4 direct edits.** You MUST NOT apply structural changes or touch complete research workspaces. Write Tasks instead.
+- **No content rewriting.** You MUST NOT rewrite prose, change section headings, or alter the meaning of any document. Only mechanical, schema-conformance repairs are permitted.
+- **No prompt fabrication.** If a T3 finding involves a missing prompt, the Task you write MUST reference a prompt that still needs to be created — do not create the prompt yourself during this routine.
+- **Idempotency.** Running this routine twice on the same delta MUST produce the same result. T1/T2 repairs are idempotent by definition. Tasks MUST be deduplicated against existing open Tasks (Reflection gate R4).
+- **Baseline integrity.** If `maintenance/run-log.md` is missing or corrupted, you MUST log this as a T1 issue, reconstruct it from the most recent commit that touched it (via `git log --follow`), and proceed with the last-known good baseline. If no baseline can be recovered, fall back to scanning files modified in the last 14 days.
+- **One RFC 2119 keyword per sentence.** Every normative sentence in any Task you write MUST contain exactly one keyword, per `maintenance/language-spec.md §2.2 U1`.
 
 ---
 

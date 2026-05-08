@@ -4,10 +4,10 @@ status: active
 slug: pre-commit-spec-integration
 summary: "Resolve the FRUSTRATED.md §28 vs PRE_COMMIT.md §2 readme-cadence contradiction, add a toolchain-precedence matrix for the THREE-WAY legacy / flexible / ADR toolchain (§7.A + §7.C from Task 031), mechanize PC.1.1 clean-working-directory checks, and shift PC.7.B waivers from per-file to per-rule granularity."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-07
 task_id: "037"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code (session claude/run-close-task-37-a0umf)"
 task_priority: P2
 task_uses_prompts:
   - research-pre-commit-readme-update-cadence
@@ -79,15 +79,15 @@ Scenario: Edit to AGENTS.md guarded section triggers ADR validator
 
 ## Todo
 
-- [ ] 1. Dispatch subtask `01-research-pre-commit-readme-update-cadence`.
-- [ ] 2. Dispatch subtask `02-tooling-clean-working-directory-linter` (Phase A).
-- [ ] 3. Dispatch subtask `03-tooling-per-rule-waiver-mechanism` (Phase A).
-- [ ] 4. Dispatch subtask `04-spec-amendment-pre-commit-md` (Phase B).
-- [ ] 5. Run `tools/check-governance.sh`.
-- [ ] 6. Update `README.md §6` per R.7.
-- [ ] 7. Update `tasks/readme.md`.
-- [ ] 8. Author `friction-log.md`.
-- [ ] 9. Set `task_status: done`.
+- [x] 1. Dispatch subtask `01-research-pre-commit-readme-update-cadence`.
+- [x] 2. Dispatch subtask `02-tooling-clean-working-directory-linter` (Phase A).
+- [x] 3. Dispatch subtask `03-tooling-per-rule-waiver-mechanism` (Phase A).
+- [x] 4. Dispatch subtask `04-spec-amendment-pre-commit-md` (Phase B).
+- [x] 5. Run `tools/check-governance.sh`.
+- [x] 6. Update `README.md §6` per R.7.
+- [x] 7. Update `tasks/readme.md`.
+- [x] 8. Author `friction-log.md`.
+- [x] 9. Set `task_status: done`.
 
 ## Links
 
