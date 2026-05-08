@@ -179,6 +179,22 @@ echo "--- [opt] Dynamic-readme partition linter (Task 039 ST-4 — MAINTENANCE.m
 "$PYTHON" tools/maintenance/dynamic-readme-partition.py tasks/ research/ prompts/ || true
 
 echo ""
+echo "--- [opt] Stale-task audit (Task 039 ST-3 — MAINTENANCE.md §3.4) ---"
+# Mechanises §3.4's four-bucket classifier per the deterministic decision tree
+# in research/spec-staleness-decision-formalization/output/SPEC.md §1. WARN-tier
+# only — never gates. Configure window via MAINT_STALE_DAYS (default 7); set
+# FM_STALENESS_AUDIT_STRICT=1 to gate once the corpus is clean.
+STALENESS_OUT="$(mktemp)"
+STALENESS_RC=0
+"$PYTHON" tools/maintenance/staleness-audit.py \
+  > "$STALENESS_OUT" 2>&1 || STALENESS_RC=$?
+cat "$STALENESS_OUT"
+rm -f "$STALENESS_OUT"
+if [ "${FM_STALENESS_AUDIT_STRICT:-0}" = "1" ] && [ "$STALENESS_RC" -ne 0 ]; then
+  FAIL=1
+fi
+
+echo ""
 echo ""
 echo "--- [opt] Prompt self-containedness linter (Task 034 ST-2, PROMPT.md §6.4 — advisory) ---"
 # PROMPT.md §5.1 / P.B.6 anchor. WARN-tier — emits to stderr, never gates.
