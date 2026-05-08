@@ -4,7 +4,7 @@ status: active
 slug: tasks-root
 summary: "Root of /tasks/. Each subfolder is one orchestrated unit of work linking prompts, research, and code via frontmatter."
 created: 2026-05-04
-updated: 2026-05-07
+updated: 2026-05-08
 ---
 
 # Tasks Root
@@ -91,6 +91,7 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`059-closed-research-repair-allowance/`](./059-closed-research-repair-allowance/) — Successor-class dispatch from [Task 053](./053-core-architecture-review-followups/) finding B.8. Amend `MAINTENANCE.md:33` T4 absolute-immutability rule for closed research workspaces to permit T1 (frontmatter date bumps) and T2 (broken-link repair) corrections, while preserving T3/T4 content immutability. Status: `open`.
 - [`060-platform-agnostic-closing-procedure/`](./060-platform-agnostic-closing-procedure/) — Successor-class dispatch from [Task 053](./053-core-architecture-review-followups/) finding B.9. Define a platform-agnostic closing-run procedure in `AGENTS.md` (open a PR via the platform's mechanism + attach friction-log + ensure index sync); demote `/sc:createPR` to one implementation among others; give Jules and Gemini concrete parity guidance. Status: `open`.
 - [`061-governance-integration-test-scaffold/`](./061-governance-integration-test-scaffold/) — Successor-class dispatch from [Task 053](./053-core-architecture-review-followups/) finding B.10. Scaffold `tests/integration/test_governance_e2e.py`: build a minimal Task → Prompt → Research triptych in a tmpdir, verify `tools/check-governance.sh` exits zero, then mutate each `TASK.md §7.0` linter row and assert the documented diagnostic surfaces. Status: `open`.
+- [`064-improve-maintenance-spec-may-08-2026/`](./064-improve-maintenance-spec-may-08-2026/) — Findings F20–F26 distilled from the 2026-05-08 coherence run: `/sc:*` closing-protocol documentation, self-improvement-Task accumulation cadence rule, `tasks/readme.md` in-session index discipline, gating-vs-advisory `tools/check-governance.sh` line format, linter-first as canonical Step 2 on large deltas, `TodoWrite` enum case sensitivity (won't-fix candidate), skip-with-citation disposition pattern. Companion (not successor) to [Task 025](./025-maintenance-spec-remaining-findings/) and [Task 044](./044-improve-maintenance-spec-may-07-2026/). Status: `open`.
 
 ### Chain-Level Falsification (Tasks 032–039)
 
