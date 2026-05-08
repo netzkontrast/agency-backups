@@ -4,7 +4,7 @@ status: active
 slug: maintenance-spec
 summary: "Governs the Nightly Maintenance Run and the Repo Coherence Check routine. Defines scope, repair permissions, run-log protocol, and Task delegation rules for all automated maintenance agents."
 created: 2026-05-02
-updated: 2026-05-07
+updated: 2026-05-08
 ---
 
 # Repository Maintenance Protocol
@@ -30,7 +30,41 @@ Not all fixes are equal. Before touching any file, the agent MUST classify the c
 | **T1 — Mechanical** | Missing or stale `updated:` date; missing `slug:` that can be derived from folder name; broken relative Markdown link where target exists; missing `readme.md` stub (per FOLDERS.md). | Fix immediately, in-place. | `tools/fm/edit.py --bump-updated` / `--set` / `--unset` |
 | **T2 — Additive** | Adding a missing L1 or L2 frontmatter key whose value is unambiguous from context (e.g. adding `type: task` to a `task.md`). | Fix immediately, in-place. | `tools/fm/edit.py --set` / `--append-list` / `--remove-from-list` |
 | **T3 — Structural** | Changing section headings, rewriting content, altering schema definitions, adding new L2 keys to the ontology, modifying root governance specs beyond T1/T2. Includes cross-file slug renames. | MUST NOT fix directly. Write a Task in `/tasks/` instead. | (deferred to `tools/fm/section.py` per Task 018, and `tools/fm/rename.py` per Task 019) |
-| **T4 — Research-touching** | Any modification to a `/research/<slug>/` workspace that is `research_phase: complete`. | MUST NOT touch. Research is immutable after closure. | — |
+| **T4 — Research-touching (content)** | Any change to *content semantics* in a `/research/<slug>/` workspace that is `research_phase: complete` — body prose, synthesis findings, evidence claims, scenario outcomes. | MUST NOT touch. Research content is immutable after closure. | — |
+
+### 1.0.1 Closed-research T1/T2 Repair Allowance (Task 059)
+
+Closed research is *content*-immutable, not *metadata*-immutable. Two
+narrow repair classes are permitted on a `research_phase: complete`
+workspace:
+
+- **T1 on closed research** — `updated:` date bumps when surrounding
+  artifacts move, slug derivations fixed to match a renamed folder,
+  and `tools/fm/edit.py --bump-updated` / `--set` / `--unset` calls
+  that touch only frontmatter scalars.
+- **T2 on closed research** — repairs to broken *relative* Markdown
+  links whose target file moved (the link points at the new path; the
+  surrounding sentence is unchanged) and additions of L1 / L2 keys
+  whose values are unambiguous from context.
+
+Any other body-content edit — typo fixes in prose, finding rewrites,
+scenario-outcome changes, table-cell corrections — remains T4 and
+MUST be written as a Task that supersedes the closed workspace via a
+new `research_phase: open` successor. T3 structural edits (heading
+rewrites, schema migrations, section reorders) are also forbidden on
+closed research regardless of trivial appearance.
+
+**Lifecycle interaction (§4.7):** A T1 / T2 repair on closed research
+MUST NOT trip the originating Task's `task_status` lifecycle. The
+Task that produced the workspace remains `done`; the repair commit
+SHOULD cite the Task slug in its message but MUST NOT mutate the
+Task's `task_status`.
+
+**Audit trail:** Every T1 / T2 repair commit on closed research MUST
+carry a one-line rationale in the commit message naming the trigger
+(typically the upstream rename or move that broke the link), and
+MUST bump the workspace's own `updated:` field via
+`tools/fm/edit.py --bump-updated` so the change is discoverable.
 
 **Root governance specs** (`AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `FRUSTRATED.md`, `PRE_COMMIT.md`, `MAINTENANCE.md`) are subject to T1/T2 repairs only. Structural changes to these files MUST be written as Tasks.
 

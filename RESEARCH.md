@@ -4,7 +4,7 @@ status: active
 slug: research-spec
 summary: "Root specification for /research/. Research is execution-only: it consumes a prompt and produces a workspace of evidence, synthesis, reflection, and a final output. Prompt-craft and follow-up question generation are out of scope and live in /prompts/."
 created: 2026-05-02
-updated: 2026-05-07
+updated: 2026-05-08
 ---
 
 # Research Task Specification
@@ -284,6 +284,6 @@ The analysis Task MAY be accompanied by a research workspace under `/research/<s
 ## 7. Anti-Patterns
 
 - **MUST NOT** craft prompts inside `/research/`. Prompts live in `/prompts/`.
-- **MUST NOT** edit a `/research/<slug>/` workspace after `research_phase: complete` to insert follow-up questions. File a new prompt instead.
+- **MUST NOT** edit a `/research/<slug>/` workspace after `research_phase: complete` to insert follow-up questions, rewrite prose, or revise findings. File a new prompt or a successor `research_phase: open` workspace instead. T1 / T2 metadata-and-link repairs are permitted under the narrow allowance in [`MAINTENANCE.md §1.0.1`](./MAINTENANCE.md#101-closed-research-t1t2-repair-allowance-task-059) (frontmatter date bumps and broken-relative-link fixes when an upstream rename moves a target); content remains T4-immutable.
 - **MUST NOT** treat a Research run as a standalone Task. If coordination across runs is needed, create a Task in `/tasks/` per `TASK.md`.
 - **MUST NOT** ingest an external `result.md` without immediately creating a downstream analysis Task per §6.5 in the same commit.
