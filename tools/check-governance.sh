@@ -170,6 +170,31 @@ echo "--- [opt] Assumption-log substance linter (Task 032 ST-4 — advisory) ---
 "$PYTHON" tools/check-assumption-log.py tasks/ research/ || true
 
 echo ""
+echo "--- [opt] Dynamic-readme partition linter (Task 039 ST-4 — MAINTENANCE.md §3.2) ---"
+# repo-maintenance-protocol-spec §3.1 enforcement. WARN-tier only — never gates.
+# Falsification mitigation per Task 039 ST-4 brief: readmes lacking the
+# `<!-- BEGIN DYNAMIC -->` / `<!-- END DYNAMIC -->` markers emit a one-time
+# `missing-marker` advisory rather than an ERROR, so the linter does not
+# retroactively break the existing corpus.
+"$PYTHON" tools/maintenance/dynamic-readme-partition.py tasks/ research/ prompts/ || true
+
+echo ""
+echo "--- [opt] Stale-task audit (Task 039 ST-3 — MAINTENANCE.md §3.4) ---"
+# Mechanises §3.4's four-bucket classifier per the deterministic decision tree
+# in research/spec-staleness-decision-formalization/output/SPEC.md §1. WARN-tier
+# only — never gates. Configure window via MAINT_STALE_DAYS (default 7); set
+# FM_STALENESS_AUDIT_STRICT=1 to gate once the corpus is clean.
+STALENESS_OUT="$(mktemp)"
+STALENESS_RC=0
+"$PYTHON" tools/maintenance/staleness-audit.py \
+  > "$STALENESS_OUT" 2>&1 || STALENESS_RC=$?
+cat "$STALENESS_OUT"
+rm -f "$STALENESS_OUT"
+if [ "${FM_STALENESS_AUDIT_STRICT:-0}" = "1" ] && [ "$STALENESS_RC" -ne 0 ]; then
+  FAIL=1
+fi
+
+echo ""
 echo ""
 echo "--- [opt] Prompt self-containedness linter (Task 034 ST-2, PROMPT.md §6.4 — advisory) ---"
 # PROMPT.md §5.1 / P.B.6 anchor. WARN-tier — emits to stderr, never gates.
@@ -257,6 +282,27 @@ done
 cat "$TRUST_OUT"
 rm -f "$TRUST_OUT"
 if [ "${FM_TRUST_AUDIT_STRICT:-0}" = "1" ] && [ "$TRUST_RC" -ne 0 ]; then
+  FAIL=1
+fi
+
+echo ""
+echo "--- [opt] Trust-audit AGGREGATOR (Task 039 ST-5 — MAINTENANCE.md §3.2, C3 partition) ---"
+# Cross-research roll-up of the per-workspace GATE above. Imports
+# tools/check-trust-audit.py's DIAGNOSTIC_SCHEMA + audit() callable;
+# never re-implements per-workspace logic. Advisory by default — set
+# FM_TRUST_AUDIT_AGGREGATOR_STRICT=1 to gate. Surfaces FL≥1 trust failures
+# as MAINT.TRUST.FRICTION recommendations for §3.3 task-delegation.
+TRUST_AGG_OUT="$(mktemp)"
+TRUST_AGG_RC=0
+TRUST_AGG_MODE="advisory"
+if [ "${FM_TRUST_AUDIT_AGGREGATOR_STRICT:-0}" = "1" ]; then
+  TRUST_AGG_MODE="strict"
+fi
+"$PYTHON" tools/maintenance/trust-audit.py --threshold-mode "$TRUST_AGG_MODE" \
+  > "$TRUST_AGG_OUT" 2>&1 || TRUST_AGG_RC=$?
+cat "$TRUST_AGG_OUT"
+rm -f "$TRUST_AGG_OUT"
+if [ "${FM_TRUST_AUDIT_AGGREGATOR_STRICT:-0}" = "1" ] && [ "$TRUST_AGG_RC" -ne 0 ]; then
   FAIL=1
 fi
 

@@ -1,0 +1,22 @@
+2026-05-08T00:00:00Z | bootstrap | ./install.sh OK
+2026-05-08T00:00:01Z | bootstrap | tools/check-governance.sh exit 0 (baseline)
+2026-05-08T00:00:02Z | branch    | claude/run-close-task-39-9IqUT confirmed
+2026-05-08T00:00:03Z | read      | CLAUDE.md, AGENTS.md (closing-run, RFC2119), RESEARCH.md (workspace+trust gate)
+2026-05-08T00:00:04Z | read      | prompts/research-toolchain-flip-criteria/{prompt.md,brief.md}
+2026-05-08T00:00:05Z | read      | tasks/039-maintenance-spec-integration/task.md (three-toolchain reality)
+2026-05-08T00:00:06Z | read      | MAINTENANCE.md §1.1 toolchain-surface (current dual-table)
+2026-05-08T00:00:07Z | read      | PRE_COMMIT.md §7 / §7.A precedence matrix / §7.B waivers / §7.C ADR validator
+2026-05-08T00:00:08Z | read      | research/flexible-frontmatter-toolchain/output/SPEC.md §8 migration ladder
+2026-05-08T00:00:09Z | read      | research/governance-specs-update-research/output/SPEC.md §2 (toolchain context)
+2026-05-08T00:00:10Z | read      | tools/check-governance.sh (steps [1/6]…[6/6] + [opt]) — current pipeline shape
+2026-05-08T00:00:11Z | read      | tools/.frontmatter-waivers (header-only; corpus is empty post-Task-019)
+2026-05-08T00:00:12Z | read      | tools/check-trust-audit.py — three-dim score thresholds confirmed
+2026-05-08T00:00:13Z | mkdir     | research/toolchain-flip-criteria/{workspace,synthesis,reflection,output}/
+2026-05-08T00:00:14Z | snapshot  | prompt.md copied verbatim from /prompts/research-toolchain-flip-criteria/
+2026-05-08T00:00:15Z | scaffold  | research-prompt.md authored (Phase 1-3 render of executing prompt)
+2026-05-08T00:00:16Z | synth     | synthesis/{methodology.md,state.md,post-synthesis-log.md,tracks.md} authored
+2026-05-08T00:00:17Z | reflect   | reflection/M07-contradictions.md, friction-log.md authored
+2026-05-08T00:00:18Z | deliver   | output/SPEC.md authored: §1 ≤7-item flip checklist, §2 single-commit shape, §3 cleanup, §4 rollback
+2026-05-08T00:00:19Z | sync      | readme.md frontmatter set research_phase: complete
+2026-05-08T00:00:20Z | gate      | python3 tools/check-trust-audit.py research/toolchain-flip-criteria/ (target: exit 0)
+2026-05-08T00:00:21Z | gate      | tools/check-governance.sh — final exit 0 verification before commit

@@ -34,6 +34,7 @@ EXIT_OK = 0
 EXIT_USAGE = 2
 EXIT_NOT_FOUND = 3
 EXIT_TYPE_ERROR = 4
+EXIT_ADR_IMMUTABLE = 5  # MAINTENANCE.md §6 anchor M.B.7
 
 
 def _today_utc() -> str:
@@ -154,6 +155,19 @@ def _find(entries: list[dict], key: str) -> int | None:
     return None
 
 
+def _is_accepted_adr(entries: list[dict]) -> bool:
+    """Return True iff frontmatter declares `adr_status: Accepted`.
+
+    MAINTENANCE.md §1 + §6 M.B.7: an Accepted ADR is T4-immutable; supersession
+    must produce a new ADR via `tools/adr/cli.py`, not mutate the predecessor.
+    """
+    idx = _find(entries, "adr_status")
+    if idx is None:
+        return False
+    e = entries[idx]
+    return e["kind"] == "scalar" and e["value"] == "Accepted"
+
+
 def _do_set(entries: list[dict], key: str, value: str) -> int:
     idx = _find(entries, key)
     if idx is not None and entries[idx]["kind"] == "list":
@@ -224,6 +238,8 @@ def apply_edit(text: str, action: str, *args: str) -> tuple[str, int]:
     if not open_fence:
         return text, EXIT_NOT_FOUND
     entries = _parse_lines(fm_body)
+    if _is_accepted_adr(entries):
+        return text, EXIT_ADR_IMMUTABLE
     rc = EXIT_OK
     if action == "set":
         key, _, val = args[0].partition("=")
@@ -290,6 +306,13 @@ def main(argv: list[str] | None = None) -> int:
         if rc == EXIT_TYPE_ERROR:
             print("fm-edit: type error — use --append-list / --remove-from-list "
                   "for list-valued keys", file=sys.stderr)
+            return rc
+        if rc == EXIT_ADR_IMMUTABLE:
+            print(
+                "M.B.7:adr-accepted-immutable:cannot apply T1 to "
+                "adr_status=Accepted",
+                file=sys.stderr,
+            )
             return rc
         if rc != EXIT_OK:
             return rc

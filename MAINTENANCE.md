@@ -4,7 +4,7 @@ status: active
 slug: maintenance-spec
 summary: "Governs the Nightly Maintenance Run and the Repo Coherence Check routine. Defines scope, repair permissions, run-log protocol, and Task delegation rules for all automated maintenance agents."
 created: 2026-05-02
-updated: 2026-05-07
+updated: 2026-05-08
 ---
 
 # Repository Maintenance Protocol
@@ -34,9 +34,13 @@ Not all fixes are equal. Before touching any file, the agent MUST classify the c
 
 **Root governance specs** (`AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `FRUSTRATED.md`, `PRE_COMMIT.md`, `MAINTENANCE.md`) are subject to T1/T2 repairs only. Structural changes to these files MUST be written as Tasks.
 
+**Accepted ADRs are T4-immutable.** Any file under [`/decisions/`](./decisions/) whose frontmatter declares `adr_status: Accepted` MUST NOT be mutated by maintenance routines at any tier — not even a T1 `updated:` bump. The Repo Coherence Check and the Nightly Maintenance Run MUST refuse to mutate Accepted ADRs and MUST file a successor ADR (or a Task that authors one) instead. This rule mirrors the assertion at [`FOLDERS.md` line 191](./FOLDERS.md) ("Once `adr_status: Accepted`, the file is T4-immutable per `MAINTENANCE.md` §1") and back-fills the cross-reference that was previously asserted only in `FOLDERS.md`. The T4-immutability is enforced two ways: (i) the mechanical refusal is implemented by [`tools/maintenance/staleness-audit.py`](./tools/maintenance/staleness-audit.py), which excludes `decisions/` from its scan by construction; (ii) the `adr_*` namespace is owned by [`tools/adr/cli.py validate`](./tools/adr/cli.py) (PRE_COMMIT.md §7.C), which runs as step `[5/6]` of [`tools/check-governance.sh`](./tools/check-governance.sh) and rejects supersession-DAG cycles. Coherence-run agents that observe a defect in an Accepted ADR MUST author a successor ADR per `decisions/readme.md` rather than editing the predecessor in place. The acceptance contract for this rule is anchor [`M.B.7`](#6-acceptance-criteria-gherkin-scenarios) below.
+
 **Mutation surface stability.** `tools/fm/edit.py` is the canonical T1/T2 mutator for frontmatter; coherence-check agents SHOULD prefer it over `sed`/`awk` because it preserves body bytes and quoting, takes a file lock, and rejects T3/T4 operations by construction (per [SPEC.md §7.2](./research/flexible-frontmatter-toolchain/output/SPEC.md)). Body-section mutations are deferred to `tools/fm/section.py` (Task 018).
 
 ### 1.1 Toolchain Surface (Post-Migration)
+
+#### 1.1.1 Two-toolchain (Legacy ↔ Flexible) baseline
 
 The flexible-frontmatter toolchain is canonical and gating; the migration tracked by [Task 017](./tasks/017-migrate-repo-to-flexible-toolchain/) and [Task 019](./tasks/019-fm-toolchain-suite-integration/) is `done` (per Task 032 finding F12).
 
@@ -52,6 +56,22 @@ Maintenance agents MUST be aware that:
 1. T1/T2 mutations through `tools/fm/edit.py` are the canonical mutator path. The file lock and per-section preservation behave identically regardless of `FM_TOOLCHAIN`.
 2. The maintenance-bypass mode in `.githooks/pre-commit` (§4.1) harvests `<path>::<level>:<code>:<msg>` diagnostics from `tools/fm/validate.py` and folds the legacy `lint-structure` / `lint-linkage` shims in for the gaps fm-validate does not yet cover (per Task 017 Batch 2c). There is no separate waiver file at `tools/.frontmatter-waivers`; waivers, when needed, are expressed inline against `tools/fm/validate.py`'s diagnostic codes (`F.3.x`, `F.4.x`, etc.) rather than a path list. An agent that finds a legitimately-bypassable error MUST file a Task with the diagnostic code and the rationale rather than introducing an out-of-band waiver mechanism.
 3. The coherence-check routine is wired to `tools/check-governance.sh` (Step 2.5 linter-first triage); it MUST NOT silently disable either toolchain. If the advisory legacy shim points at a real defect that fm-validate misses, file a Task to fold the rule into fm-validate rather than papering over the warning.
+
+#### 1.1.2 Three-way Legacy / Flexible / ADR transition matrix
+
+Post-Task-031, the gate composes **three** toolchains rather than two: the **Legacy** linters retained as a one-release escape hatch, the **Flexible** frontmatter toolchain that is the canonical gate, and the **ADR Governance Validator** ([`tools/adr/cli.py validate`](./tools/adr/cli.py)) that runs unconditionally as step `[5/6]` of [`tools/check-governance.sh`](./tools/check-governance.sh). The matrix below restates [PRE_COMMIT.md §7.A](./PRE_COMMIT.md) in maintenance-routine vocabulary; the columns are exactly three and the matrix MUST NOT silently grow a fourth column for MCP servers (per [Task 040 §C](./tasks/040-superclaude-spec-evaluation/synthesis.md): zero MCP servers are configured today). The vocabulary lifted into this section's prose — *nightly maintenance* as the framing for `/sc:improve` + `/sc:cleanup` + `/sc:build` — is a MERGE-INTO-EXISTING-TASK-039 outcome from [Task 040 §A row §8](./tasks/040-superclaude-spec-evaluation/synthesis.md); the citation is informational only and MUST NOT be read as importing Tavily, Playwright, MorphLLM-Fast-Apply, or Chrome DevTools as repo-tooling dependencies.[^morphllm]
+
+| Toolchain | Canonical entry point | Enforcement state | Flip-criteria predicate (mechanically verifiable) |
+|---|---|---|---|
+| **Legacy** | `tools/legacy/{validate-frontmatter,lint-structure,lint-linkage}.py` | Advisory shim (`FM_LEGACY_QUIET=1` by default). One-release retirement window. | Retired when [`research/toolchain-flip-criteria/output/SPEC.md` §1 TFC.1.1 through TFC.1.7](./research/toolchain-flip-criteria/output/SPEC.md) all hold simultaneously: gating-step coverage (TFC.1.1), legacy no-op under the gate (TFC.1.2), waivers carry zero legacy diagnostic codes (TFC.1.3), Tasks 016/017/019 closed (TFC.1.4), no live consumer outside the gate (TFC.1.5), pytest green canonical-only (TFC.1.6), trust-audit AGGREGATOR landed or threshold raised to 0.90 (TFC.1.7). The flip is the single atomic commit enumerated in §2 of that SPEC. |
+| **Flexible** (canonical) | `tools/fm/validate.py --type-check` invoked by `tools/check-governance.sh` step `[1/6]` | **Gating** — non-zero exit blocks the pre-commit hook. | Already canonical. The flexible column is gating before, during, and after the Legacy retirement; no flip predicate applies. |
+| **ADR** | [`tools/adr/cli.py validate`](./tools/adr/cli.py) (PRE_COMMIT.md §7.C) | **Gating** — runs unconditionally as step `[5/6]` of `tools/check-governance.sh`; graceful no-op when `decisions/` is empty. | Composes orthogonally to the Legacy-flip; ADR semantics MUST NOT change at flip time. After the Legacy column retires, step numbering re-flows from `[*/6]` to `[*/5]` and the ADR validator anchors at step `[5/5]` per `research/toolchain-flip-criteria/output/SPEC.md` §3.4. |
+
+**Flip semantics.** The maintenance agent MUST treat the Legacy column as live (advisory) until *every* TFC.1.x predicate holds against `HEAD`. The flip is non-negotiable atomic: it MUST land as a single commit per [SPEC §2.1 enumeration](./research/toolchain-flip-criteria/output/SPEC.md), and it MUST NOT bundle WARN-tier promotions (those are sequenced into separate post-flip Tasks per SPEC §3.2). Rollback is by `git revert <flip-sha>` per SPEC §4; the maintenance run-log MUST record the flip with a `routine_type: task-implementation` record (§2.3 record types).
+
+**Trust-audit composition.** The AGGREGATOR ([`tools/maintenance/trust-audit.py`](./tools/maintenance/trust-audit.py), Task 039 ST-5) imports the GATE schema from [`tools/check-trust-audit.py`](./tools/check-trust-audit.py) (Task 035 ST-4); the two are schema-locked. After the Legacy flip, the AGGREGATOR continues to run as part of the nightly maintenance roll-up regardless of which toolchain column is canonical — it composes orthogonally to Legacy/Flexible/ADR.
+
+[^morphllm]: MorphLLM-Fast-Apply is a known external editing tool that *could* prove useful for bulk T1/T2 mutations against `tools/fm/edit.py`, but it is **not** configured in this repository today. Any future Task that proposes MorphLLM as a repo-tooling dependency MUST file its own scaffolded chain (research → tooling → spec amendment) rather than retrofitting it as a fourth toolchain column. See [`tasks/040-superclaude-spec-evaluation/synthesis.md`](./tasks/040-superclaude-spec-evaluation/synthesis.md) §C for the reality-check matrix that motivated this footnote.
 
 ---
 
@@ -95,6 +115,12 @@ The agent MUST determine the baseline by reading the most recent reachable `end_
 
 The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on `end_commit:` regardless of `routine_type:`, so `task-implementation` records remain valid baselines (they advance HEAD). However, when computing aggregate metrics ("how many T3 Tasks were filed by coherence runs in May 2026?") an agent MUST filter on `routine_type: coherence-check` to avoid conflating Task-scope counters with sweep-scope counters.
 
+**Trust-audit gating before research closure.** Before any research workspace transitions from `research_phase: in_progress` to `research_phase: complete`, the agent owning the workspace MUST invoke the trust-audit GATE ([`tools/check-trust-audit.py`](./tools/check-trust-audit.py), Task 035 ST-4) against that workspace and obtain a green result. The GATE evaluates the three trust dimensions defined by [`research/agentic-eval-trust-improvement-spec/output/SPEC.md`](./research/agentic-eval-trust-improvement-spec/output/SPEC.md) (Spec-J multi-dimensional evaluation, Spec-K trust calibration, Spec-L governance improvement loop). The GATE is the per-workspace contract; the cross-workspace AGGREGATOR ([`tools/maintenance/trust-audit.py`](./tools/maintenance/trust-audit.py), Task 039 ST-5) imports the GATE's `DIAGNOSTIC_SCHEMA` and rolls findings up into the nightly maintenance run-log. The two MUST NOT duplicate trust-evaluation logic: the AGGREGATOR delegates per-workspace evaluation to the GATE and only aggregates results.
+
+A research workspace whose GATE invocation emits any ERROR-tier diagnostic MUST NOT be flipped to `research_phase: complete`. The maintenance bypass mode in [§4.1](#41-maintenance-bypass-mode) MUST NOT be used to evade this check; trust-audit failures are evidence that the synthesis is not yet trustworthy, not that the linter is misconfigured. The acceptance contract for this rule is anchor [`M.B.5`](#6-acceptance-criteria-gherkin-scenarios) below.
+
+**Run-log baseline recovery.** The fall-forward awk recovers the most-recent reachable `end_commit:` even when intermediate records are malformed. If no `end_commit:` is reachable anywhere in the file (the run-log is corrupt or has been truncated), the agent MUST fail loudly per [`research/governance-specs-update-research/output/SPEC.md` §2](./research/governance-specs-update-research/output/SPEC.md) (recommended amendments). The agent MUST NOT silently fall back to the repo's initial commit when the file is non-empty but corrupt; the only sanctioned reseed is a human-confirmed `coherence-reseed` annotation appended to `maintenance/run-log.md`. The acceptance contract for this rule is anchor [`M.B.1`](#6-acceptance-criteria-gherkin-scenarios) below.
+
 ---
 
 ## 3. Nightly Maintenance Run (Secondary Routine)
@@ -111,16 +137,23 @@ The Nightly Maintenance Run is a broader sweep executed less frequently (e.g. we
 
 ### 3.2 Dynamic Readme Updates
 
-`readme.md` files MUST act as executable state machines, not static indices. Enforce this partition:
+`readme.md` files MUST act as executable state machines, not static indices, per [`research/repo-maintenance-protocol-spec/output/SPEC.md` §3](./research/repo-maintenance-protocol-spec/output/SPEC.md) ("Dynamic Readme Schema"). Every operational `readme.md` MUST be partitioned into a *static* region above an HTML-comment boundary marker and a *dynamic* region below it.
 
 **Static section (preserve unless files move):**
-- Purpose and why this folder exists.
-- Linked navigation (relative Markdown links to all files and subfolders).
+- Purpose — why this folder exists in this location.
+- Linked Navigation — relative Markdown links to every file and subfolder.
+- Assumptions Log — `## Assumptions Log` heading; either substantive entries or the literal `(none)` line.
 
 **Dynamic section (actively rewrite):**
 - Current State — operational status of the folder.
 - Latest Synthesised Learnings — bullet points from nested `synthesis/` or `reflection/` folders.
 - Open Blockers — any outstanding issues preventing further progress.
+
+**Boundary markers.** The static and dynamic regions MUST be separated by the HTML comments `<!-- BEGIN DYNAMIC -->` and `<!-- END DYNAMIC -->`. Maintenance routines MUST NOT rewrite content above the `BEGIN DYNAMIC` marker (except to repair broken relative links); they MUST rewrite the content between the markers from the latest synthesis/reflection sources during every Nightly Maintenance Run.
+
+**Mechanical enforcement.** [`tools/maintenance/dynamic-readme-partition.py`](./tools/maintenance/dynamic-readme-partition.py) (Task 039 ST-4) is the partition linter. It walks operational `readme.md` files under `tasks/`, `research/`, and `prompts/`, verifies the marker pair is present, and emits a diagnostic when the static/dynamic boundary is violated. The linter is advisory-tier today; promotion to gating requires the corpus to be clean (per the [Toolchain Flip SPEC §3.2](./research/toolchain-flip-criteria/output/SPEC.md) WARN→ERROR sequencing rule).
+
+**Aggregator integration with the trust-audit nightly roll-up.** The dynamic section's "Latest Synthesised Learnings" bullets for any operational folder under `research/` MUST be sourced from the per-workspace trust-audit GATE output (§2.3). The cross-workspace AGGREGATOR ([`tools/maintenance/trust-audit.py`](./tools/maintenance/trust-audit.py), Task 039 ST-5) is the nightly roll-up surface; its output is the canonical input to the dynamic-readme rewrite step. The acceptance contract for this rule is anchor [`M.B.6`](#6-acceptance-criteria-gherkin-scenarios) below.
 
 ### 3.3 Task Delegation Pipeline
 
@@ -140,14 +173,31 @@ The Coherence Check and the Nightly Maintenance Run MUST audit the freshness of 
 | **Completed by drift** | Every Todo item is satisfied by other commits (the artefacts now exist) but the Task was never closed. | Close as `task_status: done` with a `friction-log.md` noting "completed-by-drift" and pointing at the commits that satisfied each Todo. |
 | **No longer desirable** | The Task's intent is not relevant any more (e.g. a feature was deleted). | Close as `task_status: abandoned` per `TASK.md §8.3`. Do NOT use `updated` for cancellation. |
 
-**Decision algorithm.** For a candidate Task:
+**Decision algorithm (deterministic).** The classification reduces to the five-signal decision tree shipped by [`research/spec-staleness-decision-formalization/output/SPEC.md` §1](./research/spec-staleness-decision-formalization/output/SPEC.md). The algorithm consumes the five signals defined in §2 of that SPEC and emits exactly one of `still_accurate`, `drifted`, `completed_by_drift`, `no_longer_desirable`. The tree has 3 levels and 4 leaves, well inside the SPEC's falsification bound (≤5 levels, ≤12 leaves). The maintenance agent MUST treat the SPEC pseudocode as the contract; it MUST NOT introduce additional buckets or signals at audit time.
 
-1. Read `task.md` and every artefact path in `task_affects_paths`.
-2. For each Todo item, attempt to verify whether it has been satisfied (artefact exists and matches the Todo's intent).
-3. If 100% satisfied → **completed-by-drift**.
-4. Else if the Task references mechanisms that have been retired or superseded (legacy linters, persistent indexes when `tools/fm/` is the canonical surface, etc.) → **drifted (re-frame)**.
-5. Else if the Task's Goal is no longer endorsed by any current spec → **no longer desirable**.
-6. Else → **still accurate**.
+**Signal vector** (see SPEC §2 for extraction recipes):
+
+| # | Signal | Type | Default under ambiguity |
+|---|---|---|---|
+| **S1** | `todo_satisfaction` | float in `[0.0, 1.0]` | `0.0` (refuses to fire `completed_by_drift` on an empty Todo). |
+| **S2** | `affects_paths_present` | bool (AND-aggregate) | `False` if `task_affects_paths` is empty. |
+| **S3** | `plan_anchors_live` | bool | `True` if `## Plan` has zero relative links. |
+| **S4** | `goal_endorsed` | bool | `False` (refuses to claim endorsement absent evidence). |
+| **S5** | `successor_present` | bool | `False`. |
+
+**Decision tree** (paraphrased from SPEC §1; the SPEC pseudocode is authoritative):
+
+1. **Gate.** If `(today - task.created).days ≤ MAINT_STALE_DAYS`, the Task is younger than the audit window; the agent MUST skip it (no bucket emitted).
+2. **Level 1 — Goal endorsement.** If `not goal_endorsed` (S4=False) → `no_longer_desirable`.
+3. **Level 2 — Completion-by-drift.** If `todo_satisfaction ≥ 1.0 AND affects_paths_present` (S1=1.0 AND S2=True) → `completed_by_drift`.
+4. **Level 3 — Drift vs. still-accurate.** If `successor_present OR not plan_anchors_live` (S5=True OR S3=False) → `drifted`.
+5. **Default.** Otherwise → `still_accurate`.
+
+**`MAINT_STALE_DAYS` configuration.** The staleness window MUST be configured via the environment variable `MAINT_STALE_DAYS`, an integer ≥ 1, with default `7` (per SPEC §4). The maintenance agent reads it as `int(os.environ.get("MAINT_STALE_DAYS", "7"))`; non-integer values MUST be rejected with exit code 2 and message `MAINT_STALE_DAYS must be a positive integer; got '<value>'`. Values > 365 are rejected as a sanity bound. Per-routine overrides are permitted (e.g. `MAINT_STALE_DAYS=3` for daily coherence sweeps, `MAINT_STALE_DAYS=14` for weekly nightlies); the override is invocation-local and does not edit any repo file.
+
+**Mechanical implementation.** [`tools/maintenance/staleness-audit.py`](./tools/maintenance/staleness-audit.py) (Task 039 ST-3) implements the decision tree above. It walks every Task whose `task_status` is `open` or `in_progress`, applies the SPEC §1 pseudocode, and emits one diagnostic per Task in the canonical `<path>::<level>:<code>:<msg>` format consumed by [`tools/check-maintenance-bypass.py`](./tools/check-maintenance-bypass.py) and the coherence run-log. Exit codes: `0` if every audited Task is `still_accurate` (or every Task is younger than the staleness window); `2` if at least one Task lands in `{drifted, completed_by_drift, no_longer_desirable}` (advisory-tier); `1` on usage error. The script excludes `decisions/` from its scan by construction so that `adr_status: Accepted` files are never proposed for mutation (mirrors the §1 T4-immutability rule).
+
+The acceptance contract for the bucket-assignment determinism is anchor [`M.B.3`](#6-acceptance-criteria-gherkin-scenarios) below.
 
 **Successor naming.** A successor Task uses the next free `<NNN>` and a slug that signals continuity with the predecessor (e.g. `<predecessor-slug>-v2` or a more specific re-framing such as `<predecessor-slug>-via-fm-edit`). The successor's `## Goal` MUST open with a one-line "Successor to Task NNN" pointer; the body re-frames the work against current repo state.
 
@@ -179,6 +229,23 @@ Because the change spans multiple files and rewrites cross-references, the maint
 6. Verify `tools/check-governance.sh` exits 0 against the post-renumber state before committing.
 
 The slug MUST remain stable across renumbering; only `<NNN>` and `task_id` change. Renumbering by reusing an unrelated free slot (e.g. picking 030 to clear a 006 collision) is permitted when the Task naturally fits later in the sequence.
+
+**Resolving the discovery loop.** Until [Task 033 ST-3](./tasks/033-task-spec-integration/subtasks/03-tooling-duplicate-task-id-linter.md) shipped [`tools/fm/check-duplicate-task-id.py`](./tools/fm/check-duplicate-task-id.py), the §3.5 prose acknowledged a circular dependency: a coherence run discovers a collision, files a T3 Task, but the colliding state remains in the working tree until the Task runs — so the *next* coherence run re-discovers the same collision and would file a *duplicate* dedup Task. The dup-id linter resolves the loop mechanically.
+
+**When the coherence run files the Task itself vs. waits for a human.** The maintenance agent MUST file the dedup Task **automatically** when *all four* of the following predicates hold:
+
+1. `tools/fm/check-duplicate-task-id.py` emits exactly one collision pair (or a small N-way collision; the linter's report is mechanical).
+2. No open Task's `task_affects_paths` already covers the colliding folders (the agent MUST grep `tasks/*/task.md` for the colliding `<NNN>` strings before filing).
+3. The colliding folders have at least one `task_status: open` member (closing collisions on `done` Tasks is lower-priority and SHOULD wait for human review).
+4. The current run is a Coherence Check (`routine_type: coherence-check`), not a Nightly Maintenance Run. Nightlies SHOULD escalate to a human-confirmed annotation rather than file a Task autonomously.
+
+If any predicate fails, the agent MUST log the collision in the run-log notes and MUST NOT file a Task on its own; the human reviewer takes the next step.
+
+**Interaction with `tools/check-governance.sh` step `[5/6]` (ADR validator).** The dup-id linter operates on Task folders only (`tasks/<NNN>-<slug>/`); it does NOT scan `decisions/<NNNN>-<slug>.md`. The ADR validator at step `[5/6]` (PRE_COMMIT.md §7.C) owns the `adr_*` namespace and rejects `adr_status: Accepted` mutations independently. The maintenance run MUST NOT edit any `decisions/<NNNN>-<slug>.md` file at any tier — not to renumber, not to bump `updated:`, not to repair a relative link — even when the dup-id linter is the entry point that surfaced the cross-reference. Cross-references from a renumbered Task into the ADR ledger are amended by *re-running* `tools/adr/cli.py synthesize` (which rewrites the guarded section of `AGENTS.md`), never by hand-editing the ADR file.
+
+**Mechanical surface.** The linter is wired into `tools/check-governance.sh` as the optional `[opt]` block guarded by `FM_DUPLICATE_TASK_ID_STRICT` (default `0`); promotion to gating is owned by Task 043 (renumber) per the [Toolchain Flip SPEC §3.2](./research/toolchain-flip-criteria/output/SPEC.md) WARN→ERROR ladder. After Task 043 lands and the corpus is dup-free, the env-var default flips to `1` and the toggle is removed in the next release window.
+
+The acceptance contract for the discovery-loop closure is anchor [`M.B.4`](#6-acceptance-criteria-gherkin-scenarios) below.
 
 ---
 
@@ -216,3 +283,155 @@ The `/maintenance/` folder MUST NOT be used to store Task orchestration, prompt 
 `tools/check-governance.sh` runs five mandatory steps (`fm-validate --type-check`, `lint-structure`, `lint-runlog`, `adr/cli.py validate`, `fm/index_diff`) plus a `[trust]` audit and an OPTIONAL narrative-ontology pair gated on `maintenance/schemas/narrative-ontology/ontology.json` existing on disk. The mandatory steps require only PyYAML; the optional narrative-ontology validator additionally requires `jsonschema>=4.18`. Per Task 032 finding F8, when `jsonschema` is absent, `tools/dramatica-nav/validate.py` emits a `WARN` and exits 0 so the suite-level exit code is not poisoned by a missing optional dependency.
 
 The supported install path is `./install.sh` (which pulls all of `tools/requirements.txt`); contributors who skip it MAY still invoke `tools/check-governance.sh` and will see the WARN above instead of a misleading FAIL.
+
+---
+
+## 6. Acceptance Criteria (Gherkin Scenarios)
+
+The seven scenarios below are the executable acceptance contract for §1, §2.3, §3.2, §3.4, and §3.5. Each scenario is anchored with a stable identifier (`M.B.<n>`); the linters cited above are the mechanical hooks for scenarios where automation is feasible. The `Scenario:` line is preceded by a `# anchor: <id>` comment so downstream Gherkin parsers can address the scenario directly.
+
+```gherkin
+# anchor: M.B.1 — run-log baseline recovery
+Feature: Coherence run recovers `end_commit` when the run-log is corrupt
+Scenario: Last record is malformed but a prior record carries a valid end_commit
+  Given `maintenance/run-log.md` has 12 records
+  And the most recent record's `end_commit:` field is missing or malformed
+  And the immediately-prior record's `end_commit:` is the SHA `4c5e7e4`
+  When the coherence-run agent reads the file at Step 1a of `prompts/repo-coherence-check/prompt.md`
+  Then the awk fall-forward MUST recover `4c5e7e4` as the baseline
+  And the agent MUST proceed with `git log 4c5e7e4..HEAD --name-only` as the delta source
+  And the agent MUST NOT silently fall back to the repo's initial commit
+  And if no prior record carries a valid `end_commit:` the agent MUST fail loudly with a `coherence-reseed` request
+```
+
+```gherkin
+# anchor: M.B.2 — T1 / T2 / T3 tier classification boundary
+Feature: Maintenance agent classifies a proposed change before mutation
+Scenario: Stale `updated:` date on a task.md is a T1 mechanical repair
+  Given `tasks/099-example/task.md` has `updated: 2026-04-01`
+  And the file's most-recent body-byte change in `git log` is dated `2026-05-07`
+  When the maintenance agent identifies the staleness during a coherence run
+  Then the agent MUST classify the repair as T1 (Mechanical, §1)
+  And the agent MUST apply the repair via `tools/fm/edit.py --bump-updated tasks/099-example/task.md`
+  And the agent MUST NOT use `sed` or `awk` to mutate frontmatter
+  And the repair MUST land in the same atomic commit as the run-log record
+Scenario: Adding a missing `type:` key to a task.md is T2 (Additive)
+  Given `tasks/098-example/task.md` lacks a `type:` L1 frontmatter key
+  And the file lives under `tasks/` (so the unambiguous value is `task`)
+  When the maintenance agent observes the missing key
+  Then the agent MUST classify the repair as T2 (Additive, §1)
+  And the agent MUST apply the repair via `tools/fm/edit.py --set type=task tasks/098-example/task.md`
+Scenario: Renaming a section heading in a root spec is T3 (Structural)
+  Given `MAINTENANCE.md` carries a heading `## 3.4 Stale-Task Audit and the `updated` Lifecycle`
+  And the maintenance agent considers renaming the heading to `## 3.4 Staleness Audit`
+  When the agent classifies the proposed change
+  Then the agent MUST classify the change as T3 (Structural, §1)
+  And the agent MUST NOT edit `MAINTENANCE.md` directly during the coherence run
+  And the agent MUST file a Task in `/tasks/<NNN>-<slug>/` whose Plan covers the rename
+```
+
+```gherkin
+# anchor: M.B.3 — stale-task lifecycle bucket assignment
+Feature: Staleness audit emits a deterministic bucket per the §3.4 decision tree
+Scenario: Task older than `MAINT_STALE_DAYS` with every Todo satisfied lands in completed-by-drift
+  Given a Task `tasks/050-example/task.md` whose `created:` is `2026-04-01`
+  And today's date is `2026-05-08`
+  And `MAINT_STALE_DAYS` resolves to `7` (the default)
+  And every `## Todo` checkbox is `- [x]` (S1 = 1.0)
+  And every path in `task_affects_paths` exists on disk (S2 = True)
+  And at least one current root spec endorses the Task's Goal (S4 = True)
+  When `tools/maintenance/staleness-audit.py` evaluates the Task per `research/spec-staleness-decision-formalization/output/SPEC.md` §1
+  Then the script MUST classify the Task as `completed_by_drift`
+  And the script MUST emit one diagnostic line in the form `tasks/050-example/task.md::WARN:MAINT.STALE.COMPLETED_BY_DRIFT:<msg>`
+  And the script MUST exit `2` (advisory-tier — at least one Task is non-still_accurate)
+  And the script MUST NOT mutate the Task file
+Scenario: Two independent agents agree on the bucket for the same HEAD
+  Given two maintenance agents A and B run `tools/maintenance/staleness-audit.py` against the same `HEAD`
+  And both export `MAINT_STALE_DAYS=7`
+  When each agent collects the per-Task bucket assignments
+  Then the two agents MUST emit identical `(<NNN>, <bucket>)` pairs for every audited Task
+  And any divergence MUST be filed as a classifier-implementation bug, NOT a SPEC ambiguity
+```
+
+```gherkin
+# anchor: M.B.4 — dup-id discovery loop closure
+Feature: Coherence run files exactly one dedup Task per collision, never a duplicate
+Scenario: Coherence run discovers a 006 collision and files Task 044 once
+  Given `tools/fm/check-duplicate-task-id.py` reports exactly one collision pair `(006-foo, 006-bar)`
+  And no existing open Task's `task_affects_paths` covers `tasks/006-foo/` OR `tasks/006-bar/`
+  And at least one of the colliding folders has `task_status: open`
+  And the current run carries `routine_type: coherence-check`
+  When the maintenance agent applies the §3.5 "When the coherence run files the Task itself" predicates
+  Then the agent MUST file a single new Task at the next free `<NNN>` (e.g. `tasks/044-resolve-006-collision/`)
+  And the agent MUST set the new Task's `task_affects_paths` to cover both colliding folders
+  And `tasks/readme.md` MUST be updated in the same commit per TASK.md §4.8
+  And on the *next* coherence run the linter MUST recognise the open dedup Task
+        via `task_affects_paths` and MUST NOT file a duplicate Task
+Scenario: Nightly maintenance escalates to a human rather than autofiling
+  Given `tools/fm/check-duplicate-task-id.py` reports a collision pair
+  And the current run carries `routine_type: nightly-maintenance` (NOT coherence-check)
+  When the maintenance agent applies the §3.5 predicates
+  Then the agent MUST log the collision in the run-log `notes:` field
+  And the agent MUST NOT file a dedup Task autonomously
+  And the human reviewer MUST take the next step
+```
+
+```gherkin
+# anchor: M.B.5 — trust-audit gating before research closure
+Feature: Research workspace cannot transition to complete while trust-audit fails
+Scenario: GATE emits an ERROR; the workspace MUST NOT flip to research_phase: complete
+  Given a research workspace at `research/example-spec/` whose `readme.md` carries `research_phase: in_progress`
+  And the agent intends to flip the workspace to `research_phase: complete`
+  When the agent invokes `python3 tools/check-trust-audit.py research/example-spec/`
+  And the GATE emits at least one ERROR-tier diagnostic against the schema/behavioral/governance dimensions
+  Then the agent MUST NOT mutate `research/example-spec/readme.md` to set `research_phase: complete`
+  And the agent MUST NOT use the maintenance-bypass (§4.1) to evade the failure
+  And the agent MUST repair the underlying defect (or file a Task that does) before retrying the transition
+Scenario: AGGREGATOR rolls per-workspace GATE results into the nightly maintenance run-log
+  Given three research workspaces have transitioned to `research_phase: complete` since the last nightly
+  When `python3 tools/maintenance/trust-audit.py` runs as part of the nightly roll-up
+  Then the AGGREGATOR MUST import `DIAGNOSTIC_SCHEMA` from `tools/check-trust-audit.py` (no duplicate logic)
+  And the AGGREGATOR MUST emit one summary record per workspace into the maintenance run-log
+  And any workspace whose GATE result regressed since the previous nightly MUST be flagged in the roll-up
+```
+
+```gherkin
+# anchor: M.B.6 — dynamic-readme partition
+Feature: Maintenance run rewrites the dynamic section but preserves the static section
+Scenario: Operational readme has the BEGIN/END DYNAMIC markers; nightly rewrite respects them
+  Given `tasks/051-example/readme.md` carries `<!-- BEGIN DYNAMIC -->` and `<!-- END DYNAMIC -->` markers
+  And the section above `BEGIN DYNAMIC` lists Purpose, Linked Navigation, and Assumptions Log (static)
+  And the section between markers lists Current State, Latest Synthesised Learnings, Open Blockers (dynamic)
+  When the Nightly Maintenance Run rewrites the file from the latest synthesis sources
+  Then the agent MUST NOT mutate any byte above `<!-- BEGIN DYNAMIC -->`
+  And the agent MUST overwrite the content between the markers with the freshly-aggregated state
+  And `tools/maintenance/dynamic-readme-partition.py` MUST exit 0 against the rewritten file
+Scenario: Partition violation is reported as a diagnostic
+  Given `tasks/052-example/readme.md` is missing the `<!-- BEGIN DYNAMIC -->` marker
+  When `python3 tools/maintenance/dynamic-readme-partition.py tasks/052-example/readme.md` runs
+  Then the linter MUST emit a diagnostic naming the missing marker
+  And the linter MUST NOT mutate the file (it is a verifier, not a mutator)
+```
+
+```gherkin
+# anchor: M.B.7 — ADR T4-immutability
+Feature: Coherence run refuses to mutate any `adr_status: Accepted` file at any tier
+Scenario: Coherence run refuses to mutate Accepted ADR
+  Given a `decisions/0042-storage-path.md` with frontmatter `adr_status: Accepted`
+  And a coherence-run agent identifies a missing `updated:` date as a T1 repair
+  When the agent attempts to apply the T1 repair via `tools/fm/edit.py`
+  Then `tools/fm/edit.py` MUST refuse with diagnostic
+        `M.B.7:adr-accepted-immutable:cannot apply T1 to adr_status=Accepted`
+  And the agent MUST file a Task at the next free `<NNN>` instead of mutating
+  And `tasks/readme.md` MUST be updated in the same commit per TASK.md §4.8
+Scenario: Maintenance run MUST NOT mutate `decisions/<NNNN>-<slug>.md` at any tier
+  Given any file under `decisions/` with frontmatter `adr_status: Accepted`
+  And a maintenance routine (Coherence Check or Nightly Maintenance Run) is active
+  When the routine considers a T1, T2, or T3 mutation against the file
+  Then the routine MUST refuse to mutate the file in place at every tier
+  And the routine MUST NOT bump `updated:`, MUST NOT repair relative links, MUST NOT renumber the slot
+  And the routine MUST author a successor ADR per `decisions/readme.md` instead
+  And `tools/maintenance/staleness-audit.py` MUST exclude `decisions/` from its scan by construction
+```
+
+The seven anchors above (M.B.1 through M.B.7) close the (a)–(f) Goal of [Task 039](./tasks/039-maintenance-spec-integration/task.md). Future Tasks that promote any advisory linter to gating MUST add a paired Gherkin scenario under the next free anchor (M.B.8 onward) so the acceptance contract grows with the toolchain.

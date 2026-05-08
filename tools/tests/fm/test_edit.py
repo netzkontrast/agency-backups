@@ -213,5 +213,109 @@ class TestParallelAppendNoDup(unittest.TestCase):
             path.unlink()
 
 
+class TestAdrAcceptedImmutable(unittest.TestCase):
+    """MAINTENANCE.md §6 anchor M.B.7: fm-edit MUST refuse mutations on
+    `adr_status: Accepted` files. Closes the spec-code gap surfaced in
+    PR #92 review (Task 039)."""
+
+    ADR_TEXT = """---
+type: adr
+status: active
+slug: storage-path
+adr_id: "0042"
+adr_status: Accepted
+created: 2026-01-01
+updated: 2026-01-01
+---
+
+## Context
+
+Body.
+"""
+
+    PROPOSED_TEXT = ADR_TEXT.replace("Accepted", "Proposed")
+
+    def _write(self, text: str) -> Path:
+        f = tempfile.NamedTemporaryFile("w", suffix=".md", delete=False)
+        f.write(text)
+        f.close()
+        return Path(f.name)
+
+    def test_bump_updated_on_accepted_adr_refuses(self):
+        path = self._write(self.ADR_TEXT)
+        try:
+            rc, _, err = _capture([str(path), "--bump-updated"])
+            self.assertEqual(rc, fm_edit.EXIT_ADR_IMMUTABLE)
+            self.assertIn(
+                "M.B.7:adr-accepted-immutable:cannot apply T1 to "
+                "adr_status=Accepted",
+                err,
+            )
+            self.assertEqual(path.read_text(encoding="utf-8"), self.ADR_TEXT)
+        finally:
+            path.unlink()
+
+    def test_set_on_accepted_adr_refuses(self):
+        path = self._write(self.ADR_TEXT)
+        try:
+            rc, _, err = _capture([str(path), "--set", "summary=foo"])
+            self.assertEqual(rc, fm_edit.EXIT_ADR_IMMUTABLE)
+            self.assertIn("M.B.7:adr-accepted-immutable", err)
+            self.assertEqual(path.read_text(encoding="utf-8"), self.ADR_TEXT)
+        finally:
+            path.unlink()
+
+    def test_unset_on_accepted_adr_refuses(self):
+        path = self._write(self.ADR_TEXT)
+        try:
+            rc, _, _ = _capture([str(path), "--unset", "summary"])
+            self.assertEqual(rc, fm_edit.EXIT_ADR_IMMUTABLE)
+        finally:
+            path.unlink()
+
+    def test_append_list_on_accepted_adr_refuses(self):
+        path = self._write(self.ADR_TEXT)
+        try:
+            rc, _, _ = _capture(
+                [str(path), "--append-list", "adr_supersedes", "0001"]
+            )
+            self.assertEqual(rc, fm_edit.EXIT_ADR_IMMUTABLE)
+        finally:
+            path.unlink()
+
+    def test_remove_from_list_on_accepted_adr_refuses(self):
+        path = self._write(self.ADR_TEXT)
+        try:
+            rc, _, _ = _capture(
+                [str(path), "--remove-from-list", "adr_supersedes", "0001"]
+            )
+            self.assertEqual(rc, fm_edit.EXIT_ADR_IMMUTABLE)
+        finally:
+            path.unlink()
+
+    def test_proposed_adr_still_mutable(self):
+        """Status flip Proposed → Accepted MUST remain possible."""
+        path = self._write(self.PROPOSED_TEXT)
+        try:
+            rc, _, _ = _capture(
+                [str(path), "--set", "adr_status=Accepted"]
+            )
+            self.assertEqual(rc, 0)
+            after = path.read_text(encoding="utf-8")
+            self.assertIn("adr_status: Accepted", after)
+        finally:
+            path.unlink()
+
+    def test_non_adr_file_unaffected(self):
+        """Regression: non-ADR files MUST mutate normally."""
+        text = "---\ntype: task\nslug: x\nupdated: 2026-01-01\n---\n\nbody\n"
+        path = self._write(text)
+        try:
+            rc, _, _ = _capture([str(path), "--bump-updated"])
+            self.assertEqual(rc, 0)
+        finally:
+            path.unlink()
+
+
 if __name__ == "__main__":
     unittest.main()
