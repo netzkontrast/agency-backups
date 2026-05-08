@@ -142,11 +142,54 @@ def parse_frontmatter(text: str, *, strict: bool = True) -> dict[str, Any]:
     return mapping
 
 
-def read_fm(path: Path, *, strict: bool = False) -> dict[str, Any]:
+def read_fm_with_diag(
+    path: Path, *, strict: bool = False
+) -> tuple[dict[str, Any], "Diagnostic | None"]:
+    """Like `read_fm`, but also surfaces the parse failure (if any).
+
+    Returns ``(mapping, diagnostic_or_none)``. The diagnostic is set when
+    the file has a leading ``---`` fence whose YAML payload fails to
+    parse — i.e. a non-empty frontmatter block collapsing to an empty
+    dict under ``strict=False``. A file with no frontmatter at all is
+    not a parse error; it returns ``({}, None)``.
+
+    Severity is ``WARN`` by default and ``ERROR`` when ``strict=True``,
+    so downstream linters can distinguish ``no frontmatter`` from
+    ``malformed frontmatter``. (Task 058.)
+    """
+    rel = str(path)
     try:
-        return parse_frontmatter(path.read_text(encoding="utf-8"), strict=strict)
-    except (OSError, Diag):
-        return {}
+        text = path.read_text(encoding="utf-8")
+    except OSError as e:
+        return {}, Diagnostic(
+            rel, None, "ERROR" if strict else "WARN", "F.3.3",
+            f"unreadable file: {e}",
+        )
+    if not FRONTMATTER_RE.match(text):
+        return {}, None
+    # Always run the strict pass so we can detect malformation even when
+    # the caller asked for the lenient (salvage) path.
+    try:
+        strict_fm = parse_frontmatter(text, strict=True)
+    except Diag as e:
+        sev = "ERROR" if strict else "WARN"
+        diag = Diagnostic(
+            rel, None, sev, "F.3.3",
+            f"malformed frontmatter: {e}",
+        )
+        if strict:
+            return {}, diag
+        try:
+            salvage = parse_frontmatter(text, strict=False)
+        except Diag:
+            salvage = {}
+        return salvage, diag
+    return strict_fm, None
+
+
+def read_fm(path: Path, *, strict: bool = False) -> dict[str, Any]:
+    fm, _ = read_fm_with_diag(path, strict=strict)
+    return fm
 
 
 def str_val(fm: dict, key: str) -> str:

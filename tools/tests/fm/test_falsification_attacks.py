@@ -161,6 +161,87 @@ class TestP4FmEditRace(unittest.TestCase):
             path.unlink()
 
 
+class TestP6ReadFmDiagnoses(unittest.TestCase):
+    """P6 (Task 058): read_fm MUST distinguish missing vs malformed frontmatter.
+
+    A file with `---\\nkey: [unbalanced\\n---\\n# body` MUST surface a
+    parse-error diagnostic, NOT a cascade of "missing required key" errors.
+    """
+
+    def test_P6_malformed_yaml_emits_warn_not_missing_keys(self):
+        with tempfile.TemporaryDirectory() as td:
+            base = Path(td)
+            _ontology_into(base)
+            # Plant a task file with malformed YAML (depth 2 nesting).
+            target = base / "tasks/099-x/task.md"
+            target.parent.mkdir(parents=True)
+            target.write_text(
+                "---\n"
+                "type: task\n"
+                "deeply:\n"
+                "  nested:\n"
+                "    forbidden: yes\n"
+                "---\n\n## Goal\nbody\n",
+                encoding="utf-8",
+            )
+            fm, diag = _core.read_fm_with_diag(target, strict=False)
+            # Non-strict salvages what it can but the WARN surfaces.
+            self.assertIsNotNone(diag)
+            assert diag is not None  # for type-checker
+            self.assertEqual(diag.severity, "WARN")
+            self.assertEqual(diag.code, "F.3.3")
+            self.assertIn("malformed frontmatter", diag.message)
+            self.assertIn("nested deeper", diag.message)
+
+    def test_P6_strict_promotes_to_error(self):
+        with tempfile.TemporaryDirectory() as td:
+            target = Path(td) / "x.md"
+            target.write_text(
+                "---\nkey:\n  nested:\n    deep: x\n---\n", encoding="utf-8",
+            )
+            fm, diag = _core.read_fm_with_diag(target, strict=True)
+            self.assertEqual(fm, {})
+            assert diag is not None
+            self.assertEqual(diag.severity, "ERROR")
+            self.assertEqual(diag.code, "F.3.3")
+
+    def test_P6_no_frontmatter_returns_none_diag(self):
+        with tempfile.TemporaryDirectory() as td:
+            target = Path(td) / "x.md"
+            target.write_text("# just a body\nno fences here\n", encoding="utf-8")
+            fm, diag = _core.read_fm_with_diag(target, strict=False)
+            self.assertEqual(fm, {})
+            self.assertIsNone(diag)
+
+    def test_P6_empty_file_returns_none_diag(self):
+        with tempfile.TemporaryDirectory() as td:
+            target = Path(td) / "x.md"
+            target.write_text("", encoding="utf-8")
+            fm, diag = _core.read_fm_with_diag(target, strict=False)
+            self.assertEqual(fm, {})
+            self.assertIsNone(diag)
+
+    def test_P6_well_formed_frontmatter_returns_none_diag(self):
+        with tempfile.TemporaryDirectory() as td:
+            target = Path(td) / "x.md"
+            target.write_text(
+                "---\ntype: task\nslug: x\n---\n\nbody\n", encoding="utf-8",
+            )
+            fm, diag = _core.read_fm_with_diag(target, strict=False)
+            self.assertEqual(fm.get("slug"), "x")
+            self.assertIsNone(diag)
+
+    def test_P6_read_fm_back_compat_unchanged(self):
+        """The legacy read_fm() signature MUST still return only the dict."""
+        with tempfile.TemporaryDirectory() as td:
+            target = Path(td) / "x.md"
+            target.write_text(
+                "---\ntype: task\nslug: y\n---\n", encoding="utf-8",
+            )
+            fm = _core.read_fm(target, strict=False)
+            self.assertEqual(fm.get("slug"), "y")
+
+
 class TestP5LoopUsesRepoSurfaces(unittest.TestCase):
     """P5: the toolchain MUST run with no subagents and no browser — just stdlib."""
 
