@@ -18,6 +18,7 @@ Operational folder for Task 039. Largest payload in the 031–038 chain — six 
 - [`task.md`](./task.md)
 - [`subtasks/`](./subtasks/) — 2 research, 3 tooling, 1 spec amendment.
 - [`friction-log.md`](./friction-log.md) — FL0; chain-level reflection.
+- [`review.md`](./review.md) — Peer review of PR #92; confirms three reviewer checklist items; flags M.B.7 tool-level enforcement gap in `tools/fm/edit.py`.
 
 ## Assumptions Log
 
