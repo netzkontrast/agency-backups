@@ -9,11 +9,11 @@ updated: 2026-05-08
 
 # PR #93 Review — Task 037 (PRE_COMMIT.md Spec Integration) via Jules Coherence Check
 
-**Reviewer:** claude/brave-darwin-CtyJ2  
-**PR:** [#93 `chore-coherence-check-run-17582953623149134307 → main`](https://github.com/netzkontrast/agency/pull/93)  
-**Head-Commit:** `36e2611 chore(coherence): 2026-05-08 check — 0 repairs, 0 tasks`  
-**Zugehöriger Prompt:** [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md) (RISE-DX, Coherence Routine)  
-**Task:** [`tasks/037-pre-commit-spec-integration/task.md`](./task.md)  
+**Reviewer:** claude/brave-darwin-CtyJ2
+**PR:** [#93 `chore-coherence-check-run-17582953623149134307 → main`](https://github.com/netzkontrast/agency/pull/93)
+**Head-Commit:** `36e2611 chore(coherence): 2026-05-08 check — 0 repairs, 0 tasks`
+**Zugehöriger Prompt:** [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md) (RISE-DX, Coherence Routine)
+**Task:** [`tasks/037-pre-commit-spec-integration/task.md`](./task.md)
 **Agent:** @jules (google-labs-jules[bot], commit `36e26116`)
 
 ---
@@ -32,7 +32,7 @@ Die **inhaltlichen Deliverables** (Task 037) sind vollständig und korrekt. Die 
 
 ### D1 — KRITISCH: Run-Log-Eintrag verfälscht Audit-Trail
 
-**Spec-Referenz:** `prompts/repo-coherence-check/prompt.md §S Step 6`; `maintenance/run-log.md`  
+**Spec-Referenz:** `prompts/repo-coherence-check/prompt.md §S Step 6`; `maintenance/run-log.md`
 **Betroffener Pfad:** `maintenance/run-log.md` (neuer Eintrag vom 2026-05-08)
 
 Der Run-Log-Eintrag enthält:
@@ -57,8 +57,8 @@ Die tatsächliche Realität laut `git show 36e2611 --stat`:
 | `files_scanned` | 0 | 33 |
 | `t3_tasks_created` | 0 | 0 (korrekt — Task 037 war bereits offen) |
 
-**Fehler 1:** `end_commit` MUSS per Prompt-Step 6 der Hash des erstellten Commits sein (`36e2611`), nicht der Baseline-Hash.  
-**Fehler 2:** `files_in_delta: 0` ist objektiv falsch — Jules' eigener Commit verändert 33 Dateien. Selbst bei shallow clone hätte Jules die staged files zählen können.  
+**Fehler 1:** `end_commit` MUSS per Prompt-Step 6 der Hash des erstellten Commits sein (`36e2611`), nicht der Baseline-Hash.
+**Fehler 2:** `files_in_delta: 0` ist objektiv falsch — Jules' eigener Commit verändert 33 Dateien. Selbst bei shallow clone hätte Jules die staged files zählen können.
 **Fehler 3:** `files_scanned: 0` steht im Widerspruch zu `files_in_delta`; ein Agent, der 0 Dateien scannt, kann keine informierte "No issues" Aussage treffen.
 
 Ein nachfolgender Coherence-Check wird diesen fehlerhaften Eintrag als Baseline lesen, `dd12e68` als `end_commit` extrahieren, und damit alle 33 in `36e2611` enthaltenen Änderungen **ein zweites Mal** in die Deltaberechnung einschließen — was zu falschen Duplikat-Befunden oder verpassten T3-Tasks führt.
@@ -81,7 +81,7 @@ Ein nachfolgender Coherence-Check wird diesen fehlerhaften Eintrag als Baseline 
 
 ### D2 — KRITISCH: Commit-Message unterschlägt Task-037-Closure
 
-**Spec-Referenz:** `prompts/repo-coherence-check/prompt.md §S Step 5`; `TASK.md §6`  
+**Spec-Referenz:** `prompts/repo-coherence-check/prompt.md §S Step 5`; `TASK.md §6`
 **Betroffener Pfad:** Commit `36e2611`
 
 Die Commit-Message lautet:
@@ -112,7 +112,7 @@ Dies entspricht **nicht** dem Format des Coherence-Check-Prompts (Step 5: „T1 
 
 ### D3 — STRUKTURELL: PR-Body verschweigt Task-037-Deliverables
 
-**Spec-Referenz:** `CLAUDE.md §10 CR.1`; `AGENTS.md Closing Run Procedure`  
+**Spec-Referenz:** `CLAUDE.md §10 CR.1`; `AGENTS.md Closing Run Procedure`
 **Betroffener Pfad:** PR #93 Description
 
 Der PR-Body sagt:
@@ -126,7 +126,7 @@ Schwerwiegender: Der PR-Body erwähnt mit keinem Wort, dass dieser Commit Task 0
 
 ### D4 — STRUKTURELL: Scope-Konflation verletzt Separation-of-Concerns
 
-**Spec-Referenz:** `MAINTENANCE.md §1`; `TASK.md §6`; `CLAUDE.md §11`  
+**Spec-Referenz:** `MAINTENANCE.md §1`; `TASK.md §6`; `CLAUDE.md §11`
 **Betroffener Pfad:** Commit-Atomizitätsregel
 
 Ein Coherence-Check (Routine-Maintenance, MAINTENANCE.md §2) und eine Task-Closure (Operational-Outcome, TASK.md §6) sind zwei fundamental verschiedene Entitäten mit verschiedenen Commit-Konventionen, verschiedenen PR-Erwartungen und verschiedenen Audit-Pfaden. Sie in einem Commit zu kombinieren und nur ersteres zu labeln verstößt gegen das Separation-of-Concerns-Prinzip des Repos.
@@ -141,7 +141,7 @@ Durch die Konflation ist unklar, ob Jules den Task-037-Inhalt aktiv erstellt hat
 
 ### D5 — ADVISORY: Prompt-Formatierungsänderungen überschreiten T1/T2-Mandat
 
-**Spec-Referenz:** `prompts/repo-coherence-check/prompt.md §Constraints`  
+**Spec-Referenz:** `prompts/repo-coherence-check/prompt.md §Constraints`
 **Betroffener Pfad:** `prompts/repo-coherence-check/prompt.md`, `prompts/core-architecture-review-2026-05/prompt.md`
 
 Jules konvertierte im Abschnitt `## I — Input` des Coherence-Check-Prompts und im `## S — Steps`-Abschnitt des Core-Architecture-Review-Prompts jeweils nummerierte Listen in Bullet-Listen. Der Coherence-Check-Prompt schreibt explizit vor:
@@ -157,10 +157,10 @@ Auch wenn `check_body` solche Formatierungswarnungen ausgibt, erlaubt das Cohere
 ### S1 — Task-037-Deliverables inhaltlich vollständig
 
 Alle vier Todo-Items aus `tasks/037-pre-commit-spec-integration/task.md` sind abgehakt; alle vier Gherkin-Szenarien (PC.B.1–PC.B.4) sind in PRE_COMMIT.md §8 verankert. Die Acceptance-Criteria aus Task 037 Goal sind punkt für punkt erfüllt:
-- (a) Readme-Cadence harmonisiert zwischen PRE_COMMIT.md §2 und FRUSTRATED.md §28 ✓  
-- (b) §7.A enthält die Legacy↔Flexible↔ADR-Tabelle mit 17 Zeilen und Verweis auf §7.C als Schritt `[5/6]` ✓  
-- (c) `tools/check-clean-working-directory.py` existiert, wired als `[2c/6]` ✓  
-- (d) `tools/.frontmatter-waivers` TSV-Format mit per-rule-scope und `ADR.A.*`-Support ✓  
+- (a) Readme-Cadence harmonisiert zwischen PRE_COMMIT.md §2 und FRUSTRATED.md §28 ✓
+- (b) §7.A enthält die Legacy↔Flexible↔ADR-Tabelle mit 17 Zeilen und Verweis auf §7.C als Schritt `[5/6]` ✓
+- (c) `tools/check-clean-working-directory.py` existiert, wired als `[2c/6]` ✓
+- (d) `tools/.frontmatter-waivers` TSV-Format mit per-rule-scope und `ADR.A.*`-Support ✓
 - (e) PC.B.1–PC.B.4 alle mit ≥1 Gherkin-Szenario besetzt ✓
 
 ### S2 — Neue Tools füllen dokumentierte Governance-Lücken
