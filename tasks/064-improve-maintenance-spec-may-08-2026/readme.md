@@ -7,6 +7,7 @@ created: 2026-05-08
 updated: 2026-05-08
 ---
 
+
 # Task 064 — Improve Maintenance Spec from 2026-05-08 Coherence Run
 
 **What:** Captures seven session-distilled findings (F20–F26) from the 2026-05-08 Repo Coherence Check and proposes concrete diffs against [`MAINTENANCE.md`](../../MAINTENANCE.md), [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md), [`tools/check-governance.sh`](../../tools/check-governance.sh), [`maintenance/run-log.md`](../../maintenance/run-log.md), and [`CLAUDE.md`](../../CLAUDE.md).
@@ -17,6 +18,7 @@ updated: 2026-05-08
 
 - [task.md](./task.md) — The Task spec: Goal, Findings (F20–F26), Plan, Todo, Links.
 - [friction-log.md](./friction-log.md) — Per-session friction record + canonical FL declaration line + per-finding disposition.
+- [review-pr-90.md](./review-pr-90.md) — PR #90 review: D1 (end_commit: PENDING), D2 (non-atomic commits / circular rationale), D3 (F25 pre-decided).
 
 ## Linked Specs and Tooling
 
