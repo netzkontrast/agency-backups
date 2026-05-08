@@ -77,13 +77,13 @@ The flexible-frontmatter toolchain is canonical and gating; the migration tracke
 | Toolchain | Entry point | Enforcement state | Owner |
 |---|---|---|---|
 | **Flexible** (default) | `tools/fm/validate.py --type-check` invoked by `tools/check-governance.sh` | **Gating** — non-zero exit blocks the pre-commit hook. | Tasks 016 / 017 / 019 lineage. |
-| **Legacy** (advisory shim, one release window) | `tools/legacy/{validate-frontmatter,lint-structure,lint-linkage}.py` | Advisory — runs alongside the gate; output silenced by `FM_LEGACY_QUIET=1` (the default in `tools/check-governance.sh`). | Task 001 lineage; scheduled for removal once the structural rules in `lint-structure.py` and `lint-linkage.py` are folded into `fm/validate.py` / a successor `fm-graph`. |
+| **Legacy** (archive; not wired into the gate) | `tools/legacy/{validate-frontmatter,lint-structure,lint-linkage}.py` | Not invoked by `tools/check-governance.sh`. Retained because `tools/check-maintenance-bypass.py` still folds their structural and cross-reference output into the bypass index. | Task 001 lineage; scheduled for removal once those structural rules are folded into `fm/validate.py` / a successor `fm-graph`. |
 
-`FM_TOOLCHAIN=0` is a documented escape hatch (it inverts which toolchain gates) but is NOT the supported configuration; it exists only to unblock a contested migration step and SHOULD NOT be used in CI.
+The `FM_TOOLCHAIN` env var was retired by [Task 054](./tasks/054-flip-fm-toolchain-default/). `tools/fm/validate.py` is invoked unconditionally; there is no longer a configuration that promotes the legacy linters to the gate.
 
 Maintenance agents MUST be aware that:
 
-1. T1/T2 mutations through `tools/fm/edit.py` are the canonical mutator path. The file lock and per-section preservation behave identically regardless of `FM_TOOLCHAIN`.
+1. T1/T2 mutations through `tools/fm/edit.py` are the canonical mutator path. The file lock and per-section preservation behave identically across the toolchain.
 2. The maintenance-bypass mode in `.githooks/pre-commit` (§4.1) harvests `<path>::<level>:<code>:<msg>` diagnostics from `tools/fm/validate.py` and folds the legacy `lint-structure` / `lint-linkage` shims in for the gaps fm-validate does not yet cover (per Task 017 Batch 2c). There is no separate waiver file at `tools/.frontmatter-waivers`; waivers, when needed, are expressed inline against `tools/fm/validate.py`'s diagnostic codes (`F.3.x`, `F.4.x`, etc.) rather than a path list. An agent that finds a legitimately-bypassable error MUST file a Task with the diagnostic code and the rationale rather than introducing an out-of-band waiver mechanism.
 3. The coherence-check routine is wired to `tools/check-governance.sh` (Step 2.5 linter-first triage); it MUST NOT silently disable either toolchain. If the advisory legacy shim points at a real defect that fm-validate misses, file a Task to fold the rule into fm-validate rather than papering over the warning.
 

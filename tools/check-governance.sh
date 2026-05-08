@@ -21,29 +21,20 @@ for arg in "$@"; do
 done
 
 FAIL=0
-# Task 017 flipped the default: fm-validate is now the gate; the legacy
-# validator runs advisory and is silenced by default. Set FM_TOOLCHAIN=0
-# to revert (e.g., for the duration of a contested migration step).
-FM_TOOLCHAIN="${FM_TOOLCHAIN:-1}"
+# Task 054 finalised the Task 017/019 migration: fm-validate is the only
+# frontmatter linter invoked. The legacy tools/legacy/{validate-frontmatter,
+# lint-structure,lint-linkage}.py scripts are retained because
+# tools/check-maintenance-bypass.py still folds their structural and
+# linkage diagnostics into the bypass index — but they no longer run
+# from this gate, and the FM_TOOLCHAIN env var has been retired.
 export FM_LEGACY_QUIET="${FM_LEGACY_QUIET:-1}"
 
 echo "=== agency check-governance ==="
 
 echo ""
-echo "--- [1/6] Frontmatter linter ---"
-if [ "$FM_TOOLCHAIN" = "1" ]; then
-  if ! "$PYTHON" tools/fm/validate.py --type-check; then
-    FAIL=1
-  fi
-  echo "--- legacy validate-frontmatter.py (advisory; one release window) ---"
-  "$PYTHON" tools/legacy/validate-frontmatter.py >/dev/null 2>&1 || true
-else
-  echo "(FM_TOOLCHAIN=0 — legacy validator gates; fm-validate runs advisory)"
-  if ! "$PYTHON" tools/legacy/validate-frontmatter.py; then
-    FAIL=1
-  fi
-  echo "--- fm-validate (advisory) ---"
-  "$PYTHON" tools/fm/validate.py >/dev/null 2>&1 || true
+echo "--- [1/6] Frontmatter linter (fm-validate --type-check) ---"
+if ! "$PYTHON" tools/fm/validate.py --type-check; then
+  FAIL=1
 fi
 
 echo ""

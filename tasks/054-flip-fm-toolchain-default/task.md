@@ -4,10 +4,10 @@ status: active
 slug: flip-fm-toolchain-default
 summary: "Residual cleanup from Tasks 017/019: flip tools/check-governance.sh:33 default branch from legacy-as-gate to fm-as-gate, retire the four legacy linters, drop the FM_TOOLCHAIN env var."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-08
 task_id: "054"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-opus-4-7"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
