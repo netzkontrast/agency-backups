@@ -1,0 +1,16 @@
+# session.log — pre-commit-readme-update-cadence
+
+2026-05-07T00:00Z  S0 kickoff. Reading inputs: PRE_COMMIT.md §2, FRUSTRATED.md §28 (Special Triggers), MAINTENANCE.md §3.2, repo-maintenance-protocol-spec/output/SPEC.md §3.1.
+2026-05-07T00:05Z  Observed contradiction surface: PRE_COMMIT.md §2 reads "EVERY folder ... MUST have its readme.md updated *now*, right before the commit" — interpretable as either (a) at the moment of pre-commit (correct intent) or (b) immediately on each touch (incorrect interpretation). FRUSTRATED.md §28 names the per-file interpretation as FL2 bloat.
+2026-05-07T00:10Z  Surveyed corpus via `git log --since='2026-04-15' --name-only origin/main` and counted readme.md touches per commit. Distribution: top-3 commits (78f5595, 4cf18db, 1d2e0fa) are bulk-ingest seeds (1000+ files); the next quartile of organic feature work (98e6893, c12db9e, ecb1919, 6d9176d, a97b1ef) lands 9–33 readme touches in a *single* commit. No commit in the recent corpus performs per-file readme-only commits.
+2026-05-07T00:18Z  Verdict: the de-facto practice is already batched-at-pre-commit. Spec wording must converge on that empirical norm.
+2026-05-07T00:25Z  Drafted three cadence options for the §1 token-cost table:
+                    A. Per-touch (immediate): every file change is followed by an in-commit readme update.
+                    B. Batched-at-precommit: all touched-folder readmes updated as a single staged group right before commit.
+                    C. Hybrid: per-touch on substantive folder-purpose changes; batched for incidental touches.
+2026-05-07T00:35Z  Token-cost estimation. For a 30-file PR: A re-loads each readme into context per touch (~150 tok/readme × 30 = ~4500 tok); B loads each readme once at pre-commit (~150 × N_touched_folders ≈ 1500 tok for 10 folders); C straddles, ~3000 tok. B is ≈3× cheaper than A and ≈2× cheaper than C on the 30-file PR.
+2026-05-07T00:42Z  Wrote SPEC.md §1 (token cost), §2 (normative rule), §3 (drop-in wording for both specs), §4 (walkthrough on PR #88 / Task 035 close).
+2026-05-07T00:50Z  Authored synthesis/state.md, methodology.md, post-synthesis-log.md.
+2026-05-07T00:55Z  Authored reflection/friction-log.md (FL0 — falsification clause did not fire; A vs B token-cost ratio is 3× not 2×).
+2026-05-07T01:00Z  Ran `python3 tools/check-trust-audit.py research/pre-commit-readme-update-cadence`; addressed any TRUST.* diagnostics.
+2026-05-07T01:05Z  Closed run; readme.md status set to `completed`, research_phase: complete.
