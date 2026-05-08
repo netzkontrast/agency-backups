@@ -26,7 +26,7 @@ All seven findings are `proposed: pending Plan execution`. None has a landed dif
 - F22 (in-session index_diff hook): proposed.
 - F23 (gating vs advisory line format): proposed.
 - F24 (linter-first as canonical Step 2): proposed.
-- F25 (TodoWrite case sensitivity): expected `won't-fix` (out of repo governance scope).
+- F25 (TodoWrite case sensitivity): proposed; disposition deferred to Plan-7 (two-step: confirm harness-ownership, then choose between `landed` with CLAUDE.md note or `won't-fix` with rationale). Per PR #90 review D3, the disposition MUST NOT be pre-judged here.
 - F26 (skip-with-citation pattern): proposed.
 
 ## Friction Encountered During This Filing

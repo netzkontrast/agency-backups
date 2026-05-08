@@ -784,7 +784,7 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
 - agent: claude-code (session claude/peaceful-carson-EL75t)
 - routine_type: coherence-check
 - start_commit: b162873
-- end_commit: PENDING
+- end_commit: dd23029
 - baseline_commit: 0825eb8 (Task 032 closure end_commit; recovered cleanly via the awk fall-forward across 23 task-implementation/coherence records — Task 008's hardening still holds across the 193-file delta)
 - files_in_delta: 193
 - files_scanned: 0
