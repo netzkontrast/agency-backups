@@ -298,6 +298,24 @@ if [ -n "$NARRATIVE_LOAD_TARGET" ]; then
   "$PYTHON" tools/check-narrative-ontology-load.py "$NARRATIVE_LOAD_TARGET" || true
 fi
 
+echo ""
+echo "--- [opt] Spec runtime-state linter (Task 055 — README.md R.19) ---"
+# WARN-tier by default; promotes to ERROR under FM_SPEC_RUNTIME_STATE_STRICT=1.
+SPEC_RT_OUT="$(mktemp)"
+SPEC_RT_RC=0
+if [ "${FM_SPEC_RUNTIME_STATE_STRICT:-0}" = "1" ]; then
+  "$PYTHON" tools/check-spec-runtime-state.py --strict \
+    > "$SPEC_RT_OUT" 2>&1 || SPEC_RT_RC=$?
+else
+  "$PYTHON" tools/check-spec-runtime-state.py \
+    > "$SPEC_RT_OUT" 2>&1 || SPEC_RT_RC=$?
+fi
+cat "$SPEC_RT_OUT"
+rm -f "$SPEC_RT_OUT"
+if [ "${FM_SPEC_RUNTIME_STATE_STRICT:-0}" = "1" ] && [ "$SPEC_RT_RC" -ne 0 ]; then
+  FAIL=1
+fi
+
 if [ "$SKIP_TRUST" -eq 0 ]; then
   echo ""
   echo "--- [trust] Spec-J/K/L trust audit ---"
