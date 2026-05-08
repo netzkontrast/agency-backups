@@ -37,12 +37,12 @@ You SHOULD use `git log --oneline -50 main`, `grep -rn`, and `ls tasks/` to tria
 
 ## S — Steps
 
-1. You MUST verify each citation by file path **and** line number; treat any unverifiable anchor as a finding to drop.
-2. You MUST evaluate the substrate against its own README.md §11 rules (R.1–R.19) and surface any self-violation.
-3. You MUST partition findings into G (Good — what works), B (Bad — what's broken), and W (Would do differently — concrete improvements). Each B-row MUST cite at least one spec clause.
-4. You MUST triage every B-row against the live `tasks/readme.md` index: is there an open Task that already owns this? If yes, cite it; if no, mark `open-new`.
-5. You SHOULD prioritise B-rows by structural blast radius (linter contracts > entry-point spec drift > scope creep > silent failure modes).
-6. You MUST produce the deliverable below.
+- You MUST verify each citation by file path **and** line number; treat any unverifiable anchor as a finding to drop.
+- You MUST evaluate the substrate against its own README.md §11 rules (R.1–R.19) and surface any self-violation.
+- You MUST partition findings into G (Good — what works), B (Bad — what's broken), and W (Would do differently — concrete improvements). Each B-row MUST cite at least one spec clause.
+- You MUST triage every B-row against the live `tasks/readme.md` index: is there an open Task that already owns this? If yes, cite it; if no, mark `open-new`.
+- You SHOULD prioritise B-rows by structural blast radius (linter contracts > entry-point spec drift > scope creep > silent failure modes).
+- You MUST produce the deliverable below.
 
 ## E — Expectations
 

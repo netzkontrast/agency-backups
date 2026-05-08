@@ -874,3 +874,21 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
     /sc:improve → /sc:Review → /sc:createPR. The four upstream
     skills are RECOMMENDED; only /sc:createPR is REQUIRED per
     CLAUDE.md §10.
+- agent: jules
+- routine_type: coherence-check
+- start_commit: dd12e68
+- end_commit: 36e2611
+- baseline_commit: dd12e68
+- files_in_delta: 33
+- files_scanned: 33
+- t1_fixes: 0
+- t2_fixes: 0
+- t3_tasks_created: 0
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+    Coherence-check combined with Task 037 closure (pre-commit-spec-integration).
+    33 files: research/pre-commit-readme-update-cadence (new workspace),
+    tools/check-clean-working-directory.py, tools/scripts/migrate-waivers.py,
+    PRE_COMMIT.md §7.A/§7.B/§8, tools/fm/_core.py + validate.py.
+    task_status: done for Task 037.
