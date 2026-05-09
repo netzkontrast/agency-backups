@@ -4,7 +4,7 @@ status: active
 slug: run-log
 summary: "Chronological log of every Repo Coherence Check and Nightly Maintenance run. The agent MUST read the last entry's end_commit before beginning any run."
 created: 2026-05-04
-updated: 2026-05-05
+updated: 2026-05-09
 ---
 
 # Maintenance Run Log
@@ -799,3 +799,64 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
     tools/check-clean-working-directory.py, tools/scripts/migrate-waivers.py,
     PRE_COMMIT.md §7.A/§7.B/§8, tools/fm/_core.py + validate.py.
     task_status: done for Task 037.
+
+### Run 2026-05-09 — Combined Coherence Check + Nightly Maintenance
+- agent: claude-code
+- routine_type: coherence-check
+- start_commit: f5e9b0b
+- end_commit: f5e9b0b
+- baseline_commit: 36e2611
+- files_in_delta: 36
+- files_scanned: 9
+- t1_fixes: 1
+- t2_fixes: 0
+- t3_tasks_created: 1
+- t4_skipped: 18
+- issues_skipped: 0
+- notes: >
+    Combined Coherence Check (§2) + Nightly Maintenance Run (§3) in a single
+    session, invoked by user with /sc:* skill chain at run-end.
+
+    Delta scan (baseline 36e2611..f5e9b0b, 36 files): 18 files inside the
+    `research/toolchain-flip-criteria/` workspace skipped as T4-immutable
+    (`research_phase: complete`); 9 markdown files outside the workspace
+    triaged.
+
+    T1 repair (1): bumped stale `updated:` on `maintenance/run-log.md`
+    (was 2026-05-05, last-modified 2026-05-08) via
+    `tools/fm/edit.py --bump-updated`.
+
+    T2 repairs (0): no missing-but-unambiguous keys in the delta.
+
+    Nightly sub-routines exercised:
+    - `tools/maintenance/staleness-audit.py`: 27 active Tasks, 27
+      gate-skipped (all younger than `MAINT_STALE_DAYS=7`); exit 0.
+    - `tools/maintenance/dynamic-readme-partition.py`: ~50 WARN-tier
+      `missing-marker` diagnostics across `tasks/*/readme.md` —
+      pre-existing corpus state, not introduced by this delta.
+      Advisory-only; promotion to gating tracked separately.
+    - `tools/maintenance/trust-audit.py`: 14/27 workspaces pass; 13
+      FL>=1 `recommend-task` lines surfaced. All pre-existing —
+      outside this delta's scope. Recorded here without auto-filing
+      per §3.3 (the spec does not yet say how to dedup against
+      existing coverage; this gap is captured by the new Task 064
+      below).
+
+    T3 Task filed (1): Task 064
+    `maintenance-spec-session-insights-2026-05-09` rolls five gaps
+    surfaced during this run into `MAINTENANCE.md` as binding
+    amendments — (a) delta-vs-aggregator scope reconciliation,
+    (b) WARN-tier dedup policy, (c) `MAINT_STALE_DAYS` gate-skipped
+    reporting, (d) `/sc:*` skill bindings, (e) root-spec frontmatter
+    exemption for `README.md`. Paired prompt scaffold created at
+    `prompts/maintenance-spec-session-insights-2026-05-09/`
+    (three-file scaffold per `FOLDERS.md §4.1`: prompt.md + brief.md +
+    readme.md). `tasks/readme.md` updated with the Task 064 bullet
+    per `TASK.md §4.8`.
+
+    end_commit recorded as the pre-commit HEAD (f5e9b0b); the new
+    commit hash this run produces will surface as the next session's
+    baseline via the awk fall-forward in
+    `prompts/repo-coherence-check/prompt.md` Step 1a.
+
+    Highest Frustration Level: FL1 (the five spec gaps were the friction).

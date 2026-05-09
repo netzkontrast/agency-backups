@@ -4,7 +4,7 @@ status: active
 slug: tasks-root
 summary: "Root of /tasks/. Each subfolder is one orchestrated unit of work linking prompts, research, and code via frontmatter."
 created: 2026-05-04
-updated: 2026-05-08
+updated: 2026-05-09
 ---
 
 # Tasks Root
@@ -91,6 +91,7 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`059-closed-research-repair-allowance/`](./059-closed-research-repair-allowance/) — Successor-class dispatch from [Task 053](./053-core-architecture-review-followups/) finding B.8. Amend `MAINTENANCE.md:33` T4 absolute-immutability rule for closed research workspaces to permit T1 (frontmatter date bumps) and T2 (broken-link repair) corrections, while preserving T3/T4 content immutability. Status: `open`.
 - [`060-platform-agnostic-closing-procedure/`](./060-platform-agnostic-closing-procedure/) — Successor-class dispatch from [Task 053](./053-core-architecture-review-followups/) finding B.9. Define a platform-agnostic closing-run procedure in `AGENTS.md` (open a PR via the platform's mechanism + attach friction-log + ensure index sync); demote `/sc:createPR` to one implementation among others; give Jules and Gemini concrete parity guidance. Status: `open`.
 - [`061-governance-integration-test-scaffold/`](./061-governance-integration-test-scaffold/) — Successor-class dispatch from [Task 053](./053-core-architecture-review-followups/) finding B.10. Scaffold `tests/integration/test_governance_e2e.py`: build a minimal Task → Prompt → Research triptych in a tmpdir, verify `tools/check-governance.sh` exits zero, then mutate each `TASK.md §7.0` linter row and assert the documented diagnostic surfaces. Status: `open`.
+- [`064-maintenance-spec-session-insights-2026-05-09/`](./064-maintenance-spec-session-insights-2026-05-09/) — Filed by the 2026-05-09 combined Coherence Check + Nightly Maintenance Run. Rolls five gaps surfaced during the session into `MAINTENANCE.md` as binding amendments: (a) delta-only vs. corpus-wide aggregator scope reconciliation, (b) WARN-tier dedup policy when filing Tasks, (c) `MAINT_STALE_DAYS` gate-skipped reporting, (d) `/sc:*` skill bindings for the nightly routines, (e) root-spec frontmatter exemption for `README.md`. Status: `open`.
 
 ### Chain-Level Falsification (Tasks 032–039)
 
