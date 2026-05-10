@@ -38,18 +38,38 @@ The 2026-05-10 coherence run discovered that `python3 tools/fm/validate.py --che
 
 1. Wire `--check-body` into `tools/check-governance.sh` as an explicit step (placed after step `[1/6]` `fm-validate --type-check` so the type-check exit code is preserved). The new step MUST scan `tasks/`, `prompts/`, and operational `research/` workspaces and MUST exit non-zero on any F.B.* diagnostic. Keep the legacy step numbering or re-flow per `research/toolchain-flip-criteria/output/SPEC.md §3.4`.
 2. Edit `prompts/repo-coherence-check/prompt.md §Step 2.5`: drop the `(Task 019)` parenthetical and promote `python3 tools/fm/validate.py --check-body <changed-paths>` from the conditional code-block tail to a mandatory invocation alongside the existing `--type-check` line. Update Reflection gate R2.5 to reference the body-shape rule explicitly.
-3. Add a new row to `MAINTENANCE.md §1` repair-permission tier table: "Body-shape repair on `task_status: done` task.md (e.g. reshaping `## Goal` from mixed to paragraph, or `## Links` from unordered_list to link_list)" → T3 (Structural). The new row MUST cite `tools/fm/validate.py --check-body` as the diagnostic surface. Add a Gherkin scenario under the next free anchor (M.B.8) per the §6 closing rule.
-4. Repair the two F.B.1 errors on `tasks/039-maintenance-spec-integration/task.md` as part of the Task 064 Plan (reshape `## Goal` to a single paragraph and `## Links` to a `link_list`). Per the new T3 row added in step 3, this work is the Task's own deliverable and is therefore in-scope; subsequent body-shape errors on already-closed Tasks will follow this same pattern (file a Task; do not edit during a coherence run).
-5. Run `tools/check-governance.sh` end-to-end against `HEAD` and verify zero F.B.* diagnostics survive the pre-commit gate. Add a regression test under `tools/tests/fm/test_body_schema.py` if one does not already cover the gating wiring.
+3. Add a new row to `MAINTENANCE.md §1` repair-permission tier table: "Body-shape repair on `task_status: done` task.md (e.g. reshaping `## Goal` from mixed to paragraph, or `## Links` from unordered_list to link_list)" → T3 (Structural). The new row MUST cite `tools/fm/validate.py --check-body` as the diagnostic surface. Add a Gherkin scenario under the next free anchor (M.B.8) per the §6 closing rule, using the shape sketched in `## Sample Gherkin` below.
+4. Audit the closed-Task backlog before the gate flips: run `python3 tools/fm/validate.py --check-body tasks/` against `HEAD` and capture the full F.B.* diagnostic list in the implementing PR's body. If the corpus exceeds ~5 ERRORs the implementer MUST split the cleanup into a follow-up Task rather than ballooning Task 064's scope; if ≤5 ERRORs, the implementer MAY repair them in-place under Plan §3's new T3 row (every repair MUST cite the M.B.8 anchor in its commit message).
+5. Repair the two F.B.1 errors on `tasks/039-maintenance-spec-integration/task.md` as part of the Task 064 Plan (reshape `## Goal` to a single paragraph and `## Links` to a `link_list`). Per the new T3 row added in step 3, this work is the Task's own deliverable and is therefore in-scope; subsequent body-shape errors on already-closed Tasks follow the §4 audit-and-split pattern.
+6. Run `tools/check-governance.sh` end-to-end against `HEAD` and verify zero F.B.* diagnostics survive the pre-commit gate. Measure end-to-end gate runtime before and after wiring; if the gate's wall-clock regression exceeds 250 ms on the 391-file corpus the implementer MUST narrow the scan scope (e.g. only re-walk paths already opened by the `--type-check` step) per the friction-log falsification clause. Add a regression test under `tools/tests/fm/test_body_schema.py` covering the gating wiring.
+
+## Sample Gherkin
+
+The implementer authoring Plan §3 SHOULD ship the following scenario at anchor `M.B.8` of `MAINTENANCE.md §6` (shape only — wording may differ):
+
+```gherkin
+# anchor: M.B.8 — body-shape repair tier on closed Tasks
+Feature: Body-shape ERRORs on closed Tasks classify as T3
+Scenario: --check-body emits F.B.1 against a task_status: done file
+  Given a Task `tasks/<NNN>-<slug>/task.md` whose frontmatter is `task_status: done`
+  And `python3 tools/fm/validate.py --check-body` against the file emits an `F.B.1` ERROR
+  When the maintenance agent classifies the proposed reshape during a coherence run
+  Then the agent MUST classify the repair as T3 (Structural, §1)
+  And the agent MUST NOT reshape the body sections in-place
+  And the agent MUST file a Task whose Plan covers the reshape
+  And the new Task's `task_affects_paths` MUST include the offending file
+```
 
 ## Todo
 
 - [ ] 1. Edit `tools/check-governance.sh` to invoke `tools/fm/validate.py --check-body` with non-zero exit on F.B.* diagnostics.
 - [ ] 2. Edit `prompts/repo-coherence-check/prompt.md §Step 2.5` to drop the stale `(Task 019)` parenthetical and promote `--check-body` to a mandatory line.
-- [ ] 3. Edit `MAINTENANCE.md §1` repair-tier table to classify body-shape repairs on closed Tasks as T3, with a Gherkin acceptance scenario at anchor M.B.8.
-- [ ] 4. Repair the two F.B.1 ERRORs in `tasks/039-maintenance-spec-integration/task.md` (`## Goal` paragraph shape, `## Links` link_list shape).
-- [ ] 5. Add or extend a test in `tools/tests/fm/test_body_schema.py` covering the gating wiring.
-- [ ] 6. Run `tools/check-governance.sh` end-to-end; verify zero F.B.* diagnostics; record the run in `maintenance/run-log.md` per §2.3.
+- [ ] 3. Edit `MAINTENANCE.md §1` repair-tier table to classify body-shape repairs on closed Tasks as T3, and add the `M.B.8` Gherkin scenario in §6 using the shape from `## Sample Gherkin`.
+- [ ] 4. Run `python3 tools/fm/validate.py --check-body tasks/` against pre-flip `HEAD`; capture the diagnostic list; decide split vs. in-scope per Plan §4 threshold.
+- [ ] 5. Repair the two F.B.1 ERRORs in `tasks/039-maintenance-spec-integration/task.md` (`## Goal` paragraph shape, `## Links` link_list shape).
+- [ ] 6. Measure pre-flip vs. post-flip gate runtime; ensure the regression is under 250 ms on the current corpus.
+- [ ] 7. Add or extend a test in `tools/tests/fm/test_body_schema.py` covering the gating wiring.
+- [ ] 8. Run `tools/check-governance.sh` end-to-end; verify zero F.B.* diagnostics; record the run in `maintenance/run-log.md` per §2.3.
 
 ## Links
 
