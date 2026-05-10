@@ -804,7 +804,7 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
 - agent: claude-code (session claude/peaceful-carson-DVtMC)
 - routine_type: coherence-check
 - start_commit: f5e9b0b
-- end_commit: TBD
+- end_commit: 56b8632
 - baseline_commit: 36e2611
 - files_in_delta: 36
 - files_scanned: 24
