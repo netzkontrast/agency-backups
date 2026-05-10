@@ -4,7 +4,7 @@ status: active
 slug: tasks-root
 summary: "Root of /tasks/. Each subfolder is one orchestrated unit of work linking prompts, research, and code via frontmatter."
 created: 2026-05-04
-updated: 2026-05-08
+updated: 2026-05-10
 ---
 
 # Tasks Root
@@ -91,6 +91,7 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`059-closed-research-repair-allowance/`](./059-closed-research-repair-allowance/) — Successor-class dispatch from [Task 053](./053-core-architecture-review-followups/) finding B.8. Amend `MAINTENANCE.md:33` T4 absolute-immutability rule for closed research workspaces to permit T1 (frontmatter date bumps) and T2 (broken-link repair) corrections, while preserving T3/T4 content immutability. Status: `open`.
 - [`060-platform-agnostic-closing-procedure/`](./060-platform-agnostic-closing-procedure/) — Successor-class dispatch from [Task 053](./053-core-architecture-review-followups/) finding B.9. Define a platform-agnostic closing-run procedure in `AGENTS.md` (open a PR via the platform's mechanism + attach friction-log + ensure index sync); demote `/sc:createPR` to one implementation among others; give Jules and Gemini concrete parity guidance. Status: `open`.
 - [`061-governance-integration-test-scaffold/`](./061-governance-integration-test-scaffold/) — Successor-class dispatch from [Task 053](./053-core-architecture-review-followups/) finding B.10. Scaffold `tests/integration/test_governance_e2e.py`: build a minimal Task → Prompt → Research triptych in a tmpdir, verify `tools/check-governance.sh` exits zero, then mutate each `TASK.md §7.0` linter row and assert the documented diagnostic surfaces. Status: `open`.
+- [`064-promote-check-body-to-gating/`](./064-promote-check-body-to-gating/) — Filed by 2026-05-10 coherence run. Promote `tools/fm/validate.py --check-body` to a gating step inside `tools/check-governance.sh`, drop the stale `(Task 019)` parenthetical in `prompts/repo-coherence-check/prompt.md §Step 2.5`, and codify body-shape repairs on `task_status: done` files as T3 in `MAINTENANCE.md §1` with a paired Gherkin anchor M.B.8. Status: `open`.
 
 ### Chain-Level Falsification (Tasks 032–039)
 

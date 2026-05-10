@@ -4,7 +4,7 @@ status: active
 slug: run-log
 summary: "Chronological log of every Repo Coherence Check and Nightly Maintenance run. The agent MUST read the last entry's end_commit before beginning any run."
 created: 2026-05-04
-updated: 2026-05-05
+updated: 2026-05-10
 ---
 
 # Maintenance Run Log
@@ -799,3 +799,46 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
     tools/check-clean-working-directory.py, tools/scripts/migrate-waivers.py,
     PRE_COMMIT.md §7.A/§7.B/§8, tools/fm/_core.py + validate.py.
     task_status: done for Task 037.
+
+### Run 2026-05-10 — Repo Coherence Check
+- agent: claude-code (session claude/peaceful-carson-DVtMC)
+- routine_type: coherence-check
+- start_commit: f5e9b0b
+- end_commit: TBD
+- baseline_commit: 36e2611
+- files_in_delta: 36
+- files_scanned: 24
+- t1_fixes: 0
+- t2_fixes: 0
+- t3_tasks_created: 1
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+    Delta 36e2611..f5e9b0b spans 36 files (24 markdown + 12 non-md);
+    `python3 tools/fm/validate.py --type-check` against the 9 in-scope
+    operational md files emitted 0 diagnostics. `--check-body` (opt-in,
+    not gated) emitted 2 F.B.1 ERRORs against
+    `tasks/039-maintenance-spec-integration/task.md` (`## Goal` shape
+    mismatch and `## Links` shape mismatch); both predate the delta.
+    Task 039 is `task_status: done`, so the body-shape repair is T3
+    (Structural) per MAINTENANCE.md §1 and cannot be applied during a
+    coherence run.
+
+    Filed Task 064 (`promote-check-body-to-gating`) bundling three
+    findings: (1) wire `tools/fm/validate.py --check-body` into
+    `tools/check-governance.sh` as a gating step (currently zero
+    references); (2) drop the stale `(Task 019)` parenthetical from
+    `prompts/repo-coherence-check/prompt.md §Step 2.5` (Task 019 closed
+    weeks ago, the promotion never landed); (3) add an explicit row
+    to `MAINTENANCE.md §1`'s tier table classifying body-shape repairs
+    on `task_status: done` files as T3 with a Gherkin acceptance
+    scenario at the next free anchor M.B.8. Plan step 4 of Task 064
+    repairs the two F.B.1 ERRORs on Task 039's task.md as part of its
+    own deliverable.
+
+    Friction logged at FL1 in
+    `tasks/064-promote-check-body-to-gating/friction-log.md`. No T1/T2
+    mutations were applied; the only repo changes in this run are the
+    new Task 064 folder (task.md, readme.md, friction-log.md), the
+    `tasks/readme.md` bullet for Task 064 with a bumped `updated:`
+    date, and this run-log record.
