@@ -2,7 +2,7 @@
 type: task
 status: active
 slug: dramatica-scenarios-nav-instruct
-summary: "Cohort-1 Foundation Task in the dramatica-scenarios Epic (078). Implement the new `nav.py instruct <entry_id> <scenario_id>` subcommand — returns structured content (definition + scenario_pipeline + worked_example + citations) by joining ontology entry data (Task 080's line-index) with the per-scenario corpus (Task 079's template, Cohort-3's per-scenario authoring). Additive: the existing `nav.py by-id` contract is unchanged."
+summary: "PROVISIONAL stub (final scope from SPEC.md §4 of research/dramatica-scenarios-foundation/). Cohort-1 Foundation Task in the dramatica-scenarios Epic (078). Implement the new `nav.py instruct <entry_id> <scenario_id>` subcommand — returns structured content (definition + scenario_pipeline + worked_example + citations) by joining ontology entry data (Task 080's line-index) with the per-scenario corpus (Task 079's template, Cohort-3's per-scenario authoring). Additive: the existing `nav.py by-id` contract is unchanged."
 created: 2026-05-11
 updated: 2026-05-11
 task_id: "081"
@@ -13,57 +13,87 @@ task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "079"
-  - "080"
+  - 079
+  - 080
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
   - tools/dramatica-nav/nav.py
   - tools/dramatica-nav/lib_instruct.py
   - tools/dramatica-nav/tests/test_instruct.py
+  - tools/dramatica-nav/readme.md
 ---
 
 # Task 081 — `nav.py instruct` subcommand
 
+> **🔶 PROVISIONAL STUB** — Cohort-1 Foundation work locked at the goal level
+> (additive `nav.py instruct <entry> <scenario>` subcommand); detailed
+> acceptance below reconciles against SPEC.md §4.1 + §1.2 + §1.6 once the
+> foundational research run completes. Do not start implementation until
+> §4.1 has landed. (Per Epic 078 Phase A step 3.)
+
 ## Goal
 
 Implement the additive `nav.py instruct <entry_id> <scenario_id>` subcommand
-per SPEC.md §4.1 (Foundation cohort). The subcommand:
+per SPEC.md §4.1 (Foundation cohort). The subcommand validates the
+(entry, scenario) pair, reads the scenario doc, dereferences the entry's
+definition via the Task 080 line-index, and returns structured JSON with
+`entry`, `definition`, `scenario_pipeline`, `decision_heuristics`,
+`anti_patterns`, `worked_example`, `cross_references`, and `citations`
+fields. The existing `by-id` subcommand contract is unchanged.
 
-1. Validates that the entry exists (via existing `by-id` machinery) AND
-   the scenario applies to the entry (the entry's `scenarios:` list
-   contains `<scenario_id>`).
-2. Reads `skills/dramatica-theory/scenarios/<scenario_id>.md` (Task 079's
-   template, Cohort-3's filled content).
-3. Reads the entry's definition prose at `term_file:term_file_line` (Task
-   080's line-index).
-4. Returns a structured JSON object with:
-   - `entry` — `{id, kind, canonical_label, …}` (current `by-id` output)
-   - `definition` — verbatim definition prose from `term_file`
-   - `scenario_pipeline` — the §pipeline section from `<scenario_id>.md`
-   - `decision_heuristics` — the §heuristics section
-   - `anti_patterns` — the §anti-patterns section
-   - `worked_example` — the §worked-example section
-   - `cross_references` — every ontology-id cited in the above sections
-     resolved to `{id, term_file, term_file_line}` tuples
-   - `citations` — every `[file:line]` citation in the above sections
-5. Returns non-zero exit + structured error when:
-   - `<entry_id>` does not exist
-   - `<scenario_id>` does not exist in ontology
-   - The entry's `scenarios:` list does not contain `<scenario_id>`
-   - `<scenario_id>.md` does not yet exist (Cohort-3 hasn't authored it)
-   - `term_file_line:` is missing (Task 080 hasn't precompiled)
+## Acceptance
 
-`done` when:
+```gherkin
+Feature: nav.py instruct subcommand
 
-1. `tools/dramatica-nav/nav.py` registers the new `instruct` subparser.
-2. `tools/dramatica-nav/lib_instruct.py` — the content-joining logic.
-3. `tools/dramatica-nav/tests/test_instruct.py` — covers: happy-path
-   resolution, all 5 error cases, JSON output schema stability,
-   citations-link-resolve (every cited file:line resolves to a real line
-   in a real file).
-4. Documentation update in `tools/dramatica-nav/readme.md` covering the
-   new subcommand syntax + output schema.
+# anchor: 081.AC.1
+Scenario: Happy path returns structured content
+  Given Tasks 079 + 080 are closed
+  And a Cohort-3 authoring Task has produced "skills/dramatica-theory/scenarios/novel.crucial-element-audit.md"
+  When the agent runs `python3 tools/dramatica-nav/nav.py instruct el.equity novel.crucial-element-audit`
+  Then the subcommand MUST exit 0
+   And MUST return a JSON object with non-empty `entry`, `definition`, `scenario_pipeline`, `worked_example`, and `citations` fields
+
+# anchor: 081.AC.2
+Scenario: Unknown entry returns structured error
+  When the agent runs `instruct el.does-not-exist novel.crucial-element-audit`
+  Then the subcommand MUST exit non-zero
+   And MUST return a structured error naming the unknown entry-id
+
+# anchor: 081.AC.3
+Scenario: Unknown scenario returns structured error
+  When the agent runs `instruct el.equity novel.does-not-exist`
+  Then the subcommand MUST exit non-zero
+   And MUST return a structured error naming the unknown scenario-id
+
+# anchor: 081.AC.4
+Scenario: Scenario does not apply to entry
+  Given `el.equity` has `scenarios:` list NOT containing `novel.act-pivot`
+  When the agent runs `instruct el.equity novel.act-pivot`
+  Then the subcommand MUST exit non-zero
+   And MUST return a structured error citing the applicability mismatch
+
+# anchor: 081.AC.5
+Scenario: Scenario doc not yet authored
+  Given `scenarios:` list applies but "skills/dramatica-theory/scenarios/<id>.md" does NOT yet exist
+  When the agent runs `instruct` for that pair
+  Then the subcommand MUST exit non-zero
+   And MUST return a structured error stating "scenario doc not yet authored — pending Cohort-3"
+
+# anchor: 081.AC.6
+Scenario: Line-index missing
+  Given the entry's `term_file_line` is missing (Task 080 not yet run)
+  When the agent runs `instruct`
+  Then the subcommand MUST exit non-zero
+   And MUST return a structured error stating "line-index not yet built — run tools/dramatica-nav/precompile.py"
+
+# anchor: 081.AC.7
+Scenario: Citation links resolve
+  Given a happy-path call has returned content with `citations:` entries
+  When each `[file:line]` tuple in `citations` is resolved
+  Then every cited line MUST exist in the cited file
+```
 
 ## Context
 

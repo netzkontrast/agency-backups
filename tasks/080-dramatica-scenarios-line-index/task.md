@@ -2,7 +2,7 @@
 type: task
 status: active
 slug: dramatica-scenarios-line-index
-summary: "Cohort-1 Foundation Task in the dramatica-scenarios Epic (078). Implement build-time line-indexing for ontology.json per SPEC.md §2 — every entry's term_file pointer gains a sibling term_file_line:<int> and term_file_anchor:<str> field, indexed across vocabulary refs + dramatica-theory chunks + the new scenarios/*.md (self-indexing). Idempotent precompile; integrates with the existing tools/dramatica-nav/precompile.py pipeline."
+summary: "PROVISIONAL stub (final scope from SPEC.md §4 of research/dramatica-scenarios-foundation/). Cohort-1 Foundation Task in the dramatica-scenarios Epic (078). Implement build-time line-indexing for ontology.json per SPEC.md §2 — every entry's term_file pointer gains a sibling term_file_line:<int> and term_file_anchor:<str> field, indexed across vocabulary refs + dramatica-theory chunks + the new scenarios/*.md (self-indexing). Idempotent precompile; integrates with the existing tools/dramatica-nav/precompile.py pipeline."
 created: 2026-05-11
 updated: 2026-05-11
 task_id: "080"
@@ -13,19 +13,25 @@ task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "078"
+  - 078
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
   - tools/dramatica-nav/lib_line_index.py
-  - tools/dramatica-nav/lib_ontology.py
   - tools/dramatica-nav/precompile.py
   - tools/dramatica-nav/tests/test_line_index.py
   - maintenance/schemas/narrative-ontology/ontology.json
   - .githooks/pre-commit
+  - tools/dramatica-nav/lib/ontology.py
 ---
 
 # Task 080 — Build-time line-indexing for ontology.json
+
+> **🔶 PROVISIONAL STUB** — Cohort-1 Foundation work locked at the goal level
+> (line-indexing precompile for ontology.json); detailed acceptance below
+> reconciles against SPEC.md §2 once the foundational research run completes.
+> Do not start implementation until §2 has landed. (Per Epic 078 Phase A
+> step 3.)
 
 ## Goal
 
@@ -38,25 +44,50 @@ new `skills/dramatica-theory/scenarios/*.md` files as they land (self-
 indexing). Re-runs idempotently — byte-identical `ontology.json` if no
 inputs changed.
 
-`done` when:
+## Acceptance
 
-1. `tools/dramatica-nav/lib_line_index.py` — new module with the anchor →
-   line resolution algorithm per SPEC.md §2.2.
-2. `tools/dramatica-nav/precompile.py` integrates the new step at the
-   point identified by SPEC.md §2.1 (between existing ontology load and
-   write).
-3. `maintenance/schemas/narrative-ontology/ontology.json` — every entry's
-   `term_file` resolves to a `term_file_line:<int>` + `term_file_anchor:
-   <slug>`. Orphan entries (anchor missing from file) handled per §2.3
-   failure-tier spec.
-4. `tools/dramatica-nav/tests/test_line_index.py` — covers: happy-path
-   resolution, orphan-entry diagnostic, duplicate-anchor diagnostic,
-   idempotency (byte-identical re-run), self-indexing of `scenarios/*.md`
-   when files appear/disappear, cross-corpus ordering stability.
-5. The pre-commit hook (`.githooks/pre-commit`) runs the precompile step
-   whenever a file under the indexed scope changes, per SPEC.md §2.5.
-6. Existing `tools/dramatica-nav/tests/` (test_validate.py et al.) still
-   pass — the new fields are additive, not breaking.
+```gherkin
+Feature: Build-time line-indexing for ontology.json
+
+# anchor: 080.AC.1
+Scenario: Every entry gains line + anchor fields
+  Given Task 080's precompile pipeline has run
+  When "maintenance/schemas/narrative-ontology/ontology.json" is opened
+  Then every entry MUST carry `term_file_line:<int>` and `term_file_anchor:<str>`
+   And both fields MUST resolve to a real heading in the file referenced by `term_file`
+
+# anchor: 080.AC.2
+Scenario: Re-run is byte-identical when inputs unchanged
+  Given inputs (vocabulary refs + theory chunks + scenarios/*.md) are unchanged
+  When "tools/dramatica-nav/precompile.py" is run twice
+  Then the two resulting `ontology.json` files MUST be byte-identical
+
+# anchor: 080.AC.3
+Scenario: Orphan entries fail loud per §2.3 tier
+  Given an entry's `term_file` anchor does NOT exist in the target file
+  When precompile runs
+  Then a Diag MUST be emitted at ERROR-tier for vocabulary refs or theory chunks
+   And a Diag MAY be emitted at WARN-tier for scenarios/*.md (incremental authoring tolerated)
+
+# anchor: 080.AC.4
+Scenario: Test suite covers the failure modes
+  Given Task 080's test scaffold is materialized
+  When "python3 -m pytest tools/dramatica-nav/tests/test_line_index.py" runs
+  Then at least 6 distinct test cases MUST pass (happy-path, orphan, duplicate-anchor, idempotency, self-indexing churn, cross-corpus stability)
+
+# anchor: 080.AC.5
+Scenario: Self-indexing covers new scenarios/*.md as they land
+  Given a new scenario doc is added under "skills/dramatica-theory/scenarios/"
+  When precompile re-runs
+  Then any entry referencing that scenario's anchor MUST receive `term_file_line`/`term_file_anchor` values pointing to the new file
+
+# anchor: 080.AC.6
+Scenario: Pre-commit hook triggers precompile on indexed-scope changes
+  Given a file under the indexed scope is modified
+  When the pre-commit hook runs
+  Then precompile MUST be invoked
+   And the commit MUST be blocked if the resulting ontology.json change is not also staged
+```
 
 ## Context
 

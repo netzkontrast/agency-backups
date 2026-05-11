@@ -2,7 +2,7 @@
 type: task
 status: active
 slug: dramatica-scenarios-taxonomy
-summary: "Cohort-2 Discovery-confirmation Task in the dramatica-scenarios Epic (078). Formalize SPEC.md §3.4's FINAL scenario taxonomy in maintenance/schemas/narrative-ontology/ontology.json — add the new ADD-verdicted scenario_ids to entry `scenarios:` lists; remove any §3.3 SKIP-verdicted IDs; surface and resolve any §3.3 EXTEND-EXISTING decisions. Pre-condition for Cohort-3 authoring (one Task per scenario in the final taxonomy)."
+summary: "PROVISIONAL stub (final scope from SPEC.md §4 of research/dramatica-scenarios-foundation/). Cohort-2 Discovery-confirmation Task in the dramatica-scenarios Epic (078). Formalize SPEC.md §3.4's FINAL scenario taxonomy in maintenance/schemas/narrative-ontology/ontology.json — add the new ADD-verdicted scenario_ids to entry `scenarios:` lists; remove any §3.3 SKIP-verdicted IDs; surface and resolve any §3.3 EXTEND-EXISTING decisions. Pre-condition for Cohort-3 authoring (one Task per scenario in the final taxonomy)."
 created: 2026-05-11
 updated: 2026-05-11
 task_id: "082"
@@ -13,8 +13,7 @@ task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "078"
-  - "080"
+  - 080
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
@@ -24,37 +23,68 @@ task_affects_paths:
 
 # Task 082 — Formalize SPEC.md §3.4 scenario taxonomy in ontology.json
 
+> **🔶 PROVISIONAL STUB** — Cohort-2 Discovery-confirmation work locked at the
+> goal level (apply SPEC.md §3.4 verdicts to ontology.json); detailed
+> acceptance below reconciles against §3.2–§3.4 once the foundational
+> research run completes. Do not start implementation until §3.4 has landed.
+> (Per Epic 078 Phase A step 3.)
+
 ## Goal
 
 Take SPEC.md §3.4's FINAL scenario taxonomy + §3.3 ADD/EXTEND/SKIP verdicts
 and apply them to `maintenance/schemas/narrative-ontology/ontology.json`:
+for each ADD-verdicted scenario_id, walk §3.2's candidate-entries filter
+and append the scenario_id to each matching entry's `scenarios:` list; for
+each EXTEND-EXISTING verdict, rename or merge per §3.3's instruction; for
+each SKIP verdict, leave unchanged. Re-run precompile (Task 080) and
+validate to confirm internal consistency.
 
-1. For each ADD-verdicted scenario_id: walk the candidate-entries list from
-   §3.2 ("entries it would tag" column) and append the scenario_id to each
-   matching entry's `scenarios:` list.
-2. For each EXTEND-EXISTING verdict: rename or merge per §3.3's instruction.
-3. For each SKIP verdict: leave unchanged (no removal — SKIP means "don't
-   add"; only the ADD scenarios are net-new tagging work).
-4. Run `tools/dramatica-nav/precompile.py` to re-line-index (Task 080's
-   pipeline) and `tools/dramatica-nav/validate.py` to confirm the modified
-   ontology is internally consistent.
+## Acceptance
 
-`done` when:
+```gherkin
+Feature: Formalize SPEC.md §3.4 scenario taxonomy
 
-1. `ontology.json` carries every §3.4 FINAL scenario_id at least once (i.e.
-   no scenario_id is "defined" in §3.4 but "tagged on zero entries").
-2. Every entry that was previously tagged with a SKIP-verdicted ID retains
-   that tag (no destructive removal — preserves backward compat for the
-   transition).
-3. `tools/dramatica-nav/tests/test_scenario_tags.py` — covers: every §3.4
-   scenario_id appears on ≥ 1 entry; cross-cohort sanity (Cohort-3 will
-   author one `<scenario_id>.md` per §3.4 ID, so the IDs MUST align);
-   alphabetical-stability of `scenarios:` lists per entry (no nondeterministic
-   ordering).
-4. `tools/dramatica-nav/validate.py` exits 0 against the modified ontology.
-5. The tagging delta (which entries gained which IDs) is summarized in the
-   Task's friction-log so Cohort-3 authors know which entries each scenario
-   touches.
+# anchor: 082.AC.1
+Scenario: Every §3.4 ID tagged on ≥ 1 entry
+  Given SPEC.md §3.4 has produced a FINAL taxonomy
+  When this Task closes
+  Then every scenario_id in §3.4 MUST appear on at least one entry's `scenarios:` list
+   And no scenario_id MUST be "defined in §3.4 but tagged on zero entries"
+
+# anchor: 082.AC.2
+Scenario: SKIP verdicts preserve existing tags (no destructive removal)
+  Given §3.3 has SKIP-verdicted some candidates
+  When this Task closes
+  Then every entry that was previously tagged with a SKIP-verdicted ID MUST still carry that tag
+   And the modification script MUST be additive-only (no entry loses tags it had before)
+
+# anchor: 082.AC.3
+Scenario: Tag delta documented in friction-log
+  Given the modification script has run
+  When this Task closes
+  Then "tasks/082-dramatica-scenarios-taxonomy/friction-log.md" MUST contain a delta table
+   And the table MUST list: scenario_id × entries-tagged × entries-untouched
+
+# anchor: 082.AC.4
+Scenario: Re-precompile is idempotent on the modified ontology
+  Given the modification script has run
+  When "tools/dramatica-nav/precompile.py" is run twice
+  Then the two resulting `ontology.json` files MUST be byte-identical
+
+# anchor: 082.AC.5
+Scenario: Validation passes
+  Given the modified ontology is committed
+  When "tools/dramatica-nav/validate.py" runs
+  Then the validator MUST exit 0
+   And report no orphan tags, no duplicate entries, and no broken cross-references
+
+# anchor: 082.AC.6
+Scenario: Tag list ordering is deterministic
+  Given any entry's `scenarios:` list has been modified
+  When the modified entry is inspected
+  Then the `scenarios:` list MUST be alphabetically sorted
+   And re-running the modification script MUST NOT change the order
+```
 
 ## Context
 

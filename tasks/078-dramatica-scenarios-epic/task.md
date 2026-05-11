@@ -47,42 +47,76 @@ without dereferencing the `term_file` pointer. The scenario tags
 (`scenarios: [novel.crucial-element-audit, …]`) on the entry exist as signals
 without operational content behind them.
 
-`done` when:
+## Acceptance
 
-1. A foundational research run has produced
-   `research/dramatica-scenarios-foundation/output/SPEC.md` (executed via
-   the prompt at `prompts/dramatica-scenarios-foundation/prompt.md`) with
-   the 6 sections §0–§6 populated per the prompt's "E — Expectations"
-   skeleton.
-2. The SPEC.md §3.4 final scenario taxonomy has been formalized in
-   `maintenance/schemas/narrative-ontology/ontology.json` (added
-   `scenarios[]` tags as recommended; redundant existing IDs removed if
-   §3.3 SKIP-verdicted any).
-3. Build-time line-indexing for `ontology.json` (new `term_file_line:` +
-   `term_file_anchor:` fields per SPEC.md §2.6) is implemented in
-   `tools/dramatica-nav/precompile.py` and tested for idempotency.
-4. A new `nav.py instruct <entry_id> <scenario_id>` subcommand returns the
-   embedded scenario instructions + entry-specific guidance + (file, line)
-   citations for every (entry, scenario) pair the ontology knows about.
-5. The content-template system from SPEC.md §1 is materialized as
-   `skills/dramatica-theory/scenarios/_template/` (the meta-template
-   wrapper + one skeleton per archetype identified in §1.2).
-6. Every `novel.*` scenario in §3.4 has a corresponding
-   `skills/dramatica-theory/scenarios/<scenario_id>.md` populated to the
-   done-bar (pipeline + heuristics + anti-patterns + Gherkin acceptance
-   scenarios + ontology cross-refs + nav.py test + per-scenario end-to-end
-   worked example).
-7. `novel-architect` Phase 2 / Phase 3 / Phase 5 / Phase 7 prose has been
-   updated to reference `nav.py instruct` at the operational moments where
-   scenario-grounded guidance is needed (no longer "consult dramatica-
-   theory" prose hand-waving).
-8. Integration tests in `tools/dramatica-nav/tests/test_scenarios_integration.py`
-   confirm: every `scenarios[]` tag in `ontology.json` has a corresponding
-   `scenarios/<scenario_id>.md`; `nav.py instruct` returns non-empty
-   structured content for every (entry, scenario) pair; the line-index
-   precompile is idempotent across reruns.
-9. All child Tasks (079–08N) closed with `task_status: done`; this Epic's
-   `task_status` flipped to `done` only when the last child Task closes.
+```gherkin
+Feature: dramatica-scenarios Epic — operational corpus + nav.py instruct
+
+# anchor: 078.AC.1
+Scenario: Foundational research SPEC.md exists and passes the prompt's acceptance signal
+  Given the prompt at "prompts/dramatica-scenarios-foundation/prompt.md" has been dispatched
+  When the deep-research executor completes
+  Then "research/dramatica-scenarios-foundation/output/SPEC.md" MUST exist
+   And SPEC.md MUST pass all 7 criteria listed in the prompt's "## Acceptance signal" section (treated as the SSoT for research-output acceptance)
+
+# anchor: 078.AC.2
+Scenario: Final taxonomy formalized in ontology.json
+  Given SPEC.md §3.4 has been produced
+  When child Task 082 (taxonomy formalization) closes
+  Then every scenario_id in SPEC.md §3.4 MUST appear on at least one entry in "maintenance/schemas/narrative-ontology/ontology.json"
+   And every entry whose `scenarios:` list was modified MUST have its modification recorded in the Task 082 friction-log delta-table
+
+# anchor: 078.AC.3
+Scenario: Build-time line-indexing landed and idempotent
+  Given SPEC.md §2 has specified the precompile design
+  When child Task 080 (line-index) closes
+  Then every entry in "ontology.json" MUST carry `term_file_line:<int>` and `term_file_anchor:<str>`
+   And re-running "tools/dramatica-nav/precompile.py" on unchanged inputs MUST produce byte-identical "ontology.json"
+
+# anchor: 078.AC.4
+Scenario: nav.py instruct subcommand resolves real (entry, scenario) pairs
+  Given Tasks 079 + 080 + 081 are closed
+  And at least one Cohort-3 authoring Task has landed `<scenario_id>.md`
+  When an agent runs `nav.py instruct <entry_id> <scenario_id>` for an (entry, scenario) pair the ontology knows about
+  Then the subcommand MUST return non-empty structured content with `definition`, `scenario_pipeline`, `worked_example`, and `citations` fields
+   And every citation tuple MUST resolve to a real file:line in the indexed corpus
+
+# anchor: 078.AC.5
+Scenario: Content-template system materialized for Cohort-3 authoring
+  Given SPEC.md §1 has specified the meta-template wrapper and §1.2 has enumerated the archetype skeletons
+  When child Task 079 (content-template) closes
+  Then "skills/dramatica-theory/scenarios/_template/" MUST contain `wrapper.md` plus one archetype file per §1.2 archetype
+   And "maintenance/schemas/header-ontology.json" MUST register `type: scenario` with the §1.1 body-schema
+
+# anchor: 078.AC.6
+Scenario: Every §3.4 scenario_id has a populated content doc
+  Given SPEC.md §3.4 enumerates the final scenario taxonomy
+  When all Cohort-3 authoring Tasks close
+  Then "skills/dramatica-theory/scenarios/<scenario_id>.md" MUST exist for every scenario_id in §3.4
+   And each MUST hit the done-bar (pipeline + heuristics + anti-patterns + Gherkin acceptance + ontology cross-refs + nav.py test + per-scenario end-to-end worked example)
+
+# anchor: 078.AC.7
+Scenario: novel-architect phases call nav.py instruct at the operational moments
+  Given Cohort-3 authoring is complete
+  When child Task 08(N+1) (novel-architect wire-up) closes
+  Then "skills/novel-architect/phases/phase2-narrative-architecture.md" MUST reference `nav.py instruct` at Phase 2 Step 6 (Crucial Element)
+   And similarly for Phase 3, Phase 5, and Phase 7 operational moments per §3.5
+
+# anchor: 078.AC.8
+Scenario: Integration tests validate the full chain
+  Given Cohort-4 integration Tasks have closed
+  When `python3 -m pytest tools/dramatica-nav/tests/test_scenarios_integration.py` runs
+  Then every `scenarios:` tag in "ontology.json" MUST have a corresponding "scenarios/<scenario_id>.md"
+   And `nav.py instruct` MUST return non-empty content for every (entry, scenario) pair
+   And the line-index precompile MUST be idempotent across re-runs
+
+# anchor: 078.AC.9
+Scenario: Epic closes only after all children close
+  Given child Tasks 079..08N are all in `task_status: done`
+  When this Epic's `task_status` is flipped
+  Then this Epic MUST transition open → done (never closed directly without all children done)
+   And `tasks/078-dramatica-scenarios-epic/friction-log.md` MUST be written with a parseable `Highest Frustration Level: FL[0-3]` line
+```
 
 ## Context
 
@@ -148,11 +182,22 @@ Exact `N` is unknown until Cohort 1 / 2 produce SPEC.md §3.4.
    checklist (7 criteria). If any fail, spawn a `prompt_kind: follow-up`
    prompt to close the gap rather than accepting a partial output as
    complete.
-3. Open the SPEC.md and decompose §4 (Epic decomposition recommendation)
-   into the actual child-Task `task.md` files. Each Cohort-1/2/4 child
-   Task gets a discrete `tasks/<NNN>-<slug>/task.md`. Cohort-3 authoring
-   Tasks may be batched as `tasks/<NNN>-dramatica-scenario-<scenario_id>/`
-   per scenario.
+3. **Reconcile** the pre-committed PROVISIONAL stubs (Tasks 079, 080, 081,
+   082) against SPEC.md §4. SPEC.md §4 has authority over cohort sizing
+   (e.g. if §1.2 surfaces a 4th archetype warranting its own Foundation
+   Task, the §4.1 recommendation may call for 4 Foundation Tasks not 3).
+   For each pre-committed stub:
+   (a) if §4 confirms its scope: lift the PROVISIONAL banner, fill the
+       acceptance Gherkin against SPEC.md's per-Task specification.
+   (b) if §4 revises scope/blocked_by/Goal: edit the stub in place; record
+       the delta in this Epic's friction-log.
+   (c) if §4 splits a stub into multiple Tasks or merges multiple: file
+       supersession via `task_supersedes`/`task_superseded_by` per
+       TASK.md §4.7 (don't delete the stub history).
+4. **Spawn** the additional Cohort-3 authoring Tasks per SPEC.md §3.4 row
+   count (`N ≥ 9`) and Cohort-4 integration Tasks per SPEC.md §4.4
+   (`≥ 2`). Naming: `tasks/<NNN>-dramatica-scenario-<scenario_id>/` for
+   Cohort-3; `tasks/<NNN>-<slug>/` for Cohort-4.
 
 ### Phase B — Foundation (delegated to Cohort 1 child Tasks)
 
@@ -225,9 +270,13 @@ When all child Tasks (079..08(N+2)) flip to `task_status: done`:
       Research). Track in `research/dramatica-scenarios-foundation/workspace/`.
 - [ ] 2. Receive `research/dramatica-scenarios-foundation/output/SPEC.md`;
       verify against the prompt's "Acceptance signal" checklist (7 criteria).
-- [ ] 3. Decompose SPEC.md §4 into discrete child-Task `task.md` files
-      under `tasks/079-…/` through `tasks/08N-…/`. Set each child's
-      `task_blocked_by:` per the §4.5 dependency graph.
+- [ ] 3. Reconcile pre-committed PROVISIONAL stubs (Tasks 079-082) against
+      SPEC.md §4 per Phase A step 3 — lift the PROVISIONAL banner where §4
+      confirms scope, edit stub in place where §4 revises, supersede where
+      §4 splits/merges.
+- [ ] 3b. Spawn additional Cohort-3 (authoring; `N ≥ 9`) and Cohort-4
+      (integration; ≥ 2) child Tasks per SPEC.md §3.4 + §4.3 + §4.4. Set
+      each child's `task_blocked_by:` per the §4.5 dependency graph.
 - [ ] 4. **Cohort 1** (Foundation): spawn ≥ 3 child Tasks per SPEC.md §4.1
       (content-template, line-index, nav.py instruct). Track to completion.
 - [ ] 5. **Cohort 2** (Discovery confirmation): spawn 1 child Task per

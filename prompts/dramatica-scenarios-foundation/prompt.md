@@ -8,7 +8,7 @@ updated: 2026-05-11
 prompt_kind: research-proposal
 prompt_framework: RISEN+ReAct
 prompt_target_agent: "Claude Code"
-prompt_relates_to_task: ""
+prompt_relates_to_task: "dramatica-scenarios-epic"
 ---
 
 # `dramatica-scenarios-foundation` — Foundational Research Prompt
@@ -25,7 +25,7 @@ You are a **narrative-systems researcher** with deep familiarity with Dramatica 
 
 You execute against the agency repo at `/home/user/agency/` (or the URL where it's accessible). The three corpora you traverse:
 
-### Corpus A — Theory chunks (15 files, ~900 KB total)
+### Corpus A — Theory chunks (15 files, ~900 KB total) [reader-test:FR-01]
 
 Path: `/home/user/agency/skills/dramatica-theory/references/`
 
@@ -47,7 +47,7 @@ Path: `/home/user/agency/skills/dramatica-theory/references/`
 | `12-scene-level-bridge.md` | Q1–Q5 scene-level audit (already operationalized by Task 075). |
 | `13-worked-storyforms.md` | Hand-worked examples per Class. |
 
-### Corpus B — Vocabulary reference files (24 files, ~265 indexed terms)
+### Corpus B — Vocabulary reference files (24 files, ~265 indexed terms) [reader-test:FR-02]
 
 Path: `/home/user/agency/skills/dramatica-vocabulary/references/`
 
@@ -112,7 +112,7 @@ answers and is not required reading). Salient compressions:
 - **Bilingual contract:** EN throughout (matches dramatica-theory).
 - **Done bar per scenario:** pipeline + heuristics + anti-patterns + Gherkin + ontology cross-refs + nav.py test + per-scenario end-to-end worked example.
 
-### Existing scenario_ids (current ontology — Step 3 input baseline)
+### Existing scenario_ids (current ontology — Step 3 input baseline) [reader-test:FR-03]
 
 The ontology currently defines **6 in-scope `novel.*` scenario_ids** (and 5
 `lyric.*` IDs which are out-of-scope per N.4.4). The 6 novel.* keepers
@@ -139,7 +139,7 @@ Use this benchmark.
 
 ## S — Steps
 
-You MUST execute these three numbered investigative steps in order. Each step has its own observation rule and its own SPEC.md output section.
+You MUST execute these four numbered investigative steps in order. Each step has its own observation rule and its own SPEC.md output section. [reader-test:FR-08]
 
 ### Step 1 — Content-template system design
 
@@ -235,7 +235,7 @@ it relaxes ONLY for prescriptive design choices in Step 2.
 **ReAct loop for this step:**
 
 1. **Observe**: count §3.4 scenarios (call it `N`). Count §1.2 archetype skeletons (call it `K`).
-2. **Reason**: the Epic's child Tasks fall into four cohorts. Cohort sizes
+2. **Reason** [reader-test:FR-05]**:** the Epic's child Tasks fall into four cohorts. Cohort sizes
    are derived from §1.2 archetype count (`K`) and §3.4 scenario count
    (`N`); do NOT hard-code:
    - **Foundation cohort** (≥ 3 Tasks; one per: meta-template + per-archetype
@@ -333,10 +333,10 @@ updated: <ISO>
 
 ## §4 — Epic decomposition recommendation
 
-### §4.1 Cohort 1 — Foundation (3 Tasks)
+### §4.1 Cohort 1 — Foundation (≥ 3 Tasks; justify cardinality from §1.2)
 ### §4.2 Cohort 2 — Discovery confirmation (1 Task)
-### §4.3 Cohort 3 — Authoring (N Tasks)
-### §4.4 Cohort 4 — Integration (2 Tasks)
+### §4.3 Cohort 3 — Authoring (N Tasks; N = §3.4 row count)
+### §4.4 Cohort 4 — Integration (≥ 2 Tasks; justify cardinality from §3.5)
 ### §4.5 Dependency graph (Mermaid)
 ### §4.6 Critical-path analysis
 
@@ -376,7 +376,7 @@ These are RFC-2119 normative.
 ### N.3 Bilingual contract
 
 - N.3.1 SPEC.md is **EN throughout** (matches `dramatica-theory`).
-- N.3.2 The §1.1 meta-template wrapper MUST mandate EN-throughout for all `scenarios/<id>.md` it produces, with a frontmatter check (`prompt_language: en`) the linter can enforce.
+- N.3.2 The §1.1 meta-template wrapper MUST mandate EN-throughout for all `scenarios/<id>.md` it produces. Task 079 registers `type: scenario` in `maintenance/schemas/header-ontology.json`; recommend either (a) a `scenario_language: en` frontmatter field on the new namespace (preferred — machine-enforceable), or (b) a body-convention rule applied at content review (no frontmatter change). The L1 schema lacks a generic `language` key today, so do NOT recommend reusing `prompt_language` — it lives in the `prompt_*` namespace and would constitute cross-namespace bleed.
 
 ### N.4 Out-of-scope
 
@@ -385,7 +385,7 @@ These are RFC-2119 normative.
 - N.4.3 Do NOT modify `nav.py` source (you spec the new subcommand in §2 and §4; child Tasks implement).
 - N.4.4 Do NOT cover `lyric.*` scenarios — the suno-lyric-writer skill owns those.
 
-### N.5 Reader-test (Phase-4 audit) findings reception
+### N.5 Reader-test (Phase-4 audit) findings reception [reader-test:FR-07]
 
 The prompt-author ran a fresh-frame reader-test on this prompt before you
 received it. Audit findings folded back in are marked with the inline tag
@@ -417,7 +417,7 @@ The research run is **accepted** when:
 3. `tools/lint-linkage.py` confirms `research_executes_prompt: dramatica-scenarios-foundation` resolves to this prompt.
 4. `reflection/friction-log.md` exists with a parseable `Highest Frustration Level: FL[0-3]` line.
 5. The §6 citation index has ≥ 30 distinct (file, line) tuples AND satisfies the cross-corpus balance from N.1.4 (≥ 5 per corpus).
-6. The §3.4 FINAL scenario taxonomy has ≥ 9 entries — the 6 existing `novel.*` keepers as a floor, plus at least 3 ADD-verdicted additions from §3.3. Stricter than "several more" — concrete number.
+6. The §3.4 FINAL scenario taxonomy has ≥ 9 entries — the 6 existing `novel.*` keepers as a floor, plus at least 3 ADD-verdicted additions from §3.3. Stricter than "several more" — concrete number. [reader-test:FR-06]
 7. The §4.5 dependency graph is a valid Mermaid `graph TD` block (renders without syntax error).
 
 ## Authoring metadata

@@ -2,7 +2,7 @@
 type: task
 status: active
 slug: dramatica-scenarios-content-template
-summary: "Cohort-1 Foundation Task in the dramatica-scenarios Epic (078). Materialize the SPEC.md §1 content-template SYSTEM as skills/dramatica-theory/scenarios/_template/ — the meta-template wrapper + one skeleton per archetype identified in §1.2 — so the Cohort-3 authoring Tasks have stable scaffolds to fill."
+summary: "PROVISIONAL stub (final scope from SPEC.md §4 of research/dramatica-scenarios-foundation/). Cohort-1 Foundation Task in the dramatica-scenarios Epic (078). Materialize the SPEC.md §1 content-template SYSTEM as skills/dramatica-theory/scenarios/_template/ — the meta-template wrapper + one skeleton per archetype identified in §1.2 — so the Cohort-3 authoring Tasks have stable scaffolds to fill."
 created: 2026-05-11
 updated: 2026-05-11
 task_id: "079"
@@ -13,7 +13,7 @@ task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "078"
+  - 078
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
@@ -23,6 +23,14 @@ task_affects_paths:
 
 # Task 079 — Content-template system for scenarios
 
+> **🔶 PROVISIONAL STUB** — this Task's scope is locked at the cohort level
+> (Cohort-1 Foundation: content-template scaffold) but its detailed
+> acceptance criteria below SHOULD be reconciled against SPEC.md §1
+> once the foundational research run completes. If §1.2 surfaces
+> additional archetypes warranting a separate scaffold Task, this Task
+> MAY be split (use `task_supersedes`/`task_superseded_by`). Do not start
+> implementation until SPEC.md §1 has landed. (Per Epic 078 Phase A step 3.)
+
 ## Goal
 
 Materialize SPEC.md §1 (Content-template system) from the
@@ -31,25 +39,44 @@ Materialize SPEC.md §1 (Content-template system) from the
 Cohort-3 authoring Task a stable starting point so per-scenario authors
 do not invent their own structures.
 
-`done` when:
+## Acceptance
 
-1. `skills/dramatica-theory/scenarios/_template/wrapper.md` — the meta-
-   template wrapper from SPEC.md §1.1 (frontmatter schema + mandatory
-   body sections + cross-reference rules + EN-throughout discipline).
-2. `skills/dramatica-theory/scenarios/_template/_archetypes/<archetype>.md`
-   — one file per archetype identified in SPEC.md §1.2 (likely:
-   `slot-fill.md`, `audit.md`, `arc-design.md`, plus any new archetypes
-   §1.2 surfaces).
-3. `skills/dramatica-theory/scenarios/_template/readme.md` — index
-   explaining the wrapper-plus-archetype pattern and how a per-scenario
-   author chooses an archetype.
-4. `maintenance/schemas/header-ontology.json` updated with a `scenario`
-   type registration (per SPEC.md §1.1 frontmatter spec) so
-   `tools/fm/validate.py --check-body` enforces the contract on
-   `skills/dramatica-theory/scenarios/*.md`.
-5. A minimal hand-authored proof-of-concept `<archetype>-example.md` for
-   one archetype demonstrates the scaffold is fillable end-to-end without
-   inventing new sections.
+```gherkin
+Feature: Content-template system materialized
+
+# anchor: 079.AC.1
+Scenario: Meta-template wrapper exists
+  Given SPEC.md §1.1 has specified the wrapper schema
+  When this Task closes
+  Then "skills/dramatica-theory/scenarios/_template/wrapper.md" MUST exist
+   And it MUST encode the frontmatter schema, mandatory body sections, cross-reference rules, and EN-throughout discipline from SPEC.md §1.1
+
+# anchor: 079.AC.2
+Scenario: One archetype skeleton per §1.2 archetype
+  Given SPEC.md §1.2 has enumerated archetype skeletons
+  When this Task closes
+  Then "skills/dramatica-theory/scenarios/_template/_archetypes/<archetype>.md" MUST exist for every archetype in §1.2
+
+# anchor: 079.AC.3
+Scenario: Template readme.md explains the pattern
+  Given the wrapper + archetype files exist
+  When this Task closes
+  Then "skills/dramatica-theory/scenarios/_template/readme.md" MUST explain wrapper-plus-archetype composition and how an author chooses an archetype
+
+# anchor: 079.AC.4
+Scenario: `type: scenario` body-schema registered
+  Given SPEC.md §1.1 has specified the frontmatter contract
+  When this Task closes
+  Then "maintenance/schemas/header-ontology.json" MUST register `type: scenario` with the §1.1 body-schema
+   And `tools/fm/validate.py --check-body skills/dramatica-theory/scenarios/` MUST exit 0 on a sample scenario file
+
+# anchor: 079.AC.5
+Scenario: Proof-of-concept fill validates the scaffold
+  Given one archetype skeleton is selected
+  When a minimal hand-authored example is produced
+  Then it MUST pass `--check-body`
+   And SHOULD NOT require inventing any new sections beyond those declared in wrapper.md + the archetype skeleton
+```
 
 ## Context
 
