@@ -15,7 +15,7 @@ Welcome, agent. This repository manages development and deep research tasks.
 
 **Before committing any work:** You MUST review and abide by the checks defined in [PRE_COMMIT.md](./PRE_COMMIT.md).
 
-**Last step of every Claude Code run:** After your final commit and push succeed, you MUST invoke `/sc:createPR` to open a pull request for review. See [§ Closing Run Procedure (Claude Code)](#closing-run-procedure-claude-code) below for the binding rule.
+**Last step of every session (all agents):** After your final commit and push succeed, you MUST satisfy the platform-agnostic closing checklist defined in [§ Closing Run Procedure](#closing-run-procedure) below. Claude Code implements step 4 via `/sc:createPR`; Jules and Gemini implement it via their platform-native PR primitives — the checklist is the binding contract, not any single implementation.
 
 ## Theoretical Foundations
 
@@ -73,45 +73,101 @@ You MUST abide by the rules defined in [FOLDERS.md](./FOLDERS.md).
 
 We rely on your honest feedback to improve these protocols. You MUST consult [FRUSTRATED.md](./FRUSTRATED.md) to accurately log the Frustration Level (FL) associated with your task. **This is a mandatory step for every session, even if everything went perfectly (FL0).**
 
-## Closing Run Procedure (Claude Code)
+## Closing Run Procedure
 
-This section binds the *final* step of every Claude Code session. It applies to Claude Code only; Jules and Gemini agents follow their own platform conventions.
+This section binds the *final* step of every session, regardless of platform. The four-step checklist below is the contract; each agent platform satisfies it through whichever primitive is native to its runtime. Claude Code MUST satisfy step 4 via `/sc:createPR`; Jules and Gemini MUST satisfy it via their respective platform-native PR mechanisms. **No platform may skip any step.**
 
-### Skill Provenance
+### Platform-Agnostic Checklist
 
-The `/sc:createPR` slash-command is provided by the **SuperClaude Framework** at [`src/superclaude/commands/createPR.md`](https://github.com/netzkontrast/SuperClaude_Framework/blob/main/src/superclaude/commands/createPR.md). It is installed automatically alongside the rest of the `/sc:*` command set; no per-repository setup is required beyond having SuperClaude available in the session.
+Every agent session MUST satisfy these four steps, in order, before declaring the session complete:
+
+1. **Friction log written and committed.** The session's `friction-log.md` MUST exist with a parseable `Highest Frustration Level: FL[0-3]` declaration in the body (per [FRUSTRATED.md §FL.Log](./FRUSTRATED.md)). Standard sessions MAY substitute a `## Frustration Log` section in the PR body or commit message; research runs MUST write `/research/<slug>/reflection/friction-log.md`. **FL0 is mandatory even on perfect runs — absence of a log is itself a defect.**
+2. **`tasks/readme.md` index synced.** If any Task changed status (`open` → `done`, `done` → `updated`, …) in this session, the corresponding bullet under [`/tasks/readme.md`](./tasks/readme.md) MUST be updated in the same commit set. The `tools/fm/index_diff.py` gate (PRE_COMMIT.md §7.11) blocks drift mechanically.
+3. **Pre-commit gate green.** [`tools/check-governance.sh`](./tools/check-governance.sh) MUST exit 0 on the final commit. A failing or unverified working tree MUST NOT be promoted to a pull request. Agents MUST NOT bypass with `--no-verify`, `--no-gpg-sign`, or equivalent.
+4. **Pull request opened (or confirmed as already covering the pushed commits).** The agent MUST open a draft pull request via the platform's PR-creation primitive against the configured upstream branch, or confirm an existing PR already covers the pushed commits. The PR body MUST cite (a) the closed Task slug(s) under `/tasks/` if any, and (b) the FL declaration from the friction log.
+
+Step 4 MUST be idempotent: re-invocation on a branch that already has an open pull request MUST be a no-op. Agents MUST NOT create duplicate PRs to "force-update" an existing one — pushing additional commits to the same branch updates the open PR automatically.
 
 ### Normative Rules
 
-- **CR.1** A Claude Code agent MUST invoke `/sc:createPR` as the final action of every session, immediately after a successful `git push`.
-- **CR.2** The agent MUST NOT consider a session complete until `/sc:createPR` has either (a) opened a new pull request, or (b) returned an explicit no-op confirmation that an existing PR already covers the pushed commits.
-- **CR.3** The agent MUST NOT invoke `/sc:createPR` if pre-commit checks (per [PRE_COMMIT.md](./PRE_COMMIT.md)) failed or were skipped. A failing or unverified working tree MUST NOT be promoted to a PR. The `/sc:createPR` skill itself enforces this gate by re-running `tools/check-governance.sh` before opening the PR.
-- **CR.4** If `/sc:createPR` errors out, the agent MUST NOT silently exit — the error MUST be reported to the user with the exact command output, and the session MUST remain in `in_progress` for the operator to triage.
-- **CR.5** The PR body created by `/sc:createPR` MUST reference (a) the closed Task slug(s) under `/tasks/` if any, and (b) the FL declaration from the friction log per [FRUSTRATED.md](./FRUSTRATED.md).
-- **CR.6** Re-invocation of `/sc:createPR` on a branch that already has an open pull request MUST be a no-op (the skill is idempotent). Agents MUST NOT create duplicate PRs to "force-update" an existing one — pushing additional commits to the same branch updates the open PR automatically.
+- **CR.1** Every agent (any platform) MUST satisfy the four-step checklist before declaring a session complete; the steps MUST be performed in order.
+- **CR.2** An agent MUST NOT consider a session complete until step 4 has either (a) opened a new pull request, or (b) confirmed an existing PR already covers the pushed commits.
+- **CR.3** An agent MUST NOT advance past step 3 if pre-commit checks (per [PRE_COMMIT.md](./PRE_COMMIT.md)) failed or were skipped. A failing working tree MUST NOT be promoted to a PR.
+- **CR.4** If the platform's PR-creation primitive errors out, the agent MUST NOT silently exit — the error MUST be reported to the user with the exact command output, and the session MUST remain in `in_progress` for the operator to triage.
+- **CR.5** The PR body opened in step 4 MUST reference (a) the closed Task slug(s) under `/tasks/` if any, and (b) the FL declaration from the friction log per [FRUSTRATED.md](./FRUSTRATED.md).
+- **CR.6** Step 4 invocations on a branch with an open pull request MUST be a no-op. Agents MUST NOT create duplicate PRs.
+- **CR.7** Each platform implementation note below specifies how step 4 is satisfied on that platform. Adding a new platform to this repo MUST be accompanied by a new implementation note in this section, not by a new normative rule.
 
-### Gherkin Scenario
+### Platform Implementation Notes
+
+#### Claude Code
+
+Step 4 is satisfied by invoking the `/sc:createPR` slash-command immediately after a successful `git push`. The command is provided by the **SuperClaude Framework** at [`src/superclaude/commands/createPR.md`](https://github.com/netzkontrast/SuperClaude_Framework/blob/main/src/superclaude/commands/createPR.md); it is installed automatically alongside the rest of the `/sc:*` command set. The skill re-runs `tools/check-governance.sh` before opening the PR (defence-in-depth on CR.3) and assembles the citation block CR.5 requires.
+
+If the cloud-hosted GitHub MCP integration is the agent's only path to GitHub (no local `gh` CLI), the agent MUST use the `mcp__github__create_pull_request` tool with the same body conventions; the four-step checklist applies unchanged.
+
+#### Jules
+
+Jules sessions satisfy step 4 by opening a draft pull request through the Jules-native PR primitive (Jules ships GitHub integration; the agent calls into it as part of the session-close routine). The PR body MUST carry the same Task-slug + FL citations CR.5 requires. There is no `/sc:createPR` equivalent on Jules; the implementation note for Jules is "use the platform's GitHub primitive directly, with the body shape this section mandates."
+
+#### Gemini
+
+Gemini Deep Research sessions execute against an external research surface, not a Git working tree; step 4 on Gemini is satisfied by writing the research output back into this repo via a follow-on integration Task (RESEARCH.md §6.5) that then opens its own PR per the Claude Code / Jules path. **Gemini sessions therefore satisfy steps 1–3 in the source environment, and step 4 is satisfied by the integration Task's agent (Claude or Jules) once the artefacts land in this repo.** The integration Task MUST cite the originating Gemini research slug in its PR body.
+
+#### Adding a new platform
+
+A new agent platform (e.g., Devin, Codex, future SDK harness) MAY be added to this section. The PR introducing it MUST add a new "Platform Implementation Notes" subsection that names the platform's PR primitive and confirms steps 1–3 are achievable in the platform's runtime. If any step is not achievable, the PR MUST also propose either a delegation pattern (like Gemini's above) or an amendment to the checklist itself.
+
+### Gherkin Scenarios
 
 ```gherkin
-Feature: Claude Code closes every run with /sc:createPR
+Feature: Every agent closes every run with the four-step checklist
 
   # anchor: CR.1.1
-  Scenario: Successful run ends with PR creation
+  Scenario: Claude Code session closes with /sc:createPR
     Given a Claude Code session has finished its work
     And the agent has committed and pushed all changes
     And tools/check-governance.sh exited 0 on the final commit
+    And the friction-log.md carries a "Highest Frustration Level: FL[0-3]" line
+    And tasks/readme.md reflects the new task_status frontmatter
     When the agent reaches the end of the session
     Then the agent MUST invoke /sc:createPR before declaring the session complete
     And the resulting pull request body MUST cite the closed Task slug(s) and the FL declaration
 
   # anchor: CR.1.2
-  Scenario: Pre-commit failure blocks PR creation
-    Given a Claude Code session is finishing
+  Scenario: Pre-commit failure blocks step 4 on any platform
+    Given any agent (Claude / Jules / future) is finishing a session
     And tools/check-governance.sh exited non-zero on the most recent commit attempt
-    When the agent considers invoking /sc:createPR
-    Then the agent MUST NOT invoke /sc:createPR
+    When the agent considers advancing to step 4
+    Then the agent MUST NOT open a pull request
     And the agent MUST report the linter diagnostics to the user
     And the session MUST remain open for triage
+
+  # anchor: CR.1.3
+  Scenario: Jules session closes via platform-native PR primitive
+    Given a Jules session has finished its work
+    And the agent has committed and pushed all changes
+    And tools/check-governance.sh exited 0 on the final commit
+    When the agent reaches step 4
+    Then the agent MUST open a draft pull request via the Jules-native GitHub primitive
+    And the PR body MUST cite the closed Task slug(s) and the FL declaration
+
+  # anchor: CR.1.4
+  Scenario: Gemini session delegates step 4 to an integration Task
+    Given a Gemini Deep Research session has produced an output artefact
+    And the artefact is destined for this repo
+    When the Gemini session ends
+    Then steps 1-3 MUST have been satisfied in Gemini's source environment
+    And step 4 MUST be deferred to a follow-on integration Task agent
+    And the integration Task's PR body MUST cite the originating Gemini research slug
+
+  # anchor: CR.1.5
+  Scenario: Re-invocation on an open PR is a no-op
+    Given any agent has already opened a pull request for the current branch
+    When the agent re-invokes step 4 (for any reason)
+    Then the primitive MUST detect the existing PR
+    And the primitive MUST NOT create a duplicate PR
+    And subsequent commits pushed to the same branch MUST update the existing PR automatically
 ```
 
 ## Task Type Routing
