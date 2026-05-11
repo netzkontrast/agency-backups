@@ -42,6 +42,8 @@ delegiert. Stellt Strukturschablonen + Storyform-Decision-Support bereit.
 
 ## Verfügbare Methoden
 
+### Plot-Strukturen (Phase 2 + 5)
+
 | File | Struktur | Wann verwenden |
 |------|----------|----------------|
 | [`methods/40-chapter-matrix.md`](./methods/40-chapter-matrix.md) | 4×10-Kapitel-Grid | Long-form Roman, methodische Komposition |
@@ -50,6 +52,18 @@ delegiert. Stellt Strukturschablonen + Storyform-Decision-Support bereit.
 | [`methods/dramatica-quad.md`](./methods/dramatica-quad.md) | Fractal 4-Element Recursion | Dramatica-natives Storyforming |
 
 Strukturen sind kombinierbar (z.B. `40-chapter-matrix` als Top-Layer + `dramatica-quad` als Akt-Layer).
+
+### Storyform-Build-Loop (Phase 2, Task 072)
+
+| File | Loop | Wann verwenden |
+|------|------|----------------|
+| [`methods/storyform/worksheet-loop.md`](./methods/storyform/worksheet-loop.md) | 8-Step Dramatica Storyform Worksheet × 3-Gate Approval | Phase 2 Default — operationaler Walkthrough für OS/MC/IC/SS, Class Assignment, Dynamics, Story Points, Crucial Element, Signposts. Inline-Excerpts aus [`assets/decision-heuristic-quick-ref.md`](./assets/decision-heuristic-quick-ref.md) pro Step 2–7. Source-SSoT: `dramatica-theory/references/00-storyform-worksheet.md`. |
+
+### Validation (Phase 2.11, Task 073)
+
+| File | Funktion | Wann verwenden |
+|------|----------|----------------|
+| [`methods/validation/hard-rules.md`](./methods/validation/hard-rules.md) | Auto-Check Pipeline für 12 Hard Rules H1–H12 aus `00-storyform-validation.md` | Mandatorisch vor Gate 3 — der Worksheet-Loop delegiert Phase 2.11 Validation an diese Pipeline. |
 
 ## Delegation Contract
 

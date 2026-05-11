@@ -101,9 +101,24 @@ gates:
   gate_2_classes_dynamics_storypoints:  { approved: false, edits: 0 }
   gate_3_final_architecture:            { approved: false, edits: 0 }
 
-# Worksheet-Step completion audit. Phase 2.11 sets each flag as the
-# corresponding step writes its slots; the validation pass checks all
-# required flags are true before allowing Gate 3 approval.
+# Worksheet-Step completion audit.
+#
+# **Semantics (Task 072 deferred-machinery convention):** these flags are
+# the *human-readable audit trail* of which worksheet steps have committed
+# their slots. The orchestrator's Phase 2 loop SHOULD flip each flag to
+# `true` after the corresponding step's askuser approves and the slots are
+# written to this YAML — but there is no enforcing linter yet (see Task
+# 072 friction-log §"What rubbed"; a follow-up Task may wire
+# `tools/fm/validate.py --check-body` to refuse Gate 3 approval when
+# required flags are missing).
+#
+# Until that linter ships, the flags are *descriptive*, not mechanical —
+# read them as a closure checklist for human reviewers. `render_architecture.py`
+# surfaces all 10 flags in the Phase 2 status-view so reviewers see the
+# audit shape immediately.
+#
+# Required to be `true` before Gate 3 approval: step_{0..7}, validation_pass.
+# `step_8_genre_mode_set` is optional (Step 8 is itself optional).
 worksheet_audit:
   step_0_intent_loaded:           false   # set true at Phase 2.2 (precondition)
   step_1_throughlines_named:      false

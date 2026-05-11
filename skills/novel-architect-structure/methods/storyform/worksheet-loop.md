@@ -143,7 +143,7 @@ to confirm the pair lookup.
 cap of 3 — split into 2 turns: Resolve+Growth, Approach+MentalSex).
 **Anti-pattern:** *"MC is logical, so must be Linear"* — Logic vs Feeling
 is a different distinction (Motivation Elements). Linear/Holistic is
-*reasoning strategy*. See [`10-decision-heuristics.md` "Linear vs Holistic — Anti-indicator"](../../../dramatica-theory/references/10-decision-heuristics.md).
+*reasoning strategy*. See [`10-decision-heuristics.md` §"Linear vs Holistic (Mental Sex)" — Anti-indicator](../../../dramatica-theory/references/10-decision-heuristics.md#linear-vs-holistic-mental-sex).
 
 ### §3.4 Step 4 — Plot Dynamics (4 binaries)
 
@@ -236,18 +236,40 @@ default; ask only if author requests genre-encoding work. See
 
 ### §3.9 Validation Pass
 
-Run [`00-storyform-validation.md`](../../../dramatica-theory/references/00-storyform-validation.md)
-hard checks. The minimum five:
+Run all **12 hard rules H1–H12** from
+[`dramatica-theory/references/00-storyform-validation.md`](../../../dramatica-theory/references/00-storyform-validation.md)
+(the canonical source numbering). Bound to worksheet steps:
 
-1. **Dynamic-pair complementarity** — OS+SS are partners; MC+IC are partners.
-2. **No character carries both elements of a dynamic pair.**
-3. **Goal is at Type level.**
-4. **Crucial Element is at Element level.**
-5. **MC Resolve ↔ Crucial Element coherence** (Change + problem, or Steadfast + solution).
+| H-rule | Source rule | Bound to step | Auto-checkable |
+|---|---|---|---|
+| **H1** | Exactly 4 throughlines (OS / MC / IC / SS) | Step 1 | ✓ |
+| **H2** | Each Class used exactly once across throughlines | Step 2 | ✓ |
+| **H3** | OS-SS and MC-IC are complementary dynamic pairs | Step 2 | ✓ |
+| **H4** | Story Goal sits at Type level | Step 5 | ✓ |
+| **H5** | Crucial Element sits at Element level | Step 6 | ✓ (`nav.py by-id`) |
+| **H6** | Crucial Element lives in the OS | Step 6 | ✓ (ontology lookup) |
+| **H7** | MC Resolve and Crucial Element role agree (Change↔problem, Steadfast↔solution) | Step 6 | ✓ |
+| **H8** | IC sits on the dynamic-pair partner of the Crucial Element | Step 6 | ✓ (`nav.py by-pair`) |
+| **H9** | No character carries both Elements of a dynamic pair | all steps | ✓ |
+| **H10** | Outcome × Judgment yields exactly one of the four endings | Step 4 | ✓ |
+| **H11** | Story Driver consistent across act transitions | Step 4 + 7 | ✓ |
+| **H12** | All four Signposts of a throughline are the four Types of that throughline's Class | Step 7 | ✓ |
+
+The five rules **especially highlighted** by `00-storyform-worksheet.md`'s
+own closing paragraph (H3, H4, H5, H7, H9) are the highest-yield checks —
+catch the largest fraction of authoring defects — but all 12 MUST run
+before Gate 3 approval (HR.M2.5).
+
+Task 073's
+[`novel-architect-structure/methods/validation/hard-rules.md`](../validation/hard-rules.md)
+catalogs the rules with deterministic auto-check pipelines (different
+internal numbering — see that file's §1 for the local-to-canonical
+mapping). Phase 2.11 of the Worksheet-Loop delegates the actual auto-check
+runs to Task 073's pipeline.
 
 Validation failures surface in the Gate 3 status-view with their
-`00-storyform-validation.md` rule ID; the author can `Edit step N` to
-loop back to the violating step *without re-running the whole gate*.
+canonical H-rule ID; the author can `Edit step N` to loop back to the
+violating step *without re-running the whole gate*.
 
 ---
 
@@ -312,9 +334,24 @@ intent.dramatica_storyform_count: single
 
 ### Phase 2.8 — Step 6 (askuser turn 6)
 
-- **Crucial Element: SELF-INTEREST.** (OS=Mind → look up Mind's 64 Elements via `nav.py`.) Lena (Change MC) must give it up.
-- **IC's opposing Element (dynamic-pair partner): MORALITY.** Vey holds it.
-- **Consistency check:** Change MC + Element-as-problem ✓.
+- **Crucial Element: EQUITY** (`el.equity`). OS=Mind → look up via
+  `nav.py by-id el.equity --include-pairs`. Aliases: balance, equilibrium,
+  evenness. Lena (Change MC) carries this as her *problem* — her unconscious
+  demand for a single balanced self — and gives it up at the climax.
+- **IC's opposing Element (dynamic-pair partner): INEQUITY** (`el.inequity`,
+  partner via `dp.equity-inequity` in `quad.order-chaos-el`). Vey holds it:
+  fragmentation = generative imbalance is liberation.
+- **Consistency check:** Change MC + Element-as-problem ✓ (quick-ref §10).
+- **H5/H6/H7/H8 validation pre-checks:** `el.equity.kind == "element"` ✓
+  (not a Variation); ontology-confirmed pair via `dp.equity-inequity` ✓;
+  MC Resolve=Change pairs with role=problem ✓; IC sits on the partner ✓.
+
+> *Authoring note: the source worksheet's own example for a Mind-class OS
+> uses To Kill A Mockingbird → `el.inequity` (Scout is Change → gives up
+> her prejudice). The `consciousness-novel` example uses the other member
+> of the same quad (`quad.order-chaos-el`) flipped: the MC carries Equity
+> (the demand for balance) rather than Inequity, because the consciousness-
+> fragmentation story argues that imbalance/multiplicity is the resolution.*
 
 ### Phase 2.9 — Step 7 (askuser turn 7)
 
@@ -329,7 +366,9 @@ Type-Quad for Mind = {Memory, Preconscious, Conscious, Subconscious}.
 
 ### Phase 2.11 — Validation pass (silent)
 
-All five hard checks pass. → **Gate 3: Approve**.
+All **12 hard checks H1–H12** pass — Phase 2.11 delegates to Task 073's
+[`methods/validation/hard-rules.md`](../validation/hard-rules.md) auto-check
+pipeline. → **Gate 3: Approve**.
 
 ### Phase 2.14 — Write architecture.yaml + NCP skeleton
 
@@ -356,7 +395,11 @@ written via `ncp-author`. Total askuser turns: **7** (within the 10-turn cap).
   `tools/dramatica-nav/nav.py` (AGENTS.md **NO.2**). Free-coined names
   are a Schema-drift defect — auto-reject in status-view.
 - **HR.M2.5 — Validation pass is mandatory.** Gate 3 cannot approve
-  until all 5 `00-storyform-validation.md` hard checks pass. Failures
+  until all 12 hard rules **H1–H12** from
+  [`dramatica-theory/references/00-storyform-validation.md`](../../../dramatica-theory/references/00-storyform-validation.md)
+  pass — delegated to Task 073's
+  [`methods/validation/hard-rules.md`](../validation/hard-rules.md)
+  auto-check pipeline. Failures surface with canonical H-rule ID and
   loop back to the violating step.
 
 ---

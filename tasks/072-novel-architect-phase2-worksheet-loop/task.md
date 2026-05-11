@@ -21,14 +21,16 @@ task_affects_paths:
   - skills/novel-architect/render/render_intent.py
   - skills/novel-architect/assets/intent-template.yaml
   - skills/novel-architect/phases/phase2-narrative-architecture.md
-  - skills/novel-architect/methods/readme.md
   - skills/novel-architect/assets/architecture-template.yaml
   - skills/novel-architect/phases/phase1-intent-capture.md
   - skills/novel-architect/render/tests/test_render_intent.py
   - skills/novel-architect-structure/methods/storyform/worksheet-loop.md
   - skills/novel-architect-structure/methods/storyform/readme.md
   - skills/novel-architect-structure/assets/decision-heuristic-quick-ref.md
-  - skills/novel-architect-structure/assets/readme.md
+  - skills/novel-architect/render/tests/conftest.py
+  - skills/novel-architect/render/render_architecture.py
+  - skills/novel-architect-structure/SKILL.md
+  - skills/novel-architect-structure/methods/readme.md
 ---
 
 # Task 072 — Phase 2 Worksheet-Loop

@@ -256,6 +256,16 @@ This satisfies HR.M2.3 (decision heuristic inline, not just linked).
 
 ---
 
-*Regenerated from `dramatica-theory/references/10-decision-heuristics.md`
-on 2026-05-12 (Task 072). When the source file changes, re-condense and
-bump this footer.*
+*Provenance, condensed 2026-05-11 (Task 072):*
+- *§§1–9 — condensed from [`dramatica-theory/references/10-decision-heuristics.md`](../../dramatica-theory/references/10-decision-heuristics.md)
+  (§Class choice, §Change vs Steadfast, §Start vs Stop, §Doer vs Beer,
+  §Linear vs Holistic, §Action vs Decision Driver, §Optionlock vs Timelock,
+  §Outcome × Judgment, §Goal level).*
+- *§10 — composed from [`dramatica-theory/references/00-storyform-worksheet.md` §Step 6](../../dramatica-theory/references/00-storyform-worksheet.md)
+  ("The Crucial Element is one of the 64 OS Character Elements … Consistency
+  check"); the source heuristics file does not contain a dedicated
+  §10-equivalent Crucial-Element section, so this §10 is **derived from the
+  worksheet's Step-6 prose**, not from `10-decision-heuristics.md`.*
+- *When `10-decision-heuristics.md` changes, re-condense §§1–9. When the
+  worksheet's Step 6 prose changes, re-condense §10. Bump this footer
+  date on either change.*

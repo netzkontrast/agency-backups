@@ -148,15 +148,31 @@ Komplette `architecture.yaml` zur Approval. User kann:
 - **Loop back to Phase 1** → Intent-Änderung nötig (e.g., the
   Resolve↔Crucial-Element check exposed an incoherent thematic argument).
 
-**Mandatory Validation gates** (auto, BEFORE the askuser):
-1. Dynamic-pair complementarity (OS+SS, MC+IC).
-2. No character carrying both Elements of a dynamic pair.
-3. Goal at Type level (`STORY_POINT_LEVEL_TOO_FINE` if violated).
-4. Crucial Element at Element level (not Type/Variation).
-5. MC Resolve ↔ Crucial Element coherence (Change+problem, or Steadfast+solution).
+**Mandatory Validation gates** (auto, BEFORE the askuser): alle 12 H-rules
+**H1–H12** aus
+[`dramatica-theory/references/00-storyform-validation.md`](../../dramatica-theory/references/00-storyform-validation.md)
+(canonical source numbering). Die fünf besonders hervorgehobenen Rules
+(H3, H4, H5, H7, H9) fangen den Großteil der Authoring-Defekte; alle 12
+MÜSSEN passen vor Gate 3.
 
-Failures surface in the status-view with the rule ID; the author can
-`Edit step N` to fix without re-running the whole gate.
+| H-rule | Bound to step | Auto-check |
+|---|---|---|
+| **H1** Exactly 4 throughlines | Step 1 | ✓ |
+| **H2** Each Class used exactly once | Step 2 | ✓ |
+| **H3** OS-SS and MC-IC complementary dynamic pairs | Step 2 | ✓ |
+| **H4** Story Goal at Type level | Step 5 (`STORY_POINT_LEVEL_TOO_FINE` if violated) | ✓ |
+| **H5** Crucial Element at Element level | Step 6 (`nav.py by-id` check) | ✓ |
+| **H6** Crucial Element lives in OS | Step 6 (ontology lookup) | ✓ |
+| **H7** MC Resolve ↔ Crucial Element role agree | Step 6 (Change↔problem, Steadfast↔solution) | ✓ |
+| **H8** IC sits on dynamic-pair partner of Crucial Element | Step 6 (`nav.py by-pair`) | ✓ |
+| **H9** No character carries both Elements of a dynamic pair | all steps | ✓ |
+| **H10** Outcome × Judgment = one of 4 endings | Step 4 | ✓ |
+| **H11** Story Driver consistent across act transitions | Step 4 + 7 | ✓ |
+| **H12** All 4 Signposts of a throughline = the 4 Types of that Class | Step 7 | ✓ |
+
+Failures surface in the status-view with the canonical H-rule ID; the
+author can `Edit step N` to fix without re-running the whole gate.
+Auto-check delegation: [`novel-architect-structure/methods/validation/hard-rules.md`](../../novel-architect-structure/methods/validation/hard-rules.md).
 
 ## §4 Delegations (verbindlich)
 
@@ -221,7 +237,11 @@ sind verboten — würden Schema-Drift erzeugen.
 - **HR.P2.4 — intent.yaml ist read-only in Phase 2.** Bei Edit-Wunsch
   zurück zu Phase 1 — surface in der status-view.
 - **HR.P2.5 — Validation pass bestanden muss sein** vor Gate-3-Askuser.
-  Alle 5 hard checks aus `00-storyform-validation.md` MÜSSEN passen.
+  Alle 12 hard rules **H1–H12** aus
+  [`dramatica-theory/references/00-storyform-validation.md`](../../dramatica-theory/references/00-storyform-validation.md)
+  (canonical numbering) MÜSSEN passen — delegiert an Task 073's
+  [`novel-architect-structure/methods/validation/hard-rules.md`](../../novel-architect-structure/methods/validation/hard-rules.md)
+  auto-check pipeline. Failures surfacen mit canonical H-rule-ID.
 - **HR.P2.6 — Bei dual storyform:** Throughline-für-Throughline durch
   BEIDE narratives simultan. Niemals A komplett vor B. Each worksheet
   step asks "what's the OS for A?" + "what's the OS for B?" together.
@@ -397,7 +417,8 @@ NCP slot mapping, see:
 - **[`assets/decision-heuristic-quick-ref.md`](../../novel-architect-structure/assets/decision-heuristic-quick-ref.md)** — inline-quotable heuristics for Steps 2–7 askuser calls.
 - **[`dramatica-theory/references/00-storyform-worksheet.md`](../../dramatica-theory/references/00-storyform-worksheet.md)** — the worksheet itself (theory SSoT).
 - **[`dramatica-theory/references/10-decision-heuristics.md`](../../dramatica-theory/references/10-decision-heuristics.md)** — full heuristics (the quick-ref is a condensation).
-- **[`dramatica-theory/references/00-storyform-validation.md`](../../dramatica-theory/references/00-storyform-validation.md)** — the 5 hard checks run in Phase 2.11.
+- **[`dramatica-theory/references/00-storyform-validation.md`](../../dramatica-theory/references/00-storyform-validation.md)** — the 12 hard rules H1–H12 run in Phase 2.11.
+- **[`novel-architect-structure/methods/validation/hard-rules.md`](../../novel-architect-structure/methods/validation/hard-rules.md)** — Task 073's deterministic auto-check pipeline for H1–H12.
 
 This Phase 2 file is the **gate-binding contract** (what gets asked, when,
 and how it ladders into 3 Gates). The method file is the **operational
