@@ -1,27 +1,77 @@
-# novel-architect
+---
+type: readme
+status: active
+slug: novel-architect-readme
+summary: Index for novel-architect@1.0.0 skill — methodengetriebene Roman-Architektur mit 8 Phasen, NCP-Integration, /sc:-Mapping
+created: 2026-05-11
+updated: 2026-05-11
+---
+
+# novel-architect (v1.0.0)
 
 ## What
->- Orchestrator für den deutschsprachigen Roman „Kohärenz Protokoll" (Hard-SF / Philosophical Horror, Dual-Storyform, 39 Kapitel, 13 Alters). State-Management läuft über NCP (Narrative Context Protocol v1.3.0) via ncp-author — Storyform A + B als zwei narratives, dynamics/storypoints/storybeats/moments als NCP-Entitäten. Nicht-strukturelle Canon-Daten (DKT, Prosa-Regeln, Mandate) in canon-meta.md. Lädt Workspace bei Session-Start, routet Skill-Pipeline (dramatica-theory, dramatica-vocabulary, ncp-author, memory-sync, research-prompt-optimizer, doc-coauthoring, drive-markdown-converter), packt sich nach signifikanten Schritten via skill-creator. Trigger — novel-architect, Kohärenz Protokoll, Roman Encoding, Storyweaving, Vortex, Throughline, Storyform A, Storyform B, NCP, ncp.json, Kanon, Kael, AEGIS, Juna, DKT, Kapitel-Entwurf, /analyze, /interview, /synthesize, /draft. Implizit bei Alters, Klimax, Dual-POV, Riss-Mandat, 39-Kapitel-Plan. NICHT bei Agency-System.
+
+Methodengetriebener Roman-Architektur-Orchestrator. Strukturiert die Entwicklung
+literarischer Langform (Roman, Novelle, Triptychon) in **8 klare Phasen** mit
+Hard Exit Gates, AskUserQuestion-Loops (≤3 Slots pro Call), File-First-Prinzip
+und progressivem Reference-Loading. State-Management über **NCP** (Narrative
+Context Protocol v1.3.0) via `ncp-author`. **Projekt-agnostisch** — alle
+projekt-spezifischen Daten leben unter `/home/claude/novel-projects/<slug>/`,
+niemals im Skill.
+
+**Vorgänger:** `novel-architect-legacy@0.3.3` (Kohärenz-Protokoll-spezifisch,
+deprecated). Migration via `scripts/bootstrap_project.sh kohaerenz-protokoll`.
 
 ## Why here
-Snapshot of the user-skill `/mnt/skills/user/novel-architect/` from a Claude.ai
-session (taken 2026-05-04). Version-controlled here so that other agents
-(Claude Code, Jules, gemini-cli) can read, audit, and propose changes via PR.
-The session-side copy under `/mnt/skills/user/` remains the live runtime
-"upstream" until a sync-back protocol is defined.
 
-## Top-level navigation
-- [SKILL.md](./SKILL.md)
-- [commands/](./commands/)
-- [references/](./references/)
-- [scripts/](./scripts/)
+Skill lebt in `/home/user/agency/skills/` und wird per Agency-Governance
+gepflegt (L1+L2 Frontmatter, `tools/fm/edit.py`, Pre-Commit-Hooks). Andere
+Agents (Claude Code, Jules, gemini-cli) können hier audit-en und via PR
+vorschlagen.
+
+## Top-level Navigation
+
+| File / Dir | Inhalt |
+|------------|--------|
+| [SKILL.md](./SKILL.md) | Pipeline-Übersicht, Frontmatter, Anti-Patterns, Reference-Index |
+| [phases/](./phases/) | 8 Phase-Detail-Files (Bootstrap → Iteration) |
+| [methods/](./methods/) | Selektierbare Methoden-Bibliothek (character/structure/conflict/research) |
+| [assets/](./assets/) | Template-Files (YAML + Markdown) |
+| [examples/](./examples/) | Worked Examples (projekt-agnostic) |
+| [render/](./render/) | Python-Helpers (io_helpers, render_intent, etc.) |
+| [commands/](./commands/) | /sc:-kompatible Sub-Commands (novel-start, novel-design, etc.) |
+| [references/](./references/) | Routing, NCP-Contract, /sc:-Mapping, Learnings, Significance |
+| [scripts/](./scripts/) | Bootstrap-Skript, Package-Skript, Utilities |
+
+## Quick Start
+
+1. Trigger den Skill (Phrasen wie „starte Roman", „neue Novelle", „/novel-start")
+2. **Phase 0** lädt oder erstellt Projekt-Workspace unter `/home/claude/novel-projects/<slug>/`
+3. **Phase 1** capturet Intent (Genre, Audience, Konflikt) via AskUserQuestion-Loop
+4. **Phase 2** baut Storyform-Architektur (Dramatica) mit 3 Approval-Gates
+5. **Phase 3-7** entwickeln Charaktere, Welt/Recherche, Scene Matrix, Drafts, Iteration
+
+Detail in [SKILL.md](./SKILL.md).
+
+## Migration vom Legacy
+
+Wenn du das Kohärenz-Protokoll-Projekt aus `novel-architect-legacy/` migrieren willst:
+
+```bash
+bash /home/user/agency/skills/novel-architect/scripts/bootstrap_project.sh kohaerenz-protokoll
+```
+
+Erstellt `/home/claude/novel-projects/kohaerenz-protokoll/` mit allen Legacy-Files
+und einer initialisierten `project-config.yaml`.
 
 ## Assumptions Log
-- Skill-internal subfolders (e.g. `references/`, `scripts/`, `agents/`) are
-  NOT given their own `readme.md`. Rationale: skills are governed by `SKILL.md`
-  and Anthropic's skill-creator conventions; adding per-subfolder readmes would
-  trigger "Structural Bloat" per `FRUSTRATED.md` (FL2 special-trigger). This
-  drift is logged once here and once globally in the PR Frustration Log.
-- The `name` and `description` shown above are extracted verbatim from
-  `SKILL.md` YAML frontmatter; if the skill is updated in `/mnt/skills/user/`,
-  this readme drifts until the next snapshot run.
+
+- Skill-interne Subfolders (`phases/`, `methods/`, etc.) bekommen jetzt eigene
+  `readme.md` für Progressive-Disclosure-Klarheit. Dies weicht von der älteren
+  v0.3.3 ab, wo subfolders keine eigenen Readmes hatten — Rationale: in v1.0.0
+  ist Skill modular genug, dass Subfolders eigene Navigation rechtfertigen.
+- `name` und `description` aus SKILL.md Frontmatter sind die Quelle der Wahrheit;
+  dieses readme.md drifted bei Inkonsistenz und muss reconciliert werden.
+- Projekt-spezifische Daten (NCP, canon-meta, progress) leben NICHT im Skill,
+  sondern unter `/home/claude/novel-projects/<slug>/`. Dies weicht von v0.3.3 ab,
+  wo `references/canon/` projekt-spezifische Daten enthielt.
