@@ -84,7 +84,29 @@ read_bundles() {
     | sed -e '/^$/d' -e 's/^- *//' -e 's/^"//' -e 's/"$//' || true
 }
 
-# Materialise one tools/<slug> source into <dest_root>/<basename>/ + sha256 sidecar.
+# Hash every tracked file under a tools/<slug> path at the given git ref.
+# Emits "<sha256>  <relative-path>" lines, sorted, with '.bundle.sha256'
+# excluded. The set is restricted to git-tracked files so __pycache__,
+# *.pyc, .pytest_cache, and similar runtime droppings never enter the
+# sidecar.
+hash_bundle_source() {
+  local slug_path="$1" ref="${2:-HEAD}"
+  ( cd "$REPO_ROOT" && \
+    git ls-tree -r --name-only "$ref" -- "$slug_path/" \
+    | grep -v '/\.bundle\.sha256$' \
+    | LC_ALL=C sort \
+    | while IFS= read -r tracked; do
+        # Hash the working-tree content (which matches HEAD when clean).
+        # Strip the slug_path/ prefix so the sidecar entries are slug-local.
+        local rel="${tracked#${slug_path}/}"
+        sha256sum "$tracked" | awk -v r="$rel" '{print $1"  ./"r}'
+      done \
+    | LC_ALL=C sort )
+}
+
+# Materialise one tools/<slug> source into <dest_root>/<basename>/ via
+# `git archive`. This respects .gitignore (no __pycache__ / *.pyc leak)
+# and yields the exact file set the sha256 sidecar tracks.
 materialise_bundle() {
   local slug_path="$1" dest_root="$2"
   local src="$REPO_ROOT/$slug_path"
@@ -99,24 +121,42 @@ materialise_bundle() {
     return 0
   fi
   mkdir -p "$dest_root"
-  rsync -a --delete --checksum "$src/" "$dst/"
-  ( cd "$src" && find . -type f ! -name '.bundle.sha256' \
-      -exec sha256sum {} \; | LC_ALL=C sort ) > "$dst/.bundle.sha256"
+  rm -rf "$dst"
+  mkdir -p "$dst"
+  # `git archive HEAD -- <slug_path>` emits a tarball with paths
+  # rooted at slug_path/<...>; strip the slug-path components so we
+  # land flat inside <dst>/.
+  local depth; depth="$(awk -F/ '{print NF}' <<<"$slug_path")"
+  if ! ( cd "$REPO_ROOT" \
+         && git archive --format=tar HEAD -- "$slug_path/" 2>/dev/null \
+         | tar -x --strip-components="$depth" -C "$dst" ) ; then
+    warn "git archive failed for $slug_path"
+    return 1
+  fi
+  hash_bundle_source "$slug_path" HEAD > "$dst/.bundle.sha256"
   return 0
 }
 
-# Compare a bundled copy against its repo source via sha256 sidecar.
-# Echoes "OK" or "DRIFT"; returns 0 in both cases (caller increments counters).
+# Hash every file in a bundled destination dir, excluding .bundle.sha256.
+hash_bundle_dest() {
+  local dst="$1"
+  ( cd "$dst" && \
+    find . -type f ! -name '.bundle.sha256' -print0 \
+    | LC_ALL=C sort -z \
+    | xargs -0 -I{} sha256sum {} \
+    | LC_ALL=C sort )
+}
+
+# Compare repo source ↔ bundled destination directly. Echoes "OK",
+# "DRIFT", or "MISSING"; returns 0 in all cases.
 diff_bundle() {
   local slug_path="$1" dest_root="$2"
-  local src="$REPO_ROOT/$slug_path"
   local base; base="$(basename "$slug_path")"
   local dst="$dest_root/$base"
   [[ -d "$dst" ]] || { echo MISSING; return 0; }
   local expected actual
-  expected="$( ( cd "$src" && find . -type f ! -name '.bundle.sha256' \
-                -exec sha256sum {} \; | LC_ALL=C sort ) )"
-  actual="$( [[ -f "$dst/.bundle.sha256" ]] && cat "$dst/.bundle.sha256" || echo "" )"
+  expected="$(hash_bundle_source "$slug_path" HEAD)"
+  actual="$(hash_bundle_dest "$dst")"
   if [[ "$expected" == "$actual" ]]; then
     echo OK
   else

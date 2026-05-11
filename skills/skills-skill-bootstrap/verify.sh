@@ -45,6 +45,33 @@ read_bundles_local() {
     | sed -e '/^$/d' -e 's/^- *//' -e 's/^"//' -e 's/"$//' || true
 }
 
+# Hash every git-tracked file under a tools/<slug> path at HEAD.
+# Mirrors sync.sh::hash_bundle_source so verify and sync agree on
+# the file set (no __pycache__/*.pyc leakage).
+hash_bundle_source() {
+  local slug_path="$1"
+  ( cd "$REPO_ROOT" && \
+    git ls-tree -r --name-only HEAD -- "$slug_path/" \
+    | grep -v '/\.bundle\.sha256$' \
+    | LC_ALL=C sort \
+    | while IFS= read -r tracked; do
+        local rel="${tracked#${slug_path}/}"
+        sha256sum "$tracked" | awk -v r="$rel" '{print $1"  ./"r}'
+      done \
+    | LC_ALL=C sort )
+}
+
+# Hash every file under a bundled destination directory.
+# Excludes the .bundle.sha256 sidecar itself.
+hash_bundle_dest() {
+  local dst="$1"
+  ( cd "$dst" && \
+    find . -type f ! -name '.bundle.sha256' -print0 \
+    | LC_ALL=C sort -z \
+    | xargs -0 -I{} sha256sum {} \
+    | LC_ALL=C sort )
+}
+
 log "Fetching origin/main..."
 git -C "$REPO_ROOT" fetch origin main --quiet
 MAIN_SHA="$(git -C "$REPO_ROOT" rev-parse origin/main)"
@@ -120,15 +147,15 @@ for skill_name in "${REPO_SKILLS[@]}"; do
   for slug_path in "${bundles[@]}"; do
     base="$(basename "$slug_path")"
     dst="$bundle_root/$base"
-    src="$REPO_ROOT/$slug_path"
     if [[ ! -d "$dst" ]]; then
       echo "BUNDLE-MISSING: $skill_name → $slug_path"
       (( BUNDLE_BAD++ )) || true
       continue
     fi
-    expected="$( ( cd "$src" && find . -type f ! -name '.bundle.sha256' \
-                  -exec sha256sum {} \; | LC_ALL=C sort ) )"
-    actual="$( [[ -f "$dst/.bundle.sha256" ]] && cat "$dst/.bundle.sha256" || echo "" )"
+    # Compare repo source ↔ bundled destination directly. The
+    # .bundle.sha256 sidecar is forensic-only; verify always re-hashes.
+    expected="$(hash_bundle_source "$slug_path")"
+    actual="$(hash_bundle_dest "$dst")"
     if [[ "$expected" == "$actual" ]]; then
       (( BUNDLE_OK++ )) || true
     else
