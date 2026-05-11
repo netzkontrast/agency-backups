@@ -45,3 +45,12 @@ OCEAN ergänzt Dramatica nicht 1:1, sondern *kalibriert*:
 - **Werte sind 0-100, nicht binär** — Persönlichkeit ist Spektrum
 - **Konsistenz im Draft prüfen** — neurotischer Charakter darf nicht plötzlich gelassen sein
 - **Trait-Veränderung über Arc = thematisch** — Big Five sagt Traits sind über Lebenszeit stabil; im Roman: Arc kann Traits *verschieben*, aber zentrale Werte bleiben
+
+## §5 NCP-Mapping
+
+Ein Big-Five-Charakter wird als ein `player` im NCP angelegt. Die OCEAN-Werte
+gehören NICHT direkt ins NCP-Schema — NCP modelliert Dramatica-Slots (archetype,
+perspectives, motivations), nicht Persönlichkeits-Traits. Speichere OCEAN-Werte
+in `character-architecture.yaml` (Schema 3) und referenziere den Player über
+`character_id` für Cross-Lookup. Optional: `custom_psycho_traits` Custom Field
+im NCP (Namespace `custom_*` per AGENTS.md NO.2).

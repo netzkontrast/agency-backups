@@ -65,3 +65,11 @@ Klassische Individuation:
 - **Archetypen sind nicht Personen** — sie sind Psyche-Funktionen. Mehrere Charaktere können denselben Archetyp tragen
 - **Individuation ist nichtlinear** — Rückfälle sind Teil des Prozesses
 - **Symbolische Motive müssen konsistent sein** — Wasser kann nicht zugleich „Tod" und „Geburt" sein, ohne dass das thematisiert wird
+
+## §6 NCP-Mapping
+
+Jung-Archetypen mappen auf Dramatica-Archetypen (siehe §4) — diese gehen direkt
+ins NCP `players[].archetype`. Individuations-Stage, Shadow-Content, symbolische
+Motive bleiben in `character-architecture.yaml` (Schema 3) und referenzieren
+den Player über `character_id`. Schatten-Projektion (`anima_animus_projection.target`)
+kann als `relationship` mit `kind: shadow_projection` modelliert werden.

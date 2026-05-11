@@ -46,15 +46,21 @@ Existiert /home/claude/novel-projects/ ?
 
 ### §3.2 `project_action: load_existing`
 
+> **Wichtig:** Auf einer NEUEN Projekt-Session existieren `intent.yaml`,
+> `architecture.yaml`, `character-architecture.yaml`, `scene-matrix.md` ggf.
+> noch nicht. Sie werden in den jeweiligen Phasen 1/2/3/5 erst geschrieben.
+> Lies nur, was vorhanden ist, und respektiere das Phase-Routing.
+
 1. Lade `project-config.yaml` aus `/home/claude/novel-projects/<slug>/`
 2. Lies `progress.md` — wo wurde aufgehört, was kommt als nächstes?
-3. Lies `<slug>.ncp.json` — strukturelle Canon-Daten
-4. Lies `canon-meta.md` — nicht-strukturelle Canon-Daten
-5. Lies `open-questions.md` — welche OQs blockieren was?
-6. Lies `learnings.md` — was lief in früheren Sessions suboptimal?
-7. **Konsistenz prüfen:** progress.md vs. NCP vs. canon-meta — drift?
-8. **Pre-Action-Sanity-Check:** gegen resolved-OQs abgleichen
-9. Empfiehl nächsten Schritt aus progress.md
+3. Lies `<slug>.ncp.json` — strukturelle Canon-Daten (falls vorhanden)
+4. Lies `canon-meta.md` — nicht-strukturelle Canon-Daten (falls vorhanden)
+5. Lies `open-questions.md` — welche OQs blockieren was? (falls vorhanden)
+6. Lies `learnings.md` — was lief in früheren Sessions suboptimal? (falls vorhanden)
+7. Lies bisherige Phase-Outputs (`intent.yaml`, `architecture.yaml`, etc.) — nur wenn vorhanden
+8. **Konsistenz prüfen:** progress.md vs. NCP vs. canon-meta — drift?
+9. **Pre-Action-Sanity-Check:** gegen resolved-OQs abgleichen
+10. Empfiehl nächsten Schritt aus progress.md
 
 ### §3.3 `project_action: demo`
 

@@ -54,3 +54,11 @@ psycho_config:
 - **Wing ist 4 oder 6** (benachbart), niemals andere
 - **Integration/Disintegration sind FIX pro Typ** (siehe Standard-Tabelle), nicht frei wählbar
 - **Level of Health beeinflusst alle Darstellungen** — Typ 5 Level 2 ≠ Typ 5 Level 7
+
+## §6 NCP-Mapping
+
+Enneagramm-Daten gehen NICHT direkt ins NCP-Schema. Speichere `type`, `wing`,
+`integration_path`, `disintegration_path`, `level_of_health` in
+`character-architecture.yaml` (Schema 3). Der `player` im NCP referenziert
+diesen Charakter über die `character_id`. Core Fear/Desire können in NCP als
+`motivations[]` mit `custom_*` Namespace gespeichert werden.

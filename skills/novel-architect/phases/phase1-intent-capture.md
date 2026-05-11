@@ -91,7 +91,7 @@ EXIT:
 - **Don't proceed on assumption.** „100% clarity" ist der Contract
 - **Surface contradictions.** Wenn Slot N Slot M widerspricht, beide in nächster status-view side-by-side; askuser resolved
 - **Mobile-friendly.** `single_select` über enum slots; free-text nur wenn genuinely offen
-- **Scope creep guard.** Phase 1 = *was wird geschrieben*, nicht *wie strukturiert*. Methoden, Frameworks, Cross-Pollination gehören in Phase 2-5
+- **Scope creep guard.** Phase 1 capturet *was wird geschrieben* + *welche Methoden zur Verfügung stehen* (Pre-Selektion). Die konkrete Storyform-Architektur, Throughline-Decisions und Scene-Strukturen gehören in Phase 2-5
 - **Chat minimalism.** Keine Status-Announcements; status-view file ist der User-Window
 
 ## §5 Edge Cases

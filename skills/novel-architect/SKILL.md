@@ -1,27 +1,18 @@
 ---
 name: novel-architect
 description: >-
-  Methodengetriebener Roman-Architektur-Orchestrator für die Entwicklung
-  literarischer Langform (Roman, Novelle, Triptychon). Strukturiert die Roman-
-  Entwicklung in 8 klare Phasen (Bootstrap, Intent Capture, Narrative
-  Architecture, Character Architecture, World & Research, Scene Matrix,
-  Drafting, Iteration) mit Hard Exit Gates, AskUserQuestion-Loops (≤3 Slots
-  pro Call), File-First-Prinzip und progressivem Reference-Loading. State-
-  Management läuft strikt über NCP (Narrative Context Protocol v1.3.0) via
-  ncp-author — Storyforms, Players, Storypoints, Storybeats, Moments leben
-  als JSON. Methoden-Bibliothek selektierbar pro Projekt (Character: TSDP,
-  Big Five, Enneagramm, Jung; Structure: 40-Kapitel-Matrix, Hero's Journey,
-  Save-the-Cat, Dramatica-Quad; Conflict: Philosophie/Science-as-Engine,
-  Dual-Storyform; Research: Domain-Mapping). /sc:-Mapping pro Phase
-  (sc:brainstorm, sc:design, sc:research, sc:workflow, sc:implement,
-  sc:reflect). Projekt-Workspaces leben unter /home/claude/novel-projects/
-  <slug>/, NICHT im Skill. Trigger — novel, roman, novella, narrative
-  architecture, storyform, throughline, dramatica, scene matrix, chapter
-  draft, character architecture, novel project, /novel-start, /novel-design,
-  /novel-research, /novel-scenes, /novel-draft, /novel-reflect. Implizit
-  bei Genre-Wahl (Hard-SF, Literary, Horror, Fantasy), Plot-Struktur-Frage,
-  Charakter-Architektur, Storyweaving. NICHT bei Agency-System-Tracks,
-  Suno-Lyrics, generischer Prosa ohne Roman-Scope.
+  Methodengetriebener Roman-Architektur-Orchestrator für literarische Langform
+  (Roman, Novelle, Triptychon). Strukturiert die Roman-Entwicklung in 8 Phasen
+  (Bootstrap, Intent, Narrative Architecture, Characters, World & Research,
+  Scene Matrix, Drafting, Iteration) mit Hard Exit Gates, AskUserQuestion-Loops
+  (≤3 Slots/Call) und NCP-State-Persistenz via ncp-author. Methoden-Bibliothek
+  selektierbar pro Projekt (Charakter, Struktur, Konflikt, Research). Projekt-
+  agnostisch — Workspaces leben unter /home/claude/novel-projects/<slug>/,
+  niemals im Skill. Trigger: novel, roman, novella, narrative architecture,
+  storyform, throughline, dramatica, scene matrix, chapter draft, /novel-start,
+  /novel-design, /novel-characters, /novel-research, /novel-scenes, /novel-draft,
+  /novel-reflect. Implizit bei Genre-Wahl, Plot-Struktur, Storyweaving. NICHT
+  bei Agency-System-Tracks, Suno-Lyrics, generischer Prosa ohne Roman-Scope.
 metadata:
   category: creative-writing
   source: user
@@ -36,9 +27,9 @@ metadata:
   triggers: >-
     novel-architect, novel, roman, novella, narrative architecture, storyform,
     throughline, dramatica, scene matrix, chapter draft, character
-    architecture, novel project, /novel-start, /novel-design, /novel-research,
-    /novel-scenes, /novel-draft, /novel-reflect, Roman planen, Roman
-    strukturieren, Charakter-Architektur, Storyweaving, 40-Kapitel-Matrix
+    architecture, novel project, /novel-start, /novel-design, /novel-characters,
+    /novel-research, /novel-scenes, /novel-draft, /novel-reflect, Roman planen,
+    Roman strukturieren, Charakter-Architektur, Storyweaving, 40-Kapitel-Matrix
   delegates_to: >-
     dramatica-theory, dramatica-vocabulary, ncp-author,
     research-prompt-optimizer, skill-creator, memory-sync (optional)
@@ -61,7 +52,7 @@ Workspace unter `/home/claude/novel-projects/<slug>/`, niemals im Skill selbst.
 
 | Phase | Goal | Output | Implementation |
 |-------|------|--------|----------------|
-| **Phase 0 — Bootstrap** | Workspace setup, Projekt laden/erstellen | `project-config.yaml` | `phases/phase0-bootstrap.md` |
+| **Phase 0 — Bootstrap** | Workspace setup, Projekt laden/erstellen | Workspace-Dir + `project-config.yaml` | `phases/phase0-bootstrap.md` |
 | **Phase 1 — Intent Capture** | Genre, Audience, Konflikt-Frage, Methoden-Auswahl | `intent.yaml` (approved) | `phases/phase1-intent-capture.md` |
 | **Phase 2 — Narrative Architecture** | Storyform, Throughlines, Dynamics (3 Gates) | `architecture.yaml` + NCP Skeleton | `phases/phase2-narrative-architecture.md` |
 | **Phase 3 — Character Architecture** | Players, Psycho-Modelle, Beziehungen | `character-architecture.yaml` + NCP `players[]` | `phases/phase3-character-architecture.md` |
@@ -284,6 +275,17 @@ Ein Checkpoint löst aus:
 - **Volume threshold** — 3+ neue Files oder ~2000 Wörter
 - **Session-End** — immer
 
+### NICHT signifikant (kein Package)
+
+- Term-Lookup in `dramatica-vocabulary`
+- Q&A ohne Canon-Berührung
+- Brainstorm ohne Festlegung
+- Reference-Reading
+- askuser-Antwort ohne approved-Slot-Setzung
+
+`progress.md` darf bei jedem nicht-trivialen Schritt cheap-updated werden. Packen
+passiert nur am Checkpoint.
+
 ---
 
 ## Constraints (nicht überschreibbar)
@@ -312,6 +314,9 @@ Ein Checkpoint löst aus:
 | Memory automatisch updaten ohne User-Wunsch | Memory-Sync ist outward-only und explizit opt-in |
 | Genre-spezifische Annahmen in den Skill hardcoden | Skill ist projekt-agnostisch; Genre kommt aus `intent.yaml` |
 | Bootstrap überspringen weil „User-Input klar ist" | Workspace muss existieren; ohne `project-config.yaml` kein Phase-Routing |
+| `dramatica_storyform_count: dual` ohne Begründung wählen | Dual verdoppelt Aufwand in Phase 2/3/5; nur bei explizit-gewünschter 5D-Interferenz |
+| Storyform-Wahl ohne `dramatica-theory` consult | Verletzt AGENTS.md NO.2; freie Element-Namen erzeugen NCP-Schema-Drift |
+| Asset-Templates als Reference statt Kopie nutzen | Templates sind Schablonen — beim Anlegen kopieren, nicht direkt referenzieren |
 
 ---
 

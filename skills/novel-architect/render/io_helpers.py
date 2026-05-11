@@ -19,7 +19,7 @@ Usage from phases:
 from __future__ import annotations
 
 import json
-import os
+import re
 import shutil
 import tempfile
 from datetime import datetime, timezone
@@ -29,11 +29,37 @@ from typing import Any
 import yaml  # type: ignore
 
 
+# ─── Slug validation ─────────────────────────────────────────────────────────
+
+
+_SLUG_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
+
+
+def validate_slug(slug: str) -> str:
+    """
+    Validate project slug is kebab-case. Returns the slug unchanged.
+    Raises ValueError on invalid input — fail fast at boundary.
+    """
+    if not isinstance(slug, str) or not slug:
+        raise ValueError(f"Slug must be a non-empty string, got: {slug!r}")
+    if not _SLUG_RE.match(slug):
+        raise ValueError(
+            f"Slug must be kebab-case (lowercase alphanumerics + hyphens), got: {slug!r}"
+        )
+    return slug
+
+
+def utcnow_iso() -> str:
+    """Return current UTC time as ISO-8601 with Z suffix (canonical form)."""
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 # ─── Path resolution ─────────────────────────────────────────────────────────
 
 
 def project_workspace(slug: str) -> Path:
     """Return the canonical project workspace path."""
+    validate_slug(slug)
     return Path(f"/home/claude/novel-projects/{slug}")
 
 
@@ -100,7 +126,7 @@ def append_revision(yaml_data: dict[str, Any], note: str) -> dict[str, Any]:
     if "revisions" not in yaml_data or not isinstance(yaml_data["revisions"], list):
         yaml_data["revisions"] = []
     yaml_data["revisions"].append({
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": utcnow_iso(),
         "note": note,
     })
     return yaml_data
@@ -121,7 +147,7 @@ def write_status_view(
     """
     ws = ensure_workspace(slug)
     path = ws / f"{phase}-status-view.md"
-    timestamp = datetime.now(timezone.utc).isoformat()
+    timestamp = utcnow_iso()
     content = (
         f"# {title}\n\n"
         f"> **Generated:** {timestamp}\n"
@@ -141,7 +167,7 @@ def write_plan_view(
     """Write a plan-view markdown (for Gate-3-Approval rendering)."""
     ws = ensure_workspace(slug)
     path = ws / f"{phase}-plan-view.md"
-    timestamp = datetime.now(timezone.utc).isoformat()
+    timestamp = utcnow_iso()
     content = (
         f"# {title}\n\n"
         f"> **Generated:** {timestamp}\n"
@@ -161,7 +187,7 @@ def write_audit_report(
     """Write Phase 7 audit-report.md."""
     ws = ensure_workspace(slug)
     path = ws / "audit-report.md"
-    timestamp = datetime.now(timezone.utc).isoformat()
+    timestamp = utcnow_iso()
     lines = [
         "# Audit Report",
         "",
