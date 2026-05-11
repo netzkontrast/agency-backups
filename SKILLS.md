@@ -4,7 +4,7 @@ status: active
 slug: skills-spec
 summary: "Root specification governing the /skills/ capability directory, the skill-bootstrap protocol, and the cross-agent portability contract."
 created: 2026-05-05
-updated: 2026-05-07
+updated: 2026-05-11
 ---
 
 # Skill Architecture Specification
@@ -210,6 +210,36 @@ Feature: Agent Bootstrap
     Then the agent MUST query `.skills-manifest.json` and the frontmatter index first
     And the agent MUST NOT open any `SKILL.md` body without first consulting the manifest
 ```
+
+### 7.2 Trust-Boundary Invariants (R5)
+
+Ratifies `research/skills-skill-architecture/output/SPEC.md` §6 R5. The skills-skill stub is the *immutable security perimeter* (read-only `/mnt/skills/user/`); skill bodies loaded from the repo at runtime are the attack surface. Any bootstrap implementation MUST enforce the four invariants below independent of repo content. Until a tooling implementation lands, the invariants bind by audit: a reviewer of [`skills/skills-skill-bootstrap/sync.sh`](./skills/skills-skill-bootstrap/sync.sh) (or any successor stub) MUST verify each clause holds.
+
+- **B.6 Repository lock.** The stub MUST contain a hardcoded `REPO_URL` and MUST NOT follow any redirection that changes the repository origin. Repo content MUST NOT be able to override the URL. (SPEC §6.1.1.)
+- **B.7 Version-reference declaration.** The stub MUST specify which reference it trusts (`main` branch or a pinned SHA via `SKILLS_SKILL_PIN`) and MUST NOT silently upgrade the reference in response to repo content. (SPEC §6.1.2.)
+- **B.8 Error surfacing.** The stub MUST surface all git errors to the user. It MUST NOT silently succeed when the clone is stale or the network is down. The staleness warning required by `B.4` is one such surfaced error. (SPEC §6.1.3.)
+- **B.9 Scope containment.** The stub MUST only inject skill bodies from `skills/*/SKILL.md` (and `references/` on T3 escalation per §7.3 below). It MUST NOT load arbitrary files from the repo. (SPEC §6.1.4.)
+
+### 7.3 Three-Tier Content Ladder (R4)
+
+Ratifies `research/skills-skill-architecture/output/SPEC.md` §5 R4. The "small `SKILL.md` body, depth pushed to `references/`" discipline is now normative across every skill in this repo:
+
+| Tier | Content | When loaded | Max size (RECOMMENDED) |
+|---|---|---|---|
+| **T1 — Summary** | First ~200 chars of `SKILL.md` body (the trigger description, equivalent to the L1 `description` field) | Always, at routing time | 200 chars |
+| **T2 — Full body** | Complete `SKILL.md` content | When routing selects this skill | 5 KB |
+| **T3 — References** | Content from the skill's `references/` subdirectory | Only when the user (or the agent's own self-check) explicitly requests deeper detail | Unlimited (agent-controlled) |
+
+The ladder MUST NOT assume persistent state between turns; the routing layer (`B.5` manifest query) is the gate that re-establishes tier state every session. Skills whose `SKILL.md` body exceeds the 5 KB T2 target SHOULD migrate excess prose to `references/` and link to it from the body — this is the same discipline `tools/dramatica-nav/` already enforces for the dramatica corpus.
+
+### 7.4 Version-Pinning and Offline Mode (R7)
+
+Ratifies `research/skills-skill-architecture/output/SPEC.md` §8 R7. The bootstrap MUST honour two environment variables:
+
+- **`SKILLS_SKILL_PIN=<sha>`** — When set, the bootstrap MUST check out the specified SHA instead of advancing to HEAD. The specified SHA MUST be reachable from `origin/main`; the bootstrap MUST error if the SHA is not reachable. Pinning is RECOMMENDED for high-security or reproducible-workflow sessions.
+- **`SKILLS_SKILL_OFFLINE=1`** — When set, the bootstrap MUST skip the fetch entirely and use the cached clone unconditionally. The `B.4` staleness warning MUST NOT be raised in this mode; offline is *intentional*, not an error condition. The cached-clone freshness contract degrades to "as of last successful sync".
+
+These two variables interact with `AGENCY_SKILLS_ALLOW_STALE=1` (B.4) as follows: `SKILLS_SKILL_OFFLINE=1` is strictly stronger (no fetch at all); `AGENCY_SKILLS_ALLOW_STALE=1` only suppresses the > 24h gate but still attempts a fetch when network is available.
 
 ## 8. Cross-Agent Portability
 

@@ -80,6 +80,30 @@ if ! "$PYTHON" tools/adr/cli.py validate; then
 fi
 
 echo ""
+echo "--- [5b] JSON-Schema mirror divergence gate (Task 023) ---"
+# Regeneration-from-canonical check: the per-type mirror files under
+# maintenance/schemas/ MUST stay byte-identical to what
+# tools/fm/gen_schema_mirror.py emits from header-ontology.json. Drift
+# blocks commit; regenerate with `python3 tools/fm/gen_schema_mirror.py`.
+if ! "$PYTHON" tools/fm/gen_schema_mirror.py --check; then
+  FAIL=1
+fi
+
+echo ""
+echo "--- [5c] skills-query smoke (Task 022) ---"
+# Read-only smoke: verify the thin skills-query wrapper composes the
+# stateless fm-* tools without error on at least one well-known
+# operational slug. Wrapper output is bounded to 1 KB; no diff produced.
+if ! "$PYTHON" tools/fm/skills_query.py manifest >/dev/null; then
+  echo "skills-query: manifest subcommand failed"
+  FAIL=1
+fi
+if ! "$PYTHON" tools/fm/skills_query.py path flexible-frontmatter-toolchain >/dev/null; then
+  echo "skills-query: path subcommand failed"
+  FAIL=1
+fi
+
+echo ""
 echo "--- [adv] RFC 2119 polarity audit (Task 032 ST-3, ASM-001 mitigation) ---"
 # Advisory by default — emits WARN diagnostics for human review of candidate
 # MUST / MUST NOT polarity inversions. Pass --strict to gate the governance
