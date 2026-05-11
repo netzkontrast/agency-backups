@@ -1,6 +1,8 @@
 ---
 name: spec-skill
 description: "Authoring, applying, and auditing normative specifications for autonomous AI agents and long-horizon agentic workflows — using RFC-2119 keywords, Gherkin acceptance criteria, and a fixed five-aspect schema (Explore, Plan, Implement, Review, Validate). Use this skill whenever the user wants to write a spec or specification for an agent, codify best practices for a coding/research/orchestration agent, draft normative MUST/SHOULD/MAY statements, derive prompts or workflows from an existing spec, validate a spec for schema-conformance and BCP-14 compliance, or convert vague requirements into a structured Markdown agent-specification document. Triggers on terms like spec, specification, RFC-2119, BCP-14, normative statement, MUST/SHOULD/MAY, Gherkin, acceptance criteria, agent best practices, agentic workflow spec, codify conventions, spec-driven, prompt spec, agent governance, long-horizon agent, autonomous agent prompt, write a spec, audit a spec, derive prompts from spec."
+skill_bundles_tools:
+  - tools/fm
 ---
 
 # Spec-Skill — Normative Specifications for Agentic Workflows

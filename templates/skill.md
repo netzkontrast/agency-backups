@@ -11,6 +11,9 @@ skill_references_skills: []
 skill_references_research: []
 skill_references_prompts: []
 skill_bootstrap_required: true
+# skill_bundles_tools:        # OPTIONAL — ADR-0007
+#   - tools/fm                # frontmatter ops in the sandbox
+#   - tools/adr               # ADR validation (auto-requires tools/fm)
 ---
 
 # REPLACE WITH HUMAN-READABLE TITLE

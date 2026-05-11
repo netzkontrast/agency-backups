@@ -12,6 +12,9 @@ description: >-
   Agency", "Suno prompt Agency", "Track X der Trilogie". Delegates lyric craft to
   the suno-lyric-writer skill; owns the project-specific conceptual, narrative, and
   aesthetic gate.
+skill_bundles_tools:
+  - tools/fm
+  - tools/adr
 ---
 
 # The Agency System — Architect

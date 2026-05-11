@@ -1,17 +1,34 @@
 #!/usr/bin/env bash
-# sync.sh — pull skill bodies from origin/main:/skills/ into ~/.claude/skills/
+# sync.sh — materialise repo skills + declared tool bundles into ~/.claude/skills/
 #
-# Usage: sync.sh [--clean] [--target DIR] [--dry-run] [--list] [--help]
+# Usage: sync.sh [--clean] [--target DIR] [--dry-run] [--list]
+#                [--no-bundle] [--bundle-only] [--verify-bundles] [--help]
 #
-# --clean     also remove local skills absent from origin/main:/skills/
-# --target    override destination (default: ~/.claude/skills/)
-# --dry-run   print what would happen; make no changes
-# --list      list skills available in origin/main without syncing
-# --help      show usage
+# Phases per skill:
+#   1. Tree sync     — full skills/<name>/ tree from origin/main is staged
+#                      via `git archive` and atomically swapped in via rsync,
+#                      preserving the local scripts/_bundled/ namespace.
+#   2. Bundle copy   — `skill_bundles_tools` from the synced SKILL.md is read
+#                      via tools/fm/extract.py; each declared tools/<slug> is
+#                      mirrored into <target>/scripts/_bundled/<basename>/
+#                      with rsync --checksum, plus a .bundle.sha256 sidecar.
+#
+# Flags:
+#   --clean            remove local skills absent from origin/main:/skills/
+#   --target DIR       override destination (default: ~/.claude/skills/)
+#   --dry-run          print what would happen; make no changes
+#   --list             list skills available in origin/main without syncing
+#   --no-bundle        skip phase 2 (offline / fast path)
+#   --bundle-only      skip phase 1 (re-bundle after a /tools/ change)
+#   --verify-bundles   diff sources vs bundled copies; non-zero exit on drift
+#   --help             show usage
+#
+# Authority: decisions/0007-skill-bundles-tools-frontmatter.md (ADR-0007).
 #
 # Exit codes:
 #   0  success (including no-op when everything is already in sync)
-#   1  unexpected error (git failure, permission denied, SKILL.md missing, etc.)
+#   1  unexpected error (git failure, permission denied, SKILL.md missing,
+#      bundle source missing, or --verify-bundles detected drift)
 
 set -euo pipefail
 
@@ -22,21 +39,22 @@ TARGET_DIR="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 CLEAN_MODE=false
 DRY_RUN=false
 LIST_ONLY=false
+NO_BUNDLE=false
+BUNDLE_ONLY=false
+VERIFY_BUNDLES=false
 
 # ---------- argument parsing ----------
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --clean)    CLEAN_MODE=true;      shift ;;
-    --dry-run)  DRY_RUN=true;         shift ;;
-    --list)     LIST_ONLY=true;       shift ;;
-    --target)   TARGET_DIR="$2";      shift 2 ;;
+    --clean)           CLEAN_MODE=true;      shift ;;
+    --dry-run)         DRY_RUN=true;         shift ;;
+    --list)            LIST_ONLY=true;       shift ;;
+    --no-bundle)       NO_BUNDLE=true;       shift ;;
+    --bundle-only)     BUNDLE_ONLY=true;     shift ;;
+    --verify-bundles)  VERIFY_BUNDLES=true;  shift ;;
+    --target)          TARGET_DIR="$2";      shift 2 ;;
     --help)
-      echo "Usage: sync.sh [--clean] [--target DIR] [--dry-run] [--list] [--help]"
-      echo ""
-      echo "  --clean     remove local skills absent from origin/main:/skills/"
-      echo "  --target    override destination (default: ~/.claude/skills/)"
-      echo "  --dry-run   print what would change; make no changes"
-      echo "  --list      list skills in origin/main and exit (no changes)"
+      sed -n '2,32p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
       exit 0
       ;;
     *)
@@ -46,10 +64,65 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+if [[ "$NO_BUNDLE" == "true" && "$BUNDLE_ONLY" == "true" ]]; then
+  echo "sync.sh: --no-bundle and --bundle-only are mutually exclusive" >&2
+  exit 1
+fi
+
 # ---------- helpers ----------
 log()  { echo "[sync] $*"; }
 warn() { echo "[sync] WARN: $*" >&2; }
 dry()  { echo "[sync] DRY-RUN: $*"; }
+
+# Read skill_bundles_tools list from a SKILL.md via tools/fm/extract.py.
+# Emits one path per line on stdout (empty when key absent).
+read_bundles() {
+  local skill_md="$1"
+  [[ -f "$skill_md" ]] || return 0
+  python3 "$REPO_ROOT/tools/fm/extract.py" \
+    "$skill_md" --frontmatter skill_bundles_tools 2>/dev/null \
+    | sed -e '/^$/d' -e 's/^- *//' -e 's/^"//' -e 's/"$//' || true
+}
+
+# Materialise one tools/<slug> source into <dest_root>/<basename>/ + sha256 sidecar.
+materialise_bundle() {
+  local slug_path="$1" dest_root="$2"
+  local src="$REPO_ROOT/$slug_path"
+  local base; base="$(basename "$slug_path")"
+  local dst="$dest_root/$base"
+  if [[ ! -d "$src" ]]; then
+    warn "bundle source missing: $slug_path"
+    return 1
+  fi
+  if [[ "$DRY_RUN" == "true" ]]; then
+    dry "would bundle: $slug_path → $dst"
+    return 0
+  fi
+  mkdir -p "$dest_root"
+  rsync -a --delete --checksum "$src/" "$dst/"
+  ( cd "$src" && find . -type f ! -name '.bundle.sha256' \
+      -exec sha256sum {} \; | LC_ALL=C sort ) > "$dst/.bundle.sha256"
+  return 0
+}
+
+# Compare a bundled copy against its repo source via sha256 sidecar.
+# Echoes "OK" or "DRIFT"; returns 0 in both cases (caller increments counters).
+diff_bundle() {
+  local slug_path="$1" dest_root="$2"
+  local src="$REPO_ROOT/$slug_path"
+  local base; base="$(basename "$slug_path")"
+  local dst="$dest_root/$base"
+  [[ -d "$dst" ]] || { echo MISSING; return 0; }
+  local expected actual
+  expected="$( ( cd "$src" && find . -type f ! -name '.bundle.sha256' \
+                -exec sha256sum {} \; | LC_ALL=C sort ) )"
+  actual="$( [[ -f "$dst/.bundle.sha256" ]] && cat "$dst/.bundle.sha256" || echo "" )"
+  if [[ "$expected" == "$actual" ]]; then
+    echo OK
+  else
+    echo DRIFT
+  fi
+}
 
 # ---------- fetch origin/main ----------
 log "Fetching origin/main..."
@@ -57,8 +130,6 @@ git -C "$REPO_ROOT" fetch origin main --quiet
 MAIN_SHA="$(git -C "$REPO_ROOT" rev-parse origin/main)"
 
 # ---------- discover skill directories in repo ----------
-# -d --name-only: lists only tree objects (directories), names only.
-# This naturally skips non-directory entries like readme.md.
 REPO_SKILLS=()
 while IFS= read -r name; do
   [[ "$name" == "skills-skill-bootstrap" ]] && continue
@@ -87,41 +158,95 @@ fi
 SYNCED=0
 SKIPPED=0
 ERRORS=0
+BUNDLES_OK=0
+BUNDLES_DRIFTED=0
 
 mkdir -p "$TARGET_DIR"
 
 for skill_name in "${REPO_SKILLS[@]}"; do
   dest="$TARGET_DIR/$skill_name"
-  dest_file="$dest/SKILL.md"
+  bundle_root="$dest/scripts/_bundled"
 
-  # Write directly from git to avoid command-substitution stripping on large files
-  remote_tmp="$(mktemp)"
-  if ! git -C "$REPO_ROOT" show "origin/main:skills/$skill_name/SKILL.md" > "$remote_tmp" 2>/dev/null; then
-    warn "$skill_name: SKILL.md not found in origin/main:skills/$skill_name/ — skipping"
-    rm -f "$remote_tmp"
-    (( ERRORS++ )) || true
+  # ---------- Phase 1: tree sync ----------
+  if [[ "$BUNDLE_ONLY" != "true" ]]; then
+    stage="$(mktemp -d)"
+    if ! git -C "$REPO_ROOT" archive --format=tar origin/main \
+            "skills/$skill_name/" 2>/dev/null \
+            | tar -x --strip-components=2 -C "$stage" 2>/dev/null; then
+      warn "$skill_name: failed to extract skills/$skill_name/ from origin/main"
+      rm -rf "$stage"
+      (( ERRORS++ )) || true
+      continue
+    fi
+    if [[ ! -f "$stage/SKILL.md" ]]; then
+      warn "$skill_name: SKILL.md not present in origin/main — skipping"
+      rm -rf "$stage"
+      (( ERRORS++ )) || true
+      continue
+    fi
+
+    if [[ "$DRY_RUN" == "true" ]]; then
+      bundle_count=0
+      while IFS= read -r _; do (( bundle_count++ )) || true; done < <(read_bundles "$stage/SKILL.md")
+      dry "would sync tree: $skill_name → $dest (+ $bundle_count declared bundle(s))"
+      rm -rf "$stage"
+      (( SYNCED++ )) || true
+      continue
+    fi
+
+    # Detect no-op via SKILL.md cmp; if identical AND scripts/references match, skip.
+    if [[ -f "$dest/SKILL.md" ]] && cmp -s "$stage/SKILL.md" "$dest/SKILL.md"; then
+      # Tree may still differ; rsync with --checksum to skip identical files cheaply.
+      rsync -a --checksum --delete --exclude='scripts/_bundled/' \
+            "$stage/" "$dest/" >/dev/null
+      log "ok (tree in sync): $skill_name"
+      (( SKIPPED++ )) || true
+    else
+      mkdir -p "$dest"
+      rsync -a --checksum --delete --exclude='scripts/_bundled/' \
+            "$stage/" "$dest/" >/dev/null
+      log "synced: $skill_name"
+      (( SYNCED++ )) || true
+    fi
+    rm -rf "$stage"
+  fi
+
+  # ---------- Phase 2: bundle materialisation ----------
+  if [[ "$NO_BUNDLE" == "true" ]]; then
+    continue
+  fi
+  bundles=()
+  if [[ -f "$dest/SKILL.md" ]]; then
+    while IFS= read -r entry; do
+      [[ -z "$entry" ]] || bundles+=("$entry")
+    done < <(read_bundles "$dest/SKILL.md")
+  fi
+  if [[ ${#bundles[@]} -eq 0 ]]; then
     continue
   fi
 
-  # Check if already in sync
-  if [[ -f "$dest_file" ]] && cmp -s "$remote_tmp" "$dest_file"; then
-    log "ok (already in sync): $skill_name"
-    rm -f "$remote_tmp"
-    (( SKIPPED++ )) || true
+  if [[ "$VERIFY_BUNDLES" == "true" ]]; then
+    for slug_path in "${bundles[@]}"; do
+      status="$(diff_bundle "$slug_path" "$bundle_root")"
+      case "$status" in
+        OK)      (( BUNDLES_OK++ )) || true ;;
+        DRIFT|MISSING)
+          echo "BUNDLE-$status: $skill_name → $slug_path"
+          (( BUNDLES_DRIFTED++ )) || true
+          ;;
+      esac
+    done
     continue
   fi
 
-  if [[ "$DRY_RUN" == "true" ]]; then
-    dry "would sync: $skill_name → $dest_file"
-    rm -f "$remote_tmp"
-    (( SYNCED++ )) || true
-    continue
-  fi
-
-  mkdir -p "$dest"
-  mv "$remote_tmp" "$dest_file"
-  log "synced: $skill_name"
-  (( SYNCED++ )) || true
+  for slug_path in "${bundles[@]}"; do
+    if materialise_bundle "$slug_path" "$bundle_root"; then
+      (( BUNDLES_OK++ )) || true
+    else
+      (( ERRORS++ )) || true
+    fi
+  done
+  log "  bundled into $skill_name: ${bundles[*]}"
 done
 
 # ---------- clean mode: remove local skills absent from repo ----------
@@ -143,11 +268,12 @@ fi
 
 # ---------- summary ----------
 echo ""
-log "Sync complete: $SYNCED synced, $SKIPPED already-in-sync, $ERRORS errors"
+log "Sync complete: $SYNCED synced, $SKIPPED in-sync, $ERRORS errors"
+log "Bundles: $BUNDLES_OK ok, $BUNDLES_DRIFTED drifted"
 log "Source: origin/main @ ${MAIN_SHA:0:7}"
 log "Target: $TARGET_DIR"
 
-if [[ $ERRORS -gt 0 ]]; then
+if [[ $ERRORS -gt 0 || $BUNDLES_DRIFTED -gt 0 ]]; then
   exit 1
 fi
 exit 0

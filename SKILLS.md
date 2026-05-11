@@ -4,7 +4,7 @@ status: active
 slug: skills-spec
 summary: "Root specification governing the /skills/ capability directory, the skill-bootstrap protocol, and the cross-agent portability contract."
 created: 2026-05-05
-updated: 2026-05-07
+updated: 2026-05-11
 ---
 
 # Skill Architecture Specification
@@ -71,6 +71,7 @@ Every `SKILL.md` MUST carry these six L1 keys (full semantics in [TASK.md §3.2]
 | `skill_references_research` | list | Slugs of `/research/<slug>/` workspaces grounding the skill's claims. |
 | `skill_references_prompts` | list | Slugs of `/prompts/<slug>/` instruction sets the skill embeds or extends. |
 | `skill_bootstrap_required` | boolean | True if the skill cannot run without the bootstrap clone in the active workspace. |
+| `skill_bundles_tools` | list[str] | OPTIONAL. Repo-relative `tools/<slug>` paths that `skills/skills-skill-bootstrap/sync.sh` materialises into `<synced-skill>/scripts/_bundled/<basename>/` at sync time. Each entry MUST start with `tools/`, MUST resolve to an existing directory, and MUST contain no `..` segments. Introduced by [ADR-0007](./decisions/0007-skill-bundles-tools-frontmatter.md). |
 
 ## 4. Workflow (Skill Lifecycle)
 
@@ -126,6 +127,7 @@ Every `SKILL.md` MUST include the following H2 (`##`) sections, as defined in `t
 - **X.2** Every reference MUST resolve at lint time. A broken reference is a pre-commit failure.
 - **X.3** Reciprocity is computed by the linter, not authored. Authors do not write `skill_referenced_by`; the index tool generates it.
 - **X.4** Composition vs. invocation is signalled by reference shape: a list element of bare `<slug>` is *invocation* (skill A calls skill B as a tool); a list element of the form `<slug>:embed` is *composition* (skill A inlines skill B's body — RECOMMENDED only between skills with the same `skill_kind`).
+- **X.5** `skill_bundles_tools` entries are not skill-to-skill references; they declare repo-relative `tools/<slug>` paths that `sync.sh` materialises at sync time. Adding or removing an entry is a **T2 additive repair** via `tools/fm/edit.py --append-list skill_bundles_tools tools/<slug>`. Validation lives in `tools/fm/validate.py` (diagnostics `F.B.5`, `F.B.6`); governance authority is [ADR-0007](./decisions/0007-skill-bundles-tools-frontmatter.md).
 
 ### 6.1 Gherkin Scenarios
 
@@ -167,7 +169,7 @@ The canonical shell implementation of this protocol is [`skills/skills-skill-boo
 
 - **B.1** Mandatory bootstrap-before-skill-use for every agent. Every agent (`claude-code`, `jules`, `gemini-cli`, `claude-ai`) MUST run the bootstrap before touching `/skills/` or executing a skill. (`claude-ai` host-routing semantics are deferred to §10 U3.)
 - **B.2** Canonical clone path `$AGENCY_SKILLS_ROOT`. The bootstrap MUST clone or fast-forward `origin/main` into the active workspace at a known path; the path is stored in environment variable `AGENCY_SKILLS_ROOT`.
-- **B.3** Manifest emission to `$AGENCY_SKILLS_ROOT/.skills-manifest.json`. The bootstrap MUST emit a manifest of all skill slugs and their `skill_kind` to this path so that downstream tools can route without re-walking the tree.
+- **B.3** Manifest emission to `$AGENCY_SKILLS_ROOT/.skills-manifest.json`. The bootstrap MUST emit a manifest of all skill slugs and their `skill_kind` to this path so that downstream tools can route without re-walking the tree. The manifest SHOULD also carry the `skill_bundles_tools` list per skill so consumers can locate the materialised `scripts/_bundled/<slug>/` paths without re-parsing every SKILL.md (per [ADR-0007](./decisions/0007-skill-bundles-tools-frontmatter.md)).
 - **B.4** Staleness gate. The bootstrap MUST surface a non-zero exit on staleness > 24h to force a sync at the cost of a per-day prompt to the human; the agent MAY override with `AGENCY_SKILLS_ALLOW_STALE=1` for offline work.
 - **B.5** Token-efficient navigation. Agents MUST query the manifest and the frontmatter index before opening any SKILL.md body. This is the single token-saving lever that makes a multi-skill repo cheap to consult.
 
@@ -230,6 +232,7 @@ This section resolves adapter architecture (R7.2) and reserved portability track
 | §9.5 Cross-Agent Adapter Parity | human review for now; future linter | Adapter directory referenced but missing |
 | §9.6 Readme Audit | `tools/lint-structure.py` | Missing `readme.md` in skill folder |
 | §9.7 Bootstrap-Required Self-Honesty | `tools/lint-linkage.py` | `skill_bootstrap_required: false` skill that imports from `references/` |
+| §9.8 Bundle-Path Resolution | `tools/fm/validate.py` (`_check_skill_bundles`) | `skill_bundles_tools` entry malformed, contains `..`, duplicated, or does not resolve to an existing `tools/<slug>/` directory (diagnostic `F.B.5`). Transitive dependency missing per `BUNDLE_DEPS` (diagnostic `F.B.6`). Authority: [ADR-0007](./decisions/0007-skill-bundles-tools-frontmatter.md). |
 
 ## 10. Edge Cases & Open Questions
 

@@ -4,24 +4,25 @@ status: active
 slug: skills-skill-bootstrap
 summary: "On-demand sync tool that pulls skill bodies from origin/main:/skills/ into Claude Code's ~/.claude/skills/ directory."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-11
 ---
 
 # /skills/skills-skill-bootstrap/
 
 ## What and Why
 
-This folder is the **local maintenance sync mechanism** for keeping Claude Code's user-scoped skill capability aligned with the canonical skill bodies in this repository.
+This folder is the **local maintenance sync mechanism** for keeping Claude Code's user-scoped skill capability aligned with the canonical skill bodies in this repository, **plus the toolchain bundles declared by each skill** (per [ADR-0007](../../decisions/0007-skill-bundles-tools-frontmatter.md)).
 
 ### Problem it solves
 
-Claude Code loads user skills from `~/.claude/skills/<name>/SKILL.md`. Without a sync mechanism, these files diverge from the versioned content in `origin/main:/skills/` after every PR that updates a skill. A human or CI job must be able to re-align them reliably, without manual copying.
+Claude Code loads user skills from `~/.claude/skills/<name>/`. Without a sync mechanism, these files diverge from the versioned content in `origin/main:/skills/` after every PR that updates a skill. A human or CI job must be able to re-align them reliably, without manual copying. Skills that depend on repo-resident tools (`tools/fm/`, `tools/adr/`, `tools/dramatica-nav/`) additionally need those tools materialised next to the synced SKILL.md so the sandboxed runtime can invoke them.
 
 ### What it does NOT do
 
 - It does **not** implement the future `skills-skill` loader (`/skills/skills-skill/` is reserved for that).
 - It does **not** modify anything inside the repository — it is strictly a one-way pull from repo → local filesystem.
 - It does **not** touch `~/.claude/commands/` or `~/.claude/agents/` — only `~/.claude/skills/`.
+- It does **not** sync any tool unless the consuming SKILL.md explicitly declares it via `skill_bundles_tools` (ADR-0007). Tools are never copied implicitly.
 
 ## Linked Navigation
 
@@ -125,6 +126,24 @@ skills/skills-skill-bootstrap/sync.sh --clean
 skills/skills-skill-bootstrap/sync.sh --target /some/other/path
 ```
 
+### Skip tool bundling (offline or fast path)
+
+```bash
+skills/skills-skill-bootstrap/sync.sh --no-bundle
+```
+
+### Re-bundle only (after a /tools/ change without re-fetching the tree)
+
+```bash
+skills/skills-skill-bootstrap/sync.sh --bundle-only
+```
+
+### Verify bundle parity in place (non-zero exit on drift)
+
+```bash
+skills/skills-skill-bootstrap/sync.sh --verify-bundles
+```
+
 ## Recovery Procedure
 
 If sync produces an error or the local skill directory is corrupt:
@@ -146,6 +165,7 @@ skills/skills-skill-bootstrap/verify.sh && echo "All skills in sync"
 
 - `~/.claude/skills/` is the correct target for Claude Code user skills. Confirmed by inspecting `/root/.claude/skills/` on the running installation. If Anthropic changes this path, update the default in `sync.sh` and this readme.
 - `git ls-tree -d --name-only` is used to enumerate skill directories. Tested against the live repo with 14 skills plus a `readme.md` at the skills root — the `-d` flag correctly excludes the readme.
-- Only `SKILL.md` is synced per skill. Skills with `references/`, `scripts/`, or `agents/` subdirectories have those managed separately (they remain in the repo but are not synced to `~/.claude/skills/`). Claude Code loads `SKILL.md` only; the deeper content is fetched by the skill itself at runtime. If this assumption changes, `sync.sh` will need a `--deep` mode.
+- Since [ADR-0007](../../decisions/0007-skill-bundles-tools-frontmatter.md) the sync materialises the **full** `skills/<name>/` tree (SKILL.md + `scripts/` + `references/` + `assets/`) via `git archive` + atomic `rsync` swap. The `scripts/_bundled/` namespace under the target is preserved across the swap so phase 2 (tool bundling) does not clobber the tree.
+- `scripts/_bundled/<basename>/` directories under each synced skill are **derived artefacts**, never authored. They are produced from the skill's `skill_bundles_tools` declaration during sync. They MUST NOT be committed; `.gitignore` enforces this. Drift between source and bundled copy is detected via a `.bundle.sha256` sidecar inside each `_bundled/<basename>/` directory.
 - The `session-start-hook` skill in `~/.claude/skills/` is NOT in the repo and is correctly reported as `LOCAL` by `verify.sh`. It is intentionally not touched.
 - This folder intentionally does NOT have `/skills/skills-skill/` as a neighbor — that path is reserved for the future loader implementation.
