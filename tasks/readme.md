@@ -4,7 +4,7 @@ status: active
 slug: tasks-root
 summary: "Root of /tasks/. Each subfolder is one orchestrated unit of work linking prompts, research, and code via frontmatter."
 created: 2026-05-04
-updated: 2026-05-08
+updated: 2026-05-11
 ---
 
 # Tasks Root
@@ -74,6 +74,7 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`042-dramatica-nav-followups/`](./042-dramatica-nav-followups/) — Phase-1 follow-ups for the dramatica-nav corpus (Task 030 successor): consolidate 10 outstanding items across encoding-hints, cleanup linter, alias loader, and persona-scenario emitter. Status: `open`.
 - [`043-renumber-duplicate-task-ids-v3/`](./043-renumber-duplicate-task-ids-v3/) — Found by coherence run 2026-05-07. Resolve the duplicate `task_id` collisions on slots 031 and 032 (each shared by two folders) per [TASK.md §8.1](../TASK.md). Successor pattern to [Task 013](./013-renumber-duplicate-task-ids/) and [Task 024](./024-renumber-duplicate-task-ids-v2/). Status: `open`.
 - [`044-improve-maintenance-spec-may-07-2026/`](./044-improve-maintenance-spec-may-07-2026/) — Findings F14–F17 distilled from the 2026-05-07 coherence run: FL declaration canonical form, cross-branch task_id mechanical gate, tasks/readme.md membership drift, /sc: skill fit for coherence runs. Companion (not successor) to [Task 025](./025-maintenance-spec-remaining-findings/) and [Task 032](./032-improve-maintenance-spec-may-2026/). Status: `open`.
+- [`064-improve-maintenance-spec-may-11-2026/`](./064-improve-maintenance-spec-may-11-2026/) — Findings F20–F23 distilled from the 2026-05-11 coherence run: body-schema `--check-body` advisory-but-actionable, recurring trust-audit FL1+ friction policy gap, advisory-tier T1 sweep mandate, task-implementation baseline delta-shape expectation. Companion (not successor) to [Task 025](./025-maintenance-spec-remaining-findings/), [Task 032](./032-improve-maintenance-spec-may-2026/), and [Task 044](./044-improve-maintenance-spec-may-07-2026/). Status: `open`.
 - [`045-readme-coherence-refresh/`](./045-readme-coherence-refresh/) — R.13/R.14-gated README restructure: reframe §1+§3 to a four-concern model (add Capability/Skills) and add §12 Narrative Ontology pointer. Status: `open`.
 - [`046-github-workflow-research/`](./046-github-workflow-research/) — Research and decide a maintainable GitHub Actions strategy for the repo (governance gate + pytest + ADR synthesis check) and replace the deleted `adr-validate.yml`. Status: `open`.
 - [`047-cross-spec-contradiction-baseline/`](./047-cross-spec-contradiction-baseline/) — Pre-chain contradiction baseline: catalogs 16 inter-spec normative conflicts across the 8 root specs before the 032–039 amendment chain. 5 High-severity (CONTR-001,004,005,006,014); §4 provides amendment-safety notes per task 032–039. Status: `done`. Output: [`research/research-cross-spec-contradiction-baseline/output/REPORT.md`](../research/research-cross-spec-contradiction-baseline/output/REPORT.md). (Note: `task_id: "047"` accounts for tasks 043–046 reserved in a parallel branch landing before this one.)

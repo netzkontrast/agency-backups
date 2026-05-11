@@ -4,7 +4,7 @@ status: active
 slug: run-log
 summary: "Chronological log of every Repo Coherence Check and Nightly Maintenance run. The agent MUST read the last entry's end_commit before beginning any run."
 created: 2026-05-04
-updated: 2026-05-05
+updated: 2026-05-11
 ---
 
 # Maintenance Run Log
@@ -799,3 +799,58 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
     tools/check-clean-working-directory.py, tools/scripts/migrate-waivers.py,
     PRE_COMMIT.md §7.A/§7.B/§8, tools/fm/_core.py + validate.py.
     task_status: done for Task 037.
+
+### Run 2026-05-11 — Repo Coherence Check
+- agent: claude-code
+- routine_type: coherence-check
+- start_commit: f5e9b0b
+- end_commit: PENDING
+- baseline_commit: 36e2611
+- files_in_delta: 36
+- files_scanned: 24
+- t1_fixes: 0
+- t2_fixes: 0
+- t3_tasks_created: 1
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+    Baseline 36e2611 (routine_type: coherence-check from Run 2026-05-08
+    which was combined with Task 037 closure). Delta spans 14 commits
+    dominated by Task 039 maintenance-spec-integration implementation
+    (tools/maintenance/staleness-audit.py, trust-audit.py,
+    dynamic-readme-partition.py, MAINTENANCE.md §1/§1.1.2/§2.3/§3.2/§3.4/§3.5/§6
+    rewrite, tools/fm/edit.py adr-Accepted enforcement) plus PR #92/#93
+    review trails.
+
+    fm/validate.py --type-check: 0 ERROR diagnostic(s) across the 24
+    typed .md files in the delta (15 non-typed files skipped).
+
+    fm/validate.py --check-body: 2 ERROR diagnostics —
+    tasks/039-maintenance-spec-integration/task.md ## Goal (paragraph
+    expected; mixed found) and ## Links (link_list expected; unordered_list
+    found). Triaged as T3 per current §1 tier table; logged as F20 of
+    Task 064.
+
+    Trust-audit AGGREGATOR roll-up: 13 research workspaces flagged
+    WARN:MAINT.TRUST.FRICTION at FL1/FL3. All recur from prior runs;
+    none filed as new Task. Pattern logged as F21 of Task 064 (no
+    recurrence policy or batching rule in §3.3).
+
+    [opt] FL-declaration linter (FR.B.4): 2 ERROR diagnostics —
+    tasks/033-task-spec-integration/friction-log.md and
+    tasks/030-cleanup-dramatica-skills-corpus/friction-log.md.
+    Suite passes because the linter is advisory; T1 mechanical fix
+    deferred pending the F22 decision (Task 064) on whether
+    friction-logs are T4-immutable once the parent Task closes.
+
+    Duplicate task_id collisions (006, 009, 031, 032): ALL four pairs
+    covered by open Tasks 024 and 043 (verified via grep of
+    task_affects_paths). Per §3.5 predicate 2, no new dedup Task filed.
+
+    Created Task 064 (this run's T3 finding bundle) capturing four new
+    findings F20–F23 for MAINTENANCE.md, prompts/repo-coherence-check/prompt.md,
+    and tools/check-governance.sh. Companion (not successor) to open
+    Tasks 025 and 044.
+
+    No T1/T2 repairs applied — the delta files were all touched within
+    the previous coherence/task window and carry fresh `updated:` dates.
