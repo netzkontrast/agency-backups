@@ -188,11 +188,17 @@ The friction log is what feeds the **Nightly Maintenance Run** ([MAINTENANCE.md]
 
 ---
 
-## 8. The Closing Run procedure (Claude Code only)
+## 8. The Closing Run procedure (all platforms)
 
-Claude Code sessions MUST close with `/sc:createPR` after a successful `git push`. The PR body cites the closed Task slug(s) and the FL declaration. The rule is binding (see [AGENTS.md § Closing Run Procedure](./AGENTS.md#closing-run-procedure-claude-code)). Other agents (Jules, Gemini) follow their own platform conventions.
+Every session — Claude Code, Jules, Gemini, or future agents — MUST close with the four-step platform-agnostic checklist defined in [AGENTS.md § Closing Run Procedure](./AGENTS.md#closing-run-procedure): write the friction log, sync `tasks/readme.md`, ensure `tools/check-governance.sh` exits 0, then open a draft PR via the platform's primitive. The PR body cites the closed Task slug(s) and the FL declaration.
 
-`/sc:createPR` is provided by the SuperClaude Framework — its source lives at [`src/superclaude/commands/createPR.md`](https://github.com/netzkontrast/SuperClaude_Framework/blob/main/src/superclaude/commands/createPR.md) and is installed alongside the rest of the `/sc:*` command set. The skill re-runs `tools/check-governance.sh` before opening a PR; pre-commit failures gate PR creation.
+Platform implementations of step 4:
+
+- **Claude Code** invokes `/sc:createPR` (provided by the SuperClaude Framework — source at [`src/superclaude/commands/createPR.md`](https://github.com/netzkontrast/SuperClaude_Framework/blob/main/src/superclaude/commands/createPR.md), installed alongside the rest of the `/sc:*` command set). The skill re-runs `tools/check-governance.sh` before opening the PR.
+- **Jules** opens the PR via its native GitHub integration with the same body shape.
+- **Gemini** Deep Research sessions defer step 4 to a follow-on integration-Task agent (RESEARCH.md §6.5), which opens the PR via Claude or Jules once the artefacts land in this repo.
+
+Pre-commit failures (step 3) gate PR creation across every platform; no platform may bypass with `--no-verify` or equivalent.
 
 ---
 

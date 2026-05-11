@@ -2,9 +2,9 @@
 type: index
 status: active
 slug: tools-maintenance
-summary: "Linters and helpers that mechanise MAINTENANCE.md routines: stale-task audit (§3.4 — shipped), dynamic-readme partition (§3.2 — shipped), trust-audit aggregator (§3.2 / §3.3 — shipped). Each emits diagnostics in the `<path>::<level>:<code>:<msg>` format consumed by `tools/check-governance.sh` and `tools/adr/runlog.py`."
+summary: "Linters and helpers that mechanise MAINTENANCE.md routines: stale-task audit (§3.4 — shipped), dynamic-readme partition (§3.2 — shipped), trust-audit aggregator (§3.2 / §3.3 — shipped), bundle-size snapshot (ADR-0009 F1 — shipped). Each emits diagnostics in the `<path>::<level>:<code>:<msg>` format consumed by `tools/check-governance.sh` and `tools/adr/runlog.py`, or (bundle-size) a runlog-appendable single-line projection."
 created: 2026-05-08
-updated: 2026-05-08
+updated: 2026-05-11
 ---
 
 # `tools/maintenance/` — Maintenance-Routine Linters
@@ -20,6 +20,7 @@ The Nightly Maintenance Run and Repo Coherence Check (per `MAINTENANCE.md §2` a
 | [`staleness-audit.py`](./staleness-audit.py) | `MAINT.STALE.*` | [`MAINTENANCE.md §3.4`](../../MAINTENANCE.md) + [`research/spec-staleness-decision-formalization/output/SPEC.md §1`](../../research/spec-staleness-decision-formalization/output/SPEC.md) | Shipped (Task 039 ST-3). |
 | [`dynamic-readme-partition.py`](./dynamic-readme-partition.py) | `M.B.6:*` | [`MAINTENANCE.md §3.2`](../../MAINTENANCE.md) + [`research/repo-maintenance-protocol-spec/output/SPEC.md §3.1`](../../research/repo-maintenance-protocol-spec/output/SPEC.md) | Shipped (Task 039 ST-4). |
 | [`trust-audit.py`](./trust-audit.py) | `MAINT.TRUST.*` (incl. `MAINT.TRUST.FRICTION`) | [`MAINTENANCE.md §3.2 / §3.3`](../../MAINTENANCE.md) + [`research/agentic-eval-trust-improvement-spec/output/SPEC.md`](../../research/agentic-eval-trust-improvement-spec/output/SPEC.md) (Spec-J/K/L) | Shipped (Task 039 ST-5). Cross-research AGGREGATOR; imports the per-workspace GATE shipped by Task 035 ST-4 (`tools/check-trust-audit.py`) — never re-implements its scoring logic (C3 partition). |
+| [`bundle-size-snapshot.py`](./bundle-size-snapshot.py) | ADR-0009 F1 | [`decisions/0009-root-spec-no-consolidation.md`](../../decisions/0009-root-spec-no-consolidation.md) §"Falsifier triggers" F1 | Shipped (`/sc:implement findings` follow-up to Task 057). Measures the 11-spec root-spec bootstrap bundle byte/token cost; emits `--format runlog` one-line projection appendable to `maintenance/run-log.md`. Exits 2 when the F1 threshold (`>= 100,000 tokens`) is breached. Not wired into `tools/check-governance.sh` — invocation cadence is the maintainer's choice. |
 
 All three linters run **advisory-tier** in `tools/check-governance.sh` (WARN-only, never gate). Promotion to gating requires a follow-up Task that resolves any pre-existing repo drift the linter flags.
 
@@ -28,6 +29,7 @@ All three linters run **advisory-tier** in `tools/check-governance.sh` (WARN-onl
 - [`staleness-audit.py`](./staleness-audit.py) — classifies each open Task into one of the four §3.4 lifecycle buckets per the deterministic decision tree in the staleness SPEC.
 - [`dynamic-readme-partition.py`](./dynamic-readme-partition.py) — verifies the static/dynamic boundary marker pair (`<!-- BEGIN DYNAMIC -->` / `<!-- END DYNAMIC -->`) and section placement in every operational `readme.md` under `tasks/`, `research/`, `prompts/`. WARN-tier per the falsification mitigation in the Task 039 ST-4 brief: readmes lacking markers emit a single `missing-marker` advisory rather than an ERROR.
 - [`trust-audit.py`](./trust-audit.py) — cross-research AGGREGATOR (C3 partition) for the per-workspace trust-audit GATE. Iterates every `research/<slug>/` workspace at `research_phase: complete`, invokes the GATE's `audit()` callable by import (not subprocess), and rolls findings into a single MAINTENANCE.md §3.2 / §3.3 friction-aggregation report. FL≥1 trust failures emit a `MAINT.TRUST.FRICTION` recommendation for Task creation (delegated, never auto-created). Surface: `python3 tools/maintenance/trust-audit.py [--threshold-mode strict|advisory] [--format text|json] [--write-runlog]`.
+- [`bundle-size-snapshot.py`](./bundle-size-snapshot.py) — measures the 11-file root-spec bootstrap bundle defined in `BUNDLE_SPECS` (in-source list — adding/removing a spec is a deliberate edit, not auto-discovery). Estimates token cost at 4 chars/token (the canonical estimator used in ADR-0009 §"Context"). Three output formats: `text` (human-readable per-spec table + total), `json` (machine-readable record), `runlog` (single line appendable to `maintenance/run-log.md`). Exits 2 if total tokens >= `F1_THRESHOLD_TOKENS` (100,000) per ADR-0009 F1; exits 1 if any spec in BUNDLE_SPECS is missing from disk (configuration-drift catch). Surface: `python3 tools/maintenance/bundle-size-snapshot.py [--format text|json|runlog] [--repo-root PATH]`.
 - [`../tests/maintenance/`](../tests/maintenance/) — pytest suites for the linters in this folder.
 
 ## How a Linter in this Folder Behaves

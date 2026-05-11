@@ -4,10 +4,10 @@ status: active
 slug: platform-agnostic-closing-procedure
 summary: "Define a platform-agnostic closing-run procedure in AGENTS.md (open a PR via the platform's mechanism + attach friction-log + ensure index sync). Demote /sc:createPR to one implementation among others; give Jules and Gemini concrete, parity guidance."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-11
 task_id: "060"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []

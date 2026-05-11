@@ -4,7 +4,7 @@ status: active
 slug: decisions-root
 summary: "Architectural Decision Records (ADRs) — repo-native MADR 4.0.0 ledger validated by tools/adr/cli.py."
 created: 2026-05-06
-updated: 2026-05-07
+updated: 2026-05-11
 ---
 
 # Decisions
@@ -17,10 +17,10 @@ updated: 2026-05-07
 
 1. Pick the next zero-padded integer (`0001`, `0002`, …) by inspecting filenames here.
 2. Author `decisions/<NNNN>-<slug>.md` with the canonical MADR sections (`Context and Problem Statement`, `Decision Drivers`, `Considered Options`, `Decision Outcome`, `Consequences`).
-3. Frontmatter MUST carry `type: adr`, `adr_id: ADR-<NNNN>`, `adr_status: Proposed | Accepted | Superseded | Deprecated`, plus standard L1 keys.
+3. Frontmatter MUST carry `type: adr`, `adr_id: ADR-<NNNN>`, `adr_status: Proposed | Accepted | Superseded | Deprecated`, plus standard L1 keys. The `summary` field is capped at **240 characters** (per [`maintenance/schemas/l2-adr.schema.json`](../maintenance/schemas/l2-adr.schema.json)) — keep it short or `tools/adr/cli.py validate` will reject it with `ERROR:ADR.A.2.2`.
 4. Run `python3 tools/adr/cli.py validate` and fix any diagnostics.
 5. When the ADR's status flips to `Accepted`, run `python3 tools/adr/cli.py synthesize` so the AGENTS.md guarded section reflects it.
-6. Commit and open a PR via `/sc:createPR`.
+6. Commit and open a PR per the four-step closing procedure in [AGENTS.md § Closing Run Procedure](../AGENTS.md#closing-run-procedure) (Claude Code: `/sc:createPR`; Jules: native primitive; Gemini: deferred to integration Task).
 
 ## Lifecycle
 
@@ -38,3 +38,7 @@ The first batch landed via [Task 032 ST-1](../tasks/032-agents-spec-integration/
 - [`0003-frontmatter-source-of-truth.md`](./0003-frontmatter-source-of-truth.md) — Frontmatter as the single source of truth for the audit graph (FOLDERS.md §3; TASK.md §3). `adr_status: Proposed`.
 - [`0004-yaml-depth-one-constraint.md`](./0004-yaml-depth-one-constraint.md) — YAML nesting depth ≤ 1 anti-hallucination rule (AGENTS.md §"YAML Depth Rule"; `tools/fm/_core.py`). `adr_status: Proposed`.
 - [`0005-repair-authority-tiers.md`](./0005-repair-authority-tiers.md) — Repair authority tiers and mutation surface boundaries (MAINTENANCE.md §1). `adr_status: Proposed`.
+- [`0006-agency-system-prototype-exemption.md`](./0006-agency-system-prototype-exemption.md) — `/Agency-System/` frontend-prototype exemption from FOLDERS.md §1 operational-folder rules and §7 audit graph. `adr_status: Accepted`.
+- [`0007-skill-bundles-tools-frontmatter.md`](./0007-skill-bundles-tools-frontmatter.md) — `skill_bundles_tools` frontmatter key for skills that sync repo tools into `~/.claude/skills/`. `adr_status: Accepted`.
+- [`0008-narrative-skills-status-quo.md`](./0008-narrative-skills-status-quo.md) — Narrative skills (6 folders + ontology + dramatica-nav) stay in this repo; the NO.5 don't-load rule + WARN linter remain the partition mechanism. `adr_status: Proposed`. Ships with five falsifier triggers (skill count > 10, bundle token cost > 60K, sustained NO.5-cited friction, narrative T3 amendment of non-AGENTS root spec, third-party-adopter blocker).
+- [`0009-root-spec-no-consolidation.md`](./0009-root-spec-no-consolidation.md) — Measured 11-spec bootstrap bundle (~70,676 tokens) stays intact; PRE_COMMIT.md does not merge into AGENTS.md, FRUSTRATED.md does not merge into MAINTENANCE.md. Saving (~1%) below migration threshold (381 cross-references; in-flight Task disruption). `adr_status: Proposed`. Ships with three falsifier triggers (bundle > 100K tokens, either spec < 1000 tokens + < 50 dependents, sustained bundle-size-cited friction).
