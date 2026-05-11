@@ -30,7 +30,41 @@ Not all fixes are equal. Before touching any file, the agent MUST classify the c
 | **T1 — Mechanical** | Missing or stale `updated:` date; missing `slug:` that can be derived from folder name; broken relative Markdown link where target exists; missing `readme.md` stub (per FOLDERS.md). | Fix immediately, in-place. | `tools/fm/edit.py --bump-updated` / `--set` / `--unset` |
 | **T2 — Additive** | Adding a missing L1 or L2 frontmatter key whose value is unambiguous from context (e.g. adding `type: task` to a `task.md`). | Fix immediately, in-place. | `tools/fm/edit.py --set` / `--append-list` / `--remove-from-list` |
 | **T3 — Structural** | Changing section headings, rewriting content, altering schema definitions, adding new L2 keys to the ontology, modifying root governance specs beyond T1/T2. Includes cross-file slug renames. | MUST NOT fix directly. Write a Task in `/tasks/` instead. | (deferred to `tools/fm/section.py` per Task 018, and `tools/fm/rename.py` per Task 019) |
-| **T4 — Research-touching** | Any modification to a `/research/<slug>/` workspace that is `research_phase: complete`. | MUST NOT touch. Research is immutable after closure. | — |
+| **T4 — Research-touching (content)** | Any change to *content semantics* in a `/research/<slug>/` workspace that is `research_phase: complete` — body prose, synthesis findings, evidence claims, scenario outcomes. | MUST NOT touch. Research content is immutable after closure. | — |
+
+### 1.0.1 Closed-research T1/T2 Repair Allowance (Task 059)
+
+Closed research is *content*-immutable, not *metadata*-immutable. Two
+narrow repair classes are permitted on a `research_phase: complete`
+workspace:
+
+- **T1 on closed research** — `updated:` date bumps when surrounding
+  artifacts move, slug derivations fixed to match a renamed folder,
+  and `tools/fm/edit.py --bump-updated` / `--set` / `--unset` calls
+  that touch only frontmatter scalars.
+- **T2 on closed research** — repairs to broken *relative* Markdown
+  links whose target file moved (the link points at the new path; the
+  surrounding sentence is unchanged) and additions of L1 / L2 keys
+  whose values are unambiguous from context.
+
+Any other body-content edit — typo fixes in prose, finding rewrites,
+scenario-outcome changes, table-cell corrections — remains T4 and
+MUST be written as a Task that supersedes the closed workspace via a
+new `research_phase: open` successor. T3 structural edits (heading
+rewrites, schema migrations, section reorders) are also forbidden on
+closed research regardless of trivial appearance.
+
+**Lifecycle interaction (§4.7):** A T1 / T2 repair on closed research
+MUST NOT trip the originating Task's `task_status` lifecycle. The
+Task that produced the workspace remains `done`; the repair commit
+SHOULD cite the Task slug in its message but MUST NOT mutate the
+Task's `task_status`.
+
+**Audit trail:** Every T1 / T2 repair commit on closed research MUST
+carry a one-line rationale in the commit message naming the trigger
+(typically the upstream rename or move that broke the link), and
+MUST bump the workspace's own `updated:` field via
+`tools/fm/edit.py --bump-updated` so the change is discoverable.
 
 **Root governance specs** (`AGENTS.md`, `TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `FRUSTRATED.md`, `PRE_COMMIT.md`, `MAINTENANCE.md`) are subject to T1/T2 repairs only. Structural changes to these files MUST be written as Tasks.
 
@@ -47,13 +81,13 @@ The flexible-frontmatter toolchain is canonical and gating; the migration tracke
 | Toolchain | Entry point | Enforcement state | Owner |
 |---|---|---|---|
 | **Flexible** (default) | `tools/fm/validate.py --type-check` invoked by `tools/check-governance.sh` | **Gating** — non-zero exit blocks the pre-commit hook. | Tasks 016 / 017 / 019 lineage. |
-| **Legacy** (advisory shim, one release window) | `tools/legacy/{validate-frontmatter,lint-structure,lint-linkage}.py` | Advisory — runs alongside the gate; output silenced by `FM_LEGACY_QUIET=1` (the default in `tools/check-governance.sh`). | Task 001 lineage; scheduled for removal once the structural rules in `lint-structure.py` and `lint-linkage.py` are folded into `fm/validate.py` / a successor `fm-graph`. |
+| **Legacy** (archive; not wired into the gate) | `tools/legacy/{validate-frontmatter,lint-structure,lint-linkage}.py` | Not invoked by `tools/check-governance.sh`. Retained because `tools/check-maintenance-bypass.py` still folds their structural and cross-reference output into the bypass index. | Task 001 lineage; scheduled for removal once those structural rules are folded into `fm/validate.py` / a successor `fm-graph`. |
 
-`FM_TOOLCHAIN=0` is a documented escape hatch (it inverts which toolchain gates) but is NOT the supported configuration; it exists only to unblock a contested migration step and SHOULD NOT be used in CI.
+The `FM_TOOLCHAIN` env var was retired by [Task 054](./tasks/054-flip-fm-toolchain-default/). `tools/fm/validate.py` is invoked unconditionally; there is no longer a configuration that promotes the legacy linters to the gate.
 
 Maintenance agents MUST be aware that:
 
-1. T1/T2 mutations through `tools/fm/edit.py` are the canonical mutator path. The file lock and per-section preservation behave identically regardless of `FM_TOOLCHAIN`.
+1. T1/T2 mutations through `tools/fm/edit.py` are the canonical mutator path. The file lock and per-section preservation behave identically across the toolchain.
 2. The maintenance-bypass mode in `.githooks/pre-commit` (§4.1) harvests `<path>::<level>:<code>:<msg>` diagnostics from `tools/fm/validate.py` and folds the legacy `lint-structure` / `lint-linkage` shims in for the gaps fm-validate does not yet cover (per Task 017 Batch 2c). There is no separate waiver file at `tools/.frontmatter-waivers`; waivers, when needed, are expressed inline against `tools/fm/validate.py`'s diagnostic codes (`F.3.x`, `F.4.x`, etc.) rather than a path list. An agent that finds a legitimately-bypassable error MUST file a Task with the diagnostic code and the rationale rather than introducing an out-of-band waiver mechanism.
 3. The coherence-check routine is wired to `tools/check-governance.sh` (Step 2.5 linter-first triage); it MUST NOT silently disable either toolchain. If the advisory legacy shim points at a real defect that fm-validate misses, file a Task to fold the rule into fm-validate rather than papering over the warning.
 

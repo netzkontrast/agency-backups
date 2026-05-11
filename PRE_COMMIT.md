@@ -38,8 +38,8 @@ Pick the matching governance spec — the agent MUST additionally satisfy the `M
 If the change touches any file under `/tasks/`, `/prompts/`, `/research/`, `/skills/`, or `/maintenance/`, the agent MUST run the unified shim below and fix every `ERROR`-level diagnostic before committing.
 
 ```bash
-# Unified (canonical, Task 017 cutover):
-tools/check-governance.sh                  # FM_TOOLCHAIN=1 by default (fm-validate gates)
+# Unified (canonical, Task 054 final cutover):
+tools/check-governance.sh                  # fm-validate gates unconditionally
 
 # Targeted invocations:
 python3 tools/fm/validate.py               # L1+L2 keys, type/path agreement, required headings
@@ -48,15 +48,14 @@ python3 tools/fm/validate.py --strict      # promotes WARN-severity diagnostics 
 python3 tools/dramatica-nav/validate.py    # narrative-ontology integrity (gated on ontology.json)
 python3 tools/dramatica-nav/cleanup.py --check   # dramatica corpus cleanup linter (Task 030 ST-6; gated on ontology.json)
 
-# Legacy escape hatches (one-release deprecation window):
-FM_TOOLCHAIN=0 tools/check-governance.sh   # restore the legacy validate-frontmatter gate
-python3 tools/legacy/lint-structure.py     # structural rules pending fm- migration
-python3 tools/legacy/lint-linkage.py       # cross-ref graph pending fm-query migration
+# Legacy archive (advisory; no longer wired into the gate):
+python3 tools/legacy/lint-structure.py     # used by tools/check-maintenance-bypass.py only
+python3 tools/legacy/lint-linkage.py       # used by tools/check-maintenance-bypass.py only
 ```
 
 ### 7.A Toolchain Precedence Matrix (Legacy ↔ Flexible ↔ ADR)
 
-The repository runs **three** toolchains in parallel: the **Legacy** linters (Task 010-era), the **Flexible** frontmatter toolchain under [`tools/fm/`](./tools/fm/) (Task 016/017/019), and the **ADR Governance Validator** under [`tools/adr/`](./tools/adr/) (Task 028/031, §7.C below). The default gate is the **Flexible** column (`FM_TOOLCHAIN=1`); Legacy is retained as a one-release escape hatch (`FM_TOOLCHAIN=0`); ADR runs unconditionally as step `[5/6]` of [`tools/check-governance.sh`](./tools/check-governance.sh) when `decisions/` is non-empty.
+As of Task 054 the **Flexible** toolchain (`tools/fm/`) is the only frontmatter linter wired into [`tools/check-governance.sh`](./tools/check-governance.sh). The **Legacy** scripts (`tools/legacy/{validate-frontmatter,lint-structure,lint-linkage}.py`) survive only because [`tools/check-maintenance-bypass.py`](./tools/check-maintenance-bypass.py) folds their structural and cross-reference output into the bypass index — they no longer run from the gate, and the `FM_TOOLCHAIN` env var has been retired. The **ADR Governance Validator** (`tools/adr/`) runs unconditionally as step `[5/6]` of `tools/check-governance.sh` when `decisions/` is non-empty.
 
 The table below maps every concern the gate covers to the tool that owns it in each toolchain. Use it to decide which command produces the gating diagnostic for any given file path.
 
@@ -83,10 +82,9 @@ The table below maps every concern the gate covers to the tool that owns it in e
 
 **Precedence rules.**
 
-1. The Flexible column is the canonical gate. The Legacy column runs advisory under `FM_TOOLCHAIN=1` (the default); to invert, export `FM_TOOLCHAIN=0`.
+1. The Flexible column is the only gating frontmatter linter (Task 054). Legacy scripts live in [`tools/legacy/`](./tools/legacy/) and are invoked only by [`tools/check-maintenance-bypass.py`](./tools/check-maintenance-bypass.py) to round out the bypass index for structural and cross-reference rules `fm-validate` does not yet replace.
 2. The ADR column runs unconditionally as step `[5/6]` of [`tools/check-governance.sh`](./tools/check-governance.sh) — see §7.C. When `decisions/` is empty the validator is a graceful no-op (exit 0).
-3. The Flexible toolchain MUST NOT be used to bypass a Legacy `ERROR` while `FM_TOOLCHAIN=0`. Conversely, the Legacy toolchain MUST NOT be used to bypass a Flexible `ERROR` under the default `FM_TOOLCHAIN=1`. If either gating column fails, the commit MUST be blocked regardless of what the other says.
-4. ADR diagnostics (codes prefixed `ADR.A.<aspect>.<stmt>`) are gated unconditionally; they cannot be silenced by toggling `FM_TOOLCHAIN`. The only legitimate suppression path is a per-rule waiver entry in [`tools/.frontmatter-waivers`](./tools/.frontmatter-waivers) per §7.B.
+3. ADR diagnostics (codes prefixed `ADR.A.<aspect>.<stmt>`) are gated unconditionally and cannot be silenced via env-var toggles. The only legitimate suppression path is a per-rule waiver entry in [`tools/.frontmatter-waivers`](./tools/.frontmatter-waivers) per §7.B.
 
 ### 7.B Frontmatter Waivers — Per-Rule Burn Protocol
 

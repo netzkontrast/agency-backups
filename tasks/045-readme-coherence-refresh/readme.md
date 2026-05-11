@@ -4,7 +4,7 @@ status: active
 slug: readme-coherence-refresh
 summary: "Folder index for Task 045 — the R.13/R.14 vehicle that reframes the README to a four-concern model and adds the Narrative Ontology section."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-08
 ---
 
 # Task 045 — README Coherence Refresh
@@ -26,6 +26,7 @@ commit `3a5c09a` is doc-only; this Task authors the backing ADR.
 ## Contents
 
 - [`task.md`](./task.md) — Goal, plan, todo, links.
+- [`friction-log.md`](./friction-log.md) — FL1 (ADR slot collision: planned `0001-agency-system-prototype-exemption.md` was taken, filed as `0006-`).
 
 ## Assumptions Log
 

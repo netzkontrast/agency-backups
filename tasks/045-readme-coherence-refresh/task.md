@@ -4,10 +4,10 @@ status: active
 slug: readme-coherence-refresh
 summary: "R.13/R.14-gated README restructure: reframe §1+§3 to a four-concern model (add Capability/Skills) and add §12 Narrative Ontology pointer."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-08
 task_id: "045"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-opus-4-7"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []

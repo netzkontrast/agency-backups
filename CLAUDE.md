@@ -4,7 +4,7 @@ status: active
 slug: claude-md
 summary: "Instructions for AI coding assistants (Claude Code, Sonnet, Opus, Haiku) operating in this repository. Routes to canonical governance specs and enumerates non-negotiable session rules."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-08
 ---
 
 # CLAUDE.md — AI Assistant Instructions
@@ -149,7 +149,12 @@ Required content:
 | **T1 — Mechanical** | Missing/stale `updated:`, derivable `slug:`, broken relative link to existing target, missing `readme.md` stub | Fix in place via `tools/fm/edit.py` |
 | **T2 — Additive** | Adding an unambiguous L1/L2 key (e.g. `type: task` to a `task.md`) | Fix in place via `tools/fm/edit.py --set` / `--append-list` |
 | **T3 — Structural** | Section heading rewrites, schema changes, root-spec edits beyond T1/T2, slug renames | MUST file a Task; do not edit directly |
-| **T4 — Research-touching** | Any change to a `research_phase: complete` workspace | MUST NOT touch — research is immutable after closure |
+| **T4 — Research-touching (content)** | Any *content* change to a `research_phase: complete` workspace — body prose, synthesis findings, scenario outcomes | MUST NOT touch — research content is immutable after closure |
+
+T1 / T2 metadata-and-link repairs on closed research are permitted
+under the narrow allowance in [`MAINTENANCE.md §1.0.1`](./MAINTENANCE.md#101-closed-research-t1t2-repair-allowance-task-059):
+`updated:` bumps and broken-relative-link fixes when an upstream
+rename moved the target. Body content remains T4-immutable.
 
 The `Accepted` state of an ADR is also T4-immutable; supersede via a new ADR.
 

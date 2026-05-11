@@ -4,10 +4,10 @@ status: active
 slug: read-fm-warn-diagnostic
 summary: "Make tools/fm/_core.py read_fm() emit a WARN-tier Diag when strict=False parsing of a non-empty file collapses to an empty dict, so downstream linters can distinguish 'no frontmatter' from 'malformed frontmatter'."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-08
 task_id: "058"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-opus-4-7"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []

@@ -799,3 +799,18 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
     tools/check-clean-working-directory.py, tools/scripts/migrate-waivers.py,
     PRE_COMMIT.md §7.A/§7.B/§8, tools/fm/_core.py + validate.py.
     task_status: done for Task 037.
+
+### Run 2026-05-08 — adr-synthesize
+- agent: tools/adr/cli.py
+- start_commit: 89c0aa3
+- end_commit: 89c0aa3
+- baseline_commit: 89c0aa3
+- files_in_delta: 0
+- files_scanned: 0
+- t1_fixes: 0
+- t2_fixes: 0
+- t3_tasks_created: 0
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+  adr-synthesize rewrite; contributing_adr_ids=[ADR-0006]; token_count=74; fidelity=1.0000 (bcp14-keyword).

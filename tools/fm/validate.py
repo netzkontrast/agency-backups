@@ -230,34 +230,42 @@ def _iter_targets(args_paths: list[str], repo_root: Path,
 
 
 def _build_slug_index(repo_root: Path, ontology: dict
-                      ) -> tuple[dict[str, dict], dict[tuple[str, str], dict]]:
-    """Return (any_index, by_type_index).
+                      ) -> tuple[dict[str, dict], dict[tuple[str, str], dict],
+                                  list[Diagnostic]]:
+    """Return (any_index, by_type_index, parse_warnings).
 
     `any_index` maps slug → first entry (used for dangling-ref resolution
     when the caller doesn't care about type).
     `by_type_index` maps (slug, type) → entry, so reciprocity rules and
     task_id resolution can disambiguate when a slug is shared between
     a task.md and its sibling prompt.md.
+    `parse_warnings` carries WARN-tier F.3.3 diagnostics for files whose
+    leading `---` fence is present but whose YAML fails to parse — see
+    `read_fm_with_diag` (Task 058).
     """
     any_index: dict[str, dict] = {}
     by_type: dict[tuple[str, str], dict] = {}
+    warnings: list[Diagnostic] = []
     for path in _core.iter_operational_files(repo_root):
         cls = _core.classify_path(path, repo_root, ontology)
         if cls.expected_type is None:
             continue
-        try:
-            fm = _core.read_fm(path, strict=False)
-        except Exception:
+        rel_path = path.resolve().relative_to(repo_root.resolve()).as_posix()
+        fm, diag = _core.read_fm_with_diag(path, strict=False)
+        if diag is not None:
+            warnings.append(Diagnostic(
+                rel_path, diag.line, diag.severity, diag.code, diag.message,
+            ))
+        if not fm:
             continue
         slug = _core.str_val(fm, "slug")
         if not slug:
             continue
-        rel = path.resolve().relative_to(repo_root.resolve()).as_posix()
         declared = _core.str_val(fm, "type") or cls.expected_type
-        entry = {"path": rel, "type": declared, "fm": fm}
+        entry = {"path": rel_path, "type": declared, "fm": fm}
         by_type.setdefault((slug, declared), entry)
         any_index.setdefault(slug, entry)
-    return any_index, by_type
+    return any_index, by_type, warnings
 
 
 def _build_task_id_index(by_type: dict[tuple[str, str], dict]) -> dict[str, str]:
@@ -296,7 +304,8 @@ def type_check(repo_root: Path, ontology: dict) -> list[Diagnostic]:
     """SPEC §5.1 + Task 019 ST-5: emit F.T.1 (dangling) and F.T.2 (reciprocity)
     diagnostics across the slug graph."""
     diags: list[Diagnostic] = []
-    any_index, by_type = _build_slug_index(repo_root, ontology)
+    any_index, by_type, parse_warnings = _build_slug_index(repo_root, ontology)
+    diags.extend(parse_warnings)
     task_id_index = _build_task_id_index(by_type)
 
     for (slug, declared), entry in by_type.items():

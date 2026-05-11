@@ -4,10 +4,10 @@ status: active
 slug: closed-research-repair-allowance
 summary: "Amend MAINTENANCE.md T4 absolute-immutability rule for closed research workspaces to permit T1 (frontmatter date bumps) and T2 (broken-link repair) corrections, while preserving T3/T4 content immutability."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-08
 task_id: "059"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-opus-4-7"
 task_priority: P3
 task_uses_prompts: []
 task_spawns_research: []

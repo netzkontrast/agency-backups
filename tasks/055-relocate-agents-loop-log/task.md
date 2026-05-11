@@ -4,10 +4,10 @@ status: active
 slug: relocate-agents-loop-log
 summary: "Move the LOOP_LOG runtime-state section out of AGENTS.md (R.19 violation) into maintenance/session-logs/, and ship a WARN-tier linter that prevents runtime-state sections from creeping into root governance specs."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-08
 task_id: "055"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-opus-4-7"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
