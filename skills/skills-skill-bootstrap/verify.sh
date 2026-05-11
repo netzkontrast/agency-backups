@@ -3,12 +3,16 @@
 #
 # Usage: verify.sh [--target DIR] [--help]
 #
-# Prints per-skill status: OK | MISSING | DIVERGED
-# Also lists LOCAL-ONLY skills (present locally but absent from repo).
+# Per-skill status: OK | MISSING | DIVERGED | MISSING-SUB | BUNDLE-MISSING |
+#                   BUNDLE-DRIFT | ERROR.
+# Also lists LOCAL-only skills (present locally but absent from repo).
+#
+# Authority: decisions/0007-skill-bundles-tools-frontmatter.md (ADR-0007).
+#
 # Exit codes:
-#   0  all canonical skills present and in sync
-#   1  one or more skills missing or diverged (run sync.sh to fix)
-#   2  unexpected error
+#   0  all canonical skills + declared bundles in sync
+#   1  any skill or bundle missing / diverged (run sync.sh to fix)
+#   2  unexpected error (git show / archive failure)
 
 set -euo pipefail
 
@@ -20,9 +24,7 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --target) TARGET_DIR="$2"; shift 2 ;;
     --help)
-      echo "Usage: verify.sh [--target DIR]"
-      echo "  Exit 0 = all canonical skills in sync."
-      echo "  Exit 1 = missing or diverged skills. Exit 2 = error."
+      sed -n '2,15p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
       exit 0
       ;;
     *)
@@ -34,6 +36,41 @@ done
 
 log()  { echo "[verify] $*"; }
 warn() { echo "[verify] WARN: $*" >&2; }
+
+read_bundles_local() {
+  local skill_md="$1"
+  [[ -f "$skill_md" ]] || return 0
+  python3 "$REPO_ROOT/tools/fm/extract.py" \
+    "$skill_md" --frontmatter skill_bundles_tools 2>/dev/null \
+    | sed -e '/^$/d' -e 's/^- *//' -e 's/^"//' -e 's/"$//' || true
+}
+
+# Hash every git-tracked file under a tools/<slug> path at HEAD.
+# Mirrors sync.sh::hash_bundle_source so verify and sync agree on
+# the file set (no __pycache__/*.pyc leakage).
+hash_bundle_source() {
+  local slug_path="$1"
+  ( cd "$REPO_ROOT" && \
+    git ls-tree -r --name-only HEAD -- "$slug_path/" \
+    | grep -v '/\.bundle\.sha256$' \
+    | LC_ALL=C sort \
+    | while IFS= read -r tracked; do
+        local rel="${tracked#${slug_path}/}"
+        sha256sum "$tracked" | awk -v r="$rel" '{print $1"  ./"r}'
+      done \
+    | LC_ALL=C sort )
+}
+
+# Hash every file under a bundled destination directory.
+# Excludes the .bundle.sha256 sidecar itself.
+hash_bundle_dest() {
+  local dst="$1"
+  ( cd "$dst" && \
+    find . -type f ! -name '.bundle.sha256' -print0 \
+    | LC_ALL=C sort -z \
+    | xargs -0 -I{} sha256sum {} \
+    | LC_ALL=C sort )
+}
 
 log "Fetching origin/main..."
 git -C "$REPO_ROOT" fetch origin main --quiet
@@ -58,6 +95,9 @@ fi
 IN_SYNC=0
 MISSING=0
 DIVERGED=0
+SUB_MISSING=0
+BUNDLE_OK=0
+BUNDLE_BAD=0
 FETCH_ERR=0
 
 for skill_name in "${REPO_SKILLS[@]}"; do
@@ -81,10 +121,48 @@ for skill_name in "${REPO_SKILLS[@]}"; do
     echo "OK:       $skill_name"
     (( IN_SYNC++ )) || true
   else
-    echo "DIVERGED: $skill_name  (local differs from origin/main)"
+    echo "DIVERGED: $skill_name  (local SKILL.md differs from origin/main)"
     (( DIVERGED++ )) || true
   fi
   rm -f "$remote_tmp"
+
+  # ----- subtree presence (scripts/, references/, assets/) -----
+  for sub in scripts references assets; do
+    if git -C "$REPO_ROOT" ls-tree origin/main "skills/$skill_name/$sub" \
+         --name-only 2>/dev/null | grep -q .; then
+      if [[ ! -d "$TARGET_DIR/$skill_name/$sub" ]]; then
+        echo "MISSING-SUB: $skill_name/$sub"
+        (( SUB_MISSING++ )) || true
+      fi
+    fi
+  done
+
+  # ----- bundle parity -----
+  bundles=()
+  while IFS= read -r entry; do
+    [[ -z "$entry" ]] || bundles+=("$entry")
+  done < <(read_bundles_local "$local_file")
+
+  bundle_root="$TARGET_DIR/$skill_name/scripts/_bundled"
+  for slug_path in "${bundles[@]}"; do
+    base="$(basename "$slug_path")"
+    dst="$bundle_root/$base"
+    if [[ ! -d "$dst" ]]; then
+      echo "BUNDLE-MISSING: $skill_name → $slug_path"
+      (( BUNDLE_BAD++ )) || true
+      continue
+    fi
+    # Compare repo source ↔ bundled destination directly. The
+    # .bundle.sha256 sidecar is forensic-only; verify always re-hashes.
+    expected="$(hash_bundle_source "$slug_path")"
+    actual="$(hash_bundle_dest "$dst")"
+    if [[ "$expected" == "$actual" ]]; then
+      (( BUNDLE_OK++ )) || true
+    else
+      echo "BUNDLE-DRIFT: $skill_name → $slug_path"
+      (( BUNDLE_BAD++ )) || true
+    fi
+  done
 done
 
 # Report local-only skills (informational — not a failure)
@@ -101,18 +179,20 @@ fi
 
 echo ""
 log "Source: origin/main @ ${MAIN_SHA:0:7}"
-log "Result: $IN_SYNC in-sync, $MISSING missing, $DIVERGED diverged, $FETCH_ERR fetch-error"
-log "Target: $TARGET_DIR"
+log "SKILL.md: $IN_SYNC in-sync, $MISSING missing, $DIVERGED diverged"
+log "Subtrees: $SUB_MISSING missing-sub"
+log "Bundles:  $BUNDLE_OK in-sync, $BUNDLE_BAD missing-or-drifted"
+log "Target:   $TARGET_DIR"
 
 if [[ $FETCH_ERR -gt 0 ]]; then
   log "git show failed for one or more skills; check origin/main and network."
   exit 2
 fi
 
-if [[ $MISSING -gt 0 || $DIVERGED -gt 0 ]]; then
+if (( MISSING + DIVERGED + SUB_MISSING + BUNDLE_BAD > 0 )); then
   log "Run skills/skills-skill-bootstrap/sync.sh to fix."
   exit 1
 fi
 
-log "All canonical skills in sync."
+log "All canonical skills + bundles in sync."
 exit 0

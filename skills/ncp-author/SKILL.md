@@ -30,6 +30,8 @@ metadata:
     validate NCP, NCP authoring, schema/ncp-schema.json, NCP storyform,
     Subtxt export, NCP file, Storyform anlegen, NCP-Datei validieren,
     NCP-Skelett, Storyform aus Outline
+skill_bundles_tools:
+  - tools/dramatica-nav
 ---
 
 # ncp-author

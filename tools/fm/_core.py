@@ -242,6 +242,13 @@ OPERATIONAL_ROOTS = (
 )
 
 
+# Static transitive dependency map for skill_bundles_tools (ADR-0007).
+# A skill that declares a key MUST also declare every path in its value list.
+BUNDLE_DEPS: dict[str, tuple[str, ...]] = {
+    "tools/adr": ("tools/fm",),
+}
+
+
 @dataclass(frozen=True)
 class Classification:
     expected_type: str | None  # None means: file is not in classifier scope

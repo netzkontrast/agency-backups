@@ -24,6 +24,8 @@ metadata:
   workspace_root: "/home/claude/novel-architect-workspace"
   state_management: "ncp"
   ncp_schema_version: "1.3.0"
+skill_bundles_tools:
+  - tools/dramatica-nav
 ---
 
 # novel-architect
