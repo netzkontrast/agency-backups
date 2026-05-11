@@ -4,10 +4,10 @@ status: active
 slug: renumber-duplicate-task-ids-v3
 summary: "Successor pattern to Tasks 013/024. Two new duplicate-task_id collisions surfaced after the May 2026 merge wave: 031 (adr-tooling-impl ↔ sync-tasks-index-status-drift) and 032 (agents-spec-integration ↔ improve-maintenance-spec-may-2026). Renumber the later-created folder of each pair into the next free slots per TASK.md §8.1."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-11
 task_id: "043"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P1
 task_uses_prompts: []
 task_spawns_research: []
@@ -59,14 +59,14 @@ The slugs MUST remain stable across the renumber per TASK.md §8.1; only the fol
 
 ## Todo
 
-- [ ] 1. Verify `045`/`046` (or next-free pair) are unclaimed at staging time.
-- [ ] 2. Rename `031-sync-tasks-index-status-drift` → `045-sync-tasks-index-status-drift`; update `task_id`.
-- [ ] 3. Rename `032-improve-maintenance-spec-may-2026` → `046-improve-maintenance-spec-may-2026`; update `task_id`.
-- [ ] 4. Sweep cross-references (paths, `task_blocked_by`, `task_supersedes`, `task_superseded_by`, run-log entries, prompt back-links).
-- [ ] 5. Update `tasks/readme.md` bullets and bump `updated:`.
-- [ ] 6. Run `tools/check-governance.sh`; confirm 0 errors.
-- [ ] 7. Append `maintenance/run-log.md` entry.
-- [ ] 8. Produce `friction-log.md` with FL[0-3] declaration.
+- [x] 1. Verify `067`/`068` (next-free pair at staging time; `045`/`046` long since claimed by Tasks 045 / 046) are unclaimed.
+- [x] 2. Rename `031-sync-tasks-index-status-drift` → `067-sync-tasks-index-status-drift`; update `task_id` to `"067"`.
+- [x] 3. Rename `032-improve-maintenance-spec-may-2026` → `068-improve-maintenance-spec-may-2026`; update `task_id` to `"068"`.
+- [x] 4. Sweep cross-references: live markdown link paths in TASK.md, MAINTENANCE.md, `tools/fm/index_diff.py`, and live tasks 044/048/064; the renumbered folders' own self-references. Historical run-log entries, T4-immutable closed research SPECs, and `tasks/032-agents-spec-integration/` done-task prose mentions left intact (no broken `[text](path)` links in those locations).
+- [x] 5. Update `tasks/readme.md` bullets, drop the `(Note: shares task_id ...)` annotations from the surviving `031-adr-tooling-impl/` and `032-agents-spec-integration/` bullets, add new bullets for `067`/`068`, bump `updated:`.
+- [x] 6. Run `tools/check-governance.sh`; PASS.
+- [x] 7. Append `maintenance/run-log.md` entry.
+- [x] 8. Produce `friction-log.md` with FL declaration.
 
 ## Links
 

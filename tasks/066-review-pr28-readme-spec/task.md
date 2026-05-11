@@ -4,8 +4,8 @@ status: active
 slug: review-pr28-readme-spec
 summary: "Review PR #28 (docs/readme): analyse governance compliance, identify the R.13 self-contradiction, and post a formal critique comment on the PR referencing @jules."
 created: 2026-05-04
-updated: 2026-05-04
-task_id: "009"
+updated: 2026-05-11
+task_id: "066"
 task_status: in_progress
 task_owner: claude-code
 task_priority: P1
@@ -13,8 +13,8 @@ task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_affects_paths:
-  - tasks/009-review-pr28-readme-spec/
-  - tasks/009-review-pr28-readme-spec/review.md
+  - tasks/066-review-pr28-readme-spec/
+  - tasks/066-review-pr28-readme-spec/review.md
 ---
 
 # Review PR #28 — docs(readme): write detailed root README with self-update spec

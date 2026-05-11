@@ -48,3 +48,36 @@ def test_adr_a_2_2_invalid_adr_status(mini_ontology):
     fm["adr_status"] = "Maybe"
     diags = adr_schema.validate_frontmatter(fm, ontology=mini_ontology)
     assert any(d.code == "ADR.A.2.2" for d in diags)
+
+
+def test_adr_a_2_2_summary_too_long_reports_length(mini_ontology):
+    """The maxLength diagnostic MUST surface actual length + cap + trim count.
+
+    Authoring an ADR with an over-cap summary previously required iterative
+    trim attempts because the diagnostic only said "is too long" without
+    quantifying the gap. See Task 056 friction-log FL1.
+    """
+    fm = _good_fm()
+    # 250-char summary; cap is 240; gap = 10.
+    fm["summary"] = "x" * 250
+    diags = adr_schema.validate_frontmatter(fm, ontology=mini_ontology)
+    summary_diags = [
+        d for d in diags
+        if d.code == "ADR.A.2.2" and "summary" in d.message
+    ]
+    assert summary_diags, f"expected ADR.A.2.2 on summary; got {diags!r}"
+    msg = summary_diags[0].message
+    assert "actual=250" in msg, f"expected actual=250 in {msg!r}"
+    assert "max=240" in msg, f"expected max=240 in {msg!r}"
+    assert "trim 10 chars" in msg, f"expected trim count in {msg!r}"
+
+
+def test_adr_a_2_2_summary_at_cap_passes(mini_ontology):
+    """Exactly the cap MUST validate clean (off-by-one regression guard)."""
+    fm = _good_fm()
+    fm["summary"] = "x" * 240
+    diags = adr_schema.validate_frontmatter(fm, ontology=mini_ontology)
+    assert not any(
+        d.code == "ADR.A.2.2" and "summary" in d.message
+        for d in diags
+    ), f"summary at exactly 240 chars should pass; got {diags!r}"

@@ -4,10 +4,10 @@ status: active
 slug: narrative-skills-extraction-adr
 summary: "Decision-class Task: produce an ADR evaluating extraction of the narrative skills (novel-architect, the-agency-system-architect, suno-lyric-writer, Dramatica corpus) into a sibling repo or governance-isolated namespace, instead of relying on the AGENTS.md NO.5 don't-load workaround."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-11
 task_id: "056"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P3
 task_uses_prompts: []
 task_spawns_research: []

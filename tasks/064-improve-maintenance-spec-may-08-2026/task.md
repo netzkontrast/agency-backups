@@ -4,7 +4,7 @@ status: active
 slug: improve-maintenance-spec-may-08-2026
 summary: "Distil seven findings (F20–F26) from the 2026-05-08 coherence run into concrete diffs against MAINTENANCE.md, prompts/repo-coherence-check/prompt.md, tools/check-governance.sh, and maintenance/run-log.md. Companion to Task 044 (open) and Task 025 (open) carrying earlier findings."
 created: 2026-05-08
-updated: 2026-05-08
+updated: 2026-05-11
 task_id: "064"
 task_status: open
 task_owner: "unassigned"
@@ -57,14 +57,14 @@ The accumulation is structural: every coherence run produces session-distilled f
 
 ### F22 — `tasks/readme.md` index discipline only triggers at commit time
 
-**Symptom.** [Task 031](../031-sync-tasks-index-status-drift/task.md) shipped `tools/fm/index_diff.py` as `[6/6] Tasks-index freshness` in `tools/check-governance.sh`. The linter runs at pre-commit but provides no in-session signal: a long-running session that creates multiple Tasks pre-commit invalidates the index N times before the gate runs. The agent has no surface to confirm "the index is in sync after Task NNN was filed" without running the full governance suite.
+**Symptom.** [Task 031](../067-sync-tasks-index-status-drift/task.md) shipped `tools/fm/index_diff.py` as `[6/6] Tasks-index freshness` in `tools/check-governance.sh`. The linter runs at pre-commit but provides no in-session signal: a long-running session that creates multiple Tasks pre-commit invalidates the index N times before the gate runs. The agent has no surface to confirm "the index is in sync after Task NNN was filed" without running the full governance suite.
 
 In this run, Task 064 (this Task) is filed mid-session; the pre-commit gate will catch a missing bullet, but the gate runs at the END of the session. An author who batches Task creation can lose track of which bullets they have/haven't added.
 
 **Concrete diffs:**
 
 - [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md) Step 4 (Writing a Task for a T3 Finding) SHOULD add a final substep: "After staging the new Task folder, run `python3 tools/fm/index_diff.py` and stage any required `tasks/readme.md` bullet update in the same commit-stage."
-- [`MAINTENANCE.md §3.4`](../../MAINTENANCE.md) Stale-Task Audit SHOULD cross-reference [Task 031](../031-sync-tasks-index-status-drift/task.md)'s linter as the canonical mid-session check, not just the pre-commit gate.
+- [`MAINTENANCE.md §3.4`](../../MAINTENANCE.md) Stale-Task Audit SHOULD cross-reference [Task 031](../067-sync-tasks-index-status-drift/task.md)'s linter as the canonical mid-session check, not just the pre-commit gate.
 - (Optional) `tools/fm/index_diff.py` SHOULD support a `--quick` flag (NOT a new subcommand — the existing dispatcher path `python3 tools/fm/fm.py index-diff --quick` MUST be the single surface) that exits 0 for in-sync state without printing anything, suitable for an in-session sanity check.
 
 ### F23 — `tools/check-governance.sh` output mixes gating and advisory errors visually
@@ -104,7 +104,7 @@ This is an agent-tool friction (Claude Code harness), not a maintenance-spec iss
 
 ### F26 — "Covered by existing open Task" skip pattern is unspecified
 
-**Symptom.** The 2026-05-07 run-log entry recorded `issues_skipped: 1` with prose rationale "already captured in [Task 032 §F8](../tasks/032-improve-maintenance-spec-may-2026/task.md)". This run encountered the same pattern: the persistent advisory ERRORs (FR.B.4 friction-log format, R.6.5 downstream-Task gap) are already filed under Task 044 / Task 038 territory. The right disposition is **skip-with-citation**, not refile.
+**Symptom.** The 2026-05-07 run-log entry recorded `issues_skipped: 1` with prose rationale "already captured in [Task 032 §F8](../tasks/068-improve-maintenance-spec-may-2026/task.md)". This run encountered the same pattern: the persistent advisory ERRORs (FR.B.4 friction-log format, R.6.5 downstream-Task gap) are already filed under Task 044 / Task 038 territory. The right disposition is **skip-with-citation**, not refile.
 
 [`MAINTENANCE.md §3`](../../MAINTENANCE.md) and the coherence prompt's Step 4 R4 reflection gate touch on dedup ("Is any Task redundant with an existing open Task in `/tasks/`?") but do not formalize the "covered-by-existing-open-Task → skip + cite" pattern as the canonical disposition. The maintenance-bypass mechanism (§4.1) handles a related but distinct case (errors covered by a Task's `task_affects_paths`); F26 is about issues NOT yet errors but already filed as findings in another open Task's `## Findings` section.
 
@@ -144,5 +144,5 @@ This is an agent-tool friction (Claude Code harness), not a maintenance-spec iss
 - Sibling Tasks (independent, not predecessors):
   - [`Task 025`](../025-maintenance-spec-remaining-findings/task.md) (F2/F3/F4/F7 from 2026-05-05).
   - [`Task 044`](../044-improve-maintenance-spec-may-07-2026/task.md) (F14–F19 from 2026-05-07; F18/F19 absorbed from PR #74).
-- Predecessor lineage (informational, not supersession): [`Task 014`](../014-improve-maintenance-spec-from-session/task.md), [`Task 032`](../032-improve-maintenance-spec-may-2026/task.md).
+- Predecessor lineage (informational, not supersession): [`Task 014`](../014-improve-maintenance-spec-from-session/task.md), [`Task 032`](../068-improve-maintenance-spec-may-2026/task.md).
 - Governing specs: [`MAINTENANCE.md`](../../MAINTENANCE.md), [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md), [`CLAUDE.md`](../../CLAUDE.md), [`TASK.md`](../../TASK.md).

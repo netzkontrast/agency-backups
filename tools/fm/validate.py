@@ -50,6 +50,76 @@ def _all_known_required_keys(ontology: dict) -> set[str]:
     return keys
 
 
+def _check_skill_bundles(
+    fm: dict, rel: str, repo_root: Path,
+) -> list[Diagnostic]:
+    """Validate skill_bundles_tools per ADR-0007.
+
+    Emits:
+      - F.B.5 when an entry is malformed (wrong type, missing tools/ prefix,
+        contains '..', duplicated, or does not resolve to a tools/<slug>/ dir).
+      - F.B.6 when a declared bundle's transitive dependency (per
+        `_core.BUNDLE_DEPS`) is missing from the same list.
+    """
+    out: list[Diagnostic] = []
+    if "skill_bundles_tools" not in fm:
+        return out
+    bundles = fm.get("skill_bundles_tools")
+    if not isinstance(bundles, list):
+        out.append(Diagnostic(
+            rel, None, "ERROR", "F.B.5",
+            "skill_bundles_tools MUST be a YAML list of strings",
+        ))
+        return out
+
+    seen: set[str] = set()
+    valid: list[str] = []
+    for entry in bundles:
+        if not isinstance(entry, str) or not entry:
+            out.append(Diagnostic(
+                rel, None, "ERROR", "F.B.5",
+                f"skill_bundles_tools entry must be a non-empty string, got {entry!r}",
+            ))
+            continue
+        if not entry.startswith("tools/"):
+            out.append(Diagnostic(
+                rel, None, "ERROR", "F.B.5",
+                f"skill_bundles_tools entry {entry!r} MUST start with 'tools/'",
+            ))
+            continue
+        if ".." in Path(entry).parts:
+            out.append(Diagnostic(
+                rel, None, "ERROR", "F.B.5",
+                f"skill_bundles_tools entry {entry!r} contains '..' — path traversal forbidden",
+            ))
+            continue
+        if entry in seen:
+            out.append(Diagnostic(
+                rel, None, "ERROR", "F.B.5",
+                f"skill_bundles_tools entry {entry!r} is duplicated",
+            ))
+            continue
+        seen.add(entry)
+        if not (repo_root / entry).is_dir():
+            out.append(Diagnostic(
+                rel, None, "ERROR", "F.B.5",
+                f"skill_bundles_tools entry {entry!r} does not resolve to an existing directory under repo root",
+            ))
+            continue
+        valid.append(entry)
+
+    # Transitive dependency closure (F.B.6).
+    valid_set = set(valid)
+    for entry in valid:
+        for dep in _core.BUNDLE_DEPS.get(entry, ()):
+            if dep not in valid_set:
+                out.append(Diagnostic(
+                    rel, None, "ERROR", "F.B.6",
+                    f"skill_bundles_tools entry {entry!r} requires transitive bundle {dep!r}; add it to the list",
+                ))
+    return out
+
+
 def _check_body_for_type(
     text: str, ontology: dict, type_for_keys: str, rel: str,
 ) -> list[Diagnostic]:
@@ -209,6 +279,10 @@ def check_file(
     # SPEC §12: opt-in per-section body schema check.
     if check_body:
         diags.extend(_check_body_for_type(text, ontology, type_for_keys, rel))
+
+    # ADR-0007: skill_bundles_tools validation (only for SKILL.md files).
+    if type_for_keys == "skill":
+        diags.extend(_check_skill_bundles(fm, rel, repo_root))
 
     return diags
 

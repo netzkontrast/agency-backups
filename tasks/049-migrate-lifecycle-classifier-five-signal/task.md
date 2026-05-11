@@ -4,10 +4,10 @@ status: active
 slug: migrate-lifecycle-classifier-five-signal
 summary: "Migrate `tools/fm/check-task-lifecycle-classification.py` from the four-condition fallback derived from TASK.md §4.7 prose onto the ratified five-signal `classify_task` decision tree from `research/spec-staleness-decision-formalization/output/SPEC.md §1` (Task 033 ST-2 / Task 039 ST-2)."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-11
 task_id: "049"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P3
 task_uses_prompts: []
 task_spawns_research: []
@@ -66,16 +66,16 @@ Wrong cut **iff**:
 
 ## Todo
 
-- [ ] 1. Read ST-2 SPEC §1, §2, §3, §6.
-- [ ] 2. Implement the five signals as pure functions.
-- [ ] 3. Implement `classify_task()` per SPEC §1 pseudocode.
-- [ ] 4. Migrate the helper; drop the two attestation flags.
-- [ ] 5. Add tests for signals, buckets, and the four worked examples.
-- [ ] 6. Update TASK.md §4.7 + helper docstring + `tools/fm/readme.md`.
-- [ ] 7. Run `tools/check-governance.sh`; fix every ERROR.
-- [ ] 8. Update `tasks/readme.md` with the closure bullet.
-- [ ] 9. Author `friction-log.md` with FL[0-3] declaration.
-- [ ] 10. Set `task_status: done`.
+- [x] 1. Read ST-2 SPEC §1, §2, §3, §6.
+- [x] 2. Implement the five signals as pure functions in `tools/fm/_lifecycle_signals.py`.
+- [x] 3. Implement `classify_task()` per SPEC §1 pseudocode (3 levels, 4 leaves, returns `ClassificationResult{bucket, signals, trace}`).
+- [x] 4. Migrate the helper; drop `--goal-still-desirable` / `--plan-drifted`; preserve `--task` / `--target-status` surface; map target → expected bucket set; emit WARN for `COMPLETED_BY_DRIFT` under `--target-status updated`.
+- [x] 5. Add tests: 12 signal-unit tests (S1..S5 + defaults + retired-path), 6 bucket-leaf tests (each §1 path), 4 worked-example walkthroughs (Tasks 022/023/024/025 against the live repo), 3 CLI tests, 3 §8.3 abandonment-precondition tests. All 29 pass.
+- [x] 6. Update TASK.md §4.7 helper paragraph + `tools/fm/readme.md` row + helper docstring.
+- [x] 7. Run `tools/check-governance.sh`; PASS.
+- [x] 8. Update `tasks/readme.md` with the closure bullet.
+- [x] 9. Author `friction-log.md` with FL declaration.
+- [x] 10. Set `task_status: done`.
 
 ## Links
 

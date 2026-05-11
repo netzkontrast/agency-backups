@@ -107,10 +107,13 @@
     },
     "skill": {
       "required_keys": ["name", "description"],
-      "recommended_keys": ["skill_kind", "skill_target_agents"],
+      "recommended_keys": ["skill_kind", "skill_target_agents", "skill_bundles_tools"],
       "required_headings": [],
       "body_schema": {
         "_note": "Anthropic SKILL.md owns the body — no schema enforced."
+      },
+      "key_docs": {
+        "skill_bundles_tools": "OPTIONAL list of repo-relative tools/<slug> paths that skills/skills-skill-bootstrap/sync.sh materialises into <synced-skill>/scripts/_bundled/<basename>/ at sync time. Validated by tools/fm/validate.py::_check_skill_bundles (diagnostics F.B.5, F.B.6). Authority: decisions/0007-skill-bundles-tools-frontmatter.md."
       }
     },
     "spec": {

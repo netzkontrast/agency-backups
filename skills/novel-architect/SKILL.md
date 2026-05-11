@@ -33,6 +33,8 @@ metadata:
   delegates_to: >-
     dramatica-theory, dramatica-vocabulary, ncp-author,
     research-prompt-optimizer, skill-creator, memory-sync (optional)
+skill_bundles_tools:
+  - tools/dramatica-nav
 ---
 
 # novel-architect v1.0.0

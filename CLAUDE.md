@@ -171,16 +171,21 @@ FL1+ entries feed the Nightly Maintenance Run, which converts recurring friction
 
 ---
 
-## 10. Closing run procedure (Claude Code only)
+## 10. Closing run procedure (all platforms)
 
-Claude Code sessions MUST close with `/sc:createPR` immediately after a successful `git push` ([AGENTS.md "Closing Run Procedure"](./AGENTS.md#closing-run-procedure-claude-code)). Rules CR.1–CR.6:
+Every session — Claude Code, Jules, Gemini — MUST close with the four-step platform-agnostic checklist defined in [AGENTS.md "Closing Run Procedure"](./AGENTS.md#closing-run-procedure). The checklist is the contract; each platform implements step 4 (PR creation) via its own primitive.
 
-- The PR body MUST cite (a) closed Task slug(s) and (b) the FL declaration.
-- `/sc:createPR` is idempotent — re-invocation on a branch with an open PR is a no-op; pushing additional commits updates the open PR. **Do not** create duplicate PRs.
-- If pre-commit failed or was skipped, do NOT invoke `/sc:createPR`. Report diagnostics to the user and leave the session `in_progress`.
-- If `/sc:createPR` errors, do not silently exit — surface the exact output.
+1. **Friction log written + committed** (`friction-log.md` with `Highest Frustration Level: FL[0-3]`).
+2. **`tasks/readme.md` index synced** with new `task_status` frontmatter.
+3. **`tools/check-governance.sh` exits 0** on the final commit.
+4. **Open a draft PR** via the platform's primitive (Claude Code: `/sc:createPR`; Jules: native GitHub primitive; Gemini: deferred to integration-Task agent). The PR body MUST cite (a) closed Task slug(s) and (b) the FL declaration.
 
-This rule binds Claude Code only; Jules / Gemini follow their own platform conventions.
+Notes that apply to all platforms:
+- Step 4 is idempotent — re-invocation on a branch with an open PR is a no-op; pushing additional commits updates the open PR. **Do not** create duplicate PRs.
+- If pre-commit failed or was skipped, do NOT advance past step 3. Report diagnostics to the user and leave the session `in_progress`.
+- If the platform's PR primitive errors, do not silently exit — surface the exact output.
+
+Rules CR.1–CR.7 in [AGENTS.md § Closing Run Procedure](./AGENTS.md#closing-run-procedure) are the binding statement; this section is a one-paragraph routing pointer.
 
 ---
 
@@ -246,7 +251,7 @@ For narrative-ontology work (Dramatica / NCP / novel-architect), prefer `tools/d
 8. Do not edit `<!-- BEGIN/END AGENCY-ADR SYNTHESIS -->` blocks by hand.
 9. Do not push to `main`, force-push, skip hooks, or use `--no-verify`.
 10. End every session with an FL declaration. FL0 inclusive.
-11. Claude Code: close with `/sc:createPR` after `git push`. Cite Task slug(s) + FL.
+11. Close every session with the four-step checklist in [AGENTS.md § Closing Run Procedure](./AGENTS.md#closing-run-procedure). Claude Code implements step 4 via `/sc:createPR`. Cite Task slug(s) + FL.
 12. When in doubt, the root spec wins over this file.
 
 ---
