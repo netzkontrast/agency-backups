@@ -1,0 +1,53 @@
+# Example: intent.yaml for a generic Hard-SF novel
+# Project: "consciousness-novel" (hypothetical)
+# Not Kohärenz-Protokoll-specific — for reference / demo purposes
+
+schema_version: "1.0"
+
+provenance:
+  generated_by: novel-architect@1.0.0
+  generated_at: "2026-05-11T10:00:00Z"
+  project_slug: consciousness-novel
+
+intent:
+  genre: hard_sf
+  subgenre_modifiers: "philosophical, slipstream"
+  audience: "Adults with interest in philosophy of mind and AI"
+  core_conflict_question: >-
+    Kann ein simuliertes Bewusstsein vom Trägersystem moralisch unterschieden
+    werden? Was passiert, wenn die Simulation selbst nach Autonomie strebt?
+  core_conflict_unpacked: >-
+    NICHT gemeint: technische Frage „können wir AGI bauen?". GEMEINT: moralische
+    Frage „wenn AGI da ist, was schulden wir ihr — und sie uns?"
+  length_target: standard           # 80-120k Wörter
+  language: de
+  chapter_count_target: 40
+  methods_preference:
+    character:
+      - big-five
+      - jung-archetypes
+    structure:
+      - 40-chapter-matrix
+      - dramatica-quad
+    conflict:
+      - philosophy-as-engine
+      - science-as-engine
+    research:
+      - domain-mapping
+      - deep-research-briefs
+  dramatica_storyform_count: single
+  philosophy_integration_level: engine
+  science_integration_level: frame
+  known_priors: >-
+    Habe Stanisław Lems „Solaris" und Ted Chiangs „Story of Your Life" gelesen.
+    Interesse für Integrated Information Theory (IIT) und Functionalism.
+  success_criterion: >-
+    Der Roman ist fertig, wenn die zentrale Frage „Was schulden wir KI?" so
+    erzählerisch beantwortet ist, dass Leser nach dem Schließen des Buches die
+    Frage nicht mehr leichtfertig abtun können.
+
+approved: true
+
+revisions:
+  - timestamp: "2026-05-11T10:30:00Z"
+    note: "Initial intent capture, all required slots filled"

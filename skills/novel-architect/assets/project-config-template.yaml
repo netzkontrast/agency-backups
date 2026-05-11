@@ -1,0 +1,52 @@
+# Project Config Template — copy to /home/claude/novel-projects/<slug>/project-config.yaml
+# Edit ALL <PLACEHOLDER> values before first use.
+
+project:
+  slug: <PLACEHOLDER-kebab-case>           # z.B. kohaerenz-protokoll, my-sf-novel
+  name: "<PLACEHOLDER human-readable>"     # z.B. "Kohärenz Protokoll"
+  language: <PLACEHOLDER-de-en-...>
+  genre: <PLACEHOLDER>                     # hard_sf, fantasy, literary, horror, etc.
+  workspace_root: /home/claude/novel-projects/<PLACEHOLDER-slug>/
+  is_demo: false                           # true für Demo-Projekte
+
+narrative:
+  storyform_count: single                  # single / dual
+  chapter_count_target: 40
+  structure_template: 40-chapter-matrix    # aus methods/structure/*.md
+
+methods_enabled:
+  character:
+    - <PLACEHOLDER>                        # tsdp-ifs, big-five, enneagramm, jung-archetypes
+  structure:
+    - 40-chapter-matrix                    # methods/structure/40-chapter-matrix.md
+    - dramatica-quad                       # methods/structure/dramatica-quad.md
+  conflict:
+    - <PLACEHOLDER>                        # philosophy-as-engine, science-as-engine, dual-storyform
+  research:
+    - domain-mapping
+    - deep-research-briefs
+
+ncp:
+  schema_version: "1.3.0"
+  file: canon/<PLACEHOLDER-slug>.ncp.json  # Pfad relativ zu workspace_root
+
+canon:
+  meta_file: canon-meta.md                 # nicht-strukturelle Canon-Daten
+
+state:
+  progress_file: progress.md
+  open_questions_file: open-questions.md
+  learnings_file: learnings.md
+  intent_file: intent.yaml
+  architecture_file: architecture.yaml
+  character_architecture_file: character-architecture.yaml
+  scene_matrix_file: scene-matrix.md
+
+integration:
+  philosophy_level: null                   # decoration / frame / engine
+  science_level: null                      # decoration / frame / engine
+
+provenance:
+  created_by: novel-architect@1.0.0
+  created_at: <ISO-8601>
+  predecessor: null                        # für Migrationen: "novel-architect-legacy@0.3.3"

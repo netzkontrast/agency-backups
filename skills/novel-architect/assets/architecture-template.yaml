@@ -1,0 +1,45 @@
+# Architecture Template — Schema 2, written by Phase 2
+# NCP-Skeleton wird parallel via ncp-author erstellt.
+
+schema_version: "1.0"
+
+provenance:
+  generated_by: novel-architect@1.0.0
+  generated_at: <ISO-8601>
+  project_slug: <slug>
+  intent_file: intent.yaml
+
+architecture:
+  storyform_count: <single|dual>
+
+  # Bei storyform_count: dual wird narratives[1] befüllt
+  narratives:
+    - id: storyform_a
+      throughlines:
+        os:   { class: <Universe|Physics|Mind|Psychology>, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        mc:   { class: <PLACEHOLDER>, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        ic:   { class: <PLACEHOLDER>, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        ss:   { class: <PLACEHOLDER>, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+      dynamics:
+        mc_resolve:    <Change|Steadfast>
+        mc_growth:     <Start|Stop>
+        mc_approach:   <Doer|Beer>
+        mc_mental_sex: <Linear|Holistic>
+        plot_driver:   <Action|Decision>
+        plot_limit:    <Timelock|Optionlock>
+        outcome:       <Success|Failure>
+        judgment:      <Good|Bad>
+
+ncp:
+  skeleton_written: false                  # true wenn ncp-author skeleton erstellt
+  ncp_file: canon/<slug>.ncp.json
+  validation_status: pending
+
+gates:
+  gate_1_storyform_shape: { approved: false, edits: 0 }
+  gate_2_throughlines_classes_dynamics: { approved: false, edits: 0 }
+  gate_3_final_architecture: { approved: false, edits: 0 }
+
+approved: false
+
+revisions: []

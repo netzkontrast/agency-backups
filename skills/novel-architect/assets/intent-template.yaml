@@ -1,0 +1,33 @@
+# Intent Template — Schema 1, written by Phase 1
+# Don't edit by hand after approval; use Phase 1 edit-loops.
+
+schema_version: "1.0"
+
+provenance:
+  generated_by: novel-architect@1.0.0
+  generated_at: <ISO-8601>
+  project_slug: <slug>
+
+intent:
+  genre: <PLACEHOLDER>                     # hard_sf, fantasy, literary, horror, etc.
+  subgenre_modifiers: "<PLACEHOLDER>"
+  audience: "<PLACEHOLDER>"
+  core_conflict_question: "<PLACEHOLDER 1-2 Sätze>"
+  core_conflict_unpacked: "<PLACEHOLDER was ist NICHT gemeint>"
+  length_target: standard                  # short_novel / standard / epic
+  language: <PLACEHOLDER>
+  chapter_count_target: 40
+  methods_preference:
+    character: []                          # tsdp-ifs, big-five, ...
+    structure: []                          # 40-chapter-matrix, heroes-journey, ...
+    conflict: []                           # philosophy-as-engine, ...
+    research: []
+  dramatica_storyform_count: single        # single / dual
+  philosophy_integration_level: null       # decoration / frame / engine / null
+  science_integration_level: null
+  known_priors: null
+  success_criterion: "<PLACEHOLDER 'Der Roman ist fertig, wenn ___'>"
+
+approved: false
+
+revisions: []

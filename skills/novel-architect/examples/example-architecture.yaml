@@ -1,0 +1,68 @@
+# Example: architecture.yaml for the consciousness-novel example
+# Demonstrates single storyform with philosophy-as-engine
+
+schema_version: "1.0"
+
+provenance:
+  generated_by: novel-architect@1.0.0
+  generated_at: "2026-05-11T11:00:00Z"
+  project_slug: consciousness-novel
+  intent_file: intent.yaml
+
+architecture:
+  storyform_count: single
+
+  narratives:
+    - id: storyform_a
+      throughlines:
+        os:
+          class: Universe
+          type: "Progress"
+          variation: "Threat"
+          element: "Hindrance"
+        mc:
+          class: Mind
+          type: "Memory"
+          variation: "Truth"
+          element: "Trust"
+        ic:
+          class: Psychology
+          type: "Conceptualizing"
+          variation: "Knowledge"
+          element: "Test"
+        ss:
+          class: Physics
+          type: "Doing"
+          variation: "Effect"
+          element: "Help"
+      dynamics:
+        mc_resolve: Change
+        mc_growth: Stop
+        mc_approach: Beer
+        mc_mental_sex: Holistic
+        plot_driver: Decision
+        plot_limit: Optionlock
+        outcome: Success
+        judgment: Good
+
+ncp:
+  skeleton_written: true
+  ncp_file: canon/consciousness-novel.ncp.json
+  validation_status: passed
+
+gates:
+  gate_1_storyform_shape:
+    approved: true
+    edits: 0
+  gate_2_throughlines_classes_dynamics:
+    approved: true
+    edits: 1
+  gate_3_final_architecture:
+    approved: true
+    edits: 0
+
+approved: true
+
+revisions:
+  - timestamp: "2026-05-11T11:30:00Z"
+    note: "Initial architecture, Gate 2 had 1 edit (switched MC class from Universe to Mind)"

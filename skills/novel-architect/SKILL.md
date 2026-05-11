@@ -1,276 +1,394 @@
 ---
 name: novel-architect
 description: >-
-  Orchestrator für den deutschsprachigen Roman „Kohärenz Protokoll" (Hard-SF /
-  Philosophical Horror, Dual-Storyform, 39 Kapitel, 13 Alters). State-Management
-  läuft über NCP (Narrative Context Protocol v1.3.0) via ncp-author — Storyform
-  A + B als zwei narratives, dynamics/storypoints/storybeats/moments als
-  NCP-Entitäten. Nicht-strukturelle Canon-Daten (DKT, Prosa-Regeln, Mandate)
-  in canon-meta.md. Lädt Workspace bei Session-Start, routet Skill-Pipeline
-  (dramatica-theory, dramatica-vocabulary, ncp-author, memory-sync,
-  research-prompt-optimizer, doc-coauthoring, drive-markdown-converter), packt
-  sich nach signifikanten Schritten via skill-creator. Trigger — novel-architect,
-  Kohärenz Protokoll, Roman Encoding, Storyweaving, Vortex, Throughline,
-  Storyform A, Storyform B, NCP, ncp.json, Kanon, Kael, AEGIS, Juna, DKT,
-  Kapitel-Entwurf, /analyze, /interview, /synthesize, /draft. Implizit bei
-  Alters, Klimax, Dual-POV, Riss-Mandat, 39-Kapitel-Plan. NICHT bei
-  Agency-System.
+  Methodengetriebener Roman-Architektur-Orchestrator für die Entwicklung
+  literarischer Langform (Roman, Novelle, Triptychon). Strukturiert die Roman-
+  Entwicklung in 8 klare Phasen (Bootstrap, Intent Capture, Narrative
+  Architecture, Character Architecture, World & Research, Scene Matrix,
+  Drafting, Iteration) mit Hard Exit Gates, AskUserQuestion-Loops (≤3 Slots
+  pro Call), File-First-Prinzip und progressivem Reference-Loading. State-
+  Management läuft strikt über NCP (Narrative Context Protocol v1.3.0) via
+  ncp-author — Storyforms, Players, Storypoints, Storybeats, Moments leben
+  als JSON. Methoden-Bibliothek selektierbar pro Projekt (Character: TSDP,
+  Big Five, Enneagramm, Jung; Structure: 40-Kapitel-Matrix, Hero's Journey,
+  Save-the-Cat, Dramatica-Quad; Conflict: Philosophie/Science-as-Engine,
+  Dual-Storyform; Research: Domain-Mapping). /sc:-Mapping pro Phase
+  (sc:brainstorm, sc:design, sc:research, sc:workflow, sc:implement,
+  sc:reflect). Projekt-Workspaces leben unter /home/claude/novel-projects/
+  <slug>/, NICHT im Skill. Trigger — novel, roman, novella, narrative
+  architecture, storyform, throughline, dramatica, scene matrix, chapter
+  draft, character architecture, novel project, /novel-start, /novel-design,
+  /novel-research, /novel-scenes, /novel-draft, /novel-reflect. Implizit
+  bei Genre-Wahl (Hard-SF, Literary, Horror, Fantasy), Plot-Struktur-Frage,
+  Charakter-Architektur, Storyweaving. NICHT bei Agency-System-Tracks,
+  Suno-Lyrics, generischer Prosa ohne Roman-Scope.
 metadata:
   category: creative-writing
-  project: Kohärenz Protokoll
-  version: "0.3.3"
+  source: user
+  version: "1.0.0"
   status: active
-  date_updated: "2026-05-03"
-  workspace_root: "/home/claude/novel-architect-workspace"
+  date_added: "2026-05-11"
+  date_updated: "2026-05-11"
+  predecessor: "novel-architect-legacy@0.3.3"
   state_management: "ncp"
   ncp_schema_version: "1.3.0"
+  project_workspace_root: "/home/claude/novel-projects"
+  triggers: >-
+    novel-architect, novel, roman, novella, narrative architecture, storyform,
+    throughline, dramatica, scene matrix, chapter draft, character
+    architecture, novel project, /novel-start, /novel-design, /novel-research,
+    /novel-scenes, /novel-draft, /novel-reflect, Roman planen, Roman
+    strukturieren, Charakter-Architektur, Storyweaving, 40-Kapitel-Matrix
+  delegates_to: >-
+    dramatica-theory, dramatica-vocabulary, ncp-author,
+    research-prompt-optimizer, skill-creator, memory-sync (optional)
 ---
 
-# novel-architect
+# novel-architect v1.0.0
 
-Orchestrator für das Roman-Projekt **Kohärenz Protokoll**. Dieser Skill ist die **Source-of-Truth** für den Kanon: strukturelle Daten in `references/canon/kohaerenz-protokoll.ncp.json` (NCP v1.3.0), nicht-strukturelle Daten in `references/canon-meta.md`, Arbeitsstand in `progress.md`, offene Fragen in `open-questions.md`. Memory (userMemories) ist ein **älterer Snapshot oder lose Anregung** — kann stale sein, kann widersprüchlich sein, ist niemals autoritativ. Bei Diskrepanz: Skill-Files gewinnen, Memory ist Konsultations-Material.
+Methodengetriebener Orchestrator für die Roman-Entwicklung. Strukturiert die
+Arbeit an einem literarischen Langform-Projekt in **8 klare Phasen** mit Hard
+Exit Gates, AskUserQuestion-Loops und NCP-State-Persistenz. Der Skill ist
+**projekt-agnostisch** — alle projekt-spezifischen Daten leben im Projekt-
+Workspace unter `/home/claude/novel-projects/<slug>/`, niemals im Skill selbst.
 
-## Mission
+> **Vorgänger:** `novel-architect-legacy@0.3.3` (Kohärenz-Protokoll-spezifisch).
+> Migration der Kohärenz-Protokoll-Daten siehe `scripts/bootstrap_project.sh`.
 
-Vier Dinge, die dieser Skill leistet:
+---
 
-1. **Workspace aufsetzen** — schreibbare Kopie seiner selbst plus read-only Spiegel der Workflow-Skills nach `/home/claude/novel-architect-workspace/`. Ohne Workspace keine Arbeit. Bootstrap ist die erste Handlung jeder Session.
+## Pipeline Overview
 
-2. **Skill-Pipeline routen** — für jede Roman-Aufgabe (Encoding, Storyweaving, Vortex-Architektur, Open-Questions-Resolution, Chapter-Drafting, Research-Ingestion, Canon-Update) ist die Skill-Reihenfolge dokumentiert. Kein Rätselraten welcher Skill wann.
+| Phase | Goal | Output | Implementation |
+|-------|------|--------|----------------|
+| **Phase 0 — Bootstrap** | Workspace setup, Projekt laden/erstellen | `project-config.yaml` | `phases/phase0-bootstrap.md` |
+| **Phase 1 — Intent Capture** | Genre, Audience, Konflikt-Frage, Methoden-Auswahl | `intent.yaml` (approved) | `phases/phase1-intent-capture.md` |
+| **Phase 2 — Narrative Architecture** | Storyform, Throughlines, Dynamics (3 Gates) | `architecture.yaml` + NCP Skeleton | `phases/phase2-narrative-architecture.md` |
+| **Phase 3 — Character Architecture** | Players, Psycho-Modelle, Beziehungen | `character-architecture.yaml` + NCP `players[]` | `phases/phase3-character-architecture.md` |
+| **Phase 4 — World & Research** | Welt-Bibel, Recherche-Briefs | `world-bible.md`, `research/briefs/*.md` | `phases/phase4-world-research.md` |
+| **Phase 5 — Scene & Chapter Matrix** | 40-Kapitel-Plan, Storybeats, Moments (3 Gates) | `scene-matrix.md` + NCP `storybeats[]`/`moments[]` | `phases/phase5-scene-matrix.md` |
+| **Phase 6 — Drafting** | Per-Kapitel Prosa | `drafts/ch-XX.docx` (außerhalb NCP) | `phases/phase6-drafting.md` |
+| **Phase 7 — Iteration (3-Mode)** | OQ-Resolution, Canon-Updates, Audits (generate/apply/audit) | Updates an NCP/canon-meta/learnings | `phases/phase7-iteration.md` |
 
-3. **Strukturellen Canon in NCP halten** — Storyform A + B, Players, Storypoints, Storybeats, Moments leben als JSON in `references/canon/kohaerenz-protokoll.ncp.json` (Narrative Context Protocol v1.3.0). Jede Mutation läuft über `ncp-author`. Nicht-strukturelle Canon-Daten (DKT-Physik, Prosa-Regeln, Mandate) bleiben in `references/canon-meta.md`.
+**Hand-off Contract:** Strukturierte YAML zwischen Phasen (intent → architecture
+→ character-architecture → scene-matrix) plus NCP-JSON als zentraler Storyform-
+State. Kein Prosa-Hand-off, kein impliziter Kontext.
 
-4. **Eigenen Stand fortschreiben** — `references/progress.md`, `references/canon/kohaerenz-protokoll.ncp.json` und ggf. `references/canon-meta.md` werden nach jedem signifikanten Schritt aktualisiert, dann wird der Skill via `skill-creator/scripts/package_skill.py` neu gepackt und die `.skill`-Datei via `present_files` zurückgegeben. So überlebt der Arbeitsstand die Session.
+**File-First Principle:** Alle substantiellen Artefakte — Status-Views, Plan-
+Views, Audit-Reports — werden via `render/io_helpers.py` geschrieben und über
+`present_files` präsentiert. Chat trägt nur `ask_user_input_v0`-Prompts und
+`present_files`-Calls.
 
 ---
 
 ## Bootstrap-Protocol (FIRST ACTION jeder Session)
 
-Wenn dieser Skill triggert, ist der erste Schritt — vor jeder inhaltlichen Antwort — der Workspace-Setup. Grund: installierter Skill-Pfad ist read-only, alle anderen Skills liegen verstreut, der Arbeitsstand der letzten Session steht in `references/progress.md` aber muss erst gelesen werden.
+Wenn dieser Skill triggert, ist der erste Schritt — vor jeder inhaltlichen
+Antwort — der Bootstrap. Anders als beim Legacy-Skill ist der Bootstrap
+**parametrisiert über `project-config.yaml`**, nicht hardcoded.
 
-### Bootstrap-Schritte
+### Bootstrap-Entscheidungsbaum
 
-```bash
-# 1. Workspace-Struktur
-mkdir -p /home/claude/novel-architect-workspace/tmp/skills-ref
-mkdir -p /home/claude/novel-architect-workspace/outputs/encoding
-mkdir -p /home/claude/novel-architect-workspace/outputs/weaving
-mkdir -p /home/claude/novel-architect-workspace/outputs/vortex
-mkdir -p /home/claude/novel-architect-workspace/outputs/drafts
-mkdir -p /home/claude/novel-architect-workspace/outputs/research
-mkdir -p /home/claude/novel-architect-workspace/outputs/oq-resolved
-mkdir -p /home/claude/novel-architect-workspace/archive
-
-# 2. Schreibbare Skill-Kopie
-cp -r /mnt/skills/user/novel-architect /home/claude/novel-architect-workspace/
-chmod -R u+w /home/claude/novel-architect-workspace/novel-architect
-
-# 3. Workflow-Skills spiegeln (read-only Referenzen)
-for skill in dramatica-theory dramatica-vocabulary memory-sync ncp-author \
-             research-prompt-optimizer pdf-to-markdown drive-markdown-converter \
-             spec-skill; do
-  cp -r /mnt/skills/user/$skill /home/claude/novel-architect-workspace/tmp/skills-ref/ 2>/dev/null
-done
-cp -r /mnt/skills/examples/doc-coauthoring /home/claude/novel-architect-workspace/tmp/skills-ref/ 2>/dev/null
-mkdir -p /home/claude/novel-architect-workspace/tmp/skills-ref/skill-creator
-cp /mnt/skills/examples/skill-creator/SKILL.md /home/claude/novel-architect-workspace/tmp/skills-ref/skill-creator/
-cp -r /mnt/skills/examples/skill-creator/scripts /home/claude/novel-architect-workspace/tmp/skills-ref/skill-creator/
-
-# 4. Helper-Skripte (preserved im Skill-Pack unter scripts/, kopiert in tmp/)
-# convert_pdfplumber.py = PDF→MD Fallback wenn pymupdf4llm nicht installierbar (PyPI gesperrt im Sandbox)
-if [ -f /home/claude/novel-architect-workspace/novel-architect/scripts/convert_pdfplumber.py ]; then
-  cp /home/claude/novel-architect-workspace/novel-architect/scripts/convert_pdfplumber.py \
-     /home/claude/novel-architect-workspace/tmp/
-fi
+```
+Skill triggert
+   ↓
+Existiert /home/claude/novel-projects/ ?
+   ├── nein → mkdir + askuser: "Neues Projekt anlegen, bestehendes laden, Demo anlegen?"
+   └── ja → ls /home/claude/novel-projects/
+              ├── leer → askuser: "Neues Projekt anlegen?"
+              ├── ein Projekt → askuser: "Dieses Projekt laden oder neues anlegen?"
+              └── mehrere Projekte → askuser: project_slug auswählen
 ```
 
-### Nach dem Workspace-Setup
+### Bootstrap-Schritte (Detail in `phases/phase0-bootstrap.md`)
 
-**Lesen heißt lesen. Nicht skimmen, nicht grep'en.** Jede der folgenden Reference-Files ist beim Bootstrap mindestens auf Sektion-Erst-Absatz-Niveau zu durchlaufen — nicht nur Section-Headers abscannen. Eine etablierte Canon-Klärung im Body, die im Header-Skim unsichtbar bleibt, macht ganze Session-Hälften redundant (Lesson 2026-05-03, siehe `references/learnings.md`).
+1. **Workspace finden oder erstellen** unter `/home/claude/novel-projects/<slug>/`
+2. **`project-config.yaml` laden oder schreiben** (siehe `assets/project-config-template.yaml`)
+3. **Reference-Files lesen** (im Projekt-Workspace, nicht im Skill):
+   - `progress.md` — Wo wurde aufgehört?
+   - `intent.yaml` — Bisheriger Intent
+   - `architecture.yaml` — Bisheriger Storyform
+   - `<slug>.ncp.json` — Strukturelle Canon-Daten
+   - `canon-meta.md` — Nicht-strukturelle Canon-Daten
+   - `open-questions.md` — Blockierende OQs
+   - `learnings.md` — Self-Improvement-Log
+4. **Skill-interne Konsistenz prüfen** (drift zwischen Files)
+5. **Pre-Action-Sanity-Check** — gegen resolved-OQs abgleichen, bevor Action läuft
 
-1. **`references/progress.md` lesen** — Wo wurde aufgehört? Was ist der nächste angekündigte Schritt?
-2. **`references/canon/kohaerenz-protokoll.ncp.json` lesen** — Strukturelle Canon-Daten (Storyform A + B, dynamics, players, storypoints, storybeats, moments). Diese Datei IST der strukturelle Kanon.
-3. **`references/canon-meta.md` vollständig lesen** — Nicht-strukturelle Canon-Daten (DKT-Physik, Prosa-Regeln, Mandate, Projekt-Meta). **Insbesondere alle Sektionen mit `(kanonisiert YYYY-MM-DD)`-Markierung im Body durchlesen** — diese tragen die jüngsten Klärungen, die noch nicht in userMemories repliziert sind.
-4. **`references/canon/README.md` lesen** — NCP-Validierungsstatus, was schon gefüllt ist, was noch leer ist.
-5. **`references/open-questions.md` vollständig lesen** — Welche OQs blockieren was? **Insbesondere die ~~Strikethrough-resolved-Einträge~~ scannen** — sie zeigen, welche Fragen heute schon entschieden sind, damit man sie nicht versehentlich nochmal aufmacht.
-6. **`references/learnings.md` lesen** — Was hat in früheren Sessions suboptimal funktioniert? Welche Korrekturen sind in Kraft? Verhindert Wiederholung derselben Fehler.
-7. **Skill-interne Konsistenz prüfen** — Decken sich `progress.md`, NCP-Datei, `canon-meta.md` und `open-questions.md`? Falls Drift: zuerst beheben, dann arbeiten. Memory wird **nicht** als Vergleichsreferenz herangezogen — Memory ist Notiz, kein Maßstab.
-8. **Pre-Action-Sanity-Check (Pflicht vor Action-Workflows wie /draft, /encoding, /research-ingestion):** Nach Bootstrap und vor erster Tool-Aktion explizit gegen die Liste der resolved-OQs (aus open-questions.md) abgleichen — *„hat das Issue, das ich gleich angehe, vielleicht schon eine resolved-OQ-Antwort?"* Wenn ja: das dem User aktiv anzeigen, statt das Issue komplett neu zu rollen.
-9. **Erst dann** auf den User-Input antworten.
+### Migration vom Legacy-Skill
 
-### Bootstrap-Heuristik
+Wenn `project-config.yaml` fehlt aber Legacy-Daten in `skills/novel-architect-legacy/references/canon/` existieren, schlägt der Skill ein Migrations-Skript vor:
 
-Der Bootstrap muss nicht bei jeder einzelnen User-Nachricht laufen — nur einmal pro Session. Wenn der Workspace bereits existiert (`/home/claude/novel-architect-workspace/novel-architect/SKILL.md` vorhanden) und in dieser Session schon gelesen wurde, übersprungen. Wenn unsicher: `ls /home/claude/novel-architect-workspace/` checken.
+```bash
+bash skills/novel-architect/scripts/bootstrap_project.sh kohaerenz-protokoll
+```
+
+Das erstellt `/home/claude/novel-projects/kohaerenz-protokoll/` mit den Legacy-Files (siehe `scripts/bootstrap_project.sh`).
 
 ---
 
-## Routing-Matrix: Workflow → Skill-Stack
+## Phase 1 — Intent Capture (Loop until 100% clarity)
 
-Übersicht. Detail-Specs in `references/workflows.md`.
+### Goal
 
-| Workflow | Trigger-Phrasen | Skill-Stack (Reihenfolge) | Output-Ziel |
+Produziere ein `intent.yaml` File, das vollständig spezifiziert: Genre,
+Audience, zentrales Thema, Konflikt-Frage, Skopus, Sprache, Methoden-Auswahl.
+**Kein Slot darf ambiguous, missing oder geraten sein.**
+
+### Intent Slot Set
+
+| Slot | Required | One-line meaning |
+|------|----------|------------------|
+| `genre` | **yes** | Hard-SF, Fantasy, Literary, Horror, etc. |
+| `subgenre_modifiers` | **yes** | „Philosophical Horror", „Cli-Fi", „Slipstream" |
+| `audience` | **yes** | Leser-Typ + Vorbildung |
+| `core_conflict_question` | **yes** | Die zentrale Frage des Romans (1-2 Sätze) |
+| `core_conflict_unpacked` | **yes** | Was *gemeint* ist (Abgrenzung) |
+| `length_target` | **yes** | `short_novel` / `standard` / `epic` |
+| `language` | **yes** | `de` / `en` / `...` |
+| `chapter_count_target` | **yes** | z.B. 39, 40, 24 |
+| `methods_preference` | **yes** | Multi-select aus `methods/` (character/structure/conflict/research) |
+| `dramatica_storyform_count` | **yes** | `single` / `dual` (parallel-encoded) |
+| `philosophy_integration_level` | optional | `decoration` / `frame` / `engine` |
+| `science_integration_level` | optional | `decoration` / `frame` / `engine` |
+| `known_priors` | optional | Bestehende Roman-Ideen, Charaktere, Welt |
+| `success_criterion` | **yes** | „Der Roman ist fertig, wenn ___" |
+
+### Loop — Summary
+
+**EXTRACT** (parse input, mark slot states) → **ASK** (file-first; write
+status view, then `ask_user_input_v0` with ≤3 thematically-grouped slots; loop
+until all required slots filled) → **CONFIRM** (write `intent.yaml` + final
+status view, askuser approve/edit) → **EXIT** (only when approved=true).
+
+### Hard Rules
+
+- **3-question cap per askuser call.** 4+ open slots → next turn
+- **Don't re-ask answered slots** unless user explicitly edits
+- **Don't proceed on assumption.** 100% clarity bar
+- **Surface contradictions** in status view
+- **Scope creep guard:** Phase 1 = *was wird geschrieben*, nicht *wie strukturiert*
+
+Vollständiger Algorithm + edge cases in `phases/phase1-intent-capture.md`.
+
+---
+
+## Phase 2 — Narrative Architecture (3-Gate Approval)
+
+### Goal
+
+Produziere `architecture.yaml` + NCP-Skeleton in `<slug>.ncp.json`. Storyform-
+Wahl, Throughlines (OS/MC/IC/SS), Klassen (Universe/Physics/Mind/Psychology),
+Dynamics. **Approval gates analog `research-prompt-optimizer` Phase 2.**
+
+### Sub-Phases
+
+```
+Phase 2.1   Load intent.yaml + select methods                  (silent)
+Phase 2.2   Storyform Count Decision (single/dual)
+            ──── GATE 1 (storyform shape) ────                  (approve/edit)
+Phase 2.3   Throughline Assignment (OS/MC/IC/SS)                (auto + dramatica-theory)
+Phase 2.4   Class Assignment                                    (auto + dramatica-theory)
+Phase 2.5   Dynamics Selection                                  (delegate dramatica-vocabulary)
+            ──── GATE 2 (throughlines+classes+dynamics) ────    (approve/edit)
+Phase 2.6   NCP Skeleton Write                                  (delegate ncp-author)
+Phase 2.7   Render Architecture View                            (file-first)
+            ──── GATE 3 (final architecture) ────               (approve/edit)
+Phase 2.8   Write architecture.yaml + NCP Skeleton              (file + present_files)
+```
+
+### Delegations (verbindlich)
+
+- **`dramatica-theory`** für Storyform-Reasoning (Why this Class/Type?)
+- **`dramatica-vocabulary`** für Dynamic-Pair-Validation
+- **`ncp-author`** für NCP-Skeleton-Erstellung (`narratives[].subtext.perspectives[]`, `dynamics[]`)
+- **`tools/dramatica-nav/nav.py`** für Ontology-Lookups (AGENTS.md Rule **NO.2**)
+
+Detail in `phases/phase2-narrative-architecture.md`.
+
+---
+
+## Phases 3-7 — Compact Overview
+
+Für detaillierte Specs siehe `phases/phase{3..7}-*.md`. Hier nur der Überblick:
+
+| Phase | Loop-Pattern | NCP-Slots befüllt | /sc:-Mapping |
 |---|---|---|---|
-| **bootstrap** | implicit, Session-Start | self | workspace ready |
-| **throughline-encoding** | „Encoding", „Throughline", „Phase 1-4", „MC/IC/OS/RS encoden" | dramatica-theory → dramatica-vocabulary → ncp-author (storypoints schreiben) → novel-architect (Project-Constraints, Block-4-Anker) | NCP: `narratives[].subtext.storypoints[]` + `narratives[].subtext.players[]`. Begleit-Markdown: `outputs/encoding/<storyform>-<throughline>.md` |
-| **dynamics-encoding** | „Driver-Pivot", „Limit", „Outcome", „Phase 5" | dramatica-theory → dramatica-vocabulary → ncp-author → novel-architect | NCP: `narratives[].subtext.dynamics[]` (Verfeinerung — Skeleton vorhanden) |
-| **storyweaving** | „Storyweaving", „Kapitel-Plan", „Phase 6", „Polyphonie-Verteilung" | dramatica-theory → ncp-author (storybeats + moments) → novel-architect | NCP: `narratives[].subtext.storybeats[]` + `narratives[].storytelling.moments[]`. Begleit-Markdown: `outputs/weaving/chapter-map.md` |
-| **vortex-architecture** | „Vortex", „Klimax", „Ch35-36", „Mnemosyne-Archipel", „Phase 7" | dramatica-theory → dramatica-vocabulary → ncp-author (5 spezifische storybeats + Klimax-moments) → novel-architect | NCP: 5 storybeats + 1-2 moments im Klimax-Bereich. Begleit-Markdown: `outputs/vortex/beat-<n>.md` |
-| **open-questions-resolution** | „OQ", „Slot 16 entscheiden", „offene Fragen", „Phase 8" | novel-architect → dramatica-theory (Implikationen) → ncp-author (falls strukturelle Auswirkung) → canon-meta-Edit (falls nicht-strukturell) | `outputs/oq-resolved/<oq-id>.md` + ggf. NCP-Update + canon-meta-Update. Memory-Broadcast nur auf User-Wunsch. |
-| **chapter-drafting** | „/draft", „Kapitel X entwerfen", „Prosa schreiben" | novel-architect (NCP + canon-meta laden) → dramatica-vocabulary (Term-Präzision) → docx | `outputs/drafts/ch-XX.docx`. Prosa lebt **außerhalb** von NCP — cross-reference via `moment.id`. |
-| **research-ingestion** | „/analyze", „Gemini-Output verarbeiten", „Recherche zu X" | research-prompt-optimizer → (extern: Gemini Deep Research) → novel-architect (Synthese gegen Canon) → doc-coauthoring | `outputs/research/<topic>.md`, ggf. NCP/canon-meta-Update via /synthesize |
-| **canon-update** | „/synthesize", „Kanon ändern", „das ist jetzt kanonisch", „korrigiere", „entschieden" | ncp-author (strukturell) UND/ODER canon-meta-Edit (nicht-strukturell) → novel-architect (progress + open-questions updaten) → memory-sync (optional, nur wenn User Memory-Broadcast wünscht) → drive-markdown-converter (optional) | NCP-Datei und/oder `references/canon-meta.md` werden geändert. Memory-Slots werden nur dann angefasst, wenn User explizit „Memory updaten" sagt. |
-| **archive-material** | „alte PDFs konvertieren", „Material in Markdown" | pdf-to-markdown (oder pdfplumber-Fallback) → drive-markdown-converter | `archive/` |
-| **drive-doc-ingest** | „Drive-Files als Markdown holen", „importiere die Outline-Files", „Bulk-Ingest" | search_files → download_file_content (exportMimeType=application/pdf) → pdfplumber-Fallback (`tmp/convert_pdfplumber.py`) → md5 dedupe + diff check → manifest unter `outputs/research/ingest-manifest-<datum>.md` | `ingest/*.md` + manifest |
+| **3 — Character Architecture** | Per-Charakter-Slots (multi-select Psycho-Modelle) | `players[]`, `players[].motivations[]` | `sc:brainstorm`, `sc:design` |
+| **4 — World & Research** | Domain-Selection + Delegation an research-prompt-optimizer | optional: `signposts[]` content updates | `sc:research`, `sc:document` |
+| **5 — Scene Matrix** | 3-Gate-Loop (Akt → Kapitel → Szene) | `storybeats[]`, `moments[]` | `sc:workflow`, `sc:design` |
+| **6 — Drafting** | Per-Kapitel mit Pre-Checks (NCP+canon-meta+OQ) | Prosa lebt **außerhalb** NCP (cross-ref via `moment.id`) | `sc:implement`, `sc:test` |
+| **7 — Iteration (3-Mode)** | generate (Spec) / apply (Workflow-Empfehlung) / audit (Konsistenz-Check) | beliebige Updates basierend auf Resolution | `sc:reflect`, `sc:improve`, `sc:save` |
 
-### Routing-Heuristik
+---
 
-Wenn die Trigger-Phrase mehrdeutig ist (z. B. „Storyform anpassen" — Encoding oder Canon-Update?), kurz nachfragen via `ask_user_input_v0`. Multi-Variable-Entscheidungen kriegen 2-4 Optionen, keine Prosa.
+## NCP-Integration-Kontrakt
 
-Wenn der User innerhalb einer Session zwischen Workflows wechselt: `progress.md` notiert beide. Workflow-Pivot ist Checkpoint-Trigger (siehe Iteration Discipline).
+Detail in `references/ncp-integration-contract.md`. Kurzform:
+
+- **Phase 2** schreibt `narratives[].subtext.perspectives[]`, `narratives[].subtext.dynamics[]`
+- **Phase 3** schreibt `narratives[].subtext.players[]`, `players[].motivations[]`, `players[].perspectives[]`
+- **Phase 4** optional: `signposts[]` content updates (nur wenn Forschung Canon ändert)
+- **Phase 5** schreibt `narratives[].subtext.storypoints[]`, `narratives[].subtext.storybeats[]`, `narratives[].storytelling.moments[]`
+- **Phase 6** keine NCP-Mutation (Prosa außerhalb)
+- **Phase 7** beliebige Updates basierend auf Resolution
+
+**Regel (AGENTS.md NO.2):** NCP-Mutation NUR via `ncp-author`. Dramatica-Slots
+vorher über Ontology auflösen (`nav.py by-id` / `nav.py by-ncp`).
+
+---
+
+## /sc:-Command-Mapping
+
+Detail in `references/sc-command-mapping.md`. Übersicht:
+
+| Phase | Primär /sc: | Sekundär /sc: |
+|---|---|---|
+| 0 — Bootstrap | `sc:load` | `sc:index` |
+| 1 — Intent | `sc:brainstorm` | `sc:business-panel` |
+| 2 — Architecture | `sc:design` | `sc:analyze` |
+| 3 — Characters | `sc:brainstorm` | `sc:design` |
+| 4 — Research | `sc:research` | `sc:document` |
+| 5 — Scenes | `sc:workflow` | `sc:design` |
+| 6 — Drafting | `sc:implement` | `sc:test` |
+| 7 — Iteration | `sc:reflect` | `sc:improve`, `sc:save` |
+
+**Aufruf-Pattern:** Skill *empfiehlt* `/sc:`-Commands aktiv (im askuser oder
+Status-View), erzwingt sie aber nicht. User kann jederzeit ohne `/sc:`-Wrapper
+arbeiten.
 
 ---
 
 ## Iteration Discipline: Significance + Packaging
 
-Detail-Heuristik in `references/significance-heuristics.md`. Hier die Kurzform.
+Detail-Heuristik in `references/significance-heuristics.md` (übernommen aus
+Legacy, generalisiert).
 
 ### Was ist „signifikant" (= Checkpoint-Trigger)
 
 Ein Checkpoint löst aus:
-1. `references/progress.md` aktualisieren (was wurde gemacht, was kommt als nächstes)
-2. **NCP-Update** falls strukturell: `references/canon/kohaerenz-protokoll.ncp.json` via ncp-author bearbeiten
-3. **canon-meta.md aktualisieren** falls nicht-strukturell (DKT, Prosa-Regeln, Mandate, Projekt-Meta)
-4. **`references/learnings.md` Eintrag (mandatorisch bei Session-End-Checkpoint, optional bei anderen)** — siehe „Learnings-Discipline" unten
-5. memory-sync **nur** wenn User explizit Memory-Broadcast wünscht (Memory ist nicht Teil des Canon-Pfads)
-6. Skill packen via `python /home/claude/novel-architect-workspace/tmp/skills-ref/skill-creator/scripts/package_skill.py /home/claude/novel-architect-workspace/novel-architect`
-7. `present_files` mit der `.skill`-Datei (und ggf. dem Output-Artefakt)
+1. `progress.md` im Projekt-Workspace aktualisieren
+2. **NCP-Update** falls strukturell: `<slug>.ncp.json` via `ncp-author`
+3. **canon-meta.md aktualisieren** falls nicht-strukturell
+4. **`learnings.md` Eintrag** (mandatorisch bei Session-End)
+5. **memory-sync NUR** wenn User explizit Memory-Broadcast wünscht
+6. **Skill packen** via `bash scripts/package_skill.sh`
+7. `present_files` mit `.skill`-Datei + Output-Artefakt
 
-Checkpoint triggert wenn EINS davon zutrifft:
+### Checkpoint triggert wenn
 
-- **Canon-Shift (strukturell)** — irgendetwas, das NCP ändert (Storyform-Slot festgelegt, Storypoint encoded, Storybeat positioniert, Player-Detail entschieden, Moment definiert)
-- **Canon-Shift (nicht-strukturell)** — irgendetwas, das canon-meta.md ändert (DKT-Regel, Prosa-Regel, Mandate-Anpassung, Alter-Somatik gefüllt, Projekt-Meta geändert)
-- **Phase-Unit complete** — eine atomare Phase-Einheit fertig: Throughline encoded (NCP storypoints + players), Dynamic verfeinert, Vortex-Beat operationalisiert (NCP storybeat), OQ resolved, 10-Kapitel-Block gemapped (NCP storybeats + moments), Chapter draft fertig
-- **Workflow-Pivot** — User wechselt zu einem anderen Workflow (z. B. von Encoding zu Storyweaving)
-- **Volume threshold** — 3+ neue Files in `outputs/` oder ~2000 Wörter substantielles Material seit letztem Checkpoint
+- **Canon-Shift (strukturell)** — NCP-Mutation
+- **Canon-Shift (nicht-strukturell)** — canon-meta.md Änderung
+- **Phase-Unit complete** — Throughline encoded, Akt-Block gemapped, Chapter draft fertig
+- **Workflow-Pivot** — User wechselt Phase
+- **Volume threshold** — 3+ neue Files oder ~2000 Wörter
 - **Session-End** — immer
-
-### Was ist NICHT signifikant (kein Package)
-
-- Term-Lookup in dramatica-vocabulary
-- Q&A ohne Canon-Berührung
-- Einzelner Scene-Keim-Brainstorm ohne Festlegung
-- Reference-Reading
-- Interview-Antwort
-
-`progress.md` darf bei jedem nicht-trivialen Schritt aktualisiert werden — das ist billig (Text-Edit). Packen passiert nur am Checkpoint.
-
-### Beispiele
-
-**Signifikant (package + present)**:
-- „MC-Encoding für Storyform A ist fertig, alle 4 Storypoints in Szenen-Keimen." → Phase-Unit complete.
-- „OQ-01 ist entschieden: Juna ist eigenständige Witness-Function." → Canon-shift + OQ resolved.
-- „Wir wechseln jetzt zur Storyweaving-Phase." → Workflow-Pivot.
-- „Session-Ende, lass speichern." → Session-end.
-
-**Nicht signifikant (kein Package)**:
-- „Was ist nochmal der Driver-Pivot?" → Term-Lookup.
-- „Brainstorm: drei mögliche Bilder für Kael in Ch3." → Brainstorm ohne Festlegung.
-- „Erklär mir kurz die OS-Throughline von B." → Q&A.
-
-### Learnings-Discipline (User-Setzung 2026-05-03)
-
-Self-Improvement ist **nicht optional und nicht „am Schluss zusammenfassen"**, sondern **kontinuierliche Pflicht**.
-
-**Während der Session:** Wenn ich beobachte, dass etwas suboptimal lief — falsches Tool zuerst gegriffen, Token-Verschwendung, übersehener Konflikt zwischen Sources, Bootstrap-Lücke, etc. — sofort Eintrag in `references/learnings.md` notieren. Format pro Eintrag: **Datum, Trigger, Lesson, Action**. Nicht aufschieben, nicht „merken für später".
-
-**Am Session-Ende-Checkpoint (immer):** Verifikation, dass mindestens ein Eintrag aus dieser Session in `learnings.md` steht. Wenn keine Lesson auftrat, das auch dokumentieren („nichts auffälliges, alle Pfade liefen wie spezifiziert" — auch eine Information). Anschließend Skill packen, damit der Eintrag persistiert.
-
-**Bootstrap-Side:** Beim Workspace-Setup wird `learnings.md` mitgelesen (Schritt 6 in „Nach dem Workspace-Setup"). So sehe ich frühere Korrekturen am Session-Anfang und vermeide Wiederholungen.
-
-**Inhaltliche Erwartung:** Ein Eintrag ist nutzlos, wenn er nur „X war suboptimal" sagt. Gut ist, wenn er konkretisiert: welche Skill-Datei wird angepasst, welcher Workflow bekommt einen Pflicht-Sub-Step, welche Heuristik erweitert sich. Action-Items zeigen auf SKILL.md, references/, oder commands/-Files — die Veränderung muss dort passieren, nicht nur in `learnings.md`.
-
----
-
-## Skill-Improvement TODO
-
-Beobachtungen über die Skill-Pipeline hinweg, die hier nicht gefixt werden, aber dokumentiert gehören. Detail in `references/skill-improvement-todo.md`. Diese Liste wächst — bei jeder Session, in der etwas Suboptimales auffällt, wird hier ergänzt.
-
-Aktueller Stand-Highlights:
-- **NCP als State-Layer ist commitment**, aber `ncp-author` ist WIP 0.1.0-draft — kein eigener Validator, schema-Drift in NCP upstream. Mitigations-Strategie in `references/canon/README.md` dokumentiert.
-- `commands/` ist nur Stub — full prompt templates für /analyze, /interview, /synthesize, /draft fehlen
-- NCP-Datei ist Skeleton: Storyform A + B + alle Dynamics gefüllt, aber `players[]`, `storypoints[]`, `storybeats[]`, `moments[]` werden Phase-für-Phase befüllt (initial leer)
-- `memory-sync` braucht klare Outward-Only-Semantik — Skill→Memory broadcast, niemals umgekehrt
-- Slot 16 (Per-Chapter Dual-POV) ist architektonische Hypothese in NCP-Form — Resolution-Workflow ausstehend
-- Kein gemeinsames Inter-Skill-Handoff-Schema — wäre nützlich
-
----
-
-## Reference-File-Index
-
-| Datei | Inhalt | Wann laden |
-|---|---|---|
-| `references/progress.md` | Letzter Arbeitsstand, nächster geplanter Schritt | Bei jedem Bootstrap |
-| `references/canon/kohaerenz-protokoll.ncp.json` | **Strukturelle Canon-Daten als NCP-JSON** (Storyform A+B, dynamics, perspectives, players, storypoints, storybeats, moments) | Bei jedem Bootstrap, bei jedem strukturellen Workflow — Mutation NUR via ncp-author |
-| `references/canon/README.md` | NCP-Status, was gefüllt ist, Validierung, Risiken, Slot-16-Hypothese | Bei Bootstrap, bei NCP-Edit, bei Validierungs-Frage |
-| `references/canon-meta.md` | Nicht-strukturelle Canon-Daten (DKT-Physik, Alter-Somatik, Riss-Mandate, Prosa-Regeln, Vortex-Beats-Übersicht, Projekt-Meta) | Bei Bootstrap, vor Workflow-Start |
-| `references/open-questions.md` | Aktuelle OQs (blockierend / nicht-blockierend) | Vor /draft, vor Workflow-Start |
-| `references/workflows.md` | Detail-Specs der 10 Workflows (Pre-Checks, Skill-Stack, Output-Format, Exit-Bedingung, NCP-Hooks) | Bei Workflow-Start |
-| `references/significance-heuristics.md` | Detail-Heuristik für Checkpoint-Trigger inkl. Beispiele | Vor Checkpoint-Entscheidung |
-| `references/skill-improvement-todo.md` | Liste der Skill-Lücken über die Pipeline, NCP-Reifegrad-Risiko | Skill-Wartung |
-| `references/learnings.md` | Self-Improvement-Log: was lief in früheren Sessions suboptimal, welche Korrekturen sind in Kraft | Bei jedem Bootstrap (Schritt 6), bei jedem Session-End-Checkpoint (mandatorischer Eintrag) |
-| `scripts/convert_pdfplumber.py` | Fallback PDF→Markdown Konverter (pdfplumber) für drive-doc-ingest und archive-material wenn pymupdf4llm nicht installierbar (PyPI gesperrt) | Wird beim Bootstrap nach `tmp/` kopiert |
-| `commands/analyze.md` | Prompt-Template für /analyze (Gemini-Archivist) | Wenn /analyze triggert |
-| `commands/interview.md` | Prompt-Template für /interview (max 3 Fragen/Runde, mit Implikationen) | Wenn /interview triggert |
-| `commands/synthesize.md` | Prompt-Template für /synthesize (NCP + canon-meta primär, Memory optional outward-broadcast) | Wenn /synthesize triggert |
-| `commands/draft.md` | Prompt-Template für /draft (Kapitel-Entwurf mit harten Pre-Checks) | Wenn /draft triggert |
 
 ---
 
 ## Constraints (nicht überschreibbar)
 
-- **POV-Schutz**: Strukturelle/stilistische Signale im Draft erst bestätigen, dann ändern — nie stillschweigend glätten. Mosaikstruktur, unzuverlässige Erzähler und widersprüchliche Fußnoten sind Risse, kein Stil-Mangel.
-- **Canon-Hierarchy**: **Skill-Files (NCP + canon-meta.md + open-questions.md + progress.md) > Memory > Training**. NCP-Datei und canon-meta.md SIND der strukturelle und nicht-strukturelle Kanon. Memory ist abgeleiteter Snapshot, kann älter sein, kann Anregung statt Fakt sein. Bei Diskrepanz: Skill-Files gewinnen.
-- **NCP-Mutation NUR via ncp-author**: Direkte Hand-Edits an der NCP-Datei sind verboten — würden Schema-Drift erzeugen. Bei Notwendigkeit immer den ncp-author-Skill aufrufen.
-- **Dual-Storyform-Integrität**: Storyform A + B laufen parallel als 5D-Interferenz. Niemals A komplett vor B encoden — Throughline-für-Throughline durch beide simultan. NCP unterstützt das nativ als zwei narratives.
-- **Story-First**: Wenn Theorie und Draft sich widersprechen, gewinnt der Draft. Theorie ist Diagnose, kein Rezept.
-- **Roman ist aktuell deprioritized** (User-Setzung): Skill ist verfügbar, drängt sich aber nicht auf. Keine Pressure, keine Push-Empfehlungen außerhalb des Auftrags.
+- **POV-Schutz:** Strukturelle/stilistische Signale im Draft erst bestätigen, dann ändern — Mosaikstruktur, unzuverlässige Erzähler, widersprüchliche Fußnoten sind *Risse, kein Stil-Mangel*.
+- **Canon-Hierarchy:** **Projekt-Workspace-Files (NCP + canon-meta + open-questions + progress) > Memory > Training.** Bei Diskrepanz: Workspace-Files gewinnen.
+- **NCP-Mutation NUR via ncp-author:** Direkte Hand-Edits an `.ncp.json` sind verboten — würden Schema-Drift erzeugen.
+- **Dual-Storyform-Integrität:** Wenn `dramatica_storyform_count: dual` gewählt: Throughline-für-Throughline durch BEIDE narratives simultan, niemals A komplett vor B.
+- **Story-First:** Wenn Theorie und Draft sich widersprechen, gewinnt der Draft. Theorie ist Diagnose, kein Rezept.
+- **Memory ist Notiz, kein Maßstab:** Memory wird nur dann updated, wenn User es explizit verlangt.
+- **AGENTS.md NO.2:** Dramatica-Slots müssen über Narrative Ontology aufgelöst werden, bevor sie in NCP geschrieben werden.
 
 ---
 
-## Navigator-Backed Lookups
+## Anti-Patterns
 
-Strukturelle Canon-Edits (Storyform-A/B-Slots, Storypoints, Players, Storybeats, Moments) referenzieren ab v0.1 Narrative-Ontology IDs statt freier Labels — Beispiel: `throughline.relationship` (kanonisch "Relationship Story") statt der älteren Bezeichnung "Subjective Story". Lade-Kontrakt liegt in [`AGENTS.md § Narrative Ontology`](../../AGENTS.md), Regel **NO.3** bindet Kohärenz-Protokoll-Strukturedits direkt.
+| Anti-Pattern | Why It Fails |
+|---|---|
+| Skip askuser weil „Input feels clear", oder 5+ Fragen in einem Batch | Loop-Design genau dagegen; `ask_user_input_v0` cap 3 |
+| Edit a slot the user did not ask to edit | Bricht Approval-Contract |
+| Phase überspringen oder Reihenfolge ignorieren | Hand-off-Kontrakt ist YAML-strukturiert; spätere Phasen brauchen früher entschiedene Slots |
+| Direkter Hand-Edit der `.ncp.json` | Schema-Drift, NCP-Validator failed |
+| Roman-Prosa in den Skill packen | Prosa lebt im Projekt-Workspace, niemals im Skill |
+| Methoden-Module alle bei Bootstrap laden | Progressive Disclosure verletzt; lade on demand |
+| `dramatica-theory` oder `dramatica-vocabulary` duplizieren | Delegation-Kontrakt verletzt; theorie/vocabulary leben dort, nicht hier |
+| Memory automatisch updaten ohne User-Wunsch | Memory-Sync ist outward-only und explizit opt-in |
+| Genre-spezifische Annahmen in den Skill hardcoden | Skill ist projekt-agnostisch; Genre kommt aus `intent.yaml` |
+| Bootstrap überspringen weil „User-Input klar ist" | Workspace muss existieren; ohne `project-config.yaml` kein Phase-Routing |
 
-Bevorzugte `nav.py`-Aufrufe pro Workflow-Lookup-Schritt:
+---
 
-| Workflow-Schritt | Lookup-Frage | Bevorzugter `nav.py`-Aufruf |
-|---|---|---|
-| throughline-encoding | „Welcher canonical_label hat die RS-Throughline?" | `nav.py by-id throughline.relationship` |
-| dynamics-encoding | „Welcher Dynamic-Pair ist Crucial Element X?" | `nav.py by-id <el.id> --include-pairs` |
-| storyweaving | „Welche Element pairs sitzen im Logic/Feeling Quad?" | `nav.py by-quad quad.logic-feeling-el` |
-| open-questions-resolution | „Welche Terms tagged sind mit `novel.diagnose-flat-draft`?" | `nav.py by-scenario novel.diagnose-flat-draft` |
-| canon-update (NCP) | „Was ist die NCP-Appreciation für Element X?" | `nav.py by-id <el.id>` (lese `ncp_appreciation`) |
-| chapter-drafting | „Welche Variation rollt zu welchem Type?" | `nav.py by-id <var.id>` (lese `type_id`) |
+## Reference Files (Load on Demand)
 
-Prose-Lookups bleiben für *konzeptuelle* Fragen (Was bedeutet Story Mind? Warum ist Resolve binär?) — die `nav.py`-Antwort enthält stets einen `term_file`-Pointer, der den Chapter-Read auf eine Section eingrenzt; `tools/dramatica-nav/extract.py <id>` liefert die Section ohne den umliegenden Chapter.
+| File | Load When | Purpose |
+|------|-----------|---------|
+| `phases/phase0-bootstrap.md` | Bootstrap edge cases | Workspace-Setup-Detail, Migration vom Legacy |
+| `phases/phase1-intent-capture.md` | Phase 1 edge cases | Slot-to-question mapping, contradiction patterns |
+| `phases/phase2-narrative-architecture.md` | Phase 2 | 3-Gate-Detail, Storyform-Decision-Tree |
+| `phases/phase3-character-architecture.md` | Phase 3 | Per-Charakter-Slot-Set, Methoden-Auswahl |
+| `phases/phase4-world-research.md` | Phase 4 | Domain-Mapping, Delegation an research-prompt-optimizer |
+| `phases/phase5-scene-matrix.md` | Phase 5 | 3-Gate-Detail, Akt-Kapitel-Szenen-Hierarchie |
+| `phases/phase6-drafting.md` | Phase 6 | Pre-Checks, Konsistenz-Checks |
+| `phases/phase7-iteration.md` | Phase 7 | 3-Mode-Pattern (generate/apply/audit) |
+| `methods/character/*.md` | Phase 3, on demand | TSDP/IFS, Big Five, Enneagramm, Jung |
+| `methods/structure/*.md` | Phase 2, 5, on demand | 40-Chapter-Matrix, Hero's Journey, Save-the-Cat, Dramatica-Quad |
+| `methods/conflict/*.md` | Phase 2, on demand | Philosophy/Science-as-Engine, Dual-Storyform |
+| `methods/research/*.md` | Phase 4, on demand | Domain-Mapping, Deep-Research-Briefs |
+| `assets/*-template.yaml` | Phase 1, 2, 3 | Schema-Templates |
+| `assets/*-template.md` | Phase 5, 6 | MD-Templates (Scene-Matrix, Chapter-Draft) |
+| `examples/*` | Reference | Worked Examples (nicht Kohärenz-spezifisch) |
+| `render/io_helpers.py` | Phase 1, 2, 3, 5 file I/O | File-Writers, append-only revisions, status views |
+| `render/render_intent.py` | Phase 1 | Intent YAML → Status-View MD |
+| `render/render_architecture.py` | Phase 2 | Architecture YAML → NCP Skeleton + MD |
+| `render/render_scene_matrix.py` | Phase 5 | Scene-Matrix → NCP storybeats + moments |
+| `commands/novel-*.md` | Trigger-spezifisch | `/sc:`-kompatible Sub-Commands |
+| `references/routing-matrix.md` | Bei Workflow-Verzweigung | Methodische Routing-Matrix |
+| `references/ncp-integration-contract.md` | NCP-Edit-Frage | Welche NCP-Slots pro Phase befüllt werden |
+| `references/sc-command-mapping.md` | /sc:-Aufruf-Frage | Phase → /sc:-Commands |
+| `references/significance-heuristics.md` | Vor Checkpoint-Entscheidung | Detail-Heuristik (übernommen aus Legacy) |
+| `references/learnings.md` | Bei Bootstrap + Session-End | Self-Improvement-Log (generisch) |
+| `references/skill-improvement-todo.md` | Skill-Wartung | Skill-Lücken-Liste |
+| `scripts/bootstrap_project.sh` | Erstmal-Migration | Erstellt Projekt-Workspace, optional Legacy-Migration |
+| `scripts/package_skill.sh` | Checkpoint | Wrapper für skill-creator/package_skill.py |
+| `scripts/convert_pdfplumber.py` | Archive-Material-Workflow | PDF→MD Fallback (übernommen aus Legacy) |
 
-## Integration mit anderen Schreib-Skills
+---
+
+## Integration mit anderen Skills
 
 | Skill | Relation | Wann |
 |---|---|---|
-| `dramatica-theory` | Input / Reference | Storyform-Arbeit, Akt-Diagnose, Encoding-Patterns |
-| `dramatica-vocabulary` | Companion | Bei jeder Dramatica-Term-Berührung — proaktiv |
-| `ncp-author` | **State-Layer Owner** | Bei jeder strukturellen Canon-Mutation — NICHT optional, NICHT umgehen |
-| `memory-sync` | Outward Broadcaster (optional) | Nur wenn User explizit Memory-Update wünscht — Skill→Memory, niemals Memory→Skill |
-| `research-prompt-optimizer` | Upstream | Gemini-Deep-Research-Prompts für /analyze |
-| `doc-coauthoring` | Downstream | Strukturierte Canon-Doc-Erstellung (canon-meta.md, Drive-Docs) |
-| `pdf-to-markdown` | Utility | Alte Material-PDFs → Markdown |
-| `drive-markdown-converter` | Utility | Drive-Synchronisation |
-| `skill-creator` | Self-update | Packaging dieses Skills |
-| `suno-lyric-writer` | DELEGIERT NICHT | Album-2-Tracks haben eigenen Skill (the-agency-system-architect + suno-lyric-writer) |
+| `dramatica-theory` | Input / Reference | Storyform-Arbeit, Akt-Diagnose (Phase 2, 5) |
+| `dramatica-vocabulary` | Companion | Bei jeder Dramatica-Term-Berührung (Phase 2, 3, 5) |
+| `ncp-author` | **State-Layer Owner** | Bei jeder strukturellen Canon-Mutation (Phase 2, 3, 5) — NICHT optional |
+| `memory-sync` | Outward Broadcaster (optional) | Nur auf expliziten User-Wunsch (Phase 7) |
+| `research-prompt-optimizer` | Upstream | Deep-Research-Prompts (Phase 4) |
+| `skill-creator` | Self-update | Packaging dieses Skills (Checkpoint) |
+| `spec-skill` | Optional | Formale Roman-Spec generieren (Phase 7 Mode: generate) |
+| `suno-lyric-writer` | DELEGIERT NICHT | Album-Tracks haben eigenen Skill |
+| `the-agency-system-architect` | DELEGIERT NICHT | Eigene Domäne |
+
+---
+
+## End-to-End Walk-Through
+
+Ein User-Input wie *„Ich möchte einen Hard-SF Roman über Bewusstsein und KI schreiben"* läuft so:
+
+1. **Phase 0** — Bootstrap: askuser ob neues Projekt; User wählt slug `consciousness-novel`
+2. **Phase 1** — Intent: 3-Slot-askuser-Loops für Genre, Audience, Konflikt, Methoden; ergibt `intent.yaml`
+3. **Phase 2** — Architecture: 3 Gates für Storyform (single/dual), Throughlines, Dynamics; ergibt `architecture.yaml` + NCP-Skeleton
+4. **Phase 3** — Characters: Per-Charakter-Loop für Players (Protagonist + Antagonist + Influence); ergibt `character-architecture.yaml` + NCP `players[]`
+5. **Phase 4** — Research: askuser welche Domänen (z.B. Kognitive Neurowissenschaft, KI-Ethik); delegate `research-prompt-optimizer`; ergibt `world-bible.md`
+6. **Phase 5** — Scene Matrix: 3 Gates (Akt → Kapitel → Szene); ergibt `scene-matrix.md` + NCP `storybeats[]`+`moments[]`
+7. **Phase 6** — Drafting: Per-Kapitel mit Pre-Checks; ergibt `drafts/ch-01.docx`
+8. **Phase 7** — Iteration: kontinuierlich nach jedem Checkpoint; Audit-Reports bei Session-End
+
+Typischerweise 15-25 askuser-Turns für komplette Phasen 0-2; Phasen 3-7 inkrementell über mehrere Sessions.
 
 ---
 
 ## Closing Note
 
-Dieser Skill ist die Source-of-Truth des Romans. NCP-Datei und canon-meta.md sind der Kanon. Memory ist Notizfeld — kann stale sein, kann Anregung sein, ist nie Maßstab. Wenn die Memory etwas anderes sagt als der Skill: Skill gewinnt; Memory wird nur dann updated, wenn User es explizit verlangt. Wenn ein Workflow nicht passt: schreib ihn um in `references/workflows.md` und packe neu. Der Skill ist ein lebendes Dokument seiner eigenen Verwendung.
+Dieser Skill ist methoden-zentriert. Er strukturiert die Roman-Entwicklung,
+schreibt aber **keine Prosa** — Drafting ist Phase 6, und auch da wird die
+Prosa-Generierung an dramatica-vocabulary/Word-Processor-Tools delegiert. Der
+Skill ist die **Source-of-Truth für die Methode**; der **Projekt-Workspace
+ist die Source-of-Truth für die Inhalte**. Bei Diskrepanz: Workspace-Files
+gewinnen, der Skill ist nur die Schablone.

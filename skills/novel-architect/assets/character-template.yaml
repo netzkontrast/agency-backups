@@ -1,0 +1,44 @@
+# Character Architecture Template — Schema 3, written by Phase 3
+# Players gehen parallel ins NCP via ncp-author.
+
+schema_version: "1.0"
+
+provenance:
+  generated_by: novel-architect@1.0.0
+  generated_at: <ISO-8601>
+  project_slug: <slug>
+  architecture_file: architecture.yaml
+
+characters:
+  - id: char_001
+    name: "<PLACEHOLDER>"
+    narrative_role: <Protagonist|Antagonist|Guardian|Contagonist|Reason|Emotion|Sidekick|Skeptic>
+    throughline_assignment:
+      storyform_a: <MC|IC|OS_member|SS_member>
+      # Bei dual: storyform_b auch befüllen
+    psycho_model:
+      primary: <tsdp-ifs|big-five|enneagramm|jung-archetypes>
+      secondary: []                        # optional weitere Modelle
+    psycho_config:
+      # Inhalt abhängig vom primary model
+      # tsdp-ifs:    list of alters with role/function/somatic
+      # big-five:    OCEAN scores
+      # enneagramm:  type + wing + integration/disintegration
+      # jung:        archetypes + individuation_stage
+      <PLACEHOLDER>: <PLACEHOLDER>
+    motivations:
+      - "<PLACEHOLDER what drives this character>"
+    arc_direction:
+      storyform_a: <Change|Steadfast>
+    relationships:
+      - target: char_002
+        kind: <antagonist|ally|romantic|mentor|family|...>
+        weight: <core|major|minor>
+
+ncp:
+  players_written: false                   # true wenn ncp-author players erstellt
+  player_count: 0
+
+approved: false
+
+revisions: []
