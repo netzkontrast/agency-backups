@@ -55,8 +55,8 @@ SUPERSEDED_RE = re.compile(r"superseded by\s*\[(?P<id>\d{3})\]")
 
 @dataclass(frozen=True)
 class TaskRow:
-    folder: str            # "031-sync-tasks-index-status-drift"
-    task_id: str           # "031"
+    folder: str            # "067-sync-tasks-index-status-drift"
+    task_id: str           # "067"
     slug: str              # "sync-tasks-index-status-drift"
     task_status: str       # "open" / "in_progress" / "done" / ...
     superseded_by: list[str]  # task_ids/slugs from frontmatter

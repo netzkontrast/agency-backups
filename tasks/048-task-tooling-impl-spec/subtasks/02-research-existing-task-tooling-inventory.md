@@ -4,7 +4,7 @@ status: draft
 slug: task-048-st2-research-existing-task-tooling-inventory
 summary: "ST-2 (research head): catalogue every existing `/tools/` script that touches `/tasks/`, classify by lifecycle stage (TASK.md §4), surface gaps against TASK.md §3 / §4 / §7 / §8, and produce the inventory + gap analysis ST-3 consumes for SPEC synthesis."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-11
 ---
 
 # ST-2: Research — Existing `/tasks/`-side Tooling Inventory + Gap Analysis
@@ -26,8 +26,8 @@ Produce a structured inventory of every `/tools/` script that touches `/tasks/`,
 - `/home/user/agency/maintenance/schemas/header-ontology.json` — the schema every existing tool consumes.
 - Recent friction-logs that flag tooling gaps:
   - `tasks/033-task-spec-integration/friction-log.md` — duplicate-id linter advisory-by-default rationale; ST-4 helper migration pending.
-  - `tasks/032-improve-maintenance-spec-may-2026/friction-log.md` — assumption-log + RFC-2119 polarity tooling.
-  - `tasks/031-sync-tasks-index-status-drift/friction-log.md` — index_diff design notes.
+  - `tasks/068-improve-maintenance-spec-may-2026/friction-log.md` — assumption-log + RFC-2119 polarity tooling.
+  - `tasks/067-sync-tasks-index-status-drift/friction-log.md` — index_diff design notes.
 
 ## Acceptance Criteria
 

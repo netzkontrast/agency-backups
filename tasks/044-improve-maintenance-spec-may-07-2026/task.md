@@ -4,7 +4,7 @@ status: active
 slug: improve-maintenance-spec-may-07-2026
 summary: "Distil six findings (F14–F19) from the 2026-05-07 coherence run and PR #74 review into concrete diffs against MAINTENANCE.md, FRUSTRATED.md, prompts/repo-coherence-check/prompt.md, tools/check-trust.py, maintenance/run-log.md, and templates/. Companion to Task 025 (open) and Task 032 (open) which carry earlier findings."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-11
 task_id: "044"
 task_status: open
 task_owner: "unassigned"
@@ -28,7 +28,7 @@ task_affects_paths:
 
 ## Goal
 
-Each of the six findings F14–F19 below MUST land as either (a) a concrete diff against [`MAINTENANCE.md`](../../MAINTENANCE.md), [`FRUSTRATED.md`](../../FRUSTRATED.md), [`TASK.md`](../../TASK.md), [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md), [`tools/check-trust.py`](../../tools/check-trust.py), [`maintenance/run-log.md`](../../maintenance/run-log.md), or [`templates/`](../../templates/); OR (b) a documented `won't-fix` disposition in this Task's `friction-log.md` with rationale. The Task closes only when every finding has either a landed diff or a recorded disposition. Companion (NOT successor) to [Task 025](../025-maintenance-spec-remaining-findings/task.md) (F2/F3/F4/F7 from 2026-05-05) and [Task 032](../032-improve-maintenance-spec-may-2026/task.md) (F8–F13 from 2026-05-06). Findings F18 and F19 absorbed from PR #74 review (R-3 and G-1 respectively); see [`maintenance/pr-74-review.md`](../../maintenance/pr-74-review.md).
+Each of the six findings F14–F19 below MUST land as either (a) a concrete diff against [`MAINTENANCE.md`](../../MAINTENANCE.md), [`FRUSTRATED.md`](../../FRUSTRATED.md), [`TASK.md`](../../TASK.md), [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md), [`tools/check-trust.py`](../../tools/check-trust.py), [`maintenance/run-log.md`](../../maintenance/run-log.md), or [`templates/`](../../templates/); OR (b) a documented `won't-fix` disposition in this Task's `friction-log.md` with rationale. The Task closes only when every finding has either a landed diff or a recorded disposition. Companion (NOT successor) to [Task 025](../025-maintenance-spec-remaining-findings/task.md) (F2/F3/F4/F7 from 2026-05-05) and [Task 032](../068-improve-maintenance-spec-may-2026/task.md) (F8–F13 from 2026-05-06). Findings F18 and F19 absorbed from PR #74 review (R-3 and G-1 respectively); see [`maintenance/pr-74-review.md`](../../maintenance/pr-74-review.md).
 
 ## Findings
 
@@ -52,7 +52,7 @@ The author intent was correct — they declared FL2 with a clear stylistic flour
 
 **Symptom.** The 2026-05-07 coherence run filed [Task 043](../043-renumber-duplicate-task-ids-v3/task.md) — the third in the lineage [Task 013](../013-renumber-duplicate-task-ids/) → [Task 024](../024-renumber-duplicate-task-ids-v2/) → Task 043. Each renumber Task captures the same structural finding: parallel branches each picked the locally-next-free `<NNN>` against their own branch state, the merges landed, and the collision became the next agent's problem.
 
-[TASK.md §8.1](../../TASK.md) places the cross-branch check on the agent ("Run `git fetch origin main && git ls-tree -r --name-only origin/main tasks/ | grep '^tasks/<NNN>-' || true`"). [Task 032 finding F13](../032-improve-maintenance-spec-may-2026/task.md) calls for adding the same check to the coherence prompt's Step 4. Both are agent-side mitigations; neither is a forcing function.
+[TASK.md §8.1](../../TASK.md) places the cross-branch check on the agent ("Run `git fetch origin main && git ls-tree -r --name-only origin/main tasks/ | grep '^tasks/<NNN>-' || true`"). [Task 032 finding F13](../068-improve-maintenance-spec-may-2026/task.md) calls for adding the same check to the coherence prompt's Step 4. Both are agent-side mitigations; neither is a forcing function.
 
 The May 2026 merge wave produced two collisions despite the spec carrying the rule for two years. The pattern is now stable enough that a CI-time mechanical gate is warranted — relying on agent obligation has not worked.
 
@@ -66,7 +66,7 @@ The May 2026 merge wave produced two collisions despite the spec carrying the ru
 
 **Symptom.** [Task 042](../042-dramatica-nav-followups/task.md) was committed without a corresponding bullet in [`tasks/readme.md`](../readme.md), in violation of [TASK.md §4.8 / §6 Gherkin "New Task folder appears in the index immediately"](../../TASK.md). The 2026-05-07 coherence run added the bullet manually while authoring the Task 043 entry. The drift surfaced incidentally; no mechanical surface caught it.
 
-This is the same shape as the 10-bullet status-drift that the 2026-05-06 coherence run found and filed as [Task 031](../031-sync-tasks-index-status-drift/task.md), but on the *membership* axis rather than the *status* axis. Task 031's plan covers both axes ("ship `fm.py index-diff` or `fm-query --diff tasks/readme.md`"). The risk is that Task 031's scope is so broad it stalls — this finding raises the priority of the membership half.
+This is the same shape as the 10-bullet status-drift that the 2026-05-06 coherence run found and filed as [Task 031](../067-sync-tasks-index-status-drift/task.md), but on the *membership* axis rather than the *status* axis. Task 031's plan covers both axes ("ship `fm.py index-diff` or `fm-query --diff tasks/readme.md`"). The risk is that Task 031's scope is so broad it stalls — this finding raises the priority of the membership half.
 
 **Concrete diffs:**
 
@@ -82,7 +82,7 @@ The maintenance protocol is silent on this. The coherence prompt's Constraints s
 
 **Concrete diffs:**
 
-- [`MAINTENANCE.md §2`](../../MAINTENANCE.md) "Repo Coherence Check" SHOULD add a one-paragraph "Skill Fit" subsection: the routine is primarily mechanical and does NOT benefit from /sc:implement, /sc:design, or /sc:research; /sc:cleanup and /sc:analyze MAY be invoked as supplementary lenses but their output MUST NOT replace the linter-first triage; /sc:reflect MAY be useful at the end of the run as a validation gate alongside the post-repair linter check (cf. [Task 032 finding F10](../032-improve-maintenance-spec-may-2026/task.md)).
+- [`MAINTENANCE.md §2`](../../MAINTENANCE.md) "Repo Coherence Check" SHOULD add a one-paragraph "Skill Fit" subsection: the routine is primarily mechanical and does NOT benefit from /sc:implement, /sc:design, or /sc:research; /sc:cleanup and /sc:analyze MAY be invoked as supplementary lenses but their output MUST NOT replace the linter-first triage; /sc:reflect MAY be useful at the end of the run as a validation gate alongside the post-repair linter check (cf. [Task 032 finding F10](../068-improve-maintenance-spec-may-2026/task.md)).
 - [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md) Constraints section SHOULD add a constraint: "/sc: skills MAY be invoked as supplementary lenses but MUST NOT bypass the Step 2.5 linter-first triage."
 - (Won't-fix candidate) If the team prefers the spec stay silent on per-skill fit (skill catalogue evolves), record that disposition in this Task's friction-log with rationale.
 
@@ -137,7 +137,7 @@ The current run-log schema treats "scanned" and "skipped" as the only two catego
 - F18 / F19 absorbed from: [PR #74 review](../../maintenance/pr-74-review.md) findings R-3 and G-1.
 - Sibling Tasks (independent, not predecessors):
   - [`Task 025`](../025-maintenance-spec-remaining-findings/task.md) (F2/F3/F4/F7 from 2026-05-05).
-  - [`Task 032`](../032-improve-maintenance-spec-may-2026/task.md) (F8–F13 from 2026-05-06).
+  - [`Task 032`](../068-improve-maintenance-spec-may-2026/task.md) (F8–F13 from 2026-05-06).
 - Companion T3 from same run: [`Task 043`](../043-renumber-duplicate-task-ids-v3/task.md) (031/032 collision renumber).
-- Predecessor lineage (informational, not supersession): [`Task 014`](../014-improve-maintenance-spec-from-session/task.md), [`Task 032`](../032-improve-maintenance-spec-may-2026/task.md).
+- Predecessor lineage (informational, not supersession): [`Task 014`](../014-improve-maintenance-spec-from-session/task.md), [`Task 032`](../068-improve-maintenance-spec-may-2026/task.md).
 - Governing specs: [`MAINTENANCE.md`](../../MAINTENANCE.md), [`FRUSTRATED.md`](../../FRUSTRATED.md), [`TASK.md`](../../TASK.md), [`prompts/repo-coherence-check/prompt.md`](../../prompts/repo-coherence-check/prompt.md).

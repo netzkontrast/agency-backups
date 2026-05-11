@@ -4,8 +4,8 @@ status: active
 slug: skills-navigation-bootstrap
 summary: "Research and design the internal skill navigation architecture, bootstrap process, and propose a root skill.md spec."
 created: 2026-05-04
-updated: 2026-05-04
-task_id: "006"
+updated: 2026-05-11
+task_id: "065"
 task_status: done
 task_owner: "claude-code"
 task_priority: P1
@@ -23,7 +23,7 @@ task_affects_paths:
   - prompts/skills-skill-enterprise-offline/
   - prompts/claude-ai-container-git-verification/
   - research/skills-navigation-bootstrap/
-  - tasks/006-skills-navigation-bootstrap/
+  - tasks/065-skills-navigation-bootstrap/
 ---
 
 # Task 006 — Skills Navigation and Bootstrap

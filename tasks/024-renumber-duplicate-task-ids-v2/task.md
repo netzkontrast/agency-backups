@@ -4,16 +4,16 @@ status: active
 slug: renumber-duplicate-task-ids-v2
 summary: "Successor to Task 013. The duplicate task_id pairs (006/006 and 009/009) remain unresolved; the original Task 013 plan targeted slots 014/015, both of which are now occupied. Renumber the duplicates into the next free slots (026/027) per TASK.md §8.1."
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-05-11
 task_id: "024"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_supersedes:
-  - "013"
+  - 013
 task_blocked_by: []
 task_affects_paths:
   - tasks/006-skills-navigation-bootstrap/
@@ -50,12 +50,12 @@ The slugs MUST remain stable across the renumber per TASK.md §8.1; only the fol
 
 ## Todo
 
-- [ ] 1. Verify 026/027 (or next-free) are unclaimed at staging time.
-- [ ] 2. Rename `006-skills-navigation-bootstrap` → `026-skills-navigation-bootstrap`; update `task_id`.
-- [ ] 3. Rename `009-review-pr28-readme-spec` → `027-review-pr28-readme-spec`; update `task_id`.
-- [ ] 4. Sweep cross-references (paths and id-form references).
-- [ ] 5. Run `tools/lint-linkage.py` and `tools/fm/validate.py`; confirm clean.
-- [ ] 6. Append `maintenance/run-log.md` entry; produce `friction-log.md` with FL[0-3].
+- [x] 1. Verify 065/066 (next-free at staging time; 026/027 long since claimed) are unclaimed.
+- [x] 2. Rename `006-skills-navigation-bootstrap` → `065-skills-navigation-bootstrap`; update `task_id` to `"065"`.
+- [x] 3. Rename `009-review-pr28-readme-spec` → `066-review-pr28-readme-spec`; update `task_id` to `"066"`.
+- [x] 4. Sweep cross-references (`task_affects_paths`, `tasks/readme.md` bullets, in-folder self-references). Backtick prose mentions in T4-immutable closed research left intact per MAINTENANCE.md §1.0.1 (no markdown links were broken).
+- [x] 5. Run `tools/check-governance.sh`; PASS.
+- [x] 6. Append `maintenance/run-log.md` entry; produce `friction-log.md` with FL declaration.
 
 ## Links
 
