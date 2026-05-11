@@ -4,10 +4,10 @@ status: active
 slug: header-ontology-and-schema-mirror
 summary: "Successor to Task 011. The canonical machine-readable contract is now maintenance/schemas/header-ontology.json (shipped by Task 016, consumed by tools/fm/validate.py). Add an OPTIONAL per-type JSON Schema mirror so Jules and Gemini can validate documents without cloning the repo, and round out the ontology's docs."
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-05-11
 task_id: "023"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P3
 task_uses_prompts: []
 task_spawns_research: []
@@ -18,7 +18,15 @@ task_blocked_by: []
 task_affects_paths:
   - maintenance/schemas/
   - maintenance/schemas/readme.md
-  - tools/fm/validate.py
+  - maintenance/schemas/l1-vault-core.schema.json
+  - maintenance/schemas/l2-task.schema.json
+  - maintenance/schemas/l2-prompt.schema.json
+  - maintenance/schemas/l2-research.schema.json
+  - maintenance/schemas/l2-skill.schema.json
+  - maintenance/schemas/l2-adr.schema.json
+  - tools/fm/gen_schema_mirror.py
+  - tools/check-governance.sh
+  - tools/tests/fm/test_gen_schema_mirror.py
 ---
 
 # Task 023 — Header Ontology + Per-Type JSON Schema Mirror
@@ -48,16 +56,20 @@ This Task is *additive* — it MUST NOT introduce a second source of truth. The 
 
 ## Todo
 
-- [ ] 1. Write `maintenance/schemas/readme.md` with the canonical/mirror partition.
-- [ ] 2. Implement the generator script.
-- [ ] 3. Generate the five mirror files; commit them as build artefacts.
-- [ ] 4. Wire the divergence gate into `tools/check-governance.sh`.
-- [ ] 5. Cross-agent smoke test (jsonschema CLI on a sample file).
-- [ ] 6. Append `friction-log.md` (FL[0-3]).
+- [x] 1. Write `maintenance/schemas/readme.md` with the canonical/mirror partition.
+- [x] 2. Implement the generator script.
+- [x] 3. Generate the five mirror files; commit them as build artefacts. (Six emitted — added `l2-adr.schema.json` lifted from `types.adr.json_schema`.)
+- [x] 4. Wire the divergence gate into `tools/check-governance.sh` (step `[5b]`).
+- [x] 5. Cross-agent smoke test (`jsonschema` Draft7 validator on real `task.md`, `prompt.md`, ADR) — see `tools/tests/fm/test_gen_schema_mirror.py` (9 tests).
+- [x] 6. Append `friction-log.md` (FL[0-3]).
 
 ## Links
 
 - Predecessor: [`../011-skills-frontmatter-schema-files/task.md`](../011-skills-frontmatter-schema-files/task.md)
-- Canonical ontology: [`maintenance/schemas/header-ontology.json`](../../maintenance/schemas/header-ontology.json)
-- Source spec: [`research/flexible-frontmatter-toolchain/output/SPEC.md`](../../research/flexible-frontmatter-toolchain/output/SPEC.md) §3, §4
-- Governing specs: [`TASK.md`](../../TASK.md), [`MAINTENANCE.md`](../../MAINTENANCE.md)
+- Canonical ontology: [`../../maintenance/schemas/header-ontology.json`](../../maintenance/schemas/header-ontology.json)
+- Generator: [`../../tools/fm/gen_schema_mirror.py`](../../tools/fm/gen_schema_mirror.py)
+- Schemas readme: [`../../maintenance/schemas/readme.md`](../../maintenance/schemas/readme.md)
+- Tests: [`../../tools/tests/fm/test_gen_schema_mirror.py`](../../tools/tests/fm/test_gen_schema_mirror.py)
+- Source spec: [`../../research/flexible-frontmatter-toolchain/output/SPEC.md`](../../research/flexible-frontmatter-toolchain/output/SPEC.md) §3, §4
+- Governing specs: [`../../TASK.md`](../../TASK.md), [`../../MAINTENANCE.md`](../../MAINTENANCE.md)
+- Friction log: [`./friction-log.md`](./friction-log.md)

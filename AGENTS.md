@@ -4,7 +4,7 @@ status: active
 slug: agents-spec
 summary: "Entry-point governance spec for all agents operating in this repository. Defines task routing, folder rules, spec language (RFC 2119 + Gherkin), and the Frontmatter Ontology every agent must apply."
 created: 2026-05-02
-updated: 2026-05-08
+updated: 2026-05-11
 ---
 
 # Agent Instructions
@@ -305,6 +305,8 @@ The skills loader and any skill that fetches its own dependencies MUST honour th
 
 - **U1 — `git` is NOT a pre-installed binary on the claude.ai code-execution container.** The official utility list (`unzip`, `unrar`, `7zip`, `bc`, `rg`, `fd`, `sqlite`) excludes git. Skills targeting claude.ai (Free/Pro/Max) MUST NOT assume `git clone` is available; they MUST use the GitHub REST API as the primary fetch mechanism (`requests` over `https://api.github.com/repos/<owner>/<repo>/contents/<path>`). Skills MAY attempt `git` first with graceful REST-API fallback. Claude API code-execution has no network access; git clone MUST NOT be used there. Claude Code on a host system has full git access. See SPEC §2.4.
 - **U2 — Container filesystem persistence between independent web conversations is NOT guaranteed.** The web UI exposes no container-ID reuse mechanism; each new claude.ai conversation MUST be treated as starting with a fresh container. The "pull-if-exists" optimisation MUST NOT be relied upon in the claude.ai web surface. All bootstrap sequences MUST re-fetch required files on each invocation. Workspace storage is 5 GiB; RAM 5 GiB. See SPEC §3.4.
+
+The skills-skill stub itself (the bootstrap layer that routes requests to skill bodies on `origin/main`) is governed by a separate spec, [`research/skills-skill-architecture/output/SPEC.md`](./research/skills-skill-architecture/output/SPEC.md). The four operational invariants ratified from that spec — **B.6 repository lock, B.7 version-reference declaration, B.8 error surfacing, B.9 scope containment** (trust boundary R5) — plus the **three-tier T1/T2/T3 content ladder** (R4) and the **`SKILLS_SKILL_PIN` / `SKILLS_SKILL_OFFLINE`** version-pinning vocabulary (R7) live in [`SKILLS.md §7.2 / §7.3 / §7.4`](./SKILLS.md#72-trust-boundary-invariants-r5). The remaining `UNCERTAIN` markers (`U3` host activation mechanism, `U4` Jules portability, `U5` raw-message availability, `U6` git signing) remain deferred to Gemini Deep Research per the `skills-skill-architecture` workspace's §9 open-questions table.
 
 ### Citation Reproducibility Protocol
 
