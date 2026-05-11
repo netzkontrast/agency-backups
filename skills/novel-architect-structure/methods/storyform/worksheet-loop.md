@@ -417,10 +417,11 @@ Steadfast, …) follow the worksheet term, not a German calque.
 
 ## §10 Versioning
 
-- **v1.0.0** (this file, Task 072) — initial 8-step Worksheet-Loop method
-  for `novel-architect@1.0.0` Phase 2. Sub-Phase numbering 2.1–2.14
-  matches `phases/phase2-narrative-architecture.md` §2.
-- **Forward-compat:** when Task 071 lands (`novel-architect-structure/`
-  sub-skill split), this file will `git mv` to
-  `skills/novel-architect-structure/methods/storyform/worksheet-workflow.md`
-  unchanged. All links above are relative; the move preserves them.
+- **v1.0.0** (Task 070 Epic close, lean) — initial ~98-line file by
+  Task 072 sub-task in the Epic batch close (PR #102). Codified slot
+  order and pseudocode; deferred per-step operational detail.
+- **v1.1.0** (Task 072 deep, this file) — replaces the lean version with
+  the full operational walkthrough: per-step askuser shape, inline
+  decision heuristic, recovery path, NCP slot mapping, worked example
+  for `consciousness-novel`. Sub-Phase numbering 2.1–2.14 matches
+  `novel-architect/phases/phase2-narrative-architecture.md` §2.

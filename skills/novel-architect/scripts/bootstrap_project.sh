@@ -3,11 +3,18 @@
 #
 # Usage:
 #   bash bootstrap_project.sh <slug>
-#   bash bootstrap_project.sh kohaerenz-protokoll   # special: migrate from legacy
+#   bash bootstrap_project.sh kohaerenz-protokoll   # ONLY this slug migrates legacy data
 #
-# Creates /home/claude/novel-projects/<slug>/ with template files.
-# Special case: if <slug> is "kohaerenz-protokoll" and novel-architect-legacy/
-# exists, migrate its data to the workspace.
+# Creates ${NOVEL_ARCHITECT_PROJECTS_ROOT:-/home/claude/novel-projects}/<slug>/
+# with template files.
+#
+# Migration (kohaerenz-protokoll only): if <slug> is "kohaerenz-protokoll" AND
+# novel-architect-legacy/ exists, this script migrates the legacy NCP + canon
+# data into the new workspace. All other slugs create fresh empty workspaces.
+#
+# Env overrides:
+#   NOVEL_ARCHITECT_PROJECTS_ROOT  - parent directory for project workspaces
+#                                     (default: /home/claude/novel-projects)
 
 set -euo pipefail
 
@@ -15,7 +22,7 @@ SLUG="${1:-}"
 if [ -z "$SLUG" ]; then
     echo "Usage: bash bootstrap_project.sh <slug>" >&2
     echo "Example: bash bootstrap_project.sh my-sf-novel" >&2
-    echo "Migration: bash bootstrap_project.sh kohaerenz-protokoll" >&2
+    echo "Migration (kohaerenz-protokoll only): bash bootstrap_project.sh kohaerenz-protokoll" >&2
     exit 1
 fi
 
@@ -30,7 +37,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILL_ROOT="$(dirname "$SCRIPT_DIR")"
 LEGACY_SKILL="$(dirname "$SKILL_ROOT")/novel-architect-legacy"
 NCP_AUTHOR="$(dirname "$SKILL_ROOT")/ncp-author"
-WORKSPACE="/home/claude/novel-projects/$SLUG"
+PROJECTS_ROOT="${NOVEL_ARCHITECT_PROJECTS_ROOT:-/home/claude/novel-projects}"
+WORKSPACE="$PROJECTS_ROOT/$SLUG"
 
 # Idempotency guard — refuse to clobber an existing workspace
 if [ -f "$WORKSPACE/project-config.yaml" ]; then
@@ -89,7 +97,7 @@ project:
   name: "Kohärenz Protokoll"
   language: de
   genre: hard_sf
-  workspace_root: /home/claude/novel-projects/kohaerenz-protokoll/
+  workspace_root: $WORKSPACE/
   is_demo: false
 
 narrative:

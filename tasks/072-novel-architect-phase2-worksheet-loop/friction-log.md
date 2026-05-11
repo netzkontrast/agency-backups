@@ -47,21 +47,22 @@ updated: 2026-05-11
 
 ## What rubbed
 
-- **Task 071 ordering — `methods/storyform/` lives in the v1.0.0 monolith.**
-  Task 072 is `task_blocked_by: 071`, but Task 071 (the sub-module
-  refactor that creates `skills/novel-architect-structure/`) hasn't been
-  done on this branch (`claude/implement-task-72-ZCpe1` is rooted at
-  `main`, not at PR #102's Epic branch). I implemented in the monolith
-  layout (`skills/novel-architect/methods/storyform/`) and put a
-  forward-compat note in `methods/storyform/readme.md`: when Task 071
-  lands, both files `git mv` to
-  `skills/novel-architect-structure/methods/storyform/` and all
-  internal links survive because they're relative
-  (`../../../dramatica-theory/...`, `../../assets/...`). The
-  task.md frontmatter `task_affects_paths` reflects the actual
-  v1.0.0 paths, not the v1.1.0 paths Task 070 Epic anticipates. Net
-  result: the *content* of Task 072 lands fully on this branch; the
-  *file locations* are forward-compatible but not yet final.
+- **Task 071 ordering — implementation landed under the v1.0.0 monolith,
+  then migrated at merge.** Task 072 is `task_blocked_by: 071`. When the
+  worksheet-loop / quick-ref work started, this branch was rooted at
+  `main` *before* PR #102 (Task 070 Epic close) landed — so the
+  sub-skill directories (`skills/novel-architect-structure/`) did not
+  yet exist. I implemented under the monolith layout
+  (`skills/novel-architect/methods/storyform/worksheet-workflow.md` +
+  `skills/novel-architect/assets/decision-heuristic-quick-ref.md`) with
+  a forward-compat plan: "when Task 071 lands, files `git mv` to
+  `novel-architect-structure/` and internal links survive (they're
+  relative)." When PR #102 landed on `main` and I rebased, the
+  migration was clean — `worksheet-workflow.md` → `worksheet-loop.md`
+  (matching main's lean version's filename) under the sub-skill, and
+  the asset to `novel-architect-structure/assets/`. Friction was the
+  two-step landing (implement under monolith, migrate at merge), not
+  the link-survival itself; the forward-compat plan worked.
 - **Architecture-template schema growth.** Adding `name` to throughlines,
   `story_points` block, `crucial_element` block, `signposts` +
   `journeys` arrays, `ending_type`, `genre_mode`, and `worksheet_audit`
@@ -71,12 +72,12 @@ updated: 2026-05-11
   That render-side change is **outside Task 072's scope** (the task is
   about the worksheet-loop *spec*, not the renderer for it) — left for
   a future Task 070-Epic-closure or the Phase 2.13 render-side work
-  noted in `methods/storyform/worksheet-workflow.md` §7.
+  noted in `methods/storyform/worksheet-loop.md` §7.
 - **Bilingual contract surface.** Phase 2 prose stays German (per
   SKILL.md "Bilingual Contract"); the new `decision-heuristic-quick-ref.md`
   is English (matches the dramatica-theory source language). The
-  worksheet-workflow.md is German prose + English schema/term names —
-  same pattern as the existing phase files. §9 of the worksheet-workflow
+  worksheet-loop.md is German prose + English schema/term names —
+  same pattern as the existing phase files. §9 of `worksheet-loop.md`
   documents this explicitly so the next maintainer doesn't try to
   translate the worksheet terms.
 

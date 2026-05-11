@@ -1,7 +1,7 @@
 # Decision-Heuristic Quick-Reference (1-pager)
 
 > **Purpose:** inline-quotable heuristics for Phase 2 askuser calls. The
-> [`methods/storyform/worksheet-workflow.md`](../methods/storyform/worksheet-workflow.md)
+> [`methods/storyform/worksheet-loop.md`](../methods/storyform/worksheet-loop.md)
 > HR.M2.3 says: *every Step 2–7 askuser MUST include a one-paragraph
 > excerpt from this file* — copy the relevant § into the status-view so
 > the author sees the heuristic without opening dramatica-theory.

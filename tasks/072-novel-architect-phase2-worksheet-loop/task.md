@@ -21,13 +21,14 @@ task_affects_paths:
   - skills/novel-architect/render/render_intent.py
   - skills/novel-architect/assets/intent-template.yaml
   - skills/novel-architect/phases/phase2-narrative-architecture.md
-  - skills/novel-architect/methods/storyform/worksheet-workflow.md
-  - skills/novel-architect/methods/storyform/readme.md
   - skills/novel-architect/methods/readme.md
-  - skills/novel-architect/assets/decision-heuristic-quick-ref.md
   - skills/novel-architect/assets/architecture-template.yaml
   - skills/novel-architect/phases/phase1-intent-capture.md
   - skills/novel-architect/render/tests/test_render_intent.py
+  - skills/novel-architect-structure/methods/storyform/worksheet-loop.md
+  - skills/novel-architect-structure/methods/storyform/readme.md
+  - skills/novel-architect-structure/assets/decision-heuristic-quick-ref.md
+  - skills/novel-architect-structure/assets/readme.md
 ---
 
 # Task 072 — Phase 2 Worksheet-Loop
@@ -38,7 +39,7 @@ Phase 2 (Narrative Architecture) in `novel-architect-structure` becomes a struct
 
 `done` when:
 1. `phase2-narrative-architecture.md` restructured to 8 sub-phases aligned with the worksheet
-2. New `methods/storyform/worksheet-workflow.md` exists in `novel-architect-structure` (or kept in orchestrator's `methods/`)
+2. New `methods/storyform/worksheet-loop.md` exists in `novel-architect-structure` (or kept in orchestrator's `methods/`)
 3. New `assets/decision-heuristic-quick-ref.md` — 1-page condensation of the 10-decision-heuristics.md for inline use
 4. Gates 1-3 aligned with worksheet steps (Gate 1 = steps 0-1 Intent+Throughlines, Gate 2 = steps 2-5 Classes+Dynamics+StoryPoints, Gate 3 = steps 6-7 Crucial Element+Signposts+Validation)
 5. End-to-end test: creating a Phase 2 architecture follows the 8-step worksheet, not the vague v1.0.0 "auto" path
@@ -75,7 +76,7 @@ This pattern repeats for Phase 2 (architecture.yaml slots), Phase 3 (character-a
 1. Read `dramatica-theory/references/00-storyform-worksheet.md` end-to-end
 2. Map the 8 steps to v1.0.0 Phase 2 sub-phases 2.1-2.8 (some 1:1, some merge)
 3. Rewrite `phase2-narrative-architecture.md` sub-phases section
-4. Create `methods/storyform/worksheet-workflow.md` (or referenced in orchestrator's methods/ if Task 071 keeps method library there)
+4. Create `methods/storyform/worksheet-loop.md` (or referenced in orchestrator's methods/ if Task 071 keeps method library there)
 5. Create `assets/decision-heuristic-quick-ref.md` — 1-page condensation of 10-decision-heuristics.md (Class choice, Change/Steadfast, Action/Decision Driver, Linear/Holistic, Goal level, Optionlock/Timelock, Outcome×Judgment)
 6. Update Gate 1/2/3 boundaries to align with worksheet steps
 7. Run end-to-end smoke test (manually walk through Phase 2 for `consciousness-novel` example)
@@ -84,7 +85,7 @@ This pattern repeats for Phase 2 (architecture.yaml slots), Phase 3 (character-a
 
 - [x] 1. Map worksheet steps to v1.0.0 Phase 2 sub-phases
 - [x] 2. Rewrite phase2 detail file with 8-step structure
-- [x] 3. Create worksheet-workflow.md method file
+- [x] 3. Create worksheet-loop.md method file
 - [x] 4. Create decision-heuristic-quick-ref.md asset
 - [x] 5. Align Gates 1-3 with worksheet step boundaries
 - [x] 6. Update SKILL.md Pipeline Overview table
@@ -94,44 +95,61 @@ This pattern repeats for Phase 2 (architecture.yaml slots), Phase 3 (character-a
 
 ## Closure (2026-05-11)
 
-`task_status: done`. All 9 todos closed. Implementation summary:
+`task_status: done`. All 9 todos closed.
+
+This branch (`claude/implement-task-72-ZCpe1`) was rebased onto `main` after
+the Task 070 Epic landed (PR #102). Main's Epic close included a **lean**
+Task 072 implementation (`skills/novel-architect-structure/methods/
+storyform/worksheet-loop.md`, ~98 lines). This branch supersedes that
+lean version with a **deep** implementation merged into the same file
+location — `novel-architect-structure/methods/storyform/worksheet-loop.md`
+now contains the full 8-step operational walkthrough (per-step askuser
+shape, inline decision heuristic, recovery path, NCP slot map, worked
+example for `consciousness-novel`).
+
+### Implementation summary
 
 1. **Worksheet → Sub-phase mapping** — Phase 2 now runs 14 sub-phases
    (2.1–2.14) bound to Worksheet Steps 0–8 + Validation Pass; mapping
    table in [`phases/phase2-narrative-architecture.md` §2](../../skills/novel-architect/phases/phase2-narrative-architecture.md#2-sub-phases-mit-3-gates-8-step-worksheet-loop).
-2. **Phase 2 detail file rewritten** — `phase2-narrative-architecture.md`
+2. **Phase 2 detail file rewritten** —
+   [`skills/novel-architect/phases/phase2-narrative-architecture.md`](../../skills/novel-architect/phases/phase2-narrative-architecture.md)
    now binds every sub-phase to a Worksheet Step with explicit Gate
    boundaries (Gate 1 = Steps 0+1, Gate 2 = Steps 2–5, Gate 3 = Steps 6+7+V).
    `architecture.yaml` grew `name` fields on throughlines, `story_points`
    block (static/driver/thematic), `crucial_element` block, `signposts`
    + `journeys` arrays, optional `genre_mode`, auto-derived `ending_type`,
    and a `worksheet_audit` step-completion tracker.
-3. **`methods/storyform/worksheet-workflow.md`** created — 360-line
-   operational walkthrough (per-step askuser shape, decision heuristic,
-   recovery path, NCP slot map, worked example for `consciousness-novel`).
-4. **`assets/decision-heuristic-quick-ref.md`** created — 1-pager with
-   §1 Class choice, §2 Change/Steadfast, §3 Start/Stop, §4 Doer/Beer,
-   §5 Linear/Holistic, §6 Action/Decision Driver, §7 Optionlock/Timelock,
-   §8 Outcome×Judgment, §9 Goal level, §10 Crucial Element coherence.
-   Designed for inline embedding in Step 2–7 askuser status-views (HR.M2.3).
+3. **`novel-architect-structure/methods/storyform/worksheet-loop.md`** —
+   replaced main's lean Epic-bundled version (~98 lines) with the deep
+   operational walkthrough (~360 lines): per-step askuser shape, inline
+   decision-heuristic excerpts (HR.M2.3), recovery paths, NCP slot mapping,
+   worked example for `consciousness-novel`.
+4. **`novel-architect-structure/assets/decision-heuristic-quick-ref.md`** —
+   new 1-pager with §1 Class choice, §2 Change/Steadfast, §3 Start/Stop,
+   §4 Doer/Beer, §5 Linear/Holistic, §6 Action/Decision Driver,
+   §7 Optionlock/Timelock, §8 Outcome×Judgment, §9 Goal level, §10
+   Crucial Element coherence. Designed for inline embedding in
+   Step 2–7 askuser status-views (HR.M2.3 / HR.P2.8).
 5. **Gate alignment** — Gate 1 (Steps 0+1: shape + throughline names),
    Gate 2 (Steps 2+3+4+5: classes + 8 dynamics + story points), Gate 3
    (Steps 6+7+(8) + Validation: crucial element + signposts + 5 hard checks).
 6. **SKILL.md Pipeline Overview** updated — Phase 2 row now references
-   the 8-Step Worksheet and the `methods/storyform/worksheet-workflow.md`
+   the 8-Step Worksheet and the
+   `novel-architect-structure/methods/storyform/worksheet-loop.md`
    implementation; `## Phase 2` section rewritten with the new sub-phase
    pseudocode and the inline-heuristic delegations.
 7. **End-to-end smoke test** — manual walkthrough for `consciousness-novel`
    (Hard-SF, single storyform): 7 askuser turns to fill all worksheet
-   slots; rendered an example architecture.yaml shape passing all 5
-   validation checks. Render_intent smoke test on real intent.yaml shape
-   produced correct status-view markdown.
+   slots; rendered an example `architecture.yaml` shape passing all 5
+   validation checks. `render_intent` smoke test on real intent.yaml
+   shape produced correct status-view markdown.
 8. **Slot-list consolidation** — `intent-template.yaml` gained a `_meta`
    block (`_required` + `_optional` lists). `render_intent.py` now reads
    the slot list via `load_slot_lists()` at runtime, with graceful
    fallback to embedded constants if the template is missing / malformed.
    `phase1-intent-capture.md` §1 table marked as "Derived view"
-   with the "Regenerated from intent-template.yaml on 2026-05-12" footer.
+   with a "Regenerated from intent-template.yaml on 2026-05-12" footer.
    Drift between the three locations is now mechanically prevented.
 9. **`render_intent.py` slot-state polish** — collapsed redundant
    placeholder checks. The classifier branches into 3 paths now (empty /
@@ -142,12 +160,6 @@ This pattern repeats for Phase 2 (architecture.yaml slots), Phase 3 (character-a
 `skills/novel-architect/render/tests/test_render_intent.py` (slot_state
 classification matrix + load_slot_lists fallback paths + module constant
 wiring). All pass: `python3 -m pytest skills/novel-architect/render/tests/ -v` → 31/31.
-
-**Forward-compat note:** `methods/storyform/` and the asset live under
-the v1.0.0 monolith (`skills/novel-architect/`). When Task 071 lands the
-sub-skill split, both will `git mv` to `skills/novel-architect-structure/`
-unchanged — all internal links are relative and survive the move (see
-`methods/storyform/readme.md` §"Forward-compat note").
 
 ## Links
 

@@ -6,14 +6,14 @@ summary: "Integrate the Scene-Level-Bridge 5-question audit (Q1-Q5) from dramati
 created: 2026-05-11
 updated: 2026-05-11
 task_id: "075"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "071"
+  - 071
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
@@ -63,15 +63,15 @@ The Scene-Level-Bridge file is the canonical operational bridge from storyform �
 
 ## Todo
 
-- [ ] 1. Read 12-scene-level-bridge.md in full
-- [ ] 2. Design moment-schema extension (NCP native vs custom_*)
-- [ ] 3. Consult `ncp-author` skill for namespace conventions
-- [ ] 4. Update ncp-integration-contract.md
-- [ ] 5. Author Phase 5 §X Scene-Level Audit Workflow
-- [ ] 6. Update Phase 6 pre-draft checklist
-- [ ] 7. Extend scene-matrix-template.md
-- [ ] 8. Extend chapter-draft-template.md
-- [ ] 9. Smoke test on existing example (consciousness-novel)
+- [x] 1. Read 12-scene-level-bridge.md in full
+- [x] 2. Design moment-schema extension (NCP native vs custom_*)
+- [x] 3. Consult `ncp-author` skill for namespace conventions
+- [x] 4. Update ncp-integration-contract.md
+- [x] 5. Author Phase 5 §X Scene-Level Audit Workflow
+- [x] 6. Update Phase 6 pre-draft checklist
+- [x] 7. Extend scene-matrix-template.md
+- [x] 8. Extend chapter-draft-template.md
+- [x] 9. Smoke test on existing example (consciousness-novel)
 
 ## Links
 

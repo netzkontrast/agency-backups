@@ -6,14 +6,14 @@ summary: "Adopt MIF Level 3 schema for novel-architect's references/learnings.md
 created: 2026-05-11
 updated: 2026-05-11
 task_id: "077"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P3
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "071"
+  - 071
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
@@ -84,15 +84,15 @@ The SessionStart-Hook complements this by surfacing the most-recent N traces (so
 
 ## Todo
 
-- [ ] 1. Read Dual-Kernel MIF Level 3 schema
-- [ ] 2. Subset schema for narrative work
-- [ ] 3. Author `schemas/mif-level3.yaml`
-- [ ] 4. Migrate existing learnings.md entries
-- [ ] 5. Author `scripts/session-start.sh`
-- [ ] 6. Update Phase 0 detail file
-- [ ] 7. Update Phase 7 detail file
-- [ ] 8. Backward compat smoke test
-- [ ] 9. Decide mnemonic integration (defer to v1.2.0?)
+- [x] 1. Read Dual-Kernel MIF Level 3 schema
+- [x] 2. Subset schema for narrative work
+- [x] 3. Author `schemas/mif-level3.yaml`
+- [x] 4. Migrate existing learnings.md entries
+- [x] 5. Author `scripts/session-start.sh`
+- [x] 6. Update Phase 0 detail file
+- [x] 7. Update Phase 7 detail file
+- [x] 8. Backward compat smoke test
+- [x] 9. Decide mnemonic integration (defer to v1.2.0?)
 
 ## Links
 

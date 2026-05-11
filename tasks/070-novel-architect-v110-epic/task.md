@@ -4,10 +4,10 @@ status: active
 slug: novel-architect-v110-epic
 summary: "Epic umbrella for novel-architect@1.1.0 — orchestrates 7 sub-tasks (071-077) that implement Sub-Module Refactor + Dramatica-Native Integration (Worksheet-Loop, Hard Rules, Anti-Patterns, Scene-Level-Bridge) + selective Dual-Kernel Patterns (Canon-Status Schema, MIF Level 3, SessionStart-Hook). Goal: skill becomes dramatica-native instead of dramatica-delegating, structured into 4-5 sub-skills following Dual-Kernel Architect pattern."
 created: 2026-05-11
-updated: 2026-05-12
+updated: 2026-05-11
 task_id: "070"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
@@ -90,16 +90,16 @@ The user's scope decision: **Sub-Module Refactor + all 4 Dramatica integrations 
 
 ## Todo
 
-- [ ] 1. Land Task 071 (foundation)
-- [ ] 2. Land Tasks 072, 074, 075, 076, 077 (parallel after 071)
-- [ ] 3. Land Task 073 (after 072)
-- [ ] 4. Update SKILL.md frontmatter: `version: "1.1.0"`, `date_updated`
-- [ ] 5. Append v1.1.0 changelog entry to `references/learnings.md`
-- [ ] 6. Add bilingual DE/EN contract note to `SKILL.md` (PR #101 review §2.7)
-- [ ] 7. Scaffold pytest tests under `skills/novel-architect/render/tests/` covering: `atomic_write`, `validate_slug`, `utcnow_iso`, `render_intent`, `render_architecture`, `render_scene_matrix` (single+dual storyform_count). Goal: ≥80% line coverage on `render/`. Addresses PR #101 review §3.
-- [ ] 8. Verify Legacy Retirement Criterion (a)/(b)/(c) status; if all met, file follow-up Task; else document blockers
-- [ ] 9. Run `tools/check-governance.sh` → exit 0
-- [ ] 10. Update PR #101 (or new PR) — close Epic
+- [x] 1. Land Task 071 (foundation)
+- [x] 2. Land Tasks 072, 074, 075, 076, 077 (parallel after 071)
+- [x] 3. Land Task 073 (after 072)
+- [x] 4. Update SKILL.md frontmatter: `version: "1.1.0"`, `date_updated`
+- [x] 5. Append v1.1.0 changelog entry to `references/learnings.md`
+- [x] 6. Add bilingual DE/EN contract note to `SKILL.md` (PR #101 review §2.7)
+- [x] 7. Scaffold pytest tests under `skills/novel-architect/render/tests/` covering: `atomic_write`, `validate_slug`, `utcnow_iso`, `render_intent`, `render_architecture`, `render_scene_matrix` (single+dual storyform_count). Goal: ≥80% line coverage on `render/`. Addresses PR #101 review §3.
+- [x] 8. Verify Legacy Retirement Criterion (a)/(b)/(c) status; if all met, file follow-up Task; else document blockers
+- [x] 9. Run `tools/check-governance.sh` → exit 0
+- [x] 10. Update PR #101 (or new PR) — close Epic
 
 ## PR #101 Review Findings — Routing
 

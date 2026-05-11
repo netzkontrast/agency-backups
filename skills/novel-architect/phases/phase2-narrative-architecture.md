@@ -5,8 +5,8 @@
 > Element-Identifikation.
 >
 > **Source spec:** [`dramatica-theory/references/00-storyform-worksheet.md`](../../dramatica-theory/references/00-storyform-worksheet.md)
-> **Operational method:** [`methods/storyform/worksheet-workflow.md`](../methods/storyform/worksheet-workflow.md)
-> **Inline-ask heuristics:** [`assets/decision-heuristic-quick-ref.md`](../assets/decision-heuristic-quick-ref.md)
+> **Operational method:** [`methods/storyform/worksheet-loop.md`](../../novel-architect-structure/methods/storyform/worksheet-loop.md)
+> **Inline-ask heuristics:** [`assets/decision-heuristic-quick-ref.md`](../../novel-architect-structure/assets/decision-heuristic-quick-ref.md)
 > **Anti-pattern catalog:** [`dramatica-theory/references/11-anti-patterns.md`](../../dramatica-theory/references/11-anti-patterns.md)
 
 ## §0 Goal
@@ -16,7 +16,7 @@ indem du das vollständige **8-Schritte-Storyform-Worksheet** aus
 `dramatica-theory` durchläufst — nicht „auto + consult", sondern eine
 operationale Loop mit AskUserQuestion-Slots pro Schritt und inline-
 zitierten Entscheidungs-Heuristiken aus
-[`decision-heuristic-quick-ref.md`](../assets/decision-heuristic-quick-ref.md).
+[`decision-heuristic-quick-ref.md`](../../novel-architect-structure/assets/decision-heuristic-quick-ref.md).
 
 Die acht Schritte des Worksheet (mit dem **`novel-architect` 3-Gate-Mapping**):
 
@@ -78,7 +78,7 @@ Phase 2.14  Write architecture.yaml (approved=true) + present_files           (f
 **Cap:** 10 askuser turns across all gates (hard rule HR.A4) — exceeded
 means the storyform is incoherent; loop back to Phase 1.
 
-**Operational detail:** [`methods/storyform/worksheet-workflow.md` §3](../methods/storyform/worksheet-workflow.md#3-per-step-operational-detail)
+**Operational detail:** [`methods/storyform/worksheet-loop.md` §3](../../novel-architect-structure/methods/storyform/worksheet-loop.md#3-per-step-operational-detail)
 walks each Step's askuser-shape, decision heuristic, and recovery path.
 
 ## §3 Gate-Details
@@ -110,7 +110,7 @@ Eine konsolidierte Approval-View mit **vier Sektionen**:
 - OS Class (one of {Universe, Physics, Mind, Psychology}).
 - SS, MC, IC fall out by dynamic-pair constraint (auto-derived; show the
   derivation in the status-view).
-- Inline: [`decision-heuristic-quick-ref.md` §1](../assets/decision-heuristic-quick-ref.md#1-class-choice).
+- Inline: [`decision-heuristic-quick-ref.md` §1](../../novel-architect-structure/assets/decision-heuristic-quick-ref.md#1-class-choice).
 
 **B. Character Dynamics (Step 3):**
 - MC Resolve: Change / Steadfast (quick-ref §2).
@@ -229,7 +229,7 @@ sind verboten — würden Schema-Drift erzeugen.
   frei coinen — Ontology-IDs first.
 - **HR.P2.8 — Decision heuristic inline (HR.M2.3).** Every Step 2–7
   askuser embeds a one-paragraph excerpt from
-  [`decision-heuristic-quick-ref.md`](../assets/decision-heuristic-quick-ref.md)
+  [`decision-heuristic-quick-ref.md`](../../novel-architect-structure/assets/decision-heuristic-quick-ref.md)
   in the status-view body (not just a link).
 
 ## §7 Edge Cases
@@ -393,8 +393,8 @@ Phase 2 ist done, wenn:
 For each Step's askuser-shape, decision heuristic, recovery path, and
 NCP slot mapping, see:
 
-- **[`methods/storyform/worksheet-workflow.md`](../methods/storyform/worksheet-workflow.md)** — operational walkthrough (§3 per-step detail, §4 worked example, §5 method-level hard rules).
-- **[`assets/decision-heuristic-quick-ref.md`](../assets/decision-heuristic-quick-ref.md)** — inline-quotable heuristics for Steps 2–7 askuser calls.
+- **[`methods/storyform/worksheet-loop.md`](../../novel-architect-structure/methods/storyform/worksheet-loop.md)** — operational walkthrough (§3 per-step detail, §4 worked example, §5 method-level hard rules).
+- **[`assets/decision-heuristic-quick-ref.md`](../../novel-architect-structure/assets/decision-heuristic-quick-ref.md)** — inline-quotable heuristics for Steps 2–7 askuser calls.
 - **[`dramatica-theory/references/00-storyform-worksheet.md`](../../dramatica-theory/references/00-storyform-worksheet.md)** — the worksheet itself (theory SSoT).
 - **[`dramatica-theory/references/10-decision-heuristics.md`](../../dramatica-theory/references/10-decision-heuristics.md)** — full heuristics (the quick-ref is a condensation).
 - **[`dramatica-theory/references/00-storyform-validation.md`](../../dramatica-theory/references/00-storyform-validation.md)** — the 5 hard checks run in Phase 2.11.

@@ -6,14 +6,14 @@ summary: "Integrate all 14 anti-patterns (AP-1 to AP-14) from dramatica-theory/1
 created: 2026-05-11
 updated: 2026-05-11
 task_id: "074"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P3
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "071"
+  - 071
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
@@ -74,13 +74,13 @@ Each of the 14 Anti-Patterns from [`dramatica-theory/references/11-anti-patterns
 
 ## Todo
 
-- [ ] 1. Read all 14 APs, confirm classification
-- [ ] 2. Author `methods/diagnostic/anti-patterns.md`
-- [ ] 3. Update phase2 detail file with Phase 2 APs as Pre-Check section
-- [ ] 4. Update phase3 detail file with Phase 3 APs
-- [ ] 5. Update phase6 detail file with Phase 6 APs
-- [ ] 6. Smoke test
-- [ ] 7. Decide advisory vs blocking severity
+- [x] 1. Read all 14 APs, confirm classification
+- [x] 2. Author `methods/diagnostic/anti-patterns.md`
+- [x] 3. Update phase2 detail file with Phase 2 APs as Pre-Check section
+- [x] 4. Update phase3 detail file with Phase 3 APs
+- [x] 5. Update phase6 detail file with Phase 6 APs
+- [x] 6. Smoke test
+- [x] 7. Decide advisory vs blocking severity
 
 ## Links
 

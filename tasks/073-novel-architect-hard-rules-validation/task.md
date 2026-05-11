@@ -6,14 +6,14 @@ summary: "Implement 12 Hard Rules (H1-H12) from dramatica-theory/00-storyform-va
 created: 2026-05-11
 updated: 2026-05-11
 task_id: "073"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "072"
+  - 072
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
@@ -68,13 +68,13 @@ From `dramatica-theory/references/00-storyform-validation.md`:
 
 ## Todo
 
-- [ ] 1. Implementation decision: pure-prose vs Python helper vs hybrid
-- [ ] 2. Author `methods/validation/hard-rules-check.md`
-- [ ] 3. Author `assets/hard-rules-checklist.md`
-- [ ] 4. Insert Phase 2.7 in `phase2-narrative-architecture.md`
-- [ ] 5. Update status-view rendering (architecture-status-view.md template)
-- [ ] 6. Smoke test
-- [ ] 7. Frontmatter validation
+- [x] 1. Implementation decision: pure-prose vs Python helper vs hybrid
+- [x] 2. Author `methods/validation/hard-rules-check.md`
+- [x] 3. Author `assets/hard-rules-checklist.md`
+- [x] 4. Insert Phase 2.7 in `phase2-narrative-architecture.md`
+- [x] 5. Update status-view rendering (architecture-status-view.md template)
+- [x] 6. Smoke test
+- [x] 7. Frontmatter validation
 
 ## Links
 
