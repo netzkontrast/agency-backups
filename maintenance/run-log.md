@@ -4,7 +4,7 @@ status: active
 slug: run-log
 summary: "Chronological log of every Repo Coherence Check and Nightly Maintenance run. The agent MUST read the last entry's end_commit before beginning any run."
 created: 2026-05-04
-updated: 2026-05-05
+updated: 2026-05-08
 ---
 
 # Maintenance Run Log
@@ -781,6 +781,99 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
     `032-agents-spec-integration/`; renumber tracked by Task 043.
 
 ### Run 2026-05-08 — Repo Coherence Check
+- agent: claude-code (session claude/peaceful-carson-EL75t)
+- routine_type: coherence-check
+- start_commit: b162873
+- end_commit: dd23029
+- baseline_commit: 0825eb8 (Task 032 closure end_commit; recovered cleanly via the awk fall-forward across 23 task-implementation/coherence records — Task 008's hardening still holds across the 193-file delta)
+- files_in_delta: 193
+- files_scanned: 0
+- t1_fixes: 0
+- t2_fixes: 0
+- t3_tasks_created: 1
+- t4_skipped: 0
+- issues_skipped: 3
+- notes: >
+    Drove the run from `tools/check-governance.sh` output (Step 2.5
+    linter-first triage). The canonical gate exits 0 across the
+    full 193-file delta — every changed file is conformant per the
+    fm-validate `--type-check` surface, with the Task 032/044/053
+    chain-merge wave already cleaned up before reaching this
+    session. No T1 or T2 repairs were required.
+
+    The full governance script DID emit ~50 advisory `ERROR:` lines
+    (TRUST.SCHEMA on closed research workspaces, FR.B.4 friction-log
+    format on Tasks 030 and 033, R.6.5 no-downstream-task on a
+    Gemini external-result file). All three classes are pre-existing
+    and already filed under open Tasks (Task 044 covers the FL
+    declaration territory via F14; Task 038 / 062 covers the
+    FR.B.4 strict-flip; Task 053-class dispatch covers the closed-
+    research repair allowance via Task 059). Recorded as
+    `issues_skipped: 3` per the skip-with-citation disposition this
+    session also proposes formalizing (see Task 064 finding F26).
+
+    T1 paired update:
+      - tasks/readme.md: added bullet for Task 064 and bumped
+        `updated:` 2026-05-07 → 2026-05-08 via
+        `tools/fm/edit.py --bump-updated` (per TASK.md §4.8 freshness
+        rule). The new linter `tools/fm/index_diff.py` exits 0
+        post-edit.
+
+    T3 Task created:
+      - tasks/064-improve-maintenance-spec-may-08-2026/ — operator-
+        instructed session distillation per the standing closing
+        instruction. Carries seven findings F20–F26: /sc:* closing-
+        protocol documentation (F20), self-improvement-Task
+        accumulation cadence rule (F21), in-session index_diff
+        discipline (F22), gating-vs-advisory line format in
+        check-governance.sh (F23), linter-first as canonical
+        Step 2 on large deltas (F24), TodoWrite enum case
+        sensitivity (F25, won't-fix candidate), skip-with-citation
+        disposition pattern (F26). Companion (not successor) to
+        the open Task 044 (F14–F19) and Task 025 (F2/F3/F4/F7);
+        F21 itself targets the lineage's accumulation pattern.
+
+    Issues skipped (3):
+      - research/gemini/agency-adr-governance-spec/result.md
+        (R.6.5:no-downstream-task): pre-existing; advisory tier;
+        absorbed by Task 053 dispatch / Task 040 territory.
+      - tasks/030-cleanup-dramatica-skills-corpus/friction-log.md
+        (FR.B.4:malformed): pre-existing; advisory tier; absorbed
+        by Task 062 (frustrated-spec-followup-ac1-ac5, FL strict
+        flip after remediating tasks 030 + 033 friction-logs).
+      - tasks/033-task-spec-integration/friction-log.md
+        (FR.B.4:malformed): same disposition as above; absorbed
+        by Task 062.
+
+    Surprises / findings carried into the maintenance-spec
+    improvement Task 064 (per the operator's standing instruction
+    to distil session insights into a follow-up Task):
+      - F20: The operator's closing sequence
+        `/sc:analyze → /sc:reflect → /sc:improve → /sc:Review →
+        /sc:createPR` is observably stable across recent sessions
+        but undocumented in MAINTENANCE.md or the coherence prompt.
+      - F21: This run files the THIRD concurrent open
+        improve-maintenance-spec-* Task (025, 044, 064). Without
+        a cadence rule, the lineage will keep growing.
+      - F22: tasks/readme.md membership/status drift is gated only
+        at pre-commit; mid-session creation of Task 064 had no
+        in-session sanity surface beyond running the full gate.
+      - F23: tools/check-governance.sh emits ~50 ERROR lines and
+        concludes PASS; gating vs advisory distinction is opaque
+        per-line.
+      - F24: 193-file delta, 0 files manually scanned. Linter-first
+        IS the canonical path for any non-trivial delta; the
+        coherence prompt should reflect that.
+      - F25: TodoWrite enum is lowercase-only; minor harness
+        friction.
+      - F26: Three "issues skipped" this run — the skip-with-
+        citation pattern is now stable across runs but unspecified.
+
+    Closing protocol per F20: this commit will be followed (at the
+    operator's instruction) by /sc:analyze → /sc:reflect →
+    /sc:improve → /sc:Review → /sc:createPR. The four upstream
+    skills are RECOMMENDED; only /sc:createPR is REQUIRED per
+    CLAUDE.md §10.
 - agent: jules
 - routine_type: coherence-check
 - start_commit: dd12e68
