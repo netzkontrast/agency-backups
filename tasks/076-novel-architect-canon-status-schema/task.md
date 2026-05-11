@@ -6,14 +6,14 @@ summary: "Adopt Dual-Kernel's Canon-Status Conflict-Schema for canon-meta.md ent
 created: 2026-05-11
 updated: 2026-05-11
 task_id: "076"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P3
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "071"
+  - 071
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
@@ -78,14 +78,14 @@ The `canon_status` hierarchy (confirmed > provisional > disputed > uncertain > d
 
 ## Todo
 
-- [ ] 1. Read Dual-Kernel entity examples
-- [ ] 2. Read Dual-Kernel common.py for Pydantic patterns
-- [ ] 3. Author `assets/canon-meta-schema.md`
-- [ ] 4. Update Phase 4 detail file
-- [ ] 5. Update Phase 7 detail file (audit-mode addition)
-- [ ] 6. Author migration guide
-- [ ] 7. Decide validation tooling
-- [ ] 8. Smoke test on Kohärenz-Protokoll legacy canon-meta.md migration
+- [x] 1. Read Dual-Kernel entity examples
+- [x] 2. Read Dual-Kernel common.py for Pydantic patterns
+- [x] 3. Author `assets/canon-meta-schema.md`
+- [x] 4. Update Phase 4 detail file
+- [x] 5. Update Phase 7 detail file (audit-mode addition)
+- [x] 6. Author migration guide
+- [x] 7. Decide validation tooling
+- [x] 8. Smoke test on Kohärenz-Protokoll legacy canon-meta.md migration
 
 ## Links
 

@@ -43,7 +43,14 @@ def render(slug: str) -> Path:
     ws = project_workspace(slug)
     config = read_yaml(ws / "project-config.yaml")
     arch = read_yaml(ws / "architecture.yaml")
-    chapter_count = config.get("narrative", {}).get("chapter_count_target", 40)
+    chapter_count = config.get("narrative", {}).get("chapter_count_target")
+    if chapter_count is None:
+        raise ValueError(
+            f"project-config.yaml:narrative.chapter_count_target missing in "
+            f"{ws / 'project-config.yaml'}. Set it explicitly (e.g. 40) before "
+            f"running Phase 5. Defaulting silently is forbidden — Phase 1 Intent "
+            f"Capture must capture this slot."
+        )
     storyform_count = arch.get("architecture", {}).get("storyform_count", "single")
     # Per phases/phase5-scene-matrix.md §5 and methods/conflict/dual-storyform.md
     # §3, a dual storyform seeds one storybeat in EACH narrative per chapter.

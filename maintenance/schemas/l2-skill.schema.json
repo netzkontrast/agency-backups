@@ -19,6 +19,9 @@
       "items": {
         "type": "string"
       }
+    },
+    "skill_bundles_tools": {
+      "type": "string"
     }
   },
   "required": [
