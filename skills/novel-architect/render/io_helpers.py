@@ -19,8 +19,8 @@ Usage from phases:
 from __future__ import annotations
 
 import json
+import os
 import re
-import shutil
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -74,14 +74,24 @@ def ensure_workspace(slug: str) -> Path:
 
 
 def atomic_write(path: Path, content: str) -> None:
-    """Write content to path atomically (temp file + rename)."""
+    """Write content to path atomically.
+
+    Uses tempfile-in-same-directory + fsync + os.replace to guarantee:
+    - readers either see the old content or the fully-written new content,
+      never a half-written truncation;
+    - on crash, the rename target is durable (fsync before close);
+    - the rename is atomic (os.replace is atomic on POSIX when src/dst share
+      a filesystem; we ensure that by placing tempfile in path.parent).
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.NamedTemporaryFile(
         "w", encoding="utf-8", dir=str(path.parent), delete=False, suffix=".tmp"
     ) as tmp:
         tmp.write(content)
+        tmp.flush()
+        os.fsync(tmp.fileno())
         tmp_path = Path(tmp.name)
-    shutil.move(str(tmp_path), str(path))
+    os.replace(tmp_path, path)
 
 
 # ─── YAML / JSON helpers ─────────────────────────────────────────────────────

@@ -23,12 +23,31 @@ from io_helpers import (  # noqa: E402
 )
 
 
+def _act_for_chapter(ch: int, per_act: int, chapter_count: int) -> str:
+    """Return roman-numeral act label for chapter number.
+
+    Acts are computed from per_act size; the final act absorbs any remainder
+    when chapter_count is not divisible by 4.
+    """
+    if ch <= per_act:
+        return "I"
+    if ch <= 2 * per_act:
+        return "II"
+    if ch <= 3 * per_act:
+        return "III"
+    return "IV"
+
+
 def render(slug: str) -> Path:
     """Render scene-matrix.md initial skeleton (Phase 5.3 starting state)."""
     ws = project_workspace(slug)
     config = read_yaml(ws / "project-config.yaml")
     arch = read_yaml(ws / "architecture.yaml")
     chapter_count = config.get("narrative", {}).get("chapter_count_target", 40)
+    storyform_count = arch.get("architecture", {}).get("storyform_count", "single")
+    # Per phases/phase5-scene-matrix.md §5 and methods/conflict/dual-storyform.md
+    # §3, a dual storyform seeds one storybeat in EACH narrative per chapter.
+    narrative_suffixes = ("a", "b") if storyform_count == "dual" else ("a",)
 
     lines = [
         f"# Scene Matrix — `{slug}`",
@@ -36,6 +55,7 @@ def render(slug: str) -> Path:
         "> **Schema:** 4-Akt × N-Kapitel × M-Szenen Hierarchie",
         "> **Persistenz:** Struktur in NCP `storybeats[]` + `moments[]`",
         "> **Written by:** Phase 5",
+        f"> **Storyform Count:** {storyform_count}",
         "",
         "## Akt-Übersicht",
         "",
@@ -57,23 +77,25 @@ def render(slug: str) -> Path:
     ])
 
     for ch in range(1, chapter_count + 1):
-        lines.extend([
+        chapter_lines = [
             f"### Kapitel {ch} — `<PLACEHOLDER Titel>`",
             "",
-            f"- **Akt:** {'I' if ch <= per_act else 'II' if ch <= 2*per_act else 'III' if ch <= 3*per_act else 'IV'}",
+            f"- **Akt:** {_act_for_chapter(ch, per_act, chapter_count)}",
             "- **POV:** <PLACEHOLDER>",
-            "- **Storyform-Fokus:** <Single | A | B | Both>",
+            f"- **Storyform-Fokus:** {'Both' if storyform_count == 'dual' else 'Single'}",
             "- **Storypoint:** <PLACEHOLDER>",
             "- **Moments:**",
             "  1. <PLACEHOLDER>",
             "  2. <PLACEHOLDER>",
             "- **NCP-Referenzen:**",
-            f"  - storybeat_id: `beat_ch{ch:02d}_a`",
-            f"  - moment_ids: `[moment_ch{ch:02d}_a_s01]`",
-            "",
-            "---",
-            "",
-        ])
+        ]
+        for suf in narrative_suffixes:
+            chapter_lines.append(f"  - storybeat_id (narrative_{suf}): `beat_ch{ch:02d}_{suf}`")
+            chapter_lines.append(
+                f"  - moment_ids (narrative_{suf}): `[moment_ch{ch:02d}_{suf}_s01]`"
+            )
+        chapter_lines.extend(["", "---", ""])
+        lines.extend(chapter_lines)
 
     lines.extend([
         "## Konsistenz-Checks",
@@ -84,8 +106,11 @@ def render(slug: str) -> Path:
         "- [ ] Charakter-Auftritte konsistent mit character-architecture.yaml",
     ])
 
-    if arch.get("architecture", {}).get("storyform_count") == "dual":
-        lines.append("- [ ] Bei dual storyform: beide Narratives in 5D-Interferenz")
+    if storyform_count == "dual":
+        lines.append(
+            "- [ ] Bei dual storyform: beide Narratives in 5D-Interferenz "
+            "(parallel storybeats pro Kapitel, siehe `methods/conflict/dual-storyform.md` §3)"
+        )
 
     content = "\n".join(lines) + "\n"
     out = ws / "scene-matrix.md"
