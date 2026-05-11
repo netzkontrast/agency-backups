@@ -1,5 +1,12 @@
 # Architecture Template — Schema 2, written by Phase 2
 # NCP-Skeleton wird parallel via ncp-author erstellt.
+#
+# Layout aligned to the 8-step Dramatica Storyform Worksheet
+# (`dramatica-theory/references/00-storyform-worksheet.md`).
+# Task 072 added: `name` fields on throughlines (Step 1), `story_points`
+# block (Step 5), `crucial_element` block (Step 6), `signposts` + `journeys`
+# blocks (Step 7), `genre_mode` (Step 8), `ending_type` (auto-derived
+# Outcome×Judgment), and `worksheet_audit` step-completion tracker.
 
 schema_version: "1.0"
 
@@ -12,14 +19,20 @@ provenance:
 architecture:
   storyform_count: <single|dual>
 
-  # Bei storyform_count: dual wird narratives[1] befüllt
+  # Bei storyform_count: dual wird narratives[1] befüllt.
+  # Worksheet-Loop läuft Throughline-für-Throughline durch BEIDE narratives
+  # simultan (SKILL.md "Dual-Storyform-Integrität" + Phase 2 HR.P2.6).
   narratives:
     - id: storyform_a
+
+      # ── Step 1: Identify the Four Throughlines (name + perspective) ──
       throughlines:
-        os:   { class: <Universe|Physics|Mind|Psychology>, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
-        mc:   { class: <PLACEHOLDER>, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
-        ic:   { class: <PLACEHOLDER>, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
-        ss:   { class: <PLACEHOLDER>, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        os: { name: <PLACEHOLDER>, class: <Universe|Physics|Mind|Psychology>, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        mc: { name: <PLACEHOLDER>, class: <PLACEHOLDER>,                     type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        ic: { name: <PLACEHOLDER>, class: <PLACEHOLDER>,                     type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        ss: { name: <PLACEHOLDER>, class: <PLACEHOLDER>,                     type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+
+      # ── Steps 3 + 4: Dynamics (8 binaries) ──
       dynamics:
         mc_resolve:    <Change|Steadfast>
         mc_growth:     <Start|Stop>
@@ -30,15 +43,78 @@ architecture:
         outcome:       <Success|Failure>
         judgment:      <Good|Bad>
 
+      # Auto-derived from outcome × judgment (Phase 2.6 readout).
+      # Triumph (Success+Good) / Personal Triumph (Failure+Good) /
+      # Personal Tragedy (Success+Bad) / Tragedy (Failure+Bad).
+      ending_type: <PLACEHOLDER>
+
+      # ── Step 5: Plot Story Points ──
+      story_points:
+        static:
+          goal:         <PLACEHOLDER>   # MUST be Type-level (quick-ref §9)
+          requirements: <PLACEHOLDER>
+          consequences: <PLACEHOLDER>
+          forewarnings: <PLACEHOLDER>
+        driver:
+          dividends:     <PLACEHOLDER>
+          costs:         <PLACEHOLDER>
+          prerequisites: <PLACEHOLDER>
+          preconditions: <PLACEHOLDER>
+        thematic:
+          # Per throughline: concern (Type) / issue (Variation) / problem (Element)
+          # / solution / focus / direction.
+          os: { concern: <PLACEHOLDER>, issue: <PLACEHOLDER>, problem: <PLACEHOLDER>, solution: <PLACEHOLDER>, focus: <PLACEHOLDER>, direction: <PLACEHOLDER> }
+          mc: { concern: <PLACEHOLDER>, issue: <PLACEHOLDER>, problem: <PLACEHOLDER>, solution: <PLACEHOLDER>, focus: <PLACEHOLDER>, direction: <PLACEHOLDER> }
+          ic: { concern: <PLACEHOLDER>, issue: <PLACEHOLDER>, problem: <PLACEHOLDER>, solution: <PLACEHOLDER>, focus: <PLACEHOLDER>, direction: <PLACEHOLDER> }
+          ss: { concern: <PLACEHOLDER>, issue: <PLACEHOLDER>, problem: <PLACEHOLDER>, solution: <PLACEHOLDER>, focus: <PLACEHOLDER>, direction: <PLACEHOLDER> }
+
+      # ── Step 6: Crucial Element ──
+      crucial_element:
+        element:              <ontology-id>   # one of the 64 OS Character Elements
+        dynamic_pair_partner: <ontology-id>   # the IC's element
+        role:                 <problem|solution>  # must match mc_resolve
+
+      # ── Step 7: Signposts (4 per throughline) + Journeys (3 per throughline) ──
+      # Order constrained by Class's Type-Quad — look up via
+      # `tools/dramatica-nav/nav.py by-quad quad.<class>-tp`.
+      signposts:
+        os: [<sp1>, <sp2>, <sp3>, <sp4>]
+        mc: [<sp1>, <sp2>, <sp3>, <sp4>]
+        ic: [<sp1>, <sp2>, <sp3>, <sp4>]
+        ss: [<sp1>, <sp2>, <sp3>, <sp4>]
+      journeys:
+        os: [<j1_2>, <j2_3>, <j3_4>]   # 3 transitions between 4 signposts
+        mc: [<j1_2>, <j2_3>, <j3_4>]
+        ic: [<j1_2>, <j2_3>, <j3_4>]
+        ss: [<j1_2>, <j2_3>, <j3_4>]
+
+      # ── Step 8 (optional): Genre Mode ──
+      genre_mode: null   # one of dramatica's Mode-of-Expression ontology-ids, or null
+
 ncp:
   skeleton_written: false                  # true wenn ncp-author skeleton erstellt
   ncp_file: canon/<slug>.ncp.json
-  validation_status: pending
+  validation_status: pending               # pending | passed | failed
 
 gates:
-  gate_1_storyform_shape: { approved: false, edits: 0 }
-  gate_2_throughlines_classes_dynamics: { approved: false, edits: 0 }
-  gate_3_final_architecture: { approved: false, edits: 0 }
+  gate_1_storyform_shape:               { approved: false, edits: 0 }
+  gate_2_classes_dynamics_storypoints:  { approved: false, edits: 0 }
+  gate_3_final_architecture:            { approved: false, edits: 0 }
+
+# Worksheet-Step completion audit. Phase 2.11 sets each flag as the
+# corresponding step writes its slots; the validation pass checks all
+# required flags are true before allowing Gate 3 approval.
+worksheet_audit:
+  step_0_intent_loaded:           false   # set true at Phase 2.2 (precondition)
+  step_1_throughlines_named:      false
+  step_2_classes_assigned:        false
+  step_3_character_dynamics_set:  false
+  step_4_plot_dynamics_set:       false
+  step_5_story_points_set:        false
+  step_6_crucial_element_set:     false
+  step_7_signposts_set:           false
+  step_8_genre_mode_set:          false   # may stay false (optional)
+  validation_pass:                false
 
 approved: false
 

@@ -10,6 +10,15 @@ und vom User approved. **Kein Slot darf ambiguous, missing oder geraten sein.**
 
 ## §1 Vollständiges Slot-Set
 
+> **Derived view.** The canonical Phase 1 slot list lives in
+> [`assets/intent-template.yaml`](../assets/intent-template.yaml) under
+> `_meta._required` / `_meta._optional`. `render/render_intent.py` loads it
+> at runtime; this table is a human-readable mirror. When you add or remove
+> a slot, edit the template's `_meta` block first, then re-sync this table
+> and bump the "Regenerated from intent-template.yaml on …" footer line below.
+> Drift between the template and this table is a regression — Task 072
+> (PR #101 review §2.5) consolidated three prior copies into one.
+
 | Slot | Required | Type | Beispielwerte |
 |---|---|---|---|
 | `genre` | yes | single_select | hard_sf, fantasy, literary, horror, thriller, mystery, romance, historical, magical_realism |
@@ -26,6 +35,8 @@ und vom User approved. **Kein Slot darf ambiguous, missing oder geraten sein.**
 | `science_integration_level` | optional | single_select | `decoration`, `frame`, `engine` |
 | `known_priors` | optional | free_text | Bisherige Roman-Ideen, Charaktere, Welt |
 | `success_criterion` | yes | free_text | "Der Roman ist fertig, wenn ___" |
+
+> *Regenerated from `intent-template.yaml` on 2026-05-12 (Task 072).*
 
 ## §2 Loop-Pseudocode
 

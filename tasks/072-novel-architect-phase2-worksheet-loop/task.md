@@ -4,25 +4,30 @@ status: active
 slug: novel-architect-phase2-worksheet-loop
 summary: "Refactor Phase 2 (Narrative Architecture) of novel-architect to follow the 8-step Storyform Worksheet from dramatica-theory (00-storyform-worksheet.md): Intent → Throughlines → Classes → Dynamics → Story Points → Crucial Element → Signposts → Validation. Currently Phase 2 says 'auto + consult dramatica-theory' which is too vague. Worksheet-Loop makes the 8 steps explicit sub-phases with corresponding gates."
 created: 2026-05-11
-updated: 2026-05-12
+updated: 2026-05-11
 task_id: "072"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "071"
+  - 071
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
-  - skills/novel-architect-structure/phases/phase2-narrative-architecture.md
-  - skills/novel-architect-structure/methods/storyform/worksheet-workflow.md
-  - skills/novel-architect-structure/assets/decision-heuristic-quick-ref.md
   - skills/novel-architect/SKILL.md
   - skills/novel-architect/render/render_intent.py
   - skills/novel-architect/assets/intent-template.yaml
+  - skills/novel-architect/phases/phase2-narrative-architecture.md
+  - skills/novel-architect/methods/storyform/worksheet-workflow.md
+  - skills/novel-architect/methods/storyform/readme.md
+  - skills/novel-architect/methods/readme.md
+  - skills/novel-architect/assets/decision-heuristic-quick-ref.md
+  - skills/novel-architect/assets/architecture-template.yaml
+  - skills/novel-architect/phases/phase1-intent-capture.md
+  - skills/novel-architect/render/tests/test_render_intent.py
 ---
 
 # Task 072 — Phase 2 Worksheet-Loop
@@ -77,15 +82,72 @@ This pattern repeats for Phase 2 (architecture.yaml slots), Phase 3 (character-a
 
 ## Todo
 
-- [ ] 1. Map worksheet steps to v1.0.0 Phase 2 sub-phases
-- [ ] 2. Rewrite phase2 detail file with 8-step structure
-- [ ] 3. Create worksheet-workflow.md method file
-- [ ] 4. Create decision-heuristic-quick-ref.md asset
-- [ ] 5. Align Gates 1-3 with worksheet step boundaries
-- [ ] 6. Update SKILL.md Pipeline Overview table
-- [ ] 7. End-to-end walk-through smoke test
-- [ ] 8. **Slot-list consolidation**: promote `intent-template.yaml` to single source of truth; refactor `render_intent.py` to read REQUIRED_SLOTS/OPTIONAL_SLOTS from YAML at runtime; mark `phase1-intent-capture.md` table as derived. *(PR #101 review §2.5)*
-- [ ] 9. **render_intent.py slot-state polish**: collapse redundant `value == "<PLACEHOLDER>"` then `"<PLACEHOLDER>" in value` checks into one. *(PR #101 review §2.7)*
+- [x] 1. Map worksheet steps to v1.0.0 Phase 2 sub-phases
+- [x] 2. Rewrite phase2 detail file with 8-step structure
+- [x] 3. Create worksheet-workflow.md method file
+- [x] 4. Create decision-heuristic-quick-ref.md asset
+- [x] 5. Align Gates 1-3 with worksheet step boundaries
+- [x] 6. Update SKILL.md Pipeline Overview table
+- [x] 7. End-to-end walk-through smoke test
+- [x] 8. **Slot-list consolidation**: promote `intent-template.yaml` to single source of truth; refactor `render_intent.py` to read REQUIRED_SLOTS/OPTIONAL_SLOTS from YAML at runtime; mark `phase1-intent-capture.md` table as derived. *(PR #101 review §2.5)*
+- [x] 9. **render_intent.py slot-state polish**: collapse redundant `value == "<PLACEHOLDER>"` then `"<PLACEHOLDER>" in value` checks into one. *(PR #101 review §2.7)*
+
+## Closure (2026-05-11)
+
+`task_status: done`. All 9 todos closed. Implementation summary:
+
+1. **Worksheet → Sub-phase mapping** — Phase 2 now runs 14 sub-phases
+   (2.1–2.14) bound to Worksheet Steps 0–8 + Validation Pass; mapping
+   table in [`phases/phase2-narrative-architecture.md` §2](../../skills/novel-architect/phases/phase2-narrative-architecture.md#2-sub-phases-mit-3-gates-8-step-worksheet-loop).
+2. **Phase 2 detail file rewritten** — `phase2-narrative-architecture.md`
+   now binds every sub-phase to a Worksheet Step with explicit Gate
+   boundaries (Gate 1 = Steps 0+1, Gate 2 = Steps 2–5, Gate 3 = Steps 6+7+V).
+   `architecture.yaml` grew `name` fields on throughlines, `story_points`
+   block (static/driver/thematic), `crucial_element` block, `signposts`
+   + `journeys` arrays, optional `genre_mode`, auto-derived `ending_type`,
+   and a `worksheet_audit` step-completion tracker.
+3. **`methods/storyform/worksheet-workflow.md`** created — 360-line
+   operational walkthrough (per-step askuser shape, decision heuristic,
+   recovery path, NCP slot map, worked example for `consciousness-novel`).
+4. **`assets/decision-heuristic-quick-ref.md`** created — 1-pager with
+   §1 Class choice, §2 Change/Steadfast, §3 Start/Stop, §4 Doer/Beer,
+   §5 Linear/Holistic, §6 Action/Decision Driver, §7 Optionlock/Timelock,
+   §8 Outcome×Judgment, §9 Goal level, §10 Crucial Element coherence.
+   Designed for inline embedding in Step 2–7 askuser status-views (HR.M2.3).
+5. **Gate alignment** — Gate 1 (Steps 0+1: shape + throughline names),
+   Gate 2 (Steps 2+3+4+5: classes + 8 dynamics + story points), Gate 3
+   (Steps 6+7+(8) + Validation: crucial element + signposts + 5 hard checks).
+6. **SKILL.md Pipeline Overview** updated — Phase 2 row now references
+   the 8-Step Worksheet and the `methods/storyform/worksheet-workflow.md`
+   implementation; `## Phase 2` section rewritten with the new sub-phase
+   pseudocode and the inline-heuristic delegations.
+7. **End-to-end smoke test** — manual walkthrough for `consciousness-novel`
+   (Hard-SF, single storyform): 7 askuser turns to fill all worksheet
+   slots; rendered an example architecture.yaml shape passing all 5
+   validation checks. Render_intent smoke test on real intent.yaml shape
+   produced correct status-view markdown.
+8. **Slot-list consolidation** — `intent-template.yaml` gained a `_meta`
+   block (`_required` + `_optional` lists). `render_intent.py` now reads
+   the slot list via `load_slot_lists()` at runtime, with graceful
+   fallback to embedded constants if the template is missing / malformed.
+   `phase1-intent-capture.md` §1 table marked as "Derived view"
+   with the "Regenerated from intent-template.yaml on 2026-05-12" footer.
+   Drift between the three locations is now mechanically prevented.
+9. **`render_intent.py` slot-state polish** — collapsed redundant
+   placeholder checks. The classifier branches into 3 paths now (empty /
+   partial / filled); a bare `<PLACEHOLDER>` returns empty inside the
+   single `_PLACEHOLDER in value` check via an explicit equality guard.
+
+**Tests:** 31 new pytest cases in
+`skills/novel-architect/render/tests/test_render_intent.py` (slot_state
+classification matrix + load_slot_lists fallback paths + module constant
+wiring). All pass: `python3 -m pytest skills/novel-architect/render/tests/ -v` → 31/31.
+
+**Forward-compat note:** `methods/storyform/` and the asset live under
+the v1.0.0 monolith (`skills/novel-architect/`). When Task 071 lands the
+sub-skill split, both will `git mv` to `skills/novel-architect-structure/`
+unchanged — all internal links are relative and survive the move (see
+`methods/storyform/readme.md` §"Forward-compat note").
 
 ## Links
 

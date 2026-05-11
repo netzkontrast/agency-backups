@@ -9,6 +9,7 @@ Projekt via `intent.methods_preference.*`.
 |--------|----------|-------|
 | `character/` | Psychologische Modelle für Charakter-Architektur | Phase 3 |
 | `structure/` | Plot-Strukturen (40-Kapitel, Hero's Journey, etc.) | Phase 2, 5 |
+| `storyform/` | Dramatica Storyform Worksheet-Loop (8-Schritte) | Phase 2 |
 | `conflict/` | Konflikt-Engines (Philosophie, Wissenschaft, Dual-Storyform) | Phase 2 |
 | `research/` | Recherche-Strategien (Domain-Mapping, Deep-Research-Briefs) | Phase 4 |
 
