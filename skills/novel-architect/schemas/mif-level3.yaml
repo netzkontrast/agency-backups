@@ -1,0 +1,117 @@
+# MIF Level 3 — Memory Integration Format (learnings.md)
+#
+# Adopted from Dual-Kernel MIF (Memory Integration Format) Level 3 spec.
+# See /home/user/Dual-Kernel/refactor/mif-level-3-spec.md (Task 077 source).
+#
+# Schema governs the *structure* of learnings.md entries so they are:
+#   1. Machine-parseable (entry blocks with stable frontmatter)
+#   2. Token-cheap to scan at Bootstrap (read summary line, decide if body matters)
+#   3. Cross-linkable to phases, canon-entries, and external research
+#
+# Level 0: free-form notes (deprecated for active projects)
+# Level 1: dated bullet list (legacy v1.0.0)
+# Level 2: dated H2-blocks with category tag (transitional)
+# Level 3: this schema — per-entry frontmatter + structured body
+#
+# Reference implementation: novel-architect v1.1.0 (Task 077)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Entry Schema
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Each entry in learnings.md is delimited by an H2 heading containing the
+# canonical learning_id. Underneath the heading lives a YAML "card" block
+# (between the heading and the first prose paragraph), followed by the
+# prose lessons. The card block uses YAML depth ≤ 1 per AGENTS.md.
+
+# Sample entry shape (in markdown):
+#
+# ## L-2026-05-11-003: Phase 4 Worksheet-Loop produced AP-13 drift
+#
+# > - learning_id: L-2026-05-11-003
+# > - learning_phase: phase4
+# > - learning_category: anti-pattern
+# > - learning_severity: medium
+# > - learning_session_id: <claude.ai-session>
+# > - learning_resolved: true
+# > - learning_resolution_phase: phase7
+# > - learning_resolution_ref: phase7-audit-2026-05-12
+# > - related_canon_ids: [canon-dkt-physik-001]
+# > - related_research_slugs: [quantum-coherence-cosmology]
+#
+# **Context.** In Phase 4 we wrote "Concern = Innermost Desires" into the
+# scene-matrix Akt-3 header, which AP-13 explicitly warns against.
+#
+# **Resolution.** Phase 7 audit refactored the matrix so Concern stays in
+# the Storyform header; Akt-3 now carries the corresponding Signpost.
+#
+# **Take-away.** Reload `references/anti-patterns.md` AP-13 before any
+# scene-matrix.md edit that touches Concern.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Schema (machine-readable)
+# ─────────────────────────────────────────────────────────────────────────────
+
+mif_level: 3
+entry_schema:
+  required_fields:
+    - learning_id            # pattern: L-YYYY-MM-DD-NNN, monotonic per day
+    - learning_phase         # enum: phase0..phase7 | epic | session-close
+    - learning_category      # enum: anti-pattern | hard-rule | drift | resolution | observation | preference
+    - learning_severity      # enum: low | medium | high | critical
+    - learning_session_id    # opaque session identifier (per platform)
+    - learning_resolved      # boolean
+  optional_fields:
+    - learning_resolution_phase   # required if learning_resolved == true
+    - learning_resolution_ref     # required if learning_resolved == true
+    - related_canon_ids           # list of canon_id strings
+    - related_research_slugs      # list of /research/<slug>/ basenames
+    - related_task_ids            # list of /tasks/<NNN>-<slug>/ ids
+    - related_anti_patterns       # list of AP-<n> identifiers
+    - related_skill_versions      # list, e.g. ["novel-architect@1.1.0"]
+
+  body_sections:
+    required:
+      - Context              # one paragraph, what happened
+      - Take-away            # one paragraph, what we learned
+    optional:
+      - Resolution           # one paragraph, only if learning_resolved == true
+      - References           # bullet list of cross-links
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Bootstrap Behaviour (SessionStart-Hook)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# A SessionStart hook (see scripts/session-start.sh, Task 077 lean
+# implementation) MAY:
+#
+#   1. Read learnings.md from <workspace>
+#   2. Extract H2-headers + the card block per entry
+#   3. Produce a token-cheap roll-up: "N learnings, M unresolved"
+#   4. Surface the M unresolved (severity desc) before any Phase routing
+#
+# The hook MUST NOT load entry-body prose at Bootstrap — only the card
+# block. Body load is on demand when a phase-specific cross-link triggers.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Migration from MIF Level 1/2
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Existing learnings.md files in pre-v1.1.0 projects are Level 1 (dated
+# bullets) or Level 2 (dated H2 blocks). Migration is *additive*:
+#
+#   - New entries (post v1.1.0 adoption) MUST use Level 3.
+#   - Legacy entries MAY stay in their original shape — the bootstrap hook
+#     handles them as "uncategorized" (severity=low, resolved=true).
+#   - Phase 7 audit MAY backport legacy entries to Level 3 if the agent
+#     explicitly opts in; otherwise: hands-off.
+#
+# No bulk-migration step is required.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Versioning
+# ─────────────────────────────────────────────────────────────────────────────
+
+schema_version: "1.0.0"
+introduced_in_skill: "novel-architect@1.1.0"
+introduced_by_task: "077-novel-architect-mif-learnings-sessionhook"

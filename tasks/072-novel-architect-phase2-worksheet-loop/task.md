@@ -4,16 +4,16 @@ status: active
 slug: novel-architect-phase2-worksheet-loop
 summary: "Refactor Phase 2 (Narrative Architecture) of novel-architect to follow the 8-step Storyform Worksheet from dramatica-theory (00-storyform-worksheet.md): Intent → Throughlines → Classes → Dynamics → Story Points → Crucial Element → Signposts → Validation. Currently Phase 2 says 'auto + consult dramatica-theory' which is too vague. Worksheet-Loop makes the 8 steps explicit sub-phases with corresponding gates."
 created: 2026-05-11
-updated: 2026-05-12
+updated: 2026-05-11
 task_id: "072"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "071"
+  - 071
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
@@ -77,15 +77,15 @@ This pattern repeats for Phase 2 (architecture.yaml slots), Phase 3 (character-a
 
 ## Todo
 
-- [ ] 1. Map worksheet steps to v1.0.0 Phase 2 sub-phases
-- [ ] 2. Rewrite phase2 detail file with 8-step structure
-- [ ] 3. Create worksheet-workflow.md method file
-- [ ] 4. Create decision-heuristic-quick-ref.md asset
-- [ ] 5. Align Gates 1-3 with worksheet step boundaries
-- [ ] 6. Update SKILL.md Pipeline Overview table
-- [ ] 7. End-to-end walk-through smoke test
-- [ ] 8. **Slot-list consolidation**: promote `intent-template.yaml` to single source of truth; refactor `render_intent.py` to read REQUIRED_SLOTS/OPTIONAL_SLOTS from YAML at runtime; mark `phase1-intent-capture.md` table as derived. *(PR #101 review §2.5)*
-- [ ] 9. **render_intent.py slot-state polish**: collapse redundant `value == "<PLACEHOLDER>"` then `"<PLACEHOLDER>" in value` checks into one. *(PR #101 review §2.7)*
+- [x] 1. Map worksheet steps to v1.0.0 Phase 2 sub-phases
+- [x] 2. Rewrite phase2 detail file with 8-step structure
+- [x] 3. Create worksheet-workflow.md method file
+- [x] 4. Create decision-heuristic-quick-ref.md asset
+- [x] 5. Align Gates 1-3 with worksheet step boundaries
+- [x] 6. Update SKILL.md Pipeline Overview table
+- [x] 7. End-to-end walk-through smoke test
+- [x] 8. **Slot-list consolidation**: promote `intent-template.yaml` to single source of truth; refactor `render_intent.py` to read REQUIRED_SLOTS/OPTIONAL_SLOTS from YAML at runtime; mark `phase1-intent-capture.md` table as derived. *(PR #101 review §2.5)*
+- [x] 9. **render_intent.py slot-state polish**: collapse redundant `value == "<PLACEHOLDER>"` then `"<PLACEHOLDER>" in value` checks into one. *(PR #101 review §2.7)*
 
 ## Links
 

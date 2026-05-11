@@ -57,10 +57,33 @@ def utcnow_iso() -> str:
 # ─── Path resolution ─────────────────────────────────────────────────────────
 
 
+DEFAULT_PROJECTS_ROOT = "/home/claude/novel-projects"
+
+
+def projects_root() -> Path:
+    """Return the configured projects-root.
+
+    Resolution order (Task 071 §"Config-Loading Boundary"):
+      1. `NOVEL_ARCHITECT_PROJECTS_ROOT` env var, if set and non-empty.
+      2. `DEFAULT_PROJECTS_ROOT` fallback.
+
+    Per-project overrides via `project-config.yaml:project.workspace_root`
+    are honoured by `project_workspace()` once the project slug is known.
+    """
+    env_val = os.environ.get("NOVEL_ARCHITECT_PROJECTS_ROOT", "").strip()
+    return Path(env_val) if env_val else Path(DEFAULT_PROJECTS_ROOT)
+
+
 def project_workspace(slug: str) -> Path:
-    """Return the canonical project workspace path."""
+    """Return the canonical project workspace path.
+
+    Honours `NOVEL_ARCHITECT_PROJECTS_ROOT` env override (see `projects_root`).
+    Per-project `project-config.yaml:project.workspace_root` overrides take
+    effect at the call sites that load config; this function returns the
+    convention path absent a project-config override.
+    """
     validate_slug(slug)
-    return Path(f"/home/claude/novel-projects/{slug}")
+    return projects_root() / slug
 
 
 def ensure_workspace(slug: str) -> Path:

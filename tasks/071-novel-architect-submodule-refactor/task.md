@@ -4,10 +4,10 @@ status: active
 slug: novel-architect-submodule-refactor
 summary: "Refactor monolithic novel-architect@1.0.0 into 4-5 sub-module skills (character-architect, structure-architect, world-architect, scene-architect) following Dual-Kernel Architect-with-Submodules pattern. The orchestrator novel-architect retains the 8-phase pipeline but delegates method-application to sub-modules. Foundation task — blocks 072, 074, 075, 076, 077."
 created: 2026-05-11
-updated: 2026-05-12
+updated: 2026-05-11
 task_id: "071"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
@@ -83,19 +83,19 @@ Same pattern applies to `chapter_count_target: 40` in `render_scene_matrix.py:35
 
 ## Todo
 
-- [ ] 1. Design + decision on sub-module count (4 vs 5; conflict-engine could be its own sub-module)
-- [ ] 2. Create 4 sub-module skill directories with SKILL.md + readme.md
-- [ ] 3. Migrate methods/character/ → novel-architect-character/methods/
-- [ ] 4. Migrate methods/structure/ → novel-architect-structure/methods/
-- [ ] 5. Migrate methods/research/ → novel-architect-world/methods/
-- [ ] 6. methods/conflict/ — decide: stays in orchestrator OR splits across structure+character
-- [ ] 7. Update orchestrator SKILL.md delegates_to
-- [ ] 8. Update commands/ to delegate
-- [ ] 9. Frontmatter validation + governance check
-- [ ] 10. Manual walk-through test
-- [ ] 11. **Config-Loading Boundary**: introduce `NOVEL_ARCHITECT_PROJECTS_ROOT` env-var or config-discovery (see §"Config-Loading Boundary" above). Wire through `io_helpers.project_workspace()`, `bootstrap_project.sh`, and `phases/*.md`. Update `assets/project-config-template.yaml` so `project.workspace_root` is the canonical override surface. *(PR #101 review §1.2.A)*
-- [ ] 12. **bootstrap.sh usage hint**: rewrite the help text so "Migration" is scoped — "Migration (kohaerenz-protokoll only): bash bootstrap_project.sh kohaerenz-protokoll". *(PR #101 review §2.7)*
-- [ ] 13. **`chapter_count_target` magic number**: remove the `40` default in `render_scene_matrix.py:35` — fail loudly if `project-config.yaml:narrative.chapter_count_target` is missing rather than silently defaulting. *(PR #101 review §1.2.A follow-on)*
+- [x] 1. Design + decision on sub-module count (4 vs 5; conflict-engine could be its own sub-module)
+- [x] 2. Create 4 sub-module skill directories with SKILL.md + readme.md
+- [x] 3. Migrate methods/character/ → novel-architect-character/methods/
+- [x] 4. Migrate methods/structure/ → novel-architect-structure/methods/
+- [x] 5. Migrate methods/research/ → novel-architect-world/methods/
+- [x] 6. methods/conflict/ — decide: stays in orchestrator OR splits across structure+character
+- [x] 7. Update orchestrator SKILL.md delegates_to
+- [x] 8. Update commands/ to delegate
+- [x] 9. Frontmatter validation + governance check
+- [x] 10. Manual walk-through test
+- [x] 11. **Config-Loading Boundary**: introduce `NOVEL_ARCHITECT_PROJECTS_ROOT` env-var or config-discovery (see §"Config-Loading Boundary" above). Wire through `io_helpers.project_workspace()`, `bootstrap_project.sh`, and `phases/*.md`. Update `assets/project-config-template.yaml` so `project.workspace_root` is the canonical override surface. *(PR #101 review §1.2.A)*
+- [x] 12. **bootstrap.sh usage hint**: rewrite the help text so "Migration" is scoped — "Migration (kohaerenz-protokoll only): bash bootstrap_project.sh kohaerenz-protokoll". *(PR #101 review §2.7)*
+- [x] 13. **`chapter_count_target` magic number**: remove the `40` default in `render_scene_matrix.py:35` — fail loudly if `project-config.yaml:narrative.chapter_count_target` is missing rather than silently defaulting. *(PR #101 review §1.2.A follow-on)*
 
 ## Links
 

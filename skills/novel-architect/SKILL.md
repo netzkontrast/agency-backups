@@ -16,7 +16,7 @@ description: >-
 metadata:
   category: creative-writing
   source: user
-  version: "1.0.0"
+  version: "1.1.0"
   status: active
   date_added: "2026-05-11"
   date_updated: "2026-05-11"
@@ -24,6 +24,7 @@ metadata:
   state_management: "ncp"
   ncp_schema_version: "1.3.0"
   project_workspace_root: "/home/claude/novel-projects"
+  project_workspace_root_env: "NOVEL_ARCHITECT_PROJECTS_ROOT"
   triggers: >-
     novel-architect, novel, roman, novella, narrative architecture, storyform,
     throughline, dramatica, scene matrix, chapter draft, character
@@ -31,13 +32,17 @@ metadata:
     /novel-research, /novel-scenes, /novel-draft, /novel-reflect, Roman planen,
     Roman strukturieren, Charakter-Architektur, Storyweaving, 40-Kapitel-Matrix
   delegates_to: >-
+    novel-architect-character (Phase 3 methods), novel-architect-structure
+    (Phase 2 + Phase 5 methods), novel-architect-world (Phase 4 methods),
+    novel-architect-scene (Phase 5 + Phase 6 detail; stub in v1.1.0),
     dramatica-theory, dramatica-vocabulary, ncp-author,
     research-prompt-optimizer, skill-creator, memory-sync (optional)
+  language_contract: "bilingual_de_en"
 skill_bundles_tools:
   - tools/dramatica-nav
 ---
 
-# novel-architect v1.0.0
+# novel-architect v1.1.0
 
 Methodengetriebener Orchestrator für die Roman-Entwicklung. Strukturiert die
 Arbeit an einem literarischen Langform-Projekt in **8 klare Phasen** mit Hard
@@ -71,6 +76,58 @@ State. Kein Prosa-Hand-off, kein impliziter Kontext.
 Views, Audit-Reports — werden via `render/io_helpers.py` geschrieben und über
 `present_files` präsentiert. Chat trägt nur `ask_user_input_v0`-Prompts und
 `present_files`-Calls.
+
+---
+
+## Sub-Module Architektur (v1.1.0)
+
+Seit v1.1.0 ist die Methoden-Bibliothek in vier Sub-Skills aufgeteilt
+(siehe [Task 071](../../tasks/071-novel-architect-submodule-refactor/task.md)).
+Der Orchestrator (dieser Skill) hält das 8-Phasen-Pipeline + Projekt-Setup +
+NCP-Integration; die Sub-Skills liefern die domänenspezifischen Methoden:
+
+| Sub-Skill | Domäne | Phase(n) | Methods |
+|-----------|--------|----------|---------|
+| [`novel-architect-character`](../novel-architect-character/) | Charakter-Psychologie | Phase 3 | TSDP/IFS, Big Five, Enneagramm, Jung Archetypen |
+| [`novel-architect-structure`](../novel-architect-structure/) | Plot-Struktur | Phase 2, 5 | 40-Chapter-Matrix, Hero's Journey, Save the Cat, Dramatica Quad |
+| [`novel-architect-world`](../novel-architect-world/) | Welt & Recherche | Phase 4 | Domain-Mapping, Deep-Research-Briefs (delegation an `research-prompt-optimizer`) |
+| [`novel-architect-scene`](../novel-architect-scene/) | Scene-Level Detail | Phase 5/6 | Q1–Q5 Scene-Level-Bridge Audit (Stub in v1.1.0; populiert via Task 075) |
+
+**Cross-cutting Methoden** (Konflikt-Engines: Philosophy-as-Engine, Science-
+as-Engine, Dual-Storyform) bleiben im Orchestrator unter
+[`methods/conflict/`](./methods/conflict/), weil sie sowohl Throughline-
+Architektur (Phase 2) als auch Charakter-Motivationen (Phase 3) prägen und
+keinem einzelnen Sub-Skill zuzuordnen sind.
+
+**Delegation-Pattern:** Wenn `/novel-characters`, `/novel-design`, `/novel-research`,
+`/novel-scenes`, `/novel-draft` triggert, lädt der Skill-Loader **nur den Sub-Skill,
+dessen Domäne gefragt ist** — der Orchestrator wird nicht eager mit allen 4
+Sub-Skills geladen. Progressive Disclosure.
+
+---
+
+## Bilingual Contract (DE / EN)
+
+> **PR #101 review §2.7 — codified by Task 070 Todo 6.**
+
+Dieser Skill und seine Sub-Skills sind **bilingual** (Deutsch + Englisch).
+Der Author-Workflow ist auf einen deutschsprachigen Roman optimiert
+(Kohärenz-Protokoll als Erst-Projekt), während die governance-, API-, und
+spec-orientierten Schichten englisch sind. **Beide Sprachen sind absichtlich
+gemischt** — Contributoren und automatische "Normalizer" MÜSSEN diese
+Trennung respektieren:
+
+| Surface | Sprache | Beispiele |
+|---|---|---|
+| Body-Prose / Phase-Beschreibungen / askuser-Prompts | DE | "Approval gates analog research-prompt-optimizer Phase 2." |
+| Frontmatter / Slot-Namen / Schema-Keys / Frontmatter-Werte | EN | `task_id`, `task_status`, `storyform_count`, `chapter_count_target` |
+| Acceptance Criteria (Gherkin) | EN (RFC 2119 + Gherkin keywords) | `Given … When … Then … MUST …` |
+| Anti-Pattern-Tabellen / Heuristik-Listen | DE (Body) + EN (Term-Anker) | "Skip askuser weil ‚Input feels clear'" |
+| Tool/CLI Output, Error Messages | EN | `ERROR: slug must be kebab-case` |
+
+**Regel:** Kein „Normalisieren" auf eine einzige Sprache ohne explizite
+Eskalation an den Skill-Owner. Die DE/EN-Mischung ist Teil des
+Kohärenz-Protokoll-Provenance und der Roman-Author-Erfahrung.
 
 ---
 
@@ -334,10 +391,11 @@ passiert nur am Checkpoint.
 | `phases/phase5-scene-matrix.md` | Phase 5 | 3-Gate-Detail, Akt-Kapitel-Szenen-Hierarchie |
 | `phases/phase6-drafting.md` | Phase 6 | Pre-Checks, Konsistenz-Checks |
 | `phases/phase7-iteration.md` | Phase 7 | 3-Mode-Pattern (generate/apply/audit) |
-| `methods/character/*.md` | Phase 3, on demand | TSDP/IFS, Big Five, Enneagramm, Jung |
-| `methods/structure/*.md` | Phase 2, 5, on demand | 40-Chapter-Matrix, Hero's Journey, Save-the-Cat, Dramatica-Quad |
-| `methods/conflict/*.md` | Phase 2, on demand | Philosophy/Science-as-Engine, Dual-Storyform |
-| `methods/research/*.md` | Phase 4, on demand | Domain-Mapping, Deep-Research-Briefs |
+| `../novel-architect-character/methods/*.md` | Phase 3, on demand | TSDP/IFS, Big Five, Enneagramm, Jung (Sub-Skill seit v1.1.0) |
+| `../novel-architect-structure/methods/*.md` | Phase 2, 5, on demand | 40-Chapter-Matrix, Hero's Journey, Save-the-Cat, Dramatica-Quad (Sub-Skill seit v1.1.0) |
+| `methods/conflict/*.md` | Phase 2, 3, on demand | Philosophy/Science-as-Engine, Dual-Storyform (cross-cutting; bleibt im Orchestrator) |
+| `../novel-architect-world/methods/*.md` | Phase 4, on demand | Domain-Mapping, Deep-Research-Briefs (Sub-Skill seit v1.1.0) |
+| `../novel-architect-scene/methods/*.md` | Phase 5/6 Detail | Q1–Q5 Scene-Level-Bridge Audit (Stub bis Task 075) |
 | `assets/*-template.yaml` | Phase 1, 2, 3 | Schema-Templates |
 | `assets/*-template.md` | Phase 5, 6 | MD-Templates (Scene-Matrix, Chapter-Draft) |
 | `examples/*` | Reference | Worked Examples (nicht Kohärenz-spezifisch) |
