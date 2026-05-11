@@ -235,7 +235,7 @@ The acceptance contract for the bucket-assignment determinism is anchor [`M.B.3`
 
 **Successor naming.** A successor Task uses the next free `<NNN>` and a slug that signals continuity with the predecessor (e.g. `<predecessor-slug>-v2` or a more specific re-framing such as `<predecessor-slug>-via-fm-edit`). The successor's `## Goal` MUST open with a one-line "Successor to Task NNN" pointer; the body re-frames the work against current repo state.
 
-**Mechanical cross-check.** The audit's `tasks/readme.md`-vs-`task_status` drift signal is also produced mechanically by [TASK.md §7.0 row §7.11](./TASK.md) (`tools/fm/index_diff.py`, landed by [Task 031](./tasks/031-sync-tasks-index-status-drift/task.md) per Task 032 finding F11). An agent SHOULD run `tools/check-governance.sh` first to surface drift; the §3.4 audit then handles the classification/lifecycle decision the linter cannot make on its own.
+**Mechanical cross-check.** The audit's `tasks/readme.md`-vs-`task_status` drift signal is also produced mechanically by [TASK.md §7.0 row §7.11](./TASK.md) (`tools/fm/index_diff.py`, landed by [Task 067](./tasks/067-sync-tasks-index-status-drift/task.md) — renumbered from 031 per [Task 043](./tasks/043-renumber-duplicate-task-ids-v3/) — per Task 032 finding F11). An agent SHOULD run `tools/check-governance.sh` first to surface drift; the §3.4 audit then handles the classification/lifecycle decision the linter cannot make on its own.
 
 **Drift-check inputs differentiate spec-bearing from review-bearing research.** When the staleness audit walks `task_spawns_research` to verify that the produced research workspace still matches the Task's premise, it MUST classify the workspace before flagging drift:
 

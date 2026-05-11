@@ -4,7 +4,7 @@ status: active
 slug: friction-log-task-064
 summary: "Friction log for Task 064 filing — the operator-instructed session distillation that produced this Task. FL1 (canonical no-separator form per Task 044 F14)."
 created: 2026-05-08
-updated: 2026-05-08
+updated: 2026-05-11
 ---
 
 # Friction Log — Task 064 Filing
@@ -35,7 +35,7 @@ All seven findings are `proposed: pending Plan execution`. None has a landed dif
 
 2. **Cross-Task overlap diligence (FL0).** Task 044's `## Findings` section (F14–F19) and Task 025's surface had to be read in full before authoring F20–F26 to confirm distinctness. The act of opening both Tasks plus walking the run-log's last four entries took ~3 tool calls. Acceptable; this is the cost of the dedup gate that prevents Task duplication. Finding F26 (skip-with-citation) explicitly proposes formalizing this dedup pattern.
 
-3. **Index bullet placement decision (FL0).** Task IDs 062 / 063 / 044 / 045 are interleaved in `tasks/readme.md` (the file is not strictly numerical-sorted). Inserted the new Task 064 bullet after Task 061 because the last block (053–061) is the contiguous 053-dispatch run; it is the natural insertion edge. Future agents may resort the index per [Task 031](../031-sync-tasks-index-status-drift/) territory.
+3. **Index bullet placement decision (FL0).** Task IDs 062 / 063 / 044 / 045 are interleaved in `tasks/readme.md` (the file is not strictly numerical-sorted). Inserted the new Task 064 bullet after Task 061 because the last block (053–061) is the contiguous 053-dispatch run; it is the natural insertion edge. Future agents may resort the index per [Task 031](../067-sync-tasks-index-status-drift/) territory.
 
 ## Next Actions (delegated)
 

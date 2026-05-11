@@ -1,199 +1,81 @@
 #!/usr/bin/env python3
-"""Task lifecycle classification helper (Task 033 ST-4 — TASK.md §4.7 helper).
+"""Task lifecycle classification helper (Task 049 — five-signal algorithm).
 
 Given a Task path and a proposed `task_status` transition target
-(`updated` or `abandoned`), evaluate the four conditions in TASK.md §4.7
-deterministically and report PASS or FAIL with the missing condition(s).
+(`updated` or `abandoned`), classify the Task via the ratified five-signal
+`classify_task` decision tree from
+`research/spec-staleness-decision-formalization/output/SPEC.md` §1 and
+report PASS / FAIL against the target.
 
-This is a **manual** helper invoked by maintenance agents. It is NOT part
-of `tools/check-governance.sh` — automatic gating would force the agent to
-mechanise subjective predicates ("Goal still desirable?") which the §4.7
-prose intentionally leaves as an agent judgement call.
+Migrated from the four-condition attestation-flag fallback (Task 033 ST-4)
+to the deterministic five-signal classifier (Task 049). The CLI surface
+`--task <path> --target-status {updated,abandoned}` is preserved; the two
+attestation flags (`--goal-still-desirable`, `--plan-drifted`) are removed
+because the SPEC mechanises both predicates into pure-function signals
+(S1/S4) consumed by `classify_task`. Example::
 
-The four §4.7 conditions for a `updated` transition:
+    $ python3 tools/fm/check-task-lifecycle-classification.py \\
+          --task tasks/010-skills-frontmatter-index-suite/task.md \\
+          --target-status updated
+    check-task-lifecycle-classification: PASS — bucket=DRIFTED (target=updated).
 
-  1. Goal still desirable
-       — agent attestation; the helper accepts `--goal-still-desirable`
-         as a CLI flag the invoking agent passes in after reading the
-         predecessor's Goal section.
-  2. Plan/Todo drifted
-       — agent attestation; flag `--plan-drifted`. The helper additionally
-         emits a heuristic WARN if the predecessor has every Todo box
-         already checked (`[x]`), since that suggests `done` is the
-         correct closure rather than `updated`.
-  3. Successor exists
-       — mechanical: `task_superseded_by` MUST be non-empty AND each
-         entry MUST resolve to an existing `tasks/<NNN>-<slug>/task.md`.
-  4. Supersession reciprocity
-       — mechanical: every successor's frontmatter MUST cite this Task's
-         `task_id` (or slug) in `task_supersedes`.
+The five-signal algorithm is a pure function of repo state with no LLM
+judgement: signals reduce to `git`/filesystem invocations whose outputs
+are reproducible at a given `HEAD`. Two agents running the helper against
+the same commit MUST produce identical bucket assignments.
 
-For the `abandoned` transition the helper checks (per TASK.md §8.3):
+Bucket → target mapping:
+    DRIFTED                 → target=`updated` PASS
+    COMPLETED_BY_DRIFT      → target=`updated` PASS (and the agent SHOULD
+                              consider `done` instead; the helper emits a
+                              WARN to that effect)
+    NO_LONGER_DESIRABLE     → target=`abandoned` PASS (plus §8.3 notes.md
+                              precondition check below)
+    STILL_ACCURATE          → no transition warranted; both targets FAIL
+
+For the `abandoned` transition the helper additionally verifies the §8.3
+preconditions:
 
   A1. `notes.md` exists in the Task folder.
   A2. `notes.md` contains a "## Partial Artifacts" or "abandonment" reason
       paragraph (heuristic: the literal word `abandon` or a `## Partial
       Artifacts` heading).
 
-The five-signal `classify_task` decision tree that mechanises *every* §4.7
-condition (including the two attestation predicates) is ratified in
-`research/spec-staleness-decision-formalization/output/SPEC.md` §1
-(Task 033 ST-2 / Task 039 ST-2). This helper currently implements the
-four-condition fallback derived from TASK.md §4.7 prose; a follow-up Task
-migrates it onto the SPEC's `classify_task` algorithm.
-
 Usage::
 
     python3 tools/fm/check-task-lifecycle-classification.py \\
         --task tasks/<NNN>-<slug>/task.md \\
-        --target-status {updated,abandoned} \\
-        [--goal-still-desirable] [--plan-drifted]
+        --target-status {updated,abandoned}
 
 Exit codes:
-    0  — transition is justified (every required condition met).
-    1  — transition is unjustified; diagnostics name the missing condition(s).
+    0  — transition is justified (computed bucket matches target).
+    1  — transition is unjustified; diagnostics name the computed bucket and signal vector.
     2  — fatal usage error (e.g. unreadable task.md).
 """
 from __future__ import annotations
 
 import argparse
+import os
 import sys
+from datetime import date
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))  # tools/ on path so `fm._core` resolves
 
-from fm._core import read_fm, str_list, str_val  # noqa: E402
+from fm._core import read_fm  # noqa: E402
+from fm._lifecycle_signals import (  # noqa: E402
+    classify_task,
+    Bucket,
+    COMPLETED_BY_DRIFT,
+    DRIFTED,
+    NO_LONGER_DESIRABLE,
+    STILL_ACCURATE,
+)
 
 
-def _normalise_ref(ref: str) -> str:
-    return ref.strip().strip('"').strip("'")
-
-
-def _strip_id_prefix(folder_name: str) -> str:
-    parts = folder_name.split("-", 1)
-    if len(parts) == 2 and parts[0].isdigit():
-        return parts[1]
-    return folder_name
-
-
-def _resolve_successor(
-    ref: str,
-    tasks_root: Path,
-) -> tuple[Path | None, dict | None]:
-    """Resolve `ref` (a task_id like `"022"` or a slug like `"foo-bar"`)
-    to a `(task.md path, frontmatter)` pair, scanning `tasks_root`.
-    Returns `(None, None)` if no folder matches."""
-    ref = _normalise_ref(ref)
-    if not ref:
-        return None, None
-    for folder in sorted(tasks_root.iterdir()):
-        if not folder.is_dir():
-            continue
-        task_md = folder / "task.md"
-        if not task_md.exists():
-            continue
-        # Match by folder-name prefix (NNN-) or by frontmatter task_id / slug.
-        folder_id = folder.name.split("-", 1)[0]
-        folder_slug = _strip_id_prefix(folder.name)
-        if ref in (folder_id, folder.name, folder_slug):
-            return task_md, read_fm(task_md, strict=False)
-        fm = read_fm(task_md, strict=False)
-        if _normalise_ref(str_val(fm, "task_id")) == ref:
-            return task_md, fm
-    return None, None
-
-
-def _check_updated(
-    task_path: Path,
-    fm: dict,
-    *,
-    goal_still_desirable: bool,
-    plan_drifted: bool,
-) -> list[tuple[str, str]]:
-    """Return a list of (severity, message) failures for an `updated`
-    transition. Empty list means PASS."""
-    diags: list[tuple[str, str]] = []
-    tasks_root = task_path.parent.parent
-
-    # Condition 1 — agent attestation.
-    if not goal_still_desirable:
-        diags.append((
-            "ERROR",
-            "§4.7(1): Goal-still-desirable not attested. Re-run with "
-            "--goal-still-desirable after reading the predecessor's Goal "
-            "section. If the Goal is no longer desirable, the correct "
-            "transition is `abandoned` (§8.3).",
-        ))
-
-    # Condition 2 — agent attestation + heuristic.
-    if not plan_drifted:
-        diags.append((
-            "ERROR",
-            "§4.7(2): Plan/Todo-drifted not attested. Re-run with "
-            "--plan-drifted after confirming the Plan no longer reflects "
-            "the current repo state. If the Plan executed cleanly to "
-            "completion, the correct transition is `done` (§4.6).",
-        ))
-    body = task_path.read_text(encoding="utf-8")
-    todo_lines = [l for l in body.splitlines() if l.lstrip().startswith("- [")]
-    if todo_lines:
-        unchecked = [l for l in todo_lines if l.lstrip().startswith("- [ ]")]
-        if not unchecked:
-            diags.append((
-                "WARN",
-                "§4.7(2) heuristic: every Todo item is already checked "
-                "(`[x]`). This suggests `done` is the correct closure "
-                "rather than `updated`. Verify that the *plan* (not just "
-                "the todo list) has drifted before proceeding.",
-            ))
-
-    # Condition 3 — mechanical: task_superseded_by non-empty + resolvable.
-    superseded_by = [_normalise_ref(s) for s in str_list(fm, "task_superseded_by")]
-    successors: list[tuple[Path, dict]] = []
-    if not superseded_by:
-        diags.append((
-            "ERROR",
-            "§4.7(3): `task_superseded_by` MUST be non-empty for an "
-            "`updated` transition. Add the successor's task_id or slug "
-            "before re-running.",
-        ))
-    else:
-        for ref in superseded_by:
-            spath, sfm = _resolve_successor(ref, tasks_root)
-            if spath is None or sfm is None:
-                diags.append((
-                    "ERROR",
-                    f"§4.7(3): successor reference {ref!r} does not "
-                    f"resolve to any tasks/<NNN>-<slug>/task.md under "
-                    f"{tasks_root}.",
-                ))
-            else:
-                successors.append((spath, sfm))
-
-    # Condition 4 — mechanical: reciprocity. Every successor must cite this
-    # Task's task_id (or slug) in its `task_supersedes`.
-    self_id = _normalise_ref(str_val(fm, "task_id"))
-    self_slug = task_path.parent.name
-    self_slug_short = _strip_id_prefix(self_slug)
-    self_refs = {self_id, self_slug, self_slug_short}
-    for spath, sfm in successors:
-        successor_supersedes = {
-            _normalise_ref(s) for s in str_list(sfm, "task_supersedes")
-        }
-        if not (successor_supersedes & self_refs):
-            diags.append((
-                "ERROR",
-                f"§4.7(4): supersession reciprocity broken. Successor "
-                f"{spath} does not cite this Task's task_id ({self_id}) "
-                f"or slug in its `task_supersedes`. Update the successor "
-                f"frontmatter before re-running.",
-            ))
-    return diags
-
-
-def _check_abandoned(task_path: Path, fm: dict) -> list[tuple[str, str]]:
-    """Return failures for an `abandoned` transition (TASK.md §8.3)."""
+def _check_abandoned_preconditions(task_path: Path) -> list[tuple[str, str]]:
+    """Return §8.3 precondition failures for an `abandoned` transition."""
     diags: list[tuple[str, str]] = []
     notes = task_path.parent / "notes.md"
     if not notes.exists():
@@ -216,20 +98,35 @@ def _check_abandoned(task_path: Path, fm: dict) -> list[tuple[str, str]]:
     return diags
 
 
+def _expected_buckets(target_status: str) -> set[Bucket]:
+    if target_status == "updated":
+        return {DRIFTED, COMPLETED_BY_DRIFT}
+    return {NO_LONGER_DESIRABLE}
+
+
+def _format_signals(signals: dict) -> str:
+    parts: list[str] = []
+    for k, v in signals.items():
+        if isinstance(v, float):
+            parts.append(f"{k}={v:.2f}")
+        else:
+            parts.append(f"{k}={v}")
+    return ", ".join(parts)
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(
-        description="Evaluate TASK.md §4.7 four-condition test for a "
-                    "Task transitioning to `updated` or `abandoned`.",
+        description="Classify a Task via the five-signal classify_task "
+                    "algorithm and validate a proposed `updated` / "
+                    "`abandoned` transition.",
     )
     ap.add_argument("--task", required=True, type=Path,
                     help="Path to tasks/<NNN>-<slug>/task.md")
     ap.add_argument("--target-status", required=True,
                     choices=["updated", "abandoned"],
                     help="Proposed task_status target.")
-    ap.add_argument("--goal-still-desirable", action="store_true",
-                    help="Agent attestation that §4.7(1) holds.")
-    ap.add_argument("--plan-drifted", action="store_true",
-                    help="Agent attestation that §4.7(2) holds.")
+    ap.add_argument("--stale-days", type=int, default=None,
+                    help="Override MAINT_STALE_DAYS (default: env or 7).")
     args = ap.parse_args(argv)
 
     if not args.task.exists():
@@ -243,14 +140,46 @@ def main(argv: list[str] | None = None) -> int:
               f"missing or unparseable frontmatter", file=sys.stderr)
         return 2
 
-    if args.target_status == "updated":
-        diags = _check_updated(
-            args.task, fm,
-            goal_still_desirable=args.goal_still_desirable,
-            plan_drifted=args.plan_drifted,
-        )
+    if args.stale_days is not None:
+        stale_days = args.stale_days
     else:
-        diags = _check_abandoned(args.task, fm)
+        try:
+            stale_days = int(os.environ.get("MAINT_STALE_DAYS", "7"))
+        except ValueError:
+            print("check-task-lifecycle-classification: MAINT_STALE_DAYS "
+                  "must be an integer", file=sys.stderr)
+            return 2
+
+    repo = args.task.resolve().parent.parent.parent
+    today = date.today()
+    result = classify_task(args.task, repo, today, stale_days)
+
+    diags: list[tuple[str, str]] = []
+    expected = _expected_buckets(args.target_status)
+
+    if result.bucket not in expected:
+        diags.append((
+            "ERROR",
+            f"classify_task -> {result.bucket.name} "
+            f"({result.bucket.description}); target=`{args.target_status}` "
+            f"expected one of {{{', '.join(b.name for b in expected)}}}. "
+            f"Signals: {_format_signals(result.signals)}. Trace: {result.trace}",
+        ))
+    else:
+        # Bucket matches target; emit a WARN if COMPLETED_BY_DRIFT under
+        # target=updated, since `done` may be the more accurate closure.
+        if result.bucket is COMPLETED_BY_DRIFT and args.target_status == "updated":
+            diags.append((
+                "WARN",
+                "classify_task -> COMPLETED_BY_DRIFT (every Todo satisfied "
+                "AND every affects-path present). The §4.7 `updated` "
+                "transition is justified, but the agent SHOULD verify "
+                "that `done` is not the more accurate closure before "
+                "proceeding.",
+            ))
+
+    if args.target_status == "abandoned":
+        diags.extend(_check_abandoned_preconditions(args.task))
 
     errors = [d for d in diags if d[0] == "ERROR"]
     warns = [d for d in diags if d[0] == "WARN"]
@@ -264,13 +193,15 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"check-task-lifecycle-classification: FAIL — "
             f"transition `{args.target_status}` is unjustified "
-            f"({len(errors)} ERROR(s), {len(warns)} WARN(s)).",
+            f"(bucket={result.bucket.name}, {len(errors)} ERROR(s), "
+            f"{len(warns)} WARN(s)).",
             file=sys.stderr,
         )
         return 1
     print(
-        f"check-task-lifecycle-classification: PASS — transition "
-        f"`{args.target_status}` is justified ({len(warns)} WARN(s))."
+        f"check-task-lifecycle-classification: PASS — bucket="
+        f"{result.bucket.name} (target=`{args.target_status}`, "
+        f"{len(warns)} WARN(s))."
     )
     return 0
 

@@ -4,7 +4,7 @@ status: active
 slug: tools-fm-readme
 summary: "Entry point for the flexible-frontmatter toolchain: stateless CLIs that read, validate, query, and edit frontmatter and body sections across the repo."
 created: 2026-05-05
-updated: 2026-05-07
+updated: 2026-05-11
 ---
 
 # `tools/fm/` — Flexible Frontmatter Toolchain

@@ -4,7 +4,7 @@ status: active
 slug: run-log
 summary: "Chronological log of every Repo Coherence Check and Nightly Maintenance run. The agent MUST read the last entry's end_commit before beginning any run."
 created: 2026-05-04
-updated: 2026-05-08
+updated: 2026-05-11
 ---
 
 # Maintenance Run Log
@@ -907,3 +907,70 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
 - issues_skipped: 0
 - notes: >
   adr-synthesize rewrite; contributing_adr_ids=[ADR-0006]; token_count=74; fidelity=1.0000 (bcp14-keyword).
+
+### Run 2026-05-11 — Task 024 + Task 043 duplicate-task_id renumber
+- agent: claude-code (session claude/complete-next-three-tasks-JUFsF)
+- routine_type: task-implementation
+- start_commit: 09a657a
+- end_commit: pending
+- baseline_commit: 09a657a
+- files_in_delta: 26
+- files_scanned: 26
+- t1_fixes: 0
+- t2_fixes: 0
+- t3_tasks_created: 0
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+  Task 024 (P2) renumbered the persistent 006/006 and 009/009 duplicate
+  task_id pairs into slots 065/066 (later claimers
+  006-skills-navigation-bootstrap and 009-review-pr28-readme-spec moved per
+  TASK.md §8.1). Original spec proposed 026/027 but those slots were taken
+  long ago; followed the spec's "pick next free pair" instruction. Task 043
+  (P1) renumbered the 031/031 and 032/032 duplicates into slots 067/068
+  (later claimers 031-sync-tasks-index-status-drift and
+  032-improve-maintenance-spec-may-2026). Spec proposed 045/046 also long
+  taken. Combined sweep: tasks/065-/, tasks/066-/, tasks/067-/, tasks/068-/
+  folder renames + task_id frontmatter updates; tasks/readme.md bullet
+  resort + drop of "(Note: shares task_id ...)" annotations on surviving
+  twin folders; live-link path updates in TASK.md §7.0 row §7.11 and
+  MAINTENANCE.md §3.4 mechanical-cross-check; tools/fm/index_diff.py:58
+  example-folder doc-comment; live downstream tasks 044/048/064 markdown
+  link path tokens. Closed-research T4 body content (4 SPEC files) and
+  historical run-log entries left intact per MAINTENANCE.md §1.0.1. Both
+  Tasks closed task_status: done with FL0 friction logs.
+
+### Run 2026-05-11 — Task 049 lifecycle classifier five-signal migration
+- agent: claude-code (session claude/complete-next-three-tasks-JUFsF)
+- routine_type: task-implementation
+- start_commit: 09a657a
+- end_commit: pending
+- baseline_commit: 09a657a
+- files_in_delta: 5
+- files_scanned: 5
+- t1_fixes: 0
+- t2_fixes: 0
+- t3_tasks_created: 0
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+  Migrated tools/fm/check-task-lifecycle-classification.py off the four-condition
+  attestation-flag fallback (Task 033 ST-4) onto the ratified five-signal
+  classify_task decision tree from research/spec-staleness-decision-formalization/output/SPEC.md
+  §1. New module tools/fm/_lifecycle_signals.py (~280 LOC) implements S1-S5
+  as pure functions (todo_satisfaction, affects_paths_present,
+  plan_anchors_live, goal_endorsed, successor_present) + classify_task()
+  with the §1 3-level / 4-leaf decision tree returning
+  ClassificationResult{bucket, signals, trace}. Helper refactored: dropped
+  --goal-still-desirable / --plan-drifted flags; preserved
+  --task / --target-status surface; added --stale-days override and
+  MAINT_STALE_DAYS env var; mapped target → expected bucket set; emits
+  WARN for COMPLETED_BY_DRIFT under --target-status updated. Test suite
+  rewritten at tools/tests/fm/test_lifecycle_classification.py (29 tests:
+  12 signal-unit, 6 bucket-leaf covering all §1 paths, 4 SPEC §3
+  worked-example regression guards against live repo Tasks 022/023/024/025,
+  3 CLI, 3 §8.3 abandonment-precondition). One FL1 friction: initial S1
+  regex omitted re.MULTILINE so findall matched only first todo line;
+  caught by signal-unit test, one-line fix. TASK.md §4.7 helper paragraph
+  + tools/fm/readme.md row updated. tools/check-governance.sh PASS.
+  task_status: done.
