@@ -4,7 +4,7 @@ status: active
 slug: novel-architect-phase2-worksheet-loop
 summary: "Refactor Phase 2 (Narrative Architecture) of novel-architect to follow the 8-step Storyform Worksheet from dramatica-theory (00-storyform-worksheet.md): Intent → Throughlines → Classes → Dynamics → Story Points → Crucial Element → Signposts → Validation. Currently Phase 2 says 'auto + consult dramatica-theory' which is too vague. Worksheet-Loop makes the 8 steps explicit sub-phases with corresponding gates."
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-12
 task_id: "072"
 task_status: open
 task_owner: "unassigned"
@@ -21,6 +21,8 @@ task_affects_paths:
   - skills/novel-architect-structure/methods/storyform/worksheet-workflow.md
   - skills/novel-architect-structure/assets/decision-heuristic-quick-ref.md
   - skills/novel-architect/SKILL.md
+  - skills/novel-architect/render/render_intent.py
+  - skills/novel-architect/assets/intent-template.yaml
 ---
 
 # Task 072 — Phase 2 Worksheet-Loop
@@ -35,6 +37,8 @@ Phase 2 (Narrative Architecture) in `novel-architect-structure` becomes a struct
 3. New `assets/decision-heuristic-quick-ref.md` — 1-page condensation of the 10-decision-heuristics.md for inline use
 4. Gates 1-3 aligned with worksheet steps (Gate 1 = steps 0-1 Intent+Throughlines, Gate 2 = steps 2-5 Classes+Dynamics+StoryPoints, Gate 3 = steps 6-7 Crucial Element+Signposts+Validation)
 5. End-to-end test: creating a Phase 2 architecture follows the 8-step worksheet, not the vague v1.0.0 "auto" path
+6. **Slot-list source-of-truth consolidated** (see §"Slot-List Consolidation" below) — addresses [PR #101 review §2.5](https://github.com/netzkontrast/agency/pull/101#issuecomment-4422239250)
+7. **`render_intent.py` slot-state classification** simplified per PR #101 review §2.7 (current ordering has redundant `value == "<PLACEHOLDER>"` then `"<PLACEHOLDER>" in value` checks — collapse to one)
 
 ## Context
 
@@ -42,6 +46,24 @@ v1.0.0's Phase 2 has 3 Gates but the sub-phases 2.1-2.8 say "auto + consult dram
 
 1. Authors with no Dramatica knowledge cannot follow "consult dramatica-theory" — they need a step-by-step worksheet.
 2. The decision-heuristics file (10-decision-heuristics.md) has practical "Class for OS" / "Change vs Steadfast" / "Action vs Decision Driver" decision trees that v1.0.0 doesn't surface inline.
+
+## Slot-List Consolidation (PR #101 review §2.5)
+
+The Phase 1 slot set is currently duplicated across **three** locations:
+
+1. `skills/novel-architect/render/render_intent.py:42-57` — `REQUIRED_SLOTS` + `OPTIONAL_SLOTS` Python lists
+2. `skills/novel-architect/phases/phase1-intent-capture.md` §1 — canonical Markdown table
+3. `skills/novel-architect/assets/intent-template.yaml` — YAML template
+
+When a new slot is added (this Task will add Phase 2 worksheet slots; future tasks may add more), all three need updating in lockstep. Only the YAML write/read path fails loudly on drift — the other two silently render incomplete status-views.
+
+**Fix in this Task:**
+- Promote `intent-template.yaml` to single source of truth.
+- Add `_required:` / `_optional:` metadata block (or extract from key naming convention).
+- `render_intent.py` reads `REQUIRED_SLOTS` / `OPTIONAL_SLOTS` from the YAML at runtime (single canonical list).
+- `phase1-intent-capture.md` table becomes auto-generated from the YAML (or carries a "regenerated from intent-template.yaml on YYYY-MM-DD" footer to make drift obvious).
+
+This pattern repeats for Phase 2 (architecture.yaml slots), Phase 3 (character-architecture.yaml), Phase 5 (scene-matrix.md fields). This Task lands the pattern for intent.yaml; other tasks (074, 075) can adopt it incrementally.
 
 ## Plan
 
@@ -62,11 +84,14 @@ v1.0.0's Phase 2 has 3 Gates but the sub-phases 2.1-2.8 say "auto + consult dram
 - [ ] 5. Align Gates 1-3 with worksheet step boundaries
 - [ ] 6. Update SKILL.md Pipeline Overview table
 - [ ] 7. End-to-end walk-through smoke test
+- [ ] 8. **Slot-list consolidation**: promote `intent-template.yaml` to single source of truth; refactor `render_intent.py` to read REQUIRED_SLOTS/OPTIONAL_SLOTS from YAML at runtime; mark `phase1-intent-capture.md` table as derived. *(PR #101 review §2.5)*
+- [ ] 9. **render_intent.py slot-state polish**: collapse redundant `value == "<PLACEHOLDER>"` then `"<PLACEHOLDER>" in value` checks into one. *(PR #101 review §2.7)*
 
 ## Links
 
 - Parent epic: [Task 070](../070-novel-architect-v110-epic/task.md)
 - Blocked by: [Task 071](../071-novel-architect-submodule-refactor/task.md)
 - Blocks: [Task 073](../073-novel-architect-hard-rules-validation/task.md) (Hard Rules validation needs worksheet structure)
+- PR #101 review: [comment 4422239250](https://github.com/netzkontrast/agency/pull/101#issuecomment-4422239250) §2.5 + §2.7
 - Source spec: [`dramatica-theory/references/00-storyform-worksheet.md`](../../skills/dramatica-theory/references/00-storyform-worksheet.md), [`dramatica-theory/references/10-decision-heuristics.md`](../../skills/dramatica-theory/references/10-decision-heuristics.md)
 - Governing specs: [`TASK.md`](../../TASK.md), [`SKILLS.md`](../../SKILLS.md), [`AGENTS.md`](../../AGENTS.md) (Narrative Ontology NO.2)

@@ -4,7 +4,7 @@ status: active
 slug: novel-architect-submodule-refactor
 summary: "Refactor monolithic novel-architect@1.0.0 into 4-5 sub-module skills (character-architect, structure-architect, world-architect, scene-architect) following Dual-Kernel Architect-with-Submodules pattern. The orchestrator novel-architect retains the 8-phase pipeline but delegates method-application to sub-modules. Foundation task — blocks 072, 074, 075, 076, 077."
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-12
 task_id: "071"
 task_status: open
 task_owner: "unassigned"
@@ -40,12 +40,33 @@ Split the monolithic `novel-architect@1.0.0` skill into an **orchestrator + 4 su
 3. `skills/novel-architect/methods/{character,structure,conflict,research}/` migrated to corresponding sub-module skills (with old paths kept as compatibility symlinks/pointers during transition)
 4. `tools/check-governance.sh` exit 0
 5. Manual walk-through: `/novel-characters` command in orchestrator delegates to `novel-architect-character`
+6. **Config-loading boundary redesigned** (see §"Config-Loading Boundary" below) — addresses [PR #101 review §1.2.A](https://github.com/netzkontrast/agency/pull/101#issuecomment-4422239250)
+7. **`bootstrap_project.sh` usage hint clarified** (currently says "Migration: bash bootstrap_project.sh kohaerenz-protokoll" without scoping that ONLY `kohaerenz-protokoll` triggers migration) — addresses PR #101 review §2.7
 
 ## Context
 
 v1.0.0 is monolithic — all methods live under `skills/novel-architect/methods/`, all phases under `skills/novel-architect/phases/`. The Dual-Kernel analysis (refactor/SKILL_HOOKS_ANALYSIS.md) shows that sub-module skills with single entry-points per domain reduce skill-matching ambiguity and allow each sub-module to evolve independently.
 
 Foundation task — blocks 072-077. Most v1.1.0 work touches sub-module skills, so the directory structure must exist first.
+
+## Config-Loading Boundary (PR #101 review §1.2.A)
+
+v1.0.0 hardcodes `/home/claude/novel-projects/` in 4 places:
+
+1. `skills/novel-architect/render/io_helpers.py` — `project_workspace(slug)` constructs the path inline
+2. `skills/novel-architect/SKILL.md` — frontmatter `project_workspace_root: "/home/claude/novel-projects"`
+3. `skills/novel-architect/scripts/bootstrap_project.sh` — `WORKSPACE="/home/claude/novel-projects/$SLUG"`
+4. All 8 `phases/phase*-*.md` reference the path in prose
+
+Worse: `assets/project-config-template.yaml` declares `project.workspace_root` — but `io_helpers.py` never reads it. The config field is vestigial.
+
+**Fix in this Task:**
+- Single source of truth: `project-config.yaml:project.workspace_root` becomes the canonical value.
+- `io_helpers.project_workspace(slug)` reads from an env var (`NOVEL_ARCHITECT_PROJECTS_ROOT`) OR a config-discovery walk, with `/home/claude/novel-projects/` as the default fallback.
+- `bootstrap_project.sh` reads from the same env var (with the same default).
+- SKILL.md frontmatter key documents the default; phase files reference it by name (`<project_workspace_root>/<slug>/`) rather than hardcoding.
+
+Same pattern applies to `chapter_count_target: 40` in `render_scene_matrix.py:35` — that magic number should live only in `project-config.yaml`.
 
 ## Plan
 
@@ -72,10 +93,14 @@ Foundation task — blocks 072-077. Most v1.1.0 work touches sub-module skills, 
 - [ ] 8. Update commands/ to delegate
 - [ ] 9. Frontmatter validation + governance check
 - [ ] 10. Manual walk-through test
+- [ ] 11. **Config-Loading Boundary**: introduce `NOVEL_ARCHITECT_PROJECTS_ROOT` env-var or config-discovery (see §"Config-Loading Boundary" above). Wire through `io_helpers.project_workspace()`, `bootstrap_project.sh`, and `phases/*.md`. Update `assets/project-config-template.yaml` so `project.workspace_root` is the canonical override surface. *(PR #101 review §1.2.A)*
+- [ ] 12. **bootstrap.sh usage hint**: rewrite the help text so "Migration" is scoped — "Migration (kohaerenz-protokoll only): bash bootstrap_project.sh kohaerenz-protokoll". *(PR #101 review §2.7)*
+- [ ] 13. **`chapter_count_target` magic number**: remove the `40` default in `render_scene_matrix.py:35` — fail loudly if `project-config.yaml:narrative.chapter_count_target` is missing rather than silently defaulting. *(PR #101 review §1.2.A follow-on)*
 
 ## Links
 
 - Parent epic: [Task 070](../070-novel-architect-v110-epic/task.md)
+- PR #101 review: [comment 4422239250](https://github.com/netzkontrast/agency/pull/101#issuecomment-4422239250) §1.2.A + §2.7
 - Pattern source: `/home/user/Dual-Kernel/skill-audit/ecosystem-analysis.md`, `/home/user/Dual-Kernel/refactor/SKILL_HOOKS_ANALYSIS.md`
 - Governing specs: [`TASK.md`](../../TASK.md), [`SKILLS.md`](../../SKILLS.md)
 - Skill: [`skills/novel-architect/`](../../skills/novel-architect/)
