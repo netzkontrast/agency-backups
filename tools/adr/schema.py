@@ -65,8 +65,34 @@ def validate_frontmatter(
             and not path_parts
         )
         code = "ADR.A.5.4" if is_required_miss else "ADR.A.2.2"
+        message = _augment_length_message(err, fm, path_parts)
         diags.append(Diagnostic(
             rel, None, "ERROR", code,
-            f"frontmatter schema violation at {loc}: {err.message}",
+            f"frontmatter schema violation at {loc}: {message}",
         ))
     return diags
+
+
+def _augment_length_message(
+    err: "jsonschema.ValidationError",  # type: ignore[name-defined]
+    fm: dict[str, Any],
+    path_parts: list[Any],
+) -> str:
+    """Append `(actual=N, max=M, trim N-M chars)` to maxLength violations.
+
+    First-time ADR authors otherwise discover the cap only via repeated trim
+    cycles. The schema carries the cap; this surfaces it in the diagnostic.
+    """
+    if err.validator != "maxLength" or not path_parts:
+        return err.message
+    try:
+        current = fm
+        for part in path_parts:
+            current = current[part]
+        actual = len(current) if isinstance(current, str) else None
+    except (KeyError, TypeError, IndexError):
+        actual = None
+    cap = err.validator_value if isinstance(err.validator_value, int) else None
+    if actual is None or cap is None:
+        return err.message
+    return f"{err.message} (actual={actual}, max={cap}, trim {actual - cap} chars)"
