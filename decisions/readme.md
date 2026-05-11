@@ -17,10 +17,10 @@ updated: 2026-05-11
 
 1. Pick the next zero-padded integer (`0001`, `0002`, …) by inspecting filenames here.
 2. Author `decisions/<NNNN>-<slug>.md` with the canonical MADR sections (`Context and Problem Statement`, `Decision Drivers`, `Considered Options`, `Decision Outcome`, `Consequences`).
-3. Frontmatter MUST carry `type: adr`, `adr_id: ADR-<NNNN>`, `adr_status: Proposed | Accepted | Superseded | Deprecated`, plus standard L1 keys.
+3. Frontmatter MUST carry `type: adr`, `adr_id: ADR-<NNNN>`, `adr_status: Proposed | Accepted | Superseded | Deprecated`, plus standard L1 keys. The `summary` field is capped at **240 characters** (per [`maintenance/schemas/l2-adr.schema.json`](../maintenance/schemas/l2-adr.schema.json)) — keep it short or `tools/adr/cli.py validate` will reject it with `ERROR:ADR.A.2.2`.
 4. Run `python3 tools/adr/cli.py validate` and fix any diagnostics.
 5. When the ADR's status flips to `Accepted`, run `python3 tools/adr/cli.py synthesize` so the AGENTS.md guarded section reflects it.
-6. Commit and open a PR via `/sc:createPR`.
+6. Commit and open a PR per the four-step closing procedure in [AGENTS.md § Closing Run Procedure](../AGENTS.md#closing-run-procedure) (Claude Code: `/sc:createPR`; Jules: native primitive; Gemini: deferred to integration Task).
 
 ## Lifecycle
 

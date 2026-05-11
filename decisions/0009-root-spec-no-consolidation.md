@@ -19,7 +19,7 @@ adr_tags:
 
 ## Context and Problem Statement
 
-Every agent session reads a bundle of root governance specs at boot. [`README.md §10`](../README.md) describes the bundle as "9+ root specs"; the measured reality (2026-05-11) is **11 files** totalling **~70,676 tokens**:
+Every agent session reads a bundle of root governance specs at boot. The bundle catalogue lives at [`README.md §10`](../README.md); the measured reality (2026-05-11) is **11 files** totalling **~70,676 tokens**:
 
 | File | Lines | Tokens (~) |
 |---|---:|---:|
@@ -150,7 +150,7 @@ This ADR ships at `adr_status: Proposed` rather than `Accepted` because the fals
 
 - This ADR is the *sibling* decision to [ADR-0008](./0008-narrative-skills-status-quo.md) (narrative skills stay in-repo) — both apply the "measure the friction, then act" pattern to topology-amendment questions. Together they establish a precedent: substrate-level topology amendments require falsifier-trigger evidence, not just architectural-elegance arguments.
 - No follow-on implementation Task is created. If a falsifier fires, the successor ADR will spawn the consolidation Task at that time.
-- The README §10 boot-bundle catalogue should be amended in a separate T1/T2 edit (not part of this ADR) to reflect the measured **11** specs instead of the prose "9+" — that is a documentation-accuracy fix, not a decision.
+- The [Task 057 task.md](../tasks/057-root-spec-consolidation-adr/task.md) prose described the bundle as "9+ root spec files"; the measured count is **11**. README §10 already lists 11 entries accurately, so no documentation-accuracy fix is required on the README side; the task.md prose stays as authored (T4 by status).
 
 ## Cross-references
 
