@@ -367,6 +367,7 @@ echo "--- [opt] novel-architect v1.1.1 linters (Task 083 cluster C — advisory,
 NA_FIXTURES="tools/tests/fixtures/novel-architect-v111"
 if [ -d "$NA_FIXTURES" ]; then
   "$PYTHON" tools/check-canon-status.py "$NA_FIXTURES/canon-meta-valid.md" || true
+  "$PYTHON" tools/check-worksheet-order.py "$NA_FIXTURES/architecture-valid.yaml" || true
 fi
 
 echo ""

@@ -1,0 +1,30 @@
+# Synthetic-violation architecture.yaml fixture. Exercises:
+#   WORKSHEET.CLASS_PAIR — MC and IC same Class (should be complementary)
+#   WORKSHEET.NAME_EMPTY — MC throughline name is empty string
+#   WORKSHEET.AUDIT_GAP  — step_7 is true while step_3 is false
+#   WORKSHEET.AUDIT_INCOMPLETE — approved=true but step_2 is false
+schema_version: "1.0"
+architecture:
+  storyform_count: single
+  narratives:
+    - id: storyform_violation
+      throughlines:
+        os: { name: "Investigation", class: Universe, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        mc: { name: "",              class: Universe, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        ic: { name: "Detective",     class: Universe, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        ss: { name: "Partnership",   class: Mind,     type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+gates:
+  gate_1_storyform_shape: { approved: true, edits: 0 }
+worksheet_audit:
+  step_0_intent_loaded: true
+  step_1_throughlines_named: true
+  step_2_classes_assigned: false
+  step_3_character_dynamics_set: false
+  step_4_plot_dynamics_set: true
+  step_5_story_points_set: false
+  step_6_crucial_element_set: false
+  step_7_signposts_set: true
+  step_8_genre_mode_set: false
+  validation_pass: false
+approved: true
+revisions: []
