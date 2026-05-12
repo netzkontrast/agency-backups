@@ -31,5 +31,5 @@ updated: 2026-05-12
 
 ## Audit-graph linkage
 
-- `skill_source: "superclaude_framework@v4.3.0"`
+- `skill_source: "superclaude@v4.3.0"`
 - `skill_references_skills: [sc-business-panel, spec-skill]` — sibling panel pattern + Agency's spec authoring substrate.

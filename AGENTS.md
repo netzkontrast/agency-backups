@@ -175,6 +175,118 @@ Feature: Every agent closes every run with the four-step checklist
     And subsequent commits pushed to the same branch MUST update the existing PR automatically
 ```
 
+## Skill Index by Category
+
+Agency mirrors 54 imported skills under [`skills/`](./skills/) — 39 from SuperClaude `v4.3.0` and 15 from Superpowers `v4.0.3`, SHA-pinned per [ADR-0011 D.3](./decisions/0011-external-skill-corpora-import.md). Per ADR-0011 D.7, **none** of the rows below register a SessionStart hook; the Agency bootstrap contract in [§SS.1–SS.3](#session-setup) remains canonical.
+
+Each skill is invoked via the Skill tool only when the user types `/<slug>` or the system reminder lists it as available; never guess names. Anchors `SK.AGENTS.<kind>.<n>` are stable for downstream tooling and audit grep.
+
+<!-- anchor: SK.AGENTS.orchestrator.1 -->
+### Orchestrator skills (12)
+
+High-level surface skills that route work through other skills, Tasks, or subagents. Use one per session entry-point.
+
+- [`sc-brainstorm`](./skills/sc-brainstorm/SKILL.md) — Socratic requirements discovery (pairs with [`superpowers-brainstorming`](./skills/superpowers-brainstorming/SKILL.md)).
+- [`sc-design`](./skills/sc-design/SKILL.md) — architecture / API / component specs.
+- [`sc-implement`](./skills/sc-implement/SKILL.md) — feature/code implementation with persona activation.
+- [`sc-improve`](./skills/sc-improve/SKILL.md) — quality / performance / maintainability sweeps.
+- [`sc-load`](./skills/sc-load/SKILL.md) — Agency-native session-context loader (Serena MCP OPTIONAL per D.8).
+- [`sc-research`](./skills/sc-research/SKILL.md) — adaptive Deep Research orchestrator (see [RESEARCH.md §7](./RESEARCH.md#7-skill-driven-research-runs)).
+- [`sc-save`](./skills/sc-save/SKILL.md) — Agency-native session-context persistence.
+- [`sc-task`](./skills/sc-task/SKILL.md) — complex Task execution / delegation (bundles `MODE_Task_Management`).
+- [`sc-workflow`](./skills/sc-workflow/SKILL.md) — generate structured PRD→implementation workflows.
+- [`superpowers-dispatching-parallel-agents`](./skills/superpowers-dispatching-parallel-agents/SKILL.md) — parallel Agent-tool dispatch (Agency adapted).
+- [`superpowers-requesting-code-review`](./skills/superpowers-requesting-code-review/SKILL.md) — post-completion code-reviewer subagent.
+- [`superpowers-subagent-driven-development`](./skills/superpowers-subagent-driven-development/SKILL.md) — two-stage execute+review subagent workflow.
+
+<!-- anchor: SK.AGENTS.discipline.1 -->
+### Discipline skills (8) — Superpowers gates
+
+Pre-commit / pre-completion discipline gates intended to be routed through `PreToolUse` / `Stop` hooks once Task 094 ST-3 ships those hooks; until then they are invoked manually via the Skill tool. ST-3 will additionally emit an audit line under `.claude/audit/` when a gate triggers.
+
+- [`superpowers-brainstorming`](./skills/superpowers-brainstorming/SKILL.md) — pre-plan ambiguity reduction.
+- [`superpowers-executing-plans`](./skills/superpowers-executing-plans/SKILL.md) — bite-sized task execution with batch checkpoints.
+- [`superpowers-finishing-a-branch`](./skills/superpowers-finishing-a-branch/SKILL.md) — three-option close decision tree (merge / PR / discard).
+- [`superpowers-receiving-code-review`](./skills/superpowers-receiving-code-review/SKILL.md) — verify before implementing review feedback.
+- [`superpowers-systematic-debugging`](./skills/superpowers-systematic-debugging/SKILL.md) — four-phase root-cause investigation.
+- [`superpowers-tdd`](./skills/superpowers-tdd/SKILL.md) — Red-Green-Refactor TDD.
+- [`superpowers-verification-before-completion`](./skills/superpowers-verification-before-completion/SKILL.md) — evidence-before-claim discipline; counterpart to [`sc-self-review`](./skills/sc-self-review/SKILL.md).
+- [`superpowers-writing-plans`](./skills/superpowers-writing-plans/SKILL.md) — granular task plan authoring downstream of [`sc-workflow`](./skills/sc-workflow/SKILL.md).
+
+<!-- anchor: SK.AGENTS.domain.1 -->
+### Domain expert skills (8)
+
+Subject-matter specialists invoked via the Skill tool when the request maps cleanly onto a single domain.
+
+- [`sc-backend-architect`](./skills/sc-backend-architect/SKILL.md) — backend reliability, data integrity, fault tolerance.
+- [`sc-deep-research-agent`](./skills/sc-deep-research-agent/SKILL.md) — adaptive multi-hop research (D.8 adapted).
+- [`sc-frontend-architect`](./skills/sc-frontend-architect/SKILL.md) — accessible, performant UI.
+- [`sc-performance-engineer`](./skills/sc-performance-engineer/SKILL.md) — measurement-driven optimisation.
+- [`sc-quality-engineer`](./skills/sc-quality-engineer/SKILL.md) — testing strategies + edge-case detection.
+- [`sc-refactoring-expert`](./skills/sc-refactoring-expert/SKILL.md) — clean-code + technical-debt reduction.
+- [`sc-security-engineer`](./skills/sc-security-engineer/SKILL.md) — vulnerability detection + compliance.
+- [`sc-system-architect`](./skills/sc-system-architect/SKILL.md) — scalable system architecture / long-horizon technical decisions.
+
+<!-- anchor: SK.AGENTS.analysis.1 -->
+### Analysis skills (7)
+
+Read-mostly skills that produce a synthesis, panel, or report rather than mutating files.
+
+- [`sc-analyze`](./skills/sc-analyze/SKILL.md) — comprehensive code analysis across quality / security / perf / architecture.
+- [`sc-business-panel`](./skills/sc-business-panel/SKILL.md) — multi-expert business strategy panel (Christensen, Porter, Drucker, Godin, Kim & Mauborgne, Collins, Taleb, Meadows, Doumont).
+- [`sc-estimate`](./skills/sc-estimate/SKILL.md) — development estimation.
+- [`sc-explain`](./skills/sc-explain/SKILL.md) — code / system behaviour explanation with educational clarity.
+- [`sc-reflect`](./skills/sc-reflect/SKILL.md) — Task reflection and validation (bundles `MODE_Introspection`).
+- [`sc-spec-panel`](./skills/sc-spec-panel/SKILL.md) — multi-expert specification review (Wiegers, Adzic, Cockburn, Fowler, Nygard, Newman, Hohpe, Crispin & Gregory, Hightower).
+- [`sc-troubleshoot`](./skills/sc-troubleshoot/SKILL.md) — diagnose code / build / deployment issues.
+
+<!-- anchor: SK.AGENTS.persona.1 -->
+### Persona skills (7)
+
+Personas activate one Claude voice with associated guardrails. Use when the request needs a particular professional stance.
+
+- [`sc-devops-architect`](./skills/sc-devops-architect/SKILL.md) — infrastructure + deployment automation.
+- [`sc-learning-guide`](./skills/sc-learning-guide/SKILL.md) — progressive learning through practical examples.
+- [`sc-python-expert`](./skills/sc-python-expert/SKILL.md) — production-ready Python (SOLID).
+- [`sc-requirements-analyst`](./skills/sc-requirements-analyst/SKILL.md) — ambiguous-idea → concrete-spec.
+- [`sc-root-cause-analyst`](./skills/sc-root-cause-analyst/SKILL.md) — evidence-based hypothesis testing.
+- [`sc-self-review`](./skills/sc-self-review/SKILL.md) — post-implementation validation + reflexion (counterpart to [`superpowers-verification-before-completion`](./skills/superpowers-verification-before-completion/SKILL.md)).
+- [`sc-socratic-mentor`](./skills/sc-socratic-mentor/SKILL.md) — Socratic-method educational guide (teaching-corpus extracted to `references/`).
+
+<!-- anchor: SK.AGENTS.tool.1 -->
+### Tool skills (7)
+
+Side-effecting utilities that drive a single build / cleanup / index / publish operation.
+
+- [`sc-build`](./skills/sc-build/SKILL.md) — build / compile / package projects.
+- [`sc-cleanup`](./skills/sc-cleanup/SKILL.md) — dead-code removal + project structure optimisation.
+- [`sc-confidence-check`](./skills/sc-confidence-check/SKILL.md) — pre-implementation ≥ 90 % confidence gate (D.7 audited).
+- [`sc-createPR`](./skills/sc-createPR/SKILL.md) — canonical Claude Code session-closer (see [CR.7](#closing-run-procedure)).
+- [`sc-document`](./skills/sc-document/SKILL.md) — focused documentation for components / functions / APIs.
+- [`sc-index`](./skills/sc-index/SKILL.md) — project documentation + knowledge-base generation.
+- [`sc-test`](./skills/sc-test/SKILL.md) — tests + coverage + quality reporting.
+
+<!-- anchor: SK.AGENTS.meta.1 -->
+### Meta skills (3)
+
+Skills *about* the skill / agent surface itself.
+
+- [`sc-pm-agent`](./skills/sc-pm-agent/SKILL.md) — Project-Manager orchestrator; invokable **only** via `/sc:pm` (inert at SessionStart per D.7).
+- [`superpowers-using-superpowers`](./skills/superpowers-using-superpowers/SKILL.md) — discipline-gate selector; **adapted per D.7** (SessionStart-injection clause stripped).
+- [`superpowers-writing-skills`](./skills/superpowers-writing-skills/SKILL.md) — TDD-for-skills meta-discipline; complements `skill-creator` + `spec-skill`.
+
+<!-- anchor: SK.AGENTS.workflow.1 -->
+### Workflow skills (1)
+
+- [`superpowers-using-git-worktrees`](./skills/superpowers-using-git-worktrees/SKILL.md) — safety-checked git-worktree creation for parallel-session work.
+
+<!-- anchor: SK.AGENTS.agent-template.1 -->
+### Agent-template skills (1)
+
+- [`superpowers-code-reviewer`](./skills/superpowers-code-reviewer/SKILL.md) — subagent prompt for Agency's built-in `code-reviewer` agent type.
+
+---
+
 ## Task Type Routing
 
 Three top-level governance specs partition the work this repository performs. Pick the one that matches your request *before* writing any file:

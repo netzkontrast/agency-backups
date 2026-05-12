@@ -39,7 +39,7 @@ For each file:
    summary: "<one-line>"
    created: 2026-05-12
    updated: 2026-05-12
-   skill_source: "superclaude_framework@v4.3.0"
+   skill_source: "superclaude@v4.3.0"
    skill_references_skills: [...]
    ---
    ```

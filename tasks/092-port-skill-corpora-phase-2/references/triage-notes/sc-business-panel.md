@@ -34,5 +34,5 @@ The upstream framework distributes business-panel functionality across **three f
 
 ## Audit-graph linkage
 
-- `skill_source: "superclaude_framework@v4.3.0"`
+- `skill_source: "superclaude@v4.3.0"`
 - `skill_references_skills: [sc-spec-panel]` — both share the multi-expert panel pattern.

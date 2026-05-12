@@ -285,6 +285,18 @@ The analysis Task MAY be accompanied by a research workspace under `/research/<s
 
 A research run MAY be initiated via the `/sc:research` skill at [`skills/sc-research/SKILL.md`](./skills/sc-research/SKILL.md), imported under the policy ratified by [ADR-0011](./decisions/0011-external-skill-corpora-import.md). The skill is Agency-adapted: WebSearch + WebFetch are the primary research surface; the upstream Tavily MCP appears only as an OPTIONAL optimization per ADR-0011 D.8.
 
+Two further imported skills compose with `/sc:research` for adjacent surfaces:
+
+- [`skills/sc-analyze/SKILL.md`](./skills/sc-analyze/SKILL.md) — code-centric comprehensive analysis (quality / security / performance / architecture). Use when the research target is the repo itself rather than the open web.
+- [`skills/sc-deep-research-agent/SKILL.md`](./skills/sc-deep-research-agent/SKILL.md) — adaptive multi-hop research specialist (Agency-adapted per ADR-0011 D.8). Use for complex, branched research questions that exceed a single `/sc:research` invocation.
+
+When a research run requires explicit pre-research ambiguity reduction, plan authoring, or post-run verification, the Superpowers discipline skills layer cleanly on top of the run without violating R.4.4 workspace cleanliness:
+
+- [`skills/superpowers-brainstorming/SKILL.md`](./skills/superpowers-brainstorming/SKILL.md) — pre-plan ambiguity reduction before a research run starts.
+- [`skills/superpowers-writing-plans/SKILL.md`](./skills/superpowers-writing-plans/SKILL.md) — bite-sized research-task plan authoring.
+- [`skills/superpowers-systematic-debugging/SKILL.md`](./skills/superpowers-systematic-debugging/SKILL.md) — four-phase root-cause discipline when the research is debugging-shaped.
+- [`skills/superpowers-verification-before-completion/SKILL.md`](./skills/superpowers-verification-before-completion/SKILL.md) — evidence-before-claim gate before promoting workspace findings to `output/SPEC.md`.
+
 When invoked, the skill MUST land its deliverables in `/research/<slug>/output/SPEC.md` per §6.5 above. Workspace cleanliness is enforced by [`tools/check-workspace-cleanliness.py`](./tools/check-workspace-cleanliness.py); follow-up downstream-Task linkage is enforced by [`tools/check-external-result-downstream-task.py`](./tools/check-external-result-downstream-task.py). Neither linter is modified by ADR-0011 — the skill operates inside the existing R.4.4 / R.6.5 envelopes.
 
 ## 8. Anti-Patterns

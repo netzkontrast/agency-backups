@@ -30,5 +30,5 @@ The upstream body binds to **six** MCP servers (sequential, morphllm, magic, pla
 
 ## Audit-graph linkage
 
-- `skill_source: "superclaude_framework@v4.3.0"`
+- `skill_source: "superclaude@v4.3.0"`
 - `skill_references_skills: [sc-research, sc-task, sc-requirements-analyst]`

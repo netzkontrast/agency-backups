@@ -38,6 +38,13 @@ SLUG_RE = re.compile(r"^[a-z0-9-]+$")
 VENDOR_PREFIXES = ("sc-", "superpowers-")
 SKILL_SOURCE_RE = re.compile(r"^(superclaude|superpowers)@v\d+\.\d+\.\d+$")
 
+# Task 094 ST-1 (T3 carry-forward from Task 092 PR #120 review A1): the
+# `skill_kind` L2 key is a closed 9-value enum. See SKILLS.md §3.3.
+SKILL_KIND_ENUM = frozenset({
+    "domain", "tool", "orchestrator", "meta",
+    "discipline", "workflow", "persona", "analysis", "agent-template",
+})
+
 
 def _expected_required_keys(ontology: dict, type_name: str) -> list[str]:
     return list(ontology["types"].get(type_name, {}).get("required_keys", []))
@@ -158,6 +165,32 @@ def _check_skill_source(fm: dict, rel: str) -> list[Diagnostic]:
             rel, None, "ERROR", "F.B.9",
             f"skill_source value {value!r} does not match "
             f"'<vendor>@v<semver>' (e.g. 'superclaude@v4.3.0') per ADR-0011 D.2",
+        ))
+    return out
+
+
+def _check_skill_kind_enum(fm: dict, rel: str) -> list[Diagnostic]:
+    """Validate skill_kind ∈ SKILL_KIND_ENUM per SKILLS.md §3.3.
+
+    Emits:
+      - F.B.11 when `skill_kind` is set but the value is not in the 9-value
+        closed enum ratified by Task 094 ST-1 (T3 carry-forward from
+        Task 092 PR #120 review A1).
+
+    Absence of the key is permitted (some SKILL.md authors omit it pending
+    classification); only out-of-enum values fail. Index routing depends on
+    a valid value, so this is ERROR-tier.
+    """
+    out: list[Diagnostic] = []
+    if "skill_kind" not in fm:
+        return out
+    value = fm.get("skill_kind")
+    if not isinstance(value, str) or value not in SKILL_KIND_ENUM:
+        sorted_enum = ", ".join(sorted(SKILL_KIND_ENUM))
+        out.append(Diagnostic(
+            rel, None, "ERROR", "F.B.11",
+            f"skill_kind value {value!r} is not in the 9-value enum "
+            f"{{{sorted_enum}}} (SKILLS.md §3.3; Task 094 ST-1)",
         ))
     return out
 
@@ -327,6 +360,8 @@ def check_file(
         diags.extend(_check_skill_bundles(fm, rel, repo_root))
         # ADR-0011: skill_source validation for imported corpora.
         diags.extend(_check_skill_source(fm, rel))
+        # Task 094 ST-1: skill_kind closed-enum validation.
+        diags.extend(_check_skill_kind_enum(fm, rel))
 
     return diags
 

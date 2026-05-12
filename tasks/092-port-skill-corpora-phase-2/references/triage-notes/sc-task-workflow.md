@@ -34,7 +34,7 @@ Both upstream commands list the **same six MCP servers** (sequential, context7, 
 
 ## Audit-graph linkage
 
-- `skill_source: "superclaude_framework@v4.3.0"` per file.
+- `skill_source: "superclaude@v4.3.0"` per file.
 - `skill_references_skills`:
   - `sc-task`: `[sc-pm-agent, sc-implement, sc-research]`.
   - `sc-workflow`: `[sc-task, sc-brainstorm, sc-implement]`.
