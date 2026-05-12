@@ -1,6 +1,6 @@
 ---
 type: task
-status: archived
+status: active
 slug: novel-architect-v120-enforcement-epic
 summary: "Mini-Epic umbrella for novel-architect@1.2.0 — orchestrates 5 sub-tasks (084-088) that mechanize the prose specifications landed in v1.1.0 Tasks 072/073/075/076 into ERROR-tier linters under tools/novel-architect-checks/, wire render_architecture.py to consume the linter's JSON artefact, and backport MIF L1/L2 entries in references/learnings.md to L3 schema. Standalone Task 089 (files separately, blocked) records legacy retirement gating per ADR-0010 + Task 070 §Legacy Retirement Criterion."
 created: 2026-05-12
@@ -33,7 +33,7 @@ task_affects_paths:
 
 Coordinate the v1.2.0 release of `skills/novel-architect/` across 5 linked sub-tasks (084-088). The Epic is `done` when:
 
-1. All 5 sub-tasks have `task_status: archived` OR `task_status: updated` with documented disposition.
+1. All 5 sub-tasks have `task_status: done` OR `task_status: updated` with documented disposition.
 2. `tools/check-governance.sh` exits 0 (gating checks pass) after all sub-tasks land, including the four new ERROR-tier linter rows.
 3. [ADR-0010 `novel-architect-error-tier-linter-policy`](../../decisions/0010-novel-architect-error-tier-linter-policy.md) reaches `adr_status: Accepted` after the 30-day post-landing observation window passes without falsifier F1/F2/F3 firing.
 4. The four ERROR-tier linters (`tools/check-{hard-rules,worksheet-order,scene-audit,canon-status}.py`) are registered in the `tools/check-governance.sh` ERROR-tier stage, path-scoped to staged diffs touching `skills/novel-architect*/` or `novel-projects/`.

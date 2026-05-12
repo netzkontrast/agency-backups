@@ -1,10 +1,10 @@
 ---
 type: task
-status: archived
+status: active
 slug: frustrated-spec-followup-ac1-ac5
 summary: "Successor to Task 038 (set `task_status: updated` on PR #87 review). Closes the two acceptance criteria deferred from 038: AC-1 (FRUSTRATED.md §28 / PRE_COMMIT.md §2 byte-identical reconciliation, joint with Task 037 ST-4) and AC-5 (Reflexion-pattern lift into §FL.Log.1, blocked on `research/gemini/superclaude-agency-orchestration-spec/` arriving on the branch). Also covers the eventual `FM_FL_DECLARATION_STRICT=1` flip after remediating historical malformed logs in tasks 030 + 033."
 created: 2026-05-07
-updated: 2026-05-12
+updated: 2026-05-07
 task_id: "062"
 task_status: open
 task_owner: "unassigned"
@@ -36,7 +36,7 @@ Land the work Task 038 explicitly deferred. The Task is `done` when **all three*
 
 ## Context — Why this Task exists
 
-PR #87 review (`tasks/038-frustrated-spec-integration/review-claude-brave-darwin.md` D1, D2) flagged that closing Task 038 as `task_status: archived` violated TASK.md §4 because two acceptance criteria were not met:
+PR #87 review (`tasks/038-frustrated-spec-integration/review-claude-brave-darwin.md` D1, D2) flagged that closing Task 038 as `task_status: done` violated TASK.md §4 because two acceptance criteria were not met:
 
 - **AC-1** required §28/§2 byte-identical reconciliation — but Task 037 ST-4 was never written, so the `diff`-verification of byte-identicality could not be performed in the 038 close. Task 038's friction-log §1 documented the deferral honestly; the reviewer's correct response was "the deferral makes the close premature".
 - **AC-5** required lifting the Reflexion-pattern from a Gemini research output that does not exist on the current branch. Task 038's friction-log §4 documented the absence; the reviewer's correct response was "absence of the source is a legitimate blocker, but the absence of a tracking task is not".

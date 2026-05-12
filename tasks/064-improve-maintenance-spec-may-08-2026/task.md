@@ -1,10 +1,10 @@
 ---
 type: task
-status: archived
+status: active
 slug: improve-maintenance-spec-may-08-2026
 summary: "Distil seven findings (F20–F26) from the 2026-05-08 coherence run into concrete diffs against MAINTENANCE.md, prompts/repo-coherence-check/prompt.md, tools/check-governance.sh, and maintenance/run-log.md. Companion to Task 044 (open) and Task 025 (open) carrying earlier findings."
 created: 2026-05-08
-updated: 2026-05-12
+updated: 2026-05-11
 task_id: "064"
 task_status: open
 task_owner: "unassigned"
@@ -51,7 +51,7 @@ The accumulation is structural: every coherence run produces session-distilled f
 
 **Concrete diffs (one of):**
 
-- (Preferred) [`MAINTENANCE.md`](../../MAINTENANCE.md) SHOULD add a §6 "Self-Improvement Cadence Rule": at most ONE open `improve-maintenance-spec-*` Task at a time. New session insights MUST be appended to the open Task's `notes.md` rather than spawning a new Task. The new-Task spawn is permitted only when the existing Task transitions to `task_status: archived` or `updated`.
+- (Preferred) [`MAINTENANCE.md`](../../MAINTENANCE.md) SHOULD add a §6 "Self-Improvement Cadence Rule": at most ONE open `improve-maintenance-spec-*` Task at a time. New session insights MUST be appended to the open Task's `notes.md` rather than spawning a new Task. The new-Task spawn is permitted only when the existing Task transitions to `task_status: done` or `updated`.
 - (Alternative) Add a `tools/fm/query.py` recipe that lists open `improve-maintenance-spec-*` Tasks; surface in the coherence prompt's Step 4 dedup gate (R4) so an agent cannot file a new one without first checking the open count.
 - (Won't-fix candidate) Accept the accumulation as the cost of session-bounded distillation; record rationale ("each session's findings are time-stamped and traceable, the open-count is its own audit signal").
 

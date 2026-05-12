@@ -21,9 +21,8 @@ Diese Spezifikation gilt für alle Artefakte unter:
 
 Archivierung wird ausgelöst, wenn mindestens einer der folgenden Trigger erfüllt ist:
 
-1. **Task-Trigger (STRICT)**
-   - **Nur** `task_status: done` ist archivierungsfähig.
-   - `open`, `in_progress`, `blocked`, `updated`, `abandoned` und `archived` dürfen **nicht** aus `/tasks/` in `/archive/tasks/` verschoben werden.
+1. **Task-Trigger**
+   - `task_status` ist `done`, `abandoned` oder `updated`.
    - Zusätzlich ist ein Cooldown abgelaufen (Standard: 7 Tage seit `updated`, sofern kein aktiver Folge-Task verlinkt ist).
 2. **Prompt-Trigger**
    - Der referenzierte Task ist abgeschlossen (`done` oder `abandoned`) und der Prompt hat keine offenen Folgeausführungen.
@@ -48,16 +47,6 @@ Archivierung nutzt genau eines der folgenden Modi je Artefakt:
    - Einsatz: wenn Relativlinks und Tooling stark auf aktuelle Pfade angewiesen sind.
 
 Die gewählte Operation MUST pro Archivierungsaktion begründet und im jeweiligen Index dokumentiert werden.
-
-## Canonical Archive Paths
-
-Die kanonischen Ziele für `Move` sind:
-
-- `/archive/tasks/<task-folder>/`
-- `/archive/prompts/<prompt-folder>/`
-- `/archive/research/<research-folder>/`
-
-Für diesen Repo-Workflow ist `Move` der **Default-Modus** für abgeschlossene Artefakte. `Index-only` ist nur zulässig, wenn ein dokumentierter Tooling-Blocker vorliegt.
 
 ## Invarianten
 
@@ -88,10 +77,3 @@ Jede Archivierungsaktion muss folgende Invarianten erhalten:
    - Link-Integrität und Frontmatter-Validität bestätigen.
 
 Ein Lauf gilt nur als abgeschlossen, wenn alle vier Schritte in dieser Reihenfolge erfüllt sind.
-
-
-## Hard Guardrail — Tasks
-
-- ONLY Done Tasks can be archived.
-- Every archive run MUST verify `task_status == done` immediately before `git mv`.
-- If a Task is not `done`, the run MUST skip it and log the skip reason.
