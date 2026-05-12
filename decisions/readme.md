@@ -4,7 +4,7 @@ status: active
 slug: decisions-root
 summary: "Architectural Decision Records (ADRs) — repo-native MADR 4.0.0 ledger validated by tools/adr/cli.py."
 created: 2026-05-06
-updated: 2026-05-11
+updated: 2026-05-12
 ---
 
 # Decisions
@@ -42,3 +42,4 @@ The first batch landed via [Task 032 ST-1](../tasks/032-agents-spec-integration/
 - [`0007-skill-bundles-tools-frontmatter.md`](./0007-skill-bundles-tools-frontmatter.md) — `skill_bundles_tools` frontmatter key for skills that sync repo tools into `~/.claude/skills/`. `adr_status: Accepted`.
 - [`0008-narrative-skills-status-quo.md`](./0008-narrative-skills-status-quo.md) — Narrative skills (6 folders + ontology + dramatica-nav) stay in this repo; the NO.5 don't-load rule + WARN linter remain the partition mechanism. `adr_status: Proposed`. Ships with five falsifier triggers (skill count > 10, bundle token cost > 60K, sustained NO.5-cited friction, narrative T3 amendment of non-AGENTS root spec, third-party-adopter blocker).
 - [`0009-root-spec-no-consolidation.md`](./0009-root-spec-no-consolidation.md) — Measured 11-spec bootstrap bundle (~70,676 tokens) stays intact; PRE_COMMIT.md does not merge into AGENTS.md, FRUSTRATED.md does not merge into MAINTENANCE.md. Saving (~1%) below migration threshold (381 cross-references; in-flight Task disruption). `adr_status: Proposed`. Ships with three falsifier triggers (bundle > 100K tokens, either spec < 1000 tokens + < 50 dependents, sustained bundle-size-cited friction).
+- [`0010-external-skill-corpora-import.md`](./0010-external-skill-corpora-import.md) — External skill corpora (SuperClaude v4.3.0, Superpowers v4.0.3) import under vendor-prefixed namespaces (`sc-*`, `superpowers-*`) with new L2 frontmatter key `skill_source`. Closes the five dangling `/sc:*` references in CLAUDE.md §13 and AGENTS.md Closing Run Procedure once the follow-up corpus Task lands. `adr_status: Proposed`. Ships with three falsifier triggers (third corpus, force-push tag drift, native↔import name collision).
