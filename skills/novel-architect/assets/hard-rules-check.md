@@ -43,15 +43,15 @@ Soft Rules werden separat (Linter WARN-tier) erfasst und blockieren das
 Gate **nicht**. Hier nur als Kontext für den User-Approval-Schritt
 auflisten:
 
-| Soft Rule | Warning |
-|-----------|---------|
-| S1 | Premise is articulable in one sentence |
-| S2 | IC's challenge to MC is concrete |
-| S3 | SS has its own arc (not just MC+IC scenes) |
-| S4 | Each thematic story point is concrete enough to write |
-| S5 | Goal, Consequences, Forewarnings, Requirements form one coherent arc |
-| S6 | Costs and Dividends are visible (not just structural) |
-| S7 | At least one full Signposts-and-Journeys progression picked |
-| S8 | Author's Intent isn't ironic relative to the storyform |
+| Soft Rule | Statement | Status | Warning (if active) |
+|-----------|-----------|--------|---------------------|
+| S1 | Premise is articulable in one sentence | [ ] OK / [ ] WARN | |
+| S2 | IC's challenge to MC is concrete | [ ] OK / [ ] WARN | |
+| S3 | SS has its own arc (not just MC+IC scenes) | [ ] OK / [ ] WARN | |
+| S4 | Each thematic story point is concrete enough to write | [ ] OK / [ ] WARN | |
+| S5 | Goal, Consequences, Forewarnings, Requirements form one coherent arc | [ ] OK / [ ] WARN | |
+| S6 | Costs and Dividends are visible (not just structural) | [ ] OK / [ ] WARN | |
+| S7 | At least one full Signposts-and-Journeys progression picked | [ ] OK / [ ] WARN | |
+| S8 | Author's Intent isn't ironic relative to the storyform | [ ] OK / [ ] WARN | |
 
-> Provenance: `skills/dramatica-theory/references/00-storyform-validation.md` §"Soft checks" (S1–S8).
+> Provenance: `skills/dramatica-theory/references/00-storyform-validation.md` §"Soft checks" (S1–S8). Column shape mirrors the Hard-Rule table above for visual consistency.

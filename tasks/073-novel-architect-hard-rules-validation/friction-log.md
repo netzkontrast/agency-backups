@@ -70,3 +70,15 @@ via T1 mechanical repair.
 The sc-chain (`/sc:analyze → brainstorm → design → workflow → implement`)
 surfaced the bleed boundary with Tasks 084/087 early in brainstorm; no
 rework, no governance-gate retries, no spec contradictions.
+
+### Post-self-review polish (same session)
+
+A second `/sc:analyze` pass over the just-shipped artefacts surfaced
+three cosmetic findings, all fixed in-place on the same branch:
+
+- **M1** — soft-rule table reshaped to 4 columns (`Soft Rule | Statement | Status | Warning (if active)`), mirroring the Hard-Rule table above it.
+- **M2** — our two German `MUSS` keywords flipped to English `MUST` (AGENTS.md R1). File-wide DE→EN sweep of RFC 2119 keywords logged as a follow-up assumption rather than widened into this PR.
+- **L1** — askuser MUSS-line now carries a `(Renderer-Wiring: siehe Task 087)` forward-pointer so a reader hitting the normative requirement sees the implementation path.
+
+FL0 holds — the polish surfaced from re-reading our own artefacts, not from
+friction with the spec or tooling.
