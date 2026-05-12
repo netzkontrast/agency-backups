@@ -1,6 +1,6 @@
 ---
 type: note
-status: active
+status: completed
 slug: task-091-st1-phase-1-corpus
 summary: "ST-1 (Task 091 Epic): extend tools/fm/validate.py for skill_source key + create 14 skill folders under skills/sc-*/ per ADR-0011 Phase 1. Corpus only; root-spec hookup deferred to ST-2."
 created: 2026-05-12
