@@ -490,14 +490,44 @@ The block below is rewritten by [`tools/adr/cli.py synthesize`](./tools/adr/cli.
 ### MUST
 - The folder MUST carry a `readme. [ADR-0006]
 - Inbound references from `skills/the-agency-system-architect/` MUST travel as plain Markdown links inside `SKILL. [ADR-0006]
+- Each list entry MUST start with `tools/`, MUST resolve to an existing directory under the repo root, and MUST contain no `.. [ADR-0007]
+- ** External skill folders MUST live at `skills/<vendor>-<bare-slug>/` where `<vendor>` ∈ `{sc, superpowers}`. [ADR-0011]
+- Bare slugs (no vendor prefix) MUST be reserved for Agency-native skills. [ADR-0011]
+- md` MUST carry the L2 frontmatter key `skill_source` with value matching `^(superclaude|superpowers)@v\d+\. [ADR-0011]
+- md` `## References` section MUST include a SHA-pinned link to the upstream source file in the form `path/to/file. [ADR-0011]
+- md`) MUST be ported as skills — `skill_kind: domain` for single-persona agents, `skill_kind: orchestrator` when the agent coordinates other agents. [ADR-0011]
+- md` files MUST be bundled inside the relevant skill's `references/` directory. [ADR-0011]
+- md` body MUST be ≤ 5 KB per [`SKILLS. [ADR-0011]
+- Excess prose MUST move to the skill's `references/` directory and MUST be cited from the body's `## References` section. [ADR-0011]
+- md body MUST be rewritten so a built-in Claude Code primitive (WebSearch, WebFetch, Read/Write/Edit, Bash) is the primary path. [ADR-0011]
+- The upstream MCP MUST appear only in `## Compatibility` as OPTIONAL. [ADR-0011]
+- The verbatim upstream body MUST be archived at `skills/<vendor>-<slug>/references/upstream-<vendor>-<slug>. [ADR-0011]
+- Subsequent re-syncs from upstream MUST file a new Task. [ADR-0011]
+- Automated upstream-pull is OUT OF SCOPE for this ADR and MUST be addressed by a future ADR if drift evidence accumulates. [ADR-0011]
+- When any falsifier triggers, a successor ADR MUST be authored that re-evaluates Options A–D against the then-current evidence and supersedes this one via `adr_supersedes: [ADR-0011]`. [ADR-0011]
 
 ### SHOULD
 - md §8 SHOULD drop the "authoring ADR pending" parenthetical via a follow-up T1 / T2 edit. [ADR-0006]
+- The tag-only pin is then insufficient and the policy SHOULD switch to tag + SHA composite pinning. [ADR-0011]
 
 ### MUST NOT
 - ** The narrative skills (`skills/novel-architect/`, `skills/suno-lyric-writer/`) follow a parallel pattern — they ship large reference corpora that consumers MUST NOT autoload (NO. [ADR-0006]
+- py` scanning `tasks/`, `prompts/`, `research/`) MUST NOT be declared — they cannot function in the sandbox. [ADR-0007]
+- The key MUST NOT appear on Agency-native skills. [ADR-0011]
+- Agents MUST NOT be stored outside `/skills/`. [ADR-0011]
+- Modes MUST NOT be ported as standalone skills. [ADR-0011]
+- ** Upstream SessionStart hooks (SuperClaude pm-agent restore, Superpowers `using-superpowers` injection) MUST NOT be ported. [ADR-0011]
 
-**Contributing ADRs:** ADR-0006.
+### OPTIONAL
+- The key is OPTIONAL; absent or empty means "no bundles". [ADR-0007]
+
+### RECOMMENDED
+- Adding the `skill_source` value to the manifest is RECOMMENDED but not required by this ADR; the manifest schema is not changed. [ADR-0011]
+
+### MAY
+- md) MAY be extended in a follow-up T2 commit to show a `skill_source` commented-example line; not blocking on the first port. [ADR-0011]
+
+**Contributing ADRs:** ADR-0006, ADR-0007, ADR-0011.
 <!-- END AGENCY-ADR SYNTHESIS -->
 
 ---

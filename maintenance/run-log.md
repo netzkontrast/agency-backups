@@ -974,3 +974,18 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
   caught by signal-unit test, one-line fix. TASK.md §4.7 helper paragraph
   + tools/fm/readme.md row updated. tools/check-governance.sh PASS.
   task_status: done.
+
+### Run 2026-05-12 — adr-synthesize
+- agent: tools/adr/cli.py
+- start_commit: 91d3949
+- end_commit: 91d3949
+- baseline_commit: 91d3949
+- files_in_delta: 0
+- files_scanned: 0
+- t1_fixes: 0
+- t2_fixes: 0
+- t3_tasks_created: 0
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+  adr-synthesize rewrite; contributing_adr_ids=[ADR-0006, ADR-0007, ADR-0011]; token_count=481; fidelity=1.0000 (bcp14-keyword).
