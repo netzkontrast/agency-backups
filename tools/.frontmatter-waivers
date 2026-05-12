@@ -22,4 +22,3 @@
 #
 # Header row (optional):
 #path-glob	rule-id	rationale	expires
-tasks/091-port-external-skill-corpora/references/upstream-snapshot/*	*	Task 091 — verbatim upstream snapshot of SuperClaude_Framework v4.3.0 + Superpowers v4.0.3 staged for Phase 2 evaluation; ADR-0011 D.9 prohibits T4 edits, so Agency frontmatter cannot be imposed on these mirrors. Re-syncs or removal require a new Task.	2026-08-12

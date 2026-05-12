@@ -6,8 +6,8 @@ summary: "Epic: Complete the upstream skill-corpora port. Triage the Phase-2 can
 created: 2026-05-12
 updated: 2026-05-12
 task_id: "092"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
@@ -20,7 +20,7 @@ task_affects_paths:
   - tools/.frontmatter-waivers
   - tools/.script-allowlist
 task_blocked_by:
-  - "091"
+  - 091
 ---
 
 # Task 092 — Port Skill Corpora (Phase 2 / Epic)
