@@ -107,13 +107,14 @@
     },
     "skill": {
       "required_keys": ["name", "description"],
-      "recommended_keys": ["skill_kind", "skill_target_agents", "skill_bundles_tools"],
+      "recommended_keys": ["skill_kind", "skill_target_agents", "skill_bundles_tools", "skill_source", "skill_references_skills", "skill_references_research", "skill_references_prompts", "skill_bootstrap_required"],
       "required_headings": [],
       "body_schema": {
         "_note": "Anthropic SKILL.md owns the body — no schema enforced."
       },
       "key_docs": {
-        "skill_bundles_tools": "OPTIONAL list of repo-relative tools/<slug> paths that skills/skills-skill-bootstrap/sync.sh materialises into <synced-skill>/scripts/_bundled/<basename>/ at sync time. Validated by tools/fm/validate.py::_check_skill_bundles (diagnostics F.B.5, F.B.6). Authority: decisions/0007-skill-bundles-tools-frontmatter.md."
+        "skill_bundles_tools": "OPTIONAL list of repo-relative tools/<slug> paths that skills/skills-skill-bootstrap/sync.sh materialises into <synced-skill>/scripts/_bundled/<basename>/ at sync time. Validated by tools/fm/validate.py::_check_skill_bundles (diagnostics F.B.5, F.B.6). Authority: decisions/0007-skill-bundles-tools-frontmatter.md.",
+        "skill_source": "REQUIRED on imported skill corpora living at skills/<vendor>-<slug>/ where <vendor> ∈ {sc, superpowers}; value MUST match '<vendor>@v<semver>' (e.g. 'superclaude@v4.3.0'). MUST NOT appear on Agency-native (bare-slug) skills. Validated by tools/fm/validate.py::_check_skill_source (diagnostics F.B.8, F.B.9). Authority: decisions/0011-external-skill-corpora-import.md."
       }
     },
     "spec": {
