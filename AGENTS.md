@@ -511,10 +511,13 @@ The block below is rewritten by [`tools/adr/cli.py synthesize`](./tools/adr/cli.
 - Subsequent re-syncs from upstream MUST file a new Task. [ADR-0011]
 - Automated upstream-pull is OUT OF SCOPE for this ADR and MUST be addressed by a future ADR if drift evidence accumulates. [ADR-0011]
 - When any falsifier triggers, a successor ADR MUST be authored that re-evaluates Options A–D against the then-current evidence and supersedes this one via `adr_supersedes: [ADR-0011]`. [ADR-0011]
+- ** The validator MUST emit diagnostic code **`F. [ADR-0012]
+- ### Negative - ADR readers MUST follow the `adr_relates_to` graph (this ADR cites ADR-0011) to discover the renumber. [ADR-0012]
 
 ### SHOULD
 - md §8 SHOULD drop the "authoring ADR pending" parenthetical via a follow-up T1 / T2 edit. [ADR-0006]
 - The tag-only pin is then insufficient and the policy SHOULD switch to tag + SHA composite pinning. [ADR-0011]
+- json) SHOULD gain entries for `F. [ADR-0012]
 
 ### MUST NOT
 - ** The narrative skills (`skills/novel-architect/`, `skills/suno-lyric-writer/`) follow a parallel pattern — they ship large reference corpora that consumers MUST NOT autoload (NO. [ADR-0006]
@@ -533,7 +536,7 @@ The block below is rewritten by [`tools/adr/cli.py synthesize`](./tools/adr/cli.
 ### MAY
 - md) MAY be extended in a follow-up T2 commit to show a `skill_source` commented-example line; not blocking on the first port. [ADR-0011]
 
-**Contributing ADRs:** ADR-0006, ADR-0007, ADR-0011.
+**Contributing ADRs:** ADR-0006, ADR-0007, ADR-0011, ADR-0012.
 <!-- END AGENCY-ADR SYNTHESIS -->
 
 ---

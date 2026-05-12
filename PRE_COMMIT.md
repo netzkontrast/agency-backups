@@ -62,6 +62,7 @@ The table below maps every concern the gate covers to the tool that owns it in e
 | Concern | Legacy | Flexible (canonical) | ADR |
 |---|---|---|---|
 | Frontmatter L1 + L2 keys | [`tools/legacy/validate-frontmatter.py`](./tools/legacy/validate-frontmatter.py) | [`tools/fm/validate.py`](./tools/fm/validate.py) | — |
+| Skill imports — `skill_source` pin (ADR-0011 + ADR-0012) | — | `tools/fm/validate.py::_check_skill_source` (codes **`F.B.8`** bare-slug violation; **`F.B.9`** malformed value) | — |
 | Body section schema (per-type required headings) | — | `tools/fm/validate.py --check-body` | — |
 | Cross-reference linkage (`task_uses_prompts` ↔ `prompt_relates_to_task`, etc.) | [`tools/legacy/lint-linkage.py`](./tools/legacy/lint-linkage.py) (shim) | `tools/fm/validate.py --type-check` | — |
 | Directory structure (required files per folder) | — | [`tools/lint-structure.py`](./tools/lint-structure.py) | — |
