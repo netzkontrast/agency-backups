@@ -1,13 +1,13 @@
 ---
 type: index
 status: active
-slug: task-090-subtasks-index
-summary: "Subtask index for Task 090 Epic. Two sequential subtasks: ST-1 (corpus) → ST-2 (hookup) per ADR-0011 + OQ1 resolution."
+slug: task-091-subtasks-index
+summary: "Subtask index for Task 091 Epic. Two sequential subtasks: ST-1 (corpus) → ST-2 (hookup) per ADR-0011 + OQ1 resolution."
 created: 2026-05-12
 updated: 2026-05-12
 ---
 
-# Task 090 — Subtask Index
+# Task 091 — Subtask Index
 
 Per ADR-0011 + OQ1 resolution (`../references/full-plan-part-3.md` §9.7), Phase 1 ships as **two sequential subtasks**. The corpus lands first (skills + validator); the root-spec hookup lands after corpus merges to `main`. This shape matches the Agency precedent for two-PR feature work where the second PR depends on real local files materialised by the first.
 

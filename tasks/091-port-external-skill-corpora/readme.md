@@ -2,12 +2,12 @@
 type: index
 status: active
 slug: port-external-skill-corpora
-summary: "Directory index for Task 090 Epic — port SuperClaude_Framework v4.3.0 + Superpowers v4.0.3 skill corpora into /skills/ under vendor-prefixed namespaces per ADR-0011. Two sequential subtasks: ST-1 corpus + ST-2 hookup."
+summary: "Directory index for Task 091 Epic — port SuperClaude_Framework v4.3.0 + Superpowers v4.0.3 skill corpora into /skills/ under vendor-prefixed namespaces per ADR-0011. Two sequential subtasks: ST-1 corpus + ST-2 hookup."
 created: 2026-05-12
 updated: 2026-05-12
 ---
 
-# Task 090 — Port External Skill Corpora (Epic)
+# Task 091 — Port External Skill Corpora (Epic)
 
 **What:** Epic umbrella for the Phase 1 execution of [ADR-0011](../../decisions/0011-external-skill-corpora-import.md). Resolves the five dangling `/sc:*` references in [`CLAUDE.md §13`](../../CLAUDE.md) and the remote-URL citation in [`AGENTS.md` Closing Run Procedure](../../AGENTS.md#closing-run-procedure) by porting 14 SuperClaude skills (5 commands + 9 supporting agents) into `skills/sc-*/` under the policy ratified in ADR-0011. Contains no code diffs itself — diffs land via two sequential subtasks.
 
@@ -31,4 +31,5 @@ updated: 2026-05-12
 
 - The 14-item Phase 1 batch (per `references/full-plan-part-1.md` §2.1 and `references/full-plan-part-4.md` §10.3) is the minimum viable cut to close the dangling references in `CLAUDE.md §13`. Phase 2 (`/sc:troubleshoot`, `/sc:cleanup`, `/sc:document`, `/sc:explain`, plus the Superpowers corpus) is deferred to a follow-up Epic; not blocking the dangling-reference fix.
 - The originally-numbered `ADR-0010` was renumbered post-hoc to `ADR-0011` due to a slot collision with [`decisions/0010-novel-architect-error-tier-linter-policy.md`](../../decisions/0010-novel-architect-error-tier-linter-policy.md) (created the same day, indexed only in the same PR session). The renumber preserved all content verbatim. See PR #107 description for the audit trail.
+- The Epic was originally filed as **Task 090** and renumbered to **Task 091** when this branch was synced with `main`. Main had two pre-existing `tasks/090-*` folders ([`090-codex-pr-review`](../090-codex-pr-review/) and [`090-review-pr109-archive-spec`](../090-review-pr109-archive-spec/)) both claiming `task_id: "090"` — itself a `TASK.md §8.1` duplicate awaiting a renumber-Task on main. Taking the next free slot (091) avoided compounding the duplicate into a triple-collision.
 - `skill_source` pin format is **tag only** (`superclaude@v4.3.0`, `superpowers@v4.0.3`) per `references/full-plan-part-3.md` §9.7 OQ5 resolution. Tag-rot risk acknowledged; mitigations listed in ADR-0011 F2 falsifier trigger.

@@ -1,8 +1,8 @@
 ---
 type: note
 status: active
-slug: task-090-st1-phase-1-corpus
-summary: "ST-1 (Task 090 Epic): extend tools/fm/validate.py for skill_source key + create 14 skill folders under skills/sc-*/ per ADR-0011 Phase 1. Corpus only; root-spec hookup deferred to ST-2."
+slug: task-091-st1-phase-1-corpus
+summary: "ST-1 (Task 091 Epic): extend tools/fm/validate.py for skill_source key + create 14 skill folders under skills/sc-*/ per ADR-0011 Phase 1. Corpus only; root-spec hookup deferred to ST-2."
 created: 2026-05-12
 updated: 2026-05-12
 ---
@@ -58,7 +58,7 @@ Verbatim from `../references/full-plan-part-4.md` §10.5 Task A — anchors `TA.
 
 ## Branch + PR shape
 
-Author on a **fresh branch** derived from `main` post-merge of this Epic-scaffold PR (#107). Do NOT continue on `claude/analyze-repo-architecture-KEvqh` — that branch is the ADR + Epic-scaffold, not the corpus implementation. PR title MUST cite this subtask, e.g. `Task 090 ST-1: Phase 1 corpus (14 sc-* skills + validator)`. PR body MUST include:
+Author on a **fresh branch** derived from `main` post-merge of this Epic-scaffold PR (#107). Do NOT continue on `claude/analyze-repo-architecture-KEvqh` — that branch is the ADR + Epic-scaffold, not the corpus implementation. PR title MUST cite this subtask, e.g. `Task 091 ST-1: Phase 1 corpus (14 sc-* skills + validator)`. PR body MUST include:
 
 - The BR.9.5 size-cap verification command output (`python3 tools/fm/validate.py --check-body skills/sc-*/SKILL.md` exit 0).
 - The TA.1.4 reciprocity verification output from the regenerated manifest.

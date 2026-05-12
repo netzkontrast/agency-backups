@@ -1,11 +1,12 @@
 > **Editorial note (added when embedding this plan as the Epic task's `references/full-plan.md`):**
 >
-> This document is the *complete planning record* produced during the `/sc:brainstorm` → `/sc:design` → `/sc:implement` cycle that authored Task 090. Two renumberings were applied post-hoc to keep the embedded plan consistent with the realized repository state:
+> This document is the *complete planning record* produced during the `/sc:brainstorm` → `/sc:design` → `/sc:implement` cycle that authored this Epic. **Three** renumberings were applied post-hoc to keep the embedded plan consistent with the realized repository state:
 >
 > 1. **`ADR-0010` → `ADR-0011`** throughout. The 0010 slot was already taken by [`decisions/0010-novel-architect-error-tier-linter-policy.md`](../../../decisions/0010-novel-architect-error-tier-linter-policy.md) (created the same day, discovered after the initial commit on this branch). The renumber preserved all content verbatim. The active ADR for this Epic is [`decisions/0011-external-skill-corpora-import.md`](../../../decisions/0011-external-skill-corpora-import.md). Gherkin anchors `ADR.10.{1,2,3}` correspondingly became `ADR.11.{1,2,3}`.
-> 2. **`<NNN>` / `<NNN+1>`** in §10.5 "Task A" / "Task B" scaffolds → realized as **Task 090** (this Epic) with two subtasks: **ST-1** (`subtasks/01-phase-1-corpus.md` — Task A's corpus work) and **ST-2** (`subtasks/02-phase-1-hookup.md` — Task B's hookup work). The two-Task design from §10.5 is preserved as a two-subtask design under one Epic.
+> 2. **`<NNN>` / `<NNN+1>`** in §10.5 "Task A" / "Task B" scaffolds → realized as **Task 091** (this Epic) with two subtasks: **ST-1** (`subtasks/01-phase-1-corpus.md` — Task A's corpus work) and **ST-2** (`subtasks/02-phase-1-hookup.md` — Task B's hookup work). The two-Task design from §10.5 is preserved as a two-subtask design under one Epic.
+> 3. **Task 090 → Task 091.** The Epic was initially filed as Task 090, but when this branch synced with `main` two existing `tasks/090-*` folders were discovered (`090-codex-pr-review` and `090-review-pr109-archive-spec`, both claiming `task_id: "090"` — a duplicate which itself awaits a `TASK.md §8.1` renumber on main). To avoid a triple-collision, this Epic was renumbered to the next free slot **091**. All folder paths and `task_id` frontmatter values were updated; section anchors (§1–§10) and Gherkin AC anchors (`BR.9.*`, `TA.1.*`, `TB.1.*`) are unchanged.
 >
-> Section anchors (§1–§10) and Gherkin AC anchors (`BR.9.*`, `TA.1.*`, `TB.1.*`) are unchanged. References to "Phase 2 / Phase 3" in §5 / §9.8 describe future expansion beyond what this Epic delivers; those are explicitly out of scope for Task 090.
+> Section anchors (§1–§10) and Gherkin AC anchors (`BR.9.*`, `TA.1.*`, `TB.1.*`) are unchanged. References to "Phase 2 / Phase 3" in §5 / §9.8 describe future expansion beyond what this Epic delivers; those are explicitly out of scope for Task 091.
 
 ---
 

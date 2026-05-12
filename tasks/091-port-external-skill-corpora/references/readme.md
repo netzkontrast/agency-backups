@@ -1,15 +1,15 @@
 ---
 type: index
 status: active
-slug: task-090-full-plan-index
-summary: "Index for the four-part complete planning record embedded as references/ for Task 090. Split for tool-call size constraints; logically one document."
+slug: task-091-full-plan-index
+summary: "Index for the four-part complete planning record embedded as references/ for Task 091. Split for tool-call size constraints; logically one document."
 created: 2026-05-12
 updated: 2026-05-12
 ---
 
-# Task 090 — Full Plan (Index)
+# Task 091 — Full Plan (Index)
 
-The complete planning record produced during the `/sc:brainstorm` → `/sc:design` → `/sc:implement` cycle that authored Task 090. The four parts below are split for tool-call size constraints only; logically the plan is one continuous document.
+The complete planning record produced during the `/sc:brainstorm` → `/sc:design` → `/sc:implement` cycle that authored Task 091. The four parts below are split for tool-call size constraints only; logically the plan is one continuous document.
 
 Read in order:
 

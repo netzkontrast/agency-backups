@@ -1,8 +1,8 @@
 ---
 type: note
 status: active
-slug: task-090-st2-phase-1-hookup
-summary: "ST-2 (Task 090 Epic): rewrite AGENTS.md Closing Run Procedure to cite local skills/sc-createPR/, add RESEARCH.md §7 citing skills/sc-research/. Hookup only; corpus shipped by ST-1."
+slug: task-091-st2-phase-1-hookup
+summary: "ST-2 (Task 091 Epic): rewrite AGENTS.md Closing Run Procedure to cite local skills/sc-createPR/, add RESEARCH.md §7 citing skills/sc-research/. Hookup only; corpus shipped by ST-1."
 created: 2026-05-12
 updated: 2026-05-12
 ---
@@ -39,7 +39,7 @@ Verbatim from `../references/full-plan-part-4.md` §10.5 Task B — anchors `TB.
 
 ## Branch + PR shape
 
-Author on a **fresh branch** derived from `main` after ST-1 merges. PR title MUST cite this subtask, e.g. `Task 090 ST-2: Phase 1 hookup (AGENTS.md cite + RESEARCH.md §7)`. PR body MUST include:
+Author on a **fresh branch** derived from `main` after ST-1 merges. PR title MUST cite this subtask, e.g. `Task 091 ST-2: Phase 1 hookup (AGENTS.md cite + RESEARCH.md §7)`. PR body MUST include:
 
 - The BR.9.2 grep output (`grep -n "src/superclaude/commands/createPR.md" AGENTS.md` exits with status 1 and zero matches).
 - The TB.1.2 reader-visible confirmation: links resolve to the local files materialised by ST-1.

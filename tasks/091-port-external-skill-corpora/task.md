@@ -5,7 +5,7 @@ slug: port-external-skill-corpora
 summary: "Epic: Port SuperClaude v4.3.0 + Superpowers v4.0.3 skill corpora into /skills/ under vendor-prefixed namespaces per ADR-0011. Phase 1 (14 skills + validator + root-spec hookup) ships in two subtasks ST-1 + ST-2."
 created: 2026-05-12
 updated: 2026-05-12
-task_id: "090"
+task_id: "091"
 task_status: open
 task_owner: "claude-opus-4-7"
 task_priority: P1
@@ -34,7 +34,7 @@ task_affects_paths:
   - RESEARCH.md
 ---
 
-# Task 090 — Port External Skill Corpora (Epic)
+# Task 091 — Port External Skill Corpora (Epic)
 
 ## Goal
 
