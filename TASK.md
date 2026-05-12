@@ -207,6 +207,62 @@ The agent MUST verify, before staging the commit:
 
 The maintenance and coherence-check agents enforce this rule on every run; per-session agents enforce it at commit time. A commit that touches `task.md` or creates/renames a `tasks/<NNN>-<slug>/` folder without a corresponding edit to `tasks/readme.md` MUST be rejected by the linter mapping in §7.0 row §7.11.
 
+### 4.9 Planning Pipeline for T3-Structural Tasks (`/sc:*` Ladder)
+
+When a Task's scope crosses the T3 (Structural) repair tier defined in [`MAINTENANCE.md §1`](./MAINTENANCE.md#1-repair-permission-tiers) — section heading rewrites, schema changes, root-spec edits beyond T1/T2, slug renames, sub-module refactors, or cross-cutting prose rewrites across more than three files — the agent SHOULD execute the four-stage SuperClaude planning ladder before authoring `task.md`'s `## Plan` section:
+
+```
+/sc:analyze  →  /sc:brainstorm  →  /sc:design  →  /sc:workflow
+```
+
+Each stage produces a discoverable artifact and feeds the next:
+
+| Stage | Purpose | Output | Canonical home |
+|---|---|---|---|
+| `/sc:analyze` | Audit current state vs. claims; surface findings with severity | H/M/L findings list | Chat or commit message; cited in `task.md` `## Context` |
+| `/sc:brainstorm` | Socratic discovery of open design questions; lock decisions | Decision matrix (D1, D2, …) | `task.md` `## Context` or `readme.md` `## Assumptions Log` |
+| `/sc:design` | Synthesize architectural artifacts; spawn parallel Explore subagents for evidence | 5 design artifacts (contracts, manifests, specs) | Chat; key artifacts may persist in `tasks/<NNN>-<slug>/design.md` |
+| `/sc:workflow` | Decompose design into commit-sized atomic steps with DAG + verification | `workflow.md` (clusters, ACs, risks, FL pre-brief) | `tasks/<NNN>-<slug>/workflow.md` |
+
+The `workflow.md` SHOULD be committed alongside `task.md` and `readme.md` so the executable plan is discoverable from the Task folder. Future agents reading the Task SHOULD be able to reconstruct the planning provenance from these files alone, without re-running the ladder.
+
+**Worked example.** [Task 083 — novel-architect-v111-hardening](./tasks/083-novel-architect-v111-hardening/) executes the full ladder in-session, producing 6 locked decisions, 5 design artifacts, and a 19-commit workflow saved to [`workflow.md`](./tasks/083-novel-architect-v111-hardening/workflow.md). The Task's `readme.md` `## Assumptions Log` records the brainstorm decisions; `task.md` `## Context` cites the analysis findings.
+
+#### Normative Rules
+
+- **T.4.9.1** An agent considering a Task whose scope crosses the T3 boundary (per `MAINTENANCE.md §1`) SHOULD execute the `/sc:analyze → /sc:brainstorm → /sc:design → /sc:workflow` ladder before authoring `task.md`'s `## Plan` section. Skipping the ladder is permitted for trivially-decomposable Tasks (e.g., a single-file linter rule addition, a one-line frontmatter fix); the threshold is operator judgment, not mechanically enforced.
+- **T.4.9.2** When the ladder is executed, the `/sc:workflow` output MUST be saved as `tasks/<NNN>-<slug>/workflow.md` carrying L1 Vault Core frontmatter (`type: note`, `status: active`, `slug`, `summary`, `created`, `updated`). The workflow document is the executable contract; `task.md`'s `## Plan` section MUST reference it by relative Markdown link.
+- **T.4.9.3** `/sc:design` SHOULD use parallel Explore subagents for evidence gathering when the design requires reading reference patterns from sibling skills, design-source documents, or producing line-level manifests across more than three files. Subagent fan-out is the canonical pattern; sequential synthesis-only mode is permitted for trivially-scoped designs.
+- **T.4.9.4** Decisions locked in `/sc:brainstorm` MUST be recoverable from the Task's `readme.md` `## Assumptions Log` or `task.md` `## Context`. An agent re-entering the Task in a later session MUST NOT have to re-run the brainstorm to recover the decision premises.
+- **T.4.9.5** The ladder is **advisory-tier**: governance gate `tools/check-governance.sh` does NOT mechanically check for ladder execution. Compliance is a social contract between the Task author and reviewers; absence of `workflow.md` on a clearly-T3 Task is a code-review finding, not a pre-commit error.
+
+```gherkin
+Feature: Planning ladder for T3-structural Tasks
+
+  # anchor: T.4.9.1
+  Scenario: T3-structural Task scopes the planning ladder before writing
+    Given an agent is about to file a new Task
+    And the Task touches more than three files OR a root governance spec OR a sub-module refactor
+    When the agent decides on the Task's `## Plan` section
+    Then the agent SHOULD execute /sc:analyze → /sc:brainstorm → /sc:design → /sc:workflow first
+    And the Task's task.md `## Plan` section SHOULD reference the workflow.md artifact
+
+  # anchor: T.4.9.2
+  Scenario: Workflow document is discoverable from the Task folder
+    Given /sc:workflow has produced an implementation plan
+    When the agent commits the plan
+    Then the plan MUST live at tasks/<NNN>-<slug>/workflow.md
+    And it MUST carry L1 frontmatter (type: note, status: active, slug, summary, created, updated)
+    And task.md's `## Plan` section MUST reference it via relative Markdown link
+
+  # anchor: T.4.9.4
+  Scenario: Brainstorm decisions are recoverable from Task artefacts
+    Given a Task that executed /sc:brainstorm in a prior session
+    When a future agent re-enters the Task
+    Then the locked decisions MUST be readable from `readme.md` `## Assumptions Log` OR `task.md` `## Context`
+    And the agent MUST NOT need to re-run /sc:brainstorm to recover the decision premises
+```
+
 ## 5. `task.md` Required Sections
 
 Every `task.md` MUST contain, in order:

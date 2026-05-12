@@ -4,7 +4,7 @@ status: active
 slug: tasks-root
 summary: "Root of /tasks/. Each subfolder is one orchestrated unit of work linking prompts, research, and code via frontmatter."
 created: 2026-05-04
-updated: 2026-05-11
+updated: 2026-05-12
 ---
 
 # Tasks Root
@@ -106,6 +106,10 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`080-dramatica-scenarios-line-index/`](./080-dramatica-scenarios-line-index/) — **Cohort-1 Foundation** (Task 078 child): build-time line-indexing for `ontology.json` per SPEC.md §2 — every entry gains `term_file_line:<int>` + `term_file_anchor:<str>` from indexed vocabulary refs (24 files) + theory chunks (15 files) + new scenarios/*.md (self-indexing). Idempotent precompile. Blocked by Task 078. Status: `open`.
 - [`081-dramatica-scenarios-nav-instruct/`](./081-dramatica-scenarios-nav-instruct/) — **Cohort-1 Foundation** (Task 078 child): implement `nav.py instruct <entry> <scenario>` subcommand. Joins ontology data (Task 080's line-index) + per-scenario corpus (Task 079's template + Cohort-3's authoring) into structured operational instructions. Additive — does NOT modify the existing `by-id` contract. Blocked by Tasks 079 + 080. Status: `open`.
 - [`082-dramatica-scenarios-taxonomy/`](./082-dramatica-scenarios-taxonomy/) — **Cohort-2 Discovery-confirmation** (Task 078 child): formalize SPEC.md §3.4's FINAL scenario taxonomy in `ontology.json` — apply ADD verdicts to entry `scenarios:` lists. Pre-condition for Cohort-3 authoring (one Task per scenario). Blocked by Tasks 078 + 080. Status: `open`.
+- [`083-novel-architect-v111-hardening/`](./083-novel-architect-v111-hardening/) — Convert `novel-architect@1.1.0` from metadata-only delegation into a runtime two-layer contract. Rewrites 12 orchestrator files (5 phases + 7 commands); grows the 4 sub-modules with 14 new method files; graduates scene from stub; ships 3 of 4 deferred CLI linters (worksheet-order WARN, hard-rules WARN→ERROR-promotion-deferred, canon-status WARN). Closes /sc:analyze findings H1/H2/M1/M2/M3/M4 from the v1.1.0 release. Planning ladder fully executed in-session: `/sc:analyze` → `/sc:brainstorm` (6 locked decisions D1–D6) → `/sc:design` (5 artifacts via 4 Explore subagents) → `/sc:workflow` (19-commit plan in [`workflow.md`](./083-novel-architect-v111-hardening/workflow.md)). Status: `open`.
+- [`084-retire-novel-architect-legacy/`](./084-retire-novel-architect-legacy/) — Placeholder Task that retires `skills/novel-architect-legacy@0.3.3-archived` once Task 070's three preconditions (a/b/c) all hold. Filed now (not at-need) so the retirement contract is machine-discoverable. Criterion (c) already mechanically satisfied; (a)+(b) require productive Kohärenz-Protokoll sessions on v1.1.1+. Blocked by Task 083. Status: `blocked`.
+- [`085-promote-check-hard-rules-error-tier/`](./085-promote-check-hard-rules-error-tier/) — Promote `tools/check-hard-rules.py` from WARN (exit 2, advisory) to ERROR (exit 1, gating) in `tools/check-governance.sh` after one validation cycle on v1.1.1. Mirrors Task 064's `--check-body` WARN→ERROR promotion pattern (≤250 ms runtime regression falsifier). Blocked by Task 083. Status: `blocked`.
+- [`086-novel-architect-scene-audit-linter/`](./086-novel-architect-scene-audit-linter/) — Ship `tools/check-scene-audit.py` — the 4th deferred CLI linter from the v1.1.0 friction log. Validates Q1–Q5 audit completeness in scene matrices against `skills/novel-architect-scene/methods/scene-level-bridge.md`. Sequenced separately because the target spec stabilizes during Task 083's scene-graduation commit cluster. Blocked by Task 083. Status: `blocked`.
 
 ### Chain-Level Falsification (Tasks 032–039)
 
