@@ -255,7 +255,7 @@ def save_project_config(slug: str, config: dict[str, Any]) -> None:
 # ─── Constants ───────────────────────────────────────────────────────────────
 
 
-SKILL_VERSION = "1.0.0"
+SKILL_VERSION = "1.1.1"
 SCHEMA_VERSION_INTENT = "1.0"
 SCHEMA_VERSION_ARCHITECTURE = "1.0"
 SCHEMA_VERSION_CHARACTER = "1.0"
