@@ -4,7 +4,7 @@ description: >-
   Technical verification discipline before implementing review feedback. Use when responding to PR review comments — do not "fix" feedback without first verifying the reviewer's claim is correct.
 skill_kind: discipline
 skill_target_agents: [claude-code]
-skill_references_skills: [superpowers-requesting-code-review, sc-self-review]
+skill_references_skills: [sc-self-review]
 skill_references_research: []
 skill_references_prompts: []
 skill_bootstrap_required: false
@@ -30,6 +30,8 @@ Fire when a reviewer leaves a comment that suggests a change. Especially: commen
    - **Correct + disagreed:** explain the trade-off in a reply; ask the reviewer if they still want the change after your context.
    - **Incorrect:** reply with the counter-evidence; close the thread without the change.
 4. **Never** make a change just to close a thread — that creates technical debt and trains reviewers to leave low-quality comments.
+
+> Forward-reference: pairs with `superpowers-requesting-code-review` (Task 092 ST-3 batch B); the `skill_references_skills` edge will be added once that skill lands.
 
 Full behavioural specification at `references/upstream-superpowers-receiving-code-review.md`.
 

@@ -35,7 +35,7 @@ Full per-phase guidance + worked examples at `references/upstream-superpowers-td
 
 - Upstream verbatim mirror: [`references/upstream-superpowers-tdd.md`](./references/upstream-superpowers-tdd.md) (Superpowers `skills/test-driven-development/SKILL.md` @ SHA `b9e16498`, v4.0.3).
 - Test-execution counterpart: [`skills/sc-test/SKILL.md`](../sc-test/SKILL.md).
-- Triage rationale: [`tasks/092-…/triage-notes/superpowers-discipline-cluster.md`](../../tasks/092-port-skill-corpora-phase-2/references/triage-notes/superpowers-discipline-cluster.md).
+- Triage rationale: [`tasks/092-…/references/triage-notes/superpowers-discipline-cluster.md`](../../tasks/092-port-skill-corpora-phase-2/references/triage-notes/superpowers-discipline-cluster.md).
 - Import policy: [`decisions/0011-external-skill-corpora-import.md`](../../decisions/0011-external-skill-corpora-import.md).
 
 ## Compatibility
