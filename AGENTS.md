@@ -102,7 +102,7 @@ Step 4 MUST be idempotent: re-invocation on a branch that already has an open pu
 
 #### Claude Code
 
-Step 4 is satisfied by invoking the `/sc:createPR` slash-command immediately after a successful `git push`. The command is provided by the **SuperClaude Framework** at [`src/superclaude/commands/createPR.md`](https://github.com/netzkontrast/SuperClaude_Framework/blob/main/src/superclaude/commands/createPR.md); it is installed automatically alongside the rest of the `/sc:*` command set. The skill re-runs `tools/check-governance.sh` before opening the PR (defence-in-depth on CR.3) and assembles the citation block CR.5 requires.
+Step 4 is satisfied by invoking the `/sc:createPR` slash-command immediately after a successful `git push`. The command is provided locally at [`skills/sc-createPR/SKILL.md`](./skills/sc-createPR/SKILL.md) under the import policy ratified by [ADR-0011](./decisions/0011-external-skill-corpora-import.md); it is materialised under `~/.claude/skills/sc-createPR/` by [`skills/skills-skill-bootstrap/sync.sh`](./skills/skills-skill-bootstrap/sync.sh). The skill re-runs `tools/check-governance.sh` before opening the PR (defence-in-depth on CR.3) and assembles the citation block CR.5 requires.
 
 If the cloud-hosted GitHub MCP integration is the agent's only path to GitHub (no local `gh` CLI), the agent MUST use the `mcp__github__create_pull_request` tool with the same body conventions; the four-step checklist applies unchanged.
 
