@@ -2,7 +2,7 @@
 type: task
 status: active
 slug: skill-integration-agency-default
-summary: "Epic: Integrate the 52 imported skills (39 sc-* + 13 superpowers-*) into Agency's default operating surface — root-spec citations (every orphan skill cited), .claude/ directory + .claude-plugin/plugin.json (agency@1.0.0), 5 D.7-compliant event-driven hooks, and carried-forward closure of the Task 092 T3 (skill_kind enum) + T1 (triage-note typos) follow-ups."
+summary: "Epic: Integrate the 54 imported skills (39 sc-* + 15 superpowers-*) into Agency's default operating surface — root-spec citations (every orphan skill cited), .claude/ directory + .claude-plugin/plugin.json (agency@1.0.0), 5 D.7-compliant event-driven hooks, and carried-forward closure of the Task 092 T3 (skill_kind enum) + T1 (triage-note typos) follow-ups."
 created: 2026-05-12
 updated: 2026-05-12
 task_id: "094"
@@ -28,7 +28,7 @@ task_affects_paths:
   - tools/tests/test_hooks.py
   - tasks/092-port-skill-corpora-phase-2/references/triage-notes/
 task_blocked_by:
-  - "092"
+  - 092
 ---
 
 # Task 094 — Skill Integration & Agency Default Surface (Epic)

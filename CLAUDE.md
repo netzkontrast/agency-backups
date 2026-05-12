@@ -237,6 +237,8 @@ Invoke skills via the **Skill** tool only when the user types `/<skill>` or the 
 
 The imported corpus is grouped by `skill_kind` (the 9-value enum ratified in [SKILLS.md §3](./SKILLS.md#3-frontmatter-namespace)). Use the per-spec audit anchors below to navigate from a category to its skills.
 
+This section partitions by **source** (SuperClaude vs. Superpowers) and counts categories within each source. AGENTS.md's "Skill Index by Category" partitions by **`skill_kind` across both sources**, so its counts differ — e.g. orchestrator is **9** here (sc-* only) but **12** in AGENTS.md (9 sc-* + 3 superpowers-*). Both partitions cite the same 54 skills; pick whichever axis matches the lookup.
+
 <!-- anchor: SK.13.SUPERCLAUDE -->
 ### 13.1 SuperClaude (`sc-*`) — 39 skills (`skill_source: superclaude@v4.3.0`)
 

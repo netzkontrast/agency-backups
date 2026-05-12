@@ -202,7 +202,7 @@ High-level surface skills that route work through other skills, Tasks, or subage
 <!-- anchor: SK.AGENTS.discipline.1 -->
 ### Discipline skills (8) — Superpowers gates
 
-Pre-commit / pre-completion discipline gates routed through PreToolUse / Stop hooks (Task 094 ST-3 surface). Each gate emits an audit line under `.claude/audit/` when triggered.
+Pre-commit / pre-completion discipline gates intended to be routed through `PreToolUse` / `Stop` hooks once Task 094 ST-3 ships those hooks; until then they are invoked manually via the Skill tool. ST-3 will additionally emit an audit line under `.claude/audit/` when a gate triggers.
 
 - [`superpowers-brainstorming`](./skills/superpowers-brainstorming/SKILL.md) — pre-plan ambiguity reduction.
 - [`superpowers-executing-plans`](./skills/superpowers-executing-plans/SKILL.md) — bite-sized task execution with batch checkpoints.

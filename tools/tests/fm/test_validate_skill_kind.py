@@ -7,7 +7,7 @@ carry-forward T3.
 Valid values: domain, tool, orchestrator, meta, discipline, workflow,
               persona, analysis, agent-template.
 
-Run: python3 -m unittest tools/tests/fm/test_validate_skill_kind.py
+Run: python3 -m pytest tools/tests/fm/test_validate_skill_kind.py
 """
 from __future__ import annotations
 
@@ -127,6 +127,39 @@ class TestSkillKindValidation(unittest.TestCase):
             rc, output = sb.run("skills/example-noop/SKILL.md")
             self.assertEqual(rc, 0, output)
             self.assertNotIn("F.B.11", output)
+        finally:
+            td.cleanup()
+
+    def test_null_skill_kind_emits_fb11(self):
+        """`skill_kind:` (parsed as YAML null / empty) MUST emit F.B.11 —
+        present-but-empty is a malformed declaration, distinct from absent
+        (which is permitted). Covers the PR #123 review A5 advisory gap."""
+        sb, td = self._new_sandbox()
+        try:
+            # `skill_kind:` (bare key, no value) — the parser surfaces this
+            # as a non-string sentinel; the enum check MUST still flag it.
+            sb.write(
+                "skills/example-null/SKILL.md",
+                _skill_md(extra_fm="skill_kind:\n"),
+            )
+            rc, output = sb.run("skills/example-null/SKILL.md")
+            self.assertEqual(rc, 1, output)
+            self.assertIn("F.B.11", output)
+            self.assertIn("9-value enum", output)
+        finally:
+            td.cleanup()
+
+    def test_explicit_yaml_null_emits_fb11(self):
+        """Explicit `skill_kind: null` MUST also emit F.B.11."""
+        sb, td = self._new_sandbox()
+        try:
+            sb.write(
+                "skills/example-explicit-null/SKILL.md",
+                _skill_md(extra_fm="skill_kind: null\n"),
+            )
+            rc, output = sb.run("skills/example-explicit-null/SKILL.md")
+            self.assertEqual(rc, 1, output)
+            self.assertIn("F.B.11", output)
         finally:
             td.cleanup()
 

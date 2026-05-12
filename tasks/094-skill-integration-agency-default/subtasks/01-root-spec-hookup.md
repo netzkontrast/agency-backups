@@ -2,7 +2,7 @@
 type: note
 status: active
 slug: task-094-st1-root-spec-hookup
-summary: "ST-1 (Task 094 Epic): cite every imported skill (52 total) in ≥ 1 root spec; ratify the expanded skill_kind enum (T3, 9 values) in SKILLS.md §3; add validator enum check (F.B.11); fix triage-note typos (T1) carried forward from Task 092."
+summary: "ST-1 (Task 094 Epic): cite every imported skill (54 total) in ≥ 1 root spec; ratify the expanded skill_kind enum (T3, 9 values) in SKILLS.md §3; add validator enum check (F.B.11); fix triage-note typos (T1) carried forward from Task 092."
 created: 2026-05-12
 updated: 2026-05-12
 ---
@@ -37,7 +37,7 @@ For every skill folder under `skills/sc-*` + `skills/superpowers-*`, add a citat
 
 ### T1 typo sweep
 
-- **`tasks/092-port-skill-corpora-phase-2/references/triage-notes/*.md`** — `grep -l "superclaude_framework@v4.3.0"` then sweep to canonical `superclaude@v4.3.0`. Use `Edit` per file (12 files affected; cosmetic only).
+- **`tasks/092-port-skill-corpora-phase-2/references/triage-notes/*.md`** — `grep -l "superclaude_framework@v4.3.0"` then sweep to canonical `superclaude@v4.3.0`. Use `Edit` per file (11 files affected; cosmetic only).
 - This is a **T1/T2 repair** on closed research per [`MAINTENANCE.md §1.0.1`](../../../MAINTENANCE.md#101-closed-research-t1t2-repair-allowance-task-059) — narrow allowance for `updated:` bumps and link-text fixes; the closed-research T4 immutability applies to *body content*, not these surface typo corrections.
 
 ## Out of scope
