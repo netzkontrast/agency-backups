@@ -59,13 +59,56 @@ Phase 1 batch ratified by [ADR-0011](../decisions/0011-external-skill-corpora-im
 - [sc-deep-research-agent/](./sc-deep-research-agent/) — Deep research specialist — adaptive strategies + multi-hop reasoning (Agency-adapted per ADR-0011 D.8).
 - [sc-pm-agent/](./sc-pm-agent/) — Project Manager agent — coordinates `/sc:*` workflows (`/sc:pm` only; inert at SessionStart per ADR-0011 D.7).
 
+### Phase 2 batch (Task 092 ST-2)
+
+Phase 2 ratified by [ADR-0011](../decisions/0011-external-skill-corpora-import.md). Imported under [Task 092](../tasks/092-port-skill-corpora-phase-2/task.md) ST-2; SHA-pinned to upstream `22ad3f4` per ADR-0011 D.3. 25 new folders (4 port commands, 13 adapt commands, 6 port agents, 1 adapt agent, 1 adapt skill). Each carries `skill_source: "superclaude@v4.3.0"`; bodies ≤ 5 KB per D.6; non-Agency MCPs appear ONLY in `## Compatibility` marked OPTIONAL per D.8; SessionStart-injection clauses stripped per D.7.
+
+**Commands — port (4):**
+- [sc-analyze/](./sc-analyze/) — Comprehensive code analysis across quality, security, performance, and architecture domains.
+- [sc-design/](./sc-design/) — Design system architecture, APIs, and component interfaces with comprehensive specifications.
+- [sc-document/](./sc-document/) — Generate focused documentation for components, functions, APIs, and features.
+- [sc-troubleshoot/](./sc-troubleshoot/) — Diagnose and resolve issues in code, builds, deployments, and system behavior.
+
+**Commands — adapt (13):**
+- [sc-build/](./sc-build/) — Build, compile, and package projects with intelligent error handling. Playwright MCP OPTIONAL (D.8).
+- [sc-brainstorm/](./sc-brainstorm/) — Interactive requirements discovery through Socratic dialogue. Sequential/Morphllm/Magic/Playwright/Context7/Serena MCPs OPTIONAL (D.6 + D.8).
+- [sc-business-panel/](./sc-business-panel/) — Multi-expert business strategy panel synthesising Christensen, Porter, Drucker, Godin, Kim & Mauborgne, Collins, Taleb, Meadows, Doumont. Sequential/Context7 MCPs OPTIONAL (D.8).
+- [sc-cleanup/](./sc-cleanup/) — Systematically clean up code, remove dead code, and optimize project structure. Sequential/Context7 MCPs OPTIONAL (D.8).
+- [sc-estimate/](./sc-estimate/) — Provide development estimates for tasks, features, or projects with intelligent analysis. Sequential/Context7 MCPs OPTIONAL (D.8).
+- [sc-explain/](./sc-explain/) — Provide clear explanations of code, concepts, and system behavior. Sequential/Context7 MCPs OPTIONAL (D.8).
+- [sc-index/](./sc-index/) — Generate comprehensive project documentation and knowledge base with intelligent organization. Sequential/Context7 MCPs OPTIONAL (D.8).
+- [sc-load/](./sc-load/) — Session lifecycle — project context loading. Serena MCP OPTIONAL (D.8); Agency-native filesystem replacement (tasks/<NNN>/task.md + friction-log.md).
+- [sc-reflect/](./sc-reflect/) — Task reflection and validation using TodoWrite + frontmatter-driven review. Bundles MODE_Introspection. Serena MCP OPTIONAL (D.8).
+- [sc-save/](./sc-save/) — Session lifecycle — context persistence via Agency frontmatter + friction-log + git commit. Serena MCP OPTIONAL (D.8).
+- [sc-spec-panel/](./sc-spec-panel/) — Multi-expert specification review (Wiegers, Adzic, Cockburn, Fowler, Nygard, Newman, Hohpe, Crispin & Gregory, Hightower); per-expert profiles in references/experts/. Sequential/Context7 MCPs OPTIONAL (D.6 + D.8).
+- [sc-task/](./sc-task/) — Execute complex tasks with intelligent workflow management. Bundles MODE_Task_Management. Sequential/Context7/Magic/Playwright/Morphllm/Serena MCPs OPTIONAL (D.6 + D.8).
+- [sc-workflow/](./sc-workflow/) — Generate structured implementation workflows from PRDs and feature requirements. Heavy MCP cluster OPTIONAL (D.6 + D.8).
+
+**Agents — port (6):**
+- [sc-devops-architect/](./sc-devops-architect/) — Automate infrastructure and deployment with focus on reliability and observability.
+- [sc-learning-guide/](./sc-learning-guide/) — Teach programming concepts with focus on progressive learning and practical examples.
+- [sc-python-expert/](./sc-python-expert/) — Deliver production-ready, secure, high-performance Python following SOLID principles.
+- [sc-requirements-analyst/](./sc-requirements-analyst/) — Transform ambiguous project ideas into concrete specifications through systematic discovery.
+- [sc-root-cause-analyst/](./sc-root-cause-analyst/) — Systematically investigate complex problems through evidence-based analysis and hypothesis testing.
+- [sc-self-review/](./sc-self-review/) — Post-implementation validation and reflexion partner.
+
+**Agents — adapt (1):**
+- [sc-socratic-mentor/](./sc-socratic-mentor/) — Educational guide specialising in Socratic method; teaching corpus extracted to `references/teaching-corpus.md`. Sequential MCP OPTIONAL (D.6 + D.8).
+
+**Skills — adapt (1):**
+- [sc-confidence-check/](./sc-confidence-check/) — Pre-implementation confidence assessment (≥ 90 % required) — duplicate check, architecture compliance, official-docs verification, OSS references, root-cause identification. D.7 audit performed (no SessionStart-injection clauses found in upstream; documented in SKILL.md `## Adaptations from upstream`).
+
+**Modes bundled as references (2):**
+- `MODE_Introspection` → [`sc-reflect/references/mode-introspection.md`](./sc-reflect/references/mode-introspection.md) (per Phase 1 precedent).
+- `MODE_Task_Management` → [`sc-task/references/mode-task-management.md`](./sc-task/references/mode-task-management.md).
+
 ## Management layer
 - [skills-skill-bootstrap/](./skills-skill-bootstrap/) — Sync tool: pulls skill bodies from `origin/main:skills/` into Claude Code's `~/.claude/skills/`.
 - [skill-creator/](./skill-creator/) — Verbatim mirror of [anthropics/skills · skills/skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) at 2026-05-05. Used as reference pattern by `/research/flexible-frontmatter-toolchain/` and Tasks 016/017.
 
 ## Current State
 
-- **14 Agency-native skills + 14 sc-\* imported skills + 2 management skills** in repo as of 2026-05-12.
+- **14 Agency-native skills + 39 sc-\* imported skills (14 Phase 1 + 25 Phase 2) + 2 management skills** in repo as of 2026-05-12.
 - `skills-skill-bootstrap/` sync mechanism is live and tested end-to-end.
 - Architecture spec for the future `skills-skill` loader is in progress at `research/skills-skill-architecture/` — awaiting Gemini Deep Research PDF to finalize.
 - `/skills/skills-skill/` path reserved; do not create until spec is accepted.
