@@ -4,7 +4,7 @@ status: active
 slug: agents-spec
 summary: "Entry-point governance spec for all agents operating in this repository. Defines task routing, folder rules, spec language (RFC 2119 + Gherkin), and the Frontmatter Ontology every agent must apply."
 created: 2026-05-02
-updated: 2026-05-11
+updated: 2026-05-12
 ---
 
 # Agent Instructions
@@ -180,6 +180,7 @@ Three top-level governance specs partition the work this repository performs. Pi
 | Authoring an executable instruction set (research proposal, follow-up, tool instruction, task-spec) | [PROMPT.md](./PROMPT.md) | [/prompts/](./prompts/) |
 | Executing a prompt to produce evidence, synthesis, reflection, output | [RESEARCH.md](./RESEARCH.md) | [/research/](./research/) |
 | Authoring or modifying a skill | [SKILLS.md](./SKILLS.md) | [/skills/](./skills/) |
+| Archivierung/Stilllegung von Artefakten inkl. Trigger und Ablauf | [ARCHIVE.md](./ARCHIVE.md) | [/tasks/](./tasks/), [/prompts/](./prompts/), [/research/](./research/) |
 
 **Separation of concerns is hard:** a Task MUST link to its prompt (never inline it); research MUST NOT contain prompt drafts; follow-up questions discovered during research MUST be filed as new prompts in `/prompts/`. The full audit-graph rules and Frontmatter Ontology (Layered Schema with Namespacing) live in [TASK.md §3](./TASK.md).
 
