@@ -63,6 +63,8 @@ Phase 1 batch ratified by [ADR-0011](../decisions/0011-external-skill-corpora-im
 
 Phase 2 ratified by [ADR-0011](../decisions/0011-external-skill-corpora-import.md). Imported under [Task 092](../tasks/092-port-skill-corpora-phase-2/task.md) ST-2; SHA-pinned to upstream `22ad3f4` per ADR-0011 D.3. 25 new folders (4 port commands, 13 adapt commands, 6 port agents, 1 adapt agent, 1 adapt skill). Each carries `skill_source: "superclaude@v4.3.0"`; bodies ≤ 5 KB per D.6; non-Agency MCPs appear ONLY in `## Compatibility` marked OPTIONAL per D.8; SessionStart-injection clauses stripped per D.7.
 
+Initial landing happened in two steps — the 10 pure-port skills shipped first as "batch A" via [PR #117](https://github.com/netzkontrast/agency/pull/117) (merged 2026-05-12); the remaining 15 skills + 2 mode bundles followed via [PR #118](https://github.com/netzkontrast/agency/pull/118). Per the PR #118 peer review, the two batches are now unified under this section.
+
 **Commands — port (4):**
 - [sc-analyze/](./sc-analyze/) — Comprehensive code analysis across quality, security, performance, and architecture domains.
 - [sc-design/](./sc-design/) — Design system architecture, APIs, and component interfaces with comprehensive specifications.
