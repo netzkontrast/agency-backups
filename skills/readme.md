@@ -74,6 +74,19 @@ Added 2026-05-12 under [Task 092](../tasks/092-port-skill-corpora-phase-2/task.m
 - [sc-root-cause-analyst/](./sc-root-cause-analyst/) — Root Cause Analyst agent — evidence-based hypothesis testing for complex / recurring / multi-component failures.
 - [sc-self-review/](./sc-self-review/) — Self Review agent — post-implementation validation and reflexion partner; closing gate before PR.
 
+## Imported from Superpowers (v4.0.3)
+
+Imported under [Task 092](../tasks/092-port-skill-corpora-phase-2/task.md) ST-3 per [ADR-0011](../decisions/0011-external-skill-corpora-import.md); SHA-pinned to upstream `b9e16498` per ADR-0011 D.3. Each folder ships verbatim upstream body at `references/upstream-<slug>.md`.
+
+### Phase 2 batch A (ST-3) — pure ports (no MCP, no D.7 SessionStart-injection)
+
+- [superpowers-verification-before-completion/](./superpowers-verification-before-completion/) — Require evidence before claiming work complete; counterpart to `sc-self-review`.
+- [superpowers-finishing-a-branch/](./superpowers-finishing-a-branch/) — Three-option branch-completion decision tree: merge / PR / discard.
+- [superpowers-using-git-worktrees/](./superpowers-using-git-worktrees/) — Safety-checked git worktree creation for parallel-session development.
+- [superpowers-receiving-code-review/](./superpowers-receiving-code-review/) — Technical verification before implementing review feedback; not performative.
+- [superpowers-systematic-debugging/](./superpowers-systematic-debugging/) — Four-phase root-cause investigation: gather → hypothesise → test → fix.
+- [superpowers-tdd/](./superpowers-tdd/) — Red-Green-Refactor TDD discipline — write the failing test first.
+
 ## Management layer
 - [skills-skill-bootstrap/](./skills-skill-bootstrap/) — Sync tool: pulls skill bodies from `origin/main:skills/` into Claude Code's `~/.claude/skills/`.
 - [skill-creator/](./skill-creator/) — Verbatim mirror of [anthropics/skills · skills/skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) at 2026-05-05. Used as reference pattern by `/research/flexible-frontmatter-toolchain/` and Tasks 016/017.
