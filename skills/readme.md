@@ -117,6 +117,20 @@ Imported under [Task 092](../tasks/092-port-skill-corpora-phase-2/task.md) ST-3 
 - [superpowers-systematic-debugging/](./superpowers-systematic-debugging/) — Four-phase root-cause investigation: gather → hypothesise → test → fix.
 - [superpowers-tdd/](./superpowers-tdd/) — Red-Green-Refactor TDD discipline — write the failing test first.
 
+### Phase 2 batch B (ST-3) — adapt rows (Skill-tool semantics; D.7 strip on using-superpowers)
+
+8 superpowers skills + 1 agent template ported per the [ST-1 triage matrix](../tasks/092-port-skill-corpora-phase-2/references/triage-matrix.md) `adapt` rows (59–67). Each SKILL.md is Agency-tailored (Skill tool / Agent tool / Task layer primitives); upstream bodies (incl. 22 KB writing-skills) preserved verbatim in `references/`.
+
+- [superpowers-brainstorming/](./superpowers-brainstorming/) — Early ambiguity reduction before plan-writing; pairs with `sc-brainstorm`.
+- [superpowers-dispatching-parallel-agents/](./superpowers-dispatching-parallel-agents/) — Parallel subagent dispatch via Agency `Agent` tool with parallel tool-use.
+- [superpowers-executing-plans/](./superpowers-executing-plans/) — Execute bite-sized tasks from a plan with batch checkpoints.
+- [superpowers-subagent-driven-development/](./superpowers-subagent-driven-development/) — Two-stage subagent workflow — execute + review per task.
+- [superpowers-requesting-code-review/](./superpowers-requesting-code-review/) — Dispatch a code-reviewer subagent post-completion; wraps Agency built-in.
+- [superpowers-writing-plans/](./superpowers-writing-plans/) — Bite-sized task implementation plans; granular layer downstream of `sc-workflow`.
+- [superpowers-using-superpowers/](./superpowers-using-superpowers/) — Meta-skill — discipline-gate selector. **Adapted per D.7** (no SessionStart injection).
+- [superpowers-writing-skills/](./superpowers-writing-skills/) — TDD-for-skills meta-discipline; complements `skill-creator` + `spec-skill`.
+- [superpowers-code-reviewer/](./superpowers-code-reviewer/) — Subagent prompt template for Agency's built-in `code-reviewer` agent type.
+
 ## Management layer
 - [skills-skill-bootstrap/](./skills-skill-bootstrap/) — Sync tool: pulls skill bodies from `origin/main:skills/` into Claude Code's `~/.claude/skills/`.
 - [skill-creator/](./skill-creator/) — Verbatim mirror of [anthropics/skills · skills/skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) at 2026-05-05. Used as reference pattern by `/research/flexible-frontmatter-toolchain/` and Tasks 016/017.
