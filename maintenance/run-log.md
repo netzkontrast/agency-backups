@@ -974,3 +974,47 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
   caught by signal-unit test, one-line fix. TASK.md §4.7 helper paragraph
   + tools/fm/readme.md row updated. tools/check-governance.sh PASS.
   task_status: done.
+
+### Run 2026-05-12 — Repo Coherence Check
+- agent: claude-code (session claude/peaceful-carson-TUvMW)
+- routine_type: coherence-check
+- start_commit: 10dc24b
+- end_commit: pending
+- baseline_commit: 89c0aa3
+- files_in_delta: 199
+- files_scanned: 199
+- t1_fixes: 0
+- t2_fixes: 0
+- t3_tasks_created: 1
+- t4_skipped: 0
+- issues_skipped: 2
+- notes: >
+  Operator-instructed maintenance run: "Execute Maintenance.md ... After
+  you Are Done, collect all Information about the current Session, that
+  could Help to further Improve the Maintenance spec and submit a new
+  Task. /sc:analyze then /sc:reflect then /sc:improve then /sc:Review
+  then /sc:createPR". Baseline 89c0aa3 was stale (~199 files / 25 commits
+  of merged PRs since); the delta-aware triage collapsed to "trust the
+  linter outputs" since per-file inspection at 199-file scale is
+  infeasible. fm/validate.py --type-check PASS (498 files, 0
+  diagnostics). check-duplicate-task-id.py PASS. staleness-audit.py
+  surfaced 2 borderline (8d age) flagged Tasks: 008
+  (completed_by_drift) and 066 (no_longer_desirable). Both flagged at
+  the freshly-stale boundary; declined to autonomously close per §3.4
+  override conservatism (see Task 078 Plan-4 — urgency-tier
+  amendment). dynamic-readme-partition.py surfaced 181 M.B.6 WARN
+  diagnostics, overwhelmingly in prompts/tooling-*/readme.md folders;
+  cataloged as Task 078 Plan-3 (corpus migration tool). Run-log itself
+  carries `end_commit: pending` on lines 915 + 947 (Tasks 024+043 +
+  Task 049 closures from 2026-05-11 never backfilled) — captured as
+  Task 078 Plan-1 (run-log-backfill tool + spec amendment).
+  T3 output: tasks/078-improve-maintenance-spec-may-12-2026/ filed
+  with 5 findings (end_commit backfill, large-delta routing, M.B.6
+  corpus migration, staleness urgency tiers, single-command verifier),
+  amended by /sc:reflect → /sc:improve to close the Plan-1
+  chicken-and-egg loop (run-start invocation repairs the previous
+  record's `pending` inside the current run's atomic commit).
+  Issues skipped: stale Tasks 008 + 066 (declined to autonomously
+  close at the staleness-window boundary; logged here for human
+  reviewer per §3.4 override conservatism). FL1 declared on
+  tasks/078-improve-maintenance-spec-may-12-2026/friction-log.md.
