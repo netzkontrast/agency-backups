@@ -18,7 +18,6 @@ Usage from phases:
 
 from __future__ import annotations
 
-import json
 import os
 import re
 import tempfile
@@ -78,16 +77,16 @@ def project_workspace(slug: str) -> Path:
     """Return the canonical project workspace path.
 
     Honours `NOVEL_ARCHITECT_PROJECTS_ROOT` env override (see `projects_root`).
-    Per-project `project-config.yaml:project.workspace_root` overrides take
-    effect at the call sites that load config; this function returns the
-    convention path absent a project-config override.
+    Returns `<projects_root>/<slug>`. No per-project YAML override is consulted
+    by this function — callers that need a `project-config.yaml:project.workspace_root`
+    override must read and apply it themselves at the call site.
     """
     validate_slug(slug)
     return projects_root() / slug
 
 
 def ensure_workspace(slug: str) -> Path:
-    """Create workspace dir if missing, return path."""
+    """Create workspace dir if missing, return path. Used by write_status_view."""
     ws = project_workspace(slug)
     ws.mkdir(parents=True, exist_ok=True)
     return ws
@@ -134,38 +133,7 @@ def read_yaml(path: Path) -> dict[str, Any]:
         return yaml.safe_load(f) or {}
 
 
-def write_json(path: Path, data: dict[str, Any], indent: int = 2) -> None:
-    """Write JSON, atomic."""
-    content = json.dumps(data, indent=indent, ensure_ascii=False)
-    atomic_write(path, content)
-
-
-def read_json(path: Path) -> dict[str, Any]:
-    """Read JSON, return empty dict if missing."""
-    if not path.exists():
-        return {}
-    with path.open("r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-# ─── Append-only revisions ──────────────────────────────────────────────────
-
-
-def append_revision(yaml_data: dict[str, Any], note: str) -> dict[str, Any]:
-    """
-    Append a revision entry to the `revisions[]` list.
-    Returns the mutated dict (also mutates in-place).
-    """
-    if "revisions" not in yaml_data or not isinstance(yaml_data["revisions"], list):
-        yaml_data["revisions"] = []
-    yaml_data["revisions"].append({
-        "timestamp": utcnow_iso(),
-        "note": note,
-    })
-    return yaml_data
-
-
-# ─── Status / plan / audit views ─────────────────────────────────────────────
+# ─── Status views ────────────────────────────────────────────────────────────
 
 
 def write_status_view(
@@ -189,67 +157,6 @@ def write_status_view(
     )
     atomic_write(path, content)
     return path
-
-
-def write_plan_view(
-    slug: str,
-    phase: str,
-    title: str,
-    body: str,
-) -> Path:
-    """Write a plan-view markdown (for Gate-3-Approval rendering)."""
-    ws = ensure_workspace(slug)
-    path = ws / f"{phase}-plan-view.md"
-    timestamp = utcnow_iso()
-    content = (
-        f"# {title}\n\n"
-        f"> **Generated:** {timestamp}\n"
-        f"> **Phase:** {phase}\n"
-        f"> **Gate:** final-approval\n\n"
-        f"{body}\n"
-    )
-    atomic_write(path, content)
-    return path
-
-
-def write_audit_report(
-    slug: str,
-    verdict: str,  # pass / fix-recommended / fix-required
-    findings: list[dict[str, str]],
-) -> Path:
-    """Write Phase 7 audit-report.md."""
-    ws = ensure_workspace(slug)
-    path = ws / "audit-report.md"
-    timestamp = utcnow_iso()
-    lines = [
-        "# Audit Report",
-        "",
-        f"> **Generated:** {timestamp}",
-        f"> **Verdict:** {verdict}",
-        "",
-        "## Findings",
-        "",
-    ]
-    for finding in findings:
-        lines.append(f"- **{finding.get('severity', 'info')}:** {finding.get('message', '')}")
-        if "file" in finding:
-            lines.append(f"  - File: `{finding['file']}`")
-    content = "\n".join(lines) + "\n"
-    atomic_write(path, content)
-    return path
-
-
-# ─── Project Config helpers ──────────────────────────────────────────────────
-
-
-def load_project_config(slug: str) -> dict[str, Any]:
-    """Load project-config.yaml from workspace."""
-    return read_yaml(project_workspace(slug) / "project-config.yaml")
-
-
-def save_project_config(slug: str, config: dict[str, Any]) -> None:
-    """Save project-config.yaml to workspace."""
-    write_yaml(project_workspace(slug) / "project-config.yaml", config)
 
 
 # ─── Constants ───────────────────────────────────────────────────────────────
