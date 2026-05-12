@@ -4,7 +4,7 @@ status: active
 slug: novel-architect-hard-rules-validation
 summary: "Implement 12 Hard Rules (H1-H12) from dramatica-theory/00-storyform-validation.md as a Phase 2 Gate 3 pre-write check in novel-architect-structure. Failing rules surface in the Gate 3 status-view; user must fix or explicitly override before approval. Prevents storyform schema-drift before NCP skeleton is written."
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-12
 task_id: "073"
 task_status: done
 task_owner: "claude-code"
@@ -17,9 +17,9 @@ task_blocked_by:
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
-  - skills/novel-architect-structure/phases/phase2-narrative-architecture.md
-  - skills/novel-architect-structure/methods/validation/hard-rules-check.md
-  - skills/novel-architect-structure/assets/hard-rules-checklist.md
+  - skills/novel-architect/phases/phase2-narrative-architecture.md
+  - skills/novel-architect-structure/methods/validation/hard-rules.md
+  - skills/novel-architect/assets/hard-rules-check.md
 ---
 
 # Task 073 — Hard Rules Validation (H1-H12)
@@ -83,3 +83,25 @@ From `dramatica-theory/references/00-storyform-validation.md`:
 - Source spec: [`dramatica-theory/references/00-storyform-validation.md`](../../skills/dramatica-theory/references/00-storyform-validation.md)
 - Related: [Task 074](../074-novel-architect-anti-patterns/task.md) (Anti-Patterns) — separate diagnostic, runs alongside Hard Rules
 - Governing specs: [`TASK.md`](../../TASK.md), [`AGENTS.md`](../../AGENTS.md) (NO.2 — Dramatica ontology resolution)
+
+## Audit & Closure Notes (2026-05-12)
+
+Task was marked `done` in the v1.1.0 worksheet-loop landing. This pass
+audited the artefacts against the original `done when:` checklist and
+applied T1/T2 gap-fills:
+
+- **AC#3 soft-rule table:** populated with S1–S8 from `skills/dramatica-theory/references/00-storyform-validation.md` §"Soft checks".
+- **AC#5 Gate 3 status line:** added `Hard Rules: X/12 pass` template to `skills/novel-architect/phases/phase2-narrative-architecture.md` §3.3.
+- **AC#6 smoke-test anchor:** added `# anchor: T073.HR.3` (H1 scenario) to `skills/novel-architect-structure/methods/validation/hard-rules.md` §5 for Task 084 test citation.
+
+**Deferred (out of T1/T2 scope, owned by sibling tasks):**
+
+- AC#4 status-view `🔴/⚠` rendering → **Task 087** (`render_architecture.py` JSON-artefact wiring).
+- AC#6 executable pytest → **Task 084** (`tools/check-hard-rules.py` + tests).
+
+**Drift acknowledgements:** `task_affects_paths` frontmatter updated to
+reflect shipped filenames (`hard-rules.md`, asset `hard-rules-check.md`,
+canonical `skills/novel-architect/phases/` path). AC#1's "Phase 2.7"
+wording resolves to the actual landing Phase 2.11 per
+`skills/novel-architect-structure/methods/storyform/worksheet-loop.md` §2
+pseudocode.

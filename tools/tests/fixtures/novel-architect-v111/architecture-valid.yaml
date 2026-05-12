@@ -1,0 +1,50 @@
+# Synthetic-valid architecture.yaml fixture for tools/check-worksheet-order.py
+# and tools/check-hard-rules.py self-tests. Models a single storyform with
+# complementary Class pairs (Universe↔Mind, Physics↔Psychology) and a complete
+# worksheet_audit (Step 0–7 + validation true; Step 8 optional/false).
+schema_version: "1.0"
+provenance:
+  generated_by: novel-architect@1.1.1
+  generated_at: "2026-05-12T00:00:00Z"
+  project_slug: test-fixture
+  intent_file: intent.yaml
+architecture:
+  storyform_count: single
+  narratives:
+    - id: storyform_a
+      throughlines:
+        os: { name: "The Investigation", class: Universe, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        mc: { name: "Sarah",              class: Physics,  type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        ic: { name: "Detective Morrison", class: Psychology, type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+        ss: { name: "Their Partnership",  class: Mind,     type: <PLACEHOLDER>, variation: <PLACEHOLDER>, element: <PLACEHOLDER> }
+      dynamics:
+        mc_resolve: Change
+        mc_growth: Start
+        mc_approach: Doer
+        mc_mental_sex: Linear
+        plot_driver: Action
+        plot_limit: Optionlock
+        outcome: Success
+        judgment: Good
+      ending_type: Triumph
+ncp:
+  skeleton_written: false
+  ncp_file: canon/test-fixture.ncp.json
+  validation_status: pending
+gates:
+  gate_1_storyform_shape: { approved: true, edits: 0 }
+  gate_2_classes_dynamics_storypoints: { approved: true, edits: 1 }
+  gate_3_final_architecture: { approved: true, edits: 0 }
+worksheet_audit:
+  step_0_intent_loaded: true
+  step_1_throughlines_named: true
+  step_2_classes_assigned: true
+  step_3_character_dynamics_set: true
+  step_4_plot_dynamics_set: true
+  step_5_story_points_set: true
+  step_6_crucial_element_set: true
+  step_7_signposts_set: true
+  step_8_genre_mode_set: false
+  validation_pass: true
+approved: true
+revisions: []

@@ -13,7 +13,7 @@ task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "083"
+  - 083
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
@@ -48,6 +48,14 @@ Ship the `tools/novel-architect-checks/` shared library and the first ERROR-tier
 The shared library is the seed of [Epic 083's](./../083-novel-architect-v120-enforcement-epic/task.md) `tools/novel-architect-checks/` package — Tasks 085 (phase-flow linters), 086 (canon-status linter), and 087 (renderer wiring) all depend on its loaders, Finding dataclass, and JSON-artefact writer.
 
 Severity is ERROR-tier per [ADR-0010 Decision Outcome](../../decisions/0010-novel-architect-error-tier-linter-policy.md). Preconditions (i) fixture corpus, (ii) <500ms latency, (iii) maintenance-bypass wiring all materialize as acceptance criteria below.
+
+### WARN-tier predecessor disposition
+
+A WARN-tier `tools/check-hard-rules.py` predecessor (200 LOC, 8/12 rules covering H1-H4 + H9-H12 mechanically; H5-H8 deferred as `INFO` tier pending `tools/dramatica-nav/nav.py` ontology integration) already exists on this branch from v1.1.1-hardening (commit `706bbd8`). Tests at `tools/tests/test_check_hard_rules.py` (16 passing). Fixtures at `tools/tests/fixtures/novel-architect-v111/architecture-{valid,violation}.yaml`.
+
+Per [Epic 083 §"WARN-tier predecessor linters"](../083-novel-architect-v120-enforcement-epic/task.md#warn-tier-predecessor-linters-from-v111-hardening-already-shipped), Task 084 is recommended to use disposition **(a) Replace** — delete the standalone predecessor and ship the ERROR-tier rewrite under `tools/novel-architect-checks/hard_rules.py` with `tools/check-hard-rules.py` as a thin CLI wrapper that imports from the shared library. Rationale: the predecessor covers only 8/12 H-rules; the shared-library refactor adds H5-H8 ontology-aware checks (via the dramatica-nav integration that the predecessor explicitly deferred). The predecessor's fixtures (`architecture-valid.yaml`, `architecture-violation.yaml`) MAY be migrated to `tools/novel-architect-checks/tests/fixtures/` as the seed of the ≥3 clean + ≥3 bad corpus this Task requires.
+
+The advisory wiring in `tools/check-governance.sh` (under "novel-architect v1.1.1 linters" block, lines wrapping `|| true`) MUST be removed atomically with the ERROR-tier landing — leaving both wired at WARN and ERROR would double-run the validation and inflate the latency budget.
 
 ## Plan
 

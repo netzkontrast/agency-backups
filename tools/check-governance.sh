@@ -360,6 +360,18 @@ if [ -n "$NARRATIVE_LOAD_TARGET" ]; then
 fi
 
 echo ""
+echo "--- [opt] novel-architect v1.1.1 linters (Task 083 cluster C — advisory, WARN-tier) ---"
+# Self-test invocation against the fixture corpus produced by Task 083. Real
+# usage targets project workspaces under /home/claude/novel-projects/<slug>/;
+# the corpus here is the smoke-test path that runs in CI.
+NA_FIXTURES="tools/tests/fixtures/novel-architect-v111"
+if [ -d "$NA_FIXTURES" ]; then
+  "$PYTHON" tools/check-canon-status.py "$NA_FIXTURES/canon-meta-valid.md" || true
+  "$PYTHON" tools/check-worksheet-order.py "$NA_FIXTURES/architecture-valid.yaml" || true
+  "$PYTHON" tools/check-hard-rules.py "$NA_FIXTURES/architecture-valid.yaml" || true
+fi
+
+echo ""
 echo "--- [opt] Spec runtime-state linter (Task 055 — README.md R.19) ---"
 # WARN-tier by default; promotes to ERROR under FM_SPEC_RUNTIME_STATE_STRICT=1.
 SPEC_RT_OUT="$(mktemp)"

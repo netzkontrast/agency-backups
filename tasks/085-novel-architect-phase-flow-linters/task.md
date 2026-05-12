@@ -13,8 +13,8 @@ task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "083"
-  - "084"
+  - 083
+  - 084
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
@@ -52,6 +52,21 @@ Ship two ERROR-tier linters that share a `tools/novel-architect-checks/phase_flo
 Both prose specs are operational-sequence specifications (one over phase steps, one over scene moments). The shared `phase_flow.py` helper consolidates the markdown-walking pattern they both need (heading-extraction, sub-heading enumeration, field-presence checking inside a structured block). Splitting into two linters with one shared helper is the design-doc compromise between "one linter handles both" (too much surface in one entry point) and "fully duplicate parsers" (DRY violation).
 
 Per [ADR-0010 Decision Outcome](../../decisions/0010-novel-architect-error-tier-linter-policy.md) and the [/sc:design §1 lumping rationale](../083-novel-architect-v120-enforcement-epic/task.md#sub-tasks-children), the two linters live in one sub-task because they share the structural-walk helper and similar shape. Their fixture corpora are independent.
+
+### WARN-tier predecessor disposition
+
+A WARN-tier `tools/check-worksheet-order.py` predecessor (160 LOC, 6 rules `WORKSHEET.*`) already exists on this branch from v1.1.1-hardening (commit `dd68a25`). Tests at `tools/tests/test_check_worksheet_order.py` (10 passing). Fixtures at `tools/tests/fixtures/novel-architect-v111/architecture-{valid,violation}.yaml`.
+
+**NOTE:** the predecessor targets `architecture.yaml` files (Phase 2 storyform schema) — it validates the **slot order** of the storyform itself, not the **operational sub-phase ordering** in `phases/phase2-narrative-architecture.md`. Task 085's `check-worksheet-order.py` (per its own §Goal) targets the phase2 markdown's sub-phase ordering against Worksheet Steps 0-8. **The two have the same name but different target file domains.** Disposition options:
+
+- **(a) Rename + replace**: the predecessor's slot-order validation is genuinely useful but conceptually different from this Task's scope. Rename the predecessor to `tools/check-architecture-slot-order.py` (or fold its rules into the Task 084 hard-rules shared library as `tools/novel-architect-checks/architecture_slots.py`) and ship this Task's phase-flow-shaped `check-worksheet-order.py` cleanly.
+- **(b) Merge scopes**: extend this Task's `check-worksheet-order.py` to cover BOTH the markdown sub-phase ordering AND the architecture.yaml slot ordering (one CLI, two file-shapes via argv routing). Justified if the rule-IDs align cleanly; risky if argv handling becomes branchy.
+
+Recommendation: **(a) Rename + replace**. The predecessor's rules (THROUGHLINE_COUNT, THROUGHLINE_KEYS, CLASS_PAIR, AUDIT_INCOMPLETE, AUDIT_GAP, NAME_EMPTY) all validate `architecture.yaml` slot integrity, not phase markdown sequence. Merging them into Task 084's `tools/novel-architect-checks/hard_rules.py` (under rule-IDs like `WA.STEP_*_SET` already in 084's scope) keeps the linter taxonomy clean.
+
+For `check-scene-audit.py`: no WARN-tier predecessor exists on this branch — it ships cleanly. (My v1.1.1 plan flagged it as a separate Task 086/093 candidate but never implemented it.)
+
+The advisory wiring in `tools/check-governance.sh` for the worksheet-order predecessor MUST be removed atomically with this Task's ERROR-tier landing.
 
 ## Plan
 

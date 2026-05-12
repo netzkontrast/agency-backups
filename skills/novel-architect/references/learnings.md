@@ -153,6 +153,107 @@ productive Kohärenz-Protokoll sessions without legacy fallback.
 
 ---
 
+### 2026-05-12 — v1.1.1 Hardening (Two-Layer Contract + Scene Graduation + SKILL_VERSION SSoT)
+
+**Trigger:** Post-v1.1.0 `/sc:analyze` surfaced 11 H/M/L findings against
+the v1.1.0 release. The biggest were structural: H1 (16+ broken refs to
+migrated `methods/character/`, `methods/structure/`, `methods/research/`
+paths in the orchestrator's phase + command prose) and H2 (zero
+delegation prose to sub-modules — only `metadata.delegates_to` declared
+the relationship, so the prose layer was *monolithic-as-before*).
+v1.1.0 had achieved metadata-level sub-module delegation but not
+runtime-level — the user-facing prose still loaded files from paths the
+git mv had emptied.
+
+**Lesson:** A sub-module refactor needs to land at TWO layers: (1) the
+`metadata.delegates_to` declaration in SKILL.md, AND (2) the prose
+layer that *invokes* the delegation at runtime (phase/command files
+naming the sub-module by name, not naming its internal file paths). The
+first without the second produces a skill that *says* it delegates
+but doesn't. The Dual-Kernel "Architect-with-Submodules" pattern
+requires both — an "architect" that knows it delegates must also
+*demonstrate* the delegation in its own prose, not just in metadata.
+
+**Lesson (cartographer over-scope; FL1 anchor).** The first `/sc:design`
+run during this hardening cycle spawned an Explore subagent ("line-level
+cartographer") that produced a 12-file manifest projecting 524 LOC of
+MOVE + 14 new sub-module method files. Post-setup-commit grep-
+verification revealed the reality: 17 broken refs across 6 files, no
+MOVE, no new method files. The cartographer had reasoned structurally
+without verifying which paths were actually broken — three of its named
+files (`phase2-narrative-architecture.md`, `phase4-world-research.md`,
+`phase6-drafting.md`) had **zero** broken refs and were already in
+correct two-layer state; one file the cartographer missed entirely
+(`phase1-intent-capture.md`) needed fixing.
+
+**Mitigation rule** (binding for future planning-ladder runs; proposed
+for `TASK.md §4.9` follow-up amendment): any Explore subagent producing
+a structural-rewrite manifest MUST (a) cite the `grep` / search command
+that produced its claims, (b) include the grep output line-by-line,
+(c) classify findings as "verified broken" vs. "structurally suggested."
+Subagents that perform pure structural reading without grep-
+verification SHOULD have their manifests treated as design hypotheses,
+not implementation targets — and the orchestrator agent (the
+`/sc:design` synthesizer) SHOULD demand grep evidence before accepting
+the manifest into the workflow plan.
+
+**Action (v1.1.1 shipped across 11 commits on the v1.1.1 branch):**
+
+1. **Two-layer contract enforcement:** rewrote 17 broken refs across 6
+   files (`phase1-intent-capture.md`, `phase3-character-architecture.md`,
+   `phase5-scene-matrix.md`, `commands/novel-{characters,research,scenes}.md`)
+   into canonical `[→ novel-architect-<sub>]` delegation prose (3 phase
+   files, REWRITE+delegate) or sub-module-path links (3 command files,
+   REWRITE-only). `methods/conflict/` stays orchestrator-resident per
+   the cross-cutting-method rule. Commit `51063bf`.
+2. **Scene graduation:** scene sub-module's "stub in v1.1.0" self-
+   qualifier was a metadata-level limitation that no longer matched
+   reality — `scene-level-bridge.md` (149 LOC, Task 075) shipped in
+   v1.1.0 and fully covers Q1–Q5 audit + scene-matrix execution +
+   drafting-precheck. The qualifier dropped from orchestrator
+   `metadata.delegates_to`; both SKILL.md versions bumped to v1.1.1.
+   Commit `3308ffe`.
+3. **SKILL_VERSION SSoT:** `io_helpers.SKILL_VERSION` had drifted from
+   `SKILL.md.metadata.version` (constant said `1.0.0`, frontmatter
+   said `1.1.0`). Bumped to `1.1.1` and added a pytest assertion
+   (`TestSkillVersionSsot`) that loads the frontmatter and asserts
+   equality — future drift fails at pre-commit. Commit `d5b2216`.
+4. **Three WARN-tier CLI linters shipped** (predecessors to the
+   ERROR-tier Epic 083 work):
+   - `tools/check-canon-status.py` (170 LOC, 8 rules `CANON.*`,
+     13 tests) — commit `78296c6`
+   - `tools/check-worksheet-order.py` (160 LOC, 6 rules `WORKSHEET.*`,
+     10 tests) — commit `dd68a25`
+   - `tools/check-hard-rules.py` (200 LOC, 8/12 rules H1-H4 + H9-H12
+     mechanical; H5-H8 deferred as INFO tier pending dramatica-nav
+     ontology integration; 16 tests) — commit `706bbd8`
+
+   Fixtures at `tools/tests/fixtures/novel-architect-v111/`. Wired into
+   `tools/check-governance.sh` under the "novel-architect v1.1.1 linters"
+   advisory block. ERROR-tier promotion + replacement under
+   `tools/novel-architect-checks/` is the scope of [Epic 083 v1.2.0
+   enforcement](../../../tasks/083-novel-architect-v120-enforcement-epic/task.md)
+   sub-tasks 084/085/086 — each carries an explicit "WARN-tier
+   predecessor disposition" section deciding replace vs. evolve.
+
+**Planning-ladder provenance:** v1.1.1 executed the full
+`/sc:analyze → /sc:brainstorm → /sc:design → /sc:workflow` ladder
+codified in [TASK.md §4.9](../../../TASK.md#49-planning-pipeline-for-t3-structural-tasks-sc-ladder).
+The ladder is itself a v1.1.1 contribution — §4.9 was authored in commit
+`aaf9567` based on the lessons from this very cycle (5 normative rules
+T.4.9.1–T.4.9.5 + 3 Gherkin scenarios). The cartographer-over-scope
+mitigation rule above is the open follow-up amendment for §4.9.
+
+**Status:** v1.1.1 shipped across 11 commits on this branch
+(`aaf9567` through `706bbd8`); the 4 planning-Tasks 090/091/092/093 that
+tracked the work were deleted in the v1.1.1-to-v1.2.0 declutter pass —
+the executed work lives in git history + this changelog entry. v1.2.0
+enforcement work tracked under [Epic 083](../../../tasks/083-novel-architect-v120-enforcement-epic/task.md)
++ standalone [Task 089](../../../tasks/089-retire-novel-architect-legacy/task.md)
+(legacy retirement, blocked on observable criteria).
+
+---
+
 ## Reserved für künftige Einträge
 
 <!-- Jede Session schreibt hier neue Einträge -->

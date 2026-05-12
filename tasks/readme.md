@@ -113,7 +113,35 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`087-novel-architect-render-architecture-wiring/`](./087-novel-architect-render-architecture-wiring/) — **Task 083 child** (blocked by 084): wires `skills/novel-architect/render/render_architecture.py` Phase 2.13 status-view to consume the JSON validation artefact produced by Task 084's `check-hard-rules.py`. Coupling is artefact-based (JSON read), not import-based, to preserve skill portability for claude.ai deployment per AGENTS.md Skills Architecture. Renders 🟢/🔴 markers for H1–H12 + ✓/✗ for `worksheet_audit.step_*_set`; emits stale-artefact warning when `checked_at < architecture.yaml` mtime. Status: `open`.
 - [`088-novel-architect-mif-l3-backport/`](./088-novel-architect-mif-l3-backport/) — **Task 083 child** (independent): retroactively applies subset MIF Level 3 frontmatter (`cognitive_type`, `decay_rate`, `derivation_chain`) per `skills/novel-architect/schemas/mif-level3.yaml` to historical entries in `references/learnings.md`. T4 archived entries receive metadata-only edits per MAINTENANCE.md §1.0.1; ships a `migration-audit.md` reviewer-facing artefact enumerating every migrated entry. Closes the deferred MIF L1/L2 → L3 backport flagged by Task 070 friction log. Status: `open`.
 - [`089-retire-novel-architect-legacy/`](./089-retire-novel-architect-legacy/) — **Standalone gated Task** (NOT a sub-task of Epic 083). Filed in 083's scaffold session for discoverability of the [Task 070 §Legacy Retirement Criterion (PR #101 review §4.3)](./070-novel-architect-v110-epic/task.md#legacy-retirement-criterion-pr-101-review-43) wait-state. `task_status: blocked` until all three observable criteria hold: (a) ≥3 productive sessions in migrated workspace without legacy fallback; (b) NCP validation passes for the migrated `kohaerenz-protokoll.ncp.json`; (c) no `task_blocked_by` references to legacy paths remain in `tasks/`. Removes `skills/novel-architect-legacy@0.3.3-archived` on closure. `task_supersedes: ["novel-architect-legacy"]`. Status: `blocked`.
-- [`091-port-external-skill-corpora/`](./091-port-external-skill-corpora/) — **Epic** for Phase 1 execution of [ADR-0011 — External Skill Corpora Import Policy](../decisions/0011-external-skill-corpora-import.md). Two sequential subtasks: **ST-1** ([`01-phase-1-corpus.md`](./091-port-external-skill-corpora/subtasks/01-phase-1-corpus.md)) — extend `tools/fm/validate.py` for the new `skill_source` L2 key (2 new diagnostics F.B.7 + F.B.8) + ship 14 skill folders under `skills/sc-*/` per ADR-0011 D.1–D.9; **ST-2** ([`02-phase-1-hookup.md`](./091-port-external-skill-corpora/subtasks/02-phase-1-hookup.md)) — rewrite `AGENTS.md` Closing Run Procedure to cite local `skills/sc-createPR/` (closes the `src/superclaude/commands/createPR.md` remote URL) and add `RESEARCH.md §7` citing `skills/sc-research/`. Closes the five dangling `/sc:*` references in [`CLAUDE.md §13`](../CLAUDE.md). Complete planning record (`/sc:brainstorm` → `/sc:design` → `/sc:implement`) embedded at [`references/readme.md`](./091-port-external-skill-corpora/references/readme.md) — four-part 83 KB document. Status: `open`.
+- [`090-codex-pr-review/`](./090-codex-pr-review/) — Governance review of PR #110 (`codex/init-repo-for-codex-with-root-specs`), which introduces `CODEX.md` and the Codex platform note in `AGENTS.md`. Findings in [`notes.md`](./090-codex-pr-review/notes.md). Status: `in_progress`.
+- [`090-review-pr109-archive-spec/`](./090-review-pr109-archive-spec/) — Structured governance review of PR #109 (`codex/create-/archive.md-governance-specification → main`), which introduces `ARCHIVE.md` as a new root-level governance spec via a Codex agent. Identifies 3 critical violations (no Task, no Prompt, no ADR), 6 structural gaps (German language, missing RFC 2119 keywords, zero Gherkin scenarios, undefined archive path, no enforcement tooling, missing CLAUDE.md topology update), and 4 minor issues. Merge recommendation: NOT READY. Status: `done`.
+<!--
+v1.1.1 hardening tracking Tasks (090-093) were filed mid-session, then deleted
+in the v1.1.1-to-v1.2.0 declutter pass after the merge with main revealed that
+main's Epic 083 sub-tasks (084 / 085 / 086 / 089) fully cover the same scope at
+ERROR-tier under tools/novel-architect-checks/.
+
+The v1.1.1 work itself shipped as 11 commits on this branch (aaf9567..706bbd8):
+- aaf9567 Tasks scaffold + TASK.md §4.9 planning-pipeline rule
+- 51063bf Two-layer contract: 17 path refs across 6 orchestrator files
+- 3308ffe Scene sub-module graduation from "stub in v1.1.0"
+- d5b2216 io_helpers.SKILL_VERSION SSoT + regression test
+- 2470d5f v1.1.1 changelog in skills/novel-architect/references/learnings.md
+- 78296c6 tools/check-canon-status.py WARN tier (8 rules, 13 tests)
+- dd68a25 tools/check-worksheet-order.py WARN tier (6 rules, 10 tests)
+- 706bbd8 tools/check-hard-rules.py WARN tier (8/12 rules, 16 tests)
+- 74da614 Merge main + renumber Tasks (now deleted in this declutter pass)
+
+Lessons recorded permanently in skills/novel-architect/references/learnings.md
+(v1.1.1 Hardening entry), including the F-090.1 cartographer over-scope finding
+and its mitigation rule for future /sc:design subagent fan-outs.
+
+Disposition of the WARN-tier predecessor linters relative to Epic 083 ERROR-tier
+plans is documented in each main-Task's §"WARN-tier predecessor disposition"
+section (Tasks 084 / 085 / 086 task.md files).
+-->
+
+- [`091-port-external-skill-corpora/`](./091-port-external-skill-corpora/) — **Epic** for Phase 1 execution of [ADR-0011 — External Skill Corpora Import Policy](../decisions/0011-external-skill-corpora-import.md). Two sequential subtasks: **ST-1** ([`01-phase-1-corpus.md`](./091-port-external-skill-corpora/subtasks/01-phase-1-corpus.md)) — extend `tools/fm/validate.py` for the new `skill_source` L2 key (2 new diagnostics F.B.7 + F.B.8) + ship 14 skill folders under `skills/sc-*/` per ADR-0011 D.1–D.9; **ST-2** ([`02-phase-1-hookup.md`](./091-port-external-skill-corpora/subtasks/02-phase-1-hookup.md)) — rewrite `AGENTS.md` Closing Run Procedure to cite local `skills/sc-createPR/` (closes the `src/superclaude/commands/createPR.md` remote URL) and add `RESEARCH.md §7` citing `skills/sc-research/`. Closes the five dangling `/sc:*` references in [`CLAUDE.md §13`](../CLAUDE.md). Originally filed at slot 090; renumbered to 091 to avoid collision with the two pre-existing `090-*` Tasks above. Complete planning record (`/sc:brainstorm` → `/sc:design` → `/sc:implement`) embedded at [`references/readme.md`](./091-port-external-skill-corpora/references/readme.md) — four-part 83 KB document. Status: `open`.
 
 ### Chain-Level Falsification (Tasks 032–039)
 

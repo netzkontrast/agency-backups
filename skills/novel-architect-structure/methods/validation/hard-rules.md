@@ -110,6 +110,15 @@ Feature: Hard-Rules block Gate 2 on violation
     Then validate_hard_rules MUST return an ERROR-tier diagnostic
     And the diagnostic MUST suggest "Help ↔ Hinder" as the canonical dynamic-pair partner
     And the Worksheet-Loop MUST re-ask the Solution slot
+
+  # anchor: T073.HR.3
+  Scenario: H1 violation (missing SS) is caught at Gate 1
+    Given an architecture.yaml lists only OS, MC, and IC throughlines
+    And the SS throughline is absent or carries name = "<UNRESOLVED>"
+    When validate_hard_rules runs before Gate 1 approval
+    Then validate_hard_rules MUST return an ERROR-tier diagnostic citing H1
+    And the diagnostic MUST surface as "WORKSHEET_DIAGNOSIS_1" in the status-view
+    And Gate 1 MUST NOT pass until the SS is named or explicitly parked
 ```
 
 ## §6 Open Questions

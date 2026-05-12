@@ -10,10 +10,10 @@ description: >-
 metadata:
   category: creative-writing
   parent: novel-architect
-  version: "1.1.0"
+  version: "1.1.1"
   status: active
   date_added: "2026-05-11"
-  date_updated: "2026-05-11"
+  date_updated: "2026-05-12"
   state_management: "ncp"
   ncp_schema_version: "1.3.0"
   triggers: >-
@@ -24,13 +24,16 @@ metadata:
     ncp-author
 ---
 
-# novel-architect-scene v1.1.0
+# novel-architect-scene v1.1.1
 
 Sub-Skill von [`novel-architect`](../novel-architect/). Übernimmt das
 *Scene-Level-Detail* zwischen abstrakter Storyform-Struktur (Phase 2/5
-Akt-Ebene) und konkreter Prosa-Generierung (Phase 6 Drafting). Der
-Sub-Skill ist v1.1.0 noch lean und wird in Task 075 mit dem vollen
-Q1–Q5-Scene-Level-Bridge-Audit befüllt.
+Akt-Ebene) und konkreter Prosa-Generierung (Phase 6 Drafting). Trägt seit
+v1.1.1 das volle Q1–Q5-Scene-Level-Bridge-Audit (vom v1.1.0-Stub
+graduiert, nachdem Task 075 die Methoden-Bibliothek in v1.1.0 befüllt hat
+— die "stub"-Bezeichnung war eine Selbst-Beschränkung der v1.1.0-
+Metadaten und wurde in v1.1.1 zurückgezogen, da das Audit tatsächlich
+bereits aktiv ist).
 
 ## Scope
 
@@ -43,11 +46,9 @@ Q1–Q5-Scene-Level-Bridge-Audit befüllt.
 
 | File | Methode | Status |
 |------|---------|--------|
-| `methods/scene-level-bridge.md` | Q1-Q5 Per-Moment Audit (dominant throughline, signpost timing, conflict flavor, character arc, thematic beat) | **TBD (Task 075)** |
+| [`methods/scene-level-bridge.md`](./methods/scene-level-bridge.md) | Q1–Q5 Per-Moment Audit (dominant throughline, signpost timing, conflict flavor, character arc, thematic beat) | **active** (149 LOC; Task 075 closed in v1.1.0; "stub" qualifier dropped in v1.1.1) |
 
-Pro v1.1.0 ist dieser Sub-Skill ein **Stub** mit verbindlichem Delegation-
-Contract; die Methoden-Bibliothek wird durch [Task 075](../../tasks/075-novel-architect-scene-level-bridge/task.md)
-populiert.
+Die Methoden-Bibliothek ist seit v1.1.0 durch [Task 075](../../tasks/075-novel-architect-scene-level-bridge/task.md) populiert. v1.1.1 retired the "stub in v1.1.0" qualifier from the orchestrator's `delegates_to` metadata; the sub-skill is now first-class.
 
 ## Delegation Contract
 
@@ -61,7 +62,7 @@ Q1–Q5 Audit-Resolution MUSS gegen `dramatica-theory` reasoniert werden — sie
 
 ## Constraints
 
-- **Stub-Status:** v1.1.0 ist dieser Sub-Skill ein Stub. Aktive Phase-5/6-Arbeit läuft (bis Task 075 schließt) direkt im Orchestrator. Trigger werden bereits hier abgefangen, damit der Skill-Loader den Sub-Skill kennt.
+- **First-class seit v1.1.1:** die v1.1.0 "stub"-Selbst-Beschränkung ist zurückgezogen. Phase-5/6 Per-Moment-Arbeit läuft über diesen Sub-Skill via [`methods/scene-level-bridge.md`](./methods/scene-level-bridge.md).
 - **Skill ist projekt-agnostisch:** kein Genre/Plot-Default.
 - **NCP-Schutz:** `moments[]` werden nur via `ncp-author` geschrieben, nie direkt.
 

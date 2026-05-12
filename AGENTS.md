@@ -4,7 +4,7 @@ status: active
 slug: agents-spec
 summary: "Entry-point governance spec for all agents operating in this repository. Defines task routing, folder rules, spec language (RFC 2119 + Gherkin), and the Frontmatter Ontology every agent must apply."
 created: 2026-05-02
-updated: 2026-05-11
+updated: 2026-05-12
 ---
 
 # Agent Instructions
@@ -114,6 +114,11 @@ Jules sessions satisfy step 4 by opening a draft pull request through the Jules-
 
 Gemini Deep Research sessions execute against an external research surface, not a Git working tree; step 4 on Gemini is satisfied by writing the research output back into this repo via a follow-on integration Task (RESEARCH.md §6.5) that then opens its own PR per the Claude Code / Jules path. **Gemini sessions therefore satisfy steps 1–3 in the source environment, and step 4 is satisfied by the integration Task's agent (Claude or Jules) once the artefacts land in this repo.** The integration Task MUST cite the originating Gemini research slug in its PR body.
 
+
+#### Codex
+
+Codex sessions satisfy step 4 by opening a draft pull request via the runtime's native PR primitive (for this harness, `make_pr`). The same CR.5 body requirements apply: reference closed Task slug(s) under `/tasks/` (if any) and include the FL declaration from the friction log. Re-invocation when a PR already exists for the branch MUST be treated as a no-op to satisfy CR.6.
+
 #### Adding a new platform
 
 A new agent platform (e.g., Devin, Codex, future SDK harness) MAY be added to this section. The PR introducing it MUST add a new "Platform Implementation Notes" subsection that names the platform's PR primitive and confirms steps 1–3 are achievable in the platform's runtime. If any step is not achievable, the PR MUST also propose either a delegation pattern (like Gemini's above) or an amendment to the checklist itself.
@@ -180,6 +185,7 @@ Three top-level governance specs partition the work this repository performs. Pi
 | Authoring an executable instruction set (research proposal, follow-up, tool instruction, task-spec) | [PROMPT.md](./PROMPT.md) | [/prompts/](./prompts/) |
 | Executing a prompt to produce evidence, synthesis, reflection, output | [RESEARCH.md](./RESEARCH.md) | [/research/](./research/) |
 | Authoring or modifying a skill | [SKILLS.md](./SKILLS.md) | [/skills/](./skills/) |
+| Archivierung/Stilllegung von Artefakten inkl. Trigger und Ablauf | [ARCHIVE.md](./ARCHIVE.md) | [/tasks/](./tasks/), [/prompts/](./prompts/), [/research/](./research/) |
 
 **Separation of concerns is hard:** a Task MUST link to its prompt (never inline it); research MUST NOT contain prompt drafts; follow-up questions discovered during research MUST be filed as new prompts in `/prompts/`. The full audit-graph rules and Frontmatter Ontology (Layered Schema with Namespacing) live in [TASK.md §3](./TASK.md).
 
