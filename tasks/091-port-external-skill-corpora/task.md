@@ -6,7 +6,7 @@ summary: "Epic: Port SuperClaude v4.3.0 + Superpowers v4.0.3 skill corpora into 
 created: 2026-05-12
 updated: 2026-05-12
 task_id: "091"
-task_status: open
+task_status: done
 task_owner: "claude-opus-4-7"
 task_priority: P1
 task_uses_prompts: []

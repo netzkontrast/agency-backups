@@ -4,7 +4,7 @@ status: active
 slug: skills-readme
 summary: "Index for /skills/: version-controlled snapshots of installed Claude skills."
 created: 2026-05-04
-updated: 2026-05-05
+updated: 2026-05-12
 ---
 
 # skills/
@@ -40,13 +40,32 @@ Claude.ai session. This folder is the durable mirror.
 - [suno-lyric-writer/](./suno-lyric-writer/) — >- Use when writing, reviewing, or revising song lyrics for Suno AI generation.
 - [the-agency-system-architect/](./the-agency-system-architect/) — >- Orchestrates the full concept-album production pipeline for "The Agency System" (Michael Schimmer's darkwave/industrial triptych — Album 1 "Together We Confide", Album 2 "Moment der Klarheit", A...
 
+## Imported from SuperClaude (v4.3.0)
+
+Phase 1 batch ratified by [ADR-0011](../decisions/0011-external-skill-corpora-import.md) (`adr_status: Accepted` 2026-05-12). Imported under [Task 091](../tasks/091-port-external-skill-corpora/task.md) ST-1; SHA-pinned to upstream `22ad3f4` per ADR-0011 D.3. Each folder ships verbatim upstream body at `references/upstream-<slug>.md`.
+
+- [sc-createPR/](./sc-createPR/) — Open a pull request for the current branch as the closing step of a Claude Code session (canonical session-closer per AGENTS.md CR.1–CR.7).
+- [sc-implement/](./sc-implement/) — Feature and code implementation with intelligent persona activation and MCP integration; orchestrates the architect/engineer personas. Bundles `tools/fm`.
+- [sc-test/](./sc-test/) — Execute tests with coverage analysis and automated quality reporting. Bundles `tools/tests`.
+- [sc-improve/](./sc-improve/) — Apply systematic improvements to code quality, performance, and maintainability.
+- [sc-research/](./sc-research/) — Deep web research with adaptive planning and intelligent search. Agency-adapted per ADR-0011 D.8: WebSearch + WebFetch primary; Tavily MCP OPTIONAL.
+- [sc-system-architect/](./sc-system-architect/) — System architect persona — scalable system architecture; maintainability and long-term technical decisions.
+- [sc-backend-architect/](./sc-backend-architect/) — Backend architect persona — reliable backend systems; data integrity, security, fault tolerance.
+- [sc-frontend-architect/](./sc-frontend-architect/) — Frontend architect persona — accessible, performant user interfaces.
+- [sc-security-engineer/](./sc-security-engineer/) — Security engineer persona — vulnerability detection + compliance.
+- [sc-quality-engineer/](./sc-quality-engineer/) — Quality engineer persona — comprehensive testing strategies + edge-case detection.
+- [sc-refactoring-expert/](./sc-refactoring-expert/) — Refactoring expert persona — clean-code principles + technical-debt reduction.
+- [sc-performance-engineer/](./sc-performance-engineer/) — Performance engineer persona — measurement-driven optimisation.
+- [sc-deep-research-agent/](./sc-deep-research-agent/) — Deep research specialist — adaptive strategies + multi-hop reasoning (Agency-adapted per ADR-0011 D.8).
+- [sc-pm-agent/](./sc-pm-agent/) — Project Manager agent — coordinates `/sc:*` workflows (`/sc:pm` only; inert at SessionStart per ADR-0011 D.7).
+
 ## Management layer
 - [skills-skill-bootstrap/](./skills-skill-bootstrap/) — Sync tool: pulls skill bodies from `origin/main:skills/` into Claude Code's `~/.claude/skills/`.
 - [skill-creator/](./skill-creator/) — Verbatim mirror of [anthropics/skills · skills/skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) at 2026-05-05. Used as reference pattern by `/research/flexible-frontmatter-toolchain/` and Tasks 016/017.
 
 ## Current State
 
-- **14 skills** in repo, all synced to `~/.claude/skills/` as of 2026-05-04.
+- **14 Agency-native skills + 14 sc-\* imported skills + 2 management skills** in repo as of 2026-05-12.
 - `skills-skill-bootstrap/` sync mechanism is live and tested end-to-end.
 - Architecture spec for the future `skills-skill` loader is in progress at `research/skills-skill-architecture/` — awaiting Gemini Deep Research PDF to finalize.
 - `/skills/skills-skill/` path reserved; do not create until spec is accepted.

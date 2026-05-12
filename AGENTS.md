@@ -102,7 +102,7 @@ Step 4 MUST be idempotent: re-invocation on a branch that already has an open pu
 
 #### Claude Code
 
-Step 4 is satisfied by invoking the `/sc:createPR` slash-command immediately after a successful `git push`. The command is provided by the **SuperClaude Framework** at [`src/superclaude/commands/createPR.md`](https://github.com/netzkontrast/SuperClaude_Framework/blob/main/src/superclaude/commands/createPR.md); it is installed automatically alongside the rest of the `/sc:*` command set. The skill re-runs `tools/check-governance.sh` before opening the PR (defence-in-depth on CR.3) and assembles the citation block CR.5 requires.
+Step 4 is satisfied by invoking the `/sc:createPR` slash-command immediately after a successful `git push`. The command is provided locally at [`skills/sc-createPR/SKILL.md`](./skills/sc-createPR/SKILL.md) under the import policy ratified by [ADR-0011](./decisions/0011-external-skill-corpora-import.md); it is materialised under `~/.claude/skills/sc-createPR/` by [`skills/skills-skill-bootstrap/sync.sh`](./skills/skills-skill-bootstrap/sync.sh). The skill re-runs `tools/check-governance.sh` before opening the PR (defence-in-depth on CR.3) and assembles the citation block CR.5 requires.
 
 If the cloud-hosted GitHub MCP integration is the agent's only path to GitHub (no local `gh` CLI), the agent MUST use the `mcp__github__create_pull_request` tool with the same body conventions; the four-step checklist applies unchanged.
 
@@ -511,10 +511,13 @@ The block below is rewritten by [`tools/adr/cli.py synthesize`](./tools/adr/cli.
 - Subsequent re-syncs from upstream MUST file a new Task. [ADR-0011]
 - Automated upstream-pull is OUT OF SCOPE for this ADR and MUST be addressed by a future ADR if drift evidence accumulates. [ADR-0011]
 - When any falsifier triggers, a successor ADR MUST be authored that re-evaluates Options A–D against the then-current evidence and supersedes this one via `adr_supersedes: [ADR-0011]`. [ADR-0011]
+- ** The validator MUST emit diagnostic code **`F. [ADR-0012]
+- ### Negative - ADR readers MUST follow the `adr_relates_to` graph (this ADR cites ADR-0011) to discover the renumber. [ADR-0012]
 
 ### SHOULD
 - md §8 SHOULD drop the "authoring ADR pending" parenthetical via a follow-up T1 / T2 edit. [ADR-0006]
 - The tag-only pin is then insufficient and the policy SHOULD switch to tag + SHA composite pinning. [ADR-0011]
+- json) SHOULD gain entries for `F. [ADR-0012]
 
 ### MUST NOT
 - ** The narrative skills (`skills/novel-architect/`, `skills/suno-lyric-writer/`) follow a parallel pattern — they ship large reference corpora that consumers MUST NOT autoload (NO. [ADR-0006]
@@ -533,7 +536,7 @@ The block below is rewritten by [`tools/adr/cli.py synthesize`](./tools/adr/cli.
 ### MAY
 - md) MAY be extended in a follow-up T2 commit to show a `skill_source` commented-example line; not blocking on the first port. [ADR-0011]
 
-**Contributing ADRs:** ADR-0006, ADR-0007, ADR-0011.
+**Contributing ADRs:** ADR-0006, ADR-0007, ADR-0011, ADR-0012.
 <!-- END AGENCY-ADR SYNTHESIS -->
 
 ---

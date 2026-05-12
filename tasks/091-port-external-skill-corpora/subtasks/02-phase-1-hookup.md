@@ -1,8 +1,8 @@
 ---
 type: note
-status: active
+status: completed
 slug: task-091-st2-phase-1-hookup
-summary: "ST-2 (Task 091 Epic): rewrite AGENTS.md Closing Run Procedure to cite local skills/sc-createPR/, add RESEARCH.md §7 citing skills/sc-research/. Hookup only; corpus shipped by ST-1."
+summary: "ST-2 (Task 091 Epic): rewrite AGENTS.md Closing Run Procedure to cite local skills/sc-createPR/, add RESEARCH.md §7 citing skills/sc-research/. Hookup only; corpus shipped by ST-1. DONE — landed in PR #115 alongside ST-1 (broken-link wait condition did not apply since the new path skills/sc-createPR/ existed on the same branch)."
 created: 2026-05-12
 updated: 2026-05-12
 ---

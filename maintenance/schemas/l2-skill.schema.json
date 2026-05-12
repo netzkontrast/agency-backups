@@ -22,6 +22,21 @@
     },
     "skill_bundles_tools": {
       "type": "string"
+    },
+    "skill_source": {
+      "type": "string"
+    },
+    "skill_references_skills": {
+      "type": "string"
+    },
+    "skill_references_research": {
+      "type": "string"
+    },
+    "skill_references_prompts": {
+      "type": "string"
+    },
+    "skill_bootstrap_required": {
+      "type": "string"
     }
   },
   "required": [

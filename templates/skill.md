@@ -14,6 +14,11 @@ skill_bootstrap_required: true
 # skill_bundles_tools:        # OPTIONAL — ADR-0007
 #   - tools/fm                # frontmatter ops in the sandbox
 #   - tools/adr               # ADR validation (auto-requires tools/fm)
+# skill_source: "<vendor>@v<semver>"   # OPTIONAL, REQUIRED on imports — ADR-0011 + ADR-0012
+#                                      # Vendor MUST be one of {superclaude, superpowers}.
+#                                      # Folder path MUST be skills/<vendor-prefix>-<slug>/.
+#                                      # Example: skill_source: "superclaude@v4.3.0"
+#                                      # Validated by F.B.8 / F.B.9 in tools/fm/validate.py.
 ---
 
 # REPLACE WITH HUMAN-READABLE TITLE

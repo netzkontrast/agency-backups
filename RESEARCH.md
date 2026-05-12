@@ -4,7 +4,7 @@ status: active
 slug: research-spec
 summary: "Root specification for /research/. Research is execution-only: it consumes a prompt and produces a workspace of evidence, synthesis, reflection, and a final output. Prompt-craft and follow-up question generation are out of scope and live in /prompts/."
 created: 2026-05-02
-updated: 2026-05-08
+updated: 2026-05-12
 ---
 
 # Research Task Specification
@@ -281,7 +281,13 @@ External results are unprocessed raw material. Every `result.md` MUST have a cor
 
 The analysis Task MAY be accompanied by a research workspace under `/research/<slug>/` if the analysis merits a full synthesis run; in that case the Task MUST list the spawned research slug in `task_spawns_research`.
 
-## 7. Anti-Patterns
+## 7. Skill-driven research runs
+
+A research run MAY be initiated via the `/sc:research` skill at [`skills/sc-research/SKILL.md`](./skills/sc-research/SKILL.md), imported under the policy ratified by [ADR-0011](./decisions/0011-external-skill-corpora-import.md). The skill is Agency-adapted: WebSearch + WebFetch are the primary research surface; the upstream Tavily MCP appears only as an OPTIONAL optimization per ADR-0011 D.8.
+
+When invoked, the skill MUST land its deliverables in `/research/<slug>/output/SPEC.md` per §6.5 above. Workspace cleanliness is enforced by [`tools/check-workspace-cleanliness.py`](./tools/check-workspace-cleanliness.py); follow-up downstream-Task linkage is enforced by [`tools/check-external-result-downstream-task.py`](./tools/check-external-result-downstream-task.py). Neither linter is modified by ADR-0011 — the skill operates inside the existing R.4.4 / R.6.5 envelopes.
+
+## 8. Anti-Patterns
 
 - **MUST NOT** craft prompts inside `/research/`. Prompts live in `/prompts/`.
 - **MUST NOT** edit a `/research/<slug>/` workspace after `research_phase: complete` to insert follow-up questions, rewrite prose, or revise findings. File a new prompt or a successor `research_phase: open` workspace instead. T1 / T2 metadata-and-link repairs are permitted under the narrow allowance in [`MAINTENANCE.md §1.0.1`](./MAINTENANCE.md#101-closed-research-t1t2-repair-allowance-task-059) (frontmatter date bumps and broken-relative-link fixes when an upstream rename moves a target); content remains T4-immutable.

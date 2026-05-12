@@ -57,7 +57,7 @@ T1/T2 closed-research repair commit alone.
 ## Cross-Reference Touchpoints
 
 - `MAINTENANCE.md §1` — main amendment (split T4 + §1.0.1 allowance).
-- `RESEARCH.md §7 (Anti-Patterns)` — pointer to MAINTENANCE.md §1.0.1
+- `RESEARCH.md §8 (Anti-Patterns)` — pointer to MAINTENANCE.md §1.0.1 (was §7 pre-Task-091-ST-2; renumbered when §7 Skill-driven research runs was inserted)
   on the existing "MUST NOT edit" bullet so RESEARCH.md doesn't
   contradict the new allowance.
 - `CLAUDE.md §8 (Repair tiers)` — same split, plus pointer to §1.0.1.

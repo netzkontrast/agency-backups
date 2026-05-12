@@ -33,6 +33,11 @@ Diag = _core.Diag
 
 SLUG_RE = re.compile(r"^[a-z0-9-]+$")
 
+# ADR-0011 D.1/D.2: imported skill corpora live under skills/<vendor>-<slug>/
+# and carry the L2 key `skill_source: "<vendor>@v<semver>"`.
+VENDOR_PREFIXES = ("sc-", "superpowers-")
+SKILL_SOURCE_RE = re.compile(r"^(superclaude|superpowers)@v\d+\.\d+\.\d+$")
+
 
 def _expected_required_keys(ontology: dict, type_name: str) -> list[str]:
     return list(ontology["types"].get(type_name, {}).get("required_keys", []))
@@ -117,6 +122,43 @@ def _check_skill_bundles(
                     rel, None, "ERROR", "F.B.6",
                     f"skill_bundles_tools entry {entry!r} requires transitive bundle {dep!r}; add it to the list",
                 ))
+    return out
+
+
+def _check_skill_source(fm: dict, rel: str) -> list[Diagnostic]:
+    """Validate skill_source per ADR-0011.
+
+    Emits:
+      - F.B.8 when `skill_source` is set on a bare-slug (Agency-native) skill
+        folder (ADR-0011 D.1 violation).
+      - F.B.9 when `skill_source` is not a string matching
+        `^(superclaude|superpowers)@v\\d+\\.\\d+\\.\\d+$` (ADR-0011 D.2 violation).
+
+    Codes F.B.8/F.B.9 are used (not F.B.7/F.B.8 as the §10.2 design draft
+    suggested) because F.B.7 is already in use by the task_list completion
+    WARN check in `_check_body_for_type`; see friction-log.md FL1.
+    """
+    out: list[Diagnostic] = []
+    if "skill_source" not in fm:
+        return out  # absence is fine for Agency-native skills
+
+    parts = rel.replace("\\", "/").split("/")
+    folder = parts[1] if len(parts) >= 3 and parts[0] == "skills" else ""
+    is_vendor_prefixed = folder.startswith(VENDOR_PREFIXES)
+    if not is_vendor_prefixed:
+        out.append(Diagnostic(
+            rel, None, "ERROR", "F.B.8",
+            "skill_source is reserved for vendor-prefixed imports "
+            "(skills/{sc,superpowers}-<slug>/) per ADR-0011 D.1",
+        ))
+
+    value = fm.get("skill_source")
+    if not isinstance(value, str) or not SKILL_SOURCE_RE.match(value):
+        out.append(Diagnostic(
+            rel, None, "ERROR", "F.B.9",
+            f"skill_source value {value!r} does not match "
+            f"'<vendor>@v<semver>' (e.g. 'superclaude@v4.3.0') per ADR-0011 D.2",
+        ))
     return out
 
 
@@ -283,6 +325,8 @@ def check_file(
     # ADR-0007: skill_bundles_tools validation (only for SKILL.md files).
     if type_for_keys == "skill":
         diags.extend(_check_skill_bundles(fm, rel, repo_root))
+        # ADR-0011: skill_source validation for imported corpora.
+        diags.extend(_check_skill_source(fm, rel))
 
     return diags
 

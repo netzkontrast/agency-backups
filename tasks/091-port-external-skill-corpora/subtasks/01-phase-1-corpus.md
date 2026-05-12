@@ -1,6 +1,6 @@
 ---
 type: note
-status: active
+status: completed
 slug: task-091-st1-phase-1-corpus
 summary: "ST-1 (Task 091 Epic): extend tools/fm/validate.py for skill_source key + create 14 skill folders under skills/sc-*/ per ADR-0011 Phase 1. Corpus only; root-spec hookup deferred to ST-2."
 created: 2026-05-12
@@ -55,6 +55,7 @@ Verbatim from `../references/full-plan-part-4.md` §10.5 Task A — anchors `TA.
 - **TA.1.2** — Validator extension does not regress existing skills: `python3 tools/fm/validate.py skills/` emits 0 ERROR diagnostics against the 22 pre-existing skill folders.
 - **TA.1.3** — `sc-research` is Agency-adapted: `WebSearch` appears in `## How to use`; `Tavily` appears only in `## Compatibility` marked OPTIONAL; verbatim upstream body exists at `skills/sc-research/references/upstream-sc-research.md`.
 - **TA.1.4** — Audit-graph reciprocity computed: manifest entry for `sc-system-architect` lists `referenced_by: [sc-implement]`; manifest entry for `sc-quality-engineer` lists `referenced_by: [sc-test, sc-improve]`.
+  > **Status (ST-1 closure):** forward references are correctly declared in YAML (`skill_references_skills` on `sc-implement`, `sc-test`, `sc-improve`) and reciprocity is derivable via `grep -l <slug> skills/sc-*/SKILL.md`. The materialised manifest the AC asserts against (`.skills-manifest.json` or equivalent) **does not exist in the toolchain today** — `skills/skills-skill-bootstrap/sync.sh` has no `--emit-manifest` flag and `tools/fm/graph.py` does not crawl `skill_references_skills`. Manifest verification is deferred to a follow-up Task per the two closure paths documented in [`../friction-log.md` FL1.2](../friction-log.md). PR #115 ships ST-1 with forward refs in place; reciprocity-materialisation is a Phase-2 ADR-level scope.
 
 ## Branch + PR shape
 
