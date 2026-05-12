@@ -23,7 +23,17 @@ ST-1 (Phase 1 corpus) execution: validator extension + 14 `skills/sc-*/` skill f
 
 **Resolution.** Renumbered the new ERROR codes to `F.B.8` / `F.B.9`. All references — the validator emit sites in [`tools/fm/validate.py`](../../tools/fm/validate.py), the 6 tests in [`tools/tests/fm/test_validate_skill_source.py`](../../tools/tests/fm/test_validate_skill_source.py), and the ontology `skill_source` key_doc in [`maintenance/schemas/header-ontology.json`](../../maintenance/schemas/header-ontology.json) — point at `F.B.8` / `F.B.9` consistently.
 
-**Recommendation.** ADR-0011's verbatim Gherkin (ADR.11.2) still cites `F.B.7` for the bare-slug rejection. A T2 follow-up (additive edit to the Accepted ADR's `## Acceptance Criteria` Gherkin block) should reconcile the code to `F.B.8` so the ADR's executable test matches the validator emit code. The ADR's body authority is unchanged; only the diagnostic code in the Gherkin needs the renumber. **Filing this as a sibling Task in main is out-of-scope for ST-1** but recommended for the ST-2 reviewer to triage.
+**Recommendation.** ADR-0011's verbatim Gherkin (ADR.11.2) still cites `F.B.7` for the bare-slug rejection. **This was originally recommended as a T2 additive edit to the Accepted ADR — that was wrong.** Per MAINTENANCE.md §1, an `Accepted` ADR is **T4-immutable**: editing its `## Acceptance Criteria` Gherkin block — even "additively" — changes the normative record of what the ADR's acceptance test asserts and so is prohibited. The correction was caught in peer review (see [`review-st1.md`](./review-st1.md) Issue 2).
+
+**Correct remediation path.** File a **new ADR** that amends/clarifies ADR-0011 without editing it:
+
+- `decisions/0012-skill-source-validator-diagnostic-codes.md` (or next free slot)
+- `adr_status: Accepted` after review
+- `adr_supersedes: []` (amendment, not supersession — D.1–D.9 normative clauses are unchanged)
+- `adr_relates_to: [ADR-0011]`
+- Body: "ADR-0011 §10.2 design specified F.B.7 / F.B.8. Implementation in PR #115 used F.B.8 / F.B.9 due to F.B.7 pre-existing use as a WARN-tier code in `_check_body_for_type`. This ADR ratifies F.B.8 / F.B.9 as the authoritative code pair and supersedes the F.B.7 reference inside ADR-0011 §ADR.11.2 Gherkin."
+
+The diagnostic-explanations registry (`maintenance/schemas/diagnostic-explanations.json`) should also gain entries for `F.B.8` / `F.B.9` when the amendment ADR lands. **Filing this as a sibling Task is out-of-scope for ST-1** but blocking for any ADR-level coherence sweep; recommended for the ST-2 reviewer to triage.
 
 ### FL1.2 — TA.1.4 manifest-reciprocity AC has no implementation backing
 
