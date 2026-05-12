@@ -26,7 +26,7 @@ Moments in NCP. 3 Approval-Gates: Akt-Outline → Chapter-Outline → Final Scen
 
 ```
 Phase 5.1   Load architecture + character + world             (silent)
-Phase 5.2   Select structure template                          (askuser if multiple in methods/structure/)
+Phase 5.2   Select structure template                          (askuser if [→ novel-architect-structure] offers multiple options)
 Phase 5.3   Fill act-level structure                           (4 Akte, storypoints)
             ──── GATE 1 (act outline) ────                     (askuser)
 Phase 5.4   Per act: fill chapter-level                        (storybeats per chapter)
@@ -43,7 +43,7 @@ Phase 5.8   Persist + present_files
 - `dramatica-theory` für Storyweaving-Pattern
 - `dramatica-vocabulary` für Element-Encoding
 - `ncp-author` für storybeats + moments
-- `methods/structure/<template>.md` (load on demand)
+- [→ novel-architect-structure] for `<template>` selection (load on demand)
 
 ## Output
 
@@ -58,4 +58,4 @@ Phase 5.8   Persist + present_files
 
 - `phases/phase5-scene-matrix.md`
 - `assets/scene-matrix-template.md`
-- `methods/structure/` (lazy load)
+- [`novel-architect-structure/methods/`](../../novel-architect-structure/methods/) (lazy-loaded per `intent.methods_preference.structure`)

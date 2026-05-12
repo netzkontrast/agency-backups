@@ -28,39 +28,54 @@ updated: 2026-05-12
 
 ## 1. Workflow Overview
 
+> **REVISED 2026-05-12** after grep-verified cartography (see §8). Original cartographer subagent over-estimated cluster A by 7× (claimed 12 files × ~810 LOC of MOVE+REWRITE work; reality is 6 files × ~20 path-ref REWRITEs). No new sub-module method files are required — scene-level-bridge.md already covers V111.US2 in full. Original overview retained below in strikethrough only where it would mislead a future reader; the live numbers are the corrected ones.
+
 | Cluster | Title | Commits | Est. session | Blocks | Closes |
 |---|---|---|---|---|---|
-| **A** | Prose rewrite (two-layer contract) | 9 | 3–4 h | B (scene metadata) | V111.US1 |
+| **A** | Prose rewrite (two-layer contract) | **2** ~~(was 9)~~ | **~45 min** ~~(was 3–4 h)~~ | B (scene metadata) | V111.US1 |
 | **B** | Scene graduation + version bumps | 3 | 0.5 h | — | V111.US2, V111.US5 |
 | **C** | Linter triple (worksheet-order, hard-rules, canon-status) | 4 | 2–3 h | — (independent) | V111.US3 |
 | **D** | Retirement-placeholder verify + small fixes (M1/M2/M3) | 3 | 1 h | — | V111.US4 |
-| **Total** | | **19 commits** | **6.5–8.5 h** | | 5/5 ACs |
+| **Total** | | **12 commits** ~~(was 19)~~ | **3–4 h** ~~(was 6.5–8.5 h)~~ | | 5/5 ACs |
 
-**Single-session feasibility:** marginal. Recommended split: 2 sessions — Session 1 = A + D (prose-heavy); Session 2 = B + C (Python + metadata). Cluster A and C can run fully in parallel across two contributors / branches; merging order is A → B → C.
+**Single-session feasibility:** **yes** ~~(was marginal)~~. The full 12-commit set fits comfortably in one session. Cluster A and C can still run in parallel; merging order remains A → B → C.
 
 ## 2. Per-Cluster Decomposition
 
-### Cluster A — Prose rewrite (9 commits)
+### Cluster A — Prose rewrite (2 commits, revised)
+
+> **Revised scope** per §8 cartographer scope-discrepancy finding. The orchestrator phase prose is already mostly correct; only ~20 broken path-refs across 6 files violate the two-layer contract. Three of those files (3 commands) need REWRITE-only path fixes; three (phase1, phase3, phase5) need REWRITE-plus-delegate prose conversion. **Zero new sub-module method files are required.**
 
 | # | Commit | Files touched | Acceptance check |
 |---|---|---|---|
-| A.0 | `chore(tasks): file Task 083 v1.1.1-hardening + companion Tasks 084/085/086` | `tasks/083-*/`, `tasks/084-*/`, `tasks/085-*/`, `tasks/086-*/`, `tasks/readme.md`, `TASK.md` | `tools/check-governance.sh` exit 0; all 4 Tasks pass `tools/fm/validate.py --type-check` |
-| A.1 | `refactor(novel-architect): phase2 → two-layer (structure sub-module owns method detail)` | `phases/phase2-narrative-architecture.md` (REWRITE 254–307), `novel-architect-structure/methods/validation/storyform-gate-details.md` (NEW, ~117 LOC from phase2:84–200), `novel-architect-structure/methods/storyform/delegations.md` (NEW, ~53 LOC from phase2:201–253) | `grep -n "methods/character\|methods/structure/\|methods/research/" phases/phase2*.md` → 0 hits; `tools/fm/validate.py --check-body` clean |
-| A.2 | `refactor(novel-architect): phase3 → two-layer (character sub-module owns method detail)` | `phases/phase3-character-architecture.md`, `novel-architect-character/methods/psycho-model-dispatch.md` (NEW), `novel-architect-character/methods/ncp-player-workflow.md` (NEW) | grep clean for phase3; pytest `render/tests/` still 74/74 |
-| A.3 | `refactor(novel-architect): phase4 → two-layer (world sub-module owns method detail)` | `phases/phase4-world-research.md`, `novel-architect-world/methods/{domain-identification,research-brief-workflow,findings-integration}.md` (3 NEW files) | grep + validate.py clean |
-| A.4 | `refactor(novel-architect): phase5 → two-layer (scene + structure split per D6)` | `phases/phase5-scene-matrix.md`, `novel-architect-scene/methods/structure-template-dispatch.md` (NEW), `novel-architect-structure/methods/{gate-details-scene-matrix,storyweaving-pattern}.md` (2 NEW) | grep + validate.py; **scene gains its first non-bridge method file** |
-| A.5 | `refactor(novel-architect): phase6 → two-layer (drafting folds into scene per D6)` | `phases/phase6-drafting.md`, `novel-architect-scene/methods/{drafting-workflow,drafting-delegations}.md` (2 NEW) | grep + validate.py |
-| A.6 | `refactor(novel-architect): commands → delegate (5 delegating: characters/design/draft/research/scenes)` | `commands/{novel-characters,novel-design,novel-draft,novel-research,novel-scenes}.md` + 5 NEW `*-command-workflow.md` files across sub-modules | `grep -rn "novel-architect-character\|-structure\|-world\|-scene" commands/` → ≥7 hits; obsolete `methods/{character,structure,research}/` refs → 0 |
-| A.7 | `refactor(novel-architect): commands → REWRITE-only (start + reflect stay orchestrator-resident)` | `commands/{novel-start,novel-reflect}.md` (path-ref REWRITEs only) | grep clean |
-| A.last | `chore(tasks/083): sync readme + friction-log + close cluster A` | `tasks/083-*/friction-log.md` (NEW), `tasks/readme.md` (index sync) | `tools/check-governance.sh` exit 0; `tools/fm/index_diff.py` clean |
+| A.0 | `chore(tasks/083-086): file v1.1.1-hardening Epic + 3 child placeholders; codify /sc:workflow planning pipeline in TASK.md §4.9` | `tasks/083-*/`, `tasks/084-*/`, `tasks/085-*/`, `tasks/086-*/`, `tasks/readme.md`, `TASK.md` | LANDED at commit `aaf9567`; `tools/check-governance.sh` exit 0 |
+| A.1 | `refactor(novel-architect): align orchestrator prose with two-layer contract — 20 path refs across 6 files` | `phases/phase1-intent-capture.md` (1 ref), `phases/phase3-character-architecture.md` (7 refs), `phases/phase5-scene-matrix.md` (5 refs), `commands/{novel-characters,novel-research,novel-scenes}.md` (2+2+3 refs). REWRITE-only for the 3 commands; REWRITE+delegate (prose conversion to `[→ sub-module]` form) for the 3 phases. No new files; no MOVE. | `grep -rnE "methods/(character\|structure/\|research/)" skills/novel-architect/{phases,commands}/` → **0 hits**; `tools/fm/validate.py --type-check skills/` clean; pytest `render/tests/` still 74/74 |
+| A.last | `chore(tasks/083): sync readme + friction-log + close cluster A` | `tasks/083-*/friction-log.md` (NEW; carries F-083.1 cartographer-scope finding), `tasks/readme.md` (index sync) | `tools/check-governance.sh` exit 0; `tools/fm/index_diff.py` clean |
 
-**Cluster A acceptance:** all 12 orchestrator files purged of obsolete `methods/{character,structure,research}/` refs; sub-modules gained 14 new method files (~524 moved LOC); 287 LOC of REWRITE applied; pytest still 74/74; governance gate green.
+**Cluster A acceptance:** all orchestrator phase + command files purged of obsolete `methods/{character,structure,research}/` refs (20 → 0); 3 phase files use canonical `[→ novel-architect-<sub>]` delegation prose for runtime-load instructions; pytest still 74/74; governance gate green.
+
+#### A.1 — Per-file edit detail (grep-verified)
+
+| File | Refs | Verdict | Notes |
+|---|---|---|---|
+| `phases/phase1-intent-capture.md:32` | 1 | REWRITE+delegate | Enum list `methods/character/`, `methods/structure/`, `methods/conflict/`, `methods/research/` → delegate by sub-module name. Note `methods/conflict/` STAYS as orchestrator-resident per /sc:design L2 finding. |
+| `phases/phase3-character-architecture.md:29` | 1 | REWRITE+delegate | `siehe methods/character/<model>.md` → `siehe [→ novel-architect-character]` |
+| `phases/phase3-character-architecture.md:40` | 1 | REWRITE+delegate | `load methods/character/<model>.md for schema` → `ask [→ novel-architect-character] for <model> schema` |
+| `phases/phase3-character-architecture.md:61-68` | 4 | REWRITE+delegate | Bullet list of `methods/character/{tsdp-ifs,big-five,enneagramm,jung-archetypes}.md` → one-line pointer to [→ novel-architect-character] methods catalog |
+| `phases/phase3-character-architecture.md:89` | 1 | REWRITE+delegate | `schemas leben in methods/character/` → `schemas owned by [→ novel-architect-character]` |
+| `phases/phase5-scene-matrix.md:28` | 1 | REWRITE+delegate | `if multiple in methods/structure/` → `if [→ novel-architect-structure] offers multiple options` |
+| `phases/phase5-scene-matrix.md:42-46` | 3 | REWRITE+delegate | Template bullet list → pointer; `methods/structure/<template>.md (load on demand)` → `[→ novel-architect-structure] template selection` |
+| `phases/phase5-scene-matrix.md:61` | 1 | REWRITE+delegate | `methods/structure/ (lazy load)` → `[→ novel-architect-structure] Methods (lazy-loaded)` |
+| `commands/novel-characters.md:28` | 1 | REWRITE-only | Path ref in workflow note |
+| `commands/novel-characters.md:64` | 1 | REWRITE-only | Path ref in detail section |
+| `commands/novel-research.md:54-55` | 2 | REWRITE-only | Two `methods/research/<file>.md` refs → `../../novel-architect-world/methods/<file>.md` links |
+| `commands/novel-scenes.md:29,46,61` | 3 | REWRITE-only | Three `methods/structure/` refs → sub-module-name delegation prose |
 
 ### Cluster B — Scene graduation + version bumps (3 commits)
 
 | # | Commit | Files touched | Acceptance check |
 |---|---|---|---|
-| B.1 | `feat(novel-architect-scene): graduate from stub — v1.1.1` | `skills/novel-architect-scene/SKILL.md` (drop "stub" qualifier, bump version), `skills/novel-architect/SKILL.md` (drop "stub in v1.1.0" qualifier in delegates_to, bump version) | `grep -c "stub" skills/novel-architect{,-scene}/SKILL.md` → 0; scene has ≥6 method files |
+| B.1 | `feat(novel-architect-scene): graduate from stub — v1.1.1` | `skills/novel-architect-scene/SKILL.md` (drop "stub" qualifier, bump version), `skills/novel-architect/SKILL.md` (drop "stub in v1.1.0" qualifier in delegates_to, bump version). **Revised:** no new method files needed — `scene-level-bridge.md` (149 LOC) already covers V111.US2's Q1–Q5 audit + scene-matrix execution + drafting-precheck per `/sc:design` Revised Artifact 3. | `grep -c "stub" skills/novel-architect{,-scene}/SKILL.md` → 0; scene SKILL.md `version: "1.1.1"` |
 | B.2 | `fix(novel-architect): bump io_helpers.SKILL_VERSION to "1.1.1" (M1)` | `skills/novel-architect/render/io_helpers.py:258`, `skills/novel-architect/render/tests/test_io_helpers.py` (add SSoT assertion) | new test asserts `SKILL_VERSION` matches SKILL.md `metadata.version`; pytest 75/75 |
 | B.3 | `docs(novel-architect): v1.1.1 changelog in learnings.md` | `skills/novel-architect/references/learnings.md` (append v1.1.1 entry below v1.1.0; reference Task 083) | manual review; entry cites Task 083 + the 5 V111.US ACs |
 
@@ -150,4 +165,29 @@ Anticipated FL hot-spots — drafted now so the closing friction-log is honest, 
 | Tooling gap on body-content shifts | FL1 | "Per-section cut-paste was scripted via `sed -n '<start>,<end>p'` + manual review; `git mv` preserved history where whole files moved." |
 | Governance gate latency | FL0–FL1 | "Measured baseline at <commit before C.1>; combined regression: <Nms>. Within / over budget — mitigation: <approach>." |
 
-**Pre-committed FL0 floor:** 19 commits + 5 ACs closed + 4 Tasks filed + governance gate green. Absent any of the above hotspots, FL0 is the honest declaration per FRUSTRATED.md (mandatory even on perfect runs).
+**Pre-committed FL0 floor:** ~~19~~ **12** commits + 5 ACs closed + 4 Tasks filed + governance gate green. Absent any of the above hotspots, FL0 is the honest declaration per FRUSTRATED.md (mandatory even on perfect runs).
+
+## 8. Cartographer Scope-Discrepancy Finding (post-A.0)
+
+**Anchor: F-083.1** — to be cited in `tasks/083-*/friction-log.md` at Task close.
+
+**FL1 — Subagent over-scope without grep-verification.**
+
+The first `/sc:design` run spawned a "line-level edit cartographer" Explore subagent that produced a 12-file manifest projecting **524 LOC of MOVE + 287 LOC of REWRITE + 14 new sub-module method files** for cluster A. The cartographer also proposed three phantom sub-modules (`novel-architect-{story,bootstrap,integration}`), which `/sc:design` correctly rejected per D6 — but the file-level scope was accepted on trust and baked into the original §1 + §2 of this workflow.
+
+Grep-verification post-A.0 revealed the reality:
+
+```bash
+$ grep -rnE "methods/(character|structure/|research/)" \
+    skills/novel-architect/phases/ skills/novel-architect/commands/
+```
+
+…returns **~20 broken refs across 6 files** (`phase1-intent-capture`, `phase3-character-architecture`, `phase5-scene-matrix`, `commands/novel-{characters,research,scenes}`), not 12. Three files the cartographer marked for heavy refactor (`phase2-narrative-architecture`, `phase4-world-research`, `phase6-drafting`) have **zero** broken refs and are already in two-layer-contract compliance. One file the cartographer missed entirely (`phase1-intent-capture.md`) has 1 ref. The cartographer's manifest was based on a maximalist structural reading — counting how much of each phase file *could in principle* move to a sub-module — without verifying which content actually violates the two-layer contract.
+
+**Impact on workflow:** v1.1.1-hardening shrinks from 19 commits / 6.5–8.5 h to **12 commits / 3–4 h** (single-session feasible). The corrected per-file manifest is now in §2 Cluster A. Cluster B simplifies too: scene's "graduation" requires no new method files since `scene-level-bridge.md` (149 LOC) already covers V111.US2's three acceptance criteria — only the SKILL.md metadata qualifier drops.
+
+**Mitigation rule (proposed for TASK.md §4.9 follow-up):** any subagent producing a structural-rewrite manifest MUST (a) cite the grep / search command it used to identify the targets, (b) include the grep output line-by-line in its response, and (c) classify findings as "verified broken" vs. "structurally suggested." Subagents that perform pure structural reading without grep-verification SHOULD have their manifests treated as design *hypotheses*, not implementation targets — and the orchestrator agent (the `/sc:design` synthesizer) SHOULD demand grep evidence before accepting the manifest into the workflow plan.
+
+**Counter-factual:** had A.0 not been committed before the grep-verification, the orchestrator agent could have plowed through the cartographer's 9-commit cluster A plan and shipped 14 sub-module method files that mostly duplicated existing content (especially in `novel-architect-scene/`, where `scene-level-bridge.md` already covered the proposed `drafting-workflow.md`, `drafting-delegations.md`, etc. functionally). The over-scoped plan would have been single-session-infeasible and would have re-introduced the very "lean but real" depth-for-breadth trade Task 070's friction-log warned against — a meta-instance of the same FL2 pattern.
+
+**Take-away:** trust subagent manifests for *evidence* (line numbers, file paths, citations) but verify scope claims (file counts, LOC counts, "needs refactor" verdicts) with a simple grep before accepting them into a workflow plan.

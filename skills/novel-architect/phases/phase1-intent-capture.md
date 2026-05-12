@@ -29,7 +29,7 @@ und vom User approved. **Kein Slot darf ambiguous, missing oder geraten sein.**
 | `length_target` | yes | single_select | `short_novel` (40-60k Wörter), `standard` (80-120k), `epic` (150k+) |
 | `language` | yes | single_select | `de`, `en`, `fr`, `es`, ... |
 | `chapter_count_target` | yes | integer | typisch: 24, 32, 39, 40, 50 |
-| `methods_preference` | yes | multi_select | aus `methods/character/`, `methods/structure/`, `methods/conflict/`, `methods/research/` |
+| `methods_preference` | yes | multi_select | aus `[→ novel-architect-character]`, `[→ novel-architect-structure]`, `methods/conflict/` (orchestrator-resident, cross-cutting), `[→ novel-architect-world]` |
 | `dramatica_storyform_count` | yes | single_select | `single` / `dual` (parallel-encoded) |
 | `philosophy_integration_level` | optional | single_select | `decoration` (Zitate), `frame` (Charaktere diskutieren), `engine` (Konflikt ist philosophisch) |
 | `science_integration_level` | optional | single_select | `decoration`, `frame`, `engine` |

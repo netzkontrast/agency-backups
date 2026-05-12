@@ -25,7 +25,7 @@ persistiere Storybeats und Moments in NCP via `ncp-author`, schreibe
 
 ```
 Phase 5.1   Load architecture + character + world             (silent)
-Phase 5.2   Select structure template                          (askuser if multiple in methods/structure/)
+Phase 5.2   Select structure template                          (askuser if [→ novel-architect-structure] offers multiple options)
 Phase 5.3   Fill act-level structure (4 acts, storypoints)    (auto + askuser per act)
             ──── GATE 1 (act outline) ────                     (1 askuser: Approve / Edit acts)
 Phase 5.4   Per act: fill chapter-level (storybeats per chapter) (loop)
@@ -39,7 +39,7 @@ Phase 5.8   Persist + present_files
 
 ## §3 Structure-Templates (load on demand)
 
-Aus `methods/structure/`:
+Aus `[→ novel-architect-structure]` (load on demand via `intent.methods_preference.structure`):
 - **`40-chapter-matrix.md`** (Default) — 4 Akte × 10 Kapitel, ~2-4 Szenen pro Kapitel
 - **`heroes-journey.md`** — 12 Stufen (Departure × 4, Initiation × 6, Return × 2)
 - **`save-the-cat.md`** — 15 Beats mit fixen Positionen

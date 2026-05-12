@@ -51,6 +51,6 @@ Phase 4.6   Update NCP signposts wenn relevant                  (delegate ncp-au
 ## Detail
 
 - `phases/phase4-world-research.md`
-- `methods/research/domain-mapping.md`
-- `methods/research/deep-research-briefs.md`
+- [`novel-architect-world/methods/domain-mapping.md`](../../novel-architect-world/methods/domain-mapping.md)
+- [`novel-architect-world/methods/deep-research-briefs.md`](../../novel-architect-world/methods/deep-research-briefs.md)
 - `assets/research-brief-template.md`

@@ -26,7 +26,7 @@ arc direction, relationships.
 | `narrative_role` | yes | single_select | Protagonist / Antagonist / Guardian / Contagonist / Reason / Emotion / Sidekick / Skeptic |
 | `throughline_assignment` | yes | single_select per storyform | MC / IC / OS_member / SS_member |
 | `psycho_model_primary` | yes | single_select | tsdp-ifs / big-five / enneagramm / jung-archetypes |
-| `psycho_config` | yes | structured | hängt vom Modell ab — siehe `methods/character/<model>.md` |
+| `psycho_config` | yes | structured | hängt vom Modell ab — siehe `[→ novel-architect-character]` für `<model>` Schema |
 | `motivations` | yes | list[free_text] | "Wahrheit finden", "System zerstören", "Bewusstsein integrieren" |
 | `arc_direction` | yes | single_select per storyform | Change / Steadfast |
 | `relationships` | optional | list[struct] | { target: char_id, kind: enum, weight: enum } |
@@ -37,7 +37,7 @@ arc direction, relationships.
 LOOP per character:
   ASK (≤3 slots from above):
     - character_name + narrative_role + throughline_assignment
-    - psycho_model_primary + psycho_config (load methods/character/<model>.md for schema)
+    - psycho_model_primary + psycho_config (ask [→ novel-architect-character] for <model> schema via psycho_model_primary selection)
     - motivations + arc_direction
     
 LOOP for relationships (after all characters defined):
@@ -53,20 +53,24 @@ APPROVE:
   askuser: Approve / Edit <char> / Add character / Remove character
 ```
 
-## §4 Methoden-Module (load on demand)
+## §4 Methoden-Module (Sub-Skill-owned; load on demand)
 
-Beim Auswählen des `psycho_model_primary` lädt der Skill das entsprechende
-Module für die Slot-Schema:
+Beim Auswählen des `psycho_model_primary` delegiert der Orchestrator an
+`[→ novel-architect-character]`. Die vier verfügbaren Modelle und ihre
+phase-level Slot-Konturen (Details und Schema im Sub-Skill):
 
-- **`methods/character/tsdp-ifs.md`** — Tertiäre Strukturelle Dissoziation + Internal Family Systems
+- **`tsdp-ifs`** — Tertiäre Strukturelle Dissoziation + Internal Family Systems
   - Slots: alters[] mit role/function/somatic
   - Beispiel: Kael (Host/ANP), Lex (analytisch/EP), Kiko (kindlich/EP)
-- **`methods/character/big-five.md`** — OCEAN
+- **`big-five`** — OCEAN
   - Slots: openness, conscientiousness, extraversion, agreeableness, neuroticism (0-100)
-- **`methods/character/enneagramm.md`** — 9 Typen
+- **`enneagramm`** — 9 Typen
   - Slots: type (1-9), wing, integration_path, disintegration_path
-- **`methods/character/jung-archetypes.md`** — Archetypen
+- **`jung-archetypes`** — Archetypen
   - Slots: archetypes[] (Shadow, Anima/Animus, etc.), individuation_stage
+
+Schema-Definition + askuser-Detail-Loops leben im Sub-Skill: siehe
+[`novel-architect-character/methods/`](../../novel-architect-character/methods/).
 
 ## §5 NCP-Player-Workflow (delegated to ncp-author)
 
@@ -86,7 +90,7 @@ Phase 3 ruft `ncp-author` auf pro Charakter:
 
 - **Players werden pro narrative gespiegelt** bei dual storyform — ein Charakter kann unterschiedliche Rollen in A vs. B haben
 - **NCP-Mutation NUR via ncp-author**
-- **Psycho-Model schemas leben in methods/character/, nicht inline** — Progressive Disclosure
+- **Psycho-Model schemas owned by `[→ novel-architect-character]`, nicht inline** — Progressive Disclosure; load via `psycho_model_primary` selection
 - **Relationships werden NACH allen Charakteren definiert** — sonst zirkuläre Refs
 - **Mindestens MC + IC sind erforderlich** bei single storyform; bei dual: MC+IC per narrative
 - **MC ist NICHT zwingend Protagonist** — siehe `dramatica-theory` Reference
