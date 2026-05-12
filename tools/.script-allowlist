@@ -10,3 +10,9 @@ install.sh
 # Task 041 — extract.py is the audit-trail of the subtask-prompt extraction
 # step. Kept inside the task folder for traceability per FOLDERS.md §6.
 tasks/041-extract-subtask-prompts/scripts/*.py
+
+# Task 091 — verbatim upstream snapshot for Phase 2 triage. Per ADR-0011 D.9
+# these files are byte-identical mirrors and MUST NOT be edited; PC.1.1's
+# script-hygiene rule applies to authored Agency scripts, not staged
+# upstream mirrors. Scoped to the snapshot subtree only.
+tasks/091-port-external-skill-corpora/references/upstream-snapshot/*

@@ -3,6 +3,12 @@ __pycache__/
 .agent_cache/
 .claude/worktrees/
 
+# pytest-cov / pytest-benchmark transient artefacts
+.coverage
+.coverage.*
+.pytest_cache/
+.benchmarks/
+
 # ADR-0007: skill_bundles_tools materialisation produced by
 # skills/skills-skill-bootstrap/sync.sh under ~/.claude/skills/<name>/.
 # Defensive ignore for the in-repo path so accidental git-adds never
