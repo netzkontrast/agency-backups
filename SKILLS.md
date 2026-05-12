@@ -4,7 +4,7 @@ status: active
 slug: skills-spec
 summary: "Root specification governing the /skills/ capability directory, the skill-bootstrap protocol, and the cross-agent portability contract."
 created: 2026-05-05
-updated: 2026-05-11
+updated: 2026-05-12
 ---
 
 # Skill Architecture Specification
@@ -65,7 +65,7 @@ Every `SKILL.md` MUST carry these six L1 keys (full semantics in [TASK.md §3.2]
 
 | Key | Type | Purpose |
 |---|---|---|
-| `skill_kind` | string | One of: `domain` (e.g. dramatica-theory), `tool` (e.g. pdf-to-markdown), `orchestrator` (e.g. the-agency-system-architect), `meta` (e.g. skills-skill-bootstrap). Drives index routing. |
+| `skill_kind` | string | Closed enum of **9 values** (ratified by Task 094 ST-1, absorbing the Task 092 PR #120 review A1 carry-forward T3): `domain` (e.g. `dramatica-theory`), `tool` (e.g. `pdf-to-markdown`, `sc-test`), `orchestrator` (e.g. `the-agency-system-architect`, `sc-task`), `meta` (e.g. `skills-skill-bootstrap`, `sc-pm-agent`, `superpowers-using-superpowers`), `discipline` (Superpowers discipline gates — e.g. `superpowers-tdd`, `superpowers-systematic-debugging`), `workflow` (e.g. `superpowers-using-git-worktrees`), `persona` (Claude-voice activators — e.g. `sc-python-expert`, `sc-socratic-mentor`), `analysis` (read-mostly synthesis skills — e.g. `sc-analyze`, `sc-spec-panel`), `agent-template` (subagent prompt templates — e.g. `superpowers-code-reviewer`). Drives index routing. Mechanically enforced by `tools/fm/validate.py` diagnostic **F.B.11** (ERROR-tier; any out-of-enum value fails the gate). |
 | `skill_target_agents` | list | Agents the skill is verified-portable to. Members from: `claude-ai`, `claude-code`, `jules`, `gemini-cli`. |
 | `skill_references_skills` | list | Slugs of other skills this skill invokes or composes. Reciprocity is computed by the linter. |
 | `skill_references_research` | list | Slugs of `/research/<slug>/` workspaces grounding the skill's claims. |

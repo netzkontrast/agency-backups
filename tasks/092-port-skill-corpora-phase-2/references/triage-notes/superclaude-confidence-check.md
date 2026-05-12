@@ -33,5 +33,5 @@ Upstream body ≈ 2.1 KB. After D.7 strip, body fits comfortably under the 5 KB 
 
 ## Audit-graph linkage
 
-- `skill_source: "superclaude_framework@v4.3.0"`
+- `skill_source: "superclaude@v4.3.0"`
 - `skill_references_skills: [sc-implement, sc-research]` — confidence-check is conceptually a gate **before** implementation, so it forward-references the heavy implementation skills.

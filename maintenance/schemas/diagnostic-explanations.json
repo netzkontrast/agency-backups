@@ -51,6 +51,12 @@
       "why": "Item patterns enforce normative-keyword discipline (lang-spec U1).",
       "fix": "Rewrite the item to include the required pattern (typically MUST / MUST NOT / SHOULD / MAY / etc.)."
     },
+    "F.B.11": {
+      "severity_hint": "ERROR",
+      "what": "A SKILL.md frontmatter `skill_kind` value is not in the closed 9-value enum {domain, tool, orchestrator, meta, discipline, workflow, persona, analysis, agent-template}.",
+      "why": "Index routing, manifest emission, and discipline-gate dispatch all depend on `skill_kind` being a known label. Out-of-enum values silently bypass routing. Ratified by Task 094 ST-1 (carry-forward T3 from Task 092 PR #120 review A1).",
+      "fix": "Either change `skill_kind` to one of the 9 enum values (see SKILLS.md §3.3) or, if a new category is genuinely required, open an ADR to ratify the enum expansion before adding the value."
+    },
     "F.T.1": {
       "severity_hint": "ERROR",
       "what": "A list-valued L2 field references a slug or task_id that has no matching operational file.",

@@ -32,6 +32,6 @@ L2 for all three — they depend on the Task / Prompt / Research substrate to re
 
 ## Audit-graph linkage
 
-- `skill_source: "superclaude_framework@v4.3.0"` per file.
+- `skill_source: "superclaude@v4.3.0"` per file.
 - `skill_references_skills: [sc-pm-agent]` per file.
 - Optional: `sc-load` ↔ `sc-save` reciprocal `skill_references_skills` edge.

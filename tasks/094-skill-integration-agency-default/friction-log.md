@@ -30,9 +30,19 @@ Peer review on PR #122 returned **APPROVED · 0 blocking · 5 advisory**. Three 
 - **A4 (resolved this PR):** Unicode `…` ellipsis in Gherkin grep paths replaced with full slug `tasks/092-port-skill-corpora-phase-2/...` in `task.md ## Goal` "done when" list and `subtasks/01-root-spec-hookup.md` AC T094.1.3. Narrative ellipsis elsewhere (prose-only shorthand) left as-is.
 - **A5 (carried forward — ST-2 scope):** No ADR for the new `.claude/` + `.claude-plugin/` topology yet. Per CLAUDE.md §5 "repo-architecture convention changes" route through `decisions/<NNNN>-<slug>.md`. ST-2 MUST file ADR-0013 declaring the symlink idiom + plugin manifest + 17-agent re-export pattern before `.claude/` lands.
 
-## ST-1 — Root-spec hookup + T3 enum + T1 typo sweep (FL declared per subtask)
+## ST-1 — Root-spec hookup + T3 enum + T1 typo sweep (FL0)
 
-(Populated as ST-1 work proceeds.)
+Highest Frustration Level: FL0
+
+- Root-spec hookup executed without blocker. All 54 imported skills (39 sc-* + 15 superpowers-*; spec said 52 but actual count is 54) are now cited in ≥ 1 root spec — zero orphans per AC T094.1.1.
+- CLAUDE.md §13 expanded with `SK.13.SUPERCLAUDE` + `SK.13.SUPERPOWERS` anchors and 9-`skill_kind`-grouped enumeration; AGENTS.md gained a new H2 "Skill Index by Category" section with `SK.AGENTS.<kind>.<n>` anchors covering every category (orchestrator / discipline / domain / analysis / persona / tool / meta / workflow / agent-template).
+- TASK.md §4.9 now inline-cites the four planning-ladder SKILL.md paths (sc-analyze / sc-brainstorm / sc-design / sc-workflow). RESEARCH.md §7 expanded to compose sc-research with sc-analyze + sc-deep-research-agent and four Superpowers discipline gates (brainstorming / writing-plans / systematic-debugging / verification-before-completion).
+- T3 carried-forward enum ratified in SKILLS.md §3.3 to the 9-value closed set; F.B.11 ERROR-tier diagnostic added to `tools/fm/validate.py` (mirrors F.B.8/F.B.9 idiom from ADR-0011/ADR-0012 precedent); diagnostic registered in `maintenance/schemas/diagnostic-explanations.json`. Pytest fixture `tools/tests/fm/test_validate_skill_kind.py` covers all 9 valid + 3 invalid values + absent-key + repo-regression — 4 tests + 12 subtests pass.
+- T1 carried-forward typo sweep applied to all 11 triage-notes that contained `superclaude_framework@v4.3.0`; verified `grep -r "superclaude_framework@v4.3.0" tasks/092-port-skill-corpora-phase-2/references/triage-notes/` returns zero matches per AC T094.1.3. `updated:` bumped via `tools/fm/edit.py --bump-updated` per MAINTENANCE.md §1.0.1 allowance idiom.
+- `tools/check-governance.sh` exits 0 on the final commit. Validate-related pytest battery (test_validate.py + test_validate_extensions.py + test_validate_skill_bundles.py + test_validate_skill_source.py + test_validate_skill_kind.py) passes 40/40. Pre-existing failures in `test_fm_wrapper.py` + `test_duplicate_task_id.py` are unrelated to ST-1's surface (confirmed via baseline `git stash` check).
+- Branch deviation: developed on the assigned `claude/execute-skill-integration-task-RAuYR` per the session-setup instruction rather than the spec-suggested `claude/task-094-st1-root-spec-hookup`. This is a session-policy override (CLAUDE.md §11 "develop on assigned feature branch"), not a friction event.
+
+No FL1+ items from ST-1.
 
 ## ST-2 — `.claude/` directory + plugin manifest (FL declared per subtask)
 

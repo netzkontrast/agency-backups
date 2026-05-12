@@ -4,7 +4,7 @@ status: active
 slug: claude-md
 summary: "Instructions for AI coding assistants (Claude Code, Sonnet, Opus, Haiku) operating in this repository. Routes to canonical governance specs and enumerates non-negotiable session rules."
 created: 2026-05-07
-updated: 2026-05-08
+updated: 2026-05-12
 ---
 
 # CLAUDE.md — AI Assistant Instructions
@@ -233,7 +233,28 @@ Adding a new top-level folder that is neither operational ([FOLDERS.md §1](./FO
 
 ## 13. Skills, Skills SDK, and the SuperClaude `/sc:*` commands
 
-The repo lists many `sc:*` skills (e.g. `sc:implement`, `sc:test`, `sc:createPR`, `sc:improve`, `sc:research`). Invoke them via the **Skill** tool only when the user asks (`/sc:<name>`) or the system reminder lists the skill as available — never guess names. `/sc:createPR` is the canonical session-closer for Claude Code (§10).
+Invoke skills via the **Skill** tool only when the user types `/<skill>` or the system reminder lists the skill as available — never guess names. `/sc:createPR` is the canonical Claude Code session-closer (§10). The full skill corpus is mirrored under [`skills/`](./skills/) (SHA-pinned per [ADR-0011](./decisions/0011-external-skill-corpora-import.md)); 54 imported skills are auto-discovered when `.claude/skills/` is materialised (Task 094 ST-2 surface).
+
+The imported corpus is grouped by `skill_kind` (the 9-value enum ratified in [SKILLS.md §3](./SKILLS.md#3-frontmatter-namespace)). Use the per-spec audit anchors below to navigate from a category to its skills.
+
+<!-- anchor: SK.13.SUPERCLAUDE -->
+### 13.1 SuperClaude (`sc-*`) — 39 skills (`skill_source: superclaude@v4.3.0`)
+
+- **orchestrator (9):** [`sc-brainstorm`](./skills/sc-brainstorm/SKILL.md), [`sc-design`](./skills/sc-design/SKILL.md), [`sc-implement`](./skills/sc-implement/SKILL.md), [`sc-improve`](./skills/sc-improve/SKILL.md), [`sc-load`](./skills/sc-load/SKILL.md), [`sc-research`](./skills/sc-research/SKILL.md), [`sc-save`](./skills/sc-save/SKILL.md), [`sc-task`](./skills/sc-task/SKILL.md), [`sc-workflow`](./skills/sc-workflow/SKILL.md).
+- **domain (8):** [`sc-backend-architect`](./skills/sc-backend-architect/SKILL.md), [`sc-deep-research-agent`](./skills/sc-deep-research-agent/SKILL.md), [`sc-frontend-architect`](./skills/sc-frontend-architect/SKILL.md), [`sc-performance-engineer`](./skills/sc-performance-engineer/SKILL.md), [`sc-quality-engineer`](./skills/sc-quality-engineer/SKILL.md), [`sc-refactoring-expert`](./skills/sc-refactoring-expert/SKILL.md), [`sc-security-engineer`](./skills/sc-security-engineer/SKILL.md), [`sc-system-architect`](./skills/sc-system-architect/SKILL.md).
+- **analysis (7):** [`sc-analyze`](./skills/sc-analyze/SKILL.md), [`sc-business-panel`](./skills/sc-business-panel/SKILL.md), [`sc-estimate`](./skills/sc-estimate/SKILL.md), [`sc-explain`](./skills/sc-explain/SKILL.md), [`sc-reflect`](./skills/sc-reflect/SKILL.md), [`sc-spec-panel`](./skills/sc-spec-panel/SKILL.md), [`sc-troubleshoot`](./skills/sc-troubleshoot/SKILL.md).
+- **persona (7):** [`sc-devops-architect`](./skills/sc-devops-architect/SKILL.md), [`sc-learning-guide`](./skills/sc-learning-guide/SKILL.md), [`sc-python-expert`](./skills/sc-python-expert/SKILL.md), [`sc-requirements-analyst`](./skills/sc-requirements-analyst/SKILL.md), [`sc-root-cause-analyst`](./skills/sc-root-cause-analyst/SKILL.md), [`sc-self-review`](./skills/sc-self-review/SKILL.md), [`sc-socratic-mentor`](./skills/sc-socratic-mentor/SKILL.md).
+- **tool (7):** [`sc-build`](./skills/sc-build/SKILL.md), [`sc-cleanup`](./skills/sc-cleanup/SKILL.md), [`sc-confidence-check`](./skills/sc-confidence-check/SKILL.md), [`sc-createPR`](./skills/sc-createPR/SKILL.md), [`sc-document`](./skills/sc-document/SKILL.md), [`sc-index`](./skills/sc-index/SKILL.md), [`sc-test`](./skills/sc-test/SKILL.md).
+- **meta (1):** [`sc-pm-agent`](./skills/sc-pm-agent/SKILL.md) — orchestrates the rest of the `sc-*` surface via `/sc:pm` only (inert at SessionStart per [ADR-0011 D.7](./decisions/0011-external-skill-corpora-import.md)).
+
+<!-- anchor: SK.13.SUPERPOWERS -->
+### 13.2 Superpowers (`superpowers-*`) — 15 skills (`skill_source: superpowers@v4.0.3`)
+
+- **discipline (8):** [`superpowers-brainstorming`](./skills/superpowers-brainstorming/SKILL.md), [`superpowers-executing-plans`](./skills/superpowers-executing-plans/SKILL.md), [`superpowers-finishing-a-branch`](./skills/superpowers-finishing-a-branch/SKILL.md), [`superpowers-receiving-code-review`](./skills/superpowers-receiving-code-review/SKILL.md), [`superpowers-systematic-debugging`](./skills/superpowers-systematic-debugging/SKILL.md), [`superpowers-tdd`](./skills/superpowers-tdd/SKILL.md), [`superpowers-verification-before-completion`](./skills/superpowers-verification-before-completion/SKILL.md), [`superpowers-writing-plans`](./skills/superpowers-writing-plans/SKILL.md).
+- **orchestrator (3):** [`superpowers-dispatching-parallel-agents`](./skills/superpowers-dispatching-parallel-agents/SKILL.md), [`superpowers-requesting-code-review`](./skills/superpowers-requesting-code-review/SKILL.md), [`superpowers-subagent-driven-development`](./skills/superpowers-subagent-driven-development/SKILL.md).
+- **meta (2):** [`superpowers-using-superpowers`](./skills/superpowers-using-superpowers/SKILL.md) (D.7-stripped — discipline-gate selector only; SessionStart injection prohibited), [`superpowers-writing-skills`](./skills/superpowers-writing-skills/SKILL.md).
+- **agent-template (1):** [`superpowers-code-reviewer`](./skills/superpowers-code-reviewer/SKILL.md) — subagent prompt for Agency's built-in `code-reviewer` agent type.
+- **workflow (1):** [`superpowers-using-git-worktrees`](./skills/superpowers-using-git-worktrees/SKILL.md).
 
 For narrative-ontology work (Dramatica / NCP / novel-architect), prefer `tools/dramatica-nav/nav.py` over loading `maintenance/schemas/narrative-ontology/ontology.json` directly. Non-narrative tasks MUST NOT load the ontology files (NO.5 in [AGENTS.md](./AGENTS.md#narrative-ontology--dramatica--ncp--novel-architect-bridge); WARN-enforced by `tools/check-narrative-ontology-load.py`).
 

@@ -40,5 +40,5 @@ Shared per-file recipe:
 
 ## Audit-graph linkage
 
-- `skill_source: "superclaude_framework@v4.3.0"` per file.
+- `skill_source: "superclaude@v4.3.0"` per file.
 - Forward refs: `sc-build` → `[sc-test]`; `sc-cleanup` → `[sc-refactoring-expert]`; `sc-estimate` → `[sc-task, sc-workflow]`; `sc-explain` → `[sc-document, sc-learning-guide]`; `sc-index` → `[sc-document]`.

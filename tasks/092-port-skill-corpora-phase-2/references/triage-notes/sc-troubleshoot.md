@@ -35,7 +35,7 @@ ST-2 ports `sc-troubleshoot` verbatim; ST-3 ports `superpowers-systematic-debugg
 
 ## Audit-graph linkage
 
-- `skill_source: "superclaude_framework@v4.3.0"`
+- `skill_source: "superclaude@v4.3.0"`
 - `skill_references_skills: [superpowers-systematic-debugging, sc-root-cause-analyst]`
 
 ## Phase 1 cross-check

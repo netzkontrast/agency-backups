@@ -43,5 +43,5 @@ Three of the five unported modes are `skip`:
 
 The host skills' `skill_source` frontmatter SHOULD note the bundle:
 
-- `sc-reflect` SKILL.md frontmatter: `skill_source: "superclaude_framework@v4.3.0"` + optional body-level `## References` link to `references/mode-introspection.md`.
+- `sc-reflect` SKILL.md frontmatter: `skill_source: "superclaude@v4.3.0"` + optional body-level `## References` link to `references/mode-introspection.md`.
 - `sc-task` SKILL.md frontmatter: same; link to `references/mode-task-management.md`.
