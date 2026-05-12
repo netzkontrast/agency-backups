@@ -114,6 +114,11 @@ Jules sessions satisfy step 4 by opening a draft pull request through the Jules-
 
 Gemini Deep Research sessions execute against an external research surface, not a Git working tree; step 4 on Gemini is satisfied by writing the research output back into this repo via a follow-on integration Task (RESEARCH.md §6.5) that then opens its own PR per the Claude Code / Jules path. **Gemini sessions therefore satisfy steps 1–3 in the source environment, and step 4 is satisfied by the integration Task's agent (Claude or Jules) once the artefacts land in this repo.** The integration Task MUST cite the originating Gemini research slug in its PR body.
 
+
+#### Codex
+
+Codex sessions satisfy step 4 by opening a draft pull request via the runtime's native PR primitive (for this harness, `make_pr`). The same CR.5 body requirements apply: reference closed Task slug(s) under `/tasks/` (if any) and include the FL declaration from the friction log. Re-invocation when a PR already exists for the branch MUST be treated as a no-op to satisfy CR.6.
+
 #### Adding a new platform
 
 A new agent platform (e.g., Devin, Codex, future SDK harness) MAY be added to this section. The PR introducing it MUST add a new "Platform Implementation Notes" subsection that names the platform's PR primitive and confirms steps 1–3 are achievable in the platform's runtime. If any step is not achievable, the PR MUST also propose either a delegation pattern (like Gemini's above) or an amendment to the checklist itself.
