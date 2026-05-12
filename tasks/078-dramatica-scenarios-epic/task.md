@@ -1,10 +1,10 @@
 ---
 type: task
-status: active
+status: archived
 slug: dramatica-scenarios-epic
 summary: "Epic umbrella for the dramatica-scenarios corpus. Replaces nav.py's term_file pointer (filename indirection) with theory-grounded, operationally-actionable scenario instructions for every novel-architect scenario. Spawns a foundational research run, taxonomy expansion, line-indexing tooling, new `nav.py instruct` subcommand, content-template authoring, per-scenario authoring child Tasks (one per scenario), and novel-architect integration. Modeled on the Task 070 Epic pattern."
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-12
 task_id: "078"
 task_status: open
 task_owner: "unassigned"
@@ -112,7 +112,7 @@ Scenario: Integration tests validate the full chain
 
 # anchor: 078.AC.9
 Scenario: Epic closes only after all children close
-  Given child Tasks 079..08N are all in `task_status: done`
+  Given child Tasks 079..08N are all in `task_status: archived`
   When this Epic's `task_status` is flipped
   Then this Epic MUST transition open → done (never closed directly without all children done)
    And `tasks/078-dramatica-scenarios-epic/friction-log.md` MUST be written with a parseable `Highest Frustration Level: FL[0-3]` line

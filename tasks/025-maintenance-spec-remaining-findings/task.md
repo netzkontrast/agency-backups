@@ -1,10 +1,10 @@
 ---
 type: task
-status: active
+status: archived
 slug: maintenance-spec-remaining-findings
 summary: "Successor to Task 014. Carry forward only the F1–F7 findings that Task 008 did not already resolve. F2/F3/F4/F7 remain open; F1, F5, F6 are absorbed by Task 008 / Task 016 deliverables."
 created: 2026-05-05
-updated: 2026-05-07
+updated: 2026-05-12
 task_id: "025"
 task_status: open
 task_owner: "unassigned"
@@ -46,7 +46,7 @@ Each remaining finding (F2, F3, F4, F7) lands as a concrete diff against `MAINTE
 
 ## Todo
 
-- [ ] 1. Confirm Task 019 (and the linter rewrite under it) has `task_status: done` before starting — F2 / F7 phrasing depends on the new linter surface.
+- [ ] 1. Confirm Task 019 (and the linter rewrite under it) has `task_status: archived` before starting — F2 / F7 phrasing depends on the new linter surface.
 - [ ] 2. Land F2 amendment to `MAINTENANCE.md §1`.
 - [ ] 3. Land F3 amendment (Step 2.5) to the coherence prompt.
 - [ ] 4. Land F4 amendment to the coherence prompt T3 checklist.

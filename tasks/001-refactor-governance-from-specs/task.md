@@ -1,10 +1,10 @@
 ---
 type: task
-status: active
+status: archived
 slug: refactor-governance-from-specs
 summary: "Encode the rules from Spec-A/B/C (3-Systems SDD), Spec-G/H/I (Session Continuity), and Spec-J/K/L (Eval/Trust/Improvement) into repository linters, pre-commit hooks, and templates."
 created: 2026-05-04
-updated: 2026-05-05
+updated: 2026-05-12
 task_id: "001"
 task_status: updated
 task_owner: "claude-code"
@@ -46,7 +46,7 @@ Convert the *theoretical* recommendations of the recently-completed research spe
 9. **Continuity hooks (Spec-G/H/I).** Translate the session-continuity rules into concrete artifacts: e.g., a `/tasks/<NNN>-<slug>/notes.md` template requiring a "Resumption Checklist" if `task_status: blocked`.
 10. **Eval/Trust hooks (Spec-J/K/L).** Translate evaluation/trust rules into a `tools/check-trust.sh` that audits whether closed tasks have non-empty friction logs and reciprocal linkage.
 11. **Self-test.** Run all linters against the current repository; fix every diagnostic by either correcting the file or relaxing the rule with documented rationale.
-12. **Close.** Update `task_status: done`, add `friction-log.md`, append every spawned research run (if any) to `task_spawns_research`.
+12. **Close.** Update `task_status: archived`, add `friction-log.md`, append every spawned research run (if any) to `task_spawns_research`.
 
 ## Todo
 
