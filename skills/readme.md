@@ -59,6 +59,21 @@ Phase 1 batch ratified by [ADR-0011](../decisions/0011-external-skill-corpora-im
 - [sc-deep-research-agent/](./sc-deep-research-agent/) — Deep research specialist — adaptive strategies + multi-hop reasoning (Agency-adapted per ADR-0011 D.8).
 - [sc-pm-agent/](./sc-pm-agent/) — Project Manager agent — coordinates `/sc:*` workflows (`/sc:pm` only; inert at SessionStart per ADR-0011 D.7).
 
+### Imported in Phase 2 batch A (Task 092 ST-2 pure ports)
+
+Added 2026-05-12 under [Task 092](../tasks/092-port-skill-corpora-phase-2/task.md) ST-2 per the [triage matrix](../tasks/092-port-skill-corpora-phase-2/references/triage-matrix.md) pure-port cluster. No MCP bindings, body ≤ 5 KB, no SessionStart-injection clauses — mechanical ports.
+
+- [sc-analyze/](./sc-analyze/) — Comprehensive code analysis across quality, security, performance, and architecture domains.
+- [sc-design/](./sc-design/) — System and component design with comprehensive specifications.
+- [sc-document/](./sc-document/) — Generate focused documentation for components, functions, APIs, and features.
+- [sc-troubleshoot/](./sc-troubleshoot/) — Diagnose and resolve issues in code, builds, deployments, and system behaviour.
+- [sc-devops-architect/](./sc-devops-architect/) — DevOps architect agent — infrastructure automation, CI/CD, observability, reliability engineering.
+- [sc-learning-guide/](./sc-learning-guide/) — Learning Guide agent — progression-driven programming education via tutorials and worked examples.
+- [sc-python-expert/](./sc-python-expert/) — Python Expert agent — production-grade Python with SOLID design, security, performance, modern tooling.
+- [sc-requirements-analyst/](./sc-requirements-analyst/) — Requirements Analyst agent — turns ambiguous ideas into concrete PRDs, user stories, Gherkin acceptance criteria.
+- [sc-root-cause-analyst/](./sc-root-cause-analyst/) — Root Cause Analyst agent — evidence-based hypothesis testing for complex / recurring / multi-component failures.
+- [sc-self-review/](./sc-self-review/) — Self Review agent — post-implementation validation and reflexion partner; closing gate before PR.
+
 ## Management layer
 - [skills-skill-bootstrap/](./skills-skill-bootstrap/) — Sync tool: pulls skill bodies from `origin/main:skills/` into Claude Code's `~/.claude/skills/`.
 - [skill-creator/](./skill-creator/) — Verbatim mirror of [anthropics/skills · skills/skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) at 2026-05-05. Used as reference pattern by `/research/flexible-frontmatter-toolchain/` and Tasks 016/017.
