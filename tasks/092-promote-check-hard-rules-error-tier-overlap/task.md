@@ -1,11 +1,11 @@
 ---
 type: task
 status: active
-slug: promote-check-hard-rules-error-tier
-summary: "Promote tools/check-hard-rules.py from WARN (exit 2, advisory) to ERROR (exit 1, gating) in tools/check-governance.sh after one validation cycle on v1.1.1. Mirrors Task 064's --check-body WARN→ERROR promotion pattern. Blocked by Task 083 (hardening introduces the linter at WARN tier; promotion requires real-corpus evidence of zero false positives)."
+slug: promote-check-hard-rules-error-tier-overlap
+summary: "Promote tools/check-hard-rules.py from WARN (exit 2, advisory) to ERROR (exit 1, gating) in tools/check-governance.sh after one validation cycle on v1.1.1. Mirrors Task 064's --check-body WARN→ERROR promotion pattern. Blocked by Task 090 (hardening introduces the linter at WARN tier; promotion requires real-corpus evidence of zero false positives)."
 created: 2026-05-12
 updated: 2026-05-12
-task_id: "085"
+task_id: "092"
 task_status: blocked
 task_owner: "unassigned"
 task_priority: P2
@@ -13,7 +13,7 @@ task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - 083
+  - 090
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
@@ -22,7 +22,7 @@ task_affects_paths:
   - tools/tests/test_check_hard_rules.py
 ---
 
-# Task 085 — Promote check-hard-rules.py to ERROR tier
+# Task 092 — Promote check-hard-rules.py to ERROR tier
 
 ## Goal
 
@@ -38,7 +38,7 @@ The Task is `done` when:
 
 This Task remains `task_status: blocked` until ALL hold:
 
-- **(a)** Task 083 has landed (the linter exists at WARN tier).
+- **(a)** Task 090 has landed (the linter exists at WARN tier).
 - **(b)** At least one full coherence-check cycle (per `MAINTENANCE.md §2`) has run with the WARN-tier linter active, and the operator confirms **zero false positives** on the existing corpus.
 - **(c)** Any real-corpus H-rule violations surfaced by the WARN cycle have been either (i) fixed in their source files, or (ii) documented with explicit override rationales.
 
@@ -53,7 +53,7 @@ This Task remains `task_status: blocked` until ALL hold:
 
 ## Todo
 
-- [ ] 1. Wait for blocker [Task 083](../083-novel-architect-v111-hardening/task.md) to close
+- [ ] 1. Wait for blocker [Task 090](../090-novel-architect-v111-hardening/task.md) to close
 - [ ] 2. Run `check-governance.sh` with WARN-tier hard-rules active across full corpus; capture diagnostic output
 - [ ] 3. Triage diagnostics → fix-list + override-list
 - [ ] 4. Drop `|| true` wrapper in `check-governance.sh`
@@ -65,7 +65,7 @@ This Task remains `task_status: blocked` until ALL hold:
 
 ## Links
 
-- Blocker: [Task 083 — novel-architect-v111-hardening](../083-novel-architect-v111-hardening/task.md)
+- Blocker: [Task 090 — novel-architect-v111-hardening](../090-novel-architect-v111-hardening/task.md)
 - Precedent pattern: [Task 064 — promote-check-body-to-gating](../064-improve-maintenance-spec-may-08-2026/) (analogous WARN→ERROR promotion)
 - Linter source spec: [`skills/novel-architect-structure/methods/validation/hard-rules.md`](../../skills/novel-architect-structure/methods/validation/hard-rules.md)
 - Governing specs: [`MAINTENANCE.md`](../../MAINTENANCE.md), [`PRE_COMMIT.md`](../../PRE_COMMIT.md)

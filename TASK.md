@@ -4,7 +4,7 @@ status: active
 slug: task-spec
 summary: "Root specification governing the /tasks/ orchestration directory, the Task lifecycle, and the Frontmatter Ontology that links Tasks to Prompts and Research."
 created: 2026-05-04
-updated: 2026-05-11
+updated: 2026-05-12
 ---
 
 # Task Orchestration Specification
@@ -226,7 +226,7 @@ Each stage produces a discoverable artifact and feeds the next:
 
 The `workflow.md` SHOULD be committed alongside `task.md` and `readme.md` so the executable plan is discoverable from the Task folder. Future agents reading the Task SHOULD be able to reconstruct the planning provenance from these files alone, without re-running the ladder.
 
-**Worked example.** [Task 083 — novel-architect-v111-hardening](./tasks/083-novel-architect-v111-hardening/) executes the full ladder in-session, producing 6 locked decisions, 5 design artifacts, and a 19-commit workflow saved to [`workflow.md`](./tasks/083-novel-architect-v111-hardening/workflow.md). The Task's `readme.md` `## Assumptions Log` records the brainstorm decisions; `task.md` `## Context` cites the analysis findings.
+**Worked example.** [Task 090 — novel-architect-v111-hardening](./tasks/090-novel-architect-v111-hardening/) executes the full ladder in-session, producing 6 locked decisions, 5 design artifacts, and a 19-commit workflow saved to [`workflow.md`](./tasks/090-novel-architect-v111-hardening/workflow.md). The Task's `readme.md` `## Assumptions Log` records the brainstorm decisions; `task.md` `## Context` cites the analysis findings.
 
 #### Normative Rules
 

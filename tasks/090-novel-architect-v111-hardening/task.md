@@ -5,7 +5,7 @@ slug: novel-architect-v111-hardening
 summary: "Convert novel-architect@1.1.0 from metadata-only delegation into a runtime two-layer contract. Rewrites 5 phase files + 7 command files in the orchestrator to delegate method-application to existing 4 sub-modules. Graduates scene from stub. Ships 3 of 4 deferred CLI linters (worksheet-order WARN, hard-rules WARN→ERROR-promotion-deferred, canon-status WARN). Closes /sc:analyze findings H1, H2, M1, M2, M3, M4 from the v1.1.0 release."
 created: 2026-05-12
 updated: 2026-05-12
-task_id: "083"
+task_id: "090"
 task_status: open
 task_owner: "claude-code"
 task_priority: P1
@@ -28,7 +28,7 @@ task_affects_paths:
   - TASK.md
 ---
 
-# Task 083 — novel-architect@1.1.1-hardening
+# Task 090 — novel-architect@1.1.1-hardening
 
 ## Goal
 
@@ -111,7 +111,7 @@ Feature: novel-architect@1.1.1 honours the two-layer delegation contract at runt
   Scenario: Legacy retirement contract is discoverable
     Given a future agent considering deletion of skills/novel-architect-legacy/
     When the agent searches tasks/ for retirement intent
-    Then a Task 084-retire-novel-architect-legacy MUST exist
+    Then a Task 091-retire-novel-architect-legacy-duplicate MUST exist
     And its task_status MUST be blocked
     And its task.md MUST list verification commands for criteria (a) and (b)
 
@@ -124,9 +124,9 @@ Feature: novel-architect@1.1.1 honours the two-layer delegation contract at runt
 
 ## Spawned Tasks
 
-- [Task 084 — retire-novel-architect-legacy](../084-retire-novel-architect-legacy/task.md) — placeholder, `task_status: blocked` until productive-session criteria (a)+(b) met
-- [Task 085 — promote-check-hard-rules-error-tier](../085-promote-check-hard-rules-error-tier/task.md) — WARN→ERROR promotion after one validation cycle
-- [Task 086 — novel-architect-scene-audit-linter](../086-novel-architect-scene-audit-linter/task.md) — 4th deferred linter, follows scene graduation
+- [Task 091 — retire-novel-architect-legacy](../091-retire-novel-architect-legacy-duplicate/task.md) — placeholder, `task_status: blocked` until productive-session criteria (a)+(b) met
+- [Task 092 — promote-check-hard-rules-error-tier](../092-promote-check-hard-rules-error-tier-overlap/task.md) — WARN→ERROR promotion after one validation cycle
+- [Task 093 — novel-architect-scene-audit-linter](../093-novel-architect-scene-audit-linter-overlap/task.md) — 4th deferred linter, follows scene graduation
 
 ## Links
 

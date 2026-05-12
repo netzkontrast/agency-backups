@@ -174,7 +174,7 @@ but doesn't. The Dual-Kernel "Architect-with-Submodules" pattern
 requires both — an "architect" that knows it delegates must also
 *demonstrate* the delegation in its own prose, not just in metadata.
 
-**The cartographer over-scope finding (FL1 — F-083.1).** The first
+**The cartographer over-scope finding (FL1 — F-090.1).** The first
 `/sc:design` run spawned an Explore subagent ("line-level cartographer")
 that produced a 12-file manifest projecting 524 LOC of MOVE + 14 new
 sub-module method files for cluster A. Post-A.0 grep-verification
@@ -186,7 +186,7 @@ rewrite manifest MUST cite the grep / search command it ran and include
 the grep output line-by-line; structural reading without grep-
 verification produces design *hypotheses*, not implementation targets.
 
-**Action (v1.1.1 — Task 083):**
+**Action (v1.1.1 — Task 090):**
 
 1. **Two-layer contract enforcement (cluster A.1):** rewrote 17 broken
    refs across 6 files (`phase1-intent-capture.md`, `phase3-character-architecture.md`,
@@ -209,24 +209,24 @@ verification produces design *hypotheses*, not implementation targets.
    asserts equality — future drift fails at pre-commit.
 4. **Three CLI linters (cluster C):** `tools/check-{worksheet-order,hard-rules,canon-status}.py`
    ship at WARN tier with fixture corpus and `check-governance.sh`
-   integration. Hard-rules promotion to ERROR gated on Task 085 after
+   integration. Hard-rules promotion to ERROR gated on Task 092 after
    one validation cycle.
 5. **Dead-code prune + docstring fix (cluster D):** 8 unused public
    helpers in `io_helpers.py` removed (YAGNI); `project_workspace()`
    docstring promise about per-project YAML override dropped (was
    unimplemented; either implement or stop promising — chose stop).
 
-**Planning ladder:** Task 083 is the worked example codified in
+**Planning ladder:** Task 090 is the worked example codified in
 `TASK.md §4.9` — `/sc:analyze` → `/sc:brainstorm` (6 locked decisions
 D1–D6) → `/sc:design` (5 artifacts, 4 Explore subagents) →
 `/sc:workflow` (revised to 12 commits / 3–4 h after cartographer
 correction). The full planning provenance is recoverable from
 `tasks/083-*/{task,readme,workflow}.md` without re-running the ladder.
 
-**Status:** v1.1.1 shipped via Task 083 close (this commit set).
+**Status:** v1.1.1 shipped via Task 090 close (this commit set).
 Companion Tasks 084 (retirement placeholder), 085 (linter ERROR
 promotion), and 086 (scene-audit linter) filed alongside as
-`task_status: blocked`, gated on Task 083 plus their own preconditions.
+`task_status: blocked`, gated on Task 090 plus their own preconditions.
 
 ---
 

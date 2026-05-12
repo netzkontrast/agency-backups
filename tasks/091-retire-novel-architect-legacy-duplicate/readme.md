@@ -1,13 +1,13 @@
 ---
 type: index
 status: active
-slug: retire-novel-architect-legacy
-summary: "Directory index for Task 084 — placeholder retirement Task for skills/novel-architect-legacy. Blocked by Task 083 plus productive-session evidence. Filed now (not at-need) so the retirement contract is discoverable."
+slug: retire-novel-architect-legacy-duplicate
+summary: "Directory index for Task 091 — placeholder retirement Task for skills/novel-architect-legacy. Blocked by Task 090 plus productive-session evidence. Filed now (not at-need) so the retirement contract is discoverable."
 created: 2026-05-12
 updated: 2026-05-12
 ---
 
-# Task 084 — Retire novel-architect-legacy
+# Task 091 — Retire novel-architect-legacy
 
 **What:** Placeholder Task that retires the legacy v0.3.3-archived skill once Task 070's three preconditions all hold. Currently `task_status: blocked`; criterion (c) already mechanically satisfied.
 

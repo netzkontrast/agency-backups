@@ -1,11 +1,11 @@
 ---
 type: task
 status: active
-slug: retire-novel-architect-legacy
-summary: "Placeholder Task that retires skills/novel-architect-legacy@0.3.3-archived once the three preconditions defined in Task 070 §Legacy Retirement Criterion are met. Blocked on Task 083 (v1.1.1-hardening) + productive Kohärenz-Protokoll sessions on v1.1.1+. Criterion (c) is already mechanically satisfied; (a)+(b) require runtime evidence. Filed now (rather than at-need) so the retirement contract is discoverable to future agents who might be tempted to clean up the legacy directory prematurely."
+slug: retire-novel-architect-legacy-duplicate
+summary: "Placeholder Task that retires skills/novel-architect-legacy@0.3.3-archived once the three preconditions defined in Task 070 §Legacy Retirement Criterion are met. Blocked on Task 090 (v1.1.1-hardening) + productive Kohärenz-Protokoll sessions on v1.1.1+. Criterion (c) is already mechanically satisfied; (a)+(b) require runtime evidence. Filed now (rather than at-need) so the retirement contract is discoverable to future agents who might be tempted to clean up the legacy directory prematurely."
 created: 2026-05-12
 updated: 2026-05-12
-task_id: "084"
+task_id: "091"
 task_status: blocked
 task_owner: "unassigned"
 task_priority: P3
@@ -13,13 +13,13 @@ task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - 083
+  - 090
 task_superseded_by: []
 task_affects_paths:
   - skills/novel-architect-legacy/
 ---
 
-# Task 084 — Retire novel-architect-legacy
+# Task 091 — Retire novel-architect-legacy
 
 ## Goal
 
@@ -50,7 +50,7 @@ This Task remains `task_status: blocked` until ALL THREE hold:
   ```bash
   cd /home/user/agency
   grep -rn "task_blocked_by:.*legacy\|task_supersedes:.*novel-architect-legacy" tasks/ \
-    | grep -v "tasks/084-retire-novel-architect-legacy"
+    | grep -v "tasks/091-retire-novel-architect-legacy-duplicate"
   # MUST report 0 hits (this Task itself is allowed to mention legacy in its own supersession metadata)
   ```
   **Status at filing time: criterion (c) is already satisfied.**
@@ -67,7 +67,7 @@ When all three criteria hold:
 
 ## Todo
 
-- [ ] 1. Wait for blocker [Task 083](../083-novel-architect-v111-hardening/task.md) to close (`task_status: done`)
+- [ ] 1. Wait for blocker [Task 090](../090-novel-architect-v111-hardening/task.md) to close (`task_status: done`)
 - [ ] 2. Verify criterion (a) — ≥3 productive sessions on v1.1.1+ — via the command above
 - [ ] 3. Verify criterion (b) — NCP-validation passes — via the command above
 - [ ] 4. Re-verify criterion (c) — no `task_blocked_by` legacy refs — via the command above
@@ -80,7 +80,7 @@ When all three criteria hold:
 
 ## Links
 
-- Blocker: [Task 083 — novel-architect-v111-hardening](../083-novel-architect-v111-hardening/task.md)
+- Blocker: [Task 090 — novel-architect-v111-hardening](../090-novel-architect-v111-hardening/task.md)
 - Originating criterion: [Task 070 §Legacy Retirement Criterion](../070-novel-architect-v110-epic/task.md#legacy-retirement-criterion-pr-101-review-43)
 - Target for removal: [`skills/novel-architect-legacy/`](../../skills/novel-architect-legacy/)
 - Governing specs: [`TASK.md`](../../TASK.md), [`SKILLS.md`](../../SKILLS.md)
