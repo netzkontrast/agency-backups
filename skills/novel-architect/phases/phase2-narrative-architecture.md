@@ -174,6 +174,21 @@ Failures surface in the status-view with the canonical H-rule ID; the
 author can `Edit step N` to fix without re-running the whole gate.
 Auto-check delegation: [`novel-architect-structure/methods/validation/hard-rules.md`](../../novel-architect-structure/methods/validation/hard-rules.md).
 
+**Gate 3 askuser-Header (verbindlich):** Jeder Gate-3-Approval-Prompt MUSS
+mit der folgenden Status-Zeile öffnen, sodass der Author die
+Validation-Bilanz vor jeder Entscheidung sieht:
+
+```
+Hard Rules: <pass>/12 pass    (failures: <H-ID list> | alle OK)
+```
+
+Wo `<pass>` die Anzahl der H-Rules mit `result == PASS` ist und
+`<H-ID list>` die komma-separierte Liste verletzter H-rule-IDs (z. B.
+`H2, H7`); bei vollständigem Pass renderiert die Komponente das wörtliche
+`alle OK`. Die Zeile MUSS oben im Status-View vor den Edit-Optionen
+erscheinen — HR.P2.5 (Validation pass bestanden muss sein vor Gate-3-
+Askuser).
+
 ## §4 Delegations (verbindlich)
 
 | Frage | Delegate to | Navigator |

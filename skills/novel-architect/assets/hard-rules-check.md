@@ -45,4 +45,13 @@ auflisten:
 
 | Soft Rule | Warning |
 |-----------|---------|
-| | |
+| S1 | Premise is articulable in one sentence |
+| S2 | IC's challenge to MC is concrete |
+| S3 | SS has its own arc (not just MC+IC scenes) |
+| S4 | Each thematic story point is concrete enough to write |
+| S5 | Goal, Consequences, Forewarnings, Requirements form one coherent arc |
+| S6 | Costs and Dividends are visible (not just structural) |
+| S7 | At least one full Signposts-and-Journeys progression picked |
+| S8 | Author's Intent isn't ironic relative to the storyform |
+
+> Provenance: `skills/dramatica-theory/references/00-storyform-validation.md` §"Soft checks" (S1–S8).

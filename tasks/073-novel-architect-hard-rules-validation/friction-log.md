@@ -2,9 +2,9 @@
 type: note
 status: active
 slug: novel-architect-hard-rules-validation-friction-log
-summary: "Friction log for Task 073 — Hard Rules H1-H12 (part of Task 070 Epic close). FL1 single-session inclusion."
+summary: "Friction log for Task 073 — Hard Rules H1-H12. FL1 from original Task 070 Epic close (2026-05-11); FL0 from Audit & Gap-Fill pass (2026-05-12). Highest across sessions: FL1."
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-12
 ---
 
 # Friction Log — Task 073 (Hard Rules H1-H12)
@@ -36,3 +36,37 @@ updated: 2026-05-11
 - [x] tasks/readme.md index synced via Epic close
 - [x] tools/check-governance.sh — passes via Epic close commits
 - [x] PR — see Task 070 PR for the bundled close
+
+---
+
+## Audit & Gap-Fill (2026-05-12)
+
+**Highest Frustration Level: FL0**
+
+Follow-up session: audited the v1.1.0 landing against the task's six
+acceptance criteria. Two real gaps inside T1/T2 repair scope were filled
+in place (AC#3 soft-rule table populated S1–S8; AC#5 Gate 3 `Hard Rules:
+X/12 pass` askuser template added). One light addition for AC#6 (`# anchor:
+T073.HR.3` on a new H1 Gherkin scenario) gives Task 084 a citation handle.
+DRIFT in `task_affects_paths` and the body's "Phase 2.7" wording resolved
+via T1 mechanical repair.
+
+### Friction items
+
+(none — FL0)
+
+### Deferred (correctly out of T1/T2 scope)
+
+- AC#4 status-view 🔴/⚠ rendering → **Task 087** (`render_architecture.py`
+  JSON-artefact wiring). Building it here would create a parallel
+  `worksheet_audit.hard_rules.*` rendering path that Task 087 has to
+  immediately replace with the JSON-artefact read.
+- AC#6 executable pytest → **Task 084** (`tools/check-hard-rules.py`
+  ships the validator + its tests). Writing a smoke test now would
+  shadow Task 084's scope.
+
+### Why FL0
+
+The sc-chain (`/sc:analyze → brainstorm → design → workflow → implement`)
+surfaced the bleed boundary with Tasks 084/087 early in brainstorm; no
+rework, no governance-gate retries, no spec contradictions.
