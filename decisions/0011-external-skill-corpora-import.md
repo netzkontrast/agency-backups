@@ -6,7 +6,7 @@ summary: "External skill corpora (SuperClaude, Superpowers) import under vendor-
 created: 2026-05-12
 updated: 2026-05-12
 adr_id: ADR-0011
-adr_status: Proposed
+adr_status: Accepted
 adr_owner: agency-maintainer
 adr_tags:
   - skills
@@ -73,7 +73,7 @@ Imported skills land at `skills/<vendor>-<bare-slug>/` where `<vendor>` ∈ `{sc
 
 ## Decision Outcome
 
-**Option D (snapshot import with vendor prefix + `skill_source` pin) is chosen, recorded as `adr_status: Proposed`.** The nine normative clauses below bind every external skill import from this point forward.
+**Option D (snapshot import with vendor prefix + `skill_source` pin) is chosen, recorded as `adr_status: Accepted` on 2026-05-12.** The nine normative clauses below bind every external skill import from this point forward.
 
 ### Normative clauses (RFC 2119)
 
