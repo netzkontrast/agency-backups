@@ -4,7 +4,7 @@ status: active
 slug: novel-architect-hard-rules-validation
 summary: "Directory index for Task 073 — implement 12 Hard Rules validation as Phase 2 Gate 3 pre-write check in novel-architect-structure."
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-12
 ---
 
 # Task 073 — Hard Rules Validation (H1-H12)
@@ -15,7 +15,8 @@ updated: 2026-05-11
 
 ## Navigation
 
-- [task.md](./task.md) — Task spec with H1-H12 checklist.
+- [task.md](./task.md) — Task spec with H1-H12 checklist + Audit & Closure Notes (2026-05-12).
+- [friction-log.md](./friction-log.md) — Friction log (FL1 original; FL0 audit pass).
 
 ## Assumptions Log
 
