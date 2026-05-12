@@ -1,6 +1,6 @@
 ---
 type: task
-status: active
+status: archived
 slug: retire-novel-architect-legacy
 summary: "Standalone gated Task (NOT a sub-task of Epic 083). Retire skills/novel-architect-legacy@0.3.3-archived per the §Legacy Retirement Criterion enumerated in Task 070. task_status: blocked until all three observable conditions (a)/(b)/(c) from Task 070 §Legacy Retirement Criterion hold. Filed in Epic 083's scaffold session for discoverability — without this Task the criteria sit buried in 070's body and the wait-state is invisible to subsequent agents."
 created: 2026-05-12
@@ -66,7 +66,7 @@ Per [TASK.md](../../TASK.md), `task_supersedes: ["novel-architect-legacy"]` reco
 - [ ] 3. (One-shot, after transition) Execute `git rm -r skills/novel-architect-legacy/` and audit any stale references.
 - [ ] 4. (One-shot, post-removal) Run `tools/check-governance.sh` → exit 0.
 - [ ] 5. (One-shot, post-removal) Append removal-audit entry to `skills/novel-architect/references/learnings.md`.
-- [ ] 6. (One-shot, post-removal) Close this Task: `task_status: done` + final friction log.
+- [ ] 6. (One-shot, post-removal) Close this Task: `task_status: archived` + final friction log.
 
 ## Acceptance
 

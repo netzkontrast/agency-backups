@@ -1,10 +1,10 @@
 ---
 type: task
-status: active
+status: archived
 slug: renumber-duplicate-task-ids
 summary: "Found by coherence check 2026-05-05: two pairs of tasks share task_id values (006 and 009), violating TASK.md §8.1."
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-05-12
 task_id: "013"
 task_status: updated
 task_owner: "claude-code"
@@ -29,7 +29,7 @@ task_affects_paths:
 
 The repository MUST have unique `task_id` values across `/tasks/`. Today two pairs collide:
 
-- `tasks/006-skills-navigation-bootstrap/` (`task_id: "006"`, created 15:09:04 UTC, `task_status: done`)
+- `tasks/006-skills-navigation-bootstrap/` (`task_id: "006"`, created 15:09:04 UTC, `task_status: archived`)
 - `tasks/006-surface-skills-architecture/` (`task_id: "006"`, claimed at 14:23:05 UTC by the previous coherence run)
 - `tasks/009-author-skills-root-spec/` (`task_id: "009"`, created 15:03:15 UTC)
 - `tasks/009-review-pr28-readme-spec/` (`task_id: "009"`, created 15:04:00 UTC)

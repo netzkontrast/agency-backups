@@ -1,0 +1,93 @@
+---
+type: task
+status: archived
+slug: folders-spec-integration
+summary: "Add Gherkin acceptance scenarios to FOLDERS.md, clarify F.1.1 readme-required scope on /research/<provider>/<slug>/ external folders, mechanically enforce F.5 readme.md L1 frontmatter, and define a frontmatter-vs-body-link consistency check for the F.6 audit graph."
+created: 2026-05-06
+updated: 2026-05-12
+task_id: "036"
+task_status: archived
+task_owner: "claude-opus-4-7 (session claude/complete-tasks-32-39-7AZfU)"
+task_priority: P3
+task_uses_prompts:
+  - tooling-readme-frontmatter-validator
+  - tooling-audit-graph-consistency-checker
+  - spec-amendment-folders-md
+task_spawns_research: []
+task_spawns_prompts: []
+task_affects_paths:
+  - FOLDERS.md
+  - tools/check-readme-frontmatter.py
+  - tools/check-audit-graph-consistency.py
+---
+
+# Task 036 — FOLDERS.md Spec Integration
+
+## Goal
+
+Close FOLDERS.md governance gaps with mechanical enforcement and clearer scope language. The Task is `done` when (a) FOLDERS.md §F.5 readme.md L1 frontmatter is checked by a linter, (b) F.1.1 explicitly states which `/research/<provider>/<slug>/` paths are exempt from the readme.md requirement, (c) F.6 has a tooling-backed consistency check that warns when a body-level Markdown link references a sibling folder *without* the corresponding frontmatter linkage being set, **and (d) each of the following anchors carries ≥1 Gherkin scenario in FOLDERS.md (total ≥5)**:
+
+- **F.B.1 readme presence** — every operational folder MUST have a readme.md (F.1).
+- **F.B.2 slug naming** — kebab-case, max 5 tokens, `<NNN>-<slug>` for tasks (F.2).
+- **F.B.3 prompt scaffold** — three-file mandatory scaffold for `/prompts/<slug>/` (F.4.1.1).
+- **F.B.4 audit-graph consistency** — body-link + frontmatter-link divergence WARN (F.6).
+- **F.B.5 §8 exemption coverage** — `/decisions/` exempt post-Task-031 (`decisions/<NNNN>-<slug>.md` ⇄ `adr` type pattern shipped in `header-ontology.json:208`).
+
+## Context
+
+FOLDERS.md governance debt (mostly mechanical):
+
+- **F.1.1 (FOLDERS.md:42)** — "non-provider `/research/<slug>/`" — the term "provider" is defined in RESEARCH.md §6 but FOLDERS.md does not enumerate the exemption. `tools/lint-structure.py` may or may not match spec intent; the rule is ambiguous in prose. Now that `/decisions/` is also operationally live (Task 031), the F.1.1 amendment must enumerate BOTH provider-research folders AND the `/decisions/` ADR ledger as exempt.
+- **F.5 (FOLDERS.md:70)** — "`readme.md` files in operational folders SHOULD carry L1 Vault Core frontmatter" — SHOULD, not MUST; no linter; readme.md files exist without frontmatter.
+- **F.6 audit-graph dual-surface (FOLDERS.md:86–98)** — frontmatter is "source of truth" but body Markdown links are "encouraged for human navigation". Agents may keep body links current and frontmatter stale; linter cannot detect the divergence today.
+- **No Gherkin scenarios** — load-bearing rules F.1 (every folder MUST have readme.md), F.2 (slug naming), F.4.1.1 (prompt scaffold), §8 exemption (post-Task-031: `/decisions/`) lack acceptance tests.
+
+This task is purely additive (T2 per MAINTENANCE.md §1) and does not require new research.
+
+## Preconditions (satisfied at branch-time)
+
+- **Task 016/017** — flexible-frontmatter toolchain is the substrate for ST-1 (readme frontmatter validator).
+- **Task 031** — `/decisions/` folder live; FOLDERS.md:115 exemption already landed; this task adds the Gherkin scenario covering it.
+
+## Build-On
+
+- **`tools/lint-structure.py`** — existing readme-presence check; ST-1 extends it with frontmatter-substance validation.
+- **`tools/fm/extract.py --frontmatter`** — readme.md frontmatter access for ST-1 + ST-2.
+- **`tools/fm/query.py refers-to=` / `referenced-by=`** — frontmatter audit-graph access for ST-2 (compare body links against frontmatter linkage).
+
+## Plan
+
+1. **Phase 1 — Tooling.** Subtask `01-tooling-readme-frontmatter-validator` (closes F.5 SHOULD→MUST). Subtask `02-tooling-audit-graph-consistency-checker` (warns on body-link/frontmatter divergence).
+2. **Phase 2 — Spec amendment.** Subtask `03-spec-amendment-folders-md`: F.1.1 provider+`/decisions/` exemption clause, F.5 promotion to MUST, F.6 dual-surface guidance, one Gherkin per F.B.1–F.B.5 anchor.
+
+## Sample Gherkin (shape the maintainer authoring subtask 03 should produce)
+
+```gherkin
+# anchor: F.B.5 — §8 exemption coverage for /decisions/
+Scenario: ADR file under /decisions/ exempt from prompt-scaffold rule
+  Given a new file `decisions/0042-storage-path.md` with frontmatter `type: adr`
+  And the file matches the pattern `decisions/[0-9][0-9][0-9][0-9]-*.md`
+        registered in `maintenance/schemas/header-ontology.json:208`
+  When `tools/lint-structure.py` runs at pre-commit
+  Then the linter MUST NOT flag the file for missing brief.md / prompt.md
+        (those are F.4.1.1 prompt-scaffold requirements, not ADR requirements)
+  And the linter MUST validate `adr_*` L2 keys per the type's required-key set
+```
+
+## Todo
+
+- [x] 1. Dispatch subtask `01-tooling-readme-frontmatter-validator` (Phase A). Shipped `tools/check-readme-frontmatter.py` + 12 tests; promoted F.5 SHOULD → MUST. ERROR-tier `[2b/6]` of `tools/check-governance.sh`.
+- [x] 2. Dispatch subtask `02-tooling-audit-graph-consistency-checker` (Phase A). Shipped `tools/check-audit-graph-consistency.py` + 8 tests. WARN-tier `[opt]`; surfaces 343 drift findings against the corpus for follow-up.
+- [x] 3. Dispatch subtask `03-spec-amendment-folders-md` (Phase B). FOLDERS.md F.1.1 enumerates `/research/<provider>/<slug>/` and `/decisions/` exemptions; F.5 promoted to MUST with the slug-containment rule documented; F.6 dual-surface drift clause added; new §6.1 carries Gherkin scenarios anchored F.B.1–F.B.5.
+- [x] 4. Ran `tools/check-governance.sh`. Exits 0; the new `[2b/6]` ERROR-tier check passes after T1 slug repairs (see friction-log F1).
+- [x] 5. Updated `README.md §6` linter table with rows for both new linters.
+- [x] 6. Updated `tasks/readme.md`.
+- [x] 7. Authored `friction-log.md`.
+- [x] 8. Set `task_status: done`.
+
+## Links
+
+- Subtask index: [`subtasks/readme.md`](./subtasks/readme.md)
+- Source research:
+  - [`research/governance-specs-update-research/output/SPEC.md`](../../research/governance-specs-update-research/output/SPEC.md) §3 (FOLDERS.md amendments)
+- Governing specs: [`FOLDERS.md`](../../FOLDERS.md), [`RESEARCH.md`](../../RESEARCH.md) §6, [`README.md`](../../README.md) §11.3
