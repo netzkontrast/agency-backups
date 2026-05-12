@@ -16,10 +16,10 @@ description: >-
 metadata:
   category: creative-writing
   source: user
-  version: "1.1.0"
+  version: "1.1.1"
   status: active
   date_added: "2026-05-11"
-  date_updated: "2026-05-11"
+  date_updated: "2026-05-12"
   predecessor: "novel-architect-legacy@0.3.3"
   state_management: "ncp"
   ncp_schema_version: "1.3.0"
@@ -34,7 +34,7 @@ metadata:
   delegates_to: >-
     novel-architect-character (Phase 3 methods), novel-architect-structure
     (Phase 2 + Phase 5 methods), novel-architect-world (Phase 4 methods),
-    novel-architect-scene (Phase 5 + Phase 6 detail; stub in v1.1.0),
+    novel-architect-scene (Phase 5 + Phase 6 detail),
     dramatica-theory, dramatica-vocabulary, ncp-author,
     research-prompt-optimizer, skill-creator, memory-sync (optional)
   language_contract: "bilingual_de_en"
@@ -42,7 +42,7 @@ skill_bundles_tools:
   - tools/dramatica-nav
 ---
 
-# novel-architect v1.1.0
+# novel-architect v1.1.1
 
 Methodengetriebener Orchestrator für die Roman-Entwicklung. Strukturiert die
 Arbeit an einem literarischen Langform-Projekt in **8 klare Phasen** mit Hard

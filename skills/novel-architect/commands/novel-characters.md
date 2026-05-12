@@ -25,7 +25,7 @@ Motivationen, Beziehungen. Persistiert in NCP `players[]` via `ncp-author`.
 LOOP per character:
   askuser ≤3 slots:
     - character_name + narrative_role + throughline_assignment
-    - psycho_model_primary + psycho_config (lädt methods/character/<model>.md on demand)
+    - psycho_model_primary + psycho_config (delegates to [→ novel-architect-character] for <model> schema on demand)
     - motivations + arc_direction
 
 LOOP for relationships (nach allen Characters):
@@ -61,4 +61,4 @@ oder direkt Phase 5 (`/novel-scenes`) wenn World schon klar
 
 - `phases/phase3-character-architecture.md`
 - `assets/character-template.yaml`
-- `methods/character/` (lazy load)
+- [`novel-architect-character/methods/`](../../novel-architect-character/methods/) (lazy-loaded per `psycho_model_primary` selection)

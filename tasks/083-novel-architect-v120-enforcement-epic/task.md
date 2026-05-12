@@ -62,6 +62,27 @@ In parallel, [Task 072's closure summary §3](../072-novel-architect-phase2-work
 
 Severity policy for the four new linters is governed by [ADR-0010 `novel-architect-error-tier-linter-policy`](../../decisions/0010-novel-architect-error-tier-linter-policy.md) (`adr_status: Proposed` at this Epic's filing). ADR-0010 permits ERROR-tier promotion under three preconditions: (i) fixture corpus ≥3 clean + ≥3 bad, (ii) <500ms per linter / +<2s aggregate budget, (iii) maintenance-bypass wiring covers the new rule-IDs. Each sub-task carries the precondition obligations.
 
+### WARN-tier predecessor linters (from v1.1.1 hardening, already shipped)
+
+Three of the four target linters already exist on disk as **WARN-tier predecessors** shipped during the parallel v1.1.1-hardening cycle (commits `78296c6` / `dd68a25` / `706bbd8` on this branch, landed before Epic 083 filing):
+
+| Predecessor (WARN-tier, on disk) | Tests | Fixtures | Epic 083 successor |
+|---|---|---|---|
+| `tools/check-canon-status.py` (170 LOC, 8 rules CANON.*) | `tools/tests/test_check_canon_status.py` (13 passing) | `tools/tests/fixtures/novel-architect-v111/canon-meta-{valid,stale}.md` | Task 086 |
+| `tools/check-worksheet-order.py` (160 LOC, 6 rules WORKSHEET.*) | `tools/tests/test_check_worksheet_order.py` (10 passing) | `tools/tests/fixtures/novel-architect-v111/architecture-{valid,violation}.yaml` | Task 085 (worksheet-order half) |
+| `tools/check-hard-rules.py` (200 LOC, 8/12 rules H1-H4 + H9-H12 mechanical; H5-H8 deferred as `INFO` tier pending dramatica-nav integration) | `tools/tests/test_check_hard_rules.py` (16 passing) | same as worksheet-order | Task 084 |
+
+Sub-tasks 084/085/086 MUST decide their disposition relative to the predecessors:
+
+- **(a) Replace** — delete the WARN-tier file, ship the ERROR-tier rewrite under `tools/novel-architect-checks/` as a thin CLI wrapper. Predecessor tests + fixtures may be migrated or replaced wholesale. **Recommended for 084** since it ships H5-H8 (predecessor only covers 8/12 rules) and the shared-library refactor would diverge significantly from the predecessor's standalone shape.
+- **(b) Evolve in place** — keep the file path, refactor internals to import from `tools/novel-architect-checks/`, flip exit-tier from WARN (exit 2) to ERROR (exit 1). Predecessor tests + fixtures migrate. **Plausible for 085/086** if the shared-library API is shaped to accommodate the predecessors' existing rule-IDs.
+
+Each sub-task SHOULD record its disposition decision in its task.md `## Context` section and update `tools/check-governance.sh` (currently wires the predecessors at WARN under the "novel-architect v1.1.1 linters" advisory block) atomically with the ERROR-tier landing.
+
+### Planning-pipeline provenance
+
+v1.1.1 hardening (predecessor work) executed the full `/sc:analyze → /sc:brainstorm → /sc:design → /sc:workflow` ladder codified in [TASK.md §4.9](../../TASK.md#49-planning-pipeline-for-t3-structural-tasks-sc-ladder). One meta-finding from that run (**F-090.1 — Subagent over-scope without grep-verification**) is recorded permanently in [`skills/novel-architect/references/learnings.md`](../../skills/novel-architect/references/learnings.md) under the v1.1.1 changelog entry. Future Epics SHOULD honour the rule it produced: structural-rewrite manifests from Explore subagents MUST cite the grep command that produced their claims and classify findings as "verified broken" vs. "structurally suggested" — otherwise the manifests are design hypotheses, not implementation targets.
+
 ## Sub-Tasks (children)
 
 | Task ID | Title | Blocks/Blocked-by | Affects |
