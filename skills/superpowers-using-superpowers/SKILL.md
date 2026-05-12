@@ -4,7 +4,7 @@ description: >-
   Meta-skill — when to invoke which Superpowers skill, ordering, and avoiding rationalisation. Rewritten for Agency's Skill-tool semantics; no SessionStart-injection (D.7).
 skill_kind: meta
 skill_target_agents: [claude-code]
-skill_references_skills: [superpowers-tdd, superpowers-systematic-debugging, superpowers-verification-before-completion]
+skill_references_skills: [superpowers-tdd, superpowers-systematic-debugging, superpowers-verification-before-completion, superpowers-receiving-code-review, superpowers-finishing-a-branch, superpowers-executing-plans, superpowers-writing-plans, superpowers-dispatching-parallel-agents]
 skill_references_research: []
 skill_references_prompts: []
 skill_bootstrap_required: false
