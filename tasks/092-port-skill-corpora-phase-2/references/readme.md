@@ -12,10 +12,37 @@ updated: 2026-05-12
 **What:** Container for the ST-1 triage outputs. ST-1 authored two artifact families here:
 
 - [`triage-matrix.md`](./triage-matrix.md) — single canonical decision matrix; one row per snapshot candidate. Columns: `# | Snapshot path | Proposed Agency slug | Tier | Decision | ADR-0011 clauses | Rationale`. **Counts:** port = 18, adapt = 24, skip = 39 (total 81 rows; satisfies AC T092.1.4 ≥ 75).
-- [`triage-notes/`](./triage-notes/) — per-skill rationale where one matrix line could not capture the decision. Currently three notes:
-  - [`triage-notes/superclaude-confidence-check.md`](./triage-notes/superclaude-confidence-check.md) — 4 snapshot copies, D.7 audit required at ST-2.
-  - [`triage-notes/superpowers-using-superpowers.md`](./triage-notes/superpowers-using-superpowers.md) — meta-skill rewrite for Skill-tool semantics (ST-3).
-  - [`triage-notes/superpowers-writing-skills.md`](./triage-notes/superpowers-writing-skills.md) — 22 KB body, heavy `references/` extraction needed at ST-3.
+- [`triage-notes/`](./triage-notes/) — per-skill rationale where one matrix line could not capture the decision. **21 notes** providing complete coverage of all port + adapt rows + skip rationales.
+
+### SuperClaude_Framework triage notes
+
+- [`triage-notes/sc-pure-ports-cluster.md`](./triage-notes/sc-pure-ports-cluster.md) — 9 mechanical-port rows (analyze, design, document + 6 agents); shared port recipe.
+- [`triage-notes/sc-light-mcp-adapts.md`](./triage-notes/sc-light-mcp-adapts.md) — 5 light-MCP adapt rows (build, cleanup, estimate, explain, index); shared strip pattern.
+- [`triage-notes/sc-brainstorm.md`](./triage-notes/sc-brainstorm.md) — heavy 6-MCP adapt for `commands/brainstorm.md`.
+- [`triage-notes/sc-business-panel.md`](./triage-notes/sc-business-panel.md) — command + agent + mode trio consolidation strategy.
+- [`triage-notes/sc-serena-trio.md`](./triage-notes/sc-serena-trio.md) — Serena→Agency filesystem rewrite for load/save/reflect.
+- [`triage-notes/sc-spec-panel.md`](./triage-notes/sc-spec-panel.md) — 18 KB body + 11-expert extraction plan.
+- [`triage-notes/sc-task-workflow.md`](./triage-notes/sc-task-workflow.md) — heavy 6-MCP adapt pair (sc-task + sc-workflow).
+- [`triage-notes/sc-socratic-mentor.md`](./triage-notes/sc-socratic-mentor.md) — 12 KB body + Sequential strip + book-corpus extraction.
+- [`triage-notes/sc-troubleshoot.md`](./triage-notes/sc-troubleshoot.md) — deconfliction with `superpowers-systematic-debugging`.
+- [`triage-notes/sc-modes-bundling.md`](./triage-notes/sc-modes-bundling.md) — mode→host-skill `references/` bundling strategy (Phase 1 precedent).
+- [`triage-notes/superclaude-confidence-check.md`](./triage-notes/superclaude-confidence-check.md) — 4 snapshot copies, D.7 audit required at ST-2.
+
+### Superpowers triage notes
+
+- [`triage-notes/superpowers-discipline-cluster.md`](./triage-notes/superpowers-discipline-cluster.md) — 4-skill discipline-gates cluster (TDD, systematic-debug, verification, receiving-review).
+- [`triage-notes/superpowers-orchestration-cluster.md`](./triage-notes/superpowers-orchestration-cluster.md) — 6-artefact orchestration cluster; Agent-tool re-binding.
+- [`triage-notes/superpowers-brainstorming.md`](./triage-notes/superpowers-brainstorming.md) — deconfliction with `sc-brainstorm` + `sc-requirements-analyst`.
+- [`triage-notes/superpowers-finishing-a-branch.md`](./triage-notes/superpowers-finishing-a-branch.md) — overlaps Closing Run Procedure; adds discard option.
+- [`triage-notes/superpowers-git-worktrees.md`](./triage-notes/superpowers-git-worktrees.md) — 5.6 KB body; worked-example extraction.
+- [`triage-notes/superpowers-using-superpowers.md`](./triage-notes/superpowers-using-superpowers.md) — meta-skill rewrite for Skill-tool semantics.
+- [`triage-notes/superpowers-writing-skills.md`](./triage-notes/superpowers-writing-skills.md) — 22 KB body, heavy `references/` extraction.
+- [`triage-notes/superpowers-hooks-skip.md`](./triage-notes/superpowers-hooks-skip.md) — D.7 rationale for all 3 hook files (skip).
+
+### Cross-cutting notes
+
+- [`triage-notes/skip-rationale-summary.md`](./triage-notes/skip-rationale-summary.md) — 6-class roll-up covering all 39 skip rows.
+- [`triage-notes/validator-touchpoints.md`](./triage-notes/validator-touchpoints.md) — ST-2/3 cheat sheet on `tools/fm/validate.py` diagnostics + ADR-0012 dependency.
 
 **Why here:** Per [TASK.md §3.4](../../../TASK.md) `task_spawns_research: []` (Task 092 does not spawn an external research workspace), so triage outputs live inside the Task folder. The decision matrix is the source of truth that ST-2 + ST-3 consume.
 
