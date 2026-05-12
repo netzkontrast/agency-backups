@@ -153,6 +153,83 @@ productive Kohärenz-Protokoll sessions without legacy fallback.
 
 ---
 
+### 2026-05-12 — v1.1.1 Hardening (Two-Layer Contract + Scene Graduation + SKILL_VERSION SSoT)
+
+**Trigger:** Post-v1.1.0 `/sc:analyze` surfaced 11 H/M/L findings against
+the v1.1.0 release. The biggest were structural: H1 (16+ broken refs to
+migrated `methods/character/`, `methods/structure/`, `methods/research/`
+paths in the orchestrator's phase + command prose) and H2 (zero
+delegation prose to sub-modules — only `metadata.delegates_to` declared
+the relationship, so the prose layer was *monolithic-as-before*).
+v1.1.0 had achieved metadata-level sub-module delegation but not
+runtime-level — the user-facing prose still loaded files from paths the
+git mv had emptied.
+
+**Lesson:** A sub-module refactor needs to land at TWO layers: (1) the
+`metadata.delegates_to` declaration in SKILL.md, AND (2) the prose
+layer that *invokes* the delegation at runtime (phase/command files
+naming the sub-module by name, not naming its internal file paths). The
+first without the second produces a skill that *says* it delegates
+but doesn't. The Dual-Kernel "Architect-with-Submodules" pattern
+requires both — an "architect" that knows it delegates must also
+*demonstrate* the delegation in its own prose, not just in metadata.
+
+**The cartographer over-scope finding (FL1 — F-083.1).** The first
+`/sc:design` run spawned an Explore subagent ("line-level cartographer")
+that produced a 12-file manifest projecting 524 LOC of MOVE + 14 new
+sub-module method files for cluster A. Post-A.0 grep-verification
+revealed the reality: 17 broken refs across 6 files, no MOVE, no new
+method files. The cartographer had reasoned structurally without
+verifying which paths were actually broken. Mitigation rule (proposed
+for `TASK.md §4.9` follow-up): any subagent producing a structural-
+rewrite manifest MUST cite the grep / search command it ran and include
+the grep output line-by-line; structural reading without grep-
+verification produces design *hypotheses*, not implementation targets.
+
+**Action (v1.1.1 — Task 083):**
+
+1. **Two-layer contract enforcement (cluster A.1):** rewrote 17 broken
+   refs across 6 files (`phase1-intent-capture.md`, `phase3-character-architecture.md`,
+   `phase5-scene-matrix.md`, `commands/novel-{characters,research,scenes}.md`)
+   into canonical `[→ novel-architect-<sub>]` delegation prose (3 phase
+   files, REWRITE+delegate) or sub-module-path links (3 command files,
+   REWRITE-only). `methods/conflict/` stays orchestrator-resident per
+   the cross-cutting-method rule.
+2. **Scene graduation (cluster B.1):** scene sub-module's "stub in
+   v1.1.0" self-qualifier was a metadata-level limitation that no
+   longer matched reality — `scene-level-bridge.md` (149 LOC, Task 075)
+   shipped in v1.1.0 and fully covers V111.US2's Q1–Q5 audit + scene-
+   matrix execution + drafting-precheck per `/sc:design` Revised
+   Artifact 3. The qualifier dropped from orchestrator
+   `metadata.delegates_to`; both SKILL.md versions bumped to v1.1.1.
+3. **SKILL_VERSION SSoT (cluster B.2):** `io_helpers.SKILL_VERSION` had
+   drifted from `SKILL.md.metadata.version` (constant said `1.0.0`,
+   frontmatter said `1.1.0`). Bumped to `1.1.1` and added a pytest
+   assertion (`TestSkillVersionSsot`) that loads the frontmatter and
+   asserts equality — future drift fails at pre-commit.
+4. **Three CLI linters (cluster C):** `tools/check-{worksheet-order,hard-rules,canon-status}.py`
+   ship at WARN tier with fixture corpus and `check-governance.sh`
+   integration. Hard-rules promotion to ERROR gated on Task 085 after
+   one validation cycle.
+5. **Dead-code prune + docstring fix (cluster D):** 8 unused public
+   helpers in `io_helpers.py` removed (YAGNI); `project_workspace()`
+   docstring promise about per-project YAML override dropped (was
+   unimplemented; either implement or stop promising — chose stop).
+
+**Planning ladder:** Task 083 is the worked example codified in
+`TASK.md §4.9` — `/sc:analyze` → `/sc:brainstorm` (6 locked decisions
+D1–D6) → `/sc:design` (5 artifacts, 4 Explore subagents) →
+`/sc:workflow` (revised to 12 commits / 3–4 h after cartographer
+correction). The full planning provenance is recoverable from
+`tasks/083-*/{task,readme,workflow}.md` without re-running the ladder.
+
+**Status:** v1.1.1 shipped via Task 083 close (this commit set).
+Companion Tasks 084 (retirement placeholder), 085 (linter ERROR
+promotion), and 086 (scene-audit linter) filed alongside as
+`task_status: blocked`, gated on Task 083 plus their own preconditions.
+
+---
+
 ## Reserved für künftige Einträge
 
 <!-- Jede Session schreibt hier neue Einträge -->
