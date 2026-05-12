@@ -13,8 +13,8 @@ task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "083"
-  - "084"
+  - 083
+  - 084
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
@@ -56,6 +56,33 @@ Ship `tools/check-canon-status.py` at ERROR-tier validating `canon-meta.md` entr
 Without mechanical enforcement, a `disputed` entry can continue blocking an active phase and a `decanonized` entry can remain referenced in NCP moments — both states violate the prose spec but render visually unremarkable in `render_intent.py` / `render_architecture.py` status-views. This linter closes that gap.
 
 Per [Epic 083 sub-task DAG](../083-novel-architect-v120-enforcement-epic/task.md#dependency-graph), this Task is independent from 085 and 087 — it touches a different file domain (`canon-meta.md` + NCP references) and shares only the Findings emitter from the [Task 084 shared library](../084-novel-architect-storyform-integrity-linter/).
+
+### WARN-tier predecessor disposition
+
+A WARN-tier `tools/check-canon-status.py` predecessor (170 LOC, 8 rules `CANON.*`) already exists on this branch from v1.1.1-hardening (commit `78296c6`). Tests at `tools/tests/test_check_canon_status.py` (13 passing). Fixtures at `tools/tests/fixtures/novel-architect-v111/canon-meta-{valid,stale}.md`.
+
+**Rule-ID alignment with this Task's ERROR-tier scope:**
+
+| Predecessor rule (WARN, this branch) | This Task's rule (ERROR) | Overlap |
+|---|---|---|
+| `CANON.MISSING_FIELD` (required inline fields present) | (not in this Task's §Goal table) | predecessor-only |
+| `CANON.STATUS_ENUM` (`canon_status` ∈ valid set) | `CS.INVALID_STATUS` | direct overlap |
+| `CANON.PHASE_PATTERN` (`canon_added_phase` matches `phase[1-7]`) | (not in this Task's §Goal table) | predecessor-only |
+| `CANON.TIMESTAMP_FORMAT` (ISO-8601 with Z suffix) | (not in this Task's §Goal table) | predecessor-only |
+| `CANON.CONFLICT_EMPTY` (contested entries have conflicts list) | `CS.MISSING_PROVENANCE` | partial overlap (conflicts list vs. variants block) |
+| `CANON.SUPERSEDED_NO_RES` (superseded entries have resolved_by) | (not in this Task's §Goal table) | predecessor-only |
+| `CANON.RECIPROCITY` (A↔B conflicts list mirror each other) | (not in this Task's §Goal table) | predecessor-only |
+| (not in predecessor) | `CS.DISPUTED_BLOCKS_ACTIVE` (disputed entry referenced in active Phase 4/5/6 NCP) | this-Task-only |
+| (not in predecessor) | `CS.DECANONIZED_REFERENCED` (decanonized entry referenced in non-archived NCP) | this-Task-only |
+
+**Critical:** the predecessor uses **status taxonomy from Task 076's prose spec §3.1** (`proposed > accepted > contested > superseded > archived`) while this Task uses the **canon-status hierarchy from Task 076's prose spec §3.2** (`confirmed > provisional > disputed > uncertain > decanonized`). Task 076 actually documents BOTH (a lifecycle for entries plus a confidence hierarchy for variants). The predecessor and this Task target different axes of the same canon-meta schema. Disposition options:
+
+- **(a) Merge axes**: ship one ERROR-tier `check-canon-status.py` covering BOTH the lifecycle (CANON.* predecessor rules) AND the confidence hierarchy (CS.* this-Task rules). Larger linter but one entry point per file domain. **Recommended** — clearer mental model than two linters scanning the same file.
+- **(b) Split linters**: keep predecessor as `tools/check-canon-lifecycle.py` (lifecycle axis, WARN→ERROR promote separately) and ship this Task as `tools/check-canon-confidence.py` (confidence hierarchy axis, ERROR-tier). Two linters; one file domain.
+
+Recommendation: **(a) Merge axes**. The predecessor's rule-IDs (CANON.*) and this Task's (CS.*) can coexist under one prefix (CANON.* for clarity); merge the predecessor's fixtures into the ERROR-tier corpus; ship the H5-H8-style "lifecycle vs. confidence" dual-axis check from one entry point.
+
+The advisory wiring in `tools/check-governance.sh` for the canon-status predecessor MUST be removed atomically with this Task's ERROR-tier landing.
 
 ## Plan
 

@@ -113,10 +113,32 @@ Subfolders follow `<NNN>-<slug>/` where `<NNN>` is a zero-padded sequence number
 - [`087-novel-architect-render-architecture-wiring/`](./087-novel-architect-render-architecture-wiring/) — **Task 083 child** (blocked by 084): wires `skills/novel-architect/render/render_architecture.py` Phase 2.13 status-view to consume the JSON validation artefact produced by Task 084's `check-hard-rules.py`. Coupling is artefact-based (JSON read), not import-based, to preserve skill portability for claude.ai deployment per AGENTS.md Skills Architecture. Renders 🟢/🔴 markers for H1–H12 + ✓/✗ for `worksheet_audit.step_*_set`; emits stale-artefact warning when `checked_at < architecture.yaml` mtime. Status: `open`.
 - [`088-novel-architect-mif-l3-backport/`](./088-novel-architect-mif-l3-backport/) — **Task 083 child** (independent): retroactively applies subset MIF Level 3 frontmatter (`cognitive_type`, `decay_rate`, `derivation_chain`) per `skills/novel-architect/schemas/mif-level3.yaml` to historical entries in `references/learnings.md`. T4 archived entries receive metadata-only edits per MAINTENANCE.md §1.0.1; ships a `migration-audit.md` reviewer-facing artefact enumerating every migrated entry. Closes the deferred MIF L1/L2 → L3 backport flagged by Task 070 friction log. Status: `open`.
 - [`089-retire-novel-architect-legacy/`](./089-retire-novel-architect-legacy/) — **Standalone gated Task** (NOT a sub-task of Epic 083). Filed in 083's scaffold session for discoverability of the [Task 070 §Legacy Retirement Criterion (PR #101 review §4.3)](./070-novel-architect-v110-epic/task.md#legacy-retirement-criterion-pr-101-review-43) wait-state. `task_status: blocked` until all three observable criteria hold: (a) ≥3 productive sessions in migrated workspace without legacy fallback; (b) NCP validation passes for the migrated `kohaerenz-protokoll.ncp.json`; (c) no `task_blocked_by` references to legacy paths remain in `tasks/`. Removes `skills/novel-architect-legacy@0.3.3-archived` on closure. `task_supersedes: ["novel-architect-legacy"]`. Status: `blocked`.
-- [`090-novel-architect-v111-hardening/`](./090-novel-architect-v111-hardening/) — Renumbered from `083` after merge with main (collision with [Task 083 v1.2.0 Epic](./083-novel-architect-v120-enforcement-epic/) per TASK.md §8.1). Convert `novel-architect@1.1.0` from metadata-only delegation into a runtime two-layer contract. Rewrote 17 path refs across 6 orchestrator files into `[→ novel-architect-<sub>]` delegation prose; graduated scene from stub; shipped 3 WARN-tier CLI linters (`check-worksheet-order.py`, `check-hard-rules.py`, `check-canon-status.py`) with fixture corpus. Closes /sc:analyze findings H1/H2/M1/M4/V111.US1/US2/US5 from the v1.1.0 release. Planning ladder: `/sc:analyze` → `/sc:brainstorm` (6 locked decisions) → `/sc:design` (twice, after cartographer over-scope correction logged as F-090.1) → `/sc:workflow` (revised to 12 commits / 3–4 h). NOTE: content scope partly overlaps Tasks 084/085/086 from main's Epic 083 — reconciliation gated on user review (this branch lands WARN-tier first; Epic 083 promotes to ERROR-tier per ADR-0010). Status: `in_progress`.
-- [`091-retire-novel-architect-legacy-duplicate/`](./091-retire-novel-architect-legacy-duplicate/) — Renumbered from `084`; superseded by [Task 089](./089-retire-novel-architect-legacy/) (same slug landed on main first). Marked DUPLICATE pending user decision on reconciliation (abandon or keep as belt-and-suspenders). Status: `blocked`.
-- [`092-promote-check-hard-rules-error-tier-overlap/`](./092-promote-check-hard-rules-error-tier-overlap/) — Renumbered from `085`. Content overlap: main's [Task 084](./084-novel-architect-storyform-integrity-linter/) ships `check-hard-rules.py` at ERROR-tier directly, making this promotion follow-up moot. Marked OVERLAP pending user decision on whether to abandon. Status: `blocked`.
-- [`093-novel-architect-scene-audit-linter-overlap/`](./093-novel-architect-scene-audit-linter-overlap/) — Renumbered from `086`. Content overlap: main's [Task 085](./085-novel-architect-phase-flow-linters/) ships `check-scene-audit.py` alongside `check-worksheet-order.py` at ERROR-tier. Marked OVERLAP pending user decision on whether to abandon. Status: `blocked`.
+<!--
+v1.1.1 hardening tracking Tasks (090-093) were filed mid-session, then deleted
+in the v1.1.1-to-v1.2.0 declutter pass after the merge with main revealed that
+main's Epic 083 sub-tasks (084 / 085 / 086 / 089) fully cover the same scope at
+ERROR-tier under tools/novel-architect-checks/.
+
+The v1.1.1 work itself shipped as 11 commits on this branch (aaf9567..706bbd8):
+- aaf9567 Tasks scaffold + TASK.md §4.9 planning-pipeline rule
+- 51063bf Two-layer contract: 17 path refs across 6 orchestrator files
+- 3308ffe Scene sub-module graduation from "stub in v1.1.0"
+- d5b2216 io_helpers.SKILL_VERSION SSoT + regression test
+- 2470d5f v1.1.1 changelog in skills/novel-architect/references/learnings.md
+- 78296c6 tools/check-canon-status.py WARN tier (8 rules, 13 tests)
+- dd68a25 tools/check-worksheet-order.py WARN tier (6 rules, 10 tests)
+- 706bbd8 tools/check-hard-rules.py WARN tier (8/12 rules, 16 tests)
+- 74da614 Merge main + renumber Tasks (now deleted in this declutter pass)
+
+Lessons recorded permanently in skills/novel-architect/references/learnings.md
+(v1.1.1 Hardening entry), including the F-090.1 cartographer over-scope finding
+and its mitigation rule for future /sc:design subagent fan-outs.
+
+Disposition of the WARN-tier predecessor linters relative to Epic 083 ERROR-tier
+plans is documented in each main-Task's §"WARN-tier predecessor disposition"
+section (Tasks 084 / 085 / 086 task.md files).
+-->
+
 
 ### Chain-Level Falsification (Tasks 032–039)
 
