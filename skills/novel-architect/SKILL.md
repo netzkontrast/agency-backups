@@ -61,7 +61,7 @@ Workspace unter `/home/claude/novel-projects/<slug>/`, niemals im Skill selbst.
 |-------|------|--------|----------------|
 | **Phase 0 — Bootstrap** | Workspace setup, Projekt laden/erstellen | Workspace-Dir + `project-config.yaml` | `phases/phase0-bootstrap.md` |
 | **Phase 1 — Intent Capture** | Genre, Audience, Konflikt-Frage, Methoden-Auswahl | `intent.yaml` (approved) | `phases/phase1-intent-capture.md` |
-| **Phase 2 — Narrative Architecture** | Storyform, Throughlines, Dynamics (3 Gates) | `architecture.yaml` + NCP Skeleton | `phases/phase2-narrative-architecture.md` |
+| **Phase 2 — Narrative Architecture** | 8-Step Storyform Worksheet → Throughlines, Classes, Dynamics, Story Points, Crucial Element, Signposts (3 Gates) | `architecture.yaml` + NCP Skeleton | `phases/phase2-narrative-architecture.md` + [`novel-architect-structure/methods/storyform/worksheet-loop.md`](../novel-architect-structure/methods/storyform/worksheet-loop.md) |
 | **Phase 3 — Character Architecture** | Players, Psycho-Modelle, Beziehungen | `character-architecture.yaml` + NCP `players[]` | `phases/phase3-character-architecture.md` |
 | **Phase 4 — World & Research** | Welt-Bibel, Recherche-Briefs | `world-bible.md`, `research/briefs/*.md` | `phases/phase4-world-research.md` |
 | **Phase 5 — Scene & Chapter Matrix** | 40-Kapitel-Plan, Storybeats, Moments (3 Gates) | `scene-matrix.md` + NCP `storybeats[]`/`moments[]` | `phases/phase5-scene-matrix.md` |
@@ -223,38 +223,68 @@ Vollständiger Algorithm + edge cases in `phases/phase1-intent-capture.md`.
 
 ---
 
-## Phase 2 — Narrative Architecture (3-Gate Approval)
+## Phase 2 — Narrative Architecture (8-Step Worksheet-Loop, 3-Gate Approval)
 
 ### Goal
 
-Produziere `architecture.yaml` + NCP-Skeleton in `<slug>.ncp.json`. Storyform-
-Wahl, Throughlines (OS/MC/IC/SS), Klassen (Universe/Physics/Mind/Psychology),
-Dynamics. **Approval gates analog `research-prompt-optimizer` Phase 2.**
+Produziere `architecture.yaml` + NCP-Skeleton in `<slug>.ncp.json` durch
+das **8-Schritte-Storyform-Worksheet** aus `dramatica-theory`. Steps:
+(0) Author's Intent — gelesen aus `intent.yaml`; (1) Four Throughlines
+(OS/MC/IC/SS); (2) Class Assignment; (3) Character Dynamics (Resolve /
+Growth / Approach / Mental Sex); (4) Plot Dynamics (Driver / Limit /
+Outcome / Judgment); (5) Plot Story Points (static + driver + thematic);
+(6) Crucial Element + dynamic-pair partner; (7) Signposts + Journeys
+(4 + 3 per throughline); (8) optional Genre Mode; (V) Validation pass.
+
+**3-Gate-Mapping** über die 8 Steps:
+- **Gate 1** = Steps 0 + 1 (storyform shape + throughline names).
+- **Gate 2** = Steps 2 + 3 + 4 + 5 (classes + 8 dynamics + story points).
+- **Gate 3** = Steps 6 + 7 (+ 8) + Validation pass (crucial element +
+  signposts + 5 hard checks).
 
 ### Sub-Phases
 
 ```
-Phase 2.1   Load intent.yaml + select methods                  (silent)
-Phase 2.2   Storyform Count Decision (single/dual)
-            ──── GATE 1 (storyform shape) ────                  (approve/edit)
-Phase 2.3   Throughline Assignment (OS/MC/IC/SS)                (auto + dramatica-theory)
-Phase 2.4   Class Assignment                                    (auto + dramatica-theory)
-Phase 2.5   Dynamics Selection                                  (delegate dramatica-vocabulary)
-            ──── GATE 2 (throughlines+classes+dynamics) ────    (approve/edit)
-Phase 2.6   NCP Skeleton Write                                  (delegate ncp-author)
-Phase 2.7   Render Architecture View                            (file-first)
-            ──── GATE 3 (final architecture) ────               (approve/edit)
-Phase 2.8   Write architecture.yaml + NCP Skeleton              (file + present_files)
+Phase 2.1   Load intent.yaml + select methods                                 (silent)
+Phase 2.2   Step 0: read Author's Intent from intent.yaml                     (silent)
+Phase 2.3   Step 1: name the 4 Throughlines (OS / MC / IC / SS)               (askuser)
+            ──── GATE 1 (storyform shape + throughlines) ────                 (approve/edit)
+Phase 2.4   Step 2: Class assignment (pair constraint enforced)               (askuser, quick-ref §1)
+Phase 2.5   Step 3: Character Dynamics (4 binaries)                           (askuser, quick-ref §2-5)
+Phase 2.6   Step 4: Plot Dynamics (4 binaries)                                (askuser, quick-ref §6-8)
+Phase 2.7   Step 5: Plot Story Points (static + driver + thematic)            (1-2 askuser, quick-ref §9)
+            ──── GATE 2 (classes + dynamics + storypoints) ────               (approve/edit)
+Phase 2.8   Step 6: Crucial Element + dynamic-pair partner                    (askuser, quick-ref §10)
+Phase 2.9   Step 7: Signposts + Journeys (4 per throughline)                  (askuser, nav.py Type-Quad)
+Phase 2.10  Step 8 (optional): Genre Mode                                     (askuser ONLY on request)
+Phase 2.11  Validation pass (5 hard checks: dynamic pairs, goal-level, …)     (silent — auto)
+Phase 2.12  NCP Skeleton Write                                                (delegate ncp-author)
+Phase 2.13  Render Architecture View                                          (file-first)
+            ──── GATE 3 (final architecture) ────                             (approve/edit-step)
+Phase 2.14  Write architecture.yaml (approved=true) + present_files
 ```
+
+**Best:** 3 askuser turns. **Typical:** 5–8. **Cap:** 10 (HR.A4).
 
 ### Delegations (verbindlich)
 
 - **`dramatica-theory`** für Storyform-Reasoning (Why this Class/Type?)
-- **`dramatica-vocabulary`** für Dynamic-Pair-Validation
-- **`ncp-author`** für NCP-Skeleton-Erstellung (`narratives[].subtext.perspectives[]`, `dynamics[]`)
-- **`tools/dramatica-nav/nav.py`** für Ontology-Lookups (AGENTS.md Rule **NO.2**)
+  und Validation (`00-storyform-validation.md`).
+- **[`novel-architect-structure/assets/decision-heuristic-quick-ref.md`](../novel-architect-structure/assets/decision-heuristic-quick-ref.md)** —
+  inline-quotable Heuristiken für Steps 2–7 askuser-Calls (HR.M2.3 /
+  HR.P2.8: heuristic inline, not just linked).
+- **[`novel-architect-structure/methods/storyform/worksheet-loop.md`](../novel-architect-structure/methods/storyform/worksheet-loop.md)** —
+  operationale Walkthrough (per-step askuser shape, decision heuristic,
+  recovery path, NCP slot map).
+- **`dramatica-vocabulary`** für Dynamic-Pair-Validation, Type-Quad-Lookup
+  (Signposts), Element-Quad-Lookup (Crucial Element).
+- **`ncp-author`** für NCP-Skeleton-Erstellung (`narratives[].subtext.perspectives[]`,
+  `dynamics[]`, `storypoints[]`, `storybeats[]`).
+- **`tools/dramatica-nav/nav.py`** für Ontology-Lookups (AGENTS.md Rule **NO.2**).
 
-Detail in `phases/phase2-narrative-architecture.md`.
+Detail in [`phases/phase2-narrative-architecture.md`](./phases/phase2-narrative-architecture.md)
+(gate-binding contract) + [`novel-architect-structure/methods/storyform/worksheet-loop.md`](../novel-architect-structure/methods/storyform/worksheet-loop.md)
+(operational recipe).
 
 ---
 

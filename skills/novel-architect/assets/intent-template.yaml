@@ -1,7 +1,42 @@
 # Intent Template — Schema 1, written by Phase 1
 # Don't edit by hand after approval; use Phase 1 edit-loops.
+#
+# This file is the **single source of truth** for the Phase 1 slot set.
+# `render/render_intent.py` reads `_meta._required` / `_meta._optional`
+# at runtime instead of duplicating the list in Python. The Markdown
+# table in `phases/phase1-intent-capture.md` is a derived view —
+# regenerate or hand-sync when this list changes, and bump the table's
+# "Regenerated from intent-template.yaml on …" footer line.
+#
+# Adding a slot:
+#   1. Add the key under `intent:` with a `<PLACEHOLDER>` value
+#   2. Append its name to `_meta._required` or `_meta._optional`
+#   3. Bump `_meta.generated` to today's ISO date
+#   4. Re-sync the table in phases/phase1-intent-capture.md §1
+#   5. Run the render-tests to confirm the loader picks it up
 
 schema_version: "1.0"
+
+_meta:
+  # Single source of truth for Phase 1 slot set (Task 072 — PR #101 review §2.5).
+  # `render_intent.py` imports these lists at runtime; do not duplicate elsewhere.
+  generated: "2026-05-12"
+  _required:
+    - genre
+    - subgenre_modifiers
+    - audience
+    - core_conflict_question
+    - core_conflict_unpacked
+    - length_target
+    - language
+    - chapter_count_target
+    - methods_preference
+    - dramatica_storyform_count
+    - success_criterion
+  _optional:
+    - philosophy_integration_level
+    - science_integration_level
+    - known_priors
 
 provenance:
   generated_by: novel-architect@1.0.0
