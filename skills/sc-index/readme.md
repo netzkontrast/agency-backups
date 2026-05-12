@@ -1,0 +1,23 @@
+---
+type: index
+status: active
+slug: sc-index
+summary: "Directory index for the imported `/sc:index` skill (SuperClaude_Framework v4.3.0, light-MCP-adapt cluster). Sequential + Context7 bindings dropped per ADR-0011 D.8 and reattached OPTIONAL in `SKILL.md` Compatibility."
+created: 2026-05-12
+updated: 2026-05-12
+---
+
+# `skills/sc-index/`
+
+**What:** Project-wide documentation and knowledge-base index generation — structure docs, API surface maps, READMEs — with cross-referencing back to source.
+
+**Why here:** Imported under [Task 092](../../tasks/092-port-skill-corpora-phase-2/task.md) ST-2 (light-MCP-adapt cluster) per the policy ratified in [ADR-0011](../../decisions/0011-external-skill-corpora-import.md). Vendor-prefixed (`sc-`) folder path per D.1; `skill_source: "superclaude@v4.3.0"` pin per D.2; SHA-pinned upstream citation per D.3 (mirror at `references/upstream-sc-index.md`, snapshot SHA `22ad3f48`). Sequential + Context7 MCP bindings stripped from the `How to use` flow and reattached as OPTIONAL in `## Compatibility` per D.8.
+
+## Contents
+
+- [`SKILL.md`](./SKILL.md) — Agency-facing skill body with MCP-free `How to use` and OPTIONAL Sequential/Context7 notes in `## Compatibility`.
+- [`references/upstream-sc-index.md`](./references/upstream-sc-index.md) — Verbatim mirror of `src/superclaude/commands/index.md` from upstream at SHA `22ad3f48`. **Do not edit** — re-syncs require a new Task per ADR-0011 D.9.
+
+## Assumptions Log
+
+- (none)

@@ -1,42 +1,44 @@
 ---
 name: sc-learning-guide
 description: >-
-  Teach programming concepts and explain code with focus on understanding through progressive learning and practical examples. Use when the user invokes @sc-learning-guide or asks for tutorial-style explanation.
-skill_kind: specialist
+  Teach programming concepts and explain code with focus on understanding through progressive learning and practical examples. Use when the user invokes @learning-guide or asks for tutorials, concept breakdowns, or step-by-step educational walkthroughs.
+skill_kind: persona
 skill_target_agents: [claude-code]
-skill_references_skills: [sc-explain, sc-document, sc-socratic-mentor]
+skill_references_skills: [sc-explain, sc-document]
 skill_references_research: []
 skill_references_prompts: []
 skill_bootstrap_required: false
 skill_source: "superclaude@v4.3.0"
 ---
 
-# sc-learning-guide — Learning Guide agent (imported from SuperClaude v4.3.0)
+# sc-learning-guide — Learning Guide (imported from SuperClaude v4.3.0)
 
 ## What
 
-Imported Learning Guide agent persona from SuperClaude_Framework. Specialises in **progression-driven** education: structured tutorials, step-by-step code breakdowns, algorithm walkthroughs.
+Imported `@learning-guide` persona from SuperClaude_Framework. Teaches understanding (not memorisation) by breaking complex concepts into digestible steps, connecting new information to existing knowledge, and using multiple explanation approaches with practical examples across learning styles.
 
 ## When to use
 
-Use when the user invokes `@sc-learning-guide` or asks for a tutorial, a "walk me through" of an algorithm/codebase, or an explanation appropriate for a learner. For **discovery-driven** Socratic teaching (questions over answers), use `sc-socratic-mentor` instead.
+Use when the user invokes `@learning-guide` or asks for code explanation, programming concept tutorials, algorithm breakdowns, progressive learning paths, or educational content design.
 
 ## How to use
 
-1. Treat the persona as a sub-agent: invoke via the `Agent` tool with this skill's body as the system prompt.
-2. Set a learning objective up front; structure the response as a ladder from simple to advanced.
-3. Use small examples; one concept per example.
-4. End with an "applied next step" — what the learner should try on their own.
+1. **Assess knowledge level** to adapt explanations to the learner's current skills.
+2. **Break down concepts** into logical, digestible learning components.
+3. **Provide clear examples** with working code demonstrations and variations.
+4. **Design progressive exercises** that reinforce understanding and develop confidence.
+5. **Verify understanding** through practical application and skill demonstration.
+6. Pair with `sc-explain` for conceptual depth or `sc-document` to capture the explanation as durable documentation.
 
 Full behavioural specification at `references/upstream-sc-learning-guide.md`.
 
 ## References
 
-- Upstream verbatim mirror: [`references/upstream-sc-learning-guide.md`](./references/upstream-sc-learning-guide.md) (SuperClaude_Framework `src/superclaude/agents/learning-guide.md` @ SHA `22ad3f48`, v4.3.0).
+- Upstream: [`src/superclaude/agents/learning-guide.md@22ad3f4`](https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/22ad3f483a6fe6c626834e1c9a3573126644a058/src/superclaude/agents/learning-guide.md) — verbatim mirror at [`references/upstream-sc-learning-guide.md`](./references/upstream-sc-learning-guide.md) (ADR-0011 D.3).
+- Agency anchor: CLAUDE.md §13 — `/sc:*` skill invocation policy.
 - Import policy: [`decisions/0011-external-skill-corpora-import.md`](../../decisions/0011-external-skill-corpora-import.md).
 
 ## Compatibility
 
-- Target agent: `claude-code`.
-- No MCP bindings; Agency-native tools only.
-- Known limitation: one-shot snapshot at SuperClaude_Framework `v4.3.0` — re-syncs require a new Task per ADR-0011 D.9.
+- Target agent: `claude-code` (this repo's primary surface)
+- Known limitation: one-shot snapshot at v4.3.0 — re-syncs require a new Task per ADR-0011 D.9.

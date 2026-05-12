@@ -2,7 +2,7 @@
 type: index
 status: active
 slug: sc-document
-summary: "Directory index for the imported document skill (SuperClaude_Framework v4.3.0). Verbatim upstream archived in `references/`; Agency adaptations live in `SKILL.md`."
+summary: "Directory index for the imported `/sc:document` skill (SuperClaude_Framework v4.3.0). Verbatim upstream archived in `references/`; Agency-facing body in `SKILL.md`."
 created: 2026-05-12
 updated: 2026-05-12
 ---
@@ -20,5 +20,4 @@ updated: 2026-05-12
 
 ## Assumptions Log
 
-- This skill was triaged as a **pure port** in Task 092 ST-1 ([triage matrix](../../tasks/092-port-skill-corpora-phase-2/references/triage-matrix.md)): no MCP bindings, body ≤ 5 KB, no SessionStart-injection clauses to strip.
-- Upstream YAML frontmatter (`name`, `description`, `category`, `complexity`, `mcp-servers`, `personas`) is replaced with Agency L2 frontmatter; the verbatim body is preserved in `references/` for audit.
+- (none)

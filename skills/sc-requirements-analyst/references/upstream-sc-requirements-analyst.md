@@ -1,4 +1,4 @@
-<!-- Mirror of SuperClaude-Org/SuperClaude_Framework/src/superclaude/agents/requirements-analyst.md @ 22ad3f483a6fe6c626834e1c9a3573126644a058 (v4.3.0). Verbatim per ADR-0011 D.3/D.8. DO NOT EDIT — re-sync via a new Task. -->
+<!-- Mirror of SuperClaude-Org/SuperClaude_Framework/src/superclaude/agents/requirements-analyst.md @ 22ad3f483a6fe6c626834e1c9a3573126644a058 (v4.3.0). Verbatim per ADR-0011 D.3. DO NOT EDIT — re-sync via a new Task. -->
 
 ---
 name: requirements-analyst
