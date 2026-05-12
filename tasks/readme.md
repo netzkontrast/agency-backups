@@ -141,6 +141,7 @@ plans is documented in each main-Task's §"WARN-tier predecessor disposition"
 section (Tasks 084 / 085 / 086 task.md files).
 -->
 
+- [`091-port-external-skill-corpora/`](./091-port-external-skill-corpora/) — **Epic** for Phase 1 execution of [ADR-0011 — External Skill Corpora Import Policy](../decisions/0011-external-skill-corpora-import.md). Two sequential subtasks: **ST-1** ([`01-phase-1-corpus.md`](./091-port-external-skill-corpora/subtasks/01-phase-1-corpus.md)) — extend `tools/fm/validate.py` for the new `skill_source` L2 key (2 new diagnostics F.B.7 + F.B.8) + ship 14 skill folders under `skills/sc-*/` per ADR-0011 D.1–D.9; **ST-2** ([`02-phase-1-hookup.md`](./091-port-external-skill-corpora/subtasks/02-phase-1-hookup.md)) — rewrite `AGENTS.md` Closing Run Procedure to cite local `skills/sc-createPR/` (closes the `src/superclaude/commands/createPR.md` remote URL) and add `RESEARCH.md §7` citing `skills/sc-research/`. Closes the five dangling `/sc:*` references in [`CLAUDE.md §13`](../CLAUDE.md). Originally filed at slot 090; renumbered to 091 to avoid collision with the two pre-existing `090-*` Tasks above. Complete planning record (`/sc:brainstorm` → `/sc:design` → `/sc:implement`) embedded at [`references/readme.md`](./091-port-external-skill-corpora/references/readme.md) — four-part 83 KB document. Status: `open`.
 
 ### Chain-Level Falsification (Tasks 032–039)
 
