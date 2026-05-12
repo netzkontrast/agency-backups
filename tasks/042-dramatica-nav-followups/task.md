@@ -1,10 +1,10 @@
 ---
 type: task
-status: archived
+status: active
 slug: dramatica-nav-followups
 summary: "Ten Task-030 follow-up items: (1) precompile validate wire-in; (2) term.py + aliases.py over-engineering audit; (3) Bucket C structural-prose decision; (4) Bucket D (41 disputed entries) triage; (5) AGENTS.md NO.5 amendment for precompiled/*.json; (6) ST-7 alias conflict resolution (27 conflicts); (7) six ontology entries without source YAML blocks; (8) derived-kind scenario-tag schema decision (dynamic-pair + quad); (9) `## Mental Sex` body content correction; (10) hardcoded test-count baseline drift."
 created: 2026-05-06
-updated: 2026-05-12
+updated: 2026-05-06
 task_id: "042"
 task_status: open
 task_owner: "claude"
@@ -150,7 +150,7 @@ Items in Phase 1 ship in one focused commit each. Items in Phase 2 each produce 
 - [ ] 11. Item 5: amend `AGENTS.md §NO.5` to cover `precompiled/*.json` OR file ADR input.
 - [ ] 12. Item 8: derived-kind scenario-tag schema decision — project source blocks OR file ADR input + document direct-edit exit.
 - [ ] 13. Run end-to-end gates: `tools/check-governance.sh`, `pytest tools/dramatica-nav/tests/`, `tools/dramatica-nav/cleanup.py --check`. All exit 0.
-- [ ] 14. Set `task_status: archived`. Push.
+- [ ] 14. Set `task_status: done`. Push.
 
 ## Acceptance Criteria (Gherkin)
 

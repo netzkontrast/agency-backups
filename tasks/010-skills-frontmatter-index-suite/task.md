@@ -1,10 +1,10 @@
 ---
 type: task
-status: archived
+status: active
 slug: skills-frontmatter-index-suite
 summary: "Design and implement a token-efficient frontmatter index + tool suite that lets Claude Code, Jules, and Gemini agents navigate /skills/ (and the rest of the repo) without opening file bodies."
 created: 2026-05-04
-updated: 2026-05-12
+updated: 2026-05-05
 task_id: "010"
 task_owner: "claude-code"
 task_status: updated
@@ -112,7 +112,7 @@ The Task explicitly inherits the **Token-Estimator → Context-Pruner → Budget
 - [ ] 5. Wire index-rebuild into `tools/check-governance.sh` (drift-detection gate).
 - [ ] 6. Run the ten-question token-efficiency benchmark; record results in `friction-log.md`.
 - [ ] 7. Confirm `tools/check-governance.sh` exits 0 on the staged tree.
-- [ ] 8. Set `task_status: archived`, update `updated`, write `friction-log.md`.
+- [ ] 8. Set `task_status: done`, update `updated`, write `friction-log.md`.
 
 ## Links
 

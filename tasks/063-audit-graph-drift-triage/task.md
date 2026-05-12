@@ -1,10 +1,10 @@
 ---
 type: task
-status: archived
+status: active
 slug: audit-graph-drift-triage
 summary: "Triage the 343 historical FOLDERS.md F.6 dual-surface-drift WARN findings surfaced by tools/check-audit-graph-consistency.py at Task 036 close. For each (source, target) pair, decide: add the missing frontmatter linkage, or rephrase the body to remove the implied edge. Then flip FM_AUDIT_GRAPH_STRICT=1 as the default."
 created: 2026-05-07
-updated: 2026-05-12
+updated: 2026-05-07
 task_id: "063"
 task_status: open
 task_owner: "unassigned"
@@ -44,7 +44,7 @@ The diagnostic shape is `<relpath>::WARN:F.6:body-link-without-frontmatter:<targ
 2. Sample 10 findings per bucket and classify resolution type.
 3. For each bucket, batch-apply the resolution and re-scan.
 4. Flip the gate.
-5. Update `tasks/readme.md`, author `friction-log.md`, set `task_status: archived`.
+5. Update `tasks/readme.md`, author `friction-log.md`, set `task_status: done`.
 
 ## Todo
 

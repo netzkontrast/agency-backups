@@ -1,10 +1,10 @@
 ---
 type: task
-status: archived
+status: active
 slug: superclaude-spec-evaluation
 summary: "Evaluate the Gemini-authored 'SuperClaude Orchestration & Meta-Governance Specification' (research/gemini/superclaude-agency-orchestration-spec/) against repo reality, decide binding status (accept-as-is / amend / merge-into-tasks-032-039 / reject), and integrate accepted portions as concrete amendments to the existing 8-task chain."
 created: 2026-05-06
-updated: 2026-05-12
+updated: 2026-05-06
 task_id: "040"
 task_status: in_progress
 task_owner: "claude-code"
@@ -97,7 +97,7 @@ Scenario: A new SC.CMD.* scenario lands without colliding with existing schemes
 - [ ] 6. Phase 6 — run `tools/check-governance.sh`; fix ERRORs.
 - [ ] 7. Update `tasks/readme.md` + `research/readme.md` for status transitions.
 - [ ] 8. Author `friction-log.md` with FL[0-3].
-- [ ] 9. Set `task_status: archived`.
+- [ ] 9. Set `task_status: done`.
 
 ## Links
 

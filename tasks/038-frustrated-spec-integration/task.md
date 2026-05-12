@@ -1,10 +1,10 @@
 ---
 type: task
-status: archived
+status: active
 slug: frustrated-spec-integration
 summary: "Resolve the FRUSTRATED.md §28 vs PRE_COMMIT.md §2 contradiction (reciprocal with Task 037), justify the FL0-mandatory rule, mechanically enforce the FL declaration at commit time, and add ≥4 Gherkin acceptance scenarios."
 created: 2026-05-06
-updated: 2026-05-12
+updated: 2026-05-07
 task_id: "038"
 task_status: updated
 task_owner: "claude-code (session claude/complete-tasks-32-39-AJVfD)"
@@ -31,7 +31,7 @@ Make FRUSTRATED.md mechanically gating, harmonise it with PRE_COMMIT.md, and add
 - **FR.B.1 closing-run** — every closed task carries an FL declaration in the canonical format.
 - **FR.B.2 FL.Special bloat** — deeply nested folder structures or per-file readme spam → FL2.
 - **FR.B.3 FL.Log surface routing** — research runs use `/reflection/friction-log.md`; standard tasks use PR description (FL.Log.1 vs FL.Log.2).
-- **FR.B.4 missing-log rejection** — pre-commit MUST reject closure with `task_status: archived` and no resolvable FL declaration.
+- **FR.B.4 missing-log rejection** — pre-commit MUST reject closure with `task_status: done` and no resolvable FL declaration.
 
 > **Cross-spec wording-convergence note (per spec-panel m1):** the §28 wording produced by subtask `03-spec-amendment-frustrated-md` MUST be byte-identical (modulo spec-name prefix) to the §2 wording produced by [Task 037 ST-4](../037-pre-commit-spec-integration/subtasks/readme.md). Both amendments land in a single coordinated commit.
 

@@ -1,10 +1,10 @@
 ---
 type: task
-status: archived
+status: active
 slug: task-tooling-impl-spec
 summary: "Research the /skills/ corpus (especially research-prompt-optimizer) for inspiration, inventory existing /tasks/ tooling and gaps, and produce an implementation-ready SPEC for Task-orchestration tooling — state-transition helpers, template scaffolding, lifecycle automation, audit-graph maintenance, friction-log automation."
 created: 2026-05-07
-updated: 2026-05-12
+updated: 2026-05-07
 task_id: "048"
 task_status: open
 task_owner: "unassigned"
@@ -71,7 +71,7 @@ This Task surveys that prior art, inventories the existing `/tasks/` tooling and
 1. **Phase A — Inspiration survey.** Dispatch [`subtasks/01-research-skills-corpus-inspiration.md`](./subtasks/01-research-skills-corpus-inspiration.md). Author the executing prompt at `/prompts/research-skills-corpus-inspiration-survey/` at dispatch time (per Task 041 audit-graph repair pattern); add the slug to `task_uses_prompts` once the prompt exists.
 2. **Phase A — Existing-tooling inventory.** Dispatch [`subtasks/02-research-existing-task-tooling-inventory.md`](./subtasks/02-research-existing-task-tooling-inventory.md). Author the executing prompt at `/prompts/research-existing-task-tooling-inventory/`; add the slug to `task_uses_prompts`.
 3. **Phase B — SPEC synthesis.** Dispatch [`subtasks/03-spec-task-tooling-impl.md`](./subtasks/03-spec-task-tooling-impl.md). Author the executing prompt at `/prompts/spec-task-tooling-impl/`; add the slug to `task_uses_prompts`. Output: `research/task-tooling-impl-spec/output/SPEC.md` per the §1–§7 build-contract pattern, integrating ST-1 patterns and ST-2 inventory into ≥6 concrete tool proposals.
-4. **Closing run.** Author `friction-log.md` (FL[0-3]); update `tasks/readme.md` to reflect `task_status: archived`; flip status; commit; push. Per AGENTS.md CR.1.
+4. **Closing run.** Author `friction-log.md` (FL[0-3]); update `tasks/readme.md` to reflect `task_status: done`; flip status; commit; push. Per AGENTS.md CR.1.
 
 **Planned prompt slugs** (frontmatter pre-declaration deferred until each prompt is authored, per the F.T.1 linter contract): `research-skills-corpus-inspiration-survey`, `research-existing-task-tooling-inventory`, `spec-task-tooling-impl`.
 

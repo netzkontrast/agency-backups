@@ -1,10 +1,10 @@
 ---
 type: task
-status: archived
+status: active
 slug: core-architecture-review-followups
 summary: "Triage an architectural review of the Agency spec corpus + fm-toolchain against the live Task graph; dispatch follow-up Tasks for the seven gaps not already owned by 017/019/043/044/045/046."
 created: 2026-05-07
-updated: 2026-05-12
+updated: 2026-05-07
 task_id: "053"
 task_status: open
 task_owner: "claude-code"
@@ -49,7 +49,7 @@ This Task does **not** itself implement the fixes. Per [`MAINTENANCE.md §3`](..
 3. **Open the seven new follow-up Tasks.** For each B.1, B.2, B.5, B.6, B.7, B.8, B.9, B.10 row above whose dispatch decision is `open-new`, create a sibling `tasks/<NNN>-<slug>/` folder per [`TASK.md §8.1`](../../TASK.md) (next free `<NNN>` discovered at commit-time, not pre-allocated here — slot races are resolved per §8.1 step 1–3). Each successor Task MUST carry `task_blocked_by: []` (none of these block on this Task; this Task is the dispatch, not the precondition). Each successor Task's `task.md` MUST cite this Task by relative path under `## Links`.
 4. **Cross-link the dispatch.** Add [`triage.md`](./triage.md) recording the ten-row map above with one row per finding: `finding_id | owning_task | gap_residual | dispatch_decision | new_task_slot`. Update this Task's `task_spawns_prompts` (none) and the new Tasks' `task.md` files; do **not** populate `task_spawns_research` because none of the gaps require a fresh research run distinct from those listed in the new Tasks' own plans.
 5. **Sync the tasks index.** Per [`TASK.md §4.8 / §7.11`](../../TASK.md), update [`tasks/readme.md`](../readme.md) **in the same commit** as each new folder creation: one bullet per new folder, citing its `task_status: open`, with this Task as a `(see Task 053)` annotation on each. The index `updated:` field is bumped on every such commit.
-6. **Close.** When all eight successor Tasks are filed and the triage matrix is complete, set `task_status: archived`, write [`friction-log.md`](./friction-log.md) with an FL[0–3] declaration (FL0 acceptable if dispatch executed cleanly), and re-sync the index per §4.8.
+6. **Close.** When all eight successor Tasks are filed and the triage matrix is complete, set `task_status: done`, write [`friction-log.md`](./friction-log.md) with an FL[0–3] declaration (FL0 acceptable if dispatch executed cleanly), and re-sync the index per §4.8.
 
 ## Todo
 
