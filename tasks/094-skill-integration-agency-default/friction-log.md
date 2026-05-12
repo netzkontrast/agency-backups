@@ -20,6 +20,16 @@ Highest Frustration Level: FL0
 
 No FL1+ items from spec authoring.
 
+### PR #122 peer review — 5 advisory items (FL0)
+
+Peer review on PR #122 returned **APPROVED · 0 blocking · 5 advisory**. Three small T1 fixes (A1 / A3 / A4) applied in this PR; two scope items (A2 / A5) carried forward to subtasks:
+
+- **A1 (resolved this PR):** `task.md ## Note` lead sentence rewritten to point at `references/source-plan.md` first; ephemeral `/root/.claude/plans/` path is now secondary.
+- **A2 (carried forward — ST-4 prerequisite):** `task_uses_prompts: []` with no prompt-layer rationale creates an audit-graph gap; first Plan-mode Epic without a `/prompts/` entry. Needs a TASK.md policy note (or a new ADR) ratifying Plan-mode artifacts as a valid prompt-layer substitute. MUST resolve before ST-4 flips the Epic to `done`.
+- **A3 (resolved this PR):** Gherkin BR.94.2 rewritten with executable proxy `find .claude/skills -maxdepth 2 -name SKILL.md | wc -l` MUST return 52; replaces the unverifiable "session log MUST show 52 descriptions" assertion.
+- **A4 (resolved this PR):** Unicode `…` ellipsis in Gherkin grep paths replaced with full slug `tasks/092-port-skill-corpora-phase-2/...` in `task.md ## Goal` "done when" list and `subtasks/01-root-spec-hookup.md` AC T094.1.3. Narrative ellipsis elsewhere (prose-only shorthand) left as-is.
+- **A5 (carried forward — ST-2 scope):** No ADR for the new `.claude/` + `.claude-plugin/` topology yet. Per CLAUDE.md §5 "repo-architecture convention changes" route through `decisions/<NNNN>-<slug>.md`. ST-2 MUST file ADR-0013 declaring the symlink idiom + plugin manifest + 17-agent re-export pattern before `.claude/` lands.
+
 ## ST-1 — Root-spec hookup + T3 enum + T1 typo sweep (FL declared per subtask)
 
 (Populated as ST-1 work proceeds.)

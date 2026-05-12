@@ -35,7 +35,7 @@ task_blocked_by:
 
 ## Note — Source plan
 
-This Epic spec is the execution surface of the planning artifact at [`/root/.claude/plans/now-please-look-at-greedy-cascade.md`](/root/.claude/plans/now-please-look-at-greedy-cascade.md) (Claude-Code Plan-mode output from session `01WBrHNUZUEoew9PE9A7SguS`). User-locked decisions captured at the bottom of the plan:
+This Epic spec is the execution surface of the planning artifact archived verbatim at [`references/source-plan.md`](./references/source-plan.md) (canonical, repo-tracked). The plan was originally authored in Claude-Code Plan-mode at the ephemeral session-local path `/root/.claude/plans/now-please-look-at-greedy-cascade.md` (session `01WBrHNUZUEoew9PE9A7SguS`); the canonical record lives in this Task's `references/` folder. User-locked decisions captured at the bottom of the plan:
 
 1. **Hook granularity:** Event-driven (~5 hooks total, one per Claude Code event).
 2. **Epic scope:** Full implementation (4 sequential subtasks: root-spec hookup, `.claude/` + plugin, hooks, cleanup).
@@ -63,7 +63,7 @@ The Epic is **done** when:
 3. `claude plugin validate --plugin-dir .` exits 0 against the new `.claude-plugin/plugin.json`.
 4. All 5 event-driven hooks fire correctly on their events (test fixtures pass) and the governance check `tools/check-hooks.py` exits 0.
 5. SKILLS.md §3 enum lists 9 values; `tools/fm/validate.py` emits `F.B.11` ERROR on any out-of-enum `skill_kind`.
-6. `grep -r "superclaude_framework@v4.3.0" tasks/092-…/references/triage-notes/` returns zero matches.
+6. `grep -r "superclaude_framework@v4.3.0" tasks/092-port-skill-corpora-phase-2/references/triage-notes/` returns zero matches.
 
 ## Context
 
@@ -143,10 +143,10 @@ Feature: Task 094 closes the skill-integration gap
   # anchor: BR.94.2
   Scenario: Claude Code auto-discovers the skill corpus
     Given Task 094 is complete
-    When a fresh Claude Code session starts in the agency repo
-    Then `.claude/skills/` MUST resolve to /skills/ (symlink or copy)
-    And the session log MUST show 52 skill descriptions loaded into context
-    And every skill description MUST be ≤ 1536 characters (Anthropic SKILL.md cap)
+    When `readlink .claude/skills` runs (or on Windows, the copy-fallback materialiser)
+    Then it MUST resolve to ../skills/
+    And `find .claude/skills -maxdepth 2 -name SKILL.md | wc -l` MUST return 52
+    And every SKILL.md `description` field MUST be ≤ 1536 characters (Anthropic SKILL.md cap)
 
   # anchor: BR.94.3
   Scenario: Agency is distributable as a plugin
@@ -170,7 +170,7 @@ Feature: Task 094 closes the skill-integration gap
     When a reader greps SKILLS.md §3 for the skill_kind enum values
     Then the enum MUST list all 9 values: domain, tool, orchestrator, meta, discipline, workflow, persona, analysis, agent-template
     And `python3 tools/fm/validate.py skills/` MUST emit diagnostic F.B.11 ERROR on any out-of-enum value
-    And `grep "superclaude_framework@v4.3.0" tasks/092-…/references/triage-notes/` MUST return zero matches
+    And `grep -r "superclaude_framework@v4.3.0" tasks/092-port-skill-corpora-phase-2/references/triage-notes/` MUST return zero matches
 ```
 
 ## Out of scope

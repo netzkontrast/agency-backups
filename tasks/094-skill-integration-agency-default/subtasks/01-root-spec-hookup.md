@@ -72,7 +72,7 @@ Feature: ST-1 closes the root-spec citation gap + T3 + T1 follow-ups
   # anchor: T094.1.3
   Scenario: T1 typo sweep complete
     Given ST-1 is complete
-    When a reader greps tasks/092-…/references/triage-notes/ for the literal "superclaude_framework@v4.3.0"
+    When a reader runs `grep -r "superclaude_framework@v4.3.0" tasks/092-port-skill-corpora-phase-2/references/triage-notes/`
     Then the grep MUST return zero matches
 
   # anchor: T094.1.4
