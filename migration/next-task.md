@@ -37,6 +37,7 @@ The next agent MUST verify each before issuing any `git mv` command.
 - **P.3** The ADR draft in [`adr-draft.md`](./adr-draft.md) has been revised to reflect (a) L11.43 v3 scope (6 types, not tasks-only) and (b) the per-type natural-fit reversal. The user has reviewed the revised draft.
 - **P.4** [`schemas-delta.md`](./schemas-delta.md) has been updated to reflect the Decision 4 reversal (uniform L2 `id:` field across the 5 promoted types).
 - **P.5** The user issues an **explicit, unambiguous instruction** to execute this task. The instruction MUST name "archive" or "git mv" or this task's slug. Implicit cues (e.g. "let's start") are **not** sufficient.
+- **P.6 — Clean working tree.** `git status --porcelain` MUST return empty (no staged, no unstaged, no untracked changes) at the moment the archive run begins, except for files inside `/migration/` that capture the post-archive handover prose. Untracked root-level artefacts are adjudicated separately in §5 step 3 — they MUST be absent here, or step 3's untracked-leftovers branch fires before any `git mv` runs. This precondition guards against the silent-exclusion failure mode where staged-but-not-committed tracked paths get omitted from the move-set built in §5 step 3.
 
 **If any precondition is unmet, the agent MUST NOT begin the archive.** Surface the unmet precondition to the user and ask for resolution. Do not proceed on the basis of "good enough" precondition coverage.
 
@@ -130,31 +131,36 @@ Feature: Big-bang archive of pre-migration repo state
 
 When the task triggers, the agent executes:
 
-1. **Verify preconditions §2.1–§2.5.** If any fails, halt and report to user.
-2. **Adjudicate §3 borderlines** via a single `AskUserQuestion` covering `install.sh`, `LICENSE`, `.editorconfig`, and any other dotfiles present at root.
-3. **Snapshot the to-be-moved set — only Git-tracked root entries:**
-    - `git ls-tree HEAD --name-only` gives the canonical list of tracked top-level entries. Filter against §3 to get the move-set; this is the input to step 5.
-    - Separately, `ls -A` minus `git ls-tree HEAD --name-only` minus §3 gives the **untracked-leftovers** set. `git mv` cannot move untracked entries (it requires tracked sources), so untracked files must be handled explicitly. **Leave-in-place is NOT a permitted option** at this step — it would violate the §4 acceptance criterion "Live tree is empty except for migration and .claude". Any untracked file the user wants to keep live MUST first be added to the §3 borderline-keep-live list and re-adjudicated there; only then does it become exempt and skip this step.
+1. **Verify preconditions §2.1–§2.6.** If any fails, halt and report to user.
+2. **Filesystem + git state preflight (mitigates R.1, R.2, R.3).** Run in order, halt on any failure:
+    - `test -e archive && { test -d archive && find archive -maxdepth 1 -mindepth 1 | head -1; }` — if `archive/` exists in the working tree (whether tracked, untracked, or partially populated from a prior interrupted run), halt and reconcile with the user. `git ls-tree HEAD archive/ | wc -l` is **not** sufficient — it only inspects the committed tree and misses working-tree-only `archive/` content.
+    - `git submodule status` — if non-empty, halt and surface the submodule list to the user. `git mv` on a submodule path may misbehave; the user MUST guide the per-submodule strategy before proceeding.
+    - `git status --porcelain | grep -v '^.. migration/'` — must be empty. Pre-existing staged/unstaged/untracked changes outside `/migration/` would silently corrupt the move-set built in step 3. (This is P.6 enforced operationally.)
+3. **Adjudicate §3 borderlines** via a single `AskUserQuestion` covering `install.sh`, `LICENSE`, `.editorconfig`, `.githooks/`, `.gitignore`, and any other dotfiles present at root.
+4. **Snapshot the to-be-moved set — only Git-controlled root entries from the index, not just HEAD:**
+    - `git ls-files -- ':(top)*' | awk -F/ '{print $1}' | sort -u` gives the canonical list of top-level entries tracked in the **index** (includes staged-but-not-committed paths; `git ls-tree HEAD` alone would miss those). Filter against §3 to get the move-set; this is the input to step 6.
+    - Separately, `(ls -A ; git ls-files -- ':(top)*' | awk -F/ '{print $1}' | sort -u) | sort | uniq -u | grep -vFf <(printf '%s\n' "${EXEMPTS[@]}")` yields the **untracked-leftovers** set (entries in `ls -A` that aren't in the index and aren't §3-exempt). `git mv` cannot move untracked entries (it requires tracked sources), so untracked files must be handled explicitly. **Leave-in-place is NOT a permitted option** at this step — it would violate the §4 acceptance criterion "Live tree is empty except for migration and .claude". Any untracked file the user wants to keep live MUST first be added to the §3 borderline-keep-live list and re-adjudicated there; only then does it become exempt and skip this step.
     - For each non-exempt untracked entry, the user picks one of three options:
       - **`git add` then archive** (default; preserves the artefact in history). Use `git add -f <entry>` for entries matched by `.gitignore` — plain `git add` refuses ignored paths and would halt the run.
       - **`mv` aside** — filesystem-move to a temporary location outside the repo. Use when the artefact should not enter git history at all.
       - **`rm`** — delete. Use when the artefact is generated junk.
     - Surface both lists to the user before executing (one final go/no-go for the tracked-move-set + per-file adjudication for any untracked-leftovers).
-4. **Create `/archive/`** if not present: `mkdir archive`.
-5. **For each entry in the tracked move-set:** `git mv <entry> archive/<entry>`. Mirror the original path inside `/archive/`. For untracked-leftover entries adjudicated as "archive" in step 3, run `git add <entry>` (or `git add -f <entry>` for ignored entries) first, then `git mv <entry> archive/<entry>`.
-6. **Verify renames:** the file-level rename count from `git status --porcelain | grep -c '^R'` equals the recursive file count of the to-be-moved set (computed via e.g. `git diff --cached --name-status --find-renames | grep -c '^R'` for staged moves, or `find <moved-path> -type f | wc -l` on the source set before the move). **Do not** use `git status` without `--porcelain` — the long human-readable format prints `renamed:` lines, not `R` codes, so `grep '^R'` returns zero matches even on successful moves. **Do not** compare against the count of top-level entries — `git mv tasks/` expands to one rename per file inside `tasks/`, not one rename total.
-7. **Commit:** `git commit --no-verify -m "archive: big-bang move of pre-migration repo state into /archive/"`. Body MUST cite `migration/waiver.md`, list the moved top-level entries, and include `Highest Frustration Level: FL[0-3]`.
-8. **Push** to the migration branch.
-9. **Update [`handover.md`](./handover.md)** with a "post-archive" section indicating the new state. Commit + push as a separate commit.
-10. **Open a PR** (if not already open) or update the existing PR description to reflect the archive milestone.
+5. **Create `/archive/`** if not present: `mkdir archive`. (Step 2 already verified it was absent or only-empty.)
+6. **For each entry in the tracked move-set:** `git mv <entry> archive/<entry>`. Mirror the original path inside `/archive/`. For untracked-leftover entries adjudicated as "archive" in step 4, run `git add <entry>` (or `git add -f <entry>` for ignored entries) first, then `git mv <entry> archive/<entry>`.
+7. **Verify renames:** the file-level rename count from `git status --porcelain | grep -c '^R'` equals the recursive file count of the to-be-moved set (computed via e.g. `git diff --cached --name-status --find-renames | grep -c '^R'` for staged moves, or `find <moved-path> -type f | wc -l` on the source set before the move). **Do not** use `git status` without `--porcelain` — the long human-readable format prints `renamed:` lines, not `R` codes, so `grep '^R'` returns zero matches even on successful moves. **Do not** compare against the count of top-level entries — `git mv tasks/` expands to one rename per file inside `tasks/`, not one rename total.
+8. **Commit:** `git commit --no-verify -m "archive: big-bang move of pre-migration repo state into /archive/"`. Body MUST cite `migration/waiver.md`, list the moved top-level entries, and include `Highest Frustration Level: FL[0-3]`.
+9. **Push** to the migration branch.
+10. **Update [`handover.md`](./handover.md)** with a "post-archive" section indicating the new state. Commit + push as a separate commit.
+11. **Open a PR** (if not already open) or update the existing PR description to reflect the archive milestone.
 
 ---
 
 ## 6. Risks and mitigations
 
-- **R.1 — Path collisions inside `/archive/`.** If a prior partial migration left `/archive/<some-path>/` in place, `git mv <path>/foo archive/<path>/foo` may fail or merge unexpectedly. **Mitigation:** §5 step 1 includes a check `git ls-tree HEAD archive/ | wc -l` to detect prior archive contents. Abort and reconcile with the user before proceeding.
-- **R.2 — Submodules.** If any submodules exist, `git mv` on a submodule path may misbehave. **Mitigation:** `git submodule status` runs in §5 step 1; if submodules present, the agent halts and asks for guidance.
-- **R.3 — Pre-existing `/archive/` from L11.43's original archive-first big-bang language.** The plan-recap (Roundtable 7) anticipated this; check whether prior commits already populated `/archive/`. **Mitigation:** as R.1.
+- **R.1 — Path collisions inside `/archive/`.** If a prior partial migration left `/archive/<some-path>/` in place (committed, staged, or only in the working tree), `git mv <path>/foo archive/<path>/foo` may fail or merge unexpectedly. **Mitigation:** §5 **step 2** runs a filesystem-level `test -e archive` plus a non-empty content check — NOT just `git ls-tree HEAD archive/`, which would miss working-tree-only `archive/` content from an interrupted prior run.
+- **R.2 — Submodules.** If any submodules exist, `git mv` on a submodule path may misbehave. **Mitigation:** §5 **step 2** runs `git submodule status`; if non-empty, the agent halts and surfaces the list for per-submodule user guidance.
+- **R.3 — Pre-existing `/archive/` from L11.43's original archive-first big-bang language.** The plan-recap (Roundtable 7) anticipated this; check whether prior commits already populated `/archive/`. **Mitigation:** as R.1 — same step-2 filesystem check covers it.
+- **R.3a — Staged-but-not-committed root entries silently excluded.** If the operator starts the archive run with staged tracked root entries that aren't in `HEAD`, naïve `git ls-tree HEAD --name-only` would miss them and they'd remain live at root, violating §4 acceptance. **Mitigation:** P.6 + §5 **step 2** require a clean working tree before run; §5 **step 4** uses `git ls-files` (which reflects the index) instead of `git ls-tree HEAD`.
 - **R.4 — `.claude/` may legitimately need updating during the rebuild** (e.g. hook registrations point at archived `tools/hooks/` paths). **Mitigation:** rebuild task (not this one) handles `.claude/` updates. This task leaves `.claude/` strictly untouched.
 - **R.5 — Governance scripts (`tools/check-governance.sh`, `tools/fm/`) move to `/archive/`, breaking any agent that tries to run them post-archive.** **Mitigation:** governance is revoked per the waiver; no agent should run those scripts during the refactor window. The next agent's banner-mandated workflow does not require them.
 - **R.6 — Branch hygiene.** This task ideally lands on the migration branch (`claude/repo-refactoring-plan-CfLY5` or a successor) and ships as one or more commits in PR #129 (or its successor). Do NOT execute the archive on a feature branch that has already been merged or that diverges from the migration plan.
