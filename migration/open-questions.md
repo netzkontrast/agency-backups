@@ -32,7 +32,7 @@ For each of the 12 first-class types, which of STANDALONE / SUBFILE / SUBDOC are
 | `friction-log` | yes | yes | – | SUBFILE under `<parent>/reflection/` is current pattern |
 | `hook` | required | – | – | Per L11.41′ |
 
-**Recommendation:** restrict SUBDOC to four types where it adds value (`prompt`, `role`, `gherkin`, `friction-log`); ban it elsewhere to keep the graph easy to walk.
+**Recommendation:** restrict SUBDOC to **three** types where it adds value: `prompt`, `role`, `gherkin`. Ban it elsewhere (including `friction-log`) to keep the graph easy to walk. (Earlier draft listed `friction-log` here too; corrected to match the table above + R3 provisional in `locks-ratified.md §Revision history` which bans STANDALONE and SUBDOC for friction-log, leaving SUBFILE only.)
 
 **Tradeoff:** permissive SUBDOC simplifies in-the-wild authoring but introduces more edge cases for the linter and the `agency extract` command.
 
@@ -114,15 +114,30 @@ Decision 4 ratified the "natural fit" principle but deferred specifics for these
 
 ## Q7 — Sequencing — what gets done in what order?
 
-Three paths surfaced in [`handover.md`](./handover.md) §4:
+> **POST-TURN-14 STATUS:** Paths A / B / C below are **SUPERSEDED** by the user's turn-14 directive (verbatim in [`original-prompt.md`](./original-prompt.md)). The mandatory sequence is now archive-first; see [`handover.md §4`](./handover.md#4-where-to-resume) for the current recommended path.
+
+**Current recommended path (post turn-14):**
+
+1. Close Q1–Q6 (incl. re-confirm provisional R1/R2/R3 from `locks-ratified.md §Revision history`).
+2. Revise [`adr-draft.md`](./adr-draft.md) + [`schemas-delta.md`](./schemas-delta.md) to reflect the resolved scope.
+3. User explicitly authorises execution per `next-task.md §2 P.5`.
+4. Execute [`next-task.md`](./next-task.md) — big-bang `git mv` to `/archive/`.
+5. Rebuild live tree directly from `/migration/` + the Gemini briefs at `.claude/research-results/` (which survive the archive).
+
+**Historical paths (do NOT pursue post turn-14):**
+
+<details>
+<summary>Pre-turn-14 sequencing options (deprecated)</summary>
 
 - **Path A** — Close Q1–Q6 → ratify ADR-0013 → cascade root specs → build migration tooling.
 - **Path B** — Build thin `agency readme` prototype → revise ADR with implementation evidence → cascade.
 - **Path C** — Land schema deltas first → ADR references already-landed schemas.
 
-**Recommendation:** **Path A**. Schema deltas (Path C) ahead of ADR acceptance invert the governance contract; Path B's prototype is valuable but premature when Q1–Q6 are open.
+Pre-turn-14 recommendation was Path A. All three paths assumed incremental modification of the existing tree; turn-14 explicitly rejected that approach.
 
-**Tradeoff:** Path A is linear and slow (multiple sessions). Path B / C front-load implementation risk but compress the timeline.
+</details>
+
+**Tradeoff:** the archive-first path forces a complete rebuild commitment up-front but eliminates governance-drift risk during cascade. Incremental paths (A/B/C) were lower-risk operationally but contradicted the user's "complete and extreme refactoring" directive — that's why they were superseded.
 
 ---
 
