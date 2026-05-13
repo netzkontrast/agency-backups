@@ -1,0 +1,5 @@
+{
+  "session_id": "test-session",
+  "prompt": "I think the test is broken — getting a failing assertion error",
+  "hook_event_name": "UserPromptSubmit"
+}

@@ -119,7 +119,7 @@ ST-1 → ST-2 → ST-3 → ST-4 is strictly sequential: each subtask depends on 
 
 - [ ] 1. ST-1 root-spec hookup + T3 enum ratification + T1 typo sweep PR'd and merged
 - [x] 2. ST-2 `.claude/` directory + `.claude-plugin/plugin.json` PR'd and merged
-- [ ] 3. ST-3 5 event-driven hooks + governance check + tests PR'd and merged
+- [x] 3. ST-3 5 event-driven hooks + governance check + tests PR'd and merged
 - [ ] 4. ST-4 cleanup + Epic close PR'd and merged
 - [ ] 5. End-to-end governance: `tools/check-governance.sh` exits 0; `tools/check-hooks.py` exits 0
 - [ ] 6. `tasks/readme.md` index entry flipped `Status: open` → `done`

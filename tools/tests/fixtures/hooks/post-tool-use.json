@@ -1,0 +1,10 @@
+{
+  "session_id": "test-session",
+  "tool_name": "Skill",
+  "tool_input": {
+    "skill": "sc-implement",
+    "prompt": "build the feature"
+  },
+  "tool_response": "Implemented the feature in src/foo.py; 3 tests added.",
+  "hook_event_name": "PostToolUse"
+}
