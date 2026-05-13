@@ -19,7 +19,7 @@ Agency is being refactored along three orthogonal axes that were ratified over R
 
 1. **Artifact ontology** — the set of first-class types grows from 7 to 12 (add `role`, `lock`, `gherkin`, `friction-log`, `hook`).
 2. **Placement model** — every type declares which of STANDALONE / SUBFILE / SUBDOC it permits via a per-type manifest; SUBDOC syntax is Pandoc fenced divs.
-3. **Identifier convention** — tasks (only) move from `<NNN>-<slug>/` to bare `<slug>/` with a ULID in frontmatter; archive-first migration preserves existing names; the other 11 types each keep a per-type "natural fit" identifier.
+3. **Identifier convention** — **status: provisional, two-version**. L11.43 v2 (in-body) says tasks-only ULID with the other 11 types keeping per-type natural-fit identifiers (e.g. role=slug, lock=`L<round>.<sub>` notation, gherkin=`# anchor:` id). L11.43 v3 (turn-11 revision history, marked PROVISIONAL in [`locks-ratified.md §Revision history`](./locks-ratified.md#revision-history--answers-given-mid-session-after-waiver-request)) extends the ULID convention to **6 types** — task + role + lock + gherkin + friction-log + hook — reversing Decision 4. The user clicked v3 but interrupted before re-confirming the cascade implications; next session MUST re-confirm before any code or schema lands. Treat the in-body L11.43 v2 framing here as **partly stale** until that re-confirmation. Archive-first migration preserves existing names either way.
 
 Plus one operational shift:
 

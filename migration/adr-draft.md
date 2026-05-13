@@ -163,7 +163,7 @@ When this ADR ratifies, the following land in dependency order:
 
 ## Evidence
 
-Gemini Deep Research brief #2 (`research/gemini-architectural-audit-2/output/SPEC.md`) supplied 8 load-bearing decisions, each cited by ID in [`gemini-evidence.md`](./gemini-evidence.md):
+The Gemini Deep Research briefs at [`.claude/research-results/gemini-1-architecture-audit.md`](../.claude/research-results/gemini-1-architecture-audit.md) (75 KB; 14-decision audit) and [`.claude/research-results/gemini-2-bootstrap-context-engineering.md`](../.claude/research-results/gemini-2-bootstrap-context-engineering.md) (54 KB; 22 context-engineering patterns) supplied 8 load-bearing decisions, each cited by ID in [`gemini-evidence.md`](./gemini-evidence.md). Both briefs survive the [`next-task.md`](./next-task.md) archive (since `.claude/` is exempt) so the authority chain remains intact through the rebuild. (Earlier drafts cited `research/gemini-architectural-audit-2/output/SPEC.md`; that path is not present in the repo — corrected via PR #129 review.)
 
 - **D1** — Promoting `role` / `lock` / `gherkin` / `friction-log` / `hook` to first-class is correct (anchors L11.32‴).
 - **D2** — Three-mode placement is the right factoring (anchors L11.36′).

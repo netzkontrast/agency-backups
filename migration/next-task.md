@@ -21,7 +21,7 @@ Quoted verbatim from the session that produced this file:
 
 Parsed:
 
-- **All current repo content — including the 12 existing ADRs — is revoked.** Nothing in the live tree is binding any longer. The Gemini research briefs (`research/gemini-architectural-audit-2/` and friends) plus everything under `/migration/` are the only authoritative sources for the rebuild.
+- **All current repo content — including the 12 existing ADRs — is revoked.** Nothing in the live tree is binding any longer. The authoritative sources for the rebuild are: (a) the Gemini Deep Research briefs at [`.claude/research-results/gemini-1-architecture-audit.md`](../.claude/research-results/gemini-1-architecture-audit.md) (primary, 75 KB) + [`.claude/research-results/gemini-2-bootstrap-context-engineering.md`](../.claude/research-results/gemini-2-bootstrap-context-engineering.md) (companion, 54 KB) — both of which survive the archive intact because `.claude/` is exempt; and (b) everything under `/migration/`. (Earlier drafts of this preface cited `research/gemini-architectural-audit-2/` — that path is not present in the repo; corrected via PR #129 review.)
 - **The rebuild is a "complete and extreme refactoring".** Not incremental, not per-folder, not opt-in.
 - **First operational step:** archive everything except `/migration/` and `/.claude/`. Use `git mv` (preserves history; renames track via `git log --follow`).
 - **Trigger:** "when the refactoring plan is Ready" — interpret as **user explicitly authorises execution**. The plan being ready is necessary but not sufficient; the user's go-ahead is required.
@@ -132,9 +132,12 @@ When the task triggers, the agent executes:
 
 1. **Verify preconditions §2.1–§2.5.** If any fails, halt and report to user.
 2. **Adjudicate §3 borderlines** via a single `AskUserQuestion` covering `install.sh`, `LICENSE`, `.editorconfig`, and any other dotfiles present at root.
-3. **Snapshot the to-be-moved set** — `ls -A` filtered against §3. Confirm the list to the user before executing (one final go/no-go).
+3. **Snapshot the to-be-moved set — only Git-tracked root entries:**
+    - `git ls-tree HEAD --name-only` gives the canonical list of tracked top-level entries. Filter against §3 to get the move-set; this is the input to step 5.
+    - Separately, `ls -A` minus `git ls-tree HEAD --name-only` minus §3 gives the **untracked-leftovers** set. `git mv` cannot move untracked entries (it requires tracked sources), so untracked files must be handled explicitly: present the list to the user; for each, choose `git add` (track first, then archive) / `mv` (filesystem-move without git tracking) / `rm` (delete) / leave-in-place. Default recommendation: `git add` then archive — preserves the untracked artefact in history.
+    - Surface both lists to the user before executing (one final go/no-go for the tracked-move-set + per-file adjudication for any untracked-leftovers).
 4. **Create `/archive/`** if not present: `mkdir archive`.
-5. **For each entry in the to-be-moved set:** `git mv <entry> archive/<entry>`. Mirror the original path inside `/archive/`.
+5. **For each entry in the tracked move-set:** `git mv <entry> archive/<entry>`. Mirror the original path inside `/archive/`. For untracked-leftover entries adjudicated as "archive" in step 3, run `git add <entry>` first, then `git mv <entry> archive/<entry>`.
 6. **Verify renames:** the file-level rename count from `git status --porcelain | grep -c '^R'` equals the recursive file count of the to-be-moved set (computed via e.g. `git diff --cached --name-status --find-renames | grep -c '^R'` for staged moves, or `find <moved-path> -type f | wc -l` on the source set before the move). **Do not** use `git status` without `--porcelain` — the long human-readable format prints `renamed:` lines, not `R` codes, so `grep '^R'` returns zero matches even on successful moves. **Do not** compare against the count of top-level entries — `git mv tasks/` expands to one rename per file inside `tasks/`, not one rename total.
 7. **Commit:** `git commit --no-verify -m "archive: big-bang move of pre-migration repo state into /archive/"`. Body MUST cite `migration/waiver.md`, list the moved top-level entries, and include `Highest Frustration Level: FL[0-3]`.
 8. **Push** to the migration branch.
