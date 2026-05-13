@@ -57,6 +57,12 @@
       "why": "Index routing, manifest emission, and discipline-gate dispatch all depend on `skill_kind` being a known label. Out-of-enum values silently bypass routing. Ratified by Task 094 ST-1 (carry-forward T3 from Task 092 PR #120 review A1).",
       "fix": "Either change `skill_kind` to one of the 9 enum values (see SKILLS.md §3.3) or, if a new category is genuinely required, open an ADR to ratify the enum expansion before adding the value."
     },
+    "F.S.1": {
+      "severity_hint": "ERROR",
+      "what": "A skills/<slug>/ operational folder contains a SKILL.md but is missing the required sibling readme.md.",
+      "why": "CLAUDE.md §7 + SKILLS.md §2 + §9.6 require every operational skill folder to carry a readme.md directory index. Without it, folder navigation, the Assumptions Log discipline, and the readme-audit invariant break. Task 091 ST-1 surfaced the gap when 14 sc-* folders shipped readme-less and governance still exited 0; Task 093 closes the mechanical-enforcement hole before Task 092's ~75-skill batch lands.",
+      "fix": "Add skills/<slug>/readme.md with L1 Vault Core frontmatter (type: index is appropriate), a 'What and Why' section, a Linked Navigation section listing siblings, and an '## Assumptions Log' heading (substantive entries or the literal '(none)' line). Copy templates/readme.md as a starting point."
+    },
     "F.T.1": {
       "severity_hint": "ERROR",
       "what": "A list-valued L2 field references a slug or task_id that has no matching operational file.",

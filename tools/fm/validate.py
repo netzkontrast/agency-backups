@@ -169,6 +169,23 @@ def _check_skill_source(fm: dict, rel: str) -> list[Diagnostic]:
     return out
 
 
+def _check_skill_readme(path: Path, rel: str) -> list[Diagnostic]:
+    """Enforce SKILLS.md §9.6 Readme Audit: every skills/<slug>/ folder MUST
+    carry a readme.md. Fired once per SKILL.md whose sibling readme.md is
+    absent. CLAUDE.md §7 + SKILLS.md §2."""
+    out: list[Diagnostic] = []
+    parent = path.parent
+    if (parent / "readme.md").is_file():
+        return out
+    skill_folder = parent.name
+    out.append(Diagnostic(
+        rel, None, "ERROR", "F.S.1",
+        f"skill folder skills/{skill_folder}/ is missing required readme.md "
+        f"(SKILLS.md §2 + §9.6; CLAUDE.md §7)",
+    ))
+    return out
+
+
 def _check_skill_kind_enum(fm: dict, rel: str) -> list[Diagnostic]:
     """Validate skill_kind ∈ SKILL_KIND_ENUM per SKILLS.md §3.3.
 
@@ -362,6 +379,8 @@ def check_file(
         diags.extend(_check_skill_source(fm, rel))
         # Task 094 ST-1: skill_kind closed-enum validation.
         diags.extend(_check_skill_kind_enum(fm, rel))
+        # Task 093: SKILLS.md §9.6 readme-audit (F.S.1).
+        diags.extend(_check_skill_readme(path, rel))
 
     return diags
 
