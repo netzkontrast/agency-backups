@@ -4,10 +4,10 @@ status: active
 slug: skill-subfolder-readme-audit-linter
 summary: "Maintenance Task: extend tools/fm/validate.py (or tools/lint-structure.py) to mechanically enforce SKILLS.md §9.6 Readme Audit for skills/<slug>/readme.md. Surfaced when Task 091 ST-1 shipped 14 sc-* skill folders without readme.md and governance still exited 0."
 created: 2026-05-12
-updated: 2026-05-12
+updated: 2026-05-13
 task_id: "093"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code"
 task_priority: P3
 task_uses_prompts: []
 task_spawns_research: []

@@ -4,7 +4,7 @@ status: active
 slug: 0009-root-spec-no-consolidation
 summary: "11-spec root bundle stays as-is. Merging PRE_COMMIT/FRUSTRATED into AGENTS/MAINTENANCE saves ~1% tokens but costs 381 cross-ref rewrites + dilutes single-concern clarity. Deferred behind three falsifier triggers."
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-13
 adr_id: ADR-0009
 adr_status: Proposed
 adr_owner: agency-maintainer
@@ -126,6 +126,10 @@ Keep the 11-spec bundle as-is. Bundle stays at ~70,676 tokens; the single-concer
 - **F3.** Sustained FL1+ friction in the Nightly Maintenance Run cites root-spec count as cause across **three or more** sessions in a 14-day window. The bundle size is workable; sustained friction means it is not.
 
 When any falsifier triggers, a successor ADR MUST be authored that re-evaluates Options 1 and 2 against the then-current evidence and supersedes this one via `adr_supersedes: [ADR-0009]`.
+
+### How the triggers are measured
+
+The binding measurement mechanism for F1–F3 is [`tools/maintenance/adr-trigger-audit.py`](../tools/maintenance/adr-trigger-audit.py) (Task 069). The audit composes [`tools/maintenance/bundle-size-snapshot.py`](../tools/maintenance/bundle-size-snapshot.py) (`--include-dependents`) for F1 (bundle-token cost) and F2 (per-spec tokens + inbound dependents), and aggregates `tasks/*/friction-log.md` over a 14-day window for F3. The audit MUST be invoked on the Nightly Maintenance Run cadence per [MAINTENANCE.md §3.6](../MAINTENANCE.md#36-adr-falsifier-trigger-audit-nightly-cadence); a fire emits `<path>::WARN:ADR-0009.F<n>:<msg>` and exits `2`, signalling that this ADR's successor MUST be authored. The trigger predicates above remain authoritative; the audit script is the *how-we-test-this* footnote, not a re-definition of the triggers.
 
 ### Status note on `adr_status: Proposed`
 

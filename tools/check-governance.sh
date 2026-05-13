@@ -406,6 +406,17 @@ if [ "$SKIP_TRUST" -eq 0 ]; then
   fi
 fi
 
+# INTEGRATION=1 runs the end-to-end governance suite under tests/integration/
+# (Task 061). Advisory by default — leave INTEGRATION unset and the row
+# no-ops so the gate stays fast.
+if [ "${INTEGRATION:-0}" = "1" ]; then
+  echo ""
+  echo "--- [opt] Integration suite (Task 061 — TASK.md §7.0 e2e mutators) ---"
+  if ! "$PYTHON" -m pytest tests/integration/ -q; then
+    FAIL=1
+  fi
+fi
+
 echo ""
 if [ "$FAIL" -eq 1 ]; then
   echo "=== FAIL: one or more checks failed. ==="

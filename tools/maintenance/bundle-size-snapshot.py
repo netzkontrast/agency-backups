@@ -34,9 +34,23 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Iterable
+
+# Suffix set considered when counting inbound references for a spec.
+DEPENDENT_SCAN_SUFFIXES: tuple[str, ...] = (".md", ".py", ".sh")
+
+# Top-level directories excluded from the dependent scan (large binary trees,
+# vendored assets, agent caches). Cross-references that matter live in code
+# and prose.
+DEPENDENT_SCAN_SKIP_DIRS: frozenset[str] = frozenset({
+    ".git",
+    ".agent_cache",
+    "node_modules",
+    "Agency-System",
+})
 
 # The 11 root specs that make up the session-boot bundle per ADR-0009 §"Context".
 # Adding or removing an entry is a deliberate amendment to the baseline.
@@ -62,11 +76,70 @@ F1_THRESHOLD_TOKENS = 100_000
 CHARS_PER_TOKEN = 4
 
 
-def measure_bundle(repo_root: Path, specs: Iterable[str] = BUNDLE_SPECS) -> dict:
+def _spec_reference_pattern(basename: str) -> "re.Pattern[bytes]":
+    """Path-token-aware match for a spec basename.
+
+    Avoids substring false-positives: `PRE_COMMIT.md.bak`, `XPRE_COMMIT.mdY`,
+    `PRE_COMMIT.md-§2` would all count as inbound references under raw
+    `bytes in bytes` containment. The boundary class excludes word characters,
+    `.`, and `-` on either side so the basename must appear as its own path
+    segment, link token, or surrounding-punctuation-delimited mention.
+    """
+    escaped = re.escape(basename).encode("utf-8")
+    return re.compile(
+        rb"(?<![A-Za-z0-9_.\-])" + escaped + rb"(?![A-Za-z0-9_.\-])",
+    )
+
+
+def count_dependents(repo_root: Path, spec_rel: str) -> int:
+    """Count files under repo_root that reference spec_rel by path token.
+
+    ADR-0009 F2 ("either spec < 1000 tokens AND < 50 dependents") requires a
+    cheap, deterministic inbound-reference count. We walk repo_root with
+    `os.walk`, pruning DEPENDENT_SCAN_SKIP_DIRS at every level (so `.git`,
+    `node_modules`, etc. are never descended into rather than filtered
+    post-traversal). Files with DEPENDENT_SCAN_SUFFIXES are matched against
+    a path-aware regex so substrings like `PRE_COMMIT.md.bak` or
+    `XPRE_COMMIT.mdY` don't count. The spec file itself is excluded.
+    """
+    import os
+
+    basename = Path(spec_rel).name
+    target_abs = (repo_root / spec_rel).resolve()
+    pattern = _spec_reference_pattern(basename)
+    count = 0
+    root_resolved = repo_root.resolve()
+    for dirpath, dirnames, filenames in os.walk(root_resolved, topdown=True):
+        dirnames[:] = [d for d in dirnames if d not in DEPENDENT_SCAN_SKIP_DIRS]
+        for filename in filenames:
+            if Path(filename).suffix not in DEPENDENT_SCAN_SUFFIXES:
+                continue
+            path = Path(dirpath) / filename
+            if path.resolve() == target_abs:
+                continue
+            try:
+                data = path.read_bytes()
+            except OSError:
+                continue
+            if pattern.search(data):
+                count += 1
+    return count
+
+
+def measure_bundle(
+    repo_root: Path,
+    specs: Iterable[str] = BUNDLE_SPECS,
+    *,
+    include_dependents: bool = False,
+) -> dict:
     """Return per-spec sizes and aggregate measurements.
 
     The return shape is the canonical record this tool emits in --format json
     and (with a one-line projection) in --format text / --format runlog.
+
+    When include_dependents is True, each per-spec record additionally carries
+    a `dependents` field (count of files referencing the spec by basename).
+    Composed by tools/maintenance/adr-trigger-audit.py for ADR-0009 F2.
     """
     per_spec: list[dict] = []
     missing: list[str] = []
@@ -80,12 +153,15 @@ def measure_bundle(repo_root: Path, specs: Iterable[str] = BUNDLE_SPECS) -> dict
         text = path.read_text(encoding="utf-8")
         nbytes = len(text.encode("utf-8"))
         nlines = text.count("\n") + (0 if text.endswith("\n") else 1)
-        per_spec.append({
+        rec = {
             "path": rel,
             "lines": nlines,
             "bytes": nbytes,
             "tokens": nbytes // CHARS_PER_TOKEN,
-        })
+        }
+        if include_dependents:
+            rec["dependents"] = count_dependents(repo_root, rel)
+        per_spec.append(rec)
         total_bytes += nbytes
         total_lines += nlines
     return {
@@ -156,6 +232,11 @@ def main(argv: list[str] | None = None) -> int:
         default=None,
         help="Repo root (defaults to git toplevel discovery from CWD).",
     )
+    parser.add_argument(
+        "--include-dependents",
+        action="store_true",
+        help="Augment per-spec records with `dependents` count (ADR-0009 F2 input).",
+    )
     args = parser.parse_args(argv)
 
     if args.repo_root is None:
@@ -174,7 +255,7 @@ def main(argv: list[str] | None = None) -> int:
             )
             return 1
 
-    snapshot = measure_bundle(args.repo_root)
+    snapshot = measure_bundle(args.repo_root, include_dependents=args.include_dependents)
 
     if snapshot["specs_missing"]:
         print(

@@ -60,6 +60,10 @@ class _Sandbox:
         path = self.base / rel
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding="utf-8")
+        if path.name == "SKILL.md":
+            sibling = path.parent / "readme.md"
+            if not sibling.exists():
+                sibling.write_text("# stub\n", encoding="utf-8")
         return path
 
     def run(self, *argv: str) -> tuple[int, str]:
