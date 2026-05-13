@@ -2,9 +2,9 @@
 type: note
 status: active
 slug: task-094-st2-claude-dir-and-plugin
-summary: "ST-2 (Task 094 Epic): create the .claude/ directory (settings.json + skills/ symlink + agents/ re-exports) and the .claude-plugin/plugin.json manifest declaring agency@1.0.0. Updates FOLDERS.md §8 to carve out the new top-level dirs."
+summary: "ST-2 (Task 094 Epic): create the .claude/ directory (settings.json + skills/ symlink + agents/ re-exports) and the .claude-plugin/plugin.json manifest declaring agency@1.0.0. Updates FOLDERS.md §8 to carve out the new top-level dirs. CLOSED 2026-05-13 — see [02-friction-log.md](./02-friction-log.md) (FL0)."
 created: 2026-05-12
-updated: 2026-05-12
+updated: 2026-05-13
 ---
 
 # ST-2 — `.claude/` directory + plugin manifest
