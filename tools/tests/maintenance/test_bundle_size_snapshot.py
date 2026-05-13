@@ -144,3 +144,61 @@ def test_main_exits_1_on_missing_specs(bss, tmp_path):
     """--format runlog MUST exit 1 if any spec in BUNDLE_SPECS is missing."""
     exit_code = bss.main(["--format", "runlog", "--repo-root", str(tmp_path)])
     assert exit_code == 1
+
+
+def test_measure_bundle_dependents_off_by_default(bss, tmp_path):
+    """`dependents` MUST NOT appear when include_dependents=False (the default)."""
+    for rel in bss.BUNDLE_SPECS:
+        p = tmp_path / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text("hi", encoding="utf-8")
+    snapshot = bss.measure_bundle(tmp_path)
+    for rec in snapshot["per_spec"]:
+        assert "dependents" not in rec
+
+
+def test_measure_bundle_dependents_counts_inbound_refs(bss, tmp_path):
+    """ADR-0009 F2 needs an inbound-reference count per spec basename."""
+    for rel in bss.BUNDLE_SPECS:
+        p = tmp_path / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text("body", encoding="utf-8")
+    # Three files reference PRE_COMMIT.md; one references FRUSTRATED.md.
+    (tmp_path / "refs1.md").write_text("see PRE_COMMIT.md", encoding="utf-8")
+    (tmp_path / "refs2.md").write_text("[link](./PRE_COMMIT.md)", encoding="utf-8")
+    (tmp_path / "scripts").mkdir()
+    (tmp_path / "scripts" / "ref.sh").write_text("# PRE_COMMIT.md note", encoding="utf-8")
+    (tmp_path / "refs4.md").write_text("FRUSTRATED.md is short", encoding="utf-8")
+    snapshot = bss.measure_bundle(tmp_path, include_dependents=True)
+    by_path = {rec["path"]: rec for rec in snapshot["per_spec"]}
+    assert by_path["PRE_COMMIT.md"]["dependents"] == 3
+    assert by_path["FRUSTRATED.md"]["dependents"] == 1
+    assert by_path["AGENTS.md"]["dependents"] == 0
+
+
+def test_count_dependents_skips_excluded_dirs(bss, tmp_path):
+    """The dependent scan MUST NOT descend into .git or other excluded trees."""
+    (tmp_path / "PRE_COMMIT.md").write_text("body", encoding="utf-8")
+    (tmp_path / ".git").mkdir()
+    (tmp_path / ".git" / "hidden.md").write_text("PRE_COMMIT.md", encoding="utf-8")
+    (tmp_path / "real.md").write_text("PRE_COMMIT.md", encoding="utf-8")
+    assert bss.count_dependents(tmp_path, "PRE_COMMIT.md") == 1
+
+
+def test_main_include_dependents_flag(bss, tmp_path, capsys):
+    """--include-dependents MUST surface the dependents count via --format json."""
+    for rel in bss.BUNDLE_SPECS:
+        p = tmp_path / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text("body", encoding="utf-8")
+    (tmp_path / "consumer.md").write_text("AGENTS.md mention", encoding="utf-8")
+    exit_code = bss.main([
+        "--format", "json",
+        "--include-dependents",
+        "--repo-root", str(tmp_path),
+    ])
+    captured = capsys.readouterr()
+    parsed = json.loads(captured.out)
+    by_path = {rec["path"]: rec for rec in parsed["per_spec"]}
+    assert by_path["AGENTS.md"]["dependents"] == 1
+    assert exit_code == 0
