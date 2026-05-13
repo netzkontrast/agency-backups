@@ -49,7 +49,7 @@ Every artifact type declares which modes it permits via `templates/<type>/manife
 | **SUBFILE** | own file inside another artifact's folder | top-of-file YAML in the subfile | `tasks/foo/scenarios/login.gherkin.md` |
 | **SUBDOC** | embedded in another artifact's body | Pandoc fenced div with YAML | `:::{.gherkin id=login}` block inside `task.md` |
 
-**Constraint:** every type permits at least STANDALONE. SUBFILE / SUBDOC are per-type opt-ins; the matrix is **Q1** in [`open-questions.md`](./open-questions.md).
+**Constraint:** every type permits at least STANDALONE — **except for the two types named in R3 below** (`gherkin` and `friction-log`), which are PARENTED-ONLY (SUBFILE / SUBDOC, no STANDALONE). SUBFILE / SUBDOC for the other 10 types are per-type opt-ins; the matrix is **Q1** in [`open-questions.md`](./open-questions.md). The R3 exception is documented in `§Revision history` below and reflected in the Q1 mode-matrix table in `open-questions.md`.
 
 ---
 

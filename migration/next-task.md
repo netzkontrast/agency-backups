@@ -101,13 +101,13 @@ Feature: Big-bang archive of pre-migration repo state
     And the count of `R` lines in `git status --porcelain` equals the total file count (recursive) of the to-be-moved set
 
   Scenario: Exempt paths survive unchanged at the archive-commit boundary
-    Given the archive commit (§5 step 8) has just been authored
+    Given the archive commit (§5 step 10) has just been authored
     Then /migration/ is byte-for-byte identical to its pre-task state at that commit
     And /.claude/ is byte-for-byte identical to its pre-task state at that commit
     And the Gemini briefs at .claude/research-results/gemini-1-architecture-audit.md and .claude/research-results/gemini-2-bootstrap-context-engineering.md are unmoved at that commit
     And /.git/ and /archive/ are intact at that commit
     And every user-elected keep-live borderline path (§3) is unmoved at that commit
-    # Post-archive followup commits (§5 step 10) explicitly add post-archive prose to /migration/handover.md;
+    # Post-archive followup commits (§5 step 12) explicitly add post-archive prose to /migration/handover.md;
     # those changes land AFTER the archive commit and are out of scope for this Scenario's byte-identity test.
 
   Scenario: History is traversable across the move
@@ -166,10 +166,16 @@ When the task triggers, the agent executes:
       - **`mv` aside** — filesystem-move to a temporary location outside the repo. Use when the artefact should not enter git history at all.
       - **`rm`** — delete. Use when the artefact is generated junk.
     - Surface both lists to the user before executing (one final go/no-go for the tracked-move-set + per-file adjudication for any untracked-leftovers).
-5. **Create `/archive/`** if not present: `mkdir archive`. (Step 2 already verified it was absent or only-empty.)
-6. **For each entry in the tracked move-set:** `git mv <entry> archive/<entry>`. Mirror the original path inside `/archive/`. For untracked-leftover entries adjudicated as "archive" in step 4, run `git add <entry>` (or `git add -f <entry>` for ignored entries) first, then `git mv <entry> archive/<entry>`.
-7. **Verify renames:** the file-level rename count from `git status --porcelain | grep -c '^R'` equals the **tracked-file** count of the to-be-moved set. Compute the tracked baseline as `git ls-files --cached <source-path> | wc -l` (lists only tracked files; matches what `git mv` actually renames). **Do not** use `find <moved-path> -type f` — that includes untracked children, which `git mv` does not rename, so the count would mismatch even on a correct move. **Do not** use `git status` without `--porcelain` — the long human-readable format prints `renamed:` lines, not `R` codes, so `grep '^R'` returns zero matches even on successful moves. **Do not** compare against the count of top-level entries — `git mv tasks/` expands to one rename per file inside `tasks/`, not one rename total.
-8. **Commit:** the body MUST cite `migration/waiver.md`, list the moved top-level entries, and include `Highest Frustration Level: FL[0-3]`. A single `-m` produces a subject-only commit and silently drops these mandatory fields, so use a HEREDOC pattern (or multiple `-m` flags) to deliver subject + body in one invocation:
+5. **Capture the pre-move baseline** (before any `git mv` runs):
+    - `baseline_count=$(git ls-files --cached -- "${MOVE_SET[@]}" | wc -l)` — total tracked-file count across the move-set, used by step 8's rename verification. `--cached` reports paths CURRENTLY in the index; after step 7's moves the original paths are gone from the index, so the baseline MUST be captured here, not after.
+6. **Handle untracked-leftovers FIRST** (before any tracked `git mv`). For nested untracked files (e.g. `tasks/local.tmp` inside a tracked `tasks/`), processing them AFTER moving the parent fails because `git add tasks/local.tmp` cannot find the source path once `tasks/` has been moved to `archive/tasks/`. So apply user decisions from step 4 now:
+    - **archive choice** — for each non-exempt untracked entry: `git add <entry>` (or `git add -f <entry>` if matched by `.gitignore`) to stage it. The next step's `git mv <parent>` will then sweep it along with the rest of the tracked parent. For untracked entries OUTSIDE any tracked move-set parent (rare), `git add <entry>` followed by `git mv <entry> archive/<entry>` immediately.
+    - **mv-aside choice** — `mv <entry> /tmp/<basename>` (or anywhere outside the repo). Filesystem-move; never touches git history.
+    - **rm choice** — `rm <entry>` (or `rm -r` for directories). Delete.
+7. **Create `/archive/`** if not present: `mkdir archive`. (Step 2 already verified it was absent or only-empty.)
+8. **For each entry in the tracked move-set:** `git mv <entry> archive/<entry>`. Mirror the original path inside `/archive/`. Untracked-leftovers that were `git add`'d in step 6 ride along with the parent's `git mv` automatically (`git mv tasks/ archive/tasks/` recursively renames everything indexed at `tasks/`).
+9. **Verify renames:** the file-level rename count from `git status --porcelain -- archive/ | grep -c '^R'` (scoped to `archive/` paths only via the `--` pathspec, to exclude any unrelated renames under `/migration/` that the preflight permitted) equals the `baseline_count` captured in step 5. **Do not** use `git status` without `--porcelain` — the long human-readable format prints `renamed:` lines, not `R` codes. **Do not** compute the baseline AFTER moves with `git ls-files --cached <source-path>` — the source path is no longer in the index after `git mv`. **Do not** use `find <moved-path> -type f` — that includes untracked children, which `git mv` does not rename.
+10. **Commit:** the body MUST cite `migration/waiver.md`, list the moved top-level entries, and include `Highest Frustration Level: FL[0-3]`. A single `-m` produces a subject-only commit and silently drops these mandatory fields, so use a HEREDOC pattern (or multiple `-m` flags) to deliver subject + body in one invocation:
 
     ```bash
     git commit --no-verify -m "$(cat <<'EOF'
@@ -205,9 +211,9 @@ When the task triggers, the agent executes:
     ```
 
     Verify the commit body landed before pushing: `git log -1 --format=%B | head -30` should show subject + body + waiver citation + FL line.
-9. **Push** to the migration branch.
-10. **Post-archive followup (separate commit; explicitly OUTSIDE the §4 exempt-paths-survive Scenario which applies only at step 8's commit boundary):** edit `migration/handover.md` to add a "post-archive" section indicating the new state. Commit + push as a separate followup commit. This step intentionally violates the byte-identity property of `/migration/`; that property is point-in-time at the archive commit (step 8) only.
-11. **Open a PR** (if not already open) or update the existing PR description to reflect the archive milestone.
+11. **Push** to the migration branch.
+12. **Post-archive followup (separate commit; explicitly OUTSIDE the §4 exempt-paths-survive Scenario which applies only at step 10's commit boundary):** edit `migration/handover.md` to add a "post-archive" section indicating the new state. Commit + push as a separate followup commit. This step intentionally violates the byte-identity property of `/migration/`; that property is point-in-time at the archive commit (step 10) only.
+13. **Open a PR** (if not already open) or update the existing PR description to reflect the archive milestone.
 
 ---
 
