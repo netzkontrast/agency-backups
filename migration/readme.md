@@ -2,7 +2,7 @@
 type: index
 status: active
 slug: migration
-summary: "In-flight design workspace for the 12-type ontology + tasks-only ULID + auto-generated readmes refactor. Plan-of-record; not yet ratified."
+summary: "In-flight design workspace for the 12-type ontology + auto-generated readmes refactor. ULID scope is **provisional**: L11.43 v2 (in-body) = tasks-only with per-type natural fit for 11 others; L11.43 v3 (revision-history, turn-11) extends to 6 types reversing Decision 4 — re-confirm before any code lands. Plan-of-record; not yet ratified."
 created: 2026-05-13
 updated: 2026-05-13
 ---
