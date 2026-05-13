@@ -22,6 +22,29 @@ Those assets are materialised by Task 094 as follows:
 - `hooks/` — at `tools/hooks/`, registered into `.claude/settings.json`
   by Task 094 ST-3.
 
+### Layout note — PR #124 Codex P2 #3
+
+Codex flagged on PR #124 that Claude plugins, when installed via a
+marketplace, may expect components in plugin-root `agents/` / `hooks/`
+directories rather than the `.claude/agents/` + `tools/hooks/` layout
+Agency uses. The current layout is intentional for the in-repo
+operating model: `.claude/agents/` is the path Claude Code's
+project-level sub-agent discovery walks (per
+[sub-agents docs](https://docs.anthropic.com/en/docs/claude-code/sub-agents)),
+and `tools/hooks/` is consistent with Agency's `tools/` convention
+for executable scripts (see [FOLDERS.md §8](../FOLDERS.md#8-non-operational-storage-folders-explicit-exemptions)).
+
+**Marketplace publishing is explicitly out of scope for Task 094**
+(per the Epic `## Out of scope` clause). When/if Agency is published
+as a downloadable plugin under a future Task, the asset-path question
+will be resolved via a new ADR after running
+`claude plugin validate --plugin-dir .` and `claude plugin install`
+against a sandbox; if the runtime requires root-level `agents/` /
+`hooks/`, the resolution will either be (a) move the assets, or
+(b) add symlink wrappers from the plugin root into the canonical
+in-repo paths. The current in-repo paths remain canonical until
+that ADR lands.
+
 ## Assumptions Log
 
 - The plugin version `1.0.0` is the first cut after the Task 091 +

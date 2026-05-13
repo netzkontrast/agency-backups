@@ -18,14 +18,20 @@ Agency. It is exempt from the operational-folder partition rule per
   `superpowers-*`) plus the in-repo non-imported skills at SessionStart.
   Per https://docs.anthropic.com/en/docs/claude-code/skills the loader
   walks `.claude/skills/<name>/SKILL.md` for project-scoped skills.
-- **[agents/](./agents)** — 16 thin Markdown wrappers re-exporting
-  `skill_kind: persona` (and the single `agent-template`
+- **[agents/](./agents)** — 16 **hybrid** Markdown wrappers
+  re-exporting `skill_kind: persona` (and the single `agent-template`
   `superpowers-code-reviewer`) so each appears as `@<slug>`-invocable
   per https://docs.anthropic.com/en/docs/claude-code/sub-agents.
-  `sc-pm-agent` is intentionally excluded — it is `skill_kind: meta`,
-  invokable only via `/sc:pm` per CLAUDE.md §13.1, so re-exporting it
-  as `@sc-pm-agent` would bypass the orchestrator-routing constraint
-  (PR #124 review fix).
+  The body of each wrapper instructs the activated subagent to
+  bootstrap by `Skill`-loading the canonical
+  `skills/<slug>/SKILL.md` body — preserving the single source of
+  truth (SHA-pinned per ADR-0011 D.3) while ensuring `@<slug>`
+  activations actually run under the persona's guardrails (PR #124
+  review fix for P1 #2). `sc-pm-agent` is intentionally excluded —
+  it is `skill_kind: meta`, invokable only via `/sc:pm` per
+  CLAUDE.md §13.1, so re-exporting it as `@sc-pm-agent` would
+  bypass the orchestrator-routing constraint (PR #124 review fix
+  for P2 #1).
 - **[commands/](./commands)** — placeholder folder; all slash commands
   resolve through the symlinked `skills/sc-<name>/SKILL.md` corpus per
   the platform's commands → skills merge.

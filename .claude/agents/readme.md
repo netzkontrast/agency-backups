@@ -1,17 +1,23 @@
 # .claude/agents/ — 16 persona sub-agent re-exports
 
-Authored by Task 094 ST-2. Each `<slug>.md` file in this folder is a
-thin Markdown wrapper that re-exports a `skill_kind: persona` (or the
-single `agent-template` slug `superpowers-code-reviewer`) so Claude Code
-treats it as an `@<slug>`-invocable sub-agent per
-https://docs.anthropic.com/en/docs/claude-code/sub-agents.
+Authored by Task 094 ST-2 (PR #124 review-fix revision).
+Each `<slug>.md` file in this folder is a **hybrid wrapper**: the
+frontmatter exposes the slug + description to Claude Code's sub-agent
+discovery path (per https://docs.anthropic.com/en/docs/claude-code/sub-agents),
+and the body instructs the activated subagent to bootstrap by `Skill`-loading
+the canonical `skills/<slug>/SKILL.md` body before producing substantive
+output. This keeps SKILL.md as the single source of truth (SHA-pinned
+per ADR-0011 D.3) while ensuring `@<slug>` activations actually run
+under the persona's guardrails — answering Codex P1 #2 on PR #124.
 
-The canonical body for every wrapper lives at
-`skills/<slug>/SKILL.md` — these wrappers do not duplicate content;
-they only expose the slug to the sub-agent discovery path.
+If a future runtime check confirms that Claude Code does NOT pass the
+SKILL.md body into a subagent context automatically (even when the
+`Skill` bootstrap directive fires), the hybrid pattern remains correct:
+the body's `Read skills/<slug>/SKILL.md` fallback still loads the
+canonical instructions verbatim.
 
-**Note (PR #124 review fix):** `sc-pm-agent` is intentionally *not*
-re-exported here. Per [CLAUDE.md §13.1](../../CLAUDE.md#131-superclaude-sc--39-skills-skill_source-superclaudev430)
+**Note (PR #124 review fix, P2 #1):** `sc-pm-agent` is intentionally
+*not* re-exported here. Per [CLAUDE.md §13.1](../../CLAUDE.md#131-superclaude-sc--39-skills-skill_source-superclaudev430)
 it is `skill_kind: meta` and is invokable only via `/sc:pm`; re-exporting
 it as `@sc-pm-agent` would bypass the orchestrator-routing constraint.
 

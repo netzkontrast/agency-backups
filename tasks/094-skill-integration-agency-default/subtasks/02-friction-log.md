@@ -15,7 +15,7 @@ Highest Frustration Level: FL1 (Codex PR review surfaced one routing violation; 
 
 - `.claude/settings.json` — project config with `skillListingBudgetFraction: 0.05`, an intentionally empty `hooks: {}` block (ST-3 surface), and a permissions allowlist matching the existing `.githooks/pre-commit` posture.
 - `.claude/skills` → `../skills/` — relative symlink so Claude Code's project-level skill discovery walks the repo-root `skills/` corpus. Verified by `readlink .claude/skills` (`../skills`) and by the live session's auto-loaded skill listing (54 imported entries surfaced after the symlink landed).
-- `.claude/agents/<slug>.md` × 16 — thin Markdown re-exports for the persona roster + `superpowers-code-reviewer`. `sc-pm-agent` was initially included per the subtask spec but removed in the PR #124 review-fix commit because CLAUDE.md §13.1 marks it `skill_kind: meta` with `/sc:pm`-only routing; re-exporting it as `@sc-pm-agent` bypasses the orchestrator-routing constraint. Bodies cite `skills/<slug>/SKILL.md` rather than duplicating to avoid drift against SHA-pinned upstreams (ADR-0011 D.3) — Codex P1 review questioning that pattern is deferred to a user decision (see PR thread).
+- `.claude/agents/<slug>.md` × 16 — **hybrid** Markdown re-exports for the persona roster + `superpowers-code-reviewer`. `sc-pm-agent` was initially included per the subtask spec but removed in the PR #124 review-fix commit because CLAUDE.md §13.1 marks it `skill_kind: meta` with `/sc:pm`-only routing. Initial revision (commit `2894d8f`) used thin wrappers ("see canonical skill body"); the PR #124 P1 review correctly pointed out that the wrapper body IS the subagent system prompt. User-decided resolution (PR thread): hybrid pattern — frontmatter exposes slug/description, body instructs the activated subagent to bootstrap by `Skill`-loading (or `Read`-fallback) `skills/<slug>/SKILL.md` before producing output. SHA-pinned single source of truth (ADR-0011 D.3) preserved; activations now run under the persona's actual guardrails.
 - `.claude/commands/readme.md` — placeholder folder explaining the platform's commands → skills merge; deliberately empty.
 - `.claude/skills-fallback/install-claude-dir.sh` — idempotent copy-tree materialiser for symlink-less platforms (Windows / `core.symlinks=false`). Refuses to clobber an existing valid symlink.
 - `.claude/readme.md` + `.claude/agents/readme.md` + `.claude-plugin/readme.md` — folder indexes with Assumptions Log entries.
@@ -34,11 +34,25 @@ Highest Frustration Level: FL1 (Codex PR review surfaced one routing violation; 
 
 - **PC.1.1 false positive** — The first governance pass flagged `.claude/skills-fallback/install-claude-dir.sh` as a script-scratchpad. The fix was mechanical: extend `tools/check-clean-working-directory.py`'s `_EXEMPT_DIR_PREFIXES` (and the matching `PRE_COMMIT.md §1` enumeration) with `.claude/` and `.claude-plugin/`. The carve-out is consistent with the new FOLDERS.md §8 entries that this subtask itself adds, so the spec → linter → spec cascade landed in one commit rather than spread across files.
 
+## PR #124 review-fix follow-up commits
+
+After the initial implementation (`2894d8f`) two review-fix commits landed on this branch:
+
+1. **`3e3c1a3` — three confident small fixes:**
+    - P2 #1 (`sc-pm-agent` routing violation) — wrapper deleted; count 17 → 16; readmes + FOLDERS.md + plugin.json description updated.
+    - P2 #4 (fallback `cp -R` does not prune) — rewrote `install-claude-dir.sh` to use `rsync --archive --delete` with an `rm -rf` + `cp -R` fallback.
+    - P2 #5 (fallback dirties tracked symlink) — script now prints `git update-index --skip-worktree .claude/skills` guidance on symlink-less platforms.
+2. **`<this commit>` — two architectural resolutions per user decision on the PR thread:**
+    - P1 #2 (embed persona body vs. thin wrapper) — RESOLVED via **hybrid** pattern. Rewrote all 16 wrappers so the frontmatter exposes name/description and the body instructs the activated subagent to `Skill`-load (or `Read`-fallback) `skills/<slug>/SKILL.md` before producing output. SKILL.md remains the single source of truth (ADR-0011 D.3); `@<slug>` activations now run under the persona's actual guardrails.
+    - P2 #3 (plugin component path resolution) — RESOLVED via **documentation**. Kept `.claude/agents/` + `tools/hooks/` layout (consistent with Agency conventions); added a "Layout note — PR #124 Codex P2 #3" to `.claude-plugin/readme.md` deferring marketplace-publish layout to a future ADR after running `claude plugin validate` in a sandbox.
+
 ## Open follow-ups for downstream subtasks
 
 - **ST-3** will populate the empty `hooks: {}` block in `.claude/settings.json` with the five D.7-compliant event hooks (`UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop`). The placeholder shape (`"hooks": {}`) is the contract ST-3 expects.
 - **ST-3** will also author `tools/check-hooks.py` and the test fixtures.
 - **`claude plugin validate --plugin-dir .`** (Epic AC BR.94.3) was not executed in this subtask because the `claude` CLI is not installed in the agent's sandbox. The manifest's syntactic shape was validated by `python3 -c "import json; json.load(open('.claude-plugin/plugin.json'))"`; the full validate-CLI run is deferred to ST-4's final governance pass.
+- **Hybrid-wrapper runtime verification.** The Codex P1 #2 claim that `.claude/agents/*.md` bodies *are* the subagent system prompt was the basis for the hybrid rewrite. A confirmatory runtime check (dispatch `@sc-backend-architect` and verify the `Skill`-bootstrap directive fires) is recommended at ST-4 sign-off; if the runtime turns out to be different from Codex's claim, the hybrid pattern still produces correct behaviour (the body's `Read`-fallback loads the SKILL.md verbatim).
+- **Plugin asset layout ADR.** Resolution of P2 #3 is deferred to a future Task that pairs `claude plugin validate` with `claude plugin install` in a sandbox to confirm the runtime's component path expectations.
 
 ## Highest Frustration Level: FL1
 
