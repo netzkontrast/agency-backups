@@ -7,7 +7,7 @@
       {
         "matcher": "",
         "hooks": [
-          { "type": "command", "command": "tools/hooks/user-prompt-submit.sh" }
+          { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/tools/hooks/user-prompt-submit.sh", "args": [] }
         ]
       }
     ],
@@ -15,7 +15,7 @@
       {
         "matcher": "Skill|Agent",
         "hooks": [
-          { "type": "command", "command": "tools/hooks/pre-tool-use.sh" }
+          { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/tools/hooks/pre-tool-use.sh", "args": [] }
         ]
       }
     ],
@@ -23,7 +23,7 @@
       {
         "matcher": "Skill|Agent",
         "hooks": [
-          { "type": "command", "command": "tools/hooks/post-tool-use.sh" }
+          { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/tools/hooks/post-tool-use.sh", "args": [] }
         ]
       }
     ],
@@ -31,7 +31,7 @@
       {
         "matcher": "",
         "hooks": [
-          { "type": "command", "command": "tools/hooks/stop.sh" }
+          { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/tools/hooks/stop.sh", "args": [] }
         ]
       }
     ],
@@ -39,7 +39,7 @@
       {
         "matcher": "code-reviewer|deep-research",
         "hooks": [
-          { "type": "command", "command": "tools/hooks/subagent-stop.sh" }
+          { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/tools/hooks/subagent-stop.sh", "args": [] }
         ]
       }
     ]

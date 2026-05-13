@@ -53,6 +53,28 @@ EXIT_FAIL = 1
 
 FORBIDDEN_EVENTS = ("SessionStart",)
 
+# Path placeholders documented by the Anthropic hooks reference. We
+# resolve them against the repo root so manifest verification works
+# whether the registration uses a bare relative path or the recommended
+# `${CLAUDE_PROJECT_DIR}` exec-form prefix.
+_PROJECT_DIR_PLACEHOLDERS = (
+    "${CLAUDE_PROJECT_DIR}",
+    "$CLAUDE_PROJECT_DIR",
+)
+
+
+def _resolve_command_path(command: str, repo: Path) -> Path:
+    """Resolve a registered `command` string to a Path relative to the repo."""
+    text = command
+    for placeholder in _PROJECT_DIR_PLACEHOLDERS:
+        if text.startswith(placeholder):
+            text = text[len(placeholder):].lstrip("/")
+            return (repo / text).resolve()
+    cmd_path = Path(text)
+    if not cmd_path.is_absolute():
+        cmd_path = (repo / cmd_path).resolve()
+    return cmd_path
+
 
 def _iter_hook_scripts(hooks_dir: Path) -> list[Path]:
     """Return the sorted list of `*.sh` files in hooks_dir."""
@@ -126,10 +148,7 @@ def audit(repo: Path, settings_path: Path, hooks_dir: Path) -> list[str]:
     seen_commands: set[str] = set()
     for event, command in registrations:
         seen_commands.add(command)
-        # Resolve relative paths against the repo root.
-        cmd_path = Path(command)
-        if not cmd_path.is_absolute():
-            cmd_path = (repo / cmd_path).resolve()
+        cmd_path = _resolve_command_path(command, repo)
         if not cmd_path.is_file():
             _emit(
                 diagnostics,
@@ -158,10 +177,7 @@ def audit(repo: Path, settings_path: Path, hooks_dir: Path) -> list[str]:
         # Match registrations whose command resolves to this script.
         registered = False
         for command in seen_commands:
-            cmd_path = Path(command)
-            if not cmd_path.is_absolute():
-                cmd_path = (repo / cmd_path).resolve()
-            if cmd_path == script.resolve():
+            if _resolve_command_path(command, repo) == script.resolve():
                 registered = True
                 break
         if not registered:

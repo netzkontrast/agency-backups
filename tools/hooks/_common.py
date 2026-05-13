@@ -163,17 +163,21 @@ def active_task(
     """Best-effort guess of the active task folder, or None.
 
     Strategy (deterministic):
-      1. If a branch name is given (or git supplies one) and any task
-         folder slug appears verbatim in it, return that task folder.
+      1. If a branch name is given (or git supplies one) and exactly one
+         task folder slug appears verbatim in it, return that task folder.
       2. Otherwise, if exactly one task with status ∈ `statuses` exists,
          return it.
-      3. Otherwise, of the tasks whose status ∈ `statuses`, return the
-         most-recently-modified task.md's parent.
-      4. If no candidate exists, return None.
+      3. Otherwise return None — the active task is ambiguous.
 
     The branch-name heuristic is gated on the slug appearing as a
     substring so we tolerate the platform-specific suffixes (e.g.
     `claude/execute-close-skill-integration-uPhs0`).
+
+    Returning None on ambiguity is deliberate: callers (the Stop hook
+    in particular) treat a None result as "no claim", so an unrelated
+    Task's broken `friction-log.md` never blocks an unrelated session.
+    Telemetry-writing callers (`append_invocation_log`) also no-op on
+    None, which is safer than appending a row to a guessed-wrong task.
     """
     tasks_dir = repo / "tasks"
     if not tasks_dir.is_dir():
@@ -182,33 +186,34 @@ def active_task(
     if branch is None:
         branch = _git_branch(repo)
 
-    candidates: list[tuple[Path, str, float]] = []
+    candidates: list[tuple[Path, str]] = []
     for task_md in tasks_dir.glob("*/task.md"):
         slug = task_md.parent.name
         status = _read_task_status(task_md)
         if status not in statuses:
             continue
-        try:
-            mtime = task_md.stat().st_mtime
-        except OSError:
-            mtime = 0.0
-        candidates.append((task_md.parent, slug, mtime))
+        candidates.append((task_md.parent, slug))
 
     if not candidates:
         return None
 
     if branch:
         # Strip the leading NNN- prefix and try matching the slug-tail.
-        for folder, slug, _ in candidates:
+        # Require an unambiguous match — if two slug-tails both appear in
+        # the branch name we treat it as ambiguous, not best-effort.
+        matches = []
+        for folder, slug in candidates:
             tail = slug.split("-", 1)[1] if "-" in slug else slug
             if tail and tail in branch:
-                return folder
+                matches.append(folder)
+        if len(matches) == 1:
+            return matches[0]
 
     if len(candidates) == 1:
         return candidates[0][0]
 
-    candidates.sort(key=lambda triple: triple[2], reverse=True)
-    return candidates[0][0]
+    # Ambiguous — refuse to guess.
+    return None
 
 
 def append_invocation_log(task_folder: Path, row: str) -> None:

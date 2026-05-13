@@ -237,15 +237,20 @@ class SubagentStopHook(unittest.TestCase):
             body["hookSpecificOutput"]["additionalContext"].lower(),
         )
 
-    def test_unknown_agent_default_message(self) -> None:
-        rc, out, _ = _run(subagent, {"subagent_type": "unfamiliar-agent"})
+    def test_unknown_agent_silent(self) -> None:
+        # PR #125 Codex P2: defense-in-depth — even though the matcher in
+        # .claude/settings.json restricts firing to code-reviewer /
+        # deep-research, a payload without a recognisable agent type
+        # MUST NOT receive a routing message it did not earn.
+        rc, out, err = _run(subagent, {"subagent_type": "unfamiliar-agent"})
         self.assertEqual(rc, 0)
-        body = json.loads(out)
-        # Default message still routes through the receiving-review gate.
-        self.assertIn(
-            "receiving-code-review",
-            body["hookSpecificOutput"]["additionalContext"],
-        )
+        self.assertEqual(out, "")
+        self.assertEqual(err, "")
+
+    def test_missing_name_silent(self) -> None:
+        rc, out, _ = _run(subagent, {})
+        self.assertEqual(rc, 0)
+        self.assertEqual(out, "")
 
 
 class CheckHooks(unittest.TestCase):
@@ -338,6 +343,171 @@ class CheckHooks(unittest.TestCase):
             REPO / "tools" / "hooks",
         )
         self.assertEqual(diags, [], f"live repo: {diags}")
+
+
+class ActiveTaskAmbiguity(unittest.TestCase):
+    """PR #125 Codex P1 #1: active_task() MUST return None on ambiguity
+    rather than guessing the most-recently-modified active task, so the
+    Stop hook never blocks an unrelated session."""
+
+    def _make_repo(self, tasks: list[tuple[str, str]]) -> TemporaryDirectory:
+        """tasks: list of (slug, status)."""
+        td = TemporaryDirectory()
+        root = Path(td.name)
+        (root / "tasks").mkdir()
+        for slug, status in tasks:
+            folder = root / "tasks" / slug
+            folder.mkdir()
+            (folder / "task.md").write_text(
+                f"---\ntype: task\ntask_status: {status}\n---\n",
+                encoding="utf-8",
+            )
+        return td
+
+    def test_no_tasks_returns_none(self) -> None:
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "tasks").mkdir()
+            self.assertIsNone(common.active_task(root, branch=""))
+
+    def test_single_active_task_returns_it(self) -> None:
+        td = self._make_repo([("100-foo", "in_progress")])
+        try:
+            root = Path(td.name)
+            self.assertEqual(
+                common.active_task(root, branch="").name, "100-foo"
+            )
+        finally:
+            td.cleanup()
+
+    def test_ambiguous_no_branch_returns_none(self) -> None:
+        # Two open tasks, branch does not match either slug.
+        td = self._make_repo([("100-foo", "open"), ("200-bar", "in_progress")])
+        try:
+            root = Path(td.name)
+            self.assertIsNone(common.active_task(root, branch="random-branch"))
+        finally:
+            td.cleanup()
+
+    def test_ambiguous_branch_disambiguates(self) -> None:
+        td = self._make_repo([("100-foo", "open"), ("200-bar", "in_progress")])
+        try:
+            root = Path(td.name)
+            self.assertEqual(
+                common.active_task(root, branch="claude/feature-bar").name,
+                "200-bar",
+            )
+        finally:
+            td.cleanup()
+
+    def test_done_tasks_excluded(self) -> None:
+        td = self._make_repo([("100-foo", "done"), ("200-bar", "in_progress")])
+        try:
+            root = Path(td.name)
+            self.assertEqual(
+                common.active_task(root, branch="").name, "200-bar"
+            )
+        finally:
+            td.cleanup()
+
+
+class CheckHooksProjectDirResolution(unittest.TestCase):
+    """PR #125 Codex P1 #2: check-hooks.py MUST resolve
+    ${CLAUDE_PROJECT_DIR}/... so the recommended exec-form path syntax
+    is treated as equivalent to the bare relative path."""
+
+    def _make_fake_repo(self, settings: dict, scripts: list[str]) -> TemporaryDirectory:
+        td = TemporaryDirectory()
+        root = Path(td.name)
+        (root / ".claude").mkdir()
+        (root / "tools" / "hooks").mkdir(parents=True)
+        (root / ".claude" / "settings.json").write_text(
+            json.dumps(settings), encoding="utf-8"
+        )
+        for name in scripts:
+            script = root / "tools" / "hooks" / name
+            script.write_text("#!/usr/bin/env bash\nexit 0\n", encoding="utf-8")
+            script.chmod(0o755)
+        return td
+
+    def _audit(self, td: TemporaryDirectory) -> list[str]:
+        root = Path(td.name)
+        return check_hooks.audit(
+            root,
+            root / ".claude" / "settings.json",
+            root / "tools" / "hooks",
+        )
+
+    def test_braced_placeholder_resolves(self) -> None:
+        settings = {
+            "hooks": {
+                "Stop": [
+                    {
+                        "matcher": "",
+                        "hooks": [
+                            {
+                                "type": "command",
+                                "command": "${CLAUDE_PROJECT_DIR}/tools/hooks/foo.sh",
+                                "args": [],
+                            }
+                        ],
+                    }
+                ]
+            }
+        }
+        td = self._make_fake_repo(settings, ["foo.sh"])
+        try:
+            self.assertEqual(self._audit(td), [])
+        finally:
+            td.cleanup()
+
+    def test_bare_placeholder_resolves(self) -> None:
+        settings = {
+            "hooks": {
+                "Stop": [
+                    {
+                        "matcher": "",
+                        "hooks": [
+                            {
+                                "type": "command",
+                                "command": "$CLAUDE_PROJECT_DIR/tools/hooks/foo.sh",
+                                "args": [],
+                            }
+                        ],
+                    }
+                ]
+            }
+        }
+        td = self._make_fake_repo(settings, ["foo.sh"])
+        try:
+            self.assertEqual(self._audit(td), [])
+        finally:
+            td.cleanup()
+
+    def test_placeholder_missing_script_emits_h_1_2(self) -> None:
+        settings = {
+            "hooks": {
+                "Stop": [
+                    {
+                        "matcher": "",
+                        "hooks": [
+                            {
+                                "type": "command",
+                                "command": "${CLAUDE_PROJECT_DIR}/tools/hooks/missing.sh",
+                                "args": [],
+                            }
+                        ],
+                    }
+                ]
+            }
+        }
+        td = self._make_fake_repo(settings, [])
+        try:
+            diags = self._audit(td)
+            self.assertTrue(any("H.1.2" in d for d in diags))
+            self.assertTrue(any("missing.sh" in d for d in diags))
+        finally:
+            td.cleanup()
 
 
 class FLRegexVariants(unittest.TestCase):

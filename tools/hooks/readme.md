@@ -38,9 +38,9 @@ Hooks are registered in [`.claude/settings.json`](../../.claude/settings.json) a
 1. Pick a D.7-permitted event (`UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop`, `Notification`, `PreCompact`, `SessionEnd`).
 2. Author `tools/hooks/<event>.sh` (1–6 lines; exec the Python module) + `tools/hooks/_<event>.py` (the logic).
 3. Add a pytest case to [`tools/tests/test_hooks.py`](../tests/test_hooks.py) — feed a sample event payload from `tools/tests/fixtures/hooks/<event>.json` and assert exit code + stdout/stderr.
-4. Register the hook in `.claude/settings.json` under the appropriate event key.
+4. Register the hook in `.claude/settings.json` using **exec form** so the path resolves regardless of cwd: `{"type": "command", "command": "${CLAUDE_PROJECT_DIR}/tools/hooks/<event>.sh", "args": []}`.
 5. `chmod +x tools/hooks/<event>.sh`.
-6. Run `python3 tools/check-hooks.py` — expect exit 0.
+6. Run `python3 tools/check-hooks.py` — expect exit 0. The linter resolves `${CLAUDE_PROJECT_DIR}` / `$CLAUDE_PROJECT_DIR` against the repo root.
 
 ## Assumptions Log
 

@@ -48,12 +48,12 @@ def main(stdin: TextIO, stdout: TextIO, stderr: TextIO) -> int:
                 break
     text = ROUTING_BY_AGENT.get(name)
     if text is None:
-        # Default route — still useful, but generic.
-        text = (
-            "Subagent output received. Route through "
-            "superpowers-receiving-code-review's "
-            "technical-verification-before-action discipline before acting."
-        )
+        # Defense-in-depth: even though the SubagentStop matcher in
+        # .claude/settings.json restricts firing to code-reviewer /
+        # deep-research, an unrelated subagent that slips past the
+        # matcher (or a payload without a recognisable name) MUST NOT
+        # receive a routing message it did not earn. Silent exit.
+        return 0
     emit(stdout, additional_context(text))
     return 0
 
