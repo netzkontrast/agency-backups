@@ -265,6 +265,47 @@ def test_composes_bundle_size_snapshot_does_not_duplicate(audit, tmp_path):
     assert report["bundle_specs_measured"] == direct["specs_measured"]
 
 
+def test_discover_repo_root_prefers_git_toplevel(audit, tmp_path, monkeypatch):
+    """`--repo-root` auto-discovery MUST prefer `git rev-parse --show-toplevel`
+    over the first ancestor with an AGENTS.md, because fixture AGENTS.md files
+    (e.g. tests/integration/fixtures/seed/AGENTS.md) would otherwise bind the
+    audit to a nested subtree and fail with IncompleteBundleError."""
+    import subprocess as _sp
+
+    # Real repo root (has 11 bundle specs).
+    repo_root = tmp_path / "agency"
+    repo_root.mkdir()
+    _seed_bundle(repo_root, per_spec_chars=100)
+    # Nested fixture root with its own AGENTS.md but no real bundle.
+    fixture_root = repo_root / "tests" / "integration" / "fixtures" / "seed"
+    fixture_root.mkdir(parents=True)
+    (fixture_root / "AGENTS.md").write_text("fixture stub", encoding="utf-8")
+    # `git rev-parse --show-toplevel` returns the real repo root regardless
+    # of cwd within the worktree.
+    _sp.run(["git", "init", "-q"], cwd=repo_root, check=True)
+    found = audit._discover_repo_root(fixture_root)
+    assert found == repo_root
+
+
+def test_discover_repo_root_falls_back_to_marker_walk(audit, tmp_path, monkeypatch):
+    """If `git` isn't reachable, ancestor-walk fallback still locates AGENTS.md."""
+    import subprocess as _sp
+
+    repo_root = tmp_path / "agency"
+    repo_root.mkdir()
+    (repo_root / "AGENTS.md").write_text("real root", encoding="utf-8")
+    nested = repo_root / "tasks" / "099-x"
+    nested.mkdir(parents=True)
+
+    def _no_git(*_args, **_kwargs):
+        raise OSError("git not installed")
+
+    monkeypatch.setattr(_sp, "run", _no_git)
+    monkeypatch.setattr(audit, "subprocess", _sp, raising=False)
+    found = audit._discover_repo_root(nested)
+    assert found == repo_root
+
+
 def test_fl_detector_uses_highest_across_all_matches(audit, tmp_path):
     """A log with FL0 followed by FL2 MUST report FL2 (highest), not FL0
     (first match). Previously _detect_fl_level used .search() per pattern

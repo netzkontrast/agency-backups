@@ -573,6 +573,42 @@ def format_runlog(report: dict) -> str:
     )
 
 
+def _discover_repo_root(start: Path) -> Path | None:
+    """Locate the repo root from `start`.
+
+    Prefers `git rev-parse --show-toplevel` over marker-file ancestor walks,
+    because Task 061 introduced a fixture AGENTS.md under
+    tests/integration/fixtures/seed/. Walking up for AGENTS.md from inside
+    that subtree would bind to the fixture and then fail with an
+    `IncompleteBundleError`, even though the real repo root sits higher up.
+    Falls back to the AGENTS.md ancestor walk if git isn't available or
+    `start` isn't inside a git worktree.
+    """
+    import subprocess
+
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "--show-toplevel"],
+            cwd=str(start),
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=5,
+        )
+    except (OSError, subprocess.SubprocessError):
+        result = None
+    if result is not None and result.returncode == 0:
+        top = Path(result.stdout.strip())
+        if top.is_dir() and (top / "AGENTS.md").is_file():
+            return top
+    cur = start
+    while cur != cur.parent:
+        if (cur / "AGENTS.md").is_file():
+            return cur
+        cur = cur.parent
+    return None
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Audit ADR-0008 / ADR-0009 falsifier triggers; back the Nightly Maintenance Run."
@@ -595,15 +631,11 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     if args.repo_root is None:
-        cur = Path.cwd().resolve()
-        while cur != cur.parent:
-            if (cur / "AGENTS.md").is_file():
-                args.repo_root = cur
-                break
-            cur = cur.parent
+        args.repo_root = _discover_repo_root(Path.cwd().resolve())
         if args.repo_root is None:
             print(
-                "adr-trigger-audit: ERROR: could not locate repo root (no AGENTS.md found in ancestors)",
+                "adr-trigger-audit: ERROR: could not locate repo root "
+                "(no git toplevel and no AGENTS.md found in ancestors)",
                 file=sys.stderr,
             )
             return 1
