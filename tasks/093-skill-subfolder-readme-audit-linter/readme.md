@@ -4,7 +4,7 @@ status: active
 slug: skill-subfolder-readme-audit-linter
 summary: "Directory index for Task 093 — close the SKILLS.md §9.6 readme-audit enforcement gap surfaced by Task 091 ST-1 peer review."
 created: 2026-05-12
-updated: 2026-05-12
+updated: 2026-05-13
 ---
 
 # Task 093 — Skill-subfolder readme-audit linter
@@ -18,6 +18,7 @@ updated: 2026-05-12
 ## Navigation
 
 - [task.md](./task.md) — Goal, Plan, Todo, Acceptance Criteria (T093.1.1–T093.1.3).
+- [friction-log.md](./friction-log.md) — Session friction log (FL1: sibling sandbox tests required a stub readme.md patch).
 
 ## Assumptions Log
 
