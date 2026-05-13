@@ -1,6 +1,6 @@
 # Agency Repo Refactoring Plan (Working Draft)
 
-> **Status:** Iterative requirements capture — Rounds 1–9 closed. Round 10 pending (meta/ reopened, plus 5 deferred questions). Not yet finalised.
+> **Status:** Iterative requirements capture — Rounds 1–10 closed (Round 10: 4/5 answered, 1 open). Round 11 **paused** pending Gemini Deep Research result (brief at [`.claude/research-prompts/gemini-deep-research-agency-refactor.md`](../research-prompts/gemini-deep-research-agency-refactor.md)). See [§ Reflection & Drift Analysis](#reflection--drift-analysis-after-round-10).
 > **Branch:** `claude/repo-refactoring-plan-CfLY5`
 > **Scope:** Restructure the `agency` repo per the four-layer model the user is incrementally specifying across rounds.
 
@@ -186,14 +186,31 @@ Exact lexicon ratified at rename-execution time. This lock pins the *direction*,
 9. Rename metaphor direction → **Theatrical** (Actor enacts → Space witnesses); execution still deferred, only direction locked.
 10. Meta-restructure confirmation → **Reopened**; user wants to discuss meta/ layout further before locking.
 
-## Open questions for Round 10
+## Round 10 — closed locks
 
-1. **Meta/ restructure** (reopened) — what should the maintenance-only `meta/` actually contain? Round 7 sketched `meta/{tasks,prompts,research,runs}/` but the user wants to revisit before locking.
-2. **MCP numbering server design** — pairs with SemVer: does the dispenser issue Task IDs (042, 043…) with SemVer applied within-Task, or does it issue full versioned identifiers? Sequence reservation semantics for parallel branches.
-3. **Bootstrap budget mechanism** — how is the agent mechanically held to <8K tokens before deferring? Candidate: a `bootstrap.md` as the only mandatory read, with all other specs lazy-loaded via a manifest.
-4. **Migration mechanics** — 96 existing tasks / 77 prompts / 30 research workspaces. Re-numbered through the MCP dispenser at SemVer 1.0.0, or grandfathered at current numbers + un-versioned, with new artefacts starting from a fresh high-water mark?
-5. **Initial goal seeding** — which existing top-level concerns become the seed `task_kind: goal` parents under the new layout?
-6. **Rename execution lexicon** — when renames happen, what exact words replace `tasks/` (commissions? missions? briefs?), `prompts/` (enactments? performances?), `research/` (witness? accounts? testimonies?)?
+Detailed in sibling document [`round-10-additions.md`](./round-10-additions.md). Summary:
+
+- **Lock A** — Gherkin deferred-write by decomposition-synthesis; goal-only Tasks have no Gherkin until subtasks spawn.
+- **Lock B** — No-decomp case: parent jumps `undecomposed → ready-to-execute` (skipping `decomposed`); synthesis writes criteria for the goal itself.
+- **Lock C** — Subtask IDs = full MCP ID + `task_parent_semver` coordinate; both addressable.
+- **Lock D** — Subtask ordering via explicit `task_depends_on` DAG; linter forbids cycles; gate-tooling runs topological partial-PASS.
+
+New frontmatter fields: `task_phase` (4 values: `undecomposed`, `decomposed`, `ready-to-execute`, `closed`); `task_depends_on`; `prompt_kind` (`decomposition` | `execution`); `research_mode` (`decomposition-synthesis` | `execution-synthesis`).
+
+## Open questions (Round 11 — paused pending Gemini results)
+
+Round 11 is paused per the post-/sc:reflect drift assessment (see § Reflection & Drift Analysis). Two Gemini Deep Research briefs commissioned:
+1. [`gemini-deep-research-agency-refactor.md`](../research-prompts/gemini-deep-research-agency-refactor.md) — stress-tests the 14 architectural decisions.
+2. [`gemini-deep-research-bootstrap-context-engineering.md`](../research-prompts/gemini-deep-research-bootstrap-context-engineering.md) — addresses the bootstrap-budget drift directly; surveys token-efficiency and context-engineering patterns implementable with what's been locked.
+
+Open questions held until both briefs return:
+1. **`decompose-goal` SKILL** — should decomposition prompts share a first-class skill that defines template + output schema + recursion rules?
+2. **Meta/ restructure** (reopened R9) — what does the maintenance-only `meta/` actually contain?
+3. **MCP numbering server design** — sequence reservation for parallel branches; interaction with SemVer.
+4. **Bootstrap budget mechanism** — how is the agent mechanically held to ≤8K tokens before deferring? (Primary gap from /sc:reflect; second Gemini brief targets this.)
+5. **Migration mechanics** — 96 tasks / 77 prompts / 30 research workspaces. Re-numbered through dispenser at SemVer 1.0.0, or grandfathered?
+6. **Initial goal seeding** — which existing top-level concerns become the seed `task_kind: goal` parents?
+7. **Rename execution lexicon** — exact wording for theatrical renames (commissions? missions? enactments? witness?).
 
 ---
 
@@ -216,3 +233,30 @@ Exact lexicon ratified at rename-execution time. This lock pins the *direction*,
 ---
 
 *This file is the **only** file being edited during plan-mode iteration. All other repository state remains untouched until the user explicitly approves the final plan via ExitPlanMode.*
+
+---
+
+## Reflection & Drift Analysis (after Round 10)
+
+**Goal snapshot.** Original problem (R1): bootstrap is ~50K tokens; target ≤8K. Architecture refactor is the *means*, not the end.
+
+**Adherence check.** Four-layer model preserved from R1 ✓. Of ~30 locked sub-decisions across 10 rounds, **zero are mechanically connected to budget reduction**. Each lock adds machinery; none subtracts from the bootstrap read-set.
+
+**Drift analysis.** Secondary-goal cascade. User posed a budget problem → conversation reframed it as a governance problem → governance problem grew its own machinery (SemVer, MCP IDs, DAG ordering, decomposition-synthesis, theatrical rename). Each plausible. None measured against the original constraint.
+
+**Validation velocity.** Decisions/round ≈ 3. Validations/round ≈ 0. Two Gemini Deep Research briefs commissioned to close this gap before Round 11 resumes.
+
+**Load-bearing vs. bikeshed.**
+- *Load-bearing:* four-layer separation; gate-tooling matrix; decomposition-synthesis (deferred Gherkin); DAG ordering; MCP ID dispenser.
+- *Bikeshed:* theatrical rename; SemVer-as-folder-name (the *encoding*); `notes:` vs `overflow:` (lexical); exact amendment-folder layout.
+- *Promoted prematurely:* "SemVer for non-code artefacts" was locked without a prior-art check. First Gemini brief flags this.
+
+**Decision before Round 11.** Pause new decisions. Execute the two Gemini briefs. Use verdict tables as gating input for Round 11. Convert one round of "ask more questions" into "validate something we already decided".
+
+## Frustration Log
+
+**Highest Frustration Level: FL1**
+
+- *FL1 — mild friction:* question-velocity outran validation-velocity through Rounds 7–10. I (the assistant) asked too many questions per round; user said "lock it" without testing; we co-created an unfalsifiable plan. The `/sc:reflect` pass at end of Round 10 caught the drift before more locks accrued.
+- *Self-correction:* commissioned two Gemini Deep Research briefs (architectural-decision audit + bootstrap-budget / context-engineering patterns) before resuming Round 11.
+- *FL0 baseline:* the brainstorm itself is in healthy iteration; locks A–D from Round 10 are well-defined; the substrate has working pre-commit governance to fall back on once the plan executes.
