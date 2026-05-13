@@ -4,7 +4,7 @@ status: active
 slug: novel-architect-mif-l3-backport
 summary: "Retroactively apply the subset MIF Level 3 frontmatter (cognitive_type, decay_rate, derivation_chain) declared in skills/novel-architect/schemas/mif-level3.yaml to historical entries in skills/novel-architect/references/learnings.md per Task 077 prose spec. T4 entries (status: archived) receive metadata-frontmatter additions only per MAINTENANCE.md §1.0.1; no body edits. Independent of the linter cluster — touches a different file domain."
 created: 2026-05-12
-updated: 2026-05-12
+updated: 2026-05-13
 task_id: "088"
 task_status: open
 task_owner: ""
@@ -13,7 +13,8 @@ task_uses_prompts: []
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by:
-  - "083"
+  - 083
+  - 095
 task_supersedes: []
 task_superseded_by: []
 task_affects_paths:
