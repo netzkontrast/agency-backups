@@ -4,7 +4,7 @@ status: active
 slug: claude-md
 summary: "Instructions for AI coding assistants (Claude Code, Sonnet, Opus, Haiku) operating in this repository. Routes to canonical governance specs and enumerates non-negotiable session rules."
 created: 2026-05-07
-updated: 2026-05-12
+updated: 2026-05-13
 ---
 
 # CLAUDE.md — AI Assistant Instructions
@@ -116,6 +116,7 @@ Canonical definitions: [`maintenance/language-spec.md`](./maintenance/language-s
 | 5 | `tools/adr/cli.py validate` | MADR fields + `adr_*` namespace + supersession DAG sanity |
 | adv | `tools/check-rfc2119-polarity.py` | WARN-tier: `MUST`/`MUST NOT` polarity inversions |
 | 6 | `tools/fm/index_diff.py` | `tasks/readme.md` index reflects current `task_status` |
+| 5d | `tools/check-hooks.py` | Hooks ↔ `.claude/settings.json` consistency + ADR-0011 D.7 (no SessionStart hooks) — codes `H.1.1` / `H.1.2` / `H.1.3` |
 | opt | `tools/dramatica-nav/{validate,cleanup}.py` | Narrative-ontology integrity (gated on `ontology.json` existing) |
 | opt | `tools/check-assumption-log.py` | WARN-tier: every operational `readme.md` carries `## Assumptions Log` |
 | opt | `tools/check-narrative-ontology-load.py` | WARN-tier: NO.5 — non-narrative tasks MUST NOT load narrative ontology |
@@ -262,7 +263,34 @@ For narrative-ontology work (Dramatica / NCP / novel-architect), prefer `tools/d
 
 ---
 
-## 14. Quick non-negotiables
+## 14. Hooks
+
+Agency ships **five D.7-compliant event-driven hooks** under [`tools/hooks/`](./tools/hooks/), registered in [`.claude/settings.json`](./.claude/settings.json) at the `hooks` key. Per [ADR-0011 §D.7](./decisions/0011-external-skill-corpora-import.md), `SessionStart` is **NOT** in the set — the Agency bootstrap contract in [AGENTS.md SS.1–SS.3](./AGENTS.md#session-setup) remains canonical. The five permitted events route invocations through the relevant Superpowers discipline gates and emit audit telemetry.
+
+<!-- anchor: HK.14.1 -->
+**`UserPromptSubmit`** ([`tools/hooks/user-prompt-submit.sh`](./tools/hooks/user-prompt-submit.sh)) — runs the `superpowers-using-superpowers` discipline-gate selector heuristic against the submitted prompt. Bug / done / test / review verb families map to `/sc:troubleshoot` (or `superpowers-systematic-debugging`), `superpowers-verification-before-completion`, `/sc:test` + `superpowers-tdd`, or `superpowers-receiving-code-review` respectively. Never blocks. Emits `hookSpecificOutput.additionalContext` with the suggestion.
+
+<!-- anchor: HK.14.2 -->
+**`PreToolUse`** (matcher `Skill|Agent`, [`tools/hooks/pre-tool-use.sh`](./tools/hooks/pre-tool-use.sh)) — three responsibilities: (a) **manifest verification** — refuse Skill invocations whose slug has no `skills/<slug>/SKILL.md` backing (exit 2); (b) **completion-claim gating** — when `tool_input.prompt` contains "done"/"complete"/"ready"/"finished", emit additionalContext routing through `superpowers-verification-before-completion`; (c) **telemetry** — append a one-line row to the active Task's `skill-invocation-log.md` (file auto-created on first invocation; `.gitignore`d).
+
+<!-- anchor: HK.14.3 -->
+**`PostToolUse`** (matcher `Skill|Agent`, [`tools/hooks/post-tool-use.sh`](./tools/hooks/post-tool-use.sh)) — two responsibilities: (a) **telemetry** — append a row to the active Task's `skill-invocation-log.md` summarising `tool_response` (≤ 200 chars); (b) **chain suggestion** — read the just-completed skill's `skill_references_skills` frontmatter and emit additionalContext naming the first three forward-chain targets. Never blocks.
+
+<!-- anchor: HK.14.4 -->
+**`Stop`** ([`tools/hooks/stop.sh`](./tools/hooks/stop.sh)) — enforces the [AGENTS.md Closing Run Procedure](./AGENTS.md#closing-run-procedure). (a) **FL declaration check** — if the active Task's `friction-log.md` lacks a parseable `Highest Frustration Level: FL[0-3]` declaration (or one of the variant forms enumerated in `research/fl0-value-justification/output/SPEC.md §2.2`), exit 2 with stderr. (b) **Index-sync reminder** — if `tasks/readme.md`'s row for the active Task does not mention the current `task_status`, emit additionalContext suggesting `python3 tools/fm/index_diff.py`. (c) **PR reminder** — if the branch is ahead of `main`/`origin/main`, emit additionalContext suggesting `/sc:createPR`. Blocking is reserved for FL-missing; the other two paths are advisory.
+
+<!-- anchor: HK.14.5 -->
+**`SubagentStop`** (matcher `code-reviewer|deep-research`, [`tools/hooks/subagent-stop.sh`](./tools/hooks/subagent-stop.sh)) — emits additionalContext routing the subagent's output through the [`superpowers-receiving-code-review`](./skills/superpowers-receiving-code-review/SKILL.md) discipline (technical-verification-before-action: verify each reviewer claim is correct before responding). Never blocks.
+
+### 14.A Governance + authoring
+
+The governance check [`tools/check-hooks.py`](./tools/check-hooks.py) verifies bidirectional consistency between `tools/hooks/*.sh` and `.claude/settings.json`. It emits three diagnostic codes — `H.1.1` orphan script, `H.1.2` orphan registration / non-executable script, `H.1.3` `SessionStart` violation (D.7 enforcement). The check runs unconditionally as step `[5d]` of [`tools/check-governance.sh`](./tools/check-governance.sh).
+
+Pytest coverage lives at [`tools/tests/test_hooks.py`](./tools/tests/test_hooks.py); per-event sample payloads live under [`tools/tests/fixtures/hooks/<event>.json`](./tools/tests/fixtures/hooks/). To add a new hook: author `tools/hooks/<event>.sh` (1–6 lines, exec the Python module) + `tools/hooks/_<event>.py` (the logic, Python 3.11 stdlib only); add a fixture + pytest case; register the hook in `.claude/settings.json`; `chmod +x` the shim. `python3 tools/check-hooks.py` then exits 0.
+
+---
+
+## 15. Quick non-negotiables
 
 1. Run `./install.sh` and `tools/check-governance.sh` **before** reading or writing any file.
 2. Read AGENTS.md before doing anything else.

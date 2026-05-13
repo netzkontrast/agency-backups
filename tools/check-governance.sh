@@ -98,6 +98,15 @@ if ! "$PYTHON" tools/fm/skills_query.py manifest >/dev/null; then
   echo "skills-query: manifest subcommand failed"
   FAIL=1
 fi
+
+echo ""
+echo "--- [5d] Hooks ↔ settings.json consistency (Task 094 ST-3) ---"
+# Bidirectional consistency between tools/hooks/*.sh and the
+# .claude/settings.json `hooks` block; also enforces ADR-0011 D.7
+# (no SessionStart hooks). ERROR-tier: emits H.1.1 / H.1.2 / H.1.3.
+if ! "$PYTHON" tools/check-hooks.py; then
+  FAIL=1
+fi
 if ! "$PYTHON" tools/fm/skills_query.py path flexible-frontmatter-toolchain >/dev/null; then
   echo "skills-query: path subcommand failed"
   FAIL=1
