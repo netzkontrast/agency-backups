@@ -1,4 +1,4 @@
-# .claude/agents/ — 17 persona sub-agent re-exports
+# .claude/agents/ — 16 persona sub-agent re-exports
 
 Authored by Task 094 ST-2. Each `<slug>.md` file in this folder is a
 thin Markdown wrapper that re-exports a `skill_kind: persona` (or the
@@ -10,7 +10,12 @@ The canonical body for every wrapper lives at
 `skills/<slug>/SKILL.md` — these wrappers do not duplicate content;
 they only expose the slug to the sub-agent discovery path.
 
-## Roster (17)
+**Note (PR #124 review fix):** `sc-pm-agent` is intentionally *not*
+re-exported here. Per [CLAUDE.md §13.1](../../CLAUDE.md#131-superclaude-sc--39-skills-skill_source-superclaudev430)
+it is `skill_kind: meta` and is invokable only via `/sc:pm`; re-exporting
+it as `@sc-pm-agent` would bypass the orchestrator-routing constraint.
+
+## Roster (16)
 
 - [sc-system-architect.md](./sc-system-architect.md)
 - [sc-backend-architect.md](./sc-backend-architect.md)
@@ -20,7 +25,6 @@ they only expose the slug to the sub-agent discovery path.
 - [sc-refactoring-expert.md](./sc-refactoring-expert.md)
 - [sc-performance-engineer.md](./sc-performance-engineer.md)
 - [sc-deep-research-agent.md](./sc-deep-research-agent.md)
-- [sc-pm-agent.md](./sc-pm-agent.md)
 - [sc-devops-architect.md](./sc-devops-architect.md)
 - [sc-learning-guide.md](./sc-learning-guide.md)
 - [sc-python-expert.md](./sc-python-expert.md)

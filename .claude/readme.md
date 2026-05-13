@@ -18,17 +18,26 @@ Agency. It is exempt from the operational-folder partition rule per
   `superpowers-*`) plus the in-repo non-imported skills at SessionStart.
   Per https://docs.anthropic.com/en/docs/claude-code/skills the loader
   walks `.claude/skills/<name>/SKILL.md` for project-scoped skills.
-- **[agents/](./agents)** — 17 thin Markdown wrappers re-exporting
+- **[agents/](./agents)** — 16 thin Markdown wrappers re-exporting
   `skill_kind: persona` (and the single `agent-template`
   `superpowers-code-reviewer`) so each appears as `@<slug>`-invocable
   per https://docs.anthropic.com/en/docs/claude-code/sub-agents.
+  `sc-pm-agent` is intentionally excluded — it is `skill_kind: meta`,
+  invokable only via `/sc:pm` per CLAUDE.md §13.1, so re-exporting it
+  as `@sc-pm-agent` would bypass the orchestrator-routing constraint
+  (PR #124 review fix).
 - **[commands/](./commands)** — placeholder folder; all slash commands
   resolve through the symlinked `skills/sc-<name>/SKILL.md` corpus per
   the platform's commands → skills merge.
 - **[skills-fallback/](./skills-fallback)** — `install-claude-dir.sh`,
-  a copy-tree materialiser for platforms that do not follow Git
-  symlinks. Idempotent. Documented escape hatch only; on unix the
-  symlink at `.claude/skills` is the canonical path.
+  a prune-delete copy-tree materialiser for platforms that do not
+  follow Git symlinks (prefers `rsync --delete`; falls back to
+  `rm -rf` + `cp -R` if rsync is absent). Idempotent. Documented
+  escape hatch only; on unix the symlink at `.claude/skills` is the
+  canonical path. On symlink-less platforms the script prints
+  explicit `git update-index --skip-worktree .claude/skills` guidance
+  so the documented recovery path does not break clean-working-tree
+  gates (PR #124 review fix).
 
 The plugin manifest lives one folder up at
 [`.claude-plugin/plugin.json`](../.claude-plugin/plugin.json); per

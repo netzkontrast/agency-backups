@@ -16,8 +16,9 @@ Those assets are materialised by Task 094 as follows:
 
 - `skills/` — at the repo root, mirrored into `.claude/skills/` via a
   symlink so Claude Code discovers them at SessionStart.
-- `agents/` — at `.claude/agents/` (17 persona re-exports written by
-  ST-2).
+- `agents/` — at `.claude/agents/` (16 persona re-exports written by
+  ST-2; `sc-pm-agent` deliberately excluded per CLAUDE.md §13.1
+  `/sc:pm`-only routing).
 - `hooks/` — at `tools/hooks/`, registered into `.claude/settings.json`
   by Task 094 ST-3.
 
