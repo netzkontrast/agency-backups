@@ -168,13 +168,24 @@ When the task triggers, the agent executes:
     - Surface both lists to the user before executing (one final go/no-go for the tracked-move-set + per-file adjudication for any untracked-leftovers).
 5. **Capture the pre-move baseline** (before any `git mv` runs):
     - `baseline_count=$(git ls-files --cached -- "${MOVE_SET[@]}" | wc -l)` — total tracked-file count across the move-set, used by step 8's rename verification. `--cached` reports paths CURRENTLY in the index; after step 7's moves the original paths are gone from the index, so the baseline MUST be captured here, not after.
-6. **Handle untracked-leftovers FIRST** (before any tracked `git mv`). For nested untracked files (e.g. `tasks/local.tmp` inside a tracked `tasks/`), processing them AFTER moving the parent fails because `git add tasks/local.tmp` cannot find the source path once `tasks/` has been moved to `archive/tasks/`. So apply user decisions from step 4 now:
-    - **archive choice** — for each non-exempt untracked entry: `git add <entry>` (or `git add -f <entry>` if matched by `.gitignore`) to stage it. The next step's `git mv <parent>` will then sweep it along with the rest of the tracked parent. For untracked entries OUTSIDE any tracked move-set parent (rare), `git add <entry>` followed by `git mv <entry> archive/<entry>` immediately.
+6. **Create `/archive/`** if not present: `mkdir -p archive`. (Step 2 already verified it was absent or only-empty.) Creating it now — BEFORE step 7's untracked handling — ensures any standalone-untracked `git mv <entry> archive/<entry>` in step 7 has a valid destination directory; otherwise that mv branch fails with "No such file or directory".
+7. **Handle untracked-leftovers FIRST** (before any tracked `git mv`). For nested untracked files (e.g. `tasks/local.tmp` inside a tracked `tasks/`), processing them AFTER moving the parent fails because `git add tasks/local.tmp` cannot find the source path once `tasks/` has been moved to `archive/tasks/`. So apply user decisions from step 4 now:
+    - **archive choice** — for each non-exempt untracked entry: `git add <entry>` (or `git add -f <entry>` if matched by `.gitignore`) to stage it. The next step's `git mv <parent>` will then sweep it along with the rest of the tracked parent. For untracked entries OUTSIDE any tracked move-set parent (rare), `git add <entry>` followed by `git mv <entry> archive/<entry>` immediately — `archive/` exists per step 6.
     - **mv-aside choice** — `mv <entry> /tmp/<basename>` (or anywhere outside the repo). Filesystem-move; never touches git history.
     - **rm choice** — `rm <entry>` (or `rm -r` for directories). Delete.
-7. **Create `/archive/`** if not present: `mkdir archive`. (Step 2 already verified it was absent or only-empty.)
-8. **For each entry in the tracked move-set:** `git mv <entry> archive/<entry>`. Mirror the original path inside `/archive/`. Untracked-leftovers that were `git add`'d in step 6 ride along with the parent's `git mv` automatically (`git mv tasks/ archive/tasks/` recursively renames everything indexed at `tasks/`).
-9. **Verify renames:** the file-level rename count from `git status --porcelain -- archive/ | grep -c '^R'` (scoped to `archive/` paths only via the `--` pathspec, to exclude any unrelated renames under `/migration/` that the preflight permitted) equals the `baseline_count` captured in step 5. **Do not** use `git status` without `--porcelain` — the long human-readable format prints `renamed:` lines, not `R` codes. **Do not** compute the baseline AFTER moves with `git ls-files --cached <source-path>` — the source path is no longer in the index after `git mv`. **Do not** use `find <moved-path> -type f` — that includes untracked children, which `git mv` does not rename.
+8. **For each entry in the tracked move-set:** `git mv <entry> archive/<entry>`. Mirror the original path inside `/archive/`. Untracked-leftovers that were `git add`'d in step 7 ride along with the parent's `git mv` automatically (`git mv tasks/ archive/tasks/` recursively renames everything indexed at `tasks/`).
+9. **Verify renames.** Status-output format is **config-dependent** (`status.renames=false` yields `A`/`D` pairs not `R`, and `git status --porcelain -- archive/` strips the rename pair view to `A archive/...` only, making `grep '^R'` return 0 even on correct moves). Use a rename-aware query that scopes by **destination path** and emits explicit rename rows:
+
+    ```bash
+    moved_count=$(git diff --cached --name-status --find-renames \
+                  | awk '$1 ~ /^R/ && $3 ~ /^archive\// {n++} END {print n+0}')
+    if [ "$moved_count" != "$baseline_count" ]; then
+        printf 'HALT: rename count %s != baseline %s\n' "$moved_count" "$baseline_count"
+        exit 1
+    fi
+    ```
+
+    `git diff --cached --name-status --find-renames` always reports renames as `R<similarity>\t<src>\t<dst>` regardless of operator's `status.renames` config; awk filters to only the rows whose destination is under `archive/`. **Do not** use `git status --porcelain -- archive/` — the path filter breaks the rename pair view. **Do not** use `git status --porcelain` without rename-detection — output depends on `status.renames` config. **Do not** compute `baseline_count` AFTER moves with `git ls-files --cached <source-path>` — the source path is no longer in the index after `git mv` (step 5 captures it pre-move). **Do not** use `find <moved-path> -type f` — that includes untracked children, which `git mv` does not rename.
 10. **Commit:** the body MUST cite `migration/waiver.md`, list the moved top-level entries, and include `Highest Frustration Level: FL[0-3]`. A single `-m` produces a subject-only commit and silently drops these mandatory fields, so use a HEREDOC pattern (or multiple `-m` flags) to deliver subject + body in one invocation:
 
     ```bash
