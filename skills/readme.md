@@ -4,7 +4,7 @@ status: active
 slug: skills-readme
 summary: "Index for /skills/: version-controlled snapshots of installed Claude skills."
 created: 2026-05-04
-updated: 2026-05-12
+updated: 2026-05-13
 ---
 
 # skills/

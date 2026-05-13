@@ -1,0 +1,5 @@
+{
+  "session_id": "test-session",
+  "subagent_type": "code-reviewer",
+  "hook_event_name": "SubagentStop"
+}

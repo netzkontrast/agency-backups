@@ -76,6 +76,7 @@ The table below maps every concern the gate covers to the tool that owns it in e
 | RFC 2119 polarity audit | — | [`tools/check-rfc2119-polarity.py`](./tools/check-rfc2119-polarity.py) | — |
 | Trust audit (Spec-J/K/L per-workspace gate) | — | [`tools/check-trust-audit.py`](./tools/check-trust-audit.py) | — |
 | Trust audit (closure verification) | — | [`tools/check-trust.py`](./tools/check-trust.py) | — |
+| Hooks ↔ `.claude/settings.json` consistency (Task 094 ST-3; D.7 enforcement) | — | [`tools/check-hooks.py`](./tools/check-hooks.py) — codes **`H.1.1`** orphan script, **`H.1.2`** orphan registration / non-executable, **`H.1.3`** SessionStart violation | — |
 | Per-rule waiver loader (§7.B) | (per-file rows in `tools/.frontmatter-waivers`) | [`tools/fm/_core.load_waivers`](./tools/fm/_core.py) (TSV) + [`tools/scripts/migrate-waivers.py`](./tools/scripts/migrate-waivers.py) | (same loader; ADR.A.* codes accepted as rule-ids) |
 | Narrative-ontology validate / cleanup (gated on `ontology.json`) | — | [`tools/dramatica-nav/validate.py`](./tools/dramatica-nav/validate.py), [`tools/dramatica-nav/cleanup.py`](./tools/dramatica-nav/cleanup.py) | — |
 | ADR governance (MADR fields, supersession DAG, `adr_*` namespace) | — | — | [`tools/adr/cli.py validate`](./tools/adr/cli.py) (step `[5/6]`) |

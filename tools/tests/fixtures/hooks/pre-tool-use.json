@@ -1,0 +1,9 @@
+{
+  "session_id": "test-session",
+  "tool_name": "Skill",
+  "tool_input": {
+    "skill": "sc-implement",
+    "prompt": "build the feature"
+  },
+  "hook_event_name": "PreToolUse"
+}
