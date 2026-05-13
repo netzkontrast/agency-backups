@@ -37,17 +37,31 @@ The next agent MUST verify each before issuing any `git mv` command.
 - **P.3** The ADR draft in [`adr-draft.md`](./adr-draft.md) has been revised to reflect **whichever ULID scope the user confirmed at P.2** (v2 tasks-only OR v3 6-types) and the corresponding Decision-4 status (kept vs. reversed). The user has reviewed the revised draft. The dependency is "ADR matches the user-confirmed scope post-P.2", **not** any specific scope variant.
 - **P.4** [`schemas-delta.md`](./schemas-delta.md) has been updated to reflect the user-confirmed ULID scope (uniform L2 `id:` field across 6 types if v3; tasks-only `id:` field if v2). Same agnostic dependency as P.3.
 - **P.5** The user issues an **explicit, unambiguous instruction** to execute this task. The instruction MUST name "archive" or "git mv" or this task's slug. Implicit cues (e.g. "let's start") are **not** sufficient.
-- **P.6 — No staged/unstaged tracked changes outside `/migration/`.** Use this awk-based check (safe under `set -e` because awk exits 0 unless explicitly told otherwise — earlier draft used grep-pipe in command substitution which inherits `grep`'s exit-1-on-no-match and aborts under errexit even in the clean case):
+- **P.6 — No staged/unstaged tracked changes outside `/migration/`.** Use this rename-aware check (the earlier porcelain-grep form ignored the destination side of rename entries, so a staged rename like `migration/foo.md -> docs/foo.md` would be silently treated as safe):
 
     ```bash
-    dirty=$(git status --porcelain | awk '!/^\?\? / && !/^.. migration\// {print}')
+    dirty=$(
+        {
+            git diff --cached --name-status --find-renames
+            git diff           --name-status --find-renames
+        } | awk '
+            $1 ~ /^[RC]/ {
+                # rename or copy: status, src, dst — both must be under migration/
+                if ($2 ~ /^migration\// && $3 ~ /^migration\//) next
+                print; next
+            }
+            # M / A / D / T / U: status, path
+            $2 ~ /^migration\// { next }
+            { print }
+        '
+    )
     if [ -n "$dirty" ]; then
-        printf 'HALT: dirty tree outside /migration/:\n%s\n' "$dirty"
+        printf 'HALT: tracked changes outside /migration/:\n%s\n' "$dirty"
         exit 1
     fi
     ```
 
-    Untracked root-level entries (status `??`) are permitted at this precondition — they are adjudicated explicitly in §5 step 4's untracked-leftovers branch. Staged or unstaged changes (`M`, `A`, `D`, `R`, etc.) on tracked paths outside `/migration/` are NOT permitted — they would silently corrupt the move-set built in step 4 (where `git ls-files` reflects the index, including staged changes the operator may not have intended to archive). If P.6 fails, surface the dirty paths to the user and ask them to commit, stash, or discard before re-running.
+    Untracked root-level entries are permitted at this precondition — they are adjudicated explicitly in §5 step 4's untracked-leftovers branch. Staged or unstaged tracked changes outside `/migration/` are NOT permitted — they would silently corrupt the move-set built in step 4 (where `git ls-files` reflects the index, including staged changes the operator may not have intended to archive). For rename/copy entries (status codes `R<similarity>` / `C<similarity>`), BOTH source and destination paths must be under `migration/`; otherwise the entry counts as a tracked change crossing the migration boundary and halts the run. If P.6 fails, surface the dirty paths to the user and ask them to commit, stash, or discard before re-running.
 
 **If any precondition is unmet, the agent MUST NOT begin the archive.** Surface the unmet precondition to the user and ask for resolution. Do not proceed on the basis of "good enough" precondition coverage.
 
@@ -147,16 +161,28 @@ When the task triggers, the agent executes:
 2. **Filesystem + git state preflight (mitigates R.1, R.2, R.3, R.3a).** Run each check, halt on any check that fails:
     - **`archive/` must NOT exist.** Test: `! test -e archive`. The shell-portable form is an explicit `if [ -e archive ]; then echo 'HALT: archive/ exists; reconcile before run'; exit 1; fi`. If `archive/` exists at all (whether populated, empty, tracked, untracked, or partial from a prior interrupted run), halt and reconcile with the user. **Do not** rely on `git ls-tree HEAD archive/ | wc -l` — that only inspects the committed tree and misses working-tree-only content. Existence-based filesystem check is the correct semantic.
     - **Submodules must be absent.** Test: `[ -z "$(git submodule status)" ]`. The shell-portable form is `if [ -n "$(git submodule status)" ]; then echo 'HALT: submodules present; per-submodule guidance required'; exit 1; fi`. `git mv` on a submodule path may misbehave; the user MUST guide the per-submodule strategy before proceeding.
-    - **No staged/unstaged tracked changes outside `/migration/`.** Use the awk-based form from P.6 (safe under `set -e`):
+    - **No staged/unstaged tracked changes outside `/migration/`.** Use the rename-aware diff-based form from P.6 (porcelain-grep would miss the destination side of renames; diff `--name-status --find-renames` reports both sides):
 
         ```bash
-        dirty=$(git status --porcelain | awk '!/^\?\? / && !/^.. migration\// {print}')
+        dirty=$(
+            {
+                git diff --cached --name-status --find-renames
+                git diff           --name-status --find-renames
+            } | awk '
+                $1 ~ /^[RC]/ {
+                    if ($2 ~ /^migration\// && $3 ~ /^migration\//) next
+                    print; next
+                }
+                $2 ~ /^migration\// { next }
+                { print }
+            '
+        )
         if [ -n "$dirty" ]; then
-            printf 'HALT: dirty tree outside /migration/:\n%s\n' "$dirty"; exit 1
+            printf 'HALT: tracked changes outside /migration/:\n%s\n' "$dirty"; exit 1
         fi
         ```
 
-        (This enforces P.6 operationally.) Untracked entries (`??`) are explicitly permitted here — they're adjudicated in step 4.
+        (This enforces P.6 operationally.) Untracked entries are explicitly permitted here — they're adjudicated in step 4.
 3. **Adjudicate §3 borderlines** via a single `AskUserQuestion` covering `install.sh`, `LICENSE`, `.editorconfig`, `.githooks/`, `.gitignore`, and any other dotfiles present at root.
 4. **Snapshot the to-be-moved set — only Git-controlled root entries from the index, not just HEAD:**
     - `git ls-files -- ':(top)*' | awk -F/ '{print $1}' | sort -u` gives the canonical list of top-level entries tracked in the **index** (includes staged-but-not-committed paths; `git ls-tree HEAD` alone would miss those). Filter against §3 to get the move-set; this is the input to step 6.
