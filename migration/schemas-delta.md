@@ -86,7 +86,7 @@ Add five files under `maintenance/schemas/`:
 | File | Namespace | Required keys |
 |---|---|---|
 | `l2-role.schema.json` | `role_*` | `role_persona`, `role_invocation_pattern`, `role_used_by_prompts` (list) |
-| `l2-lock.schema.json` | `lock_*` | `lock_id` (pattern `^L\d+\.\d+(prime|double|triple)?$`), `lock_round`, `lock_sub`, `lock_sha`, `lock_supersedes` (optional), `lock_referenced_by_adr` (optional) |
+| `l2-lock.schema.json` | `lock_*` | `lock_id` (pattern `^L\d+\.\d+[′″‴]?(-[a-z0-9-]+)?$` — accepts prime-mark glyphs `′` `″` `‴` as actually used in `locks-ratified.md` for L11.32‴, L11.36′, etc.; the textual `prime`/`double`/`triple` aliases are NOT accepted to keep one canonical form), `lock_round`, `lock_sub`, `lock_revision_marker` (enum `null|′|″|‴`), `lock_sha`, `lock_supersedes` (optional), `lock_referenced_by_adr` (optional) |
 | `l2-gherkin.schema.json` | `gherkin_*` | `gherkin_anchor_id`, `gherkin_feature`, `gherkin_parent_artifact`, `gherkin_scenarios` (list) |
 | `l2-friction-log.schema.json` | `friction_log_*` | `friction_log_session_id`, `friction_log_parent_artifact`, `friction_log_max_level` (enum FL0..FL3), `friction_log_entries` (list) |
 | `l2-hook.schema.json` | `hook_*` | `hook_event` (enum: 5 D.7-compliant events), `hook_slug`, `hook_script_path`, `hook_python_module_path` |

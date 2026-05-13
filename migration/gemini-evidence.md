@@ -9,9 +9,16 @@ updated: 2026-05-13
 
 # Gemini evidence appendix — D1 through D8
 
-These 8 citations come from Gemini Deep Research brief #2 (`research/gemini-architectural-audit-2/output/SPEC.md`), commissioned in Round 10 of the design conversation. Each provides external validation for a load-bearing decision captured in [`locks-ratified.md`](./locks-ratified.md) and ratified in [`adr-draft.md`](./adr-draft.md).
+These 8 citations come from the Gemini Deep Research briefs commissioned in Round 10 of the design conversation. The actual artefacts live at:
+
+- [`.claude/research-results/gemini-1-architecture-audit.md`](../.claude/research-results/gemini-1-architecture-audit.md) (75 KB; 14-decision audit anchoring D1–D8) — primary source for citations D1–D8 below.
+- [`.claude/research-results/gemini-2-bootstrap-context-engineering.md`](../.claude/research-results/gemini-2-bootstrap-context-engineering.md) (54 KB; 22 context-engineering patterns) — companion brief, supplementary context.
+
+The source briefs sit under `.claude/research-results/`, which is **exempt from the [`next-task.md`](./next-task.md) archive operation** — meaning the authority chain for D1–D8 survives the rebuild intact. Each citation below provides external validation for a load-bearing decision captured in [`locks-ratified.md`](./locks-ratified.md) and ratified in [`adr-draft.md`](./adr-draft.md).
 
 When ADR-0013 promotes to `decisions/`, this appendix moves with it (either as a section in the ADR or as `decisions/0013-twelve-type-ontology/evidence.md`).
+
+**Stale-path note:** earlier revisions of this file cited `research/gemini-architectural-audit-2/output/SPEC.md` as the canonical source. That path **does not exist** in the repository; the actual artefacts are the two `.claude/research-results/` files named above. This note was added in response to PR #129 review comments verifying the path against the live repo.
 
 ---
 
@@ -103,4 +110,4 @@ When ADR-0013 promotes to `decisions/`, this appendix moves with it (either as a
 
 ## Assumptions Log
 
-- **Assumption E1.** Gemini Deep Research brief #2 (`research/gemini-architectural-audit-2/output/SPEC.md`) is the canonical source for these 8 citations. *Status: declared in commits 5f9d9df and 82dc85d; the SPEC.md file itself was not re-read while compiling this appendix — paraphrases above match the design-conversation digest, not verbatim citations.*
+- **Assumption E1 (revised 2026-05-13).** The canonical source for D1–D8 is `.claude/research-results/gemini-1-architecture-audit.md` (75 KB, 14-decision audit) — verified to exist in the repo. The companion brief `.claude/research-results/gemini-2-bootstrap-context-engineering.md` (54 KB) provides supplementary context. The previously-cited path `research/gemini-architectural-audit-2/output/SPEC.md` does **not** exist; the assumption that it did was stale. Paraphrases above match the gemini-1 audit's decision table (verified via re-read 2026-05-13).

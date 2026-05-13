@@ -44,25 +44,33 @@ The next agent MUST verify each before issuing any `git mv` command.
 
 ## 3. Exempt paths (DO NOT move)
 
-The following top-level entries MUST remain in place; everything else in the repo root moves into `/archive/`:
+Turn-14 user directive (verbatim, in [`original-prompt.md`](./original-prompt.md)): *"archiving (git mv) of every file except the Migration folder - and the .claude folder."*
+
+Therefore **only two paths are unconditionally exempt** by user directive:
 
 | Path | Reason |
 |---|---|
-| `migration/` | The plan-of-record. Must remain live for the rebuild to consult. |
-| `.claude/` | Plugin / session-state directory; carries the SuperClaude + Superpowers skill manifests and hook registrations. Removing it breaks the agent's runtime. |
-| `.git/` | Git infrastructure. **Never** move. |
-| `.githooks/` | Pre-commit hook directory; while governance is revoked the hook is a no-op via `--no-verify`, but the script itself MUST stay in place so the post-rebuild restoration of governance has something to point at. |
-| `archive/` | Target folder; created by this task. If it already exists from a prior partial migration, abort and reconcile before proceeding (see §6 R.3). |
-| `.gitignore` | Repository-level ignore patterns; needed for the rebuild to function predictably. Move into archive only if the rebuild explicitly redefines it. |
+| `migration/` | Named by user. The plan-of-record; must remain live for the rebuild to consult. |
+| `.claude/` | Named by user. Plugin / session-state directory; carries the SuperClaude + Superpowers skill manifests, hook registrations, and (critically) the authoritative Gemini Deep Research briefs at `.claude/research-results/gemini-{1,2}-*.md` that anchor the D1–D8 evidence chain in [`gemini-evidence.md`](./gemini-evidence.md). |
 
-**Borderline cases requiring user adjudication before this task starts:**
+**Technical-necessity exceptions** (not files; not user-adjudicable):
 
-- `.gitignore` — recommend keep in place; user MAY override.
-- `LICENSE` / `LICENSE.md` (if present) — recommend keep in place to preserve repo licensing throughout the rebuild.
-- `.editorconfig`, `.gitattributes`, similar dotfiles — recommend keep in place; user MAY override per-file.
-- `install.sh` — currently at repo root; the bootstrap script. Recommend **move into archive** because the post-rebuild bootstrap will be reauthored from the migration plan. The user MAY override.
+| Path | Reason |
+|---|---|
+| `.git/` | Git infrastructure. Moving it would break the repo entirely. Not a "file" in the directive's sense. |
+| `archive/` | Target folder being created by this task. Cannot move a folder into itself. Created fresh; if it already exists from a prior partial run, abort and reconcile (§6 R.3). |
 
-The next agent MUST surface these borderlines via `AskUserQuestion` before issuing any `git mv`.
+**Borderline cases — every entry below MUST be adjudicated by the user via a single `AskUserQuestion` before any `git mv` runs.** None are unconditionally exempt; the user explicitly chooses keep-live vs. archive for each:
+
+| Path | Default recommendation | Rationale |
+|---|---|---|
+| `.githooks/` | **keep live** (recommended) | Pre-commit hook directory. While governance is revoked the hook is a no-op via `--no-verify`, but the script MUST exist post-rebuild for governance restoration. User MAY override. |
+| `.gitignore` | **keep live** (recommended) | Repo-level ignore patterns. Move only if the rebuild explicitly redefines them. User MAY override. |
+| `LICENSE` / `LICENSE.md` (if present) | **keep live** (recommended) | Preserves repo licensing throughout the rebuild. User MAY override. |
+| `.editorconfig`, `.gitattributes`, other dotfiles | **keep live** (recommended) | Editor / git-attribute config. User MAY override per-file. |
+| `install.sh` (if present at root) | **archive** (recommended) | Post-rebuild bootstrap will be reauthored from the migration plan. User MAY override. |
+
+**Authority-chain note.** The Gemini briefs at `.claude/research-results/` (anchoring D1–D8) survive the archive intact because `.claude/` is unconditionally exempt. Any *other* `research/` workspaces (e.g. `research/adr-assumption-audit/`, `research/gemini/`) move into `archive/research/` and become **non-binding** historical context per §4 Scenario "Rebuild proceeds from /migration/". If a rebuild task needs an archived research workspace as a binding input, it MUST first promote that workspace's relevant artefacts into `/migration/` (or a fresh live folder) via a documented amendment to this task spec — not by silently consulting `archive/`.
 
 ---
 
@@ -74,27 +82,33 @@ Feature: Big-bang archive of pre-migration repo state
   Scenario: Every non-exempt entry moves to /archive/
     Given the preconditions in §2 all hold
     And the user has explicitly authorised execution
+    And the §3 borderlines have been adjudicated
     When the archive task runs
-    Then every top-level entry in the repo root except those listed in §3 is moved into /archive/<original-path>/
-    And the move uses `git mv <source> <destination>` for each entry
-    And `git status` shows all moves as `R` (rename), not as `D` (delete) + `A` (add)
+    Then every top-level entry in the repo root except those listed in §3 (unconditional exempts + technical exceptions + user-kept borderlines) is moved into /archive/<original-path>/
+    And the move uses `git mv <source> <destination>` for each entry (or recursively for directories)
+    And `git status --porcelain` shows every moved file with status code `R` (rename), not as `D` (delete) + `A` (add)
+    And the count of `R` lines in `git status --porcelain` equals the total file count (recursive) of the to-be-moved set
 
   Scenario: Exempt paths survive unchanged
     Given the archive task has completed
     Then /migration/ is byte-for-byte identical to its pre-task state
     And /.claude/ is byte-for-byte identical to its pre-task state
-    And /.git/, /.githooks/, /archive/ are intact
+    And the Gemini briefs at .claude/research-results/gemini-1-architecture-audit.md and .claude/research-results/gemini-2-bootstrap-context-engineering.md are unmoved
+    And /.git/ and /archive/ are intact
+    And every user-elected keep-live borderline path (§3) is unmoved
 
   Scenario: History is traversable across the move
     Given the archive task has completed
-    When `git log --follow archive/<some-original-path>` runs
+    When `git log --follow archive/tasks/039-maintenance-spec-integration/task.md` runs (one concrete file path as the example; `--follow` works only for individual files, not directories)
     Then the log shows the complete pre-archive history of that file
     And the rename event is visible at the top of the log
+    And the same property holds for any other individually-named archived file path
 
   Scenario: Live tree is empty except for migration and .claude
     Given the archive task has completed
     When `ls -A` runs in the repo root
-    Then the output contains exactly: migration, .claude, .git, .githooks, archive, plus any §3-borderline paths the user opted to keep live
+    Then the output contains exactly: migration, .claude, .git, archive, plus every §3-borderline path the user opted to keep live
+    And no other entries exist at the repo root
 
   Scenario: Rebuild proceeds from /migration/
     Given the archive task has completed
@@ -121,7 +135,7 @@ When the task triggers, the agent executes:
 3. **Snapshot the to-be-moved set** — `ls -A` filtered against §3. Confirm the list to the user before executing (one final go/no-go).
 4. **Create `/archive/`** if not present: `mkdir archive`.
 5. **For each entry in the to-be-moved set:** `git mv <entry> archive/<entry>`. Mirror the original path inside `/archive/`.
-6. **Verify renames:** `git status | grep '^R'` count equals the to-be-moved set size.
+6. **Verify renames:** the file-level rename count from `git status --porcelain | grep -c '^R'` equals the recursive file count of the to-be-moved set (computed via e.g. `git diff --cached --name-status --find-renames | grep -c '^R'` for staged moves, or `find <moved-path> -type f | wc -l` on the source set before the move). **Do not** use `git status` without `--porcelain` — the long human-readable format prints `renamed:` lines, not `R` codes, so `grep '^R'` returns zero matches even on successful moves. **Do not** compare against the count of top-level entries — `git mv tasks/` expands to one rename per file inside `tasks/`, not one rename total.
 7. **Commit:** `git commit --no-verify -m "archive: big-bang move of pre-migration repo state into /archive/"`. Body MUST cite `migration/waiver.md`, list the moved top-level entries, and include `Highest Frustration Level: FL[0-3]`.
 8. **Push** to the migration branch.
 9. **Update [`handover.md`](./handover.md)** with a "post-archive" section indicating the new state. Commit + push as a separate commit.
