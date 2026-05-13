@@ -82,27 +82,45 @@ Then read [`session-log.md`](./session-log.md), [`original-prompt.md`](./origina
 
 ## 4. Where to resume
 
-Three reasonable paths forward; the user has not yet picked. Recommend one, ask via `AskUserQuestion` if uncertain.
+**Major directive update (turn 14):** *"All Content of the repo - including the ADRs - are revoked until further notice… Based on the Gemini Research… and all Migration artefacts - we rebuild this repo completely - starting with archiving (git mv) of every file except the Migration folder - and the .claude folder - into Archive."*
 
-### Path A — Close Q1–Q7, ratify ADR-0013, then cascade and build
+This **shifts the recommended path** away from incremental cascade (Path A) and toward **big-bang archive then rebuild**. The archive operation itself is captured as a mandatory next task in [`next-task.md`](./next-task.md) and triggers only when (a) the refactoring plan is ratified and (b) the user explicitly authorises execution.
+
+### Recommended path (post turn-14) — Ratify, then big-bang archive, then rebuild
+
+1. **Close Q1–Q7** in [`open-questions.md`](./open-questions.md) via AskUserQuestion. Single short session.
+2. **Re-confirm turn-11 provisional answers** (R1 / R2 / R3 in [`locks-ratified.md §Revision history`](./locks-ratified.md#revision-history--answers-given-mid-session-after-waiver-request)).
+3. **Revise [`adr-draft.md`](./adr-draft.md)** to reflect L11.43 v3 scope (6 types) and Decision 4 reversal. Revise [`schemas-delta.md`](./schemas-delta.md) similarly.
+4. **User authorises archive execution.** Explicit instruction required (see [`next-task.md §2 P.5`](./next-task.md)).
+5. **Execute [`next-task.md`](./next-task.md)** — `git mv` every non-exempt entry into `/archive/`. Live tree shrinks to `/migration/`, `/.claude/`, `/.git/`, `/.githooks/`, `/archive/`, plus the few user-adjudicated borderline dotfiles.
+6. **Rebuild** — author the new operational tree directly into the live root, guided by `/migration/` + the Gemini research briefs. Tasks 6.x get created as they're needed.
+
+### Why this replaces Paths A / B / C
+
+The previous Path A (linear cascade), Path B (prototype first), and Path C (schema deltas first) all assumed **incremental modification of the existing tree**. Turn 14 explicitly rejected that:
+
+> *"All Content of the repo - including the ADRs - are revoked until further notice"*
+
+This is a hard reset of the design baseline. The existing 12 ADRs no longer bind. Incremental cascade is wrong because it implies keeping the pre-migration tree as a foundation; the user wants a clean rebuild from `/migration/`.
+
+The three earlier paths are preserved below for historical reference but are **not recommended** post turn-14.
+
+<details>
+<summary>Pre-turn-14 paths (historical only — do not pursue)</summary>
+
+#### Path A — Close Q1–Q7, ratify ADR-0013, then cascade and build (deprecated)
 
 Linear, lowest-risk. Each question takes one AskUserQuestion round. After all 7 close, promote [`adr-draft.md`](./adr-draft.md) to `decisions/0013-twelve-type-ontology.md` with `adr_status: Proposed`, then cascade into root specs in a follow-up Task, then build the migration tooling in another follow-up Task.
 
-Estimated effort: 1 short session to close Q1–Q7 + ratify ADR; 1–2 sessions for spec cascade; 2–3 sessions for tooling.
+#### Path B — Build a thin `agency readme` prototype first (deprecated)
 
-### Path B — Build a thin `agency readme` prototype first
+Risky-by-design: scope creep is likely, but a working prototype surfaces unanticipated design questions that improve the ADR.
 
-Risky-by-design: scope creep is likely, but a working prototype surfaces unanticipated design questions (e.g. what does the renderer do when `assumptions: list[Assumption]` is empty?) that improve the ADR. Promote ADR to `Accepted` only after the prototype proves the renderer pipeline.
+#### Path C — Land the schema deltas first (deprecated)
 
-Estimated effort: 1 session for the renderer; 1 session to revise ADR with implementation evidence; then Path A's spec cascade + full tooling.
+Add `lock` / `role` / `gherkin` / `friction-log` / `hook` to the L1 type enum; add `purpose` + `assumptions` to L1; author `l2-lock.schema.json`. This unblocked every other artifact in the pre-turn-14 design.
 
-### Path C — Land the schema deltas first
-
-Add `lock` / `role` / `gherkin` / `friction-log` / `hook` to the L1 type enum; add `purpose` + `assumptions` to L1; author `l2-lock.schema.json`. This unblocks every other artifact (locks in `decisions/locks/` can validate; readme auto-generation has fields to read). The ADR then references already-landed schemas rather than proposing them in absentia.
-
-Estimated effort: 1 session for schema work + regen; then Path A's ratification.
-
-**Recommendation for next session:** Path A. The schema deltas in Path C touch infrastructure ahead of ADR acceptance, which inverts the governance contract (T3 structural changes should land *via* ADR, not in parallel with one). Path B's prototype is valuable but premature when Q1–Q7 are still open.
+</details>
 
 ---
 

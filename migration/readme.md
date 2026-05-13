@@ -30,6 +30,7 @@ When the migration is executed, this folder is deleted — locks promote to `dec
 | [`readme.md`](./readme.md) | This file. Index + governance status. |
 | [`handover.md`](./handover.md) | **Next-session entry point — MANDATORY first read.** What's done, what's open, where to resume. |
 | [`next-agent-report.md`](./next-agent-report.md) | **MANDATORY second read.** Deep reflection on revision patterns, robust-vs-fragile decisions, inherited risks, and failure modes for the next agent. |
+| [`next-task.md`](./next-task.md) | **MANDATORY Next Task** — big-bang archive of pre-migration repo state into `/archive/` via `git mv`. Pending; triggers only when refactoring plan is ratified AND user explicitly authorises execution. Per turn-14 user directive: "All Content of the repo - including the ADRs - are revoked until further notice". |
 | [`locks-ratified.md`](./locks-ratified.md) | All 11 user-confirmed locks (L11.32‴..L11.44 + Decision 4). **Read §Revision history** at the bottom — L11.43 v3 lives there, not in the main body. |
 | [`open-questions.md`](./open-questions.md) | Q1–Q7 still pending; each blocks ADR ratification. |
 | [`waiver.md`](./waiver.md) | Authorisation to bypass `tools/check-governance.sh`. **All governance revoked** for the refactor window. |
