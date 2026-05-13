@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import fnmatch
 import importlib.util
 import json
 import re
@@ -186,6 +187,36 @@ def _file_mtime_date(path: Path) -> dt.date | None:
         return None
 
 
+_FRONTMATTER_BLOCK_RE = re.compile(r"\A---\s*\n(.*?)\n---", re.DOTALL)
+_FRONTMATTER_DATE_RE = re.compile(
+    r"^(?P<key>updated|created):\s*['\"]?(?P<date>\d{4}-\d{2}-\d{2})['\"]?\s*$",
+    re.MULTILINE,
+)
+
+
+def _log_session_date(path: Path, text: str) -> dt.date | None:
+    """Stable session date for a friction log.
+
+    Prefer YAML frontmatter `updated:` (then `created:`) over filesystem mtime,
+    which gets rewritten by clone/checkout/copy and would let historical logs
+    spuriously land inside the friction window on a fresh worktree.
+    """
+    fm = _FRONTMATTER_BLOCK_RE.match(text)
+    if fm is not None:
+        keyed: dict[str, str] = {}
+        for m in _FRONTMATTER_DATE_RE.finditer(fm.group(1)):
+            keyed.setdefault(m.group("key"), m.group("date"))
+        for key in ("updated", "created"):
+            raw = keyed.get(key)
+            if raw is None:
+                continue
+            try:
+                return dt.date.fromisoformat(raw)
+            except ValueError:
+                continue
+    return _file_mtime_date(path)
+
+
 def _friction_in_window(
     repo_root: Path,
     pattern: re.Pattern,
@@ -194,19 +225,20 @@ def _friction_in_window(
 ) -> tuple[int, list[str]]:
     """Return (session_count, citing_paths) for FL1+ friction logs that match.
 
-    A "session" here is one friction-log.md file whose mtime falls inside the
-    window AND whose body declares FL1+ AND whose body mentions the pattern.
+    Window is `window_days` calendar dates inclusive of today (so window_days=14
+    accepts [today-13, today]). Session date comes from frontmatter `updated:`
+    (preferred) or `created:`; falls back to mtime only if neither is present.
     """
-    threshold_date = today - dt.timedelta(days=window_days)
+    threshold_date = today - dt.timedelta(days=window_days - 1)
     sessions = 0
     cited: list[str] = []
     for log in _list_friction_logs(repo_root):
-        mdate = _file_mtime_date(log)
-        if mdate is None or mdate < threshold_date:
-            continue
         try:
             text = log.read_text(encoding="utf-8", errors="replace")
         except OSError:
+            continue
+        mdate = _log_session_date(log, text)
+        if mdate is None or mdate < threshold_date:
             continue
         fl_match = FL_LINE_PATTERN.search(text)
         if fl_match is None or int(fl_match.group(1)) < 1:
@@ -240,22 +272,52 @@ _TASK_AFFECTS_BLOCK_RE = re.compile(
     r"^task_affects_paths:\s*\n((?:[ \t]+-\s.*\n)+)",
     re.MULTILINE,
 )
-_NARRATIVE_PATH_RE = re.compile(r"skills/(dramatica|ncp|novel)[-\w/]*")
 _NON_NEUTRAL_ROOTS: tuple[str, ...] = (
+    "AGENTS.md",
     "TASK.md", "PROMPT.md", "RESEARCH.md", "FOLDERS.md",
     "PRE_COMMIT.md", "FRUSTRATED.md", "MAINTENANCE.md", "README.md",
 )
 
 
+def _parse_affects_paths_entries(block: str) -> list[str]:
+    """Pull clean string entries out of a `task_affects_paths:` YAML block."""
+    entries: list[str] = []
+    for raw in block.splitlines():
+        s = raw.strip()
+        if not s.startswith("- "):
+            continue
+        entry = s[2:].strip().strip('"').strip("'")
+        if entry:
+            entries.append(entry)
+    return entries
+
+
+def _is_narrative_skill_path(entry: str) -> bool:
+    """True iff entry is a `skills/<slug>/...` path under a narrative glob."""
+    if not entry.startswith("skills/"):
+        return False
+    parts = entry.split("/", 2)
+    if len(parts) < 2 or not parts[1]:
+        return False
+    return any(fnmatch.fnmatchcase(parts[1], pat) for pat in NARRATIVE_SKILL_GLOBS)
+
+
 def audit_0008_f4(repo_root: Path) -> dict:
     """ADR-0008 F4 — narrative-tagged Task amends a non-SKILLS root spec.
 
-    Scans only the `task_affects_paths:` YAML block, not arbitrary prose. A
-    candidate fires when the block lists at least one narrative path AND at
-    least one non-neutral root spec (everything except AGENTS.md/SKILLS.md,
-    per the ADR's "other than `SKILLS.md` or the AGENTS.md narrative
-    section" carve-out). Manual review still needed to confirm T3 vs T1/T2
-    tier; the heuristic flags candidates for inspection.
+    Scans only `task_affects_paths:` YAML entries (no substring search over
+    the block, no prose). A candidate fires when the entry list contains at
+    least one narrative-skill path AND at least one non-neutral root spec.
+
+    Narrative match uses the full NARRATIVE_SKILL_GLOBS set (so suno-lyric-writer
+    and the-agency-system-architect are caught alongside dramatica/ncp/novel-*).
+    Root-spec match is exact string equality on the entry; substring matches
+    like `skills/foo/README.md` ⊃ `README.md` no longer fire.
+
+    AGENTS.md is included as a candidate root: the ADR exempts only the
+    AGENTS.md narrative section, not the entire file. Maintainer manually
+    confirms (a) T3 vs T1/T2 tier and (b) whether the AGENTS.md edit was
+    confined to the narrative carve-out.
     """
     tasks_dir = repo_root / "tasks"
     candidates: list[str] = []
@@ -268,13 +330,16 @@ def audit_0008_f4(repo_root: Path) -> dict:
             m = _TASK_AFFECTS_BLOCK_RE.search(text)
             if m is None:
                 continue
-            block = m.group(1)
-            if not _NARRATIVE_PATH_RE.search(block):
+            entries = _parse_affects_paths_entries(m.group(1))
+            if not any(_is_narrative_skill_path(e) for e in entries):
                 continue
-            roots_touched = [r for r in _NON_NEUTRAL_ROOTS if r in block]
+            roots_touched = [r for r in _NON_NEUTRAL_ROOTS if r in entries]
             if roots_touched:
                 candidates.append(f"{task_md.relative_to(repo_root)}->{','.join(roots_touched)}")
-    msg = f"candidates={len(candidates)} (requires manual T3-vs-T1/T2 review); list={';'.join(candidates) or 'none'}"
+    msg = (
+        f"candidates={len(candidates)} (requires manual T3-vs-T1/T2 review "
+        f"and AGENTS.md narrative-section check); list={';'.join(candidates) or 'none'}"
+    )
     return _fire("ADR-0008.F4", msg) if candidates else _ok("ADR-0008.F4", msg)
 
 

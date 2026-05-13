@@ -265,6 +265,107 @@ def test_composes_bundle_size_snapshot_does_not_duplicate(audit, tmp_path):
     assert report["bundle_specs_measured"] == direct["specs_measured"]
 
 
+def test_friction_window_prefers_frontmatter_updated_over_mtime(audit, tmp_path):
+    """Session date MUST come from frontmatter `updated:` so clone/checkout
+    mtime resets don't make a 30-day-old log look 0-day-old."""
+    _seed_bundle(tmp_path, per_spec_chars=100)
+    today = dt.date(2026, 5, 13)
+    # Three FL1+ logs whose mtime is fresh (today) but whose frontmatter
+    # `updated:` is 30 days ago — outside the 14-day window.
+    for slug in ("070-a", "071-b", "072-c"):
+        log = _seed_friction_log(
+            tmp_path,
+            slug,
+            "---\n"
+            "type: note\n"
+            "updated: 2026-04-13\n"
+            "---\n\n"
+            "Highest Frustration Level: FL2\nNO.5 trouble.\n",
+            mtime_offset_days=0,
+        )
+        assert log.exists()
+    report = audit.run_audit(tmp_path, today=today, window_days=14)
+    assert report["results"]["ADR-0008.F3"]["fired"] is False
+
+
+def test_friction_window_off_by_one_boundary(audit, tmp_path):
+    """`window_days=14` MUST accept exactly 14 calendar dates (today plus 13
+    prior), not 15. A log dated today-14 MUST be excluded."""
+    _seed_bundle(tmp_path, per_spec_chars=100)
+    today = dt.date(2026, 5, 13)
+    boundary = today - dt.timedelta(days=14)  # one day too old
+    for slug in ("073-a", "074-b", "075-c"):
+        _seed_friction_log(
+            tmp_path,
+            slug,
+            f"---\nupdated: {boundary.isoformat()}\n---\n\n"
+            "Highest Frustration Level: FL2\nNO.5 trouble.\n",
+        )
+    report = audit.run_audit(tmp_path, today=today, window_days=14)
+    assert report["results"]["ADR-0008.F3"]["fired"] is False
+
+
+def test_f4_substring_match_does_not_false_fire(audit, tmp_path):
+    """Narrative path ending in `README.md` MUST NOT be treated as touching
+    the root `README.md`. F4 only fires on exact root-spec entries."""
+    _seed_bundle(tmp_path, per_spec_chars=100)
+    tasks_dir = tmp_path / "tasks" / "100-readme-substring"
+    tasks_dir.mkdir(parents=True)
+    (tasks_dir / "task.md").write_text(
+        "---\n"
+        "type: task\n"
+        "task_affects_paths:\n"
+        "  - skills/novel-architect/README.md\n"
+        "---\n",
+        encoding="utf-8",
+    )
+    report = audit.run_audit(tmp_path, today=dt.date(2026, 5, 13))
+    assert report["results"]["ADR-0008.F4"]["fired"] is False
+
+
+def test_f4_matches_all_narrative_skill_globs(audit, tmp_path):
+    """F4 narrative match MUST cover the full NARRATIVE_SKILL_GLOBS set,
+    including suno-lyric-writer and the-agency-system-architect."""
+    _seed_bundle(tmp_path, per_spec_chars=100)
+    for i, narrative_slug in enumerate(("suno-lyric-writer", "the-agency-system-architect")):
+        tasks_dir = tmp_path / "tasks" / f"10{i + 1}-narr"
+        tasks_dir.mkdir(parents=True)
+        (tasks_dir / "task.md").write_text(
+            "---\n"
+            "type: task\n"
+            "task_affects_paths:\n"
+            f"  - skills/{narrative_slug}/SKILL.md\n"
+            "  - MAINTENANCE.md\n"
+            "---\n",
+            encoding="utf-8",
+        )
+    report = audit.run_audit(tmp_path, today=dt.date(2026, 5, 13))
+    f4 = report["results"]["ADR-0008.F4"]
+    assert f4["fired"] is True
+    assert "candidates=2" in f4["msg"]
+
+
+def test_f4_includes_agents_md_as_candidate(audit, tmp_path):
+    """ADR-0008 F4 carve-out exempts only the AGENTS.md narrative section,
+    not the entire file. AGENTS.md MUST be a candidate root spec; the
+    maintainer manually confirms section-scope post-fire."""
+    _seed_bundle(tmp_path, per_spec_chars=100)
+    tasks_dir = tmp_path / "tasks" / "104-agents-touch"
+    tasks_dir.mkdir(parents=True)
+    (tasks_dir / "task.md").write_text(
+        "---\n"
+        "type: task\n"
+        "task_affects_paths:\n"
+        "  - skills/novel-architect/SKILL.md\n"
+        "  - AGENTS.md\n"
+        "---\n",
+        encoding="utf-8",
+    )
+    report = audit.run_audit(tmp_path, today=dt.date(2026, 5, 13))
+    assert report["results"]["ADR-0008.F4"]["fired"] is True
+    assert "AGENTS.md" in report["results"]["ADR-0008.F4"]["msg"]
+
+
 def test_f4_only_inspects_task_affects_paths_block(audit, tmp_path):
     """F4 MUST NOT fire on prose mentions of root specs — only on task_affects_paths entries."""
     _seed_bundle(tmp_path, per_spec_chars=100)
