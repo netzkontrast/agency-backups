@@ -4,7 +4,7 @@ status: active
 slug: maintenance-spec
 summary: "Governs the Nightly Maintenance Run and the Repo Coherence Check routine. Defines scope, repair permissions, run-log protocol, and Task delegation rules for all automated maintenance agents."
 created: 2026-05-02
-updated: 2026-05-08
+updated: 2026-05-13
 ---
 
 # Repository Maintenance Protocol
@@ -281,6 +281,28 @@ If any predicate fails, the agent MUST log the collision in the run-log notes an
 
 The acceptance contract for the discovery-loop closure is anchor [`M.B.4`](#6-acceptance-criteria-gherkin-scenarios) below.
 
+### 3.6 ADR Falsifier-Trigger Audit (Nightly Cadence)
+
+[ADR-0008](./decisions/0008-narrative-skills-status-quo.md) and [ADR-0009](./decisions/0009-root-spec-no-consolidation.md) each ratify *status quo* with a set of falsifier triggers that, when fired, mandate a successor ADR. The eight triggers are mechanical, semi-mechanical, or manual predicates. Without a recurring measurement cadence, the triggers are theoretical: a decision ratified at `adr_status: Proposed` would never collect the evidence required to flip to `Accepted` or to spawn a successor.
+
+[`tools/maintenance/adr-trigger-audit.py`](./tools/maintenance/adr-trigger-audit.py) (Task 069) is the binding measurement mechanism for the eight triggers. It composes [`tools/maintenance/bundle-size-snapshot.py`](./tools/maintenance/bundle-size-snapshot.py) for the two bundle-token triggers (ADR-0008 F2 + ADR-0009 F1), reuses the snapshot's `--include-dependents` extension for ADR-0009 F2, walks `skills/` for ADR-0008 F1, aggregates `tasks/*/friction-log.md` for the two semi-mechanical sustained-friction triggers (ADR-0008 F3 + ADR-0009 F3), and scans `task_affects_paths:` blocks for ADR-0008 F4. The single manual trigger (ADR-0008 F5 — third-party-adopter blocker) MUST surface as `MANUAL` in the audit report rather than as a fire/no-fire predicate; the audit cannot synthesise a missing signal.
+
+**Cadence.** The Nightly Maintenance Run (§3) MUST invoke `python3 tools/maintenance/adr-trigger-audit.py --format runlog` once per run and append the single-line projection to [`maintenance/run-log.md`](./maintenance/run-log.md) as a sibling of the run record. The Repo Coherence Check (§2) MAY invoke the audit but is NOT required to; the audit's data refreshes slowly (bundle size, skill counts, friction over a 14-day window) and the coherence-check cadence is per-session, which over-samples the predicate space.
+
+**Runlog projection format.** One line per nightly run, appendable to `maintenance/run-log.md`:
+
+```
+YYYY-MM-DD | adr-trigger-audit | 8 triggers / window=14d / bundle~<N> tokens | <ok|FIRED:CODE,CODE...> | manual=<CODE,CODE...>
+```
+
+The projection is intentionally identical in shape to `bundle-size-snapshot.py --format runlog` so a maintenance agent can `grep` both lines from the same record window.
+
+**Exit-code contract.** The audit exits `0` when no mechanical or semi-mechanical trigger fires (manual triggers are reported but never count as a fire), `2` when at least one trigger fires (advisory-tier — a maintainer decides whether to file an ADR-0008 / ADR-0009 successor), and `1` on usage error. The audit MUST NOT be wired into the default `tools/check-governance.sh` gate; it MAY run as an `[opt]`-tier WARN-only row if the maintainer chooses to surface fires in pre-commit output, but a fired trigger MUST NOT block a commit.
+
+**Action on a fire.** When the audit reports `FIRED:<CODE>`, the maintenance agent MUST NOT mutate ADR-0008 or ADR-0009 in place (both files are `T4`-immutable once `Accepted`; while at `Proposed` they remain root-spec-tier per §1 and require a successor or amendment Task). Instead the agent MUST file a Task whose Plan covers the successor ADR per [`decisions/readme.md`](./decisions/readme.md), citing the audit's diagnostic line as the evidence anchor.
+
+The acceptance contract for the audit cadence is anchor [`M.B.8`](#6-acceptance-criteria-gherkin-scenarios) below.
+
 ---
 
 ## 4. Finalising Any Run
@@ -469,3 +491,25 @@ Scenario: Maintenance run MUST NOT mutate `decisions/<NNNN>-<slug>.md` at any ti
 ```
 
 The seven anchors above (M.B.1 through M.B.7) close the (a)–(f) Goal of [Task 039](./tasks/039-maintenance-spec-integration/task.md). Future Tasks that promote any advisory linter to gating MUST add a paired Gherkin scenario under the next free anchor (M.B.8 onward) so the acceptance contract grows with the toolchain.
+
+```gherkin
+# anchor: M.B.8 — ADR falsifier-trigger audit cadence
+Feature: Nightly maintenance run invokes the ADR-0008 / ADR-0009 trigger audit and records the result
+Scenario: Audit runs once per nightly cadence and emits a runlog projection
+  Given the Nightly Maintenance Run (§3) is active
+  And `tools/maintenance/adr-trigger-audit.py` is executable
+  When the maintenance agent invokes `python3 tools/maintenance/adr-trigger-audit.py --format runlog`
+  Then the audit MUST emit exactly one line in the form
+        `<date> | adr-trigger-audit | 8 triggers / window=<N>d / bundle~<N> tokens | <ok|FIRED:...> | manual=...`
+  And the agent MUST append the line to `maintenance/run-log.md` in the same atomic commit as the run record
+  And the audit MUST exit `0` when no mechanical or semi-mechanical trigger fires
+  And the audit MUST exit `2` when at least one such trigger fires (advisory)
+  And manual triggers (ADR-0008 F5) MUST be reported as `MANUAL` and MUST NOT count as a fire
+Scenario: Audit fire spawns a successor-ADR Task rather than an in-place edit
+  Given the audit emits `FIRED:ADR-0008.F1` (narrative-skill count exceeds threshold)
+  When the maintenance agent processes the diagnostic
+  Then the agent MUST NOT mutate `decisions/0008-narrative-skills-status-quo.md` in place
+  And the agent MUST file a Task whose Plan covers the ADR successor per `decisions/readme.md`
+  And the Task's `task_affects_paths` MUST include the ADR file
+  And the Task body MUST cite the audit's diagnostic line as evidence
+```

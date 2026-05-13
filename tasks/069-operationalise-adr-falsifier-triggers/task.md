@@ -4,10 +4,10 @@ status: active
 slug: operationalise-adr-falsifier-triggers
 summary: "ADR-0008 (F1-F5) and ADR-0009 (F1-F3) record eight falsifier triggers that re-open the decisions when fired. Without a recurring measurement cadence none of them fire on their own; the decisions stay 'Proposed' forever. This Task wires each mechanical trigger into a single check + documents the cadence in MAINTENANCE.md."
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-13
 task_id: "069"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude-code/worktree-agent-a0fbbf369b577c4cf"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
@@ -65,14 +65,14 @@ The single falsifiable outcome of this Task: a maintainer can run **one** CLI in
 
 ## Todo
 
-- [ ] 1. Classify all eight triggers in `notes.md` (mechanical / semi-mechanical / manual table).
-- [ ] 2. Ship `tools/maintenance/adr-trigger-audit.py` (composes `bundle-size-snapshot.py`; never duplicates its logic).
-- [ ] 3. Extend `bundle-size-snapshot.py` to emit a `dependents` count per spec; backport into the existing 9-test suite.
-- [ ] 4. Author ≥ 6 tests for `adr-trigger-audit.py` under `tools/tests/maintenance/test_adr_trigger_audit.py`.
-- [ ] 5. Amend `MAINTENANCE.md` with a new subsection wiring the audit into the Nightly Maintenance Run cadence; document the runlog projection format.
-- [ ] 6. Amend ADR-0008 + ADR-0009 (`Proposed` → still `Proposed`) to cite `tools/maintenance/adr-trigger-audit.py` as the binding measurement mechanism.
-- [ ] 7. Run the audit; record baseline in `notes.md`; assert no trigger fires (regression-tested against ADR-0009 F1 = 70,676 tokens).
-- [ ] 8. Write `friction-log.md` with FL[0–3] declaration on closure.
+- [x] 1. Classify all eight triggers in `notes.md` (mechanical / semi-mechanical / manual table).
+- [x] 2. Ship `tools/maintenance/adr-trigger-audit.py` (composes `bundle-size-snapshot.py`; never duplicates its logic).
+- [x] 3. Extend `bundle-size-snapshot.py` to emit a `dependents` count per spec; backport into the existing 9-test suite.
+- [x] 4. Author ≥ 6 tests for `adr-trigger-audit.py` under `tools/tests/maintenance/test_adr_trigger_audit.py`.
+- [x] 5. Amend `MAINTENANCE.md` with a new subsection wiring the audit into the Nightly Maintenance Run cadence; document the runlog projection format.
+- [x] 6. Amend ADR-0008 + ADR-0009 (`Proposed` → still `Proposed`) to cite `tools/maintenance/adr-trigger-audit.py` as the binding measurement mechanism.
+- [x] 7. Run the audit; record baseline in `notes.md`; assert no trigger fires (regression-tested against ADR-0009 F1 = 70,676 tokens).
+- [x] 8. Write `friction-log.md` with FL[0–3] declaration on closure.
 
 ## Out of scope
 

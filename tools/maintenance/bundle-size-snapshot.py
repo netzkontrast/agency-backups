@@ -38,6 +38,19 @@ import sys
 from pathlib import Path
 from typing import Iterable
 
+# Suffix set considered when counting inbound references for a spec.
+DEPENDENT_SCAN_SUFFIXES: tuple[str, ...] = (".md", ".py", ".sh")
+
+# Top-level directories excluded from the dependent scan (large binary trees,
+# vendored assets, agent caches). Cross-references that matter live in code
+# and prose.
+DEPENDENT_SCAN_SKIP_DIRS: frozenset[str] = frozenset({
+    ".git",
+    ".agent_cache",
+    "node_modules",
+    "Agency-System",
+})
+
 # The 11 root specs that make up the session-boot bundle per ADR-0009 §"Context".
 # Adding or removing an entry is a deliberate amendment to the baseline.
 BUNDLE_SPECS: tuple[str, ...] = (
@@ -62,11 +75,55 @@ F1_THRESHOLD_TOKENS = 100_000
 CHARS_PER_TOKEN = 4
 
 
-def measure_bundle(repo_root: Path, specs: Iterable[str] = BUNDLE_SPECS) -> dict:
+def count_dependents(repo_root: Path, spec_rel: str) -> int:
+    """Count files under repo_root that reference spec_rel by basename.
+
+    ADR-0009 F2 ("either spec < 1000 tokens AND < 50 dependents") requires a
+    cheap, deterministic inbound-reference count. We scan files with one of
+    DEPENDENT_SCAN_SUFFIXES below repo_root, skipping top-level directories
+    in DEPENDENT_SCAN_SKIP_DIRS, and count files whose contents contain the
+    spec's basename (e.g. "PRE_COMMIT.md"). The spec file itself is excluded.
+    """
+    basename = Path(spec_rel).name
+    target_abs = (repo_root / spec_rel).resolve()
+    needle = basename.encode("utf-8")
+    count = 0
+    for path in repo_root.rglob("*"):
+        if not path.is_file():
+            continue
+        if path.suffix not in DEPENDENT_SCAN_SUFFIXES:
+            continue
+        try:
+            rel_parts = path.resolve().relative_to(repo_root.resolve()).parts
+        except ValueError:
+            continue
+        if rel_parts and rel_parts[0] in DEPENDENT_SCAN_SKIP_DIRS:
+            continue
+        if path.resolve() == target_abs:
+            continue
+        try:
+            data = path.read_bytes()
+        except OSError:
+            continue
+        if needle in data:
+            count += 1
+    return count
+
+
+def measure_bundle(
+    repo_root: Path,
+    specs: Iterable[str] = BUNDLE_SPECS,
+    *,
+    include_dependents: bool = False,
+) -> dict:
     """Return per-spec sizes and aggregate measurements.
 
     The return shape is the canonical record this tool emits in --format json
     and (with a one-line projection) in --format text / --format runlog.
+
+    When include_dependents is True, each per-spec record additionally carries
+    a `dependents` field (count of files referencing the spec by basename).
+    Composed by tools/maintenance/adr-trigger-audit.py for ADR-0009 F2.
     """
     per_spec: list[dict] = []
     missing: list[str] = []
@@ -80,12 +137,15 @@ def measure_bundle(repo_root: Path, specs: Iterable[str] = BUNDLE_SPECS) -> dict
         text = path.read_text(encoding="utf-8")
         nbytes = len(text.encode("utf-8"))
         nlines = text.count("\n") + (0 if text.endswith("\n") else 1)
-        per_spec.append({
+        rec = {
             "path": rel,
             "lines": nlines,
             "bytes": nbytes,
             "tokens": nbytes // CHARS_PER_TOKEN,
-        })
+        }
+        if include_dependents:
+            rec["dependents"] = count_dependents(repo_root, rel)
+        per_spec.append(rec)
         total_bytes += nbytes
         total_lines += nlines
     return {
@@ -156,6 +216,11 @@ def main(argv: list[str] | None = None) -> int:
         default=None,
         help="Repo root (defaults to git toplevel discovery from CWD).",
     )
+    parser.add_argument(
+        "--include-dependents",
+        action="store_true",
+        help="Augment per-spec records with `dependents` count (ADR-0009 F2 input).",
+    )
     args = parser.parse_args(argv)
 
     if args.repo_root is None:
@@ -174,7 +239,7 @@ def main(argv: list[str] | None = None) -> int:
             )
             return 1
 
-    snapshot = measure_bundle(args.repo_root)
+    snapshot = measure_bundle(args.repo_root, include_dependents=args.include_dependents)
 
     if snapshot["specs_missing"]:
         print(

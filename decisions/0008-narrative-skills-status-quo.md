@@ -4,7 +4,7 @@ status: active
 slug: 0008-narrative-skills-status-quo
 summary: "Six narrative skills + narrative-ontology + dramatica-nav stay in this repo. The AGENTS.md NO.5 don't-load rule and WARN-tier linter remain the partition. Extraction deferred until a falsifier trigger fires."
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-13
 adr_id: ADR-0008
 adr_status: Proposed
 adr_owner: agency-maintainer
@@ -78,6 +78,10 @@ Keep the existing topology. `AGENTS.md` `NO.5` plus `tools/check-narrative-ontol
 - **F5.** A third-party adopter of this substrate requests narrative-content exclusion as a hard prerequisite. The substrate's primary value proposition is governance; if narrative content actively blocks adoption, extraction earns its cost.
 
 When any falsifier triggers, a successor ADR MUST be authored that re-evaluates Options 1 and 2 against the then-current evidence and supersedes this one via `adr_supersedes: [ADR-0008]`.
+
+### How the triggers are measured
+
+The binding measurement mechanism for F1–F5 is [`tools/maintenance/adr-trigger-audit.py`](../tools/maintenance/adr-trigger-audit.py) (Task 069). The audit composes [`tools/maintenance/bundle-size-snapshot.py`](../tools/maintenance/bundle-size-snapshot.py) for F2 (bundle-token cost) and computes F1 / F3 / F4 directly; F5 surfaces as `MANUAL` rather than a fire/no-fire predicate because no in-repo signal exists for third-party-adopter requests. The audit MUST be invoked on the Nightly Maintenance Run cadence per [MAINTENANCE.md §3.6](../MAINTENANCE.md#36-adr-falsifier-trigger-audit-nightly-cadence); a fire emits `<path>::WARN:ADR-0008.F<n>:<msg>` and exits `2`, signalling that this ADR's successor MUST be authored. The trigger predicates above remain authoritative; the audit script is the *how-we-test-this* footnote, not a re-definition of the triggers.
 
 ### Status note on `adr_status: Proposed`
 
