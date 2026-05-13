@@ -37,7 +37,7 @@ The next agent MUST verify each before issuing any `git mv` command.
 - **P.3** The ADR draft in [`adr-draft.md`](./adr-draft.md) has been revised to reflect (a) L11.43 v3 scope (6 types, not tasks-only) and (b) the per-type natural-fit reversal. The user has reviewed the revised draft.
 - **P.4** [`schemas-delta.md`](./schemas-delta.md) has been updated to reflect the Decision 4 reversal (uniform L2 `id:` field across the 5 promoted types).
 - **P.5** The user issues an **explicit, unambiguous instruction** to execute this task. The instruction MUST name "archive" or "git mv" or this task's slug. Implicit cues (e.g. "let's start") are **not** sufficient.
-- **P.6 — Clean working tree.** `git status --porcelain` MUST return empty (no staged, no unstaged, no untracked changes) at the moment the archive run begins, except for files inside `/migration/` that capture the post-archive handover prose. Untracked root-level artefacts are adjudicated separately in §5 step 3 — they MUST be absent here, or step 3's untracked-leftovers branch fires before any `git mv` runs. This precondition guards against the silent-exclusion failure mode where staged-but-not-committed tracked paths get omitted from the move-set built in §5 step 3.
+- **P.6 — No staged/unstaged tracked changes outside `/migration/`.** `git status --porcelain | grep -v '^?? ' | grep -v '^.. migration/'` MUST produce empty output. Untracked root-level entries (status `??`) are permitted at this precondition — they are adjudicated explicitly in §5 step 4's untracked-leftovers branch. Staged or unstaged changes (`M`, `A`, `D`, `R`, etc.) on tracked paths outside `/migration/` are NOT permitted — they would silently corrupt the move-set built in step 4 (where `git ls-files` reflects the index, including staged changes the operator may not have intended to archive). If P.6 fails, surface the dirty paths to the user and ask them to commit, stash, or discard before re-running.
 
 **If any precondition is unmet, the agent MUST NOT begin the archive.** Surface the unmet precondition to the user and ask for resolution. Do not proceed on the basis of "good enough" precondition coverage.
 
@@ -90,13 +90,15 @@ Feature: Big-bang archive of pre-migration repo state
     And `git status --porcelain` shows every moved file with status code `R` (rename), not as `D` (delete) + `A` (add)
     And the count of `R` lines in `git status --porcelain` equals the total file count (recursive) of the to-be-moved set
 
-  Scenario: Exempt paths survive unchanged
-    Given the archive task has completed
-    Then /migration/ is byte-for-byte identical to its pre-task state
-    And /.claude/ is byte-for-byte identical to its pre-task state
-    And the Gemini briefs at .claude/research-results/gemini-1-architecture-audit.md and .claude/research-results/gemini-2-bootstrap-context-engineering.md are unmoved
-    And /.git/ and /archive/ are intact
-    And every user-elected keep-live borderline path (§3) is unmoved
+  Scenario: Exempt paths survive unchanged at the archive-commit boundary
+    Given the archive commit (§5 step 8) has just been authored
+    Then /migration/ is byte-for-byte identical to its pre-task state at that commit
+    And /.claude/ is byte-for-byte identical to its pre-task state at that commit
+    And the Gemini briefs at .claude/research-results/gemini-1-architecture-audit.md and .claude/research-results/gemini-2-bootstrap-context-engineering.md are unmoved at that commit
+    And /.git/ and /archive/ are intact at that commit
+    And every user-elected keep-live borderline path (§3) is unmoved at that commit
+    # Post-archive followup commits (§5 step 10) explicitly add post-archive prose to /migration/handover.md;
+    # those changes land AFTER the archive commit and are out of scope for this Scenario's byte-identity test.
 
   Scenario: History is traversable across the move
     Given the archive task has completed
@@ -132,10 +134,10 @@ Feature: Big-bang archive of pre-migration repo state
 When the task triggers, the agent executes:
 
 1. **Verify preconditions §2.1–§2.6.** If any fails, halt and report to user.
-2. **Filesystem + git state preflight (mitigates R.1, R.2, R.3).** Run in order, halt on any failure:
-    - `test -e archive && { test -d archive && find archive -maxdepth 1 -mindepth 1 | head -1; }` — if `archive/` exists in the working tree (whether tracked, untracked, or partially populated from a prior interrupted run), halt and reconcile with the user. `git ls-tree HEAD archive/ | wc -l` is **not** sufficient — it only inspects the committed tree and misses working-tree-only `archive/` content.
-    - `git submodule status` — if non-empty, halt and surface the submodule list to the user. `git mv` on a submodule path may misbehave; the user MUST guide the per-submodule strategy before proceeding.
-    - `git status --porcelain | grep -v '^.. migration/'` — must be empty. Pre-existing staged/unstaged/untracked changes outside `/migration/` would silently corrupt the move-set built in step 3. (This is P.6 enforced operationally.)
+2. **Filesystem + git state preflight (mitigates R.1, R.2, R.3, R.3a).** Run each check, halt on any check that fails:
+    - **`archive/` must NOT exist.** Test: `! test -e archive`. The shell-portable form is an explicit `if [ -e archive ]; then echo 'HALT: archive/ exists; reconcile before run'; exit 1; fi`. If `archive/` exists at all (whether populated, empty, tracked, untracked, or partial from a prior interrupted run), halt and reconcile with the user. **Do not** rely on `git ls-tree HEAD archive/ | wc -l` — that only inspects the committed tree and misses working-tree-only content. Existence-based filesystem check is the correct semantic.
+    - **Submodules must be absent.** Test: `[ -z "$(git submodule status)" ]`. The shell-portable form is `if [ -n "$(git submodule status)" ]; then echo 'HALT: submodules present; per-submodule guidance required'; exit 1; fi`. `git mv` on a submodule path may misbehave; the user MUST guide the per-submodule strategy before proceeding.
+    - **No staged/unstaged tracked changes outside `/migration/`.** Test: `[ -z "$(git status --porcelain | grep -v '^?? ' | grep -v '^.. migration/')" ]`. The shell-portable form is `dirty="$(git status --porcelain | grep -v '^?? ' | grep -v '^.. migration/')"; if [ -n "$dirty" ]; then echo "HALT: dirty tree outside /migration/:\n$dirty"; exit 1; fi`. (This enforces P.6 operationally.) Untracked entries (`??`) are explicitly permitted here — they're adjudicated in step 4.
 3. **Adjudicate §3 borderlines** via a single `AskUserQuestion` covering `install.sh`, `LICENSE`, `.editorconfig`, `.githooks/`, `.gitignore`, and any other dotfiles present at root.
 4. **Snapshot the to-be-moved set — only Git-controlled root entries from the index, not just HEAD:**
     - `git ls-files -- ':(top)*' | awk -F/ '{print $1}' | sort -u` gives the canonical list of top-level entries tracked in the **index** (includes staged-but-not-committed paths; `git ls-tree HEAD` alone would miss those). Filter against §3 to get the move-set; this is the input to step 6.
@@ -150,7 +152,7 @@ When the task triggers, the agent executes:
 7. **Verify renames:** the file-level rename count from `git status --porcelain | grep -c '^R'` equals the recursive file count of the to-be-moved set (computed via e.g. `git diff --cached --name-status --find-renames | grep -c '^R'` for staged moves, or `find <moved-path> -type f | wc -l` on the source set before the move). **Do not** use `git status` without `--porcelain` — the long human-readable format prints `renamed:` lines, not `R` codes, so `grep '^R'` returns zero matches even on successful moves. **Do not** compare against the count of top-level entries — `git mv tasks/` expands to one rename per file inside `tasks/`, not one rename total.
 8. **Commit:** `git commit --no-verify -m "archive: big-bang move of pre-migration repo state into /archive/"`. Body MUST cite `migration/waiver.md`, list the moved top-level entries, and include `Highest Frustration Level: FL[0-3]`.
 9. **Push** to the migration branch.
-10. **Update [`handover.md`](./handover.md)** with a "post-archive" section indicating the new state. Commit + push as a separate commit.
+10. **Post-archive followup (separate commit; explicitly OUTSIDE the §4 exempt-paths-survive Scenario which applies only at step 8's commit boundary):** edit `migration/handover.md` to add a "post-archive" section indicating the new state. Commit + push as a separate followup commit. This step intentionally violates the byte-identity property of `/migration/`; that property is point-in-time at the archive commit (step 8) only.
 11. **Open a PR** (if not already open) or update the existing PR description to reflect the archive milestone.
 
 ---
