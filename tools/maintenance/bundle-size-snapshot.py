@@ -34,6 +34,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Iterable
@@ -75,38 +76,53 @@ F1_THRESHOLD_TOKENS = 100_000
 CHARS_PER_TOKEN = 4
 
 
+def _spec_reference_pattern(basename: str) -> "re.Pattern[bytes]":
+    """Path-token-aware match for a spec basename.
+
+    Avoids the substring false-positives that bit ADR-0009 F2: `PRE_COMMIT.md.bak`
+    and `XPRE_COMMIT.mdY` would both count as inbound references under raw
+    `bytes in bytes` containment. The boundary class excludes `.` and word
+    characters on either side so the basename must appear as its own path
+    segment, link token, or surrounding-punctuation-delimited mention.
+    """
+    escaped = re.escape(basename).encode("utf-8")
+    return re.compile(
+        rb"(?<![A-Za-z0-9_.\-])" + escaped + rb"(?![A-Za-z0-9_.])",
+    )
+
+
 def count_dependents(repo_root: Path, spec_rel: str) -> int:
-    """Count files under repo_root that reference spec_rel by basename.
+    """Count files under repo_root that reference spec_rel by path token.
 
     ADR-0009 F2 ("either spec < 1000 tokens AND < 50 dependents") requires a
-    cheap, deterministic inbound-reference count. We scan files with one of
-    DEPENDENT_SCAN_SUFFIXES below repo_root, skipping top-level directories
-    in DEPENDENT_SCAN_SKIP_DIRS, and count files whose contents contain the
-    spec's basename (e.g. "PRE_COMMIT.md"). The spec file itself is excluded.
+    cheap, deterministic inbound-reference count. We walk repo_root with
+    `os.walk`, pruning DEPENDENT_SCAN_SKIP_DIRS at every level (so `.git`,
+    `node_modules`, etc. are never descended into rather than filtered
+    post-traversal). Files with DEPENDENT_SCAN_SUFFIXES are matched against
+    a path-aware regex so substrings like `PRE_COMMIT.md.bak` or
+    `XPRE_COMMIT.mdY` don't count. The spec file itself is excluded.
     """
+    import os
+
     basename = Path(spec_rel).name
     target_abs = (repo_root / spec_rel).resolve()
-    needle = basename.encode("utf-8")
+    pattern = _spec_reference_pattern(basename)
     count = 0
-    for path in repo_root.rglob("*"):
-        if not path.is_file():
-            continue
-        if path.suffix not in DEPENDENT_SCAN_SUFFIXES:
-            continue
-        try:
-            rel_parts = path.resolve().relative_to(repo_root.resolve()).parts
-        except ValueError:
-            continue
-        if rel_parts and rel_parts[0] in DEPENDENT_SCAN_SKIP_DIRS:
-            continue
-        if path.resolve() == target_abs:
-            continue
-        try:
-            data = path.read_bytes()
-        except OSError:
-            continue
-        if needle in data:
-            count += 1
+    root_resolved = repo_root.resolve()
+    for dirpath, dirnames, filenames in os.walk(root_resolved, topdown=True):
+        dirnames[:] = [d for d in dirnames if d not in DEPENDENT_SCAN_SKIP_DIRS]
+        for filename in filenames:
+            if Path(filename).suffix not in DEPENDENT_SCAN_SUFFIXES:
+                continue
+            path = Path(dirpath) / filename
+            if path.resolve() == target_abs:
+                continue
+            try:
+                data = path.read_bytes()
+            except OSError:
+                continue
+            if pattern.search(data):
+                count += 1
     return count
 
 

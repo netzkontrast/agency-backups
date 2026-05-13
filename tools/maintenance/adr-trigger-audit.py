@@ -91,7 +91,70 @@ BUNDLE_FRICTION_PATTERN = re.compile(
     r"\bbundle[- ]size\b|root[- ]spec[- ]count|\b11[- ]spec[- ]bundle\b",
     re.IGNORECASE,
 )
-FL_LINE_PATTERN = re.compile(r"Highest Frustration Level:\s*FL([0-3])", re.IGNORECASE)
+
+# Fallback used only if tools/check-fl-declaration.py cannot be loaded.
+_FL_LINE_PATTERN_FALLBACK = re.compile(
+    r"(?im)^\s*\*{0,2}\s*Highest\s+Frustration\s+Level\s*:\s*\*{0,2}\s*FL[0-3]\b",
+)
+_FL_TOKEN_RE = re.compile(r"\bFL([0-3])\b")
+
+
+def _load_fl_patterns() -> tuple[tuple[re.Pattern, ...], object | None]:
+    """Reuse tools/check-fl-declaration.py's canonical FL-declaration grammar.
+
+    Falls back to a single-pattern set on import failure so the audit still
+    runs in a stripped-down environment. Without this the audit only
+    recognised the canonical line and silently undercounted FL1+ sessions
+    on any of the 11 other accepted variants.
+    """
+    candidates = (
+        Path(__file__).resolve().parents[1] / "check-fl-declaration.py",
+    )
+    for path in candidates:
+        if not path.is_file():
+            continue
+        spec = importlib.util.spec_from_file_location("check_fl_declaration", path)
+        if spec is None or spec.loader is None:
+            continue
+        module = importlib.util.module_from_spec(spec)
+        try:
+            spec.loader.exec_module(module)
+        except Exception:
+            continue
+        patterns = getattr(module, "_FL_LINE_PATTERNS", None)
+        if patterns:
+            return tuple(patterns), module
+    return (_FL_LINE_PATTERN_FALLBACK,), None
+
+
+_FL_LINE_PATTERNS, _FL_CHECK_MODULE = _load_fl_patterns()
+
+
+def _detect_fl_level(text: str) -> int | None:
+    """Return the highest FL[0-3] level declared on a recognised line, or None.
+
+    Strips frontmatter before scanning so `summary: FL0` (variant 10 — the
+    malformed surface) does not count as a body declaration.
+    """
+    if _FL_CHECK_MODULE is not None and hasattr(_FL_CHECK_MODULE, "_strip_frontmatter"):
+        body = _FL_CHECK_MODULE._strip_frontmatter(text)
+    else:
+        body = text
+        if body.startswith("---\n"):
+            end = body.find("\n---\n", 4)
+            if end != -1:
+                body = body[end + 5 :]
+    highest: int | None = None
+    for pattern in _FL_LINE_PATTERNS:
+        m = pattern.search(body)
+        if m is None:
+            continue
+        tok = _FL_TOKEN_RE.search(m.group(0))
+        if tok is None:
+            continue
+        level = int(tok.group(1))
+        highest = level if highest is None else max(highest, level)
+    return highest
 
 
 # ----- diagnostic helpers -----
@@ -240,8 +303,8 @@ def _friction_in_window(
         mdate = _log_session_date(log, text)
         if mdate is None or mdate < threshold_date:
             continue
-        fl_match = FL_LINE_PATTERN.search(text)
-        if fl_match is None or int(fl_match.group(1)) < 1:
+        fl_level = _detect_fl_level(text)
+        if fl_level is None or fl_level < 1:
             continue
         if not pattern.search(text):
             continue
@@ -279,14 +342,36 @@ _NON_NEUTRAL_ROOTS: tuple[str, ...] = (
 )
 
 
+_YAML_INLINE_COMMENT_RE = re.compile(r"(?:^|\s)#.*$")
+
+
 def _parse_affects_paths_entries(block: str) -> list[str]:
-    """Pull clean string entries out of a `task_affects_paths:` YAML block."""
+    """Pull clean string entries out of a `task_affects_paths:` YAML block.
+
+    Prefers PyYAML for proper YAML semantics (handles quoting, escapes, inline
+    comments). Falls back to line slicing + inline-comment stripping if PyYAML
+    isn't installed, which preserves stdlib-only usage of this tool while
+    still handling the common `- path.md # note` form.
+    """
+    try:
+        import yaml  # type: ignore
+    except ImportError:
+        yaml = None
+    if yaml is not None:
+        try:
+            parsed = yaml.safe_load("task_affects_paths:\n" + block)
+        except Exception:
+            parsed = None
+        if isinstance(parsed, dict):
+            items = parsed.get("task_affects_paths") or []
+            if isinstance(items, list):
+                return [str(item).strip() for item in items if item is not None and str(item).strip()]
     entries: list[str] = []
     for raw in block.splitlines():
         s = raw.strip()
         if not s.startswith("- "):
             continue
-        entry = s[2:].strip().strip('"').strip("'")
+        entry = _YAML_INLINE_COMMENT_RE.sub("", s[2:]).strip().strip('"').strip("'")
         if entry:
             entries.append(entry)
     return entries
@@ -366,6 +451,11 @@ TRIGGER_ORDER: tuple[tuple[str, str], ...] = (
 )
 
 
+class IncompleteBundleError(RuntimeError):
+    """Raised when measure_bundle reports missing specs — refuses to evaluate
+    F2/F1 triggers on undercounted data (sparse checkout, mis-rooted run)."""
+
+
 def run_audit(
     repo_root: Path,
     *,
@@ -376,6 +466,15 @@ def run_audit(
         today = dt.date.today()
     bss = _load_bundle_module(repo_root)
     bundle = bss.measure_bundle(repo_root, include_dependents=True)
+    missing = bundle.get("specs_missing") or []
+    if missing:
+        raise IncompleteBundleError(
+            "adr-trigger-audit: refusing to evaluate triggers on an incomplete "
+            f"bundle — measure_bundle reports {len(missing)} missing spec(s): "
+            f"{', '.join(missing)}. ADR-0008.F2 / ADR-0009.F1 / ADR-0009.F2 "
+            "would be evaluated on undercounted data; resolve the missing "
+            "files (or run from the correct repo root) and re-invoke."
+        )
     results: dict[str, dict] = {
         "ADR-0008.F1": audit_0008_f1(repo_root),
         "ADR-0008.F2": audit_0008_f2(bundle),
@@ -465,7 +564,11 @@ def main(argv: list[str] | None = None) -> int:
             )
             return 1
 
-    report = run_audit(args.repo_root, window_days=args.window_days)
+    try:
+        report = run_audit(args.repo_root, window_days=args.window_days)
+    except IncompleteBundleError as exc:
+        print(f"adr-trigger-audit: ERROR: {exc}", file=sys.stderr)
+        return 1
 
     if args.format == "json":
         print(json.dumps(report, indent=2, sort_keys=True))

@@ -265,6 +265,84 @@ def test_composes_bundle_size_snapshot_does_not_duplicate(audit, tmp_path):
     assert report["bundle_specs_measured"] == direct["specs_measured"]
 
 
+def test_incomplete_bundle_raises_and_main_exits_1(audit, tmp_path, capsys):
+    """Missing bundle specs MUST hard-fail rather than evaluate F1/F2 on
+    undercounted data (sparse checkout, mis-rooted run)."""
+    # Don't seed the bundle — measure_bundle reports all 11 specs missing.
+    with pytest.raises(audit.IncompleteBundleError):
+        audit.run_audit(tmp_path, today=dt.date(2026, 5, 13))
+    code = audit.main(["--repo-root", str(tmp_path), "--format", "json"])
+    captured = capsys.readouterr()
+    assert code == 1
+    assert "incomplete bundle" in captured.err.lower()
+
+
+def test_fl_parser_recognises_variant_forms(audit, tmp_path):
+    """Audit MUST share check-fl-declaration.py's variant grammar so logs
+    using `**FL2** — ...` or `## Frustration Level: FL2` are counted."""
+    _seed_bundle(tmp_path, per_spec_chars=100)
+    today = dt.date(2026, 5, 13)
+    variants = [
+        ("080-v1", "**FL2** — narrative ontology ergonomics issue"),
+        ("081-v2", "## Frustration Level: FL2\n\nNO.5 friction described below."),
+        ("082-v3", "- **Friction Level:** FL2 — NO.5 carve-out churn"),
+    ]
+    for slug, body in variants:
+        _seed_friction_log(
+            tmp_path,
+            slug,
+            f"---\nupdated: {today.isoformat()}\n---\n\n{body}\nMentions narrative-ontology\n",
+        )
+    report = audit.run_audit(tmp_path, today=today, window_days=14)
+    assert report["results"]["ADR-0008.F3"]["fired"] is True
+
+
+def test_f4_strips_yaml_inline_comments(audit, tmp_path):
+    """`- MAINTENANCE.md # touched` MUST equal MAINTENANCE.md after parse."""
+    _seed_bundle(tmp_path, per_spec_chars=100)
+    tasks_dir = tmp_path / "tasks" / "105-inline-comment"
+    tasks_dir.mkdir(parents=True)
+    (tasks_dir / "task.md").write_text(
+        "---\n"
+        "type: task\n"
+        "task_affects_paths:\n"
+        "  - skills/novel-architect/SKILL.md\n"
+        "  - MAINTENANCE.md  # touched only the §3.6 wiring\n"
+        "---\n",
+        encoding="utf-8",
+    )
+    report = audit.run_audit(tmp_path, today=dt.date(2026, 5, 13))
+    f4 = report["results"]["ADR-0008.F4"]
+    assert f4["fired"] is True
+    assert "MAINTENANCE.md" in f4["msg"]
+
+
+def test_count_dependents_excludes_substring_false_positives(audit, tmp_path):
+    """count_dependents MUST not count `PRE_COMMIT.md.bak` or `XPRE_COMMIT.mdY`
+    as inbound references to root `PRE_COMMIT.md`."""
+    bss_spec = importlib.util.spec_from_file_location("bundle_size_snapshot", BUNDLE_MODULE_PATH)
+    bss = importlib.util.module_from_spec(bss_spec)
+    bss_spec.loader.exec_module(bss)
+    (tmp_path / "PRE_COMMIT.md").write_text("real spec", encoding="utf-8")
+    (tmp_path / "noise1.md").write_text("see PRE_COMMIT.md.bak instead\n", encoding="utf-8")
+    (tmp_path / "noise2.md").write_text("XPRE_COMMIT.mdY is unrelated\n", encoding="utf-8")
+    (tmp_path / "real_ref.md").write_text("[gate](PRE_COMMIT.md)\n", encoding="utf-8")
+    assert bss.count_dependents(tmp_path, "PRE_COMMIT.md") == 1
+
+
+def test_count_dependents_prunes_skip_dirs_without_descent(audit, tmp_path):
+    """DEPENDENT_SCAN_SKIP_DIRS MUST be pruned at walk-time, not post-filtered."""
+    bss_spec = importlib.util.spec_from_file_location("bundle_size_snapshot", BUNDLE_MODULE_PATH)
+    bss = importlib.util.module_from_spec(bss_spec)
+    bss_spec.loader.exec_module(bss)
+    (tmp_path / "PRE_COMMIT.md").write_text("spec", encoding="utf-8")
+    git_dir = tmp_path / ".git" / "deep" / "nested"
+    git_dir.mkdir(parents=True)
+    # If `.git` were traversed, this file would count as a dependent.
+    (git_dir / "log.md").write_text("references PRE_COMMIT.md\n", encoding="utf-8")
+    assert bss.count_dependents(tmp_path, "PRE_COMMIT.md") == 0
+
+
 def test_friction_window_prefers_frontmatter_updated_over_mtime(audit, tmp_path):
     """Session date MUST come from frontmatter `updated:` so clone/checkout
     mtime resets don't make a 30-day-old log look 0-day-old."""
