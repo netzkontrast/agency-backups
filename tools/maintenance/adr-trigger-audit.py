@@ -131,10 +131,13 @@ _FL_LINE_PATTERNS, _FL_CHECK_MODULE = _load_fl_patterns()
 
 
 def _detect_fl_level(text: str) -> int | None:
-    """Return the highest FL[0-3] level declared on a recognised line, or None.
+    """Return the highest FL[0-3] level declared on any recognised line, or None.
 
     Strips frontmatter before scanning so `summary: FL0` (variant 10 — the
-    malformed surface) does not count as a body declaration.
+    malformed surface) does not count as a body declaration. Iterates EVERY
+    match of every pattern rather than the first, so a log with an early
+    FL0 reference followed by a later FL1+ declaration still reports the
+    higher severity.
     """
     if _FL_CHECK_MODULE is not None and hasattr(_FL_CHECK_MODULE, "_strip_frontmatter"):
         body = _FL_CHECK_MODULE._strip_frontmatter(text)
@@ -146,14 +149,12 @@ def _detect_fl_level(text: str) -> int | None:
                 body = body[end + 5 :]
     highest: int | None = None
     for pattern in _FL_LINE_PATTERNS:
-        m = pattern.search(body)
-        if m is None:
-            continue
-        tok = _FL_TOKEN_RE.search(m.group(0))
-        if tok is None:
-            continue
-        level = int(tok.group(1))
-        highest = level if highest is None else max(highest, level)
+        for m in pattern.finditer(body):
+            tok = _FL_TOKEN_RE.search(m.group(0))
+            if tok is None:
+                continue
+            level = int(tok.group(1))
+            highest = level if highest is None else max(highest, level)
     return highest
 
 
@@ -331,10 +332,6 @@ def audit_0009_f3(repo_root: Path, window_days: int, today: dt.date) -> dict:
     return _fire("ADR-0009.F3", msg) if sessions >= FRICTION_SESSION_THRESHOLD else _ok("ADR-0009.F3", msg)
 
 
-_TASK_AFFECTS_BLOCK_RE = re.compile(
-    r"^task_affects_paths:\s*\n((?:[ \t]+-\s.*\n)+)",
-    re.MULTILINE,
-)
 _NON_NEUTRAL_ROOTS: tuple[str, ...] = (
     "AGENTS.md",
     "TASK.md", "PROMPT.md", "RESEARCH.md", "FOLDERS.md",
@@ -343,38 +340,86 @@ _NON_NEUTRAL_ROOTS: tuple[str, ...] = (
 
 
 _YAML_INLINE_COMMENT_RE = re.compile(r"(?:^|\s)#.*$")
+_FRONTMATTER_FULL_RE = re.compile(r"\A---\s*\n(.*?)\n---", re.DOTALL)
 
 
-def _parse_affects_paths_entries(block: str) -> list[str]:
-    """Pull clean string entries out of a `task_affects_paths:` YAML block.
+def _read_task_affects_paths(task_md_text: str) -> list[str]:
+    """Read `task_affects_paths` from a task.md's YAML frontmatter.
 
-    Prefers PyYAML for proper YAML semantics (handles quoting, escapes, inline
-    comments). Falls back to line slicing + inline-comment stripping if PyYAML
-    isn't installed, which preserves stdlib-only usage of this tool while
-    still handling the common `- path.md # note` form.
+    Parses the entire frontmatter block with PyYAML so all three YAML list
+    forms are accepted equivalently:
+      - block list (the common form)
+      - block list with blank/comment lines between entries
+      - inline list (`task_affects_paths: [a, b, c]`)
+    Falls back to a tolerant block-style line scan if PyYAML isn't installed.
+    Returns [] when the file has no frontmatter or no task_affects_paths key.
     """
+    fm_match = _FRONTMATTER_FULL_RE.match(task_md_text)
+    if fm_match is None:
+        return []
+    fm_text = fm_match.group(1)
     try:
         import yaml  # type: ignore
     except ImportError:
         yaml = None
     if yaml is not None:
         try:
-            parsed = yaml.safe_load("task_affects_paths:\n" + block)
+            fm = yaml.safe_load(fm_text)
         except Exception:
-            parsed = None
-        if isinstance(parsed, dict):
-            items = parsed.get("task_affects_paths") or []
-            if isinstance(items, list):
-                return [str(item).strip() for item in items if item is not None and str(item).strip()]
-    entries: list[str] = []
-    for raw in block.splitlines():
-        s = raw.strip()
-        if not s.startswith("- "):
-            continue
-        entry = _YAML_INLINE_COMMENT_RE.sub("", s[2:]).strip().strip('"').strip("'")
-        if entry:
-            entries.append(entry)
-    return entries
+            fm = None
+        if isinstance(fm, dict):
+            paths = fm.get("task_affects_paths") or []
+            if isinstance(paths, list):
+                return [str(p).strip() for p in paths if p is not None and str(p).strip()]
+        return []
+    return _read_task_affects_paths_fallback(fm_text)
+
+
+def _read_task_affects_paths_fallback(fm_text: str) -> list[str]:
+    """Best-effort line-scan for environments without PyYAML.
+
+    Handles block lists with blank/comment lines and inline `[a, b]` lists.
+    Stops at the next top-level YAML key.
+    """
+    lines = fm_text.splitlines()
+    in_block = False
+    out: list[str] = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if not in_block:
+            m = re.match(r"^task_affects_paths\s*:\s*(.*)$", line)
+            if m:
+                rest = m.group(1).strip()
+                if rest.startswith("["):
+                    buf = rest
+                    while "]" not in buf and i + 1 < len(lines):
+                        i += 1
+                        buf += " " + lines[i]
+                    inner = buf[buf.index("[") + 1 : buf.rindex("]")] if "]" in buf else buf[buf.index("[") + 1 :]
+                    for item in inner.split(","):
+                        s = _YAML_INLINE_COMMENT_RE.sub("", item).strip().strip('"').strip("'")
+                        if s:
+                            out.append(s)
+                    return out
+                in_block = True
+                i += 1
+                continue
+        else:
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#"):
+                i += 1
+                continue
+            if stripped.startswith("- "):
+                entry = _YAML_INLINE_COMMENT_RE.sub("", stripped[2:]).strip().strip('"').strip("'")
+                if entry:
+                    out.append(entry)
+                i += 1
+                continue
+            if re.match(r"^\S.*:", line):
+                break
+        i += 1
+    return out
 
 
 def _is_narrative_skill_path(entry: str) -> bool:
@@ -412,10 +457,9 @@ def audit_0008_f4(repo_root: Path) -> dict:
                 text = task_md.read_text(encoding="utf-8", errors="replace")
             except OSError:
                 continue
-            m = _TASK_AFFECTS_BLOCK_RE.search(text)
-            if m is None:
+            entries = _read_task_affects_paths(text)
+            if not entries:
                 continue
-            entries = _parse_affects_paths_entries(m.group(1))
             if not any(_is_narrative_skill_path(e) for e in entries):
                 continue
             roots_touched = [r for r in _NON_NEUTRAL_ROOTS if r in entries]

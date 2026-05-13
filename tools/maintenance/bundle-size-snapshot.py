@@ -79,15 +79,15 @@ CHARS_PER_TOKEN = 4
 def _spec_reference_pattern(basename: str) -> "re.Pattern[bytes]":
     """Path-token-aware match for a spec basename.
 
-    Avoids the substring false-positives that bit ADR-0009 F2: `PRE_COMMIT.md.bak`
-    and `XPRE_COMMIT.mdY` would both count as inbound references under raw
-    `bytes in bytes` containment. The boundary class excludes `.` and word
-    characters on either side so the basename must appear as its own path
+    Avoids substring false-positives: `PRE_COMMIT.md.bak`, `XPRE_COMMIT.mdY`,
+    `PRE_COMMIT.md-§2` would all count as inbound references under raw
+    `bytes in bytes` containment. The boundary class excludes word characters,
+    `.`, and `-` on either side so the basename must appear as its own path
     segment, link token, or surrounding-punctuation-delimited mention.
     """
     escaped = re.escape(basename).encode("utf-8")
     return re.compile(
-        rb"(?<![A-Za-z0-9_.\-])" + escaped + rb"(?![A-Za-z0-9_.])",
+        rb"(?<![A-Za-z0-9_.\-])" + escaped + rb"(?![A-Za-z0-9_.\-])",
     )
 
 

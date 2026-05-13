@@ -265,6 +265,74 @@ def test_composes_bundle_size_snapshot_does_not_duplicate(audit, tmp_path):
     assert report["bundle_specs_measured"] == direct["specs_measured"]
 
 
+def test_fl_detector_uses_highest_across_all_matches(audit, tmp_path):
+    """A log with FL0 followed by FL2 MUST report FL2 (highest), not FL0
+    (first match). Previously _detect_fl_level used .search() per pattern
+    and stopped at the first hit."""
+    body = (
+        "## Frustration Log\n\n"
+        "**FL0** — early checkpoint, plan held.\n"
+        "**FL2** — later, NO.5 friction surfaced.\n"
+    )
+    fm = "---\nupdated: 2026-05-13\n---\n\n"
+    level = audit._detect_fl_level(fm + body)
+    assert level == 2
+
+
+def test_f4_accepts_inline_yaml_list(audit, tmp_path):
+    """`task_affects_paths: [a, b]` inline form MUST be parsed equivalently
+    to the block form."""
+    _seed_bundle(tmp_path, per_spec_chars=100)
+    tasks_dir = tmp_path / "tasks" / "106-inline-list"
+    tasks_dir.mkdir(parents=True)
+    (tasks_dir / "task.md").write_text(
+        "---\n"
+        "type: task\n"
+        "task_affects_paths: [skills/novel-architect/SKILL.md, MAINTENANCE.md]\n"
+        "---\n",
+        encoding="utf-8",
+    )
+    report = audit.run_audit(tmp_path, today=dt.date(2026, 5, 13))
+    f4 = report["results"]["ADR-0008.F4"]
+    assert f4["fired"] is True
+    assert "MAINTENANCE.md" in f4["msg"]
+
+
+def test_f4_handles_non_contiguous_block_list(audit, tmp_path):
+    """Block list entries separated by blank lines or YAML comments MUST
+    still be picked up — previously the contiguous-run regex bailed."""
+    _seed_bundle(tmp_path, per_spec_chars=100)
+    tasks_dir = tmp_path / "tasks" / "107-non-contiguous"
+    tasks_dir.mkdir(parents=True)
+    (tasks_dir / "task.md").write_text(
+        "---\n"
+        "type: task\n"
+        "task_affects_paths:\n"
+        "  - skills/novel-architect/SKILL.md\n"
+        "  # documented carve-out for the §3.6 wiring\n"
+        "\n"
+        "  - MAINTENANCE.md\n"
+        "task_owner: claude\n"
+        "---\n",
+        encoding="utf-8",
+    )
+    report = audit.run_audit(tmp_path, today=dt.date(2026, 5, 13))
+    f4 = report["results"]["ADR-0008.F4"]
+    assert f4["fired"] is True
+    assert "MAINTENANCE.md" in f4["msg"]
+
+
+def test_count_dependents_rejects_hyphen_suffix(audit, tmp_path):
+    """`PRE_COMMIT.md-§2` MUST NOT count as an inbound reference."""
+    bss_spec = importlib.util.spec_from_file_location("bundle_size_snapshot", BUNDLE_MODULE_PATH)
+    bss = importlib.util.module_from_spec(bss_spec)
+    bss_spec.loader.exec_module(bss)
+    (tmp_path / "PRE_COMMIT.md").write_text("spec", encoding="utf-8")
+    (tmp_path / "prose.md").write_text("see PRE_COMMIT.md-§2 for the rule\n", encoding="utf-8")
+    (tmp_path / "link.md").write_text("[gate](PRE_COMMIT.md)\n", encoding="utf-8")
+    assert bss.count_dependents(tmp_path, "PRE_COMMIT.md") == 1
+
+
 def test_incomplete_bundle_raises_and_main_exits_1(audit, tmp_path, capsys):
     """Missing bundle specs MUST hard-fail rather than evaluate F1/F2 on
     undercounted data (sparse checkout, mis-rooted run)."""
