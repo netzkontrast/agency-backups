@@ -1,22 +1,29 @@
 ---
 type: note
-status: draft
+status: archived
 slug: roundtable-7-ontology-locks-recap
 summary: >
-  Session recap and open-questions ledger for Roundtable 7 of the Agency
-  repo-refactoring design. Captures the 12-first-class-types ontology
-  (L11.32triple), the three-mode placement model (L11.36-prime through L11.42),
-  and the ULID-prefixed folder convention with archive-first migration
-  (L11.43). Plan-of-record document; not yet promoted to /tasks/ or /decisions/.
+  Historical recap of Roundtable 7. Superseded by /migration/ in Roundtable 8.
+  L11.43 captured below is the ORIGINAL form (12 types except ADR,
+  <slug>-<ulid>/ folder shape) — revised same-session-sequence to tasks-only
+  with bare-slug + frontmatter ULID. See /migration/handover.md.
 created: 2026-05-13
 updated: 2026-05-13
 session_branch: claude/repo-refactoring-plan-CfLY5
-session_phase: design-locks-pending-cascade
+session_phase: superseded
 ---
+
+> **SUPERSEDED — see [`/migration/`](../../migration/)**
+>
+> Roundtable 8 revised L11.43 to tasks-only with bare-slug folders + frontmatter
+> ULID, and introduced L11.44 (auto-generated readmes). This document captures the
+> Roundtable 7 state only and is retained as a historical snapshot. The current
+> plan-of-record is [`/migration/handover.md`](../../migration/handover.md). Do not
+> edit this file further; supersede via the migration workspace.
 
 # Roundtable 7 — Ontology Locks & Open Questions
 
-This document is the **plan-of-record** for the in-flight repo-refactoring design conversation. It is NOT yet an ADR; the ADR(s) get drafted once the remaining open questions in §3 are resolved.
+This document is the **historical recap** of Roundtable 7. As of Roundtable 8 (2026-05-13), the plan-of-record is [`/migration/`](../../migration/); content below is preserved for audit only.
 
 File is `type: note` and lives in `.claude/plans/` — outside the 12-type governance scope, so it carries a bare-slug filename matching its sibling plan files (`agency-refactor-plan.md`, `round-10-additions.md`, etc.). The ULID convention pinned in L11.43 applies to operational artifacts of the 12 first-class types only.
 
