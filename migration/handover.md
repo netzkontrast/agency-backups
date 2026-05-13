@@ -90,7 +90,7 @@ This **shifts the recommended path** away from incremental cascade (Path A) and 
 
 1. **Close Q1–Q7** in [`open-questions.md`](./open-questions.md) via AskUserQuestion. Single short session.
 2. **Re-confirm turn-11 provisional answers** (R1 / R2 / R3 in [`locks-ratified.md §Revision history`](./locks-ratified.md#revision-history--answers-given-mid-session-after-waiver-request)).
-3. **Revise [`adr-draft.md`](./adr-draft.md)** to reflect L11.43 v3 scope (6 types) and Decision 4 reversal. Revise [`schemas-delta.md`](./schemas-delta.md) similarly.
+3. **Revise [`adr-draft.md`](./adr-draft.md)** to reflect **whichever ULID scope step 2 confirmed** — v2 (tasks-only + per-type natural fit for the other 11 types) OR v3 (6 types with ULID, Decision 4 reversed). Revise [`schemas-delta.md`](./schemas-delta.md) to match. Earlier draft hardcoded v3; the dependency is scope-agnostic (must match user-confirmed answer at step 2), aligned with `next-task.md` P.3/P.4.
 4. **User authorises archive execution.** Explicit instruction required (see [`next-task.md §2 P.5`](./next-task.md)).
 5. **Execute [`next-task.md`](./next-task.md)** — `git mv` every non-exempt entry into `/archive/`. Live tree shrinks to `/migration/`, `/.claude/`, `/.git/`, `/.githooks/`, `/archive/`, plus the few user-adjudicated borderline dotfiles.
 6. **Rebuild** — author the new operational tree directly into the live root, guided by `/migration/` + the Gemini research briefs. Tasks 6.x get created as they're needed.
