@@ -1,6 +1,6 @@
 # Agency Repo Refactoring Plan (Working Draft)
 
-> **Status:** Iterative requirements capture — Round 7 closed. Round 8 pending. Not yet finalised.
+> **Status:** Iterative requirements capture — Rounds 1–9 closed. Round 10 pending (meta/ reopened, plus 5 deferred questions). Not yet finalised.
 > **Branch:** `claude/repo-refactoring-plan-CfLY5`
 > **Scope:** Restructure the `agency` repo per the four-layer model the user is incrementally specifying across rounds.
 
@@ -73,33 +73,44 @@ When a Research workspace closes, the parent Task runs its gate-tooling against 
 - **Sub-numbered amendments** capture subtasks, prompt updates, and research re-syntheses. These are self-reflective loops that **feed back into the main triple** — they do not replace it.
 - The audit graph: `task.md` ← amendment trail ← (sub)prompt updates ← (sub)research re-syntheses ← back into main synthesis.
 
-### Audit-trail layout (Round 8 lock)
-- **Amendment folders inside main:**
-  ```
-  tasks/042/
-  ├── task.md                       # canonical mission
-  ├── plan/                         # plan for this task
-  ├── amendments/
-  │   ├── 001-replan/               # plan revision
-  │   ├── 002-subtask-validator/    # decomposed subtask
-  │   └── 003-research-resynth/     # re-synthesis loop
-  └── readme.md
-  prompts/042/
-  ├── prompt.md
-  ├── brief.md
-  ├── traces/                       # tool-call session traces (feeds prompt-optimizer)
-  ├── amendments/
-  │   └── 001-revised-instructions/
-  └── readme.md
-  research/042/
-  ├── output/
-  ├── synthesis/
-  ├── reflection/
-  ├── amendments/
-  │   └── 001-resynth/              # tighter synthesis of same evidence
-  └── readme.md
-  ```
-- Each amendment carries its own L1+L2 frontmatter (`type: amendment`, `amendment_kind`, `amendment_of`).
+### Audit-trail layout (revised Round 9 — SemVer)
+The Round 8 "amendment folders + numbered slugs" is superseded by **Semantic Versioning** of artefacts. Each Task / Prompt / Research carries a SemVer (`MAJOR.MINOR.PATCH`) where:
+
+| Component | Meaning | Trigger |
+|---|---|---|
+| **MAJOR** | Breaking redesign | Goal shift; acceptance criteria change incompatibly; schema-incompatible overhaul. |
+| **MINOR** | Additive: new subtask | Decomposition adds work without invalidating prior synthesis. |
+| **PATCH** | In-place amendment | Prompt update, plan revision, research re-synthesis on same evidence. |
+
+Layout uses amendment folders from Round 8, but folder names encode SemVer:
+```
+tasks/042/
+├── task.md                          # main artefact (semver: 1.0.0)
+├── plan/
+├── amendments/
+│   ├── 1.0.1-replan/                # patch: plan revised
+│   ├── 1.1.0-subtask-validator/     # minor: subtask added
+│   ├── 1.1.1-subtask-replan/        # patch on the subtask
+│   └── 2.0.0-goal-shift/            # major: goal redesigned (rare)
+└── readme.md
+prompts/042/
+├── prompt.md                        # semver: 1.0.0
+├── brief.md
+├── traces/                          # tool-call session traces (feeds prompt-optimizer)
+├── amendments/
+│   └── 1.0.1-revised-instructions/  # patch: tightened wording
+└── readme.md
+research/042/
+├── output/                          # semver: 1.0.0
+├── synthesis/
+├── reflection/
+├── amendments/
+│   └── 1.0.1-resynth/               # patch: sharper synthesis of same evidence
+└── readme.md
+```
+- Each amendment carries `type: amendment`, `semver: <version>`, `amendment_kind: {patch,minor,major}`, `amends: <parent-artefact>`.
+- The main artefact's `semver:` rolls forward to the highest amendment version (or stays at 1.0.0 if untouched).
+- Gate-tooling reads `semver:` to decide what to re-validate (PATCH → re-run gate; MINOR → also gate the new subtask; MAJOR → full re-validation).
 
 ### Gate-tooling matrix (Round 7 answer)
 For every Task's validation tooling, mandatory baseline + conditional layers:
@@ -111,11 +122,12 @@ For every Task's validation tooling, mandatory baseline + conditional layers:
 | **Custom validator scripts** | **No — only for meta-initialized maintenance Tasks** | Forbidden for regular Tasks. Available when meta spawns a tooling-update Task. |
 | **Reviewer subagent (code-reviewer / prose reviewer)** | **No — conditional** | When output is code, prose, or otherwise mechanically ungateable. |
 
-### Schema overflow channel (Round 8 lock)
-- Every schema carries a top-level **`overflow:` frontmatter key** — a free-form mapping for information that doesn't fit the canonical schema yet.
-- Meta-runs grep non-empty `overflow:` blocks across artefacts → cluster patterns → propose schema upgrades (and may spawn schema-evolution Tasks).
-- Linter behaviour: non-empty `overflow:` is permitted (it's the whole point) but **WARNs after N days** to ensure overflow doesn't become a permanent dumping ground.
-- Schema-evolution flow: overflow accumulates → meta notices → meta asks user → user confirms → schema gains canonical key → meta spawns migration Task → overflow keys drain.
+### Schema overflow channel (revised Round 9 — `notes:` field)
+The Round 8 `overflow:` frontmatter mapping is superseded by a **reserved `notes:` string field** in every schema. Lower-ceremony, easier to author, still machine-harvestable.
+- Every schema reserves a top-level `notes:` string field — free prose where the agent records information that doesn't currently fit elsewhere.
+- Meta-runs grep `notes:` across artefacts, cluster recurring patterns, and propose schema upgrades.
+- Linter behaviour: `notes:` may be non-empty indefinitely (it's a permanent escape valve, not just a queue), but meta surfaces clusters proactively in nightly digests.
+- Schema-evolution flow: `notes:` accumulates → meta notices recurring shapes → meta asks user → user confirms → schema gains canonical key → meta spawns migration Task that lifts the relevant `notes:` content into the new key.
 
 ---
 
@@ -141,7 +153,18 @@ Global ID dispenser (MCP service)
    meta/{tasks,prompts,research,runs}/  (maintenance-only; reasons across closed artefacts)
 ```
 
-Every artefact's frontmatter carries an `overflow:` channel that meta-runs harvest to propose schema upgrades.
+Every artefact's frontmatter carries a `notes:` string field that meta-runs harvest to propose schema upgrades.
+
+### Rename metaphor direction (Round 9 lock — execution timing still deferred)
+When the renames eventually happen (still scheduled *after* the meta/ refactor lands), they will follow the **theatrical metaphor** the user selected — *Actor enacts, Space witnesses*. Provisional mapping:
+
+| Current name | Theatrical successor | Verb |
+|---|---|---|
+| `tasks/` | (TBD — Mission? Brief? Goal? — held) | the *commission* |
+| `prompts/` | **enactments/** (or *performances/*) | Actor *enacts* the instruction |
+| `research/` | **witness/** (or *accounts/*) | Space *witnesses* the enactment, records the account |
+
+Exact lexicon ratified at rename-execution time. This lock pins the *direction*, not the wording.
 
 ---
 
@@ -153,16 +176,24 @@ Every artefact's frontmatter carries an `overflow:` channel that meta-runs harve
 3. Gate tooling → **Gherkin + JSON Schema mandatory; custom validators only for meta-init Tasks; reviewer subagent for code/prose.**
 
 **Round 8:**
-4. Audit-trail layout → **Amendment folders inside main artefact** (`<NNN>/amendments/<NNN>-<slug>/`).
-5. Overflow channel → **Top-level `overflow:` frontmatter key**, machine-harvestable by meta.
-6. Layer-name renames (tasks→missions etc.) → **Deferred** until after meta/ refactor lands.
+4. Audit-trail layout → ~~Amendment folders + numbered slugs~~ → **superseded by Round 9 SemVer**.
+5. Overflow channel → ~~Top-level `overflow:` frontmatter key~~ → **superseded by Round 9 `notes:` field**.
+6. Layer-name renames → **Execution deferred** until after meta/ refactor.
 
-## Open questions for Round 9
+**Round 9:**
+7. Audit-trail layout → **SemVer-versioned amendment folders** (`amendments/<MAJOR.MINOR.PATCH>-<slug>/`); main artefact's `semver:` rolls forward.
+8. Overflow channel → **Reserved `notes:` string field** per schema (replaces `overflow:`).
+9. Rename metaphor direction → **Theatrical** (Actor enacts → Space witnesses); execution still deferred, only direction locked.
+10. Meta-restructure confirmation → **Reopened**; user wants to discuss meta/ layout further before locking.
 
-1. **MCP numbering server design** — single global counter vs. per-kind counters (`task_id`, `prompt_id`, `research_id`) vs. hierarchical (`042.amendments.003`). Sequence reservation semantics for parallel branches.
-2. **Bootstrap budget mechanism** — how is the agent mechanically held to <8K tokens before deferring? Candidate: a `bootstrap.md` as the only mandatory read, with all other specs lazy-loaded via a manifest.
-3. **Migration mechanics** — what happens to the 96 existing tasks / 77 prompts / 30 research workspaces? Re-numbered through the MCP dispenser, or grandfathered at current numbers with new artefacts starting from a fresh high-water mark?
-4. **Initial goal seeding** — which existing top-level concerns become the seed `task_kind: goal` parents under the new layout? (Candidate list will need user nomination.)
+## Open questions for Round 10
+
+1. **Meta/ restructure** (reopened) — what should the maintenance-only `meta/` actually contain? Round 7 sketched `meta/{tasks,prompts,research,runs}/` but the user wants to revisit before locking.
+2. **MCP numbering server design** — pairs with SemVer: does the dispenser issue Task IDs (042, 043…) with SemVer applied within-Task, or does it issue full versioned identifiers? Sequence reservation semantics for parallel branches.
+3. **Bootstrap budget mechanism** — how is the agent mechanically held to <8K tokens before deferring? Candidate: a `bootstrap.md` as the only mandatory read, with all other specs lazy-loaded via a manifest.
+4. **Migration mechanics** — 96 existing tasks / 77 prompts / 30 research workspaces. Re-numbered through the MCP dispenser at SemVer 1.0.0, or grandfathered at current numbers + un-versioned, with new artefacts starting from a fresh high-water mark?
+5. **Initial goal seeding** — which existing top-level concerns become the seed `task_kind: goal` parents under the new layout?
+6. **Rename execution lexicon** — when renames happen, what exact words replace `tasks/` (commissions? missions? briefs?), `prompts/` (enactments? performances?), `research/` (witness? accounts? testimonies?)?
 
 ---
 
