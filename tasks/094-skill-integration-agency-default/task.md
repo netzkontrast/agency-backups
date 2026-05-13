@@ -6,8 +6,8 @@ summary: "Epic: Integrate the 54 imported skills (39 sc-* + 15 superpowers-*) in
 created: 2026-05-12
 updated: 2026-05-13
 task_id: "094"
-task_status: open
-task_owner: "unassigned"
+task_status: done
+task_owner: "claude"
 task_priority: P2
 task_uses_prompts: []
 task_spawns_research: []
@@ -117,13 +117,13 @@ ST-1 → ST-2 → ST-3 → ST-4 is strictly sequential: each subtask depends on 
 
 ## Todo
 
-- [ ] 1. ST-1 root-spec hookup + T3 enum ratification + T1 typo sweep PR'd and merged
-- [x] 2. ST-2 `.claude/` directory + `.claude-plugin/plugin.json` PR'd and merged
-- [x] 3. ST-3 5 event-driven hooks + governance check + tests PR'd and merged
-- [ ] 4. ST-4 cleanup + Epic close PR'd and merged
-- [ ] 5. End-to-end governance: `tools/check-governance.sh` exits 0; `tools/check-hooks.py` exits 0
-- [ ] 6. `tasks/readme.md` index entry flipped `Status: open` → `done`
-- [ ] 7. Epic-level friction log authored (`friction-log.md` with `Highest Frustration Level: FL[0-3]`)
+- [x] 1. ST-1 root-spec hookup + T3 enum ratification + T1 typo sweep PR'd and merged (PR #123, merged 2026-05-12)
+- [x] 2. ST-2 `.claude/` directory + `.claude-plugin/plugin.json` PR'd and merged (PR #124, merged 2026-05-13)
+- [x] 3. ST-3 5 event-driven hooks + governance check + tests PR'd and merged (PR #125, merged 2026-05-13)
+- [x] 4. ST-4 cleanup + Epic close PR'd and merged
+- [x] 5. End-to-end governance: `tools/check-governance.sh` exits 0; `tools/check-hooks.py` exits 0
+- [x] 6. `tasks/readme.md` index entry flipped `Status: open` → `done`
+- [x] 7. Epic-level friction log authored (`friction-log.md` with `Highest Frustration Level: FL[0-3]`)
 
 ## Acceptance Criteria
 
