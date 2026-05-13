@@ -4,7 +4,7 @@ status: active
 slug: task-094-subtasks
 summary: "Subtask index for Task 094 (Skill Integration & Agency Default Surface Epic). Four sequential subtasks: ST-1 root-spec hookup + T3 enum + T1 typo sweep, ST-2 .claude/ + plugin, ST-3 5 event-driven hooks, ST-4 cleanup + Epic close."
 created: 2026-05-12
-updated: 2026-05-12
+updated: 2026-05-13
 ---
 
 # Task 094 — Subtasks
@@ -14,7 +14,8 @@ Four sequential subtasks per the [Epic Plan section](../task.md#plan-four-sequen
 ## Files
 
 - [`01-root-spec-hookup.md`](./01-root-spec-hookup.md) — Cite every imported skill in ≥ 1 root spec; ratify the expanded `skill_kind` enum (T3 carry-forward); fix triage-note typos (T1 carry-forward).
-- [`02-claude-dir-and-plugin.md`](./02-claude-dir-and-plugin.md) — Create `.claude/` directory (settings.json + skills symlink + agents re-exports) + `.claude-plugin/plugin.json` declaring `agency@1.0.0`.
+- [`02-claude-dir-and-plugin.md`](./02-claude-dir-and-plugin.md) — Create `.claude/` directory (settings.json + skills symlink + agents re-exports) + `.claude-plugin/plugin.json` declaring `agency@1.0.0`. **CLOSED 2026-05-13** ([02-friction-log.md](./02-friction-log.md); FL0).
+- [`02-friction-log.md`](./02-friction-log.md) — ST-2 closing friction log (FL0).
 - [`03-event-driven-hooks.md`](./03-event-driven-hooks.md) — Author 5 D.7-compliant hooks under `tools/hooks/`; register in `.claude/settings.json`; add `tools/check-hooks.py` governance check + test fixtures; document in `CLAUDE.md §14`.
 - [`04-cleanup-and-close.md`](./04-cleanup-and-close.md) — Final governance run; flip Epic to `task_status: done`; update `tasks/readme.md`; author the Epic-level friction-log summary.
 

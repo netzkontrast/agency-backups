@@ -1,0 +1,9 @@
+{
+  "name": "agency",
+  "version": "1.0.0",
+  "description": "Agency framework: 54 imported skills (39 sc-* + 15 superpowers-*) + 16 sub-agents (sc-pm-agent excluded — /sc:pm-only per CLAUDE.md §13.1) + 5 D.7-compliant event hooks (planned ST-3) + the agency governance substrate (Task / Prompt / Research / ADR layers).",
+  "author": { "name": "netzkontrast/agency contributors" },
+  "homepage": "https://github.com/netzkontrast/agency",
+  "repository": "https://github.com/netzkontrast/agency",
+  "license": "see LICENSE"
+}

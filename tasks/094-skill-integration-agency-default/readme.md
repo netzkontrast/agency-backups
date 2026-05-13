@@ -4,7 +4,7 @@ status: active
 slug: task-094-skill-integration-agency-default
 summary: "Folder index for Task 094 (Skill Integration & Agency Default Surface Epic). Closes the integration gap between the 52 imported skills and Agency's default operating surface via root-spec citations, .claude/ directory, plugin manifest, and 5 D.7-compliant event-driven hooks."
 created: 2026-05-12
-updated: 2026-05-12
+updated: 2026-05-13
 ---
 
 # Task 094 — Skill Integration & Agency Default Surface
@@ -12,8 +12,8 @@ updated: 2026-05-12
 **What:** Epic Task that integrates the 52 imported skills (39 `sc-*` + 13 `superpowers-*` shipped by Tasks 091 + 092) into Agency's default operating surface so Claude Code "uses and knows them on default" — via four layered mechanisms:
 
 1. **Root-spec citations** (ST-1) — every orphan skill cited in ≥ 1 root spec (CLAUDE.md / AGENTS.md / SKILLS.md / TASK.md / RESEARCH.md).
-2. **`.claude/` directory** (ST-2) — `settings.json` + `skills/` symlink + `agents/` re-exports so Claude Code auto-discovers the corpus at SessionStart.
-3. **Plugin manifest** (ST-2) — `.claude-plugin/plugin.json` declaring `agency@1.0.0` for marketplace-ready distribution.
+2. **`.claude/` directory** (ST-2 — **CLOSED 2026-05-13**) — `settings.json` + `skills/` symlink + `agents/` re-exports so Claude Code auto-discovers the corpus at SessionStart.
+3. **Plugin manifest** (ST-2 — **CLOSED 2026-05-13**) — `.claude-plugin/plugin.json` declaring `agency@1.0.0` for marketplace-ready distribution.
 4. **5 D.7-compliant event-driven hooks** (ST-3) — under `tools/hooks/`, registered in `.claude/settings.json`, with governance check + test fixtures + CLAUDE.md §14 documentation.
 
 Plus carried-forward closure of two Task 092 follow-ups (T3 `skill_kind` enum ratification; T1 triage-note typo sweep).

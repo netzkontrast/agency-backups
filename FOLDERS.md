@@ -4,7 +4,7 @@ status: active
 slug: folders-spec
 summary: "Repository folder topology, separation of concerns between /tasks/, /prompts/, /research/, and the mandatory readme.md rule."
 created: 2026-05-02
-updated: 2026-05-08
+updated: 2026-05-13
 ---
 
 # Folder Interaction Specification
@@ -174,7 +174,7 @@ Scenario: ADR file under `/decisions/` exempt from prompt-scaffold rule
 
 ## 7. Anti-Patterns
 
-- **MUST NOT** create operational folders outside `/tasks/`, `/prompts/`, `/research/`. Top-level governance specs (`TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `FRUSTRATED.md`, `PRE_COMMIT.md`, `AGENTS.md`) live at the repo root. *Exemption:* the non-operational storage folders enumerated in §8 (`/skills/`, `/templates/`, `/tools/`, `/maintenance/`, `/decisions/`, `/Agency-System/`) are explicitly out of scope of this rule.
+- **MUST NOT** create operational folders outside `/tasks/`, `/prompts/`, `/research/`. Top-level governance specs (`TASK.md`, `PROMPT.md`, `RESEARCH.md`, `FOLDERS.md`, `FRUSTRATED.md`, `PRE_COMMIT.md`, `AGENTS.md`) live at the repo root. *Exemption:* the non-operational storage folders enumerated in §8 (`/skills/`, `/templates/`, `/tools/`, `/maintenance/`, `/decisions/`, `/Agency-System/`, `/.claude/`, `/.claude-plugin/`) are explicitly out of scope of this rule.
 - **MUST NOT** mix kinds inside one folder (e.g., a prompt draft inside a research workspace).
 - **MUST NOT** rely on body-level Markdown links instead of frontmatter for cross-directory linkage that tooling will consume.
 
@@ -190,5 +190,7 @@ Some top-level folders hold content that is mirrored from, or destined for, an e
 | `/maintenance/` | Canonical language spec and maintenance run logs. | Treated as a governance annex; not in the audit graph. |
 | `/decisions/` | Architectural Decision Records (ADRs) — repo-native MADR 4.0.0 ledger governed by `research/adr-spec-research-synthesis/output/SPEC.md` and validated by `tools/adr/cli.py`. | Files use the `adr` type and `adr_*` L2 namespace; each `decisions/<NNNN>-<slug>.md` MUST carry L1 frontmatter. Once `adr_status: Accepted`, the file is T4-immutable per `MAINTENANCE.md` §1; the corpus synthesises into the guarded section of `AGENTS.md` via `tools/adr/cli.py synthesize`. |
 | `/Agency-System/` | Frontend prototype for the Agency System triptychon (HTML/JSX/SVG) — design-system source consumed by `skills/the-agency-system-architect/`. Not an operational orchestration folder. | Exempt from §1 / §7 and from the audit graph. The folder is opaque to `tools/validate-frontmatter.py` and `tools/lint-linkage.py`; assets are referenced from skills via plain Markdown links. The folder MUST contain a `readme.md` documenting the prototype's purpose and lifecycle (authoring ADR pending). |
+| `/.claude/` | Claude Code project-level integration surface authored by Task 094 ST-2. Holds `settings.json` (project config + ST-3 hook registry), a `skills/` symlink to the repo-root `/skills/` corpus, 16 persona sub-agent re-exports under `agents/` (`sc-pm-agent` deliberately excluded per CLAUDE.md §13.1 `/sc:pm`-only routing), a `commands/` placeholder, and a `skills-fallback/install-claude-dir.sh` copy-tree materialiser for platforms without symlink support. | Exempt from §1 / §7 and from the audit graph. The folder is opaque to `tools/validate-frontmatter.py`, `tools/lint-linkage.py`, and the operational-readme linters. The `agents/<slug>.md` wrappers re-export by reference (canonical bodies stay at `skills/<slug>/SKILL.md`). ADR-0011 D.7 forbids SessionStart-hook injection — `settings.json` MUST NOT register a SessionStart hook. |
+| `/.claude-plugin/` | Plugin manifest folder declaring `agency@1.0.0` per `https://docs.anthropic.com/en/docs/claude-code/plugins`. Holds exactly one file: `plugin.json`. | Exempt from §1 / §7 and from the audit graph. The folder is opaque to `tools/validate-frontmatter.py` and `tools/lint-linkage.py`. Per platform docs, every other plugin asset (skills/, agents/, hooks/) stays at the plugin root (= this repo root); `.claude-plugin/` itself MUST NOT contain those folders. |
 
 `tools/validate-frontmatter.py` enforces this partition mechanically: it walks `/tasks/`, `/prompts/`, `/research/`, `/templates/`, `/tools/` only. Adding a new top-level folder that is *not* on this list is itself an anti-pattern unless it is explicitly listed in the table above.

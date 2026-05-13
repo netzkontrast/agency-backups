@@ -4,7 +4,7 @@ status: active
 slug: skill-integration-agency-default
 summary: "Epic: Integrate the 54 imported skills (39 sc-* + 15 superpowers-*) into Agency's default operating surface — root-spec citations (every orphan skill cited), .claude/ directory + .claude-plugin/plugin.json (agency@1.0.0), 5 D.7-compliant event-driven hooks, and carried-forward closure of the Task 092 T3 (skill_kind enum) + T1 (triage-note typos) follow-ups."
 created: 2026-05-12
-updated: 2026-05-12
+updated: 2026-05-13
 task_id: "094"
 task_status: open
 task_owner: "unassigned"
@@ -118,7 +118,7 @@ ST-1 → ST-2 → ST-3 → ST-4 is strictly sequential: each subtask depends on 
 ## Todo
 
 - [ ] 1. ST-1 root-spec hookup + T3 enum ratification + T1 typo sweep PR'd and merged
-- [ ] 2. ST-2 `.claude/` directory + `.claude-plugin/plugin.json` PR'd and merged
+- [x] 2. ST-2 `.claude/` directory + `.claude-plugin/plugin.json` PR'd and merged
 - [ ] 3. ST-3 5 event-driven hooks + governance check + tests PR'd and merged
 - [ ] 4. ST-4 cleanup + Epic close PR'd and merged
 - [ ] 5. End-to-end governance: `tools/check-governance.sh` exits 0; `tools/check-hooks.py` exits 0

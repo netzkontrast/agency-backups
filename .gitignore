@@ -1,6 +1,10 @@
 __pycache__/
 *.pyc
 .agent_cache/
+
+# Task 094 ST-2: .claude/ holds the project-level Claude Code config
+# (settings.json + skills symlink + agents re-exports + plugin assets).
+# It MUST be tracked. Only the worktrees scratch path is ignored.
 .claude/worktrees/
 
 # pytest-cov / pytest-benchmark transient artefacts

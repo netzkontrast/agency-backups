@@ -32,6 +32,12 @@ Exempt directory prefixes (PRE_COMMIT.md PC.1.1 + FOLDERS.md §8):
                      is exempt per FOLDERS.md §8 either way (no false
                      positives).
     Agency-System/ — frontend prototype; opaque per §8.
+    .claude/       — Claude Code project-level config; the
+                     `skills-fallback/install-claude-dir.sh` materialiser
+                     for symlink-less platforms is a legitimate `.sh`
+                     asset (Task 094 ST-2; FOLDERS.md §8).
+    .claude-plugin/— Plugin manifest folder (`.claude-plugin/plugin.json`
+                     only); opaque per §8 (Task 094 ST-2).
     .githooks/     — pre-commit hook scripts.
     .git/          — VCS internals.
     .agent_cache/  — agent-only cache (FOLDERS.md L3).
@@ -79,6 +85,8 @@ _EXEMPT_DIR_PREFIXES: tuple[str, ...] = (
     "maintenance/",
     "decisions/",
     "Agency-System/",
+    ".claude/",
+    ".claude-plugin/",
     ".githooks/",
     ".git/",
     ".agent_cache/",
