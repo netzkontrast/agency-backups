@@ -150,7 +150,42 @@ When the task triggers, the agent executes:
 5. **Create `/archive/`** if not present: `mkdir archive`. (Step 2 already verified it was absent or only-empty.)
 6. **For each entry in the tracked move-set:** `git mv <entry> archive/<entry>`. Mirror the original path inside `/archive/`. For untracked-leftover entries adjudicated as "archive" in step 4, run `git add <entry>` (or `git add -f <entry>` for ignored entries) first, then `git mv <entry> archive/<entry>`.
 7. **Verify renames:** the file-level rename count from `git status --porcelain | grep -c '^R'` equals the recursive file count of the to-be-moved set (computed via e.g. `git diff --cached --name-status --find-renames | grep -c '^R'` for staged moves, or `find <moved-path> -type f | wc -l` on the source set before the move). **Do not** use `git status` without `--porcelain` — the long human-readable format prints `renamed:` lines, not `R` codes, so `grep '^R'` returns zero matches even on successful moves. **Do not** compare against the count of top-level entries — `git mv tasks/` expands to one rename per file inside `tasks/`, not one rename total.
-8. **Commit:** `git commit --no-verify -m "archive: big-bang move of pre-migration repo state into /archive/"`. Body MUST cite `migration/waiver.md`, list the moved top-level entries, and include `Highest Frustration Level: FL[0-3]`.
+8. **Commit:** the body MUST cite `migration/waiver.md`, list the moved top-level entries, and include `Highest Frustration Level: FL[0-3]`. A single `-m` produces a subject-only commit and silently drops these mandatory fields, so use a HEREDOC pattern (or multiple `-m` flags) to deliver subject + body in one invocation:
+
+    ```bash
+    git commit --no-verify -m "$(cat <<'EOF'
+    archive: big-bang move of pre-migration repo state into /archive/
+
+    Moved top-level entries (verbatim list from §5 step 4 tracked move-set):
+    - tasks/
+    - prompts/
+    - research/
+    - skills/
+    - decisions/
+    - tools/
+    - maintenance/
+    - templates/
+    - Agency-System/
+    - AGENTS.md, CLAUDE.md, TASK.md, PROMPT.md, RESEARCH.md, SKILLS.md,
+      FOLDERS.md, PRE_COMMIT.md, FRUSTRATED.md, MAINTENANCE.md
+    - README.md
+    - <plus any borderline paths the user adjudicated as "archive">
+
+    Untracked-leftover handling: <enumerate per-file decisions from §5
+    step 4 untracked branch, e.g. "added .env-example via git add -f
+    then archived; rm'd .DS_Store; mv'd /tmp/scratch.txt out of repo">
+
+    Waiver: migration/waiver.md (governance suspended during refactor —
+    turn 13). Authority chain: .claude/research-results/gemini-{1,2}-*.md
+    survive the archive (.claude/ exempt) so D1–D8 evidence remains
+    reachable for the rebuild.
+
+    Highest Frustration Level: FL[0-3]
+    EOF
+    )"
+    ```
+
+    Verify the commit body landed before pushing: `git log -1 --format=%B | head -30` should show subject + body + waiver citation + FL line.
 9. **Push** to the migration branch.
 10. **Post-archive followup (separate commit; explicitly OUTSIDE the §4 exempt-paths-survive Scenario which applies only at step 8's commit boundary):** edit `migration/handover.md` to add a "post-archive" section indicating the new state. Commit + push as a separate followup commit. This step intentionally violates the byte-identity property of `/migration/`; that property is point-in-time at the archive commit (step 8) only.
 11. **Open a PR** (if not already open) or update the existing PR description to reflect the archive milestone.

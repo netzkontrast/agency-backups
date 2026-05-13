@@ -2,7 +2,7 @@
 type: note
 status: active
 slug: migration-handover
-summary: "Next-session entry point for the 12-type ontology + tasks-only ULID + auto-generated readmes refactor. Read this before touching the migration."
+summary: "Next-session entry point for the 12-type ontology + auto-generated readmes refactor. ULID scope is **provisional**: L11.43 v2 (in-body) says tasks-only with per-type natural fit for 11 others; L11.43 v3 (revision-history, turn-11) extends to 6 types — re-confirm before any code lands. Read this before touching the migration."
 created: 2026-05-13
 updated: 2026-05-13
 ---
