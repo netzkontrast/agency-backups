@@ -4,7 +4,7 @@ status: active
 slug: run-log
 summary: "Chronological log of every Repo Coherence Check and Nightly Maintenance run. The agent MUST read the last entry's end_commit before beginning any run."
 created: 2026-05-04
-updated: 2026-05-11
+updated: 2026-05-14
 ---
 
 # Maintenance Run Log
@@ -1034,3 +1034,50 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
 - issues_skipped: 0
 - notes: >
   adr-synthesize noop; contributing_adr_ids=[ADR-0006, ADR-0007, ADR-0011, ADR-0012]; token_count=520; fidelity=1.0000 (bcp14-keyword).
+
+### Run 2026-05-14 — coherence-check
+- agent: claude-code (session claude/peaceful-carson-17CND)
+- routine_type: coherence-check
+- start_commit: 867453e
+- end_commit: pending
+- baseline_commit: 6e4859d
+- files_in_delta: 756
+- files_scanned: 3
+- t1_fixes: 3
+- t2_fixes: 0
+- t3_tasks_created: 1
+- t4_skipped: 0
+- issues_skipped: 13
+- notes: >
+  Maintenance run dispatched via user request "Execute Maintenance.md".
+  Three blocking ERRORs cleared as T1 mechanical repairs: (1) tasks/readme.md
+  bullet for Task 093 said `Status: open` while task.md carried
+  `task_status: done` — TASK.md §7.11 / T.7.11 drift fix; (2)
+  tasks/033-task-spec-integration/friction-log.md carried `**FL: 1** — minor friction.`
+  as the body declaration line; the FR.B.4 linter requires the canonical
+  `Highest Frustration Level: FL[0-3]` form (or the three variants enumerated
+  in research/fl0-value-justification/output/SPEC.md §2.2); body line rewritten
+  to `Highest Frustration Level: FL1`; (3)
+  tasks/030-cleanup-dramatica-skills-corpus/friction-log.md had no body-level
+  FL declaration line at all — only inline `(FL2, Significant)` / `(FL3, Blocking)` /
+  `(FL1, Minor)` event-level tags; added `Highest Frustration Level: FL3`
+  paragraph just below the H1 (highest of three event-level tags).
+  Both friction-log files belong to Tasks already at `task_status: done`;
+  the T1 repair touches metadata-and-declaration-line only (no body-content
+  rewrite of the friction events themselves), parallel to the §1.0.1 closed-research
+  T1/T2 repair allowance pattern.
+  T3 follow-up filed: Task 096 ("maintenance-spec-friction-log-declaration-hardening")
+  — captures four MAINTENANCE.md improvement opportunities surfaced during this run
+  (auto-derivation of canonical declaration line, batch --bump-updated semantics for
+  fm/edit.py, closed-Task friction-log repair tier explicit allowance, /sc:* command
+  routing from the maintenance routine).
+  Advisory-tier diagnostics deliberately NOT auto-filed as Tasks during this sweep
+  (counted under issues_skipped=13): 13 trust-audit FL≥1 recommendations from
+  the AGGREGATOR; one RFC2119 polarity candidate on decisions/0010 (per §1
+  T4-immutability if Accepted, a successor ADR is required); 8 structure WARNs
+  on research workspaces missing recommended subdirs; 120 narrative-ontology
+  WARN-tier advisories (quad-membership + unmapped-heading partitions; NO.5
+  non-narrative scope this session — not loaded). The 13 trust-audit workspaces
+  have existed for ≥ 14 days and belong to the nightly-maintenance cadence
+  (§3), not a per-session coherence sweep.
+  Run committed atomically with the T1 repairs and this record.

@@ -4,14 +4,14 @@ status: active
 slug: task-033-friction-log
 summary: "Friction log for Task 033 — TASK.md spec integration. FL1: research subtasks dispatched in parallel via deep-research subagents while ST-3 / ST-4 / ST-5 implementation proceeded; one pre-existing branch ERROR (Task 046 missing `## Todo`) is documented as scope-out."
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-05-14
 ---
 
 # Task 033 — Friction Log
 
 ## FL Declaration
 
-**FL: 1** — minor friction. The chain executed largely as planned; two specific points are recorded below for the friction-pattern-synthesis corpus (Task 033 ST-1 itself).
+**Highest Frustration Level: FL1** — minor friction. The chain executed largely as planned; two specific points are recorded below for the friction-pattern-synthesis corpus (Task 033 ST-1 itself).
 
 ## Notes
 
