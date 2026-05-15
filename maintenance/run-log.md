@@ -1034,3 +1034,35 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
 - issues_skipped: 0
 - notes: >
   adr-synthesize noop; contributing_adr_ids=[ADR-0006, ADR-0007, ADR-0011, ADR-0012]; token_count=520; fidelity=1.0000 (bcp14-keyword).
+
+### Run 2026-05-15 — Repo Coherence Check + ADR falsifier-trigger audit (manual user invocation)
+- agent: claude-code (session claude/peaceful-carson-SOZFe)
+- routine_type: coherence-check
+- start_commit: 867453e
+- end_commit: pending
+- baseline_commit: 6e4859d
+- files_in_delta: 756
+- files_scanned: ~30 (linter-first triage; manual inspection scoped to ERROR-emitting paths)
+- t1_fixes: 1
+- t2_fixes: 0
+- t3_tasks_created: 1
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+  Manual user invocation: "Execute Maintenance.md ... submit a new Task ... /sc:analyze /sc:reflect /sc:improve /sc:Review /sc:createPR".
+  Combined a §2 Coherence Check (linter-first triage) with the §3.6 nightly-cadence
+  ADR falsifier-trigger audit per the user prompt. T1 fix: tasks/readme.md bullet
+  for Task 093 said `open` but task.md task_status=`done` — applied via Edit per
+  the T.7.11 mechanical enforcement (`tools/fm/index_diff.py`). T3 Task created:
+  Task 096-improve-maintenance-spec-may-15-2026 surfacing five spec gaps observed
+  during this run: (a) §3.6 multi-fire ambiguity (ADR-0008 F1+F2+F3+F4 fired same
+  audit, bundle~77926 tokens, narrative-skill count=11 > 10); (b) §3.5 dup-id
+  autofile predicate (4) doesn't accept manual invocations (090 collision:
+  090-codex-pr-review/in_progress vs 090-review-pr109-archive-spec/done);
+  (c) §3.4 staleness audit flagged 4 Tasks (008/048/053/066) spanning 3 buckets
+  without batch guidance; (d) `[opt]` linter ERROR vs gate-effect orthogonality
+  (FR.B.4 emits ERROR, gate exits 0, user reads "broken"); (e) §2.3 routine_type
+  enum lacks `manual-execution`. ADR-0008 F1/F2/F3/F4 fires NOT actioned in this
+  run (deferred per Task 096 "Out of Scope"); the dedup Task for 090 collision
+  also deferred (predicate-4 letter doesn't authorise autofile under manual
+  invocation). Pre-commit gate exits 0.
