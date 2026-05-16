@@ -1039,13 +1039,13 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
 - agent: claude-code (session claude/peaceful-carson-hXNWW)
 - routine_type: coherence-check
 - start_commit: 867453e
-- end_commit: PENDING
+- end_commit: e7eb221
 - baseline_commit: 6e4859d (fall-forward; most-recent reachable end_commit; most-recent coherence-check baseline is 36e2611 — see F27 in Task 096 for the routine-type-preference gap)
 - files_in_delta: 756
 - files_scanned: triage-only (linter-first; full delta scan deferred to Task 096 follow-on)
 - t1_fixes: 1
 - t2_fixes: 0
-- t3_tasks_created: 1
+- t3_tasks_created: 2
 - t4_skipped: 0
 - issues_skipped: 0
 - notes: >
@@ -1065,11 +1065,16 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
   (DRIFTED), 048+066 (NO_LONGER_DESIRABLE); deferred their inline closures
   to a follow-on session because the operator mandate was spec-improvement
   not staleness-closure. ADR trigger audit fired ADR-0008.F1+F2+F3+F4 +
-  MANUAL F5; deferred successor-ADR Task to follow-on per F29 batching
-  policy decision. Run-log entry filed in same atomic commit as the T1
-  repair + Task 096 + tasks/readme.md update + this entry. Session closing
+  MANUAL F5; Task 097 (successor-adr-0008-falsifier-fires) filed per §3.6
+  MUST clause, structured per the Task 096 F29 proposed batching policy
+  (one parent Task with per-trigger Plan sections). Initial commit landed
+  at e7eb221 with PENDING end_commit (chicken-and-egg); follow-up commit
+  amends PENDING → e7eb221, adds Task 096 task_uses_prompts: [repo-coherence-check]
+  per Task 025 sibling precedent, and files Task 097. Session closing
   ladder: /sc:analyze (8 findings + 3 cross-cutting issues + 8 amendments)
   → /sc:reflect (validated authority, scope, F-numbering F27 start,
   /review-vs-/sc:review nuance) → /sc:improve (drafted Task 096 task.md
   + readme.md) → /review (PR review skill, built-in, NOT /sc:review) →
-  /sc:createPR (terminator).
+  /sc:createPR (terminator). Codex review on PR #132 surfaced 2 valid
+  findings (P1 PENDING hash; P2 successor-ADR Task), both addressed in
+  the follow-up commit.

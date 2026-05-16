@@ -9,7 +9,8 @@ task_id: "096"
 task_status: open
 task_owner: "unassigned"
 task_priority: P2
-task_uses_prompts: []
+task_uses_prompts:
+  - repo-coherence-check
 task_spawns_research: []
 task_spawns_prompts: []
 task_blocked_by: []
