@@ -4,7 +4,7 @@ status: active
 slug: run-log
 summary: "Chronological log of every Repo Coherence Check and Nightly Maintenance run. The agent MUST read the last entry's end_commit before beginning any run."
 created: 2026-05-04
-updated: 2026-05-11
+updated: 2026-05-17
 ---
 
 # Maintenance Run Log
@@ -1034,3 +1034,19 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
 - issues_skipped: 0
 - notes: >
   adr-synthesize noop; contributing_adr_ids=[ADR-0006, ADR-0007, ADR-0011, ADR-0012]; token_count=520; fidelity=1.0000 (bcp14-keyword).
+
+### Run 2026-05-17 — coherence-check
+- agent: claude-opus (session claude/peaceful-carson-U4tNm)
+- routine_type: coherence-check
+- start_commit: 867453e
+- end_commit: a0cb138
+- baseline_commit: 6e4859d
+- files_in_delta: 40+
+- files_scanned: 12
+- t1_fixes: 1
+- t2_fixes: 0
+- t3_tasks_created: 2
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+  Coherence run from baseline 6e4859d (adr-synthesize) to HEAD 867453e. T1 fix: corrected tasks/readme.md bullet for Task 093 ('open' → 'done') and bumped `updated:` per `tools/fm/edit.py --bump-updated` (T.7.11 drift surfaced by `tools/fm/index_diff.py`). T3 Tasks filed: Task 096 (resolve `task_id: "090"` collision — `090-codex-pr-review` in_progress vs. `090-review-pr109-archive-spec` done; all four §3.5 auto-fire predicates held) and Task 097 (successor to Task 068 carrying six new findings F14–F19 against MAINTENANCE.md and its supporting linters). Trust-audit aggregator reports 14/27 workspaces PASS (FL0=14, FL1=9, FL3=4) — 13 friction items already covered by historical Tasks; not re-filed. WARN-tier diagnostics surfaced: 8 structure warnings (review-bearing research lacks workspace/synthesis subdirs — expected per §3.4 review-bearing classification), 1 RFC2119 polarity candidate at decisions/0010, 2 malformed FL declarations in tasks/030 and tasks/033 friction-logs (deferred; pre-existing).
