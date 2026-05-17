@@ -1039,7 +1039,7 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
 - agent: claude-opus (session claude/peaceful-carson-U4tNm)
 - routine_type: coherence-check
 - start_commit: 867453e
-- end_commit: pending
+- end_commit: a0cb138
 - baseline_commit: 6e4859d
 - files_in_delta: 40+
 - files_scanned: 12
