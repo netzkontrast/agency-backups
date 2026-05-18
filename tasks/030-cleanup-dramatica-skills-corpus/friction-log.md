@@ -4,10 +4,12 @@ status: active
 slug: task-030-friction-log
 summary: "Execution-time friction log for Task 030. All four §Goal gates now PASS after a re-dispatch on a fresh quota cycle landed ST-7 (aliases), ST-8 (scenario coverage), and ST-9 (precompile). Task is task_status: done. Five execution-time friction events recorded for Task 029 to absorb."
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-18
 ---
 
 # Task 030 — Execution Friction Log
+
+**Highest Frustration Level: FL3** — driven by FE-EX-2 (org monthly usage limit hit mid-Phase-B, blocking until a fresh quota cycle let ST-7/8/9 land cleanly). Lower-severity events captured below.
 
 This file records friction encountered while EXECUTING Task 030. The planning-time friction is in `notes.md §3` (separate file, separate scope, per the FRUSTRATED.md convention).
 
