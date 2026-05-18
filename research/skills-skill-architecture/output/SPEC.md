@@ -4,7 +4,7 @@ status: active
 slug: skills-skill-architecture
 summary: "Preliminary RFC-2119 architecture spec for the skills-skill loader covering R1-R7. Uncertain sections marked; deferred to Gemini Deep Research."
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-05-18
 research_phase: complete
 research_executes_prompt: skills-skill-architecture
 research_friction_level: FL1
@@ -112,6 +112,8 @@ Scenario: Bootstrap with no clone and no network
 | Jules skill directory | **UNKNOWN** | **UNKNOWN** | **UNKNOWN** |
 | gemini-cli skill directory | **UNKNOWN** | **UNKNOWN** | **UNKNOWN** |
 
+<!-- Jules row resolved 2026-05-18 — `<repo>/AGENTS.md` (plain Markdown, lexical scope, nested overrides), written by the `skills-skill` Jules adapter when the canonical corpus changes. See research/skills-skill-jules-portability/output/SPEC.md §3. -->
+
 ### 3.2 Conflict Model
 
 Because `/mnt/skills/user/` is read-only and `~/.claude/skills/` is written only by the deterministic sync tool, **no concurrent writes are possible in the current topology**. No conflict-resolution algorithm is required.
@@ -131,6 +133,8 @@ Author edits skill body
 ```
 
 > **UNCERTAIN (U4)**: Jules and gemini-cli are not installed in this environment and their skill-loading conventions are unknown. Adapter architecture is reserved but not specified (see R6). Filed as follow-up prompts: `/prompts/skills-skill-jules-portability/` and `/prompts/skills-skill-gemini-cli-portability/`.
+>
+> **Jules portion resolved 2026-05-18** — see `research/skills-skill-jules-portability/output/SPEC.md`. Jules' native format is `AGENTS.md` (plain Markdown, lexical scope, nested overrides); SKILL.md is NOT natively compatible; an adapter under `skills/skills-skill/adapters/jules/` is REQUIRED. The gemini-cli portion of U4 remains open.
 
 ### 3.4 Gherkin Scenarios — R2
 
@@ -288,6 +292,8 @@ Scenario: SHA pinning enabled
 | Jules | **UNKNOWN** | **UNKNOWN** | **UNKNOWN** |
 | gemini-cli | **UNKNOWN** | **UNKNOWN** | **UNKNOWN** |
 
+<!-- Jules row resolved 2026-05-18 — Skill directory: `<repo>/AGENTS.md`. Format: plain Markdown, no frontmatter, no `description:`-keyed trigger. Adapter needed: YES (`skills/skills-skill/adapters/jules/`). See research/skills-skill-jules-portability/output/SPEC.md §3. -->
+
 Claude Code's `~/.claude/skills/<name>/SKILL.md` format is **confirmed identical** to claude.ai's format by direct environment inspection (session 2026-05-04). The same canonical `SKILL.md` body is loadable by both without transformation.
 
 ### 7.2 Adapter Architecture (Reserved)
@@ -397,5 +403,7 @@ The following uncertainties are explicitly deferred to Gemini Deep Research. Eac
 | U4 | Jules skill-loading convention | R2, R6 | Medium |
 | U5 | Does the host pass the raw user message to the stub? | R3 routing algorithm | Medium |
 | U6 | Is git commit/tag signing feasible in the container? | R5 (tamper detection) | Low |
+
+<!-- U4 resolved 2026-05-18 — see research/skills-skill-jules-portability/output/SPEC.md. Jules' native format is AGENTS.md; SKILL.md is not natively compatible; an AGENTS.md adapter is required. -->
 
 See also: `/prompts/skills-skill-jules-portability/`, `/prompts/skills-skill-gemini-cli-portability/`, `/prompts/skills-skill-trigger-lifecycle/`.
