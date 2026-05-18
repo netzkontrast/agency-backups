@@ -4,7 +4,7 @@ status: active
 slug: run-log
 summary: "Chronological log of every Repo Coherence Check and Nightly Maintenance run. The agent MUST read the last entry's end_commit before beginning any run."
 created: 2026-05-04
-updated: 2026-05-11
+updated: 2026-05-18
 ---
 
 # Maintenance Run Log
@@ -1034,3 +1034,37 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
 - issues_skipped: 0
 - notes: >
   adr-synthesize noop; contributing_adr_ids=[ADR-0006, ADR-0007, ADR-0011, ADR-0012]; token_count=520; fidelity=1.0000 (bcp14-keyword).
+
+### Run 2026-05-18 — Repo Coherence Check
+- agent: claude-code (session claude/peaceful-carson-DZXcm)
+- routine_type: coherence-check
+- start_commit: 867453e
+- end_commit: pending
+- baseline_commit: 89c0aa3
+- files_in_delta: 193
+- files_scanned: 4
+- t1_fixes: 2
+- t2_fixes: 1
+- t3_tasks_created: 1
+- t4_skipped: 0
+- issues_skipped: 17
+- notes: >
+  Baseline = last `coherence-check` (Run 2026-05-08) at 89c0aa3; the four intervening
+  `adr-synthesize` records were skipped because their `routine_type` is non-sweep (the
+  F29 finding filed by this run documents the rule we applied). Delta 89c0aa3..867453e
+  = 193 files across 95 commits (PR merges #119–#128 plus closing-task and adr-trigger-audit work).
+
+  T1/T2 repairs applied in this run:
+  - T1: tasks/033-task-spec-integration/friction-log.md — normalised `**FL: 1**` → `**FL1**` (variant 5 bold-bare-prose per `tools/check-fl-declaration.py`).
+  - T2: tasks/030-cleanup-dramatica-skills-corpus/friction-log.md — added top-level `**Highest Frustration Level: FL3**` line (level mechanically derivable from FE-EX-2's "FL3, Blocking" label).
+  - T1: tasks/readme.md — Task 093 bullet status drift `open` → `done` (T.7.11 mechanical sync).
+  Each fix bumped its file's `updated:` via `tools/fm/edit.py --bump-updated`.
+
+  T3 Task filed: Task 096 `improve-maintenance-spec-may-18-2026` carrying seven session-distilled findings F27–F33 against MAINTENANCE.md / coherence prompt / `tools/adr/cli.py`. Companion (NOT successor) to open Tasks 025 / 044 / 064 in the same lineage; cites Task 064 F21 (one-open-Task cadence) as recognised pre-condition.
+
+  Issues skipped (17 total):
+  - 13 trust-audit AGGREGATOR FL1/FL3 recommendations (research/* workspaces) — pre-existing, advisory `[opt]` tier (do not gate). Absorbed by Task 096 F28 (dedup predicate) + Task 044 territory.
+  - 4 staleness-audit hits (Tasks 008 completed_by_drift / 048 + 066 no_longer_desirable / 053 drifted) — deferred to Task 096 F30 (triage threshold rule) for proper batch handling.
+
+  Closing-protocol skills invoked per CLAUDE.md §13 + operator instruction:
+  /sc:analyze → /sc:reflect → /sc:improve → /sc:self-review → /sc:createPR. Detailed analyze + reflect output captured inline in the session response (not persisted to a workspace).
