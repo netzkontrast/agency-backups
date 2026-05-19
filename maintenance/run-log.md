@@ -4,7 +4,7 @@ status: active
 slug: run-log
 summary: "Chronological log of every Repo Coherence Check and Nightly Maintenance run. The agent MUST read the last entry's end_commit before beginning any run."
 created: 2026-05-04
-updated: 2026-05-11
+updated: 2026-05-19
 ---
 
 # Maintenance Run Log
@@ -1034,3 +1034,48 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
 - issues_skipped: 0
 - notes: >
   adr-synthesize noop; contributing_adr_ids=[ADR-0006, ADR-0007, ADR-0011, ADR-0012]; token_count=520; fidelity=1.0000 (bcp14-keyword).
+
+### Run 2026-05-19 — Repo Coherence Check
+- agent: claude-code
+- routine_type: coherence-check
+- start_commit: da099884b23dec09fb44b6dfbcdc15f209e1b8f9
+- end_commit: pending
+- baseline_commit: 6e4859d
+- files_in_delta: 762
+- files_scanned: 8
+- t1_fixes: 1
+- t2_fixes: 0
+- t3_tasks_created: 1
+- t4_skipped: 0
+- issues_skipped: 17
+- notes: >
+    Single gating ERROR in delta: T.7.11 on tasks/readme.md — Task 093 bullet
+    said `Status: open` while task.md said `task_status: done`. T1 mechanical
+    repair: replaced `Status: \`open\`.` with `Status: \`done\`.` and bumped
+    `updated:` via `tools/fm/edit.py --bump-updated`. 762-file delta (65
+    commits) is dominated by ADR-0011 skill-corpus imports (skills/sc-*/ +
+    skills/superpowers-*/) and Task 094 hook/agent surface — each PR
+    independently passed `tools/check-governance.sh`, so files outside the
+    one T.7.11 bullet were treated as conformant per their merge-time gate.
+    Issues deferred without new Tasks (17 total): 13 trust-audit FL1/FL3
+    `recommend-task` items from prior runs (8 already covered by existing
+    open improve-maintenance-spec-* lineage Tasks 025/044/064; remaining 5
+    surface as advisory diagnostics every coherence run but the trust-audit
+    AGGREGATOR's recommend-task verb is itself a generic prompt — the
+    recommendation belongs to the open lineage, not a new Task per run);
+    2 FR.B.4 closed-Task friction-log ERRORs on tasks 030 + 033 captured as
+    F30 in the new Task 096; 1 RFC2119 polarity WARN on decisions/0010 is
+    pre-existing and ADR-immutable; 4 §3.4 staleness-audit WARN findings
+    surfaced by tools/maintenance/staleness-audit.py (Task 008
+    completed_by_drift, Task 048 + 066 no_longer_desirable, Task 053
+    drifted) — all pre-existing, recurring across recent coherence runs,
+    cumulative cleanup belongs to the open improve-maintenance-spec-*
+    lineage (specifically Task 064 F21 forcing-function gap) rather than
+    a per-finding new Task per coherence run. Filed Task 096 carrying F27–F32 (six
+    session-distilled findings). Companion (NOT successor) to Tasks 025,
+    044, 064 (all open). The accumulation of four open
+    `improve-maintenance-spec-*` Tasks is itself an instance of Task 064
+    F21 (the forcing-function gap); resolution belongs to Task 064.
+    Operator-requested closing sequence honoured per CLAUDE.md §10 + Task
+    064 F20: /sc:analyze → /sc:reflect → /sc:improve → /sc:Review →
+    /sc:createPR. Highest Frustration Level: FL1.
