@@ -4,7 +4,7 @@ status: active
 slug: run-log
 summary: "Chronological log of every Repo Coherence Check and Nightly Maintenance run. The agent MUST read the last entry's end_commit before beginning any run."
 created: 2026-05-04
-updated: 2026-05-11
+updated: 2026-05-16
 ---
 
 # Maintenance Run Log
@@ -1034,3 +1034,47 @@ The awk fall-forward in `prompts/repo-coherence-check/prompt.md` Step 1a keys on
 - issues_skipped: 0
 - notes: >
   adr-synthesize noop; contributing_adr_ids=[ADR-0006, ADR-0007, ADR-0011, ADR-0012]; token_count=520; fidelity=1.0000 (bcp14-keyword).
+
+### Run 2026-05-16 — Repo Coherence Check
+- agent: claude-code (session claude/peaceful-carson-hXNWW)
+- routine_type: coherence-check
+- start_commit: 867453e
+- end_commit: e7eb221
+- baseline_commit: 6e4859d (fall-forward; most-recent reachable end_commit; most-recent coherence-check baseline is 36e2611 — see F27 in Task 096 for the routine-type-preference gap)
+- files_in_delta: 756
+- files_scanned: triage-only (linter-first; full delta scan deferred to Task 096 follow-on)
+- t1_fixes: 1
+- t2_fixes: 0
+- t3_tasks_created: 2
+- t4_skipped: 0
+- issues_skipped: 0
+- notes: >
+  Coherence run executed under operator mandate "Execute MAINTENANCE.md, then file
+  improvements". T1 mechanical: tasks/readme.md Task 093 bullet showed
+  `Status: \`open\`` despite task.md task_status=done; index_diff exit code
+  now 0. Filed Task 096 (improve-maintenance-spec-may-16-2026) with eight
+  findings F27-F34 covering: (F27) awk-baseline routine-type preference;
+  (F28) §3.5 audit-window predicate gap (dup-id, staleness, adr-trigger
+  audits not Step-2.5-mandated; explains why 090-* collision has persisted);
+  (F29) §3.6 multi-trigger ADR batching policy (today's audit fired 4
+  triggers simultaneously); (F30) §3.2 dynamic-readme MUST/SHOULD decision;
+  (F31) /sc:* closing-ladder spec authority + /review-vs-/sc:review
+  distinction (extends Task 064 F20); (F32) §3.4 multi-bucket prioritization
+  order; (F33) F-number registry convention; (F34) install.sh quiet-mode
+  polish. Staleness audit identified Tasks 008 (COMPLETED_BY_DRIFT), 053
+  (DRIFTED), 048+066 (NO_LONGER_DESIRABLE); deferred their inline closures
+  to a follow-on session because the operator mandate was spec-improvement
+  not staleness-closure. ADR trigger audit fired ADR-0008.F1+F2+F3+F4 +
+  MANUAL F5; Task 097 (successor-adr-0008-falsifier-fires) filed per §3.6
+  MUST clause, structured per the Task 096 F29 proposed batching policy
+  (one parent Task with per-trigger Plan sections). Initial commit landed
+  at e7eb221 with PENDING end_commit (chicken-and-egg); follow-up commit
+  amends PENDING → e7eb221, adds Task 096 task_uses_prompts: [repo-coherence-check]
+  per Task 025 sibling precedent, and files Task 097. Session closing
+  ladder: /sc:analyze (8 findings + 3 cross-cutting issues + 8 amendments)
+  → /sc:reflect (validated authority, scope, F-numbering F27 start,
+  /review-vs-/sc:review nuance) → /sc:improve (drafted Task 096 task.md
+  + readme.md) → /review (PR review skill, built-in, NOT /sc:review) →
+  /sc:createPR (terminator). Codex review on PR #132 surfaced 2 valid
+  findings (P1 PENDING hash; P2 successor-ADR Task), both addressed in
+  the follow-up commit.
